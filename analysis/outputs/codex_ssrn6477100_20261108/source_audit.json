@@ -1,0 +1,106 @@
+{
+  "checked_at_utc": "2026-11-08T11:31:34.246975+00:00",
+  "checked_codex_head": "3c190c7549ab69c368a2c8e3eb55330a43d7bb53",
+  "checked_remote_codex": "3c190c7549ab69c368a2c8e3eb55330a43d7bb53",
+  "source": {
+    "id": "ssrn:6477100",
+    "title": "Adaptive Limits of Algorithmic Cryptocurrency Trading from a Complex Adaptive Systems Perspective: An Empirical Study on Human-AI Collaborative Strategy",
+    "author": "Wonpyo Han, Hansung University",
+    "version": "March 2026; PDF metadata March 27, 2026",
+    "pages": 17,
+    "path": "agents/codex/inputs/ssrn6477100_20261108/paper.pdf",
+    "sha256": "93c5925f5fe2086c049e79aace07dc7f674c268cc236064c6dd92afea0126b13",
+    "text_sha256": "941088905923858917d89c32ef7d1e28d33492dc1c819267cddc0e80163b0d80",
+    "permission": "owned_upload",
+    "provenance": "User attachment file_00000000352481fd810ac040177fe83b",
+    "access_method": "Full uploaded text read; Tables 1/3 and 6/7/8 visually checked"
+  },
+  "source_sample": "Ten selected surviving Binance crypto assets, hourly OHLCV, June 2022 through March 2026; eight retrospective periods; study reports 80 main and over 160 total experiments",
+  "quoted_arithmetic": {
+    "table1_buy_hold_pct": 14.87,
+    "table1_reconciliation": [
+      {
+        "profile": "V1",
+        "return_pct": -4.33,
+        "reported_alpha_pct": -19.08,
+        "return_minus_buy_hold_pct": -19.2,
+        "reported_minus_simple_alpha_pp": 0.120000000000001
+      },
+      {
+        "profile": "V3",
+        "return_pct": -2.76,
+        "reported_alpha_pct": -17.52,
+        "return_minus_buy_hold_pct": -17.63,
+        "reported_minus_simple_alpha_pp": 0.10999999999999943
+      }
+    ],
+    "table1_caveat": "Residuals 0.12/0.11 pp exceed ordinary rounding of three two-decimal means, if alpha is simple same-sample excess. Definitions/weights require raw reconciliation, not an accusation of fabrication.",
+    "table3_conditional": [
+      {
+        "period": "Bear22",
+        "buy_hold_pct": -18.6,
+        "reported_alpha_pct": 19.0,
+        "implied_strategy_pct_if_alpha_is_simple_excess": 0.3999999999999986
+      },
+      {
+        "period": "Bull24b",
+        "buy_hold_pct": -22.3,
+        "reported_alpha_pct": 21.7,
+        "implied_strategy_pct_if_alpha_is_simple_excess": -0.6000000000000014
+      },
+      {
+        "period": "Bear25",
+        "buy_hold_pct": -43.6,
+        "reported_alpha_pct": 31.2,
+        "implied_strategy_pct_if_alpha_is_simple_excess": -12.400000000000002
+      }
+    ],
+    "table3_caveat": "Implied arithmetic only under simple-excess definition; no independent reconstruction of original strategy returns.",
+    "table8_adaptive_minus_always_return_pp": 1.63,
+    "table8_adaptive_minus_always_alpha_pp": 1.6400000000000006,
+    "table8_two_sided_p_from_t_n": 0.035876863118018,
+    "table8_both_mean_returns_negative": true,
+    "table8_caveat": "Paired p arithmetic agrees with 0.036 under iid pairs; independence, selection correction and chronological strategy validity not established.",
+    "table7_return_change_pp_per_point1_fee": -3.176285714285715,
+    "table7_fit_r_squared": 0.9991652097087624,
+    "table7_all_mean_returns_negative": true,
+    "table7_caveat": "Arithmetic on reported fee-study means only; no observed spread, fill or native futures cost validation. A low-fee viability threshold is not established by negative means."
+  },
+  "owned_input_mapping": {
+    "method": "Filename metadata only; no raw prices or returns loaded",
+    "crypto_names": [
+      "BTCUSD_spot_1min_2018.csv",
+      "BTCUSD_spot_1min_2019.csv",
+      "BTCUSD_spot_1min_2020.csv",
+      "BTCUSD_spot_1min_2021.csv",
+      "BTCUSD_spot_1min_2022.csv",
+      "BTCUSD_spot_1min_2023.csv",
+      "BTCUSD_spot_1min_2024.csv",
+      "BTCUSD_spot_1min_2025.csv",
+      "BTCUSD_spot_1min_2026.csv",
+      "BTC_1min_2018.csv",
+      "BTC_1min_2019.csv",
+      "BTC_1min_2020.csv",
+      "BTC_1min_2021.csv",
+      "BTC_1min_2022.csv",
+      "BTC_1min_2023.csv",
+      "BTC_1min_2024.csv",
+      "BTC_1min_2025.csv",
+      "BTC_1min_2026.csv",
+      "ETHUSDT_perp_30m.csv"
+    ],
+    "conclusion": "Owned BTC series and ETH perpetual 30-minute data do not establish the exact ten-asset Binance hourly universe, V3 formula or sentiment availability. No proxy or new acquisition loop justified."
+  },
+  "prior_family": "Generic indicator/regime filters overlap existing failed/qualified work; exact study is not falsely called already tested.",
+  "disposition": "dont_test",
+  "new_economic_trials": 0,
+  "market_return_tests_run": false,
+  "independent_economic_verification": false,
+  "scout_preserved": {
+    "sha256": "a1a6a234549adeb9f810ea33bcd720a9faca54621bf1188484446552f76e1d45",
+    "hypotheses": 4,
+    "definitions": 10,
+    "lease": null
+  },
+  "root_trials_sha256": "40597f5c61a99f0fb913c53067b630b4a2583af2643dcc44a0b567e9a372af4e"
+}

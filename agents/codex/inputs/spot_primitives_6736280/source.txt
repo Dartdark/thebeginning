@@ -1,0 +1,785 @@
+                        The Two Primitives of Spot Market Strategy
+
+
+
+
+                                              Fikri Direnç Aktaş
+
+
+
+
+                                                 Working Paper
+
+
+                                                   May 2026
+
+
+
+
+Abstract
+
+This paper argues that in a single, reasonably efficient spot market, there exist only two fundamental trading
+strategies. The argument rests on a logical constraint: in spot markets, profit derives exclusively from price
+movement in the direction of one's position. For a trader to enter a position, they must have a reason to
+expect that movement. That reason must take one of two forms: either the current price is low relative to
+some reference level and should rise (the logic of Mean Reversion), or the current price is high relative to
+some reference level and signals a breakout that should continue (the logic of Momentum). There is no third
+positional argument. A price that is neither low nor high—a price in the middle—provides no directional
+justification and is untradeable in spot markets. This logical constraint, not merely empirical resemblance,
+makes Mean Reversion and Momentum the exhaustive primitives of spot market strategy. We demonstrate
+that value investing, growth investing, arbitrage, pairs trading, and trend following all reduce to variations of
+these two primitives, and briefly discuss the conditions under which each dominates.
+
+Keywords: momentum, mean reversion, market strategy taxonomy, trend following, value investing,
+arbitrage
+
+
+
+
+                                                        i
+Contents
+
+1. Introduction .................................................................................................................................................... 1
+2. Literature Review........................................................................................................................................... 2
+   2.1 Momentum: Empirical Evidence ............................................................................................................. 2
+   2.2 Mean Reversion: Empirical Evidence ..................................................................................................... 2
+   2.3 Theoretical Explanations ......................................................................................................................... 2
+   2.4 The Taxonomic Gap ................................................................................................................................. 3
+   2.5 Related Work............................................................................................................................................ 3
+3. The Logical Argument: Why Only Two ........................................................................................................ 4
+   3.1 The Profit Constraint................................................................................................................................ 4
+   3.2 The Positional Constraint ......................................................................................................................... 4
+   3.3 Low: The Logic of Mean Reversion ........................................................................................................ 4
+   3.4 High: The Logic of Momentum ............................................................................................................... 5
+   3.5 Middle: The Absence of Signal ................................................................................................................ 5
+   3.6 A Qualification: Yield-Bearing Assets ..................................................................................................... 5
+   3.7 The Exhaustion Claim.............................................................................................................................. 6
+4. The Two Primitives Defined .......................................................................................................................... 7
+   4.1 Mean Reversion ....................................................................................................................................... 7
+   4.2 Momentum ............................................................................................................................................... 8
+   4.3 Two Variants of Momentum .................................................................................................................... 8
+   4.4 Comparative Summary ............................................................................................................................ 9
+5. The Reductionist Demonstration ................................................................................................................. 10
+   5.1 Value Investing as Mean Reversion ....................................................................................................... 10
+   5.2 Growth Investing as Momentum ........................................................................................................... 10
+   5.3 Arbitrage as Spatial Mean Reversion ..................................................................................................... 11
+   5.4 Pairs Trading as Relative Mean Reversion ............................................................................................ 11
+   5.5 Trend Following and Cross-Sectional Momentum as Momentum ........................................................ 12
+   5.6 Summary Taxonomy .............................................................................................................................. 12
+6. Regime Dependence .................................................................................................................................... 13
+7. Conclusion ................................................................................................................................................... 14
+References ........................................................................................................................................................ 15
+
+
+
+
+                                                                                 ii
+1. Introduction
+
+In a spot market, there is only one way to profit: buy an asset, wait for its price to rise, and sell it at a higher
+price. Whatever the strategy, whatever the philosophy, whatever the analytical framework, the profit
+mechanism is always the same. Price must move in the direction of the position.
+
+This simple fact imposes a logical constraint on the number of possible strategies. To enter a position, a
+trader must have a reason to expect that the price will rise from its current level. That reason must be a
+statement about the current price relative to something else. What kind of statement can it be?
+
+There are only two possibilities.
+
+The first possibility: The current price is low relative to some reference level. It has fallen below its
+historical average. It is below its estimated intrinsic value. It is cheap compared to a related asset. The trader
+buys because the deviation should correct. The price should rise because it is low. This is the logic of Mean
+Reversion.
+
+The second possibility: The current price is high relative to some reference level. It has broken above its
+recent trading range. It is above its moving average. Its earnings trajectory is accelerating beyond peers. The
+trader buys because the deviation signals strength rather than error. The price should continue rising because
+the breakout reveals an anomaly—a trend that has not yet been fully priced. This is the logic of Momentum.
+
+There is no third possibility. A price that is neither low nor high—a price sitting comfortably in the middle of
+its range, at fair value, showing no breakout and no deviation—provides no reason to expect movement in
+either direction. It is, from the perspective of spot market trading, inert. It offers no trade.
+
+This logical argument, not merely an empirical observation about risk profiles, is why Mean Reversion and
+Momentum are the only two fundamental strategies in spot markets. They are not two among many. They
+are the only two possible justifications for directional price expectations.
+
+The middle position—the absence of signal—is precisely the gap that structured products fill. Through
+derivative contracts, traders can profit from stillness, time decay, and volatility contraction rather than
+directional movement. That synthetic third strategy is the subject of related work1.The present paper focuses
+on the natural primitives themselves.
+
+The paper proceeds as follows. Section 2 reviews the empirical evidence for momentum and mean
+reversion, the theoretical explanations that have been proposed, and the taxonomic gap this paper addresses.
+Section 3 develops the logical argument that these two strategies exhaust the possibilities of spot market
+trading. Section 4 defines each primitive—its statistical basis, behavioral logic, implementation, and risk
+profile—and distinguishes cross-sectional from time-series momentum. Section 5 demonstrates that existing
+investment philosophies, from value investing to pairs trading, map cleanly onto the two primitives. Section
+6 briefly addresses regime dependence. Section 7 concludes.
+
+
+
+
+1
+ Aktaş, Fikri Direnç, Two Primitives, One Synthetic: A Unified Framework for Understanding Structured Products and Range-
+Based Strategies (April 20, 2026). Available at SSRN: https://ssrn.com/abstract=6614880
+
+                                                             1
+2. Literature Review
+
+The two strategies at the center of this paper—Momentum and Mean Reversion—are independently well-
+documented in the empirical finance literature. This section reviews the evidence for each, the theoretical
+explanations that have been proposed, and the absence of a unified taxonomy that this paper addresses.
+
+
+
+2.1 Momentum: Empirical Evidence
+
+The momentum effect—the tendency for assets with high past returns to continue outperforming—was first
+systematically documented by Jegadeesh and Titman (1993). Using U.S. equity data from 1965 to 1989,
+they found that portfolios buying past six-month winners and selling past six-month losers generated
+approximately 1% per month in excess returns. The effect was robust across formation and holding periods
+and was not explained by standard risk factors.
+
+Subsequent research confirmed momentum's pervasiveness. Rouwenhorst (1998) documented return
+continuation across twelve European markets. Moskowitz, Ooi, and Pedersen (2012) extended the analysis
+to time-series momentum—evaluating each asset against its own past rather than ranking assets against
+peers—and found significant Sharpe ratios across equity indices, currencies, commodities, and bonds.
+Asness, Moskowitz, and Pedersen (2013) demonstrated that momentum profits exist across eight distinct
+markets and asset classes, concluding that momentum reflects a common source of variation operating
+across the entire financial landscape.
+
+
+
+2.2 Mean Reversion: Empirical Evidence
+
+Mean reversion—the tendency for prices to revert to a historical average after extreme deviations—has an
+equally long intellectual history. Poterba and Summers (1988) documented long-horizon mean reversion in
+U.S. stock prices, finding negative autocorrelation in returns over multi-year horizons. De Bondt and Thaler
+(1985, 1987) showed that extreme losers outperform extreme winners over three- to five-year periods—a
+contrarian effect opposite to short-term momentum. In the practitioner literature, mean reversion forms the
+basis for statistical arbitrage and pairs trading (Gatev, Goetzmann, & Rouwenhorst, 2006).
+
+
+
+2.3 Theoretical Explanations
+
+The theoretical literature has developed competing explanations for these phenomena.
+
+Behavioral models attribute momentum to investor underreaction and mean reversion to overreaction.
+Barberis, Shleifer, and Vishny (1998) model a representative investor subject to conservatism bias (updating
+beliefs too slowly, generating momentum) and representativeness heuristic (extrapolating recent trends too
+far, generating subsequent reversals). Hong and Stein (1999) propose a model in which "news watchers"
+
+
+                                                      2
+trade on fundamentals and "momentum traders" extrapolate past returns; gradual information diffusion
+creates initial underreaction, which momentum traders subsequently amplify into overreaction and eventual
+reversal.
+
+Institutional models offer a structural alternative. Vayanos and Woolley (2013) develop a rational model of
+momentum and reversal based on delegated portfolio management. Fund flows respond gradually to changes
+in perceived managerial ability, creating price continuation in the short run and reversal in the long run. This
+mechanism does not require behavioral biases; it arises from the adjustment costs and incentive structures
+facing institutional investors.
+
+Risk-based explanations have been proposed for both phenomena but remain contested. Conrad and Kaul
+(1998) argued that momentum profits reflect cross-sectional variation in expected returns, but Jegadeesh and
+Titman (2001) found that most momentum profits derive from time-series predictability rather than static
+expected return differences. Daniel and Moskowitz (2016) characterized momentum strategies as crash-
+prone, but this characterization applies primarily to unmanaged cross-sectional portfolios rather than the
+time-series strategies with built-in risk management employed in practice (Covel, 2017).
+
+
+
+2.4 The Taxonomic Gap
+
+Despite the richness of these literatures, a unified taxonomy is absent. Momentum and mean reversion are
+treated as separate anomalies requiring separate explanations—behavioral, institutional, or risk-based. The
+literature does not ask whether these two strategies might exhaust the logical space of spot market trading,
+nor whether other strategies might reduce to variations of these two. This paper addresses that gap. It does
+not propose new empirical evidence for either strategy. It proposes a logical framework that positions them
+as the only two possible strategies in spot markets, and demonstrates that existing investment philosophies
+map cleanly onto this framework.
+
+
+
+2.5 Related Work
+
+This paper is part of a broader research program. In related work, I extend the two-primitives framework to
+structured products, arguing that range-based option strategies constitute a synthetic third strategy designed
+to fill the structural gap left by sideways markets where neither primitive functions effectively2. The present
+paper provides the foundational taxonomy upon which that extension builds.
+
+
+
+
+2
+ Aktaş, Fikri Direnç, Two Primitives, One Synthetic: A Unified Framework for Understanding Structured Products and Range-
+Based Strategies (April 20, 2026). Available at SSRN: https://ssrn.com/abstract=6614880
+
+                                                             3
+3. The Logical Argument: Why Only Two
+
+3.1 The Profit Constraint
+
+In a spot market, profit requires directional price movement. An investor buys an asset. The price must rise
+for the investor to realize a gain. There is no alternative mechanism—no time decay to harvest, no volatility
+premium to collect, no spread to capture from simultaneous buying and selling in different markets (the
+latter constituting arbitrage, which we will show is itself a form of mean reversion).
+
+For non-yielding spot assets, the investor's entire return derives from a single source: price moving in the
+desired direction. For yield-bearing assets, price movement remains the primary source of trading returns,
+though total return includes income components. Section 3.6 addresses this qualification.
+
+This means that every spot market strategy must answer one question: Why do I expect the price to rise from
+here?
+
+
+
+3.2 The Positional Constraint
+
+The answer to that question must take the form of a positional statement. The current price must be
+characterized relative to something—its past, its peers, its fundamentals, its recent range. Without such a
+reference, the statement "price will rise" is groundless.
+
+What kinds of positional statements are logically available?
+
+Every price exists somewhere on a spectrum relative to a chosen reference level. It is either below the
+reference, at the reference, or above it. These three positions—low, middle, high—exhaust the logical
+possibilities.
+
+
+
+3.3 Low: The Logic of Mean Reversion
+
+If the current price is low relative to a reference level—below its historical average, below its intrinsic value,
+below a correlated asset—the trader has a reason to buy. The deviation should correct. Prices that are
+unusually low tend to rise. This expectation is not arbitrary; it rests on a specific statistical property:
+negative autocorrelation. Extreme observations in a stationary process tend to be followed by observations
+closer to the mean.
+
+This positional argument—"price will rise because it is low"—is the logical foundation of every mean
+reversion strategy, whether implemented with oscillators on price data or with valuation multiples on
+fundamental data.
+
+
+
+
+                                                        4
+3.4 High: The Logic of Momentum
+
+If the current price is high relative to a reference level—breaking above its recent trading range, crossing
+above its moving average, showing earnings growth exceeding peers—the trader also has a reason to buy.
+But the logic is different. The price is high not because of random fluctuation that will correct, but because
+something has changed. The deviation is an anomaly that signals a new regime. The breakout reveals
+information that the market has not yet fully absorbed.
+This positional argument—"price will continue rising because it is high and breaking out"—rests on a
+different statistical property: positive autocorrelation. In a trending process, above-average observations tend
+to be followed by further above-average observations.
+
+
+
+3.5 Middle: The Absence of Signal
+
+Now consider the middle position. The price is at its historical average, at fair value, in the middle of its
+range, showing no breakout and no deviation. There is no reason—from either logic—to expect movement
+in either direction. The price is where it "should" be.
+
+This is not a tradeable condition. The spot market investor has no natural mechanism to profit from a price
+that is correctly valued and stationary. The middle is an absence of signal. It requires a synthetic strategy—
+derivatives, options, structured products—to monetize.
+
+
+
+3.6 A Qualification: Yield-Bearing Assets
+
+The argument above assumes that the sole source of return is price appreciation. This is true for non-yielding
+assets—commodities, currencies held as speculation, non-dividend-paying stocks. But many spot market
+assets generate yield: stocks pay dividends, bonds pay coupons, and currencies held as investments earn
+interest rate differentials.
+
+Does yield create a third primitive?
+
+First, yield in stillness resembles the synthetic third strategy. An investor who buys a dividend-paying
+stock and holds it through a flat price environment earns a return from business activity rather than price
+movement. This is functionally similar to the structured products discussed in related work (Aktaş, 2026a): a
+premium collected from the passage of time rather than from directional accuracy. In this sense, yield-
+bearing spot assets partially fill the "middle" gap identified in Section 3.5—they make stillness partially
+tradeable without derivatives. However, they do so not through a new trading logic but through a
+fundamentally different source of return: the distribution of business profits to owners. This is not
+a strategy in the trading sense; it is a claim on cash flows. The dividend investor is not making a positional
+argument about price. They are collecting an ownership entitlement.
+Second, yield does not create a new positional logic. When a trader makes an active decision to enter a
+position—as opposed to passively holding for yield—they must still justify why now. If the justification is
+
+
+                                                       5
+"the dividend is attractive," the implicit argument is that the price has fallen enough to make the yield
+competitive relative to alternatives. That is a "low" argument: the price is low relative to the income stream.
+It reduces to mean reversion. If the justification is "the company is growing its dividend," the implicit
+argument is that the growth trajectory will continue. That is a "high" argument: the payout is breaking out
+relative to its history. It reduces to momentum.
+
+Third, yield can dominate price movement without replacing the positional logic. A bond with a high
+coupon may generate positive total return even if the price declines modestly. But the decision to buy that
+bond still requires a directional view (or at least the view that price decline won't overwhelm the yield). The
+yield modifies the risk-reward calculus but does not eliminate the need for a positional justification.
+
+In summary: Yield-bearing assets blur the boundary between natural and synthetic returns—they make
+stillness partially profitable without derivatives. But they do not introduce a third positional logic. The active
+trading decision still reduces to buying because the price is low (yield is attractive relative to price) or
+buying because the breakout is continuing (yield is growing). The two primitives remain exhaustive of
+trading strategies, even if the total return calculation includes non-price components.
+
+
+
+3.7 The Exhaustion Claim
+
+The argument can be summarized as follows:
+
+   1. Spot market profit requires directional price movement.
+
+   2. Expecting directional movement requires a positional justification.
+
+   3. Positional justifications exhaust in three categories: low, middle, high.
+
+   4. "Low" generates the logic of Mean Reversion (correction expected).
+
+   5. "High" generates the logic of Momentum (continuation expected).
+
+   6. "Middle" provides no directional justification and is untradeable in spot markets.
+   7. Therefore, there are exactly two natural spot market strategies.
+
+This is not an empirical claim about what strategies happen to exist or what risk profiles happen to resemble
+each other. It is a logical claim about the structure of spot market trading itself. If you accept the premise
+that profit requires directional movement and that directional expectations require positional justification,
+the conclusion follows necessarily.
+
+
+
+
+                                                        6
+4. The Two Primitives Defined
+
+Having established why there are only two primitives, we now define what they are.
+
+
+
+4.1 Mean Reversion
+
+Mean reversion is the strategy of buying assets whose prices are low relative to a reference level, based on
+the expectation that the deviation will correct. The reference level may take several forms: a historical
+moving average (price-based mean reversion), an estimate of intrinsic value (fundamental-based mean
+reversion, commonly known as value investing), a contemporaneous price in another market (spatial
+arbitrage), or the historical spread relative to a paired asset (relative value or pairs trading). What unifies
+these approaches is not the reference level itself but the underlying logic: the price is low, the deviation
+should correct, and the correction produces the return.
+
+The statistical foundation of mean reversion is negative autocorrelation. In a stationary process, extreme
+observations tend to be followed by observations closer to the mean. This property is not unique to financial
+markets—it is a general feature of any process with a stable distribution, from heights in a population to
+measurement errors in scientific instruments. In asset prices, Poterba and Summers (1988) documented
+long-horizon negative autocorrelation in U.S. equity returns, providing early formal evidence for the
+phenomenon.
+
+The behavioral explanation for mean reversion is overreaction. De Bondt and Thaler (1985, 1987) argued
+that investors systematically overreact to news, driving prices beyond fundamental justification during both
+selloffs and rallies. These dislocations are temporary. As the emotional response fades and fundamental
+analysis reasserts itself, prices revert toward prior levels. The mean reversion trader profits by identifying
+these overreactions and positioning for their correction.
+Common implementations include oscillators such as the Relative Strength Index (Wilder, 1978) and
+Stochastic indicators, which measure the speed and magnitude of recent price changes to identify
+overbought and oversold conditions. Volatility bands, such as Bollinger Bands (Bollinger, 2001) and Keltner
+Channels, place statistically-derived boundaries around a moving average; touches of the lower band signal
+potential mean reversion to the upside, and touches of the upper band signal potential reversion to the
+downside. Pairs trading (Gatev, Goetzmann, & Rouwenhorst, 2006) extends the logic to relative
+relationships between correlated assets.
+
+The characteristic risk profile of mean reversion strategies combines a high win rate with a low win/loss
+ratio. The strategy generates frequent small gains as prices revert from temporary extremes. These are
+punctuated by occasional large losses when deviations persist—either because the trend is stronger than
+anticipated or because the reference level itself has permanently shifted. The practitioner metaphor "picking
+up pennies in front of a steamroller" captures this asymmetry: steady, modest profits that can be erased by a
+single catastrophic event when the expected reversion fails to materialize.
+
+
+
+
+                                                        7
+4.2 Momentum
+
+Momentum is the strategy of buying assets whose prices are high relative to a reference level and breaking
+out, based on the expectation that the breakout signals a new trend that will continue. As with mean
+reversion, the reference level may vary: a moving average or recent price range (trend following), a peer
+group ranking (cross-sectional momentum), or an earnings trajectory (growth investing). What unifies these
+approaches is the underlying logic: the price is high, the elevation signals a persistent anomaly rather than a
+temporary deviation, and the continuation produces the return.
+
+The statistical foundation of momentum is positive autocorrelation, or autoregression. In a trending process,
+above-average values tend to be followed by further above-average values—the opposite of the mean-
+reverting pattern. Jegadeesh and Titman (1993) first systematically documented this property in U.S.
+equities, finding that portfolios buying past six-month winners and selling past six-month losers generated
+approximately one percent per month in excess returns. Moskowitz, Ooi, and Pedersen (2012) extended the
+analysis to time-series momentum across equity indices, currencies, commodities, and bonds, demonstrating
+that the effect is pervasive across asset classes.
+
+The behavioral explanation for momentum is underreaction. Barberis, Shleifer, and Vishny (1998) modeled
+investors who update their beliefs too slowly in response to new information, generating gradual price drift
+in the direction of the news. Hong and Stein (1999) proposed a complementary mechanism in which "news
+watchers" trade on fundamental information while "momentum traders" extrapolate past returns; the gradual
+diffusion of information among news watchers creates initial underreaction, which momentum traders
+subsequently amplify. A structural alternative emphasizes institutional constraints: Vayanos and Woolley
+(2013) demonstrated that large funds executing trades gradually to minimize market impact generate price
+patterns empirically indistinguishable from behavioral underreaction, but arising from rational execution
+strategy rather than cognitive bias.
+
+Common implementations include moving average crossovers, which generate buy signals when a shorter-
+term average crosses above a longer-term average, and channel breakouts such as Donchian channels, which
+generate buy signals when prices exceed the highest level of a specified lookback period. Relative strength
+rankings, the basis for cross-sectional momentum, compare assets against peers and select the strongest
+performers.
+
+The characteristic risk profile of momentum strategies combines a low win rate with a high win/loss ratio—
+the mirror image of mean reversion. The strategy generates frequent small losses during sideways or choppy
+markets when breakouts fail and trends do not establish. These are punctuated by occasional large gains
+during sustained directional movements. The practitioner discipline of "cutting losses short and letting
+winners run" (Covel, 2017) reflects this profile: the strategy accepts many small losses as the cost of being
+positioned for the infrequent large trends that generate the bulk of returns.
+
+
+
+4.3 Two Variants of Momentum
+
+The momentum literature distinguishes two implementations that, while sharing the same underlying logic,
+exhibit meaningfully different risk characteristics.
+
+
+
+                                                       8
+Cross-sectional momentum ranks assets against each other based on past returns over a formation period,
+typically six to twelve months. The highest-performing assets (winners) are bought, and the lowest-
+performing assets (losers) are sold short. This is a relative strength approach: performance is measured
+against peers, not against an asset's own history. The strategy requires short-selling capability and, as Daniel
+and Moskowitz (2016) documented, is exposed to severe losses during market rebounds when heavily
+shorted loser stocks experience dramatic reversals. These "momentum crashes" are a well-known
+vulnerability of the cross-sectional implementation.
+
+Time-series momentum, also called trend following, evaluates each asset independently against its own
+past performance. Long positions are taken in assets with positive recent returns; positions are exited or
+reversed when returns turn negative. This approach, formalized academically by Moskowitz, Ooi, and
+Pedersen (2012) but practiced by commodity trading advisors for decades, does not require short selling—
+the strategy can simply exit to cash when trends reverse. The built-in risk management through trend-
+reversal signals produces a fundamentally different risk profile from unmanaged cross-sectional portfolios:
+vulnerability to whipsaws during sideways markets rather than vulnerability to catastrophic crashes during
+market rebounds. The distinction is not merely academic; it has significant practical implications for
+portfolio construction and risk management.
+
+
+
+4.4 Comparative Summary
+
+
+Dimension               Mean Reversion                      Momentum
+
+
+                        Price is low; should rise           Price is high and breaking out; should continue
+Positional Logic
+                        (correction)                        rising (anomaly)
+
+
+Statistical Basis       Negative autocorrelation            Positive autocorrelation
+
+
+Behavioral Logic        Overreaction                        Underreaction
+
+
+Entry Rule              Buy after decline                   Buy after rally
+
+
+Win Rate                High                                Low
+
+
+Win/Loss Ratio          Low                                 High
+
+
+Primary
+                        Trend persistence                   Sideways markets
+Vulnerability
+
+
+
+
+                                                       9
+5. The Reductionist Demonstration
+
+If the logical argument of Section 3 is correct, then every existing spot market strategy must reduce to either
+Mean Reversion or Momentum. This section demonstrates that mapping. Importantly, the reduction is not
+based on resemblance of risk profiles or economic outcomes. It is based on the positional logic each strategy
+employs.
+
+
+
+5.1 Value Investing as Mean Reversion
+
+Value investing, as articulated by Graham and Dodd (1934) and practiced by investors such as Warren
+Buffett, involves buying securities that trade below their estimated intrinsic value and waiting for market
+prices to converge to that value. The positional logic is straightforward: the price is low relative to intrinsic
+value, and that deviation should correct.
+
+The information set is fundamental rather than price-based. Value investors analyze earnings, book value,
+discounted cash flows, and competitive position to estimate what a company is worth. The reference level—
+intrinsic value—is derived from these fundamentals rather than from historical price data. But the
+underlying logic is identical to price-based mean reversion. A deviation is identified (price below intrinsic
+value), a correction is expected (price rising to meet value), and the correction produces the return.
+
+The risk profile is also analogous. Value investors win regularly when the market recognizes the discrepancy
+and prices converge. But they can suffer extended drawdowns when cheap stocks become cheaper—the
+"value trap," which is the fundamental equivalent of catching a falling knife in price-based mean reversion.
+In both cases, the strategy fails when the reference level shifts or when the deviation persists longer than the
+investor's patience or capital.
+
+
+
+5.2 Growth Investing as Momentum
+
+Growth investing involves buying companies with strong and accelerating earnings growth, expecting that
+growth trajectory to continue and to drive prices higher. The positional logic mirrors momentum: the
+earnings trajectory is high relative to peers or history and is breaking out. That breakout signals a persistent
+anomaly—something about this company's competitive position, market opportunity, or execution capability
+is different—and the anomaly should continue.
+
+The information set is forward-looking fundamentals: earnings growth rates, revenue expansion, market
+share gains, and total addressable market. The reference level is the growth trajectory of peers or the
+company's own historical growth rate. But the underlying logic is identical to price-based momentum. A
+trend is identified (earnings growth), continuation is expected (growth will persist, and prices will follow),
+and that continuation produces the return.
+The risk profile is similarly analogous. Growth investors suffer frequent small losses on companies whose
+growth proves unsustainable or already priced in, punctuated by occasional massive gains on the rare
+
+
+                                                        10
+companies that sustain exceptional trajectories over many years. This is precisely the "many small losses,
+occasional huge gains" profile of price-based momentum.
+
+
+
+5.3 Arbitrage as Spatial Mean Reversion
+
+Arbitrage, in its purest form, involves buying an asset in one market where it is undervalued and
+simultaneously selling an identical asset in another market where it is overvalued. The positional logic is
+mean reversion applied across space rather than time: the price is low in one market relative to another
+market for the same asset, and that deviation should correct.
+The information set consists of cross-market prices. The reference level is the contemporaneous price in the
+other market. The arbitrageur does not need to estimate intrinsic value or analyze historical price patterns—
+the reference is directly observable in real time. But the underlying logic remains mean reversion. A
+deviation is identified (price discrepancy between markets), convergence is expected (the law of one price),
+and the convergence produces the return.
+
+The primary risk—that the gap widens before it closes—is the spatial analogue of the temporal risk faced by
+price-based mean reversion traders. Just as a stock can become cheaper before it reverts, an arbitrage spread
+can widen before it converges. The structural vulnerability is identical; only the dimension (space versus
+time) differs.
+
+
+
+5.4 Pairs Trading as Relative Mean Reversion
+
+Pairs trading identifies two historically correlated assets, monitors their price ratio or spread, and enters
+positions when that relationship diverges beyond a statistical threshold. The positional logic is mean
+reversion applied to a relative relationship rather than an absolute price level: one asset's price is low relative
+to a historically correlated asset, and that relative deviation should correct.
+
+The information set consists of cross-asset price ratios. The reference level is the historical spread or ratio
+between the two assets, typically estimated using cointegration or correlation analysis over a calibration
+period. As with arbitrage, the reference is empirically derived rather than fundamentally estimated. But the
+logic remains mean reversion: a deviation from a stable relationship is expected to reverse.
+
+The characteristic risk is that the historical correlation breaks down—the two assets decouple permanently
+due to structural changes in one or both. This is the relational analogue of the mean reversion trader's risk
+that the reference level has permanently shifted. In both cases, the strategy fails when the assumption of
+stationarity is violated.
+
+
+
+
+                                                        11
+5.5 Trend Following and Cross-Sectional Momentum as Momentum
+
+Trend following and cross-sectional momentum are the purest expressions of the momentum primitive. Both
+use price-based information sets and price-based reference levels. The positional logic is identical: the price
+is high relative to a reference and breaking out, and that breakout signals a persistent anomaly.
+
+In trend following, the reference is the asset's own history—its moving average or recent trading range. The
+price is high relative to where it has been, and the breakout suggests that the trend will continue. In cross-
+sectional momentum, the reference is the asset's peer group. The price is high relative to competitors, and
+that relative strength suggests continued outperformance.
+
+No further reduction is needed. These strategies are the primitive itself, expressed directly in price data
+without fundamental intermediation.
+
+
+
+5.6 Summary Taxonomy
+
+
+Strategy                   Positional Logic                          Information Set        Primitive
+
+
+RSI / Bollinger            Price is low relative to historical
+                                                                     Price                  Mean Reversion
+Bands                      distribution
+
+
+                           Price is low relative to intrinsic
+Value Investing                                                      Fundamentals           Mean Reversion
+                           value
+
+
+                           Price is low relative to other            Price (cross-          Mean Reversion
+Arbitrage
+                           market                                    market)                (Spatial)
+
+
+                                                                     Price (cross-          Mean Reversion
+Pairs Trading              Asset A is low relative to Asset B
+                                                                     asset)                 (Relative)
+
+
+Trend Following            Price is high and breaking out
+                                                                     Price                  Momentum
+(Time-Series)              relative to own history
+
+
+Cross-Sectional                                                      Price (cross-          Momentum
+                           Price is high relative to peers
+Momentum                                                             asset)                 (Relative)
+
+
+                           Earnings trajectory is high and
+Growth Investing                                                     Fundamentals           Momentum
+                           breaking out relative to peers
+
+
+
+The taxonomy is complete and exhaustive. Every major spot market investment philosophy maps cleanly
+onto one of the two primitives.
+
+                                                        12
+6. Regime Dependence
+
+The logical argument establishes that there are only two primitives. It does not establish which one will
+work at a given time. That depends on market structure.
+
+Momentum requires trending markets. Without sustained directional movement, breakouts fail and the
+strategy is whipsawed—accumulating small losses that erode capital.
+
+Mean reversion requires range-bound markets. Without identifiable boundaries around a stable reference
+level, deviations may not correct. The strategy either is starved of entry signals or suffers catastrophic losses
+when the reference level has permanently shifted.
+
+Strategy selection is therefore regime diagnosis. The investor's first task is not choosing between value and
+growth, or between RSI and moving average crossovers. It is determining whether the current market
+structure rewards the logic of correction or the logic of continuation. For an empirical demonstration of
+regime-dependent strategy performance—specifically, the dominance of momentum over mean reversion in
+an institution-dominated, inflation-driven emerging market—see Aktaş (2026b). What determines which
+regime prevails is the subject of related work (Aktaş, 2026c).
+
+
+
+
+                                                       13
+7. Conclusion
+
+This paper has argued that spot market strategy is constrained by a simple logical structure. Profit requires
+directional price movement. Directional expectations require positional justification—a statement about
+whether the current price is low, high, or in the middle relative to some reference. "Low" generates the logic
+of Mean Reversion. "High" generates the logic of Momentum. "Middle" generates no tradeable signal in
+spot markets and requires synthetic strategies to monetize.
+
+This logical argument is stronger than an empirical claim about resemblance. It does not merely observe that
+value investing looks like mean reversion. It demonstrates that value investing cannot be anything other
+than mean reversion, because the only way to justify buying after a decline is the expectation of correction.
+Similarly, growth investing cannot be anything other than momentum, because the only way to justify
+buying a company whose metrics are already elevated is the expectation that the elevation signals a
+persistent anomaly rather than a temporary deviation.
+
+The two primitives are mirror images. They rest on opposite statistical properties. They generate opposite
+risk profiles. They require opposite market structures. And together, they exhaust the logical space of spot
+market strategy.
+The framework presented here serves as a foundation. A complete strategy space also requires synthetic
+strategies—derivatives-based constructions that profit from stillness rather than movement (Aktaş, 2026a).
+And a complete investment process requires understanding why a given regime prevails—the political
+economy of market structure (Aktaş, 2026c). But the starting point is here: in a spot market, you can buy
+because the price is low, or you can buy because the price is high and breaking out. There is no third reason.
+
+
+
+
+                                                      14
+References
+
+Aktaş, F. D. (2026a). Two Primitives, One Synthetic: A Unified Framework for Understanding Structured
+Products and Range-Based Strategies. Working Paper. Available at
+SSRN: https://ssrn.com/abstract=6614880
+
+Aktaş, F. D. (2026b). Performance and Risk Analysis of Momentum-Based Algorithmic Trading Strategies in
+the Turkish Equity Market: An Empirical Study. Unpublished master's thesis, Vistula University.
+
+Aktaş, F. D. (2026c). The Political Economy of Market Regimes. Working Paper (forthcoming).
+
+Asness, C. S., Moskowitz, T. J., & Pedersen, L. H. (2013). Value and momentum everywhere. Journal of
+Finance, 68(3), 929–985.
+
+Barberis, N., Shleifer, A., & Vishny, R. W. (1998). A model of investor sentiment. Journal of Financial
+Economics, 49(3), 307–343.
+
+Bollinger, J. (2001). Bollinger on Bollinger Bands. McGraw-Hill.
+
+Conrad, J., & Kaul, G. (1998). An anatomy of trading strategies. Review of Financial Studies, 11(3), 489–
+519.
+
+Covel, M. W. (2017). Trend Following: How to Make a Fortune in Bull, Bear and Black Swan Markets (5th
+ed.). Wiley.
+
+Daniel, K., & Moskowitz, T. J. (2016). Momentum crashes. Journal of Financial Economics, 122(2), 221–
+247.
+
+De Bondt, W. F. M., & Thaler, R. H. (1985). Does the stock market overreact? Journal of Finance, 40(3),
+793–805.
+
+De Bondt, W. F. M., & Thaler, R. H. (1987). Further evidence on investor overreaction and stock market
+seasonality. Journal of Finance, 42(3), 557–581.
+
+Gatev, E., Goetzmann, W. N., & Rouwenhorst, K. G. (2006). Pairs trading: Performance of a relative-value
+arbitrage rule. Review of Financial Studies, 19(3), 797–827.
+
+Graham, B., & Dodd, D. (1934). Security Analysis. McGraw-Hill.
+Hong, H., & Stein, J. C. (1999). A unified theory of underreaction, momentum trading, and overreaction in
+asset markets. Journal of Finance, 54(6), 2143–2184.
+
+Jegadeesh, N., & Titman, S. (1993). Returns to buying winners and selling losers: Implications for stock
+market efficiency. Journal of Finance, 48(1), 65–91.
+
+Jegadeesh, N., & Titman, S. (2001). Profitability of momentum strategies: An evaluation of alternative
+explanations. Journal of Finance, 56(2), 699–720.
+
+Moskowitz, T. J., Ooi, Y. H., & Pedersen, L. H. (2012). Time series momentum. Journal of Financial
+Economics, 104(2), 228–250.
+Poterba, J. M., & Summers, L. H. (1988). Mean reversion in stock prices: Evidence and
+implications. Journal of Financial Economics, 22(1), 27–59.
+
+
+                                                     15
+Rouwenhorst, K. G. (1998). International momentum strategies. Journal of Finance, 53(1), 267–284.
+
+Vayanos, D., & Woolley, P. (2013). An institutional theory of momentum and reversal. The Review of
+Financial Studies, 26(5), 1087–1145.
+
+Wilder, J. W. (1978). New Concepts in Technical Trading Systems. Greensboro, NC.
+
+
+
+
+                                                   16
+

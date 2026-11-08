@@ -304,6 +304,18 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- Crypto regime/insurance follow-up, retained 2026-11-08: Han,
+  [SSRN 6477100 full review](results/ssrn6477100_review_20261108.md), March 2026, Tables 1/3/7/8 and pp. 7–15.
+  A regime labelled from final-period buy-and-hold return is unavailable at entry. A causal EMA can avoid that
+  particular leak while its chosen strategy/threshold still carries selection and dependent-sample risk.
+  Source EMA switching improves mean period return −2.27%→−0.64% (unadjusted paired p=.036); both remain losses.
+  Relative bear outperformance can be lower beta/cash exposure, not profitable insurance or protection before
+  an account breach. All fee-study means are negative, including .1% cost; no low-fee viability or measured saving
+  follows. No actual human intervention policy was tested. For separately justified comparisons, freeze feature/
+  sentiment availability, first fills, cash-versus-hold behavior and matched exposure/turnover controls before
+  dependence/selection-aware inference and native paths. Source/arithmetic review only; zero return trials,
+  no new monitor/switch/queue candidate or book change. Do not infer competing bot orders from price patterns.
+
 - Commodity-turning-point follow-up2026-11-02: [source-method review](results/scout_overreaction_source_gate_20261102.md),
   Borgards/Czudaj/Hoang2021, DOI10.1016/j.resourpol.2020.101966. Capturing a fixed fraction of an ex-post reversal
   does not define causal entry/exit availability. The inspected model assumes20%capture and omits fees/slippage;
@@ -2207,6 +2219,22 @@ causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the 
 This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
 rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.
 
+### E09/E19 follow-up — Locked arbitrage cashflow versus future convergence
+
+Aktaş, *The Two Primitives of Spot Market Strategy*, SSRN6736280, May 2026;
+[full review](results/spot_primitives_6736280_review.md),
+[constructed audit](../../analysis/outputs/codex_spot_primitives_6736280/audit.json).
+The source's §5.3 describes pure simultaneous arbitrage as depending on future convergence and bearing widening
+risk before closure. Distinguish a locked executable spread in identical fungible deliverable units from a
+position held for risky convergence. With both legs and delivery assured by assumption, buy ask 99/sell bid 101
+less assumed total cost 0.20 yields 1.80 immediately; no later convergence is required. This is a mathematical
+example, not observed quotes or an available opportunity. The source's narrow single-market premise itself
+excludes this cross-venue case, but its later taxonomy explicitly includes it.
+Practical replication still needs synchronized executable bid/ask, legging/settlement/financing/delivery risks,
+native units and cash/borrow ledgers; correlation or a strategy label supplies none. Source §3.6 already
+acknowledges dividends/coupons: retain income separately from price gain instead of omitting it from accounting.
+Evidence: source reading and constructed checks only; no market-return trial, measured execution savings,
+new data-shopping entry, policy change, arbitrage bot or live change. Existing clock/cashflow controls remain.
 
 ### E09/E19 follow-up — Weekly close exits, equity reconstruction and low-beta claims
 
