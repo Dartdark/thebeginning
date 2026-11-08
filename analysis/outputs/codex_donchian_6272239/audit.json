@@ -1,0 +1,81 @@
+{
+  "source_commit": "d7c1d74012fb66bbc5e64e6f08fff21381372f20",
+  "script_sha256": "f699399a6e577cba429483db69b122ce1ce9351eb8886ffc4914fb0e5ce8b97d",
+  "input_sha256": {
+    "agents/codex/inputs/ssrn6272239/.gitattributes": "3a7849516f0a5dc024c7dce1c786d0cb7ce1bf3dfe5e9abcc02c96301c3ae5a0",
+    "agents/codex/inputs/ssrn6272239/repository/LICENSE": "e8f460a28c06122e70a9188273c09e774c446f59b6c086af0e6cb6dcef9c41cf",
+    "agents/codex/inputs/ssrn6272239/repository/README.md": "35e94c16fe310b5921775bbe666423e49b1bdb9e85a7d914eb4f5573bfb861a1",
+    "agents/codex/inputs/ssrn6272239/repository/commit.json": "ba71046db86dcfa4b7f0d825900a1291ba5bd6f1fe72c9235b05199cf597fc38",
+    "agents/codex/inputs/ssrn6272239/repository/documentation_fills.json": "e6f99b2d1aa62ae0eea7432f027af6f5dc16cc6bb9614b5621ac2900c4bc3f76",
+    "agents/codex/inputs/ssrn6272239/repository/documentation_trailing.json": "8acfaa83b931610154de9b6b9a38322bde0e9c0516619f85b4ee0007299d2b14",
+    "agents/codex/inputs/ssrn6272239/repository/donchian_breakout.pine": "a7b6424a55c5f4b8a470a1d0bc63484a494e91114b49138d2825eb8c21d1517c",
+    "agents/codex/inputs/ssrn6272239/repository/tree.json": "237768d481d504dbe8bc5167bf02e54d40d9a6a4869e24c710c62b505c58cf48",
+    "agents/codex/inputs/ssrn6272239/results_screenshot.png": "08b72c82d6d4a9e79a1a8eafa2e5bc54f5c1609f2248a0e31a45f6db3509a4d9",
+    "agents/codex/inputs/ssrn6272239/source.pdf": "92163631772b53ae818bb7b051fcd6da3ae4aef0db138a43a0b5ee78a1ac7036",
+    "agents/codex/inputs/ssrn6272239/source.txt": "57975ce03464aa083708ea5d785bff3993dcd81ef76860825dc14897aaa5b093"
+  },
+  "static_checks": {
+    "prior_channel_long": true,
+    "prior_channel_short": true,
+    "regime_above_average": true,
+    "trailing_activation_present": true,
+    "trailing_offset_missing": true,
+    "price_to_tick_conversion_missing": true,
+    "bar_close_fill_setting_missing": true,
+    "on_fill_recalculation_missing": true,
+    "realtime_tick_recalculation_enabled": true,
+    "explicit_quantity_missing": true,
+    "long_stop_uses_current_atr": true,
+    "short_stop_uses_current_atr": true
+  },
+  "screenshot_transcription": {
+    "timeframe": "1W",
+    "symbol": "Bitcoin / U.S. Dollar; CRYPTO",
+    "tester_date_label": "Oct 4, 2009 - Feb 15, 2026",
+    "profit_usd": 41023.96,
+    "profit_pct": 410.24,
+    "max_equity_drawdown_usd": 8613.24,
+    "max_equity_drawdown_pct": 51.65,
+    "trades": 31,
+    "wins": 28,
+    "profit_factor": 7.076
+  },
+  "conditional_arithmetic": {
+    "starting_equity_usd": 10000,
+    "ending_equity_if_no_external_flows_usd": 51023.96,
+    "return_pct": 410.2396,
+    "win_rate_pct": 90.32258064516128,
+    "losses": 3
+  },
+  "synthetic_stop_update": {
+    "entry": 100,
+    "risk_atr_multiple": 2,
+    "atr_before": 2,
+    "atr_after": 4,
+    "long_stop_before": 96,
+    "long_stop_after": 92,
+    "note": "Illustrates current-ATR stop widening, not market performance."
+  },
+  "owned_btc_files": [
+    "data/BTCUSD_spot_1min_2018.csv",
+    "data/BTCUSD_spot_1min_2019.csv",
+    "data/BTCUSD_spot_1min_2020.csv",
+    "data/BTCUSD_spot_1min_2021.csv",
+    "data/BTCUSD_spot_1min_2022.csv",
+    "data/BTCUSD_spot_1min_2023.csv",
+    "data/BTCUSD_spot_1min_2024.csv",
+    "data/BTCUSD_spot_1min_2025.csv",
+    "data/BTCUSD_spot_1min_2026.csv",
+    "data/BTC_1min_2018.csv",
+    "data/BTC_1min_2019.csv",
+    "data/BTC_1min_2020.csv",
+    "data/BTC_1min_2021.csv",
+    "data/BTC_1min_2022.csv",
+    "data/BTC_1min_2023.csv",
+    "data/BTC_1min_2024.csv",
+    "data/BTC_1min_2025.csv",
+    "data/BTC_1min_2026.csv"
+  ],
+  "return_trials": 0,
+  "status": "Source screenshot/arithmetic/static code only. No Pine runtime compilation, author trade replication or independent backtest."
+}

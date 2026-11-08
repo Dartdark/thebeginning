@@ -1,0 +1,1394 @@
+                                                                          1
+
+
+
+
+      Backtesting and Analysis of a Quantitative Trading Strategy:
+
+A Case Study in Moving Average Crossovers and Portfolio Diversification
+
+
+
+                           Zachary B. Arnold
+
+                           Independent Study
+
+                            Capstone Course
+
+                               Ms. Harris
+
+                             April 27, 2026
+                                                                                                    2
+
+
+                                            Abstract
+
+       The paper examines the profitability and statistical strength of a 50/200-day simple
+
+moving average crossover strategy as compared to a passive buy-and-hold control on a
+
+diversified portfolio of large-cap equities. The strategy is implemented on five
+
+large-capitalization U.S. equities representing different economic sectors -- AAPL, MSFT, JPM,
+
+XOM, and JNJ -- between January 2010 and December 2023, where performance is measured by
+
+annualized Sharpe ratios, maximum drawdown, and two-tailed t-tests of mean daily excess
+
+returns, and where the entire sample is split into an in-sample period (2010–2018) and an
+
+out-of-sample validation period (2019–2023). Sharpe ratio of the strategy at the portfolio level
+
+was 0.779, which was lower than the buy-and-hold Sharpe ratio of 0.849, and the strategy
+
+produced an annualized excess return of -5.23% compared to the passive benchmark and a
+
+statistically significant negative t-statistic of -2.169 (p = 0.030), which suggests that the
+
+crossover reliably underperformed the passive benchmark. These results are widely in line with
+
+the postulations of the Efficient Market Hypothesis, which holds that simple rule-based technical
+
+strategies might not be useful in producing consistent excess returns in contemporary
+
+large-capitalization equity markets, but the results are subject to survivorship bias inherent in the
+
+sample selection and would be improved by extending the analysis to larger asset universes and
+
+using machine learning techniques that can dynamically adapt to changing market regimes.
+                                                                                                      3
+
+
+                     Backtesting and Analysis of a Quantitative Trading Strategy:
+
+               A Case Study in Moving Average Crossovers and Portfolio Diversification
+
+       There is a tension at the heart of contemporary financial economics: markets are
+
+theorized to be efficient processors of information, but practitioners have always sought to take
+
+advantage of historical price patterns and charts in an attempt to gain higher returns. The
+
+efficient market hypothesis, originally developed by Fama (1970), is the belief that capital
+
+markets operate optimally when prices are used to efficiently allocate ownership of the
+
+productive resources of the economy to make sure that investment capital is directed to its most
+
+productive uses. This theoretical ideal is in direct contrast to the practice of technical analysis, in
+
+which traders seek to predict price changes based on historical price data. The solution to this
+
+tension has important implications for both investors considering active trading strategies and
+
+financial theorists attempting to comprehend how those markets integrate and present
+
+information.
+
+       Technical analysis encompasses a broad array of techniques through which traders seek
+
+to predict future price changes using solely historical data, such as past prices, trading volume,
+
+and charts; however, its theoretical basis has been repeatedly questioned in the academic world.
+
+Nonetheless, technical analysis is still extensively used by professional market traders, especially
+
+in the foreign exchange and commodities markets where short-term momentum indicators are
+
+closely followed. Empirical studies of the effectiveness of these methods have yielded mixed
+
+conclusions. For instance, Brock, Lakonishok, and LeBaron (1992) documented economically
+
+and statistically significant returns for SMA (Simple Moving Averages) and trading range
+
+breakout rules added to nearly a century of Dow Jones Industrial Average data; however, this
+
+evidence is not without substantial methodological critique. As White (2000, p.1097) observes,
+                                                                                                      4
+
+
+“The problem of data snooping is well-known but largely ignored in the finance literature. When
+
+a large number of trading rules are tested, it is not surprising that some rules appear to perform
+
+well, even if no rule has genuine predictive power” (p. 1097). This is the unsolved dilemma
+
+between reported profitability and risk of statistical artifact which the present study empirically
+
+investigates.
+
+       A moving average crossover strategy is based on a simple principle: when the short-term
+
+average of the past prices increases above the long-term average, the strategy sends a buy signal,
+
+which means that the upward momentum is present; when the short-term average decreases
+
+below the long-term average, the strategy sends a sell signal, which means that the current trend
+
+has weakened. This particular strategy warrants close examination for several reasons. Its
+
+conceptual simplicity renders it accessible to both retail and institutional investors. Its
+
+widespread adoption across global equity markets establishes its practical relevance. And its
+
+extensive treatment in the academic literature provides a rich comparative basis against which
+
+the present study’s findings can be evaluated. Brock, Lakonishok, and LeBaron (1992) carried
+
+out the historic empirical study of this strategy, demonstrating that moving average rules on the
+
+Dow Jones Industrial Average between 1897 and 1986 yielded both economically and
+
+statistically significant returns, which remained significant even after the researchers explicitly
+
+adjusted the rules to account for trading cost. Their work demonstrates the moving average
+
+crossover as a valid scholarly debate and offers the methodological and empirical standard by
+
+which future studies, such as the current one, have to gauge their results.
+
+       This paper empirically examines the hypothesis of whether the 50-day and 200-day
+
+crossover strategy based on the simple moving average produces statistically significant
+
+risk-adjusted excess returns in comparison with a passive buy-and-hold strategy when applied to
+                                                                                                       5
+
+
+a diversified sample of five large-capitalization U.S. equities between 2010 and 2023. The null
+
+hypothesis (H₀) is that moving average crossover trading rule would produce no statistically
+
+significant increase in the risk-adjusted performance relative to the passive benchmark when
+
+transaction costs are considered and the risk of data-snooping bias is properly managed. The
+
+alternative hypothesis (H₁) goes in the reverse direction, with patterns of economically
+
+exploitable returns surviving in equity returns series, so that the crossover strategy yields better
+
+risk-adjusted returns than the passive standard. The performance is assessed on five stocks
+
+representing five different economic sectors with a thirteen-year window of both expansionary
+
+and contractionary market periods where the main focus of the analysis is the 50/200-day simple
+
+moving average crossover rule of daily adjusted closing prices.
+
+       Section 2 surveys the existing theoretical and empirical literature on market efficiency
+
+and technical trading strategies. Section 3 details the data sources, sample selection criteria and
+
+the methodological framework employed to evaluate the 50/200-day simple moving average
+
+crossover strategy. Section 4 includes the empirical results, including summary statistics,
+
+performance measures, and statistical significance test. Section 5 puts the findings into
+
+perspective in the wider context of the efficient market hypothesis and the data-snooping
+
+critique. Section 6 details final remarks, comments on the limitations of the current analysis, and
+
+proposes future research directions.
+
+                                        Literature Review
+
+       The theoretical basis of the current research is the Efficient Market Hypothesis (EMH) as
+
+it was formally developed by Fama (1970) and which states that financial markets are efficient
+
+processors of the available information and that the prices of assets at any point in time are the
+
+result of all the information available to market participants. Fama (1970) defined three different
+                                                                                                       6
+
+
+types of market efficiency that are distinguished by the information set that each of them
+
+assumes. The weak form states that the current prices are complete and reflect all the past trading
+
+information, making technical analysis theoretically useless. The semi-strong form generalizes
+
+this assertion to all publicly available information, in the sense that no strategy based on public
+
+information alone can always produce excess returns. The strong form is the most rigorous
+
+criterion, which asserts that even private insider information is reflected in prices.
+
+       The joint-hypothesis problem is a critical complication in the assessment of the EMH,
+
+which Fama himself admitted to be: any empirical test of market efficiency is also a test of the
+
+pricing model by which normal returns are defined. Excess returns could thus be due to either
+
+true market inefficiency or merely a misspecified model of expected returns - a distinction that
+
+cannot be entirely empirically resolved. This epistemological limitation is the key to the
+
+interpretation of the results of the current research.
+
+       The weak form, which includes the random walk hypothesis, was strongly empirically
+
+challenged by Lo and MacKinlay (1988), who discovered that stock prices are not random walks,
+
+with the ratios of variance consistently larger than one and statistically significant departures of
+
+the random walk model. Their results indicated that there is a certain amount of short-term
+
+predictability in equity returns - a finding that directly inspires the current research to investigate
+
+moving average crossover strategies on contemporary equity data.
+
+Technical analysis, which is generally described as the application of past price, trading volume,
+
+and chart patterns to predict future price changes, holds an unclear place in the financial
+
+economics literature. Technical analysis, as Lo, Mamaysky and Wang (2000) note, has been in
+
+the financial practice over several decades, but despite its popularity has received little scholarly
+
+attention. This lack of practitioner adoption and scholarly acknowledgment is indicative of a
+                                                                                                        7
+
+
+larger conflict: although the EMH implies that historical price data cannot be utilized to produce
+
+excess returns, professional traders, especially in foreign exchange and commodities markets,
+
+still heavily depend on technical indicators as a decision-making tool.
+
+        Lo, Mamaysky, and Wang (2000) contributed to closing this gap by creating a systematic
+
+and automatic method of technical pattern recognition, using rigorous statistical inference on
+
+chart patterns that had been previously assessed subjectively. The team found that some technical
+
+patterns hold statistically significant information about future price movements, thus providing
+
+academic credibility to a practice that has long been abandoned by the "efficient market" school.
+
+The current research is a continuation of this tradition, as it uses a similarly rigorous statistical
+
+model to one of the most popular technical rules, the moving average crossover, on a diversified
+
+portfolio of contemporary U.S. equities.
+
+        The empirical evidence on the profitability of moving average trading rules is vast,
+
+controversial, and relevant to the research question addressed in this paper. The initial studies of
+
+filter rules - mechanical trading rules that are based on price movements of a certain size -
+
+provided evidence that simple rule-based strategies could outperform a passive benchmark,
+
+implying that equity markets were not weak-form efficient. These results provided the
+
+intellectual framework for the moving average studies that followed.
+
+        The seminal empirical research in this literature was made by Brock, Lakonishok, and
+
+LeBaron (1992). They analyzed almost 100 years of Dow Jones Industrial Average data between
+
+1897 and 1986 and found that simple moving average crossover rules and trading range breakout
+
+strategies produced economically and statistically significant returns, which remained significant
+
+even after explicit consideration of transaction costs. Their method was similar to modern
+
+rigorous standards and their conclusions appeared to be plenty of evidence that weak-form
+                                                                                                       8
+
+
+efficiency is not applicable to the U.S. equity markets. The Brock et al. (1992) work made the
+
+moving average crossover a valid object of empirical investigation and gave the methodological
+
+standard by which the findings of the future studies, including the current one, should be
+
+measured.
+
+       However, the conclusions of Brock et al. (1992) did not go unchallenged. White (2000)
+
+further developed a critical methodology as he believed that the seeming profitability of
+
+technical trading rules is an artifact of data snooping the statistical phenomenon by which
+
+repeated testing of a large set of candidate rules on the same data set will yield rules that appear
+
+to be profitable not due to their predictive ability, but by chance alone. The optimal technical
+
+trading rules, as was shown by White (2000) after adjusting the impact of data snooping with the
+
+Reality Check bootstrap procedure, fail to statistically significant excess returns over the
+
+buy-and-hold reference point. This contradiction between the results of Brock et al. (1992) and
+
+the methodological critique of White (2000) is the main intellectual issue that the current
+
+research aims to explore in the modern data on equity.
+
+       The mean-variance framework originally proposed by Markowitz (1952) is used to
+
+construct the portfolio that is studied in the current work and set the theoretical foundation of the
+
+modern portfolio theory. Markowitz (1952) showed that rational investors are advised to analyze
+
+securities based on the contribution they made to the overall risk and return properties of a
+
+portfolio and that diversification of assets with imperfectly correlated returns can decrease
+
+portfolio variance without a proportional decrease in the expected return. The portfolio selection
+
+process as outlined by Markowitz (1952) starts with the beliefs about the future performances of
+
+the securities available and ends with the selection of a portfolio that maximally gives the
+
+expected return against the risk.
+                                                                                                   9
+
+
+       In the current research, five large-capitalization U.S. equities are chosen in different
+
+economic sectors, namely technology, financials, energy, and healthcare, to minimize
+
+idiosyncratic, company-specific risk and enable the systematic characteristics of the moving
+
+average crossover strategy to be more evident in the performance data. A portfolio is created
+
+with equal weights of all five assets and the performance is measured by the annualized Sharpe
+
+ratio, the standard risk-adjusted performance measure, which is the excess return divided by the
+
+unit of volatility, as the main measure of comparison to the passive buy-and-hold benchmark.
+
+This type of portfolio construction methodology makes sure that the performance of the strategy
+
+is captured by the behavior of the strategy in a diversified cross-section of the equity market and
+
+not the performance of a single security.
+
+       The empirical investigation of technical trading rules must take seriously a number of
+
+well-documented methodological issues that can systematically overstate the apparent strategy
+
+performance. The largest of these is survivorship bias - the propensity to examine only those
+
+securities that survived and were listed during the sample period, thus omitting firms that were
+
+delisted, became bankrupt, or acquired. Since the current research focuses on five
+
+large-capitalization U.S. equities that were continuously listed between 2010 and 2023, the
+
+findings can be overstated in terms of the performance that could have been attained by an
+
+investor who did not have the advantage of hindsight in choosing the sample.
+
+       A second issue is overfitting, or in-sample optimization - the possibility that the
+
+parameters of a trading rule are chosen because they worked well on historical data, and that they
+
+will not continue to work well out of sample. To address this issue, the current research uses a
+
+fixed parameter specification, namely the 50/200-day simple moving average crossover, which is
+
+not optimized on the sample data, and further splits the entire sample into an in-sample period
+                                                                                                  10
+
+
+(2010-2018) and an out-of-sample validation period (2019-2023). The evidence on the
+
+out-of-sample period is the most plausible evidence on the true predictive content of the strategy
+
+since the observations were not known at the time of specification of the strategy. Lastly, the
+
+data-snooping issue that White (2000) points out is resolved by robustness analysis of the results
+
+of various combinations of moving averages, which enables one to determine whether the
+
+findings are due to the 50/200-day specification or are applicable to a wider set of
+
+parameterizations. The present research paper pays direct attention to all these concerns, and
+
+with the help of the methodological background, which is adequately rigorous enough to
+
+plausibly make inferences regarding profitability of moving average crossover strategies based
+
+on the modern equity data.
+
+                                       Data & Methodology
+
+       The dataset employed in the present study comprises daily adjusted closing prices for five
+
+large-capitalization U.S. equities: Apple Inc. (AAPL), Microsoft Corporation (MSFT),
+
+JPMorgan Chase & Co. (JPM), Exxon Mobil Corporation (XOM), and Johnson & Johnson
+
+(JNJ). These securities were chosen to represent different areas of the U.S. economy -
+
+technology, financials, energy and healthcare respectively - in line with the diversification
+
+principles championed by Markowitz (1952) and to make sure that the results are based on how
+
+the strategy performs over a wide cross-section of the equity market and not on the idiosyncratic
+
+performance of a single sector. The source of price data was Yahoo Finance through the yfinance
+
+Python library, and covers the timeframe between January 2010 and December 2023, with an
+
+overall of about 3,520 trading days per security. All prices are adjusted closing values on a daily
+
+basis, adjusted to account for stock splits and dividend payments, so that the experience of total
+
+returns of a continuously invested position is reflected in the calculation of returns.
+                                                                                                   11
+
+
+       Admittedly, the sample is also prone to survivorship bias: all five securities were
+
+continuously listed during the entire sample period, and the fact that only surviving firms were
+
+included can lead to an overstatement of the performance that would have been attained by an
+
+investor who would have created a similar portfolio in real time without the advantage of
+
+hindsight. This is discussed in more detail in Section 5.
+
+       The trading rule that is discussed in the current paper is the simple moving average
+
+crossover rule, which is as follows. The short-run moving average at time t is calculated as the
+
+arithmetic mean of the closing prices of the last 50 trading days, and the long-run moving
+
+average is calculated as the arithmetic mean of the closing prices of the last 200 trading days:
+
+
+
+                      𝑀𝐴₅₀(𝑡) = (1/50) × Σ 𝑃(𝑡 − 𝑖) 𝑓𝑜𝑟 𝑖 = 0 𝑡𝑜 49
+
+
+
+                    𝑀𝐴₂₀₀(𝑡) = (1/200) × Σ 𝑃(𝑡 − 𝑖) 𝑓𝑜𝑟 𝑖 = 0 𝑡𝑜 199
+
+
+
+The short-run moving average crosses the long-run moving average at time t to produce a buy
+
+signal, i.e., when 𝑀𝐴₅₀(𝑡) > 𝑀𝐴₂₀₀(𝑡) 𝑎𝑛𝑑 𝑀𝐴₅₀(𝑡 − 1) ≤ 𝑀𝐴₂₀₀(𝑡 − 1). When the
+
+opposite condition is true, a sell signal is created. To remove look-ahead bias, all signals are
+
+lagged by one trading day before execution, so that the position taken on day t is based only on
+
+information available at the end of day t-1.
+
+       The strategy presupposes a long-only strategy: a position of 1 is taken when a buy signal
+
+is on, and a position of 0 is taken when a sell signal is on, and the portfolio goes to cash when out
+
+of the market. There is no short selling and no leverage used anywhere. Each trade is charged a
+                                                                                                    12
+
+
+transaction cost of 0.10% which is a round-trip cost of 0.20% per completed trade cycle and is
+
+charged against the daily return of the strategy at the point of position change.
+
+          The signals at the individual stock level are combined into one portfolio through an
+
+equal-weighting scheme, where each of the five securities has a constant weight of 20 percent of
+
+the total portfolio value at any given time. Equal-weighting was chosen over value-weighting or
+
+optimization-based weighting to prevent the introduction of an extra parameter estimation step,
+
+which can also be overfitted. In line with the mean-variance model of Markowitz (1952), the five
+
+securities included in the portfolio, representing different sectors of the economy, are used to
+
+minimize idiosyncratic, company-specific risk in the portfolio, so that the performance of the
+
+aggregate portfolio better reflects the systematic characteristics of the moving average crossover
+
+strategy than the fortuitous performance of any single security. The portfolio return on any given
+
+trading day is calculated as the equally weighted average of the five individual stock strategy
+
+returns on that day, and the returns of each stock are adjusted by the position signal and
+
+transaction cost adjustments as in Section 4.2.
+
+          The measures of strategy performance are assessed as follows and each measure is
+
+defined before presentation of the results in Section 5.
+
+          Annualized return is calculated by multiplying the daily strategy returns of the entire
+
+                                                                                    252
+sample and giving it an annualized form: Annualized Return = (1 + 𝑅_𝑑𝑎𝑖𝑙𝑦)                − 1, where
+
+R_daily represents the mean daily return over the period.
+
+          The excess return is calculated as the difference between annualized strategy return and
+
+annualized buy-and-hold benchmark return of the same security or portfolio during the same
+
+period.
+                                                                                                     13
+
+
+       The Sharpe ratio is computed as the annualized excess return over the risk-free rate
+
+divided by the annualized standard deviation of daily returns: Sharpe =
+
+(𝑅_𝑝 − 𝑅_𝑓) / σ_𝑝 × √252, where R_f is set equal to 2.0% per annum throughout the study, in
+
+line with the average short-term yield of the U.S. Treasury securities during the sample.
+
+       The maximum drawdown is the largest peak-to-trough decrease in cumulative portfolio
+
+value during the sample period, as a percentage of the peak value.
+
+Win rate is the ratio of trading days where the strategy has made a positive return.
+
+       The transaction costs are assumed to be 0.10% per trade, which is a round-trip cost of
+
+0.20% per completed trade cycle, and are subtracted from strategy returns when each position
+
+change is made.
+
+       The excess returns of the strategy are statistically significant at the two-tailed t-test of the
+
+mean daily excess returns, which is the daily strategy return less the daily buy-and-hold return of
+
+the respective security. The null and alternative hypotheses are as follows:
+
+       Verbal form — The null hypothesis (H₀) holds that the moving average crossover strategy
+
+generates no statistically significant excess return over the buy-and-hold benchmark on a daily
+
+basis. The alternative hypothesis (H₁) is that there is a statistically significant nonzero mean daily
+
+excess return.
+
+
+
+                         Algebraic form — 𝐻₀: μₑ = 0 𝑣𝑠. 𝐻₁: μₑ ≠ 0
+
+
+
+       Each security and the equal-weighted portfolio are reported to have the t-statistic,
+
+two-tailed p-value, and 95% confidence interval. A significance level of α = 0.05 is adopted
+
+throughout. Results significant at the 1% and 10% levels are also noted where relevant.
+                                                                                                   14
+
+
+
+
+To protect against the impact of data snooping, the entire sample is split into an in-sample period
+
+of January 2010 to December 2018 and an out-of-sample validation period of January 2019 to
+
+December 2023. Out-of-sample testing is the simplest method of protecting against data
+
+snooping, as it is possible to set aside a part of the data to be used as a validation, and determine
+
+whether apparent in-sample profitability is due to true predictability or just overfitting, as White
+
+(2000) determined. No re-estimation of parameters or change of strategy is done based on
+
+out-of-sample observations, so that the validation period is a true test of the predictive content of
+
+the strategy on previously unseen data.
+
+                                          Empirical Results
+
+       Table 1 shows the descriptive statistics of the daily log returns of each of the five
+
+securities during the entire sample period between January 2010 and December 2023. Following
+
+the approach of Lo and MacKinlay (1988), who established that characterizing the stochastic
+
+properties of a return series is essential prior to examining predictability, the distributional
+
+properties of each security's returns are examined before any strategy performance results are
+
+presented.
+                                                                                                                        15
+
+
+
+
+Table 1
+
+Descriptive Statistics of Daily Log Returns, January 2010 - December 2023
+
+ Ticker      Mean         Std Dev     Skewnes      Kurtosis    JB Stat     JB p-Val     AC(1)       Min       Max
+
+             (Daily)                  s
+
+
+ AAPL        0.0010       0.0178      -0.2545      5.4454      4373.2      0.0000       -0.0434     -0.2038   +0.1392
+
+
+ JNJ         0.0004       0.0106      -0.3316      9.7002      13824.7     0.0000       -0.0704     -0.1595   +0.0839
+
+
+ JPM         0.0005       0.0177      -0.1033      9.4669      13112.6     0.0000       -0.0961     -0.2018   +0.1524
+
+
+ MSFT        0.0008       0.0163      -0.1864      8.0499      9496.1      0.0000       -0.1075     -0.1472   +0.1421
+
+
+ XOM         0.0003       0.0160      -0.1605      7.3506      7915.8      0.0000       -0.0242     -0.2021   +0.1233
+
+Notes. Mean and Std Dev are daily. JB = Jarque-Bera normality test. AC(1) = first-order autocorrelation
+
+
+
+
+          Several features of the return distributions are noteworthy. The skewness of all five
+
+securities is negative, which implies that the distributions of returns are skewed with a longer left
+
+tail, i.e. large negative returns are more common than a symmetric distribution would suggest,
+
+which is also in line with the well-known crash risk phenomenon in equity markets. The values
+
+of kurtosis are significantly greater than three in all securities, which implies that the
+
+distributions are leptokurtic with fat tails, i.e. extreme returns (positive and negative) are more
+
+common than they would be under the assumption of a normal distribution. The Jarque-Bera test
+
+values are high and the p-values are practically zero in all five securities, which proves that the
+
+daily log returns are not normally distributed. This result has consequences on the interpretation
+
+of the t-tests in Section 5.4, since the normality assumption of standard inference is not met, but
+
+the large sample size alleviates this issue by the central limit theory.
+                                                                                                                              16
+
+
+          The coefficients of autocorrelation of the first order AC(1) have negative values (all five
+
+securities) with coefficients-values varying between about -0.04 to -0.11. The near-zero
+
+autocorrelation of daily returns provides preliminary support for the weak form of the Efficient
+
+Market Hypothesis, as it suggests that past daily returns contain little predictive information
+
+about future daily returns. The observation is in line with the description of equity returns in the
+
+general empirical literature and forms the benchmark with which the predictive power of the
+
+moving average crossover strategy should be measured.
+
+          Table 2 provides a detailed comparison of the moving average crossover strategy with the
+
+passive buy-and-hold benchmark of each of the five securities during the entire sample period.
+
+Figure 2 shows the cumulative equity curves of the strategy and the benchmark of each security,
+
+and Figure 4 shows a comparative bar chart of annualized returns and Sharpe ratios of all five
+
+stocks.
+
+Table 2
+
+Strategy vs. Buy-and-Hold performance, 50/200-Day SMA Crossover | Transaction Cost: 0.1%
+
+per trade
+
+ Ticker         Strat Ann      B&H Ann        Excess Ret    Strat          B&H            Max DD         Max       N Trades
+
+                Ret            Ret                          Sharpe         Sharpe         (Strat)        DD(B&H)
+
+
+ AAPL           +20.38%        +27.47%        -7.10%        0.815          0.932          -45.72%        -43.80%   11
+
+
+ MSFT           +19.09%        +21.96%        -2.87%        0.806          0.819          -28.04%        -37.15%   15
+
+
+ JPM            +7.89%         +13.26%        -5.37%        0.378          0.514          -43.63%        -43.63%   15
+
+
+ XOM            +4.00%         +6.66%         -2.67%        0.199          0.303          -42.46%        -62.40%   22
+
+
+ JNJ            +3.75%         +9.70%         -5.96%        0.189          0.517          -35.87%        -27.37%   20
+
+Notes: Ann Ret = annualized return. Sharpe ratio uses Rf = 2.0% p.a. Max DD = maximum peak-to-trough drawdown.
+                                                                                     17
+
+
+
+
+Figure 2
+
+Equity Curves – MA Crossover Strategy vs. Buy-and-Hold (50/200-Day SMA, Jan 2010 – Dec
+
+2023)
+                                                                                                    18
+
+
+Figure 4
+
+Strategy vs. Buy-and-Hold Performance Summary (50/200-Day MA Crossover, 2010–2023)
+
+
+
+
+       Table 2 shows that the moving average crossover strategy performed poorly compared to
+
+the passive buy-and-hold benchmark on an annualized basis in all five securities. AAPL had the
+
+highest return difference, where the strategy produced an annualized return of +20.38%
+
+compared to the buy-and-hold return of +27.47%, which is an excess return of -7.10%. MSFT
+
+generated the smallest underperformance, where the strategy generated +19.09% versus the
+
+buy-and-hold of +21.96, an excess of -2.87%. JPM, XOM, and JNJ all similarly underperformed
+
+their respective benchmarks, with excess returns of −5.37%, −2.67%, and −5.96% respectively.
+
+       The annualized Sharpe ratio (to determine the risk-adjusted performance) presents a more
+
+subtle picture. Although the strategy performed poorly on the raw returns of all five securities,
+
+the difference in Sharpe ratios was significantly smaller in a number of instances. MSFT
+
+generated strategy and buy-and-hold Sharpe ratios of 0.806 and 0.819 respectively - a difference
+
+of just 0.013 - indicating that on a risk-adjusted basis the strategy was nearly equal to the
+                                                                                              19
+
+
+benchmark of that security. One of the most striking findings is on maximum drawdown: the
+
+strategy decreased maximum drawdown compared to the buy-and-hold benchmark on MSFT
+
+(−28.04% vs. −37.15%) and XOM (−42.46% vs. −62.40%), indicating that the strategy tendency
+
+to shift to cash during extended downward trends offered significant downside protection in
+
+those instances, despite lower raw returns. The number of trades was low, ranging from 11 in the
+
+case of AAPL to 22 in the case of XOM, which indicates that the strategy has low turnover and
+
+that the transaction costs are not the main cause of poor performance.
+
+       Figure 3 shows the cumulative equity curve and drawdown profile of the equal-weighted
+
+five-stock portfolio of the moving average crossover strategy and the passive buy-and-hold
+
+benchmark during the entire sample period.
+                                                                                                   20
+
+
+Figure 3
+
+Equal Weighted Portfolio Equity Curve – MA Crossover vs. Buy-and-Hold
+
+
+
+
+       The moving average crossover strategy produced an annualized portfolio-level excess
+
+return of -5.23% per annum, compared to the buy-and-hold benchmark annualized
+
+portfolio-level excess return of 17.27%. The Sharpe ratio of the strategy at the portfolio level
+
+was 0.779, as compared to 0.849 of the buy-and-hold benchmark. The table below summarizes
+
+all portfolio-level performance metrics.
+                                                                                                21
+
+
+Table 3
+
+Equal-Weighted Portfolio Summary (AAPL, MSFT, JPM, XOM, JNJ | 2010-2023)
+
+ Metric                                           Equal-Weighted Portfolio
+
+
+ Strategy Ann. Return                             12.04%
+
+
+ B&H Ann. Return                                  17.27%
+
+
+ Excess Return (Ann.)                             -5.23%
+
+
+ Strategy Sharpe                                  0.779
+
+
+ B&H Sharpe                                       0.849
+
+
+ Strategy Max Drawdown                            -25.79%
+
+
+ B&H Max Drawdown                                 -35.23%
+
+
+ Win Rate (Strategy)                              52.10%
+
+
+ t-Statistic                                      -2.169
+
+
+ p-Value                                          0.030
+
+
+ 95% CI Lower                                     -.0004
+
+
+ 95% CI Upper                                     -0.0000
+
+
+ Significant at 5%?                               Yes
+
+
+Although these findings validate the underperformance of the strategy on a return basis, the
+
+maximum drawdown of the strategy of -25.79% on a portfolio basis is better than the
+
+buy-and-hold maximum drawdown of -35.23% which is a decrease of about 9.4 percentage
+
+points. This observation is in line with the theoretical forecasts of Markowitz (1952), whose
+
+mean-variance model determined that diversification of assets with imperfect correlation lowers
+                                                                                                                           22
+
+
+the risk at the portfolio level. The five sector-diversified securities, weighted equally, seem to
+
+have averaged idiosyncratic volatility, resulting in a more stable drawdown profile of the strategy
+
+than would have been the case in a single-security implementation.
+
+          Table 3 presents the results of the two-tailed t-tests on mean daily excess returns for each
+
+of the five securities and the equal-weighted portfolio, conducted under the null hypothesis that
+
+the mean daily excess return is equal to zero.
+
+Table 4
+
+Statistical Significance of Daily Excess Returns | H₀: Mean daily excess return = 0 (Two-tailed
+
+t-test)
+
+ Ticker            Mean             Std Excess        t-Statistic      p-Value           95% CI    95% CI    Sig. at 5%?
+
+                   Excess                                                                Lower     Upper
+
+
+ AAPL              -0.0003          0.0095            -1.696           0.0900            -0.0006   0.0000    No
+
+
+ MSFT              -0.0001          0.0083            -0.919           0.3579            -0.0004   0.0001    No
+
+
+ JPM               -0.0003          0.0122            -1.272           0.2036            -0.0007   0.0001    No
+
+
+ XOM               -0.0002          0.0118            -0.850           0.3954            -0.0006   0.0002    No
+
+
+ JNJ               -0.0002          0.0051            -2.748           0.0060            -0.0004   -0.0001   Yes
+
+Notes: Excess return = strategy daily return minus buy-and-hold return. p<0.01, p<0.05, p<0.1
+
+
+
+
+          The findings show that the null hypothesis of no excess return has not been rejected at the
+
+5% level of significance in four out of five individual securities. AAPL generated a t-statistic of
+
+-1.696 and a p-value of 0.090, which is above the 5% significance level. The p-values of MSFT,
+
+JPM, and XOM were 0.358, 0.204, and 0.395 respectively, none of which is close to traditional
+
+levels of statistical significance. The sole exception is JNJ, for which the null hypothesis is
+                                                                                                      23
+
+
+rejected at the 1% significance level, with a t-statistic of −2.748 and a p-value of 0.006; It is
+
+important to point out, however, that the excess return sign of JNJ is negative - the statistically
+
+significant value indicates a consistently negative excess return, i.e. the strategy performed
+
+significantly worse than the buy-and-hold benchmark of that security, not better.
+
+        At the portfolio level, the t-statistic of −2.169 and p-value of 0.030 indicate that the null
+
+hypothesis is rejected at the 5% significance level for the equal-weighted portfolio. Once again
+
+the sign of this finding is negative - the excess return at the portfolio level is statistically
+
+significantly negative, which is evidence that the strategy is a consistent underperformer of the
+
+passive benchmark, and not an overperformer. The difference between statistical significance and
+
+economic significance also comes into play here: A statistically significant result is not
+
+necessarily an economically significant result in the positive economic sense, and the portfolio
+
+level t-test result is a good representation of this phenomenon.
+
+        A comparison of strategy and buy-and-hold performance during the in-sample period of
+
+January 2010 through December 2018 and the out-of-sample validation period of January 2019
+
+through December 2023 are shown in Table 4.
+                                                                                                                 24
+
+
+Table 5
+
+In-Sample vs. Out-of-Sample Performance | In-Sample: 2010–2018 | Out-of-Sample:
+
+2019–2023
+
+ Ticker                Period               Strat Sharpe          B&H Sharpe       Strat Ann Ret   B&H Ann Ret
+
+
+ AAPL                  In-sample            0.767                 0.817            +17.04%         +21.72%
+
+
+ AAPL                  Out-of-Sample        0.900                 1.112            +26.62%         +38.52%
+
+
+ MSFT                  In-Sample            0.590                 0.713            +12.43%         +17.04%
+
+
+ MSFT                  Out-of-Sample        1.120                 0.982            +32.07%         +31.33%
+
+
+ JPM                   In-Sample            0.421                 0.499            +8.26%          +12.19%
+
+
+ JPM                   Out-of-Sample        0.329                 0.541            +7.23%          +15.21%
+
+
+ XOM                   In-Sample            -0.165                0.144            -0.95%          +2.97%
+
+
+ XOM                   Out-of-Sample        0.580                 0.487            +13.51%         +13.64%
+
+
+ JNJ                   In-Sample            0.463                 0.664            +7.34%          +11.34%
+
+
+ JNJ                   Out-of-Sample        -0.163                0.332            -2.41%          +6.83%
+
+Notes: Out-of-sample period used for validation only -- no parameter re-fitting.
+
+          The in-sample and out of sample results provide a mixed and security-specific image. In
+
+the case of AAPL, the Sharpe ratio of the strategy increased from 0.767 in-sample to 0.900
+
+out-of-sample, but the Sharpe ratio of the buy-and-hold also increased significantly, from 0.817
+
+to 1.112, indicating that the strategy still performed poorly relative to the benchmark during the
+
+out-of-sample period. The most significant finding is that of MSFT, where the strategy generated
+
+an out-of-sample Sharpe ratio of 1.120 compared to a buy-and-hold Sharpe ratio of 0.982 - the
+
+only case among all securities and both periods where the strategy outperformed the benchmark
+                                                                                                 25
+
+
+on a risk-adjusted basis. Another interesting reversal was XOM: the strategy had a negative
+
+in-sample Sharpe ratio of -0.165 but an out-of-sample Sharpe ratio of 0.580, which is very
+
+similar to the buy-and-hold Sharpe of 0.487 during that time. On the other hand, JNJ worsened
+
+significantly out-of-sample, with the strategy Sharpe ratio declining to -0.163 out-of-sample,
+
+which is a significant deterioration in performance. The lack of a uniform pattern of in-sample to
+
+out-of-sample performance persistence among the five securities indicates that the in-sample
+
+performance of the strategy is not indicative of strong and generalizable predictability, which is
+
+generally consistent with the data-snooping critique of White (2000).
+
+       Figure 5 shows a heatmap of annualized Sharpe ratios of the moving average crossover
+
+strategy using sixteen combinations of parameters, which are short moving average windows of
+
+10, 20, 30, and 50 days and long moving average windows of 50, 100, 150, and 200 days,
+
+applied to AAPL over the entire sample period.
+                                                                                                    26
+
+
+Figure 5
+
+RobustnessCheck – Sharpe Ratio Across MA Parameter Combinations
+
+
+
+
+       Similar to the robustness analysis of Lo, Mamaysky, and Wang (2000), who stressed the
+
+need to test technical trading rules across a variety of specifications, as opposed to a single
+
+parameterization, this analysis determines whether the observed performance under the primary
+
+50/200-day specification is a true and generalizable signal or a result of that particular
+
+parameterization. The heatmap shows that there is variation in Sharpe ratios between parameter
+
+combinations, with certain combinations yielding higher risk-adjusted performance than the
+
+primary specification and others yielding lower or negative Sharpe ratios. The fact that there is
+
+no consistently strong performance in all combinations of parameters indicates that the results
+                                                                                                   27
+
+
+are sensitive to the selection of moving average windows, which is in line with the issue that
+
+White (2000) raises that apparent profitability can be partly due to the selection of a good
+
+specification among a larger set of candidates.
+
+                                             Discussion
+
+       The findings of the current research are in striking contrast to the findings of Brock,
+
+Lakonishok, and LeBaron (1992), who reported economically and statistically significant excess
+
+returns on moving average crossover rules on almost 100 years of Dow Jones Industrial Average
+
+data. In all five securities analyzed in the current study, the 50/200-day simple moving average
+
+crossover strategy did not produce positive risk-adjusted excess returns compared to the passive
+
+buy-and-hold benchmark during the 2010-2023 period, with the portfolio-level excess return of
+
+-5.23% per annum and a statistically significant negative t-statistic indicating consistent
+
+underperformance. This difference can be explained by several structural differences between the
+
+current study and the Brock et al. (1992) investigation.
+
+       To begin with, the sample period considered in the current study, January 2010 to
+
+December 2023, is one of the longest bull markets in the history of the U.S. equity market, with
+
+only brief drawdowns in 2020 and 2022. In long-term trending up markets, a periodically
+
+shifting to cash strategy in response to sell signals will systematically miss returns that a
+
+continuously invested buy-and-hold strategy will accumulate. There is a structural advantage of
+
+the moving average crossover strategy to systems with alternating trending and mean-reverting
+
+regimes, and its poor performance in the current sample is possibly in part due to the specific
+
+nature of the sample regime but not necessarily due to an inherent lack of predictability.
+
+       Second, equity markets have evolved in terms of their competitive environment since the
+
+time when Brock et al. (1992) studied it. The growth in the number of algorithmic and
+                                                                                                      28
+
+
+high-frequency trading since the early 2000s has increased the pace of integration of price
+
+information into market prices, which further shortens the windows of momentum that moving
+
+average crossover rules are designed to take advantage of. The market structure as described by
+
+Fama (1970) is that in an efficient market the price is a reflection of available information, and
+
+the information in this paper is largely consistent with the opinion that U.S. equity markets are
+
+now, after the decades, more informationally efficient than it was historically in which case
+
+simple rule-based strategies are not in a position to create simple excess returns in the same way
+
+they seemed to have over the centuries.
+
+        The results of the current study should be read within the framework of a number of
+
+methodological shortcomings that limit the applicability of the findings.
+
+        The largest of these is survivorship bias. The five securities analyzed, namely AAPL,
+
+MSFT, JPM, XOM, and JNJ were all listed continuously and were at least in the top
+
+capitalization firms in their respective industries throughout the entire sample period. The fact
+
+that the sample does not include companies which were delisted, acquired, or whose market
+
+capitalization has notably declined during this time implies that the sample does not represent the
+
+universe of investable equities, and the findings may be biased to reflect the success that would
+
+have been attained by an investor building a similar portfolio in real time.
+
+        A second limitation concerns the possibility of residual data snooping bias. As White
+
+(2000) established, whenever a researcher chooses a model based on its performance on a
+
+particular dataset, the standard errors and the level of significance of the chosen model are
+
+misleading since they do not take into consideration the method used to choose the model. The
+
+50/200-day specification is not the only parameter specification that has been studied in the
+
+existing literature, and the fact that it is the specification of primary interest in the current study
+                                                                                                  29
+
+
+was not made in isolation, as it may indicate that there is some ex-post selection bias in the
+
+overall body of literature.
+
+       Third, the assumed transaction cost of 0.10% per trade is not comprehensive in
+
+measuring strategy implementation costs, even though this is a decent initial approximation.
+
+Bid-ask spreads, market impact costs and execution slippage, particularly with large position
+
+sizes, would practically cause high effective transaction costs than the effective transaction costs
+
+assumed in the present analysis, which would further reduce any marginal excess returns that the
+
+strategy might generate.
+
+       Finally, the present study is limited by the inability to take market regime dependence
+
+into consideration. Moving average crossover strategies are more theoretically appropriate in
+
+trending market conditions, and are known to produce false signals and losses in sideways or
+
+mean-reverting markets. The sample period includes different market regimes, such as the
+
+post-financial crisis recovery, the COVID-19 drawdown and recovery, and interest rate driven
+
+correction of 2022, and the overall findings obscure potentially significant differences in
+
+performance of different strategies in these various settings.
+
+       The practical implications of the findings of the present study are rather simple. To
+
+individual investors who may be contemplating the use of a moving average crossover strategy
+
+as an alternative to passive index investing, the findings do not give much empirical evidence to
+
+support the use of the strategy during the sample period under study. All five securities showed
+
+lower annualized returns compared to the buy-and-hold benchmark, and the only statistically
+
+significant excess returns were negative. Practically, the findings are in line with the
+
+long-standing recommendations of proponents of passive investing: in most cases and over most
+                                                                                                   30
+
+
+time horizons, a low-cost diversified index fund cannot be systematically beaten by simple
+
+rule-based technical strategies.
+
+       Theoretical implications of the findings are more subtle. The systematic poor
+
+performance of the moving average crossover strategy on contemporary equity data is widely in
+
+line with the postulations of the Efficient Market Hypothesis as developed by Fama (1970)
+
+which indicates that the level of weak-form inefficiency that Brock et al. (1992) found in
+
+historical data might have been reduced significantly as markets have become more competitive
+
+and informationally efficient. Nevertheless, it is important to note that Fama has a
+
+joint-hypothesis problem in explaining this conclusion: the result that the strategy does not
+
+produce excess returns can be due to either actual market efficiency or a risk model that is not
+
+fully capturing the actual expected return of the strategy. The two explanations cannot be
+
+completely divorced with equal measure on the evidence presented and this is an epistemological
+
+limitation that all empirical tests of market efficiency have.
+
+       The current research proposes some fruitful avenues of future empirical research. First,
+
+future studies might use machine learning techniques, like reinforcement learning or gradient
+
+boosting, to dynamically optimize moving average parameters based on changing market
+
+conditions, which would overcome the drawback of the fixed 50/200-day specification and
+
+enable the strategy to adapt to changing market regimes instead of using a fixed rule in
+
+fundamentally different environments.
+
+       Second, future studies might consider expanding the analysis to other asset classes, such
+
+as fixed income securities, commodities, and foreign exchange markets, which would overcome
+
+the limitation of the current study to the U.S. large-capitalization equities and would enable the
+                                                                                                      31
+
+
+evaluation of whether the performance of the strategy is systematically different across asset
+
+classes with different return dynamics and liquidity properties.
+
+       Third, future studies might use the Reality Check bootstrap procedure of White (2000) in
+
+a formal application to a large universe of moving average parameter combinations on the
+
+current data, which would give a statistically rigorous correction of data snooping across the
+
+entire parameter space and would enable a more definitive determination of whether any moving
+
+average specification generates truly significant excess returns on modern equity data after
+
+conditioning on the multiplicity of tests performed on the broader technical trading literature.
+
+       Lastly, future studies might break down the sample period into specific market regimes -
+
+based on trend strength, volatility level, or business cycle phase - and test strategy performance
+
+independently within each regime, which would overcome the limitation found in Section 6.2 of
+
+market regime dependence and would give a more detailed picture of the circumstances under
+
+which moving average crossover strategies are most and least likely to create value relative to a
+
+passive benchmark.
+
+                                             Conclusion
+
+       The aim of this paper was to establish whether the 50-day and 200-day simple moving
+
+average crossover strategy has been able to yield statistically significant risk-adjusted excess
+
+returns over a passive buy-and-hold benchmark index, when applied to a portfolio of five
+
+large-capitalization U.S. equities over the period from January 2010 to December 2023. The
+
+evidence suggests the strategy did not produce a statistically significant (risk-adjusted) excess
+
+return compared to a passive benchmark across any of the five stocks and at the portfolio level,
+
+with a portfolio-level annualized excess return of −5.23% and a statistically significant negative
+
+t-statistic of -2.169. As such, the null hypothesis of no statistically significant positive excess
+                                                                                                      32
+
+
+return from the moving average crossover strategy relative to the buy-and-hold benchmark
+
+cannot be rejected in the positive direction and the results are strongly suggestive of a reliable
+
+risk-adjusted underperformance relative to the buy-and-hold benchmark.
+
+       The results of the current study have important implications for both the theoretical
+
+debate on market efficiency and the practical issue of whether simple technical trading rules can
+
+be used to generate excess returns for investors on contemporary equity data. The failure of the
+
+moving average crossover strategy to generate excess returns across all five securities and the
+
+equal-weighted portfolio is broadly in line with the predictions of the Efficient Market
+
+Hypothesis as put forward by Fama (1970), and suggests that U.S. large-capitalization equity
+
+markets have become so informationally efficient that simple rule-based strategies of the type
+
+documented by Brock et al. (1992) on historical data no longer appear to be able to generate
+
+consistent excess returns; however, as Fama noted in the joint-hypothesis problem, this cannot
+
+be said with absolute certainty: the inability of the strategy to generate excess returns may be due
+
+to either market efficiency or the fact that the risk model used to calculate the expected return of
+
+the strategy is not fully correct, and these two possibilities cannot be definitively distinguished
+
+on the basis of the evidence presented in this study.
+
+       The findings of the current study are subject to the most prominent empirical limitation of
+
+the study: the sample consists of the five largest-capitalization U.S. equities that survived and
+
+were listed every day of the fourteen-year sample period with the possibility of survivorship bias
+
+that can skew the sample towards potential outperformance in the real world investment
+
+environment. As such, the findings represent one carefully performed study in an empirical
+
+debate that is far from being settled rather than a conclusive finding about the profitability or
+                                                                                                    33
+
+
+unprofitability of moving average crossover strategies in all market conditions, asset classes, and
+
+time frames.
+
+       The debate underlying this study - between the theoretical ideal of informationally
+
+efficient markets and the continued popularity of systematic trading rules among market
+
+participants - is as pertinent today as it was when Fama (1970) first articulated the efficient
+
+market hypothesis. The preponderance of evidence in this paper suggests that although moving
+
+average crossover strategies may hold some risk management benefits, such as substantial
+
+reductions in maximum drawdown, the effectiveness and economic importance of the return
+
+advantage over a buy-and-hold strategy depends critically on the market environment in which
+
+the strategy is applied and the rigor of the methods used to measure its performance. The
+
+quantitative techniques used in this study offer a valuable means of empirically testing such
+
+claims - and it is the application of such techniques, in a consistent and objective manner, that
+
+contributes to the body of knowledge about the operation of financial markets.
+                                                                                                           34
+
+
+                                                     References
+
+Brock, W., Lakonishok, J., & LeBaron, B. (1992). Simple technical trading rules and the stochastic properties
+
+        of stock returns. The Journal of Finance, 47(5), 1731–1764.
+
+Fama, E. F. (1970). Efficient capital markets: A review of theory and empirical work. The Journal of Finance,
+
+        25(2), 383–417.
+
+Lo, A. W., & MacKinlay, A. C. (1988). Stock market prices do not follow random walks: Evidence from a
+
+        simple specification test. The Review of Financial Studies, 1(1), 41–66.
+
+Lo, A. W., Mamaysky, H., & Wang, J. (2000). Foundations of technical analysis: Computational algorithms,
+
+        statistical inference, and empirical implementation. The Journal of Finance, 55(4), 1705–1765.
+
+Markowitz, H. (1952). Portfolio selection. The Journal of Finance, 7(1), 77–91.
+
+White, H. (2000). A reality check for data snooping. Econometrica, 68(5), 1097–1126.
+
