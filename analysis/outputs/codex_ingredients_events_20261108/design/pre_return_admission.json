@@ -1,0 +1,215 @@
+{
+  "start": "2018-01-01",
+  "end": "2022-12-30",
+  "source_policy_not_native_fill_certification": true,
+  "eligible_counts": {
+    "EOS/original": 60,
+    "EOS/no_expiry_gate": 255,
+    "EOS/opposite_direction": 60,
+    "EOS/no_stop": 60,
+    "EOS/exit_0900": 60,
+    "NFP/original": 44,
+    "NFP/no_spike_gate": 83,
+    "NFP/no_payroll_calendar": 117,
+    "NFP/opposite_direction": 44,
+    "NFP/no_stop": 44,
+    "CL/original": 41,
+    "CL/no_upgap_gate": 242,
+    "CL/opposite_direction": 41,
+    "CL/no_stop": 41,
+    "CL/exit_0300": 41
+  },
+  "excluded_before_pricing": [
+    {
+      "case": "CL/all",
+      "date": "2018-01-01",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-01-22",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-02-19",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-04-02",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-04-30",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-06-04",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-06-11",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-10-01",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-11-05",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2018-11-19",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2019-04-15",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2020-07-20",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2021-03-15",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2021-10-11",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2021-10-25",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2022-07-18",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2022-11-21",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2022-12-26",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    }
+  ],
+  "raw_inputs": {
+    "NQ_1min_2017.csv": {
+      "bytes": 3720003,
+      "git_blob": "1a235da2d569011833fcc27fc4b8bbe0ad51c012",
+      "sha256": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d"
+    },
+    "NQ_1min_ON_2017.csv": {
+      "bytes": 872961,
+      "git_blob": "2b48593ed40b8b6165c566f183b54460918a5523",
+      "sha256": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a"
+    },
+    "CL_1min_2017.csv": {
+      "bytes": 1112561,
+      "git_blob": "ade2a977c8374f9274db2ceff5eb0a132ee97b38",
+      "sha256": "1c92250cd6bb12fd34958af01b5a54871d59f7419cb092524d626be16b0d8f91"
+    },
+    "NQ_1min_2018.csv": {
+      "bytes": 5630086,
+      "git_blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237"
+    },
+    "NQ_1min_ON_2018.csv": {
+      "bytes": 11729558,
+      "git_blob": "bf8386738439cb25cbdd160d23a6d3b3f39c5f3b",
+      "sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2"
+    },
+    "CL_1min_2018.csv": {
+      "bytes": 14481455,
+      "git_blob": "7ab69da3b9d5f28ecbd6737175aabe580b7d6e16",
+      "sha256": "8a932d5cee6e9caa2026436d0d5c86c65b9014e2bdb0dcdcffa2ccb2dc217198"
+    },
+    "NQ_1min_2019.csv": {
+      "bytes": 5643031,
+      "git_blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e"
+    },
+    "NQ_1min_ON_2019.csv": {
+      "bytes": 11858009,
+      "git_blob": "2a0dc8d66e208b526621d246d79e7a08699b1562",
+      "sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d"
+    },
+    "CL_1min_2019.csv": {
+      "bytes": 14363545,
+      "git_blob": "104544695e6b26f4af6f9c82c3a338f16717e027",
+      "sha256": "d6a49a30b4f5a1ac039a7c6db2253dff9dadc2955d2db52548840b5be2f575e3"
+    },
+    "NQ_1min_2020.csv": {
+      "bytes": 5890101,
+      "git_blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4"
+    },
+    "NQ_1min_ON_2020.csv": {
+      "bytes": 12324066,
+      "git_blob": "cd0eaccf6dcc1956dd1f7ef5fd417b6041f74cb8",
+      "sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9"
+    },
+    "CL_1min_2020.csv": {
+      "bytes": 14483533,
+      "git_blob": "353dafe063c4b6e0bea1f04348a52172ba8a2ddb",
+      "sha256": "966d94e0454e9382adaaad6ff4d2955eebdea6113a8b7b75071afe895978497b"
+    },
+    "NQ_1min_2021.csv": {
+      "bytes": 6118786,
+      "git_blob": "c978b68c5092abceaba934228970a401b03b65b4",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500"
+    },
+    "NQ_1min_ON_2021.csv": {
+      "bytes": 12996633,
+      "git_blob": "26a8f20c87383ea421cb7efca5bfc2b03ed6a7a1",
+      "sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e"
+    },
+    "CL_1min_2021.csv": {
+      "bytes": 14481189,
+      "git_blob": "794fec45c279a7601aaac5167f7c5ba22a93cff7",
+      "sha256": "5f032d4260084867b9ecc027e8e13238e116edbc40b298334b69f457a0e12f3b"
+    },
+    "NQ_1min_2022.csv": {
+      "bytes": 6122385,
+      "git_blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2"
+    },
+    "NQ_1min_ON_2022.csv": {
+      "bytes": 13079168,
+      "git_blob": "2b0510fa786cfcb9f23b285735097258e77383ce",
+      "sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0"
+    },
+    "CL_1min_2022.csv": {
+      "bytes": 14926411,
+      "git_blob": "f49ab04f29287713b295bc61070c88b80f7a47af",
+      "sha256": "102b1e4d88b8396425f257f79090360817b28324f22340e3f3c603e50a660823"
+    }
+  },
+  "fixtures": {
+    "groups_passed": 5,
+    "market_returns_computed": false
+  },
+  "dependency_sha256": {
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75"
+  }
+}
