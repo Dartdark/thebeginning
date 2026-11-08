@@ -192,6 +192,10 @@ Retain these outcomes so old NEEDS DATA headings do not become accidental new sh
   Three definitions including shadow;2018–22selected complete-day net$25,517.50versus BASE$107,475,
   return Sharpe.663versus1.281. Selected fails design; no2023+or account tests, no current placement.
   Exact SPY inputs remain a separate data lead; do not mislabel the completed ES result as data-only.
+- **Standalone baseline follow-up:** user subsequently nominated BASEfor unchanged2023+validation under
+  a separate committed protocol. [Completed result](results/delgado_es_baseline_20261108.md): recent net
+  +$49,755/return Sharpe.550,2025+$852.50,2026−$32,910; weak t/bootstrap and larger drawdown fail its
+  own validation. No native portfolio placement or tuning; this does not erase the profitable historical result.
 - **Merit/status:** conditional low-priority personal SPY lead / NEEDS DATA AND SPECIFICATION, no code build.
   Delgado reports close historical replication but−8.1%September2025–August2026; final overlays were adaptively
   selected on seen history and worsen QQQ Sharpe. Related NQ/ES variants already tested; no futures rescue.

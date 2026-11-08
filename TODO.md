@@ -272,6 +272,9 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   **User-authorized ES adaptation now TESTED / REJECT DESIGN:**2018–22complete-day selected net$25,517.50
   versus BASE$107,475; return Sharpe.663versus1.281. Three definitions including shadow, no rescue/2023+
   or account stage. [Actual ES test](agents/codex/results/delgado_es_20261108.md). Exact SPY gate remains separate.
+  User subsequently nominated the unchanged baseline for a separate2023+test: recent net+$49,755but return
+  Sharpe.550,2025nearly flat/2026−$32,910andDD$56,842.50. Baseline's own recent t/bootstrap fail; no allocation.
+  [Baseline validation](agents/codex/results/delgado_es_baseline_20261108.md). No modified-candidate rerun/tuning.
   Author closely replicates the historical SPY noise-band/VWAP result, but reports−8.1%September2025–August2026;
   final overlays selected after80adaptive SPY alternatives, no clean holdout, and fail to improve QQQ Sharpe.
   Native SPY minute/dividend/calendar/cash/borrow data and authenticated replication engine/trial package missing

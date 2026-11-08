@@ -1664,6 +1664,10 @@ Source: Delgado, *“Beat the Market” Revisited*, SSRN7323419, August20,2026;
   reconciliation pass. Freeze whole-lot quantity at the known decision close, never future fill-open; record
   fill/marked leverage breaches rather than retrospectively resizing. Unknown requested fills/held paths remain
   unknown calendar days. Source-like4xrequested exposure is not a broker-margin or gap-loss guarantee.
+- [Unchanged baseline validation](results/delgado_es_baseline_20261108.md) under the user's later nomination
+  verifies2018–22daily/trade CSVs byte-for-byte before inspecting2023+summaries. Preserve exact shared
+  prefixes to distinguish later outcomes from silent implementation changes. Recent strength fails; no measured
+  execution savings, native account promotion or reopening of the rejected modifications.
 
 ### E09/E12 follow-up — Slow trend signals, actual-position turnover and no-trade bands
 

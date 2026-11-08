@@ -1,4 +1,4 @@
-# Unchanged ES baseline: TEST for user-requested historical validation
+# Unchanged ES baseline: TEST completed; recent-strength gates fail
 
 The user asks why the profitable baseline cannot be used. This explicitly nominates the unchanged baseline
 for a separate evaluation after the modified candidate failed. It does not promote the failed overlays or grant
@@ -20,3 +20,11 @@ live/account changes. Prior context: [ES comparison](../results/delgado_es_20261
 - **Decision:** TEST limited to the once-only unchanged baseline2023+historical reconstruction and fixed
   diagnostics under a new committed protocol. The old stop still applies to the failed modified candidate.
   Statistical merit, sizing/execution certification and account contribution remain separate decisions.
+
+## Completed outcome
+
+[Report](../results/delgado_es_baseline_20261108.md): unchanged2018–22daily/trade prefixes match byte
+for byte.2023–October9,2026known-day net+$49,755, return Sharpe.550, daily return t1.065;
+2025+$852.50and2026−$32,910. Daily DD$56,842.50;1000block-bootstrap Sharpe p5−.175.
+The baseline's own recent validation fails t/interval gates. No new variants, account simulations or allocation.
+One recent unknown held-price day retained; source/cost/margin/roll certification limits remain.

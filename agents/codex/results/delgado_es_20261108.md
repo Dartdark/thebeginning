@@ -15,6 +15,12 @@ Outputs: [complete JSON/hash manifest](../../../analysis/outputs/codex_delgado_e
 `analysis/outputs/codex_delgado_es/design/*_daily.csv`, `*_trades.csv`, `*_cap_breaches.json`.
 Date: November8,2026(America/Los_Angeles). Independent review pending.
 New financial definitions:3(BASE,SHADOW,CANDIDATE); shadow is mechanical/nonselectable, no winner search.
+
+**Later user-nominated baseline evaluation:** [unchanged baseline2023+validation](delgado_es_baseline_20261108.md).
+This separate committed protocol explicitly nominates BASEafter the design comparison; it does not reopen
+the failed modified candidate. Recent known-day net+$49,755but return Sharpe.550and2026−$32,910;
+baseline also earns no allocation. Exact prior-design CSVidentity is preserved. Original stop below remains
+the outcome of the modified-candidate comparison, not a claim the baseline was permanently disqualified.
 Known multiplicity lower bound:439;tbar3.686, including80source alternatives.
 
 ## Rule as tested

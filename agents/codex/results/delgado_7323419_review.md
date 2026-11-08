@@ -25,6 +25,10 @@ New economic trials/account simulations:0/0. No strategy/planner or MultiCharts 
 ES study supersedes the source-only no-substitution limitation for that explicitly authorized adaptation,
 while the exact native SPY replication/data gate below remains separate. No new2023+returns or allocation.
 
+Later the user separately nominated the unchanged baseline: [2023+validation](delgado_es_baseline_20261108.md).
+That baseline-only protocol ran historical recent returns without altering the original rule/design ledger.
+Recent return Sharpe.550,2025nearly flat and2026−$32,910; no baseline allocation earned either.
+
 ## Five questions
 
 1. **What is it about?** Independently reproducing Zarattini/Aziz/Barbon's SPY intraday momentum strategy,
