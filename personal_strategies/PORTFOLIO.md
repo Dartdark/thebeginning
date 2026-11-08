@@ -11,7 +11,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | Relative Strength (both sides) | MNQ | $3,889 | $4,900 | $2,871 | 1.30 | B, MC-confirmed; funded plan (longs) |
 | Kusho v9 (21:00 exit, weekend holds) | MNQ | $3,573 | $3,398 | $1,757 | 1.68 | B; personal only (user 2026-10-24); **still on the forward log**; roll-adjusted rule `checks/candidates/kusho/Kusho_v9.txt` |
 | Twin Continuation v2.1 | MNQ | $3,673 | $5,711 | $1,629 | 1.77 | A, MC-confirmed, personal only (overnight, wide stop) |
-| Dual Thrust v4 | MNQ | $2,422 | $2,879 | $2,010 | 1.41 | A, checker PASS WITH CONCERNS; MultiCharts check pending; also 150K funded at 2 MNQ (user 2026-10-24) |
+| Dual Thrust v4 | MNQ | $2,422 | $2,879 | $2,010 | 1.41 | A, checker PASS WITH CONCERNS; MultiCharts-confirmed (report in mc_reports/, 99.9% of fills match the rebuild); also 150K funded at 2 MNQ (user 2026-10-24) |
 | S47 v2 (Europe-open impulse) | MNQ | $2,705 | $2,638 | $1,583 | 1.33 | B; personal only (user 2026-10-24); **still on the forward log**; `checks/candidates/s47_v2/S47_v2_fixed.txt` |
 | ONB ML | MNQ | $2,410 | $2,773 | $1,564 | 1.62 | S; funded plan (the combine runs plain ONB ADX30) |
 | FC 2B v2 | MNQ | $2,366 | $2,213 | $1,534 | 1.33 | A, MC-confirmed, **forward log first** |
