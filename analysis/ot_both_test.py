@@ -22,7 +22,7 @@ if __name__ == "__main__":
     dm = lambda t: (t.groupby("date").net.sum() / 10 - 0.55 * t.groupby("date").size())
     print("\n   Personal book 1-year MC return / DD p95 (OT already 2 MNQ; to 2026-07-07):")
     Pp = pd.read_pickle("scratch_data/personal_P.pkl"); ot = Pp.OvernightTick
-    BB.personal({"OT 2 (plan)": ot, "+ any-day 1": ot + dm(S["any day"]), "+ parent 1 (OT 3)": ot + dm(S["parent"]), "+ extra up-days 1": ot + dm(S["extra up-day nights"])}, end="2026-07-07")
+    BB.personal({"OT 2 (plan)": ot, "+ any-day 1": ot.add(dm(S["any day"]), fill_value=0.0), "+ parent 1 (OT 3)": ot.add(dm(S["parent"]), fill_value=0.0), "+ extra up-days 1": ot.add(dm(S["extra up-day nights"]), fill_value=0.0)}, end="2026-07-07")
     lab = ctx["lab"]
     for k in S: lab.W["OT_" + k] = PT[k][0]; lab.C["OT_" + k] = PT[k][1][:, -1]
     BB.BASE_FUNDED = {**BB.BASE_FUNDED, "OT_parent": 2}
