@@ -228,6 +228,17 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **KSE Sentinel / PSX trend continuation — NEEDS RULES AND VALIDATION (uploaded SSRN7102818).**
+  Low-priority personal-market lead only. Author claims 1,009 trades, PF 2.51, Sharpe 2.08,
+  PKR CAGR 7.47% but USD CAGR −2.96%; unverified. Exact EMA/regime/exit/sizing rules withheld;
+  DSR left as a placeholder, archive/forward outcomes not supplied. Public strategy shortlink
+  returned HTTP 403; bounded title/link search found no reproducible specification. Next only
+  with free new inputs: frozen rules/code plus a small dated trade/blocked-signal and cost/FX
+  ledger before acquiring full PSX point-in-time history or admitting a return experiment.
+  Do not invent settings, use an opaque API as verification, or adapt to NQ/ES automatically.
+  [Review](agents/codex/results/kse_sentinel_7102818_review.md) ·
+  [Data register](agents/codex/DATA_NEEDED.md#kse-sentinel--psx-source-rule-gate-uploaded-ssrn7102818).
+
 - [ ] **International Buffett-indicator allocation — NEEDS DATA AND SPECIFICATION (SSRN4071039).**
   Conditional low-priority personal long-term lead: country-wise matured ten-year-return regressions on
   log(market-cap/GDP), equal-weight top7 of14, reset everyten years. Source composite10.5% versus9.5%,
