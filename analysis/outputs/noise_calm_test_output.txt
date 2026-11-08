@@ -1,0 +1,32 @@
+[provenance] code c093fc29 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Noise-area longs: size up on calm days / volatility-scaled exits (user 2026-11-08, follow-up of noise_vix_test.py's post hoc lead).
+   k = 50 / median ATR15 2018-22 (198 pts) = 0.252
+   base (stop 50 / target 25)   n 2583 $  62 t  5.50 | 2018-22 $50 (t 3.3) 2023+ $75 (t 4.4) | calm $88 volatile $41 | total $161,308 worst $-1,012
+      by year $: {2018: 5216, 2019: 3712, 2020: 6233, 2021: 26287, 2022: 22336, 2023: 39352, 2024: 16821, 2025: 25846, 2026: 15506}
+   B vol-scaled exits           n 2180 $  59 t  3.38 | 2018-22 $38 (t 2.0) 2023+ $85 (t 2.7) | calm $99 volatile $23 | total $128,314 worst $-3,660
+      by year $: {2018: 2164, 2019: 2550, 2020: -7026, 2021: 26686, 2022: 20968, 2023: 39327, 2024: 9055, 2025: 16534, 2026: 18056}
+
+   Personal book 1-year MC return / DD p95 (noise-area added):
+      2018-26: book 5.42 | + as is 5.45 (+0.03) | + A calm 2 / else 1 5.56 (+0.14) | + B vol exits 5.33 (-0.09)
+      2018-22: book 5.45 | + as is 5.58 (+0.13) | + A calm 2 / else 1 5.69 (+0.24) | + B vol exits 5.20 (-0.24)
+      2023+: book 6.10 | + as is 6.24 (+0.14) | + A calm 2 / else 1 6.35 (+0.25) | + B vol exits 6.15 (+0.05)
+
+   Monte Carlo at trading size (noise-area alone, MNQ):
+   Monte Carlo as is 1 MNQ (x0.1): trades 2583 | total p5 $9,962 / p50 $14,725 / p95 $19,464, P(total <= 0) 0.0%
+      max DD actual $1,283 (rank 52%), shuffled p50 $1,270 / p95 $2,052 / p99 $2,517; losing streak actual 14, p95 10
+      252-day block bootstrap: P&L p5 $-30 / p50 $1,624 / p95 $3,400, P(loss) 5.3%, max DD p50 $580 / p95 $1,137, return/DD 2.80, P(hit $2,000 trailing, EOD check only) 0.1%
+   Monte Carlo A calm 2 / else 1 (x0.1): trades 2583 | total p5 $17,353 / p50 $24,469 / p95 $31,572, P(total <= 0) 0.0%
+      max DD actual $1,536 (rank 28%), shuffled p50 $1,768 / p95 $2,809 / p99 $3,469; losing streak actual 14, p95 10
+      252-day block bootstrap: P&L p5 $177 / p50 $2,642 / p95 $5,592, P(loss) 3.9%, max DD p50 $792 / p95 $1,506, return/DD 3.34, P(hit $2,000 trailing, EOD check only) 0.9%
+   Monte Carlo B vol exits 1 MNQ (x0.1): trades 2180 | total p5 $5,224 / p50 $11,652 / p95 $17,806, P(total <= 0) 0.1%
+      max DD actual $2,506 (rank 72%), shuffled p50 $2,084 / p95 $3,543 / p99 $4,514; losing streak actual 14, p95 11
+      252-day block bootstrap: P&L p5 $-800 / p50 $1,318 / p95 $3,447, P(loss) 15.1%, max DD p50 $855 / p95 $1,826, return/DD 1.54, P(hit $2,000 trailing, EOD check only) 3.2%
+
+   Overnight Tick at trading size (user question): 1 MNQ vs 2 MNQ, per-night trades to 2026-07-07
+   Monte Carlo OT 1 MNQ (x0.1): trades 536 | total p5 $13,722 / p50 $20,056 / p95 $26,579, P(total <= 0) 0.0%
+      max DD actual $1,280 (rank 42%), shuffled p50 $1,352 / p95 $2,279 / p99 $2,802; losing streak actual 5, p95 9
+      252-day block bootstrap: P&L p5 $147 / p50 $2,145 / p95 $4,544, P(loss) 3.9%, max DD p50 $619 / p95 $1,294, return/DD 3.47, P(hit $2,000 trailing, EOD check only) 0.3%
+   Monte Carlo OT 2 MNQ (x0.2): trades 536 | total p5 $27,444 / p50 $40,112 / p95 $53,157, P(total <= 0) 0.0%
+      max DD actual $2,560 (rank 42%), shuffled p50 $2,703 / p95 $4,558 / p99 $5,605; losing streak actual 5, p95 9
+      252-day block bootstrap: P&L p5 $295 / p50 $4,290 / p95 $9,087, P(loss) 3.9%, max DD p50 $1,237 / p95 $2,587, return/DD 3.47, P(hit $2,000 trailing, EOD check only) 9.6%
+   OT worst night per MNQ $-879, worst intranight $-978
