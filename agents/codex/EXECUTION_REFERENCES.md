@@ -1647,6 +1647,11 @@ Source: Delgado, *“Beat the Market” Revisited*, SSRN7323419, August20,2026;
   replay. Full trial series needed for independent statistical audit only. A new strategy test can instead freeze
   explicit interpretations on admitted free data. No ETF-cost or IEX-only volume substitution into futures.
 - Status: methods/execution reference and low-priority D55data watch; zero new financial trials, no allocation.
+- Subsequent user-authorized [ES historical test](results/delgado_es_20261108.md): three definitions fail
+  candidate design advancement; no allocation. Twelve pre-return synthetic checks and gross/net ledger
+  reconciliation pass. Freeze whole-lot quantity at the known decision close, never future fill-open; record
+  fill/marked leverage breaches rather than retrospectively resizing. Unknown requested fills/held paths remain
+  unknown calendar days. Source-like4xrequested exposure is not a broker-margin or gap-loss guarantee.
 
 ### E09/E12 follow-up — Slow trend signals, actual-position turnover and no-trade bands
 

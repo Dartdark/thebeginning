@@ -1,4 +1,4 @@
-# Delgado rules on ES: TEST for bounded observed-data design reconstruction
+# Delgado rules on ES: TEST completed; selected candidate REJECT at design gate
 
 User explicitly asks whether ES data can be used after the SPY-only gate. This authorizes an ES adaptation,
 not an exact SPY replication or revival of every failed noise-band variant. Source review: delgado_7323419_review.md.
@@ -27,3 +27,11 @@ TEST is limited to the committed observed-data2018–22screen. A failing design 
 placebos and account benches. A passing design permits once-only already-seen2023+historical reconstruction
 and the frozen diagnostics. No live/MC code, allocation or small-account affordability established. Native margin,
 contract/roll identities and actual execution remain limitations even if the signal reconstruction is profitable.
+
+## Completed outcome (after frozen commits1c0e1a54/4740cdd2)
+
+[Historical report](../results/delgado_es_20261108.md): complete-day2018–22BASEnet$107,475,
+selected$25,517.50; return Sharpe1.281versus.663. Candidate return t1.481and trade t1.360fail2;
+profit retention and net/drawdown improvement also fail. Three economic definitions including shadow; no
+2023+returns, rescue, placebo or account stage. Unknown day/path and native margin/roll limits retained.
+No allocation earned in any of the five homes. This is a completed negative ES result, not a data-only refusal.

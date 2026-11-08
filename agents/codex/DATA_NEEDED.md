@@ -188,6 +188,10 @@ Retain these outcomes so old NEEDS DATA headings do not become accidental new sh
 
 ### D55 — SPY noise-band/VWAP replication audit, SSRN7323419 (November8,2026)
 
+- **ES follow-up completed at explicit user request:** [actual ES test](results/delgado_es_20261108.md).
+  Three definitions including shadow;2018–22selected complete-day net$25,517.50versus BASE$107,475,
+  return Sharpe.663versus1.281. Selected fails design; no2023+or account tests, no current placement.
+  Exact SPY inputs remain a separate data lead; do not mislabel the completed ES result as data-only.
 - **Merit/status:** conditional low-priority personal SPY lead / NEEDS DATA AND SPECIFICATION, no code build.
   Delgado reports close historical replication but−8.1%September2025–August2026; final overlays were adaptively
   selected on seen history and worsen QQQ Sharpe. Related NQ/ES variants already tested; no futures rescue.
