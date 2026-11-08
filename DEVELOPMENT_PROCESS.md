@@ -444,6 +444,21 @@ trades, so a new combination still needs its own pre-registered design gate (Cod
 Post hoc leads from the ablation (not adopted, need their own pre-registered test): Overnight Tick's order-flow x VIX cell on any day
 (t 4.8 vs the full rule's 5.2, twice the nights); Twin's breakout entries in RTH only ($309 vs $248 a trade, total $246k vs $274k).
 
+**Round 2 (`analysis/ingredient_ablation2.py`, 2026-11-08; Vault Break v1, Dual Thrust v4, PAPERTREND v2; per NQ 2018-26, removed -> $ a trade / t):**
+
+| Ingredient | Where | Evidence | Status |
+|---|---|---|---|
+| Volatility-scaled distance from the open (VB open + 0.3 ATR, DT open +- 0.5 prior range, PT open +- 0.5 ATR; = the noise band) | VB, DT, PT, noise-area | removed: VB $87 t 4.1 -> $55 t 3.2 (DD $13.9k -> $23.6k); DT $139 t 4.4 -> $74 t 2.4; PT $373 t 4.0 -> $126 t 1.7 | **Proven, shared** by four plan pieces (daily corr between them only 0.16-0.29: different days / times) |
+| Direction of the break | PT | random side on the same days / times $-12 vs $373 | Proven (the side carries it) |
+| Late start (VB entries from 10:00, not 08:30) | VB | from 08:30: $40, t 1.9, 2023+ t 0.7, DD $30.1k | Supporting (strong: the first 90 minutes are noise for VB) |
+| Range-regime filter (DT skip RR > 1.2 ADR; PT skip after the widest of 7 ranges) | DT, PT | DT t 4.4 -> 3.6; PT t 4.0 -> 3.5 | Supporting |
+| Gap-side filter | PT | t 4.0 -> 3.4, but total $212k -> $301k (more trades) | Supporting per trade; costs total |
+| VWAP confirmation | VB | t 4.05 -> 3.81 | Weak supporting |
+| Up to 3 entries a day | VB | 1 a day: t 4.1 -> 2.9, total $154k -> $80k | Supporting |
+| Stop (target kept) | VB, DT | VB no stop: worst -$1.5k -> -$8.5k, t 2.4; DT both stops off: worst -$19k, 2023+ t 0.8 | Required (risk shape) |
+| Target | VB, DT | VB no target $152 t 2.7 (less steady); DT no target $201, **same t 4.37, total $226k -> $327k, DD $19.6k -> $27.4k** | VB: helps; DT: post hoc lead (needs its own pre-registered test) |
+| Entry-bar stop, holiday list (DT); 2 x ATR disaster stop (PT) | DT, PT | no change (PT's stop is never the exit that matters in the backtest) | Decoration (PT stop kept for tail risk) |
+
 **Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
 (t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
 carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight

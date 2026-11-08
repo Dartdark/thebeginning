@@ -1,0 +1,33 @@
+[provenance] code 458def5e dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Ingredient ablation, round 2 (user 2026-11-08: 'another set of strats to get ingredients from'): Vault Break v1, Dual Thrust v4 and
+
+1. Vault Break v1 (longs):
+   as is                                        n  1774 $   87 t  4.05 PF 1.24 total $  154k maxDD $13.9k | 2018-22 $  88 (t  3.1) 2023+ $  86 (t  2.7) | worst $-1,517
+   no noise level (break of the open)           n  2828 $   55 t  3.20 PF 1.15 total $  157k maxDD $23.6k | 2018-22 $  61 (t  2.7) 2023+ $  49 (t  1.9) | worst $-1,517
+   no VWAP condition                            n  1825 $   81 t  3.81 PF 1.22 total $  148k maxDD $14.1k | 2018-22 $  82 (t  3.0) 2023+ $  80 (t  2.5) | worst $-1,517
+   neither (close > open only; coupled)         n  3104 $   30 t  1.77 PF 1.07 total $   93k maxDD $19.9k | 2018-22 $  31 (t  1.4) 2023+ $  29 (t  1.1) | worst $-1,517
+   no target                                    n  1101 $  152 t  2.74 PF 1.29 total $  167k maxDD $22.1k | 2018-22 $ 131 (t  2.6) 2023+ $ 176 (t  1.7) | worst $-1,517
+   no stop (target 40 kept)                     n  1637 $   75 t  2.40 PF 1.19 total $  123k maxDD $26.3k | 2018-22 $  79 (t  2.1) 2023+ $  71 (t  1.4) | worst $-8,532
+   1 trade a day                                n   961 $   83 t  2.85 PF 1.23 total $   80k maxDD $17.6k | 2018-22 $  79 (t  2.3) 2023+ $  88 (t  1.8) | worst $-1,517
+   entries from 08:30                           n  2144 $   40 t  1.91 PF 1.10 total $   86k maxDD $30.1k | 2018-22 $  59 (t  2.1) 2023+ $  21 (t  0.7) | worst $-1,517
+
+2. Dual Thrust v4:
+   as is                                        n  1623 $  139 t  4.37 PF 1.27 total $  226k maxDD $19.6k | 2018-22 $ 125 (t  3.1) 2023+ $ 156 (t  3.0) | worst $-1,042
+   no range threshold (k 0, break of the open)  n  1860 $   74 t  2.42 PF 1.13 total $  138k maxDD $27.7k | 2018-22 $  59 (t  1.5) 2023+ $  94 (t  1.9) | worst $-1,047
+   no band filter                               n  1813 $  108 t  3.61 PF 1.21 total $  196k maxDD $22.0k | 2018-22 $ 100 (t  2.7) 2023+ $ 119 (t  2.4) | worst $-1,042
+   no target                                    n  1623 $  201 t  4.37 PF 1.36 total $  327k maxDD $27.4k | 2018-22 $ 181 (t  3.5) 2023+ $ 226 (t  2.8) | worst $-1,042
+   no stop (both stops off, target kept; coupled) n  1623 $  150 t  2.79 PF 1.20 total $  244k maxDD $53.8k | 2018-22 $ 215 (t  3.7) 2023+ $  72 (t  0.8) | worst $-19,147
+   no entry-bar stop                            n  1623 $  139 t  4.36 PF 1.27 total $  225k maxDD $19.6k | 2018-22 $ 125 (t  3.1) 2023+ $ 156 (t  3.0) | worst $-1,322
+   no holiday list                              n  1651 $  137 t  4.36 PF 1.27 total $  226k maxDD $19.7k | 2018-22 $ 121 (t  3.1) 2023+ $ 156 (t  3.1) | worst $-1,042
+   longs only                                   n   984 $  123 t  3.15 PF 1.25 total $  121k maxDD $14.2k | 2018-22 $ 127 (t  2.6) 2023+ $ 119 (t  1.9) | worst $-1,042
+   shorts only                                  n   955 $  118 t  2.77 PF 1.22 total $  113k maxDD $24.8k | 2018-22 $  86 (t  1.6) 2023+ $ 156 (t  2.3) | worst $-1,057
+
+3. PAPERTREND v2 (2 x ATR disaster stop as planned):
+   as is                                        n   568 $  373 t  4.00 PF 1.65 total $  212k maxDD $27.8k | 2018-22 $ 369 (t  3.7) 2023+ $ 377 (t  2.2) | worst $-11,087
+   no band (k 0, break of the open)             n  1479 $  126 t  1.67 PF 1.13 total $  186k maxDD $65.6k | 2018-22 $ 127 (t  1.5) 2023+ $ 125 (t  0.9) | worst $-16,687
+   no gap filter                                n  1147 $  262 t  3.40 PF 1.38 total $  301k maxDD $35.1k | 2018-22 $ 229 (t  3.0) 2023+ $ 303 (t  2.1) | worst $-12,592
+   no skip filter                               n   676 $  305 t  3.45 PF 1.49 total $  206k maxDD $21.7k | 2018-22 $ 340 (t  3.5) 2023+ $ 260 (t  1.6) | worst $-11,087
+   no stop (as the report)                      n   568 $  372 t  3.99 PF 1.65 total $  212k maxDD $27.8k | 2018-22 $ 363 (t  3.5) 2023+ $ 384 (t  2.3) | worst $-11,087
+   longs only                                   n   319 $  301 t  2.67 PF 1.59 total $   96k maxDD $24.2k | 2018-22 $ 310 (t  2.9) 2023+ $ 289 (t  1.3) | worst $-7,822
+   shorts only                                  n   249 $  464 t  2.98 PF 1.71 total $  116k maxDD $19.0k | 2018-22 $ 447 (t  2.4) 2023+ $ 485 (t  1.9) | worst $-11,087
+   random side (50 runs, same days / times): $-12 a trade, 95th $122; real $373
