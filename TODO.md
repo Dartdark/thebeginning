@@ -119,6 +119,7 @@ bottom). Times are Central (CT).
       and the stop cap; add the account to `FUNDED` in analysis/account_tools.py and to expected_setup.json.
 
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
+- Note (user 2026-11-08): the job starts Nov 10 and the FIRST payday is likely Mon Nov 17, not Fri Nov 13; dates below shift once the pay schedule is known.
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
       after tax ~3 (5 days/wk) / ~4 (6 days/wk); without tax 4 (5 days) / 4-5 (6 days). Dec 26 pay (3 days): ~2, January starts.
