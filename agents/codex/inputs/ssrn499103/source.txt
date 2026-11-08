@@ -1,0 +1,2116 @@
+        Analyst Recommendations and Nasdaq Market Making Activity
+
+
+
+
+                                             Bruce Mizrach∗
+                                         Department of Economics
+                                            Rutgers University
+                                         Working Paper #2003-07
+                                                May 2003
+                                         Revised: December 2003
+
+
+
+
+                                                 Abstract:
+
+    I investigate the linkage between liquidity provision by Nasdaq market makers and analysts in
+the same firm. Using three measures of market activity, I find that Nasdaq firms are more likely
+to provide buy side liquidity in anticipation of upgrades in the period 1999-2000. ECN activity
+supports this pattern. Firm level evidence shows that 15 of 42 market makers studied engage in
+significant pre-recommendation activity. I estimate cumulative abnormal returns of more than 75%
+and profits of almost $600 million in a sample of 47 large capitalization stocks.
+
+
+
+
+JEL: G14; G24.
+Keywords: analyst; Nasdaq; market maker.
+
+
+
+∗
+    Address for editorial correspondence: Department of Economics, Rutgers University, 303b New Jersey Hall,
+
+New Brunswick, NJ 08901. e-mail: mizrach@econ.rutgers.edu, (732) 932-8261 (voice) and (732) 932-7416
+
+(fax). I would like to thank Rikin Pandya and Susan Weerts for outstanding research assistance. Joseph
+
+Franco, Eric Kramer, and Eugene White made helpful comments on an earlier draft. Any future revisions
+
+to this manuscript may be found at http://snde.rutgers.edu
+   Stock analysts became celebrities in the bull market of the 1990s. In the bear market that
+followed, they became the focus of retail investor outrage, especially after regulatory investigations
+revealed widespread conflicts of interest. In December 2002, ten of the leading investment banks
+paid fines totalling $1.4 billion dollars to settle civil claims brought by Eliot Spitzer, the New York
+Attorney General.
+   This paper looks at another potential conflict of interest in the stock market, the one between
+market making activity and analyst recommendations. I find compelling evidence that at many
+security firms, market making activity is influenced by analyst recommendations. For both 1999
+and 2000, I find that market makers tended to accentuate their bid activity in anticipation of
+analyst upgrades. I estimate the potential profits from this activity to be substantial, approaching
+$600 million in a group of 47 large capitalization Nasdaq stocks.
+   The academic literature has focused on both the market power and bias of analysts. It has
+been well known since Womack’s (1996) pioneering work that individual analysts do impact stock
+returns. Analyst recommendation changes not only produce large daily changes in security prices,
+but these eﬀects also persist, for as long as six months in the case of downgrades. Barber, Lehavy,
+McNichols and Trueman (2001) also show that there is investment value in the consensus recom-
+mendations.
+   Well before the Spitzer investigation, research had documented serious bias in analyst recom-
+mendations. Analysts have been too bullish overall. In June 2001, 15 months into the bear market,
+First Call reported that only 2% of all security analyst recommendations were sells. Part of this
+bias reflects potential revenues from investment banking activities. According to Michaely and
+Womack (1999), lead underwriter analysts issued 50% more buy recommendations. Their recom-
+mendations under performed picks by unconflicted analysts by more than 25% per year for two
+years.
+   Spitzer’s investigation brought into plain view what the statistical evidence could only hint at.
+There was direct pressure within firms for analysts to slant coverage in cases where other profitable
+(generally investment banking) relationships existed. These links are illustrated by an e-mail from
+Kirsten Campbell to Henry Blodget, both Internet analysts at Merrill Lynch: “. . . we are putting
+half of merrill retail into this stock. . . i don’t think that’s the right thing to do. We are losing
+people money and i don’t like it. john and mary smith are losing their retirement because we
+don’t want todd [Tappin, GoTo CFO] to be mad at us.”1 GoTo.com (now known as Overture and
+
+
+
+                                                  2
+recently acquired by Yahoo) was an Internet company that Merrill hoped to win investment banking
+business from. Large sums of money helped to blur the ethical lines: between December 1999 and
+November 2000, the Internet group at Merrill produced $115 million in investment banking fees
+for the firm.
+    Additional conflicts of interest may arise in firms that sponsor sell-side research and make
+markets in securities. Analyst recommendations create profit opportunities on an agency basis
+through brokerage commissions and on a principal basis through proprietary trading. Weiss (2003)
+notes that for the 10 firms cited by Spitzer, their aggregate share of revenues from commissions
+(9%) and trading (10.8%) exceeded those from investment banking (8.4%).
+    The academic literature has found indirect evidence of these conflicts. Ellis, Michaely and
+O’Hara (2000) find that the lead underwriter typically becomes the most active market maker in
+the stock and that 23% of profits come from inventory gains and trading. Aggarwal and Conroy
+(2000) highlight the important role underwriters play in price discovery in the aftermarket for
+IPOs. Irvine (2003) finds that trading activity in Toronto Stock Exchange issues increases at the
+analysts’ firm in the two weeks following earnings and recommendation changes. Chung, McInish,
+Wood, and Wyhowski (1995) demonstrate that analysts are more likely to cover stocks on the
+NYSE and Nasdaq with wide bid-ask spreads. Schultz (2003) also notes that a Nasdaq firm is
+more likely to make markets in stocks in which they have analyst coverage.
+    This paper finds empirical evidence of market maker-analyst conflicts in the period leading
+up to a recommendation change. Section I begins by describing principal and agent relationships
+that influence liquidity. There is also a discussion of rules and ethical standards regulating these
+associations.
+    The Nasdaq2 limit order book, described in Section II, allows me to observe liquidity from all
+market makers. Historical data from the order book is collected in Nasdaq’s Nastraq database.
+    Section II also develops a variety of measures of bid or ask pressure. The first relies on the
+frequency with which a market maker provides the best available price in the marketplace. A
+second measure takes into account depth on these occasions. A final measure looks at trading
+activity.
+    I cross reference, in Section III, the Thomson First Call database of analyst recommendations
+with data from the order book. I have three complete years of overlap in both data sets, 1999 to
+2001. In total, I examine nearly 1, 600 recommendations and the corresponding market making
+
+
+
+                                                 3
+activity.
+    For all three liquidity measures, I find evidence of increased bid activity prior to upgrades in
+the years 1999 and 2000 in Section IV. For downgrades in all years, and for upgrades in 2001, this
+pattern is not in evidence. In Section V, I find that 7 of the 10 firms fined by Spitzer and 15 of 42
+overall show statistically significant links between their analysts and market makers.
+    An analysis of the ex-post returns in Section VI suggests that the potential profits from this
+activity are large. I compute a very conservative measure that suggests abnormal profits of $1.8
+million per recommendation in just a single week. The aggregate abnormal returns for the 42 firms
+are 75%.
+    I conclude with some general comments in Section VII on the Nasdaq and the functioning of a
+marketplace in which market makers act as both principal and agent.
+
+
+                      I.      Principal and Agent Conflicts
+
+When a Nasdaq market maker displays a quote to the market, there are two possible sources for
+the liquidity. The market maker may be acting on an agency basis, representing a customer order
+or trading as a principal from the firm’s inventory. Conflicts3 can arise in either case, but their
+empirical implications are similar.
+    Sell-side research is provided to clients in return for commission business4 . These arrangements
+are legal under the SEC Exchange Act of 1934 Section 28(e). A conflict of interest could arise,
+however, if the information concerned the timing of an analyst’s recommendation change. This
+would violate the Association for Investment Management and Research’s Standards of Professional
+Conduct. Section B.3 requires that “..members shall deal fairly and objectively with all clients
+and prospects when disseminating investment recommendations...” Section B.8 would also require
+disclosure of any fees the firm earns for providing such information. NASD’s Rule 2711, which took
+eﬀect in July 2002, now clearly prohibits pre-release access of the content of the firm’s research
+report.
+    A Nasdaq firm accumulating (selling) shares prior to the public release of the analyst upgrade
+(downgrade) presents an obvious conflict of interest. This kind of trading would be a violation of
+NASD Rule 2110.4 which prohibits “...purposefully establishing, creating or changing the firm’s
+inventory position...in anticipation of the issuance of a research report...”
+    Both principal and agent conflicts should result in changes in the bid or ask behavior of market
+
+
+
+                                                  4
+makers prior to their recommendation changes. The next section develops several quantitative
+measures of market maker activity.
+
+
+                       II.     Buying and Selling Interest
+
+The National Association of Security Dealers Automated Quote System (Nasdaq) has a unique
+microstructure conducive to our analysis. Nasdaq has no trading floor and provides a decentral-
+ized network of broker dealers and automated quote and execution systems. In the absence of a
+centralized auction as in the New York Stock Exchange, traders on the Nasdaq receive a compre-
+hensive display of limit order prices and depth5 known as the Level II. This enables the public
+to view the behavior of distinct market makers and their electronic competitors6 known as ECNs
+(Electronic Communication Networks). Because of the ability to identify liquidity provision from
+specific market participants in the order book, my study is limited to Nasdaq stocks. Historical
+data from the Level II is obtained from the Nastraq database.
+   While all quotes on the Nasdaq are firm, one way to express buying (selling) interest is to
+provide the best bid (oﬀer). I can illustrate this idea by discussing Figure 1.
+                                     [INSERT Figure 1 HERE]
+
+   In the figure7 , there are five tiers of liquidity for the Nasdaq National Market (NNM) stock
+Cisco Systems (CSCO). On the left side of the color coded display, one can see five liquidity
+providers at the best bid of 19.98. These include four market makers, GVR Company (GVRC),
+Morgan Stanley (MSCO), Spear Leeds and Kellog (SLKC), and Soundview Technology (SNDV),
+and one ECN, the Nasdaq-owned ECN (SIZE). ECNs are distinguished by a # in the display. The
+best oﬀer is just a penny away at 19.99 with liquidity from a market maker, U.S. Bancorp Piper
+Jaﬀray (PIPR), and the ECN Size.
+   These quotes make up what is called the inside market in the stock. In the aggregate, Cisco’s
+national best bid and oﬀer (NBBO) is 19.98 × 19.99 with a depth of 6, 100 ×1, 500. These depths
+should be construed as minimums. In many cases, market makers will refresh their quotes auto-
+matically to provide greater depth at that price.
+   Under the Nasdaq’s new SuperMontage system, which was fully implemented in December
+2002, market makers may oﬀer depth at more than one price level. For example, Morgan Stanley
+(MSCO) is bidding for 2, 100 shares at 19.98 and for another 500 shares at 19.97. The multiple
+quotes are not relevant for our study which only spans 1999-2001.
+
+
+                                                 5
+    A key decision for a market maker is how to represent his own buying and selling interest and
+those of his clients. I turn to this decision in the next section.
+
+II.A        Inside market appearances
+
+The first measure of buying and selling interest I will tabulate is the willingness of a market maker
+to provide a quote to the inside market. Simaan, Weaver and Whitcomb (2003) note that Nasdaq
+market makers are less likely to enter the inside market than ECNs. ECN quotes of all kinds are
+nearly three times as likely to improve the inside market than market maker quotes. They conclude
+that market makers place a value on anonymity. A decision to take the inside bid (ask) may be
+informative and consistent with a desire to accumulate (decumulate) shares or raise (lower) the
+share price.
+    I count the number of times8 a market participant provides a price quote in the inside market.
+I compute average counts for the bid and the ask for the market maker in a period from 4 weeks
+(-16 to -20 days) before the recommendation change to 4 weeks after (+16 to +20). For clarity, I
+will discuss the results for one upgrade by Goldman Sachs of Qualcomm, Inc. (QCOM) on April
+21, 1999.
+
+                            Qualcomm Upgrade on April 21, 1999
+                       Inside Market Appearances by Goldman Sachs
+                       Days         Date Bid Count      Ask Count
+                         -10   7-Apr-1999        82            172
+                          -9   8-Apr-1999        85            345
+                          -8   9-Apr-1999       192              3
+                          -7 12-Apr-1999         97            283
+                          -6 13-Apr-1999        420            337
+
+                           -5   14-Apr-1999              40                79
+                           -4   15-Apr-1999             295               172
+                           -3   16-Apr-1999             228               174
+                           -2   19-Apr-1999             910               229
+                           -1   20-Apr-1999             179               243
+    Two weeks prior to the analyst’s upgrade (days -6 to -10), the Goldman Sachs market maker
+was more often on the inside oﬀer than on the inside bid. The average inside ask count for the
+week was 228.00 versus a 175.20 average for the inside bid count. In the week prior to the upgrade
+this pattern reverses, with an average inside bid count of 330.40 versus 179.40 average inside ask
+appearances.
+    If the average bid (ask) side count rises in a week prior to an upgrade (downgrade) from the
+
+
+                                                   6
+average 2, 3 or 4 weeks prior, this will be evidence of market maker analyst conflicts.
+
+II.B     Inside depth
+
+A market maker could also accumulate (decumulate) shares without altering their inside frequency
+counts. They could simply increase the number of shares bid (oﬀered) whenever they take the
+inside. To capture this possibility, I aggregate the depth of a market maker every time they take
+the inside bid or ask. For upgrades, I compute a ratio of the number of times average aggregate
+inside bid depth exceeds aggregate inside ask depth. I compute the converse ratio for downgrades.
+As before, I use rolling 5 day periods before and after the downgrade.
+    In practice, this measure is highly correlated with our prior measure because many market
+makers oﬀer a constant bid or ask size. Goldman Sachs, for example, shows a constant bid size of
+1, 000 shares more than 99% of the time. It is worth recalling that quoted depth and true depth
+are not the same on the Nasdaq because market makers can set a reserve depth not visible9 in the
+Level II display.
+
+II.C     Matched trades
+
+Quotation activity represents only an intention to buy or sell a security. My third measure looks
+at trading activity to see if it is consistent with the quotes.
+    I assign trades to the bid or ask based on the standard assignment mechanism, distance from
+the quote midpoint. A trade that goes oﬀ above (below) the midpoint is considered to be a buyer
+(seller) initiated trade. I then assign the buyer (seller) initiated trades equally to all the market
+participants on the inside bid (ask). I aggregate these throughout the trading day and compare
+weekly averages. A pattern of increased buyer (seller) initiated trades in the week prior to an
+upgrade (downgrade) will provide evidence of possible conflicts.
+
+
+                                          III. Data
+
+III.A     Liquidity in the Nasdaq marketplace
+
+The large capitalization stocks in the Nasdaq are aggregated into the Nasdaq 100 index. The
+individual stocks are extremely liquid; futures, options, and exchange traded funds based on the
+index contribute to trading volume. To maintain a consistent sample, I chose to analyze the 47
+
+
+
+                                                   7
+listings that remained10 in the Nasdaq 100 during the four years of 1999-200211 . This group and
+some of their characteristics are listed in Data Appendix A.1.
+   The 47 stocks had capitalizations ranging from $268.7 billion at the end of 2000 (CSCO: Cisco
+Systems) to $2.3 billion (CPWR: Compuware). The sample average is $34.18 billion. The stocks
+traded an average of 13.79 million shares per day in December 2000.
+   On average, 68 market makers and ECNs provide liquidity in the 47 issues. All ten of the
+investment banks that settled with New York Attorney General Spitzer also make markets in
+Nasdaq securities. I list each of the ten, their Nasdaq market participant identity symbols, and
+their Nasdaq national market share of volume from December 2000. (1) Bear Stearns and Co.
+(BEST: 1.80%); (2) Credit Suisse First Boston LLC (CSFB: 3.38%); (3) Deutsche Bank Securities
+Inc. (DBKS, DBAB: 1.83%); (4) Goldman, Sachs & Co. (GSCO: 3.50%); (5) J. P. Morgan and
+Chase Co. (JPMS, JPHQ: 0.68%); (6) Lehman Brothers, Inc. (LEHM: 2.32%); (7) Merrill Lynch
+and Co. (MLCO: 4.63%); (8) Morgan Stanley & Co. (MSCO: 4.48%); (9) Salomon Smith Barney
+(SBSH: 5.42%); (10) UBS Warburg (WARR, UBSW: 1.54%);
+   ECNs had approximately 17% of the market12 in December 2000, so the ten banks cited by
+Spitzer had 30% of the overall national market volume and 36% of the non-ECN share13 . The 42
+market maker-investment bank pairs I study had 41% of the total market and 49% of the non-ECN
+share.
+
+III.B     Details on the First Call database
+
+Thomson Financial is now the publisher of the industry standard database of earnings estimates
+and analyst recommendations that were originally oﬀered by First Call and I/B/E/S. The data
+set covers over 9, 700 securities with information from 1990. I will be using only a small portion of
+the data set that intersects with my data on Nasdaq liquidity.
+   There are 808 entities providing security recommendations. Thomson translates the qualitative
+recommendations of brokerage firms into a five point scale, with one the strongest buy recom-
+mendation. I exclude recommendations that are not issued in real time, reiterations of previous
+recommendations, and initial ratings.
+   For the 47 stocks, there are 747 upgrades by 82 entities in the three years from 1999 to 2001.
+There are 852 downgrades by 90 entities between 1999 and 2001 in the Nasdaq 100 sample.
+   In 1999, during the tech stock boom, upgrades outnumber downgrades, 297 versus 198. In
+2000, as tech stocks began to decline, downgrades became the majority. The ratio of upgrades to
+
+
+                                                 8
+downgrades was 203 to 276. In 2001, in the second year of a tech stock bear market, the downgrades
+dominate the upgrades, 377 to only 245.
+   In the upgrade group, I can match a subset of these 82 entities to 42 market making firms in
+the Nasdaq. For a listing of these pairs, see Data Appendix A.2. Within my 42 pairs are all of the
+top ten underwriting firms of tech IPOs for 1999, and 21 of the top 25.
+   Limiting myself to these market making-analyst matched pairs, my sample retains 636 up-
+grades. In about 80% of these cases, the analyst firms also make markets in the stock that they
+upgrade. After excluding unmatched combinations, I am left with 536 events in the three year
+period. For each Nasdaq stock, there is a median of 10 upgrades, with a range from 28 (Applied
+Materials: AMAT) to 0 for Compuware (CPWR). Only Compuware (CPWR) has no upgrades
+from 1999-2001 in the matched set.
+   For the downgrades, I search for matches among the same 42 market maker analyst pairs in a
+sample of 720 recommendations. Again, in about 80% of the cases, the market maker does provide
+liquidity in the stock. There are then 586 events in the three year downgrade sample from 1999 to
+2001. Each Nasdaq stock has a median of 12 downgrades, ranging from 30 for Oracle (ORCL) to
+0 for Compuware, which is again the only stock with no downgrades.
+   In all, I have a large sample of analyst ratings changes and a set of aﬃliated market makers
+representing nearly half of the market maker share on the Nasdaq.
+
+
+                              IV. Aggregate Results
+
+This section aggregates the recommendation changes across analysts and stocks in two sub-periods,
+1999-2000 and 2001. Tables I to VI show the results for upgrades and downgrades for the three
+liquidity measures before and after the recommendation change.
+   The inside counts, such as those in the Goldman Sachs example in Section II, are summed over
+five days and treated as a single binomial event. Begin and end indicate the range of days relative
+to the public release by the analyst. For an upgrade (downgrade), if the average bid (ask) activity
+for the week exceeds ask (bid) activity, I assign a value of 1. The column labeled frequency is the
+fraction of times that the recommending market maker provided more liquidity in the direction of
+the recommendation change.
+   I have chosen a binomial test of count frequency for two reasons apart from its simplicity: (1)
+the data come from a variety of market makers, large and small; (2) the stocks are also heterogenous
+
+
+
+                                                 9
+in terms of market capitalization, quote, and trade activity. I will examine later in this section
+whether this heterogeneity matters for the results.
+    In Tables I to VI, I report a p-value of the probability that the observed count frequency in
+the week prior to the recommendation change is consistent with the count frequency in some other
+week. A small p-value indicates that bid (ask) pressure increases significantly for that upgrade
+(downgrade) with respect to the reference week.
+
+IV.A      Upgrades - inside bid activity
+
+In the first two lines of Table I, for example, I observe that inside bid counts exceed inside ask
+counts 181 out of 327 times -6 to -10 days prior to upgrades in 1999 and 2000. That is a relative
+frequency of 55.4%. In the week prior to the upgrade, the firm’s market maker is more often on
+the inside bid 63.6% of the time, or 208 out of 327 cases. This increase in inside bid activity is
+significant at the 99.9% confidence level. I note that this increase in inside bid presence is significant
+with respect to 3 and 4 weeks prior14 (-11 to —15 and -16 to -20 days) as well.
+
+                                       [INSERT Table I HERE]
+
+    Looking at 1999 and 2000 separately reveals this pattern to be stable. In 1999, there are 189
+upgrades. 54.0% of the time from day -10 to -6 prior to the upgrade, market makers are more
+frequently on the inside bid than ask. This rises to 61.4% the week prior. Bid count prevalence
+rises from 57.3% to 65.9% from two weeks to one week prior to upgrades in 2000.
+    The upgrades in 2001 do not show the pattern of increased bid side activity. Bid count ap-
+pearances are steady in the two weeks prior to the upgrade at 56.4%.
+    In all three years, it appears that bid side activity persists after the upgrades. In 1999-2000,
+inside bid frequency is still above 60% four weeks after the upgrade. In 2001, bid side activity
+returns to normal after three weeks.
+
+IV.B      Downgrades - inside ask activity
+
+The downgrades in Table II show no distinct pattern of prior week selling pressure. Market makers
+are on the inside ask more frequently two weeks prior than one week, 40.0% versus 39.1%. The
+symmetric pattern to the upgrades is just not present in the downgrades.
+
+                                       [INSERT Table II HERE]
+
+    In 2001, inside ask counts for the downgrades are similar to 2000 at a 39% average. There is
+
+
+                                                   10
+again no evidence of pre-recommendation ask side pressure.
+   After the downgrades are released, the inside ask side pressure in 1999-2000 is not very pro-
+tracted, returning to normal after a week. In 2001, after a downgrade, the inside ask pressure stays
+high for three weeks.
+
+IV.C      Other liquidity measures
+
+Inside depth
+
+This pattern of pre-upgrade bid activity is also supported by the inside depth measure. In Table
+III, market makers have a larger aggregate inside bid depth 52.9% of the time two weeks prior
+to upgrades. This jumps to 61.2% in the week prior. The proportional increase in bid pressure
+is almost identical to the inside bid counts, and the resulting binomial test rejects at the same
+significance level, 99.9%. The upgrades in 2001 show a rise when I compare the week prior to two
+weeks prior, but not when I compare it to the aggregate liquidity earlier in the month.
+
+                                    [INSERT Table III HERE]
+
+   Inside bid depth remains very strong in the week following the upgrade, and stays above pre-
+upgrade levels for the rest of the month in 1999-2000. Aggregate bid liquidity stays elevated for
+only a week after the upgrade in 2001.
+
+                                    [INSERT Table IV HERE]
+
+   The same two sample periods for downgrades are in Table IV. Downgrade ask depth exceeds
+bid depth between 41 and 44% of the time in the month prior to the recommendation change during
+1999 and 2000. It is stable throughout the month, and betrays no overt signs of a market maker
+decumulating (or shorting) shares. There is a one week surge in ask pressure after the downgrade.
+The pattern in 2001 is similar, although average sell side liquidity appears a bit lower. There is a
+strong surge in ask pressure after the downgrade, exceeding 50% for the only time in the sample,
+but it falls back to pre-downgrade levels after three weeks.
+Matched trades
+
+The trade data is also supportive of the pattern of pre-upgrade accumulation in the period 1999
+to 2000. Buyer initiated trades, as reported in Table V, exceed seller initiated trades 53.8% of the
+time from -6 to -10 days prior to the upgrade in 1999-2000. This jumps to 61.8% in the week prior
+to the upgrade. I can then reject this increase as random at the 99.5% level or better with respect
+
+
+                                                11
+to any of the three preceding weeks. Again, in 2001, there is no statistically significant pattern.
+
+                                     [INSERT Table V HERE]
+
+   Strong buyer initiated trading continues for (at least) a full month after upgrades in 1999-2000.
+In 2001, there is only a one-week surge in buyer initiated trading.
+
+                                    [INSERT Table VI HERE]
+
+   The downgrades show no pre-recommendation pattern in either 1999-2000 or 2001 in Table VI.
+There is a sustained increase in seller initiated trades after the downgrades in both samples, but
+the relative increase is larger in the 1999-2000 period.
+
+IV.D      Do analyst firm market makers diﬀer?
+
+One possible explanation for my pre-upgrade results is that buyers enter the market because of
+good news. Analysts then react to bullish news with upgrades. If the signal or information were
+public though, a randomly selected market maker would on average also be more eager to buy the
+stock. In this section, I examine and reject this explanation for my results.
+   For every security that undergoes a recommendation change, I construct a list of market makers
+who are present every day in a one month window before and after the announcement. I then select
+a market maker randomly from this list and compute the inside bid and ask counts. Results for
+this randomly selected group are in the first panel of Table VII.
+
+                                    [INSERT Table VII HERE]
+
+   I do not find any statistically significant pattern of inside bid counts prior to upgrades in either
+sample period. In reporting the results in Table VII, I show the p-value for a test that the 63.6%
+bid frequency from Table I is random based on the count for the corresponding time period. In
+all cases, I reject at the 99.9% level or more. Interestingly, the random market makers also do not
+provide post recommendation change bid pressure either. They reduce their bid side presence to
+under 50% for three of the next four weeks. I will examine post-upgrade performance in greater
+detail in Section VII.
+   It might be the case that analyst firms may have an informational advantage15 , and they receive
+some news not available to other market makers. I take a second random selection among all the
+firms that have a rating on the stock and also make markets in it. This group, in the second panel,
+shows a slightly higher average bid side frequency of 56.9% versus 53.0% for a purely random market
+
+
+                                                 12
+maker. In the week prior to the recommendation change though, the analyst market making firms
+decrease their inside bid presence, unlike the firms about to upgrade. This diﬀers from the pattern
+in Table I at the 99.8% level.
+   I also reject that our pattern from Table I is random at the 99% level in 8 of the 10 weeks,
+and at the 90% level for all 10 weeks, including those after the upgrade. Based on the average
+frequency for the four weeks prior to the upgrade, I can reject a market wide analyst informational
+advantage at the 99% level.
+
+IV.E      Initial summary of evidence
+
+Measured by inside market presence, inside depth or trade initiation, there is a strong pattern of
+pre-upgrade market maker buying activity in the first two years of our sample. The pattern is
+almost certainly not random or common across all analysts.
+   The downgrades for all three years from 1999-2001 show no significant patterns. By disaggre-
+gating the results, I hope to better understand where this pre-upgrade pattern is coming from.
+
+
+                           V.      Disaggregate Findings
+
+I now examine several cross sectional breakdowns of the results. I provide results for individual
+market makers, ECNs and market making subsidiaries, and provide frequency counts by stock.
+
+V.A      By market maker
+
+I examine one dimension of the heterogeneity in the data set by breaking down the results for
+individual market makers. My tests here are limited by sample size. For only four market makers,
+Merrill Lynch (MLCO), Prudential (PRUS), Morgan Stanley (MSCO) and ABN Amro (ABNA),
+do I have more than 20 upgrades in the sub-sample 1999-2000. For 16 market makers, though, I
+do have 10 or more. Table VIII shows the sample sizes for upgrades, and tests of the their inside
+bid count activity.
+
+                                   [INSERT Table VIII HERE]
+
+   Merrill Lynch, our most active market maker analyst pairing, also provides the strongest evi-
+dence in support of our hypothesis. In only 12 of 29 upgrades does their inside bid count exceed
+the ask count two weeks prior to an upgrade. In the week prior though, their inside bid counts
+surge and exceed the ask counts 62.1% of the time, or 18 of 29 times. Despite a relatively small
+
+
+                                                13
+sample, I can reject that Merrill’s behavior is random at the 98.8% level.
+   There is one other market maker I can reject at the 98% level, Credit Suisse First Boston
+(FBCO) which raises its inside bid prevalence from 46.2% to 76.9%. I can reject two other market
+makers at the 95% level, William Blair (WBLR) and J.P. Morgan (JPMS), and three others at
+the 90% level, U.S. Bancorp Piper Jaﬀray (PIPR), A.G. Edwards (AGED), and Donaldson, Lufkin
+and Jenrette (DLJP).
+   This group is certainly heterogenous with three industry titans, Merrill, J.P. Morgan, and First
+Boston, all of whom were cited by Spitzer and were among the top ten tech underwriters during the
+Internet boom. There are also three mid-tier players, Piper Jaﬀray, A.G. Edwards and Donaldson,
+Lufkin. Finally, a very small firm also makes it into the group, William Blair.
+   It should be noted that the other three of our most active pairings do not display any pattern
+of buying pressure (p-values are in parentheses): Morgan Stanley (0.34), Prudential (0.50), ABN
+Amro (0.50). The largest Nasdaq market maker by share in our group, Salomon Smith Barney
+(0.32), also does not demonstrate pre-upgrade accumulation.
+
+                                    [INSERT Table IX HERE]
+
+   In 2001, while there appears to be no market wide pattern of pre-upgrade activity, individual
+market makers in Table IX show significant increases in their bid presence. First Boston (0.00),
+A.G. Edwards (0.01), and J.P. Morgan show continuations of their prior market making activity.
+Morgan Stanley is significant at the 95% level, and Dain Rauscher (DAIN) at the 92% level.
+
+                                    [INSERT Table X HERE]
+
+   For the downgrades, my tests were unable to detect any market wide selling interest. Individual
+market makers, however, do demonstrate a pattern of increased inside ask activity. For 1999-2000,
+as shown in Table X, A.G. Edwards and Hambrecht and Quest (HAMR) are significant at the 98%
+level, and Lehman Brothers (LEHM) and Piper Jaﬀray are at the 95 and 90% levels, respectively.
+Merrill Lynch at the 99% level, Legg Mason (LEGG) at the 98% level, and Robertson Stephens
+(RSSF) at the 95% level are the only statistically significant rejections in 2001 in Table XI. As
+with the upgrades, this is a diverse group, ranging from boutique size, Hambrecht and Quest, to
+financial supermarket, Merrill Lynch.
+
+                                    [INSERT Table XI HERE]
+
+   Merrill Lynch is noteworthy for appearing in three of our four samples (all but the downgrades
+
+
+                                                14
+in 1999-2000). Their size alone is clearly not the determining factor. Salomon Smith Barney has
+about 80% of the events of Merrill Lynch (35 versus 46 downgrades, and 30 versus 41 upgrades),
+but it never shows a statistically significant market making pattern. A.G. Edwards, a much smaller
+firm, also appears in three of four samples at the 10% level or better (all but the downgrades in
+2001). J. P. Morgan and First Boston appear in both upgrade samples.
+
+V.B      Market making subsidiaries
+
+There are many investment firms which do market making through subsidiaries as well. Because
+of the indirect linkage, it may be possible that some firms use their subsidiary market making
+relationships to avoid the appearance of a conflict. There are six linked firms in my sample: (1)
+Goldman Sachs and Spear Leeds and Kellog (SLKC) which merged on September 11, 2000; (2)
+Morgan Stanley which acquired Dean Witter (DEAN) back in 1997; (3) Deutsche Bank which
+acquired National Discount Brokers (SHWD, NDBC) in June of 2000; (4) Merrill Lynch acquired
+Herzog, Heine Geduld, LLC (HRZG) on June 6, 2000; (5) First Boston has an IPO sharing re-
+lationship with Charles Schwab (MASH, SCHB) that started in 1997. (6) J.P. Morgan has the
+same IPO sharing relationship and is a minority shareholder in Schwab Capital Markets (MASH,
+SCHB).
+
+                                    [INSERT Table XII HERE]
+
+   I look at upgrade and downgrades during the entire period of the company’s linkage and
+find strong evidence for our upgrade pattern in Table XII across these subsidiaries. The Morgan
+Stanley-Dean Witter pairing is a strong one, and can be rejected as random at the 99.8% level.
+The Goldman Sachs-Spear Leeds relationship is also strong and can be rejected at the 95% level.
+At the 89% level or better, I can also identify a pattern in both Deutsche Bank and National
+Discount Brokers and Credit Suisse First Boston and Charles Schwab’s Mayer Schweitzer. What
+is especially interesting about these results is that they include upgrades into 2001 as well. I found
+no significant links in the downgrade group, so these are not reported.
+   Including the subsidiary relationships, 15 of 42 market makers and 7 of the Spitzer 10 show
+significant market making analyst linkages: A. G. Edwards (AGED); Dain Rauscher (DAIN);
+Deutsche Bank (DBAB); Donaldson, Lufkin, Jenrette (DLJP); First Boston (FBCO); Goldman
+Sachs (GSCO); Hambrecht and Quest (HAMR); J.P. Morgan (JPMS); Legg Mason (LEGG);
+Lehman (LEHM); Merrill Lynch (MLCO); Morgan Stanley (MSCO); Piper Jaﬀray (PIPR); Robert-
+
+
+                                                 15
+son Stephens (RSSF); and William Blair (WBLR).
+
+V.C      By stock
+
+I find the market making pattern prior to upgrades is present across a wide variety of stocks. Even
+though the analysis is restricted to large cap stocks in the Nasdaq 100, they are still a diverse
+group, with market capitalization from $2 to $200 billion. Trading activity also displays a wide
+range from an average of a half million shares a day in Panamsat Corp. (SPOT) to 107 million for
+Microsoft, (MSFT). Market maker competition is also diverse, from 32 for Paccar Inc. (PCAR) to
+111 for Oracle (ORCL) and Cisco (CSCO).
+
+                                   [INSERT Table XIII HERE]
+
+    In 1999-2000, our significant bid pressure group from Table XIII includes Microsoft, Ap-
+plied Materials (AMAT) and Yahoo (YHOO) among the larger caps, and Staples (SPLS), Biogen
+(BGEN), and Linear Technology (LLTC) among the smaller caps. Across the entire sample, I find
+bid pressure unrelated to market capitalization, number of market makers, or trading volume. The
+total number of recommendations does matter, so a more frequently covered stock is more likely
+to enter the group.
+
+                                   [INSERT Table XIV HERE]
+
+    In 2001, the significant upgrade group in Table XIV is entirely new with the exception of
+Applied Materials, our most frequently upgraded stock. Oracle is also highly significant. The only
+other stock at the 95% level is Chiron (CHIR). There is no significant relationship with any stock
+characteristics.
+    There are five stocks in Table XV which display significant ask pressure in 1999 and 2000
+at the 95% level: Yahoo, Fiserv (FISV), Xilinx (XLNX), Apple (AAPL) and Linear Technology.
+Yahoo, Linear Technology and Applied Materials (which is significant at the 93% level) are notable,
+because they also appear on the upgrade bid pressure list for the same time period.
+
+                               [INSERT Table XV and XVI HERE]
+
+    Linear Technology appears yet again in the downgrade list in Table XVI for 2001 at the 99.9%
+level. The other repeat stock is Microsoft at the 95% level. Microchip Technology (MCHP), Biogen
+(BGEN), Dell (DELL) and ADC Telecommunications (ADCT) appear for the first time and are
+significant at the 95% level or higher. None of the stock characteristics matter for the ask pressure
+
+
+                                                 16
+frequency in either time period.
+   I next turn to an analysis of the anonymous trading outlets available to Nasdaq market makers.
+
+V.D        ECN activity
+
+One surprising aspect of these results is that Nasdaq market makers have the ability to quote
+anonymously through ECNs. The majority of institutional ECN trading takes place on the Instinet
+(INCA) network, even though Island16 had more liquidity during our sample period. This is partly
+due to Instinet’s long term presence in the market, and because their order book is only visible in
+its entirety to subscribers. Archipelago (ARCA) which is owned partly by Goldman Sachs, J.P.
+Morgan and Merrill Lynch, among others, is the other ECN with substantial institutional liquidity.
+   Selling interest is more likely to be expressed through an ECN than through a market maker.
+INCA is unconditionally more likely to be an inside ask participant 55.14% of the time in 1999-
+2000. Conversely, our 42 market makers are more likely to be on the inside ask 50.1% of the time
+in 1999-2000.
+
+                                   [INSERT Table XVII HERE]
+
+   Despite having an ask side bias, Instinet appears to respond to upgrades in 1999 and 2000,
+although not as strongly as the market makers. Three and four weeks prior to an upgrade in Table
+XVII, INCA is more often on the inside bid than ask only 41.3% of the time. This increases to
+46.5% two and one week prior to the upgrade. Comparing the later two weeks (-1 to -10) to the
+prior two weeks (-11 to -20), I detect the presence of inside bid pressure at the 99.8% level. Bid
+pressure remains strong for a month after the upgrade. The pre-upgrade pattern is not repeated
+in 2001.
+
+                                   [INSERT Table XVIII HERE]
+
+   There is some evidence for an increase in ask pressure in 1999 and 2000 for downgrades in
+Table XVIII. The inside ask presence increases from 52.9% to 56.9% from two weeks to one week
+prior, which is significant at the 92.5% level. This surge, however, is not statistically significant
+compared to the 58.5% inside ask presence four weeks prior. After a downgrade, there is some
+persistent inside ask activity. For two weeks, sell side pressure is over 61%. The pattern both
+before and after is not repeated in 2001.
+   A similar analysis for both Island and Archipelago revealed no significant patterns for either
+upgrades or downgrades.
+
+
+                                                 17
+   I will devote the rest of my discussion now to what happens to the stock price and market
+making activity after the recommendation change has been made public.
+
+
+                                       VI. Returns
+
+Given all of the recent publicity about analyst’s conflict of interest, it may be surprising that
+Womack (1996) finds substantial investment value to brokerage industry recommendations in his
+1989-1991 sample. Abnormal returns from the day before the event to one month after are 5.93%
+for upgrades and −5.38% for downgrades. Perhaps more surprising is that, especially for the
+downgrades, the returns are persistent. In the six months following the recommendation change,
+abnormal returns are 2.42% for upgrades and −6.42% for downgrades.
+
+                                   [INSERT Table XIX HERE]
+
+   Abnormal returns in my sample are summarized in Table XIX. My ex-post returns are similar
+to Womack’s but less persistent for the downgrades. From one day before to four days after (−1
+to 4) the recommendation change, upgrades have an abnormal return of 5.73% in 1999 and 2000.
+Even in the bear market year of 2001, these returns are positive, 5.00%. Downgrades also have a
+strong impact in the bull market years of 1999 and 2000, −7.24%. The downgrade returns in 2001
+are nearly symmetric to the upgrades, −5.01%.
+   For the downgrades, I find that the entire return is in the first week. During the next three
+weeks, there is an abnormal positive return of 1.69% in 1999-2000. Even in the bear market of
+2001, the three week abnormal return after one week is 0.86%. There are positive abnormal returns
+from 1 to 3 weeks after the upgrades, 0.32% in 1999-2000 and 1.70% in 2001.
+
+VI.A      Profitability analysis
+
+There is little evidence that ex-ante market maker activity impacts ex-ante returns. In three of
+four cases though (with the exception of the upgrades in 1999 to 2000), stock prices do move in
+the direction of the recommendation change in the week prior.
+   I do find substantial evidence though that ex-ante market making activity does eﬀect ex-post
+returns. In three cases (the exception are the downgrades in 1999-2000), pre- and post-change
+returns have the opposite sign. I also find that market maker bid activity raises ex-post returns for
+the upgrades. Finally, a sub-group of market makers that display significant pre-upgrade increases
+in inside bid frequency produce large abnormal returns.
+
+
+                                                 18
+   I regress the abnormal return from one day before to four days after on the recommenda-
+tion change on three explanatory variables and a constant. The results for the two upgrade and
+downgrade samples are in Table XX.
+                                    [INSERT Table XX HERE]
+
+   The first explanatory variable is the prior return from −5 to −1 days before. The two upgrade
+samples show mean reverting returns. A 1% increase in the week prior is associated with a −0.10%
+reduction in the ex-post return in 1999-2000, and −0.26% in 2001. Only the latter estimate is
+statistically significant though. Both downgrade prior return coeﬃcients are insignificant as well.
+   To test the impact of market maker activity, I sum the diﬀerence between inside bid and
+ask counts in the five days prior to the recommendation change and use this as an excess demand
+regressor. The estimates for upgrades and downgrades in 1999 and 2000 are statistically significant.
+The upgrade regression suggests that if a market maker is on the inside bid 234 times more often
+than on the ask, there is a 1% higher ex-post return. The downgrade regression has the wrong
+sign: 148 net inside ask appearances raise the stock price ex-post by 1%. The sample estimates
+for upgrades and downgrades in 2001 for this variable are insignificantly diﬀerent from zero.
+   Finally, I include a dummy variable for whether the market maker was significant at the
+95% level in Tables VIII to XI. In the first case, I assign a dummy if the upgrading market
+maker is Merrill Lynch, First Boston, J.P. Morgan or William Blair. Their presence in 1999-2000
+is associated with a 3.29% higher ex-post return. In 2001, the upgrade group is First Boston,
+A. G. Edwards Morgan Stanley and J.P. Morgan.             They raise ex-post returns by 3.26%. The
+downgrade group, A.G. Edwards, Hambrecht Quest and Lehman Brothers in 1999-2000, and Merrill
+Lynch, Legg Mason, and Robertson Stephens in 2001, have a very small (under 0.5%) positive and
+insignificant impact on abnormal returns.
+   The last estimate I compute from this regression are the abnormal profits from market maker
+accumulation in the 1999-2000 time period. First, I compute the marginal abnormal return due to
+market maker activity by multiplying inside frequency counts times the elasticity in Table XX. I
+report aggregate results by market maker in Table XXI. The average marginal abnormal return for
+all market makers is 0.23%. The range is from 20.47% at the high for Robertson Stephens (RSSF)
+and to −5.86% at the low for Salomon Smith Barney (SBSH).
+                                    [INSERT Table XXI HERE]
+
+   I construct the dollar profitability estimates by first calculating bid or ask share17 in the security
+
+
+                                                  19
+from relative inside frequency counts. I then multiply that by the trading volume over the five
+days. Finally, I multiply by the five day return in the security times the dollar price on the close
+the day before the announcement. In total, I show profitability estimates of $592 million for the
+327 upgrades, or an average of $1.81 million per upgrade.
+   The profits for individual firms in Table XXI present a slightly diﬀerent picture than our
+statistical results in Tables VIII to XI. Most of our statistically important market makers also
+show large profits: First Boston with $192 million and CIBC with $65.5 million are among them.
+Our most active analyst-market making pair, Merrill Lynch, is actually estimated with a loss of
+−$47.17 million18 . Robertson Stephens, which is on the bid and oﬀer in equal frequencies overall,
+instead shows a profit estimate of $292 million.
+
+
+                                    VII. Conclusion
+
+This paper looks at Nasdaq market making activity in the most liquid stocks in the month before
+and after analyst recommendation changes. I reject the null hypothesis that analysts and market
+makers act independently. On a given week before an upgrade in 1999-2000, I find that buying
+interest by market makers accelerates. This is true whether I measure how often a market maker
+enters the inside market, from the aggregate depth they provide on the inside, or whether trades
+tend to go oﬀ on the ask when they bid for shares. This is not a market wide phenomenon. A
+randomly selected market maker or analyst tends not to display a similar uptick in buying interest.
+Evidence from ECNs and market making subsidiaries reinforces these results. 15 of the 42 market
+makers studied show significant changes in their pre-recommendation liquidity provision.
+   The pre-upgrade activity influences ex-post returns. Aggregate stock returns are cumulatively
+more than 75% higher due to market maker activity in the upgrade events, an average of 0.23%
+per upgrade. I estimate aggregate market maker profits of almost $600 million.
+   I can only speculate why the results appear to weaken in 2001. There are at least three possi-
+ble explanations: (1) The bear market. Barber, Lehavy McNichols and Trueman (2003) note that
+returns to analysts picks deteriorated drastically in 2000-2001; (2) Regulation Fair Disclosure19
+(Reg FD), which appears to increase the quantity of public information; (3) The Spitzer investiga-
+tion. All three explanations are intermingled, but each would reduce the benefits of pre-upgrade
+accumulation.
+   The fact that conflicts appear to be present primarily on upgrades is consistent with the buy-
+
+
+
+                                                   20
+side bias on Wall Street. It seems reasonable to conclude, as do Michaely and Womack (1999,
+p.654) that “implicit pressure on analysts to ... maintain positive recommendations” may extend
+to market makers as well.
+   Overall this statistical evidence, while certainly not a smoking gun, questions the impartiality
+of both analysts and market makers. It merits further investigation by the appropriate regulatory
+agencies.
+   Paul Schultz (2003, p.72) questions in his analysis of the Nasdaq “why market making is
+typically bundled with brokerage, analyst coverage and underwriting in the same firm. Why are
+not these businesses separable?” He suggests that “one possibility is that the information generated
+in one of these activities is valuable in the others...” Our analysis supports this explanation and
+points to inherent problems in the Nasdaq microstructure that regulation alone may not be able
+to eliminate.
+
+
+
+
+                                                21
+                                          References
+
+   Aggarwal, R., Conroy, P., 2000, “Price discovery in initial public oﬀerings and the role of the
+lead underwriter,” Journal of Finance 55, 2903—2922.
+   Bailey, W.B., H. Li, C. X. Mao, R. Zhong, 2003, “Regulation Fair Disclosure and earnings
+information: market, analyst, and corporate responses,” Journal of Finance, forthcoming.
+   Barber, B., R. Lehavy, M. McNichols and B. Trueman, 2001, “Can investors profit from the
+prophets? Consensus analyst recommendations and stock returns,” Journal of Finance 56, 341-72.
+   Barber, B., R. Lehavy, M. McNichols and B. Trueman, 2001, “Reassessing the returns to
+analysts’ stock recommendation,” Financial Analysts Journal 59, 88-96.
+   M. J. Barclay, T. Hendershott, D. T. McCormick, 2001, “Electronic communications networks
+and market quality," Rochester University Working Paper.
+   Chung, K. H., T. H. McInish, R. A. Wood, and D. J. Wyhowski, 1995, “Production of infor-
+mation asymmetry and the bid-ask spread: empirical evidence from analysts’ forecasts,” Journal
+of Banking and Finance 19, 1025-46;
+   Ellis, K., R. Michaely, and M. O’Hara, 2000, “When the underwriter is the market maker: an
+examination of trading in the IPO aftermarket,” Journal of Finance 55, 1039-74.
+   Hasbrouck, J. and G. Saar, 2002, “Limit orders and volatility in a hybrid market: the Island
+ECN,” New York University Working Paper.
+   Heflin, F., K.R. Subramanyam, and Y. Zhang, 2003, “Regulation FD and the Financial Infor-
+mation Environment: Early Evidence, Accounting Review 78.
+   Irvine, P., (2003) “Analyst’s forecasts and brokerage-firm trading”, The Accounting Review,
+forthcoming.
+   Michaely, R. and K. L. Womack, 1999, “Conflict of interest and the credibility of underwriter
+analyst recommendations,” Review of Financial Studies 12, 653-86.
+   Mizrach, B., 2002, “The Next Tick on Nasdaq: Does Level II Information Matter?”, Rutgers
+University Working Paper #2002-02.
+   Mizrach, B. and Y. Zhang, 2000, “Should ECNs be SOESable?”, Rutgers University Working
+Paper #2000-10.
+   Schultz, P., 2003, “Who makes markets?”, Journal of Financial Markets 6, 49-72.
+   Simann, Y., D.G. Weaver, and D. K. Whitcomb, 2003, “Market maker quotation behavior and
+pretrade transparency,” Journal of Finance 58, 1247-67.
+
+
+
+                                               22
+   Weiss, M., 2003, “Research analyst reforms and the settlement: why reforms don’t adequately
+protect investors,” Weiss Ratings Inc.
+   Womack, K. L., 1996, “Do brokerage analysts’ recommendations have investment value?” Jour-
+nal of Finance 51, 137-67.
+
+
+
+
+                                             23
+                                                  Notes
+
+
+   1
+       The e-mail exchange is dated November 16, 2000, and was made public by the initial Spitzer
+
+investigation into conflicts just at Merrill Lynch. See http://www.oag.state.ny.us/press/2002/
+
+apr/MerrillL.pdf, exhibit (ML 09045). Blodget gained notoriety for his bullish recommendations
+
+of Amazon.com. He left Merrill in December 2001, and was barred from the securities industry for
+
+life by the SEC.
+
+   2
+       The reason for looking at Nasdaq stocks has nothing to do with a possible ethical gap between
+
+New York Stock Exchange specialists and Nasdaq market makers but rather the transparency of
+
+the Nasdaq microstructure.
+
+   3
+       Michaely and Womack (1999) also note that proprietary trading can come into conflict with a
+
+market maker’s best execution responsibility. This seems to be an inherent problem of the Nasdaq
+
+microstructure.
+
+   4
+       It is also common practice for some of the commission revenue to be returned to the institu-
+
+tional client in the form of “soft dollars.” This conflict between the mutual fund shareholders and
+
+management has recently come under scrutiny as well.
+
+   5
+       For a discussion of the mechanics of the Level II display and short-run price discovery on the
+
+Nasdaq, see Mizrach (2002).
+
+   6
+       Additional information on ECNs may be found in Hasbrouck and Saars (2002), Weston (2002),
+
+and Barclay, Hendershott, and McCormick (2001).
+
+
+
+
+                                                  24
+   7
+       This graphic is from the Nasdaq’s TotalView display which provides the full order book of
+
+liquidity. It can be found at http://viewsuite.nasdaqtrader.com/total.asp. The Nastraq database
+
+provides only the top market maker quote.
+
+   8
+       A market maker who appears most frequently on the bid or ask is known among daytraders
+
+as “the ax.”
+
+   9
+       Mizrach (2002) shows that the number of market makers on the inside bid or oﬀer matters
+
+more than the quoted depth for short term price discovery.
+
+  10
+       There was substantial turnover during this time period though because of the dramatic rise
+
+and collapse of the technology stock market.
+
+  11
+       ATML and VTSS were dropped on December 23, 2002, but were included in the sample. USAI
+
+become IACI on June 23, 2003.
+
+  12
+       ECNs have a much higher share of trades, around 35%, than of volume, because the ECNs,
+
+especially Island (ISLD), the largest ECN in our sample period and a favorite of daytraders, handle
+
+many small trades.
+
+  13
+       The remaining market share is highly concentrated in retail oriented market makers like Knight-
+
+Trimark (NITE) which had market share of 7.188% in December 2000.
+
+  14
+       The number of cases sometimes drops oﬀ with longer lags because the dealer may not have
+
+made markets in the security in the prior weeks. Some of the recommendations from January 1999
+
+may also extend outside my sample of dealer quotes.
+
+
+
+
+                                                   25
+  15
+       I thank Roberto Rigobon for this suggestion.
+
+  16
+       In May of 2001, Reuters took Instinet public and in September 2002, they acquired Island.
+
+The two ECNs continued to operate independently with diﬀerent clienteles during the rest of my
+
+sample. In 2002, Archipelago (ARCA) became the second most liquid ECN.
+
+  17
+       This is measured as percentage of the time on inside bid less the percentage on the inside ask,
+
+relative to all other market participants, summed over the 5 days prior to the recommendation
+
+change.
+
+  18
+       The loss is due to two upgrades of Amazon.com on August 18, 1999 and February 3, 2000
+
+which are estimated to have cost the firm -$24.48 and -$35.94 million, respectively.
+
+  19
+       You can read more of the details on Reg FD at the SEC web site: http://www.sec.gov/rules
+
+/final/33-7881.htm. It was implemented on October 23, 2000. Heflin, Subramanyam and. Zhang
+
+(2003) find that post-earnings announcement price changes are smaller. Bailey, Li, Mao, and Zhong
+
+(2003) find that the quantity of public information increases.
+
+
+
+
+                                                   26
+                                       Data Appendix A.1
+                           Market Characteristics for Nasdaq 100 Stocks20
+     Company Name                              Ticker    Market Cap      Daily Close     MMs      Volume
+     APPLE COMPUTER INC                        AAPL           4.9962           14.875      86        7.528
+     ADOBE SYSTEMS INC                         ADBE          13.9850           58.188      59        4.371
+     ADC TELECOMMUNICATIONS INC                ADCT          13.9916           18.125      79       11.756
+     ALTERA CORP                               ALTR          10.4310           26.313      73        7.121
+     APPLIED MATERIALS INC                     AMAT          30.9752           38.188      88       34.581
+     AMGEN INC                                 AMGN          65.7216           63.938      77        6.687
+     AMAZON.COM INC                            AMZN           5.5430           15.563      87        9.622
+     ATMEL CORP                                ATML           5.4194           11.625      82        9.679
+     BED BATH BEYOND INC                       BBBY           6.3232           22.375      57        4.108
+     BIOGEN INC                                BGEN           9.0518           60.063      65        2.440
+     BIOMET INC                                BMET           7.0599           26.458      70        2.272
+     CHIRON CORP                               CHIR           7.9955             44.5      58        1.629
+     COSTCO WHOLESALE CORP                     COST          17.8959           39.938      69        6.785
+     COMPUWARE CORP                            CPWR           2.2823             6.25      57        3.496
+     CISCO SYSTEMS INC                         CSCO         268.6623            38.25     111       75.053
+     CINTAS CORP                               CTAS           8.9505           53.188      37        1.571
+     CITRIX SYSTEMS INC                        CTXS           4.1787             22.5      73        4.236
+     DELL COMPUTER CORP                        DELL          45.6299           17.438     100       41.356
+     ERICSSON (L M) TEL -ADR                   ERICY         80.1665           11.188      84        1.346
+     ELECTRONIC ARTS INC                       ERTS           5.5373           42.625      45        2.031
+     FISERV INC                                FISV           5.8464           47.438      45        1.884
+     GENZYME GENERAL                           GENZ           7.8442           44.969      49        3.937
+     INTEL CORP                                INTC         202.3206           30.063      97       58.297
+     INTUIT INC                                INTU           8.1601           39.438      59        5.744
+     KLA-TENCOR CORP                           KLAC           6.2660           33.688      68        5.156
+     LINEAR TECHNOLOGY CORP                    LLTC          14.6483            46.25      57        4.038
+     MICROCHIP TECHNOLOGY INC                  MCHP           2.6048           21.938      47        3.187
+     MOLEX INC                                 MOLX           5.9723             35.5      38        0.823
+     MICROSOFT CORP                            MSFT         231.2902           43.375      99      107.893
+     MAXIM INTEGRATED PRODUCTS                 MXIM          13.6383           47.813      54        3.672
+     NEXTEL COMMUNICATIONS                     NXTL          17.9611            24.75      70        9.991
+     ORACLE CORP                               ORCL         162.6758           29.063     111       43.358
+     PAYCHEX INC                               PAYX          18.0544           48.625      55        3.914
+     PACCAR INC                                PCAR           3.7684            49.25      32        1.209
+     PEOPLESOFT INC                            PSFT          10.6151           37.188      63        4.707
+     QUALCOMM INC                              QCOM          61.5120           82.188      82       17.809
+     STARBUCKS CORP                            SBUX           8.2097           22.125      65        4.117
+     STAPLES INC                               SPLS           5.3508           11.813      65        6.613
+     PANAMSAT CORP                             SPOT           5.1907           34.688      40        0.505
+     SMURFIT-STONE CONTAINER CORP              SSCC           3.6379           14.938      37        1.953
+     SUN MICROSYSTEMS INC                      SUNW          89.7116           27.875      96       67.308
+     TELLABS INC                               TLAB          23.1714             56.5      75        5.488
+     USA NETWORKS INC                          USAI           5.8017           19.438      50        2.654
+     VERITAS SOFTWARE CO                       VRTS          35.7567             87.5      67       11.584
+     VITESSE SEMICONDUCTOR CORP                VTSS           9.9353           55.313      72        6.758
+     XILINX INC                                XLNX          15.2074           46.125      77        9.747
+     YAHOO INC                                 YHOO          16.5144           30.063      86       18.016
+
+
+
+20
+     Market capitalization is in billions of dollars. The average price is the monthly average of the daily closes.
+
+ The number of market makers is the total for the entire month. Volume is in millions of shares. All data
+
+ are for December 2000.                                  27
+                                             Data Appendix A.2
+                                           Nasdaq Market Makers21
+     Company                                     MMID         Merger date    Share    Up    Down
+     ABN Amro Securities LLC                     AANA                         0.274    37      42
+     Adams, Harkness Hill, Inc.                  ADAM                         0.242     6       7
+     Advest, Inc.                                ADVS                         0.059     3       1
+     A. G. Edwards Sons, Inc.                    AGED                         0.264    31      36
+     Brown Brothers Harriman Co.                 BBHC                         0.000     3       4
+     Sanford C. Bernstein Co., Inc.              BERN                         0.000     6       6
+     Bear, Stearns Co. Inc.                      BEST                         1.799    18      15
+     C.E. Unterberg, Towbin                      CEUT                         0.131     3       6
+     CIBC World Markets Corp.                    OPCO, CIBC     3-May-1999    0.910    23      17
+     SG Cowen Securities Corporation             COWN                         0.501    19      30
+     RBC Dain Rauscher Inc.                      DAIN                         0.560     4       3
+     Deutsche Bank Securities Inc.               DBKS, DBAB    16-Jan-2001    1.832    19      23
+     Donaldson, Lufkin, Jenrette                 DLJP                         0.072    11       7
+     Dresdner Kleinwort Wasserstein Securities   DKNA, DRKW    29-Jan-2001    0.003     2      11
+     First Albany Corporation                    FACT                         0.059     9       4
+     Credit Suisse First Boston LLC              FBCO                         3.379    26      39
+     Goldman, Sachs Co.                          GSCO                         3.502    20      13
+     W.R. Hambrecht + Co., LLC                   HAMR                         0.063    22      24
+     Investec Inc.                               ITEC                         0.000     2       3
+     J. P. Morgan Securities                     JPMS, JPHQ     5-Jan-2001    0.680    20      27
+     Kaufman Bros., L.P.                         KBRO                         0.019     2       2
+     Legg Mason Wood Walker, Incorporated        LEGG                         0.202     3       5
+     Lehman Brothers Inc.                        LEHM                         2.319    14      21
+     Merrill Lynch and Co.                       MLCO                         4.626    43      46
+     Banc of America Securities LLC              MONT                         1.958    23      32
+     Morgan Stanley Co., Incorporated            MSCO                         4.481    36      45
+     Needham Company, Inc.                       NEED                         0.135    24      19
+     U.S. Bancorp Piper Jaﬀray Inc.              PIPR                         0.707    13      16
+     Prudential Securities Incorporated          PRUS                         1.034    36      26
+     UBS PaineWebber Inc.                        PWJC                         0.861    12      10
+     RBC Dominion Securities Corporation         RBCD                         0.031    13      17
+     Robertson Stephens, Inc.                    RSSF                         1.912    24      20
+     The Seidler Companies Incorporated          SASI                         0.009     1       1
+     Citigroup Global Markets Inc.               SBSH                         5.419    30      36
+     Sands Brothers Co., Ltd.                    SNDS                         0.027     1       2
+     Soundview Technology Corporation            SNDV                         0.435    16      19
+     Tucker Anthony Cleary Gull                  TGUL                         0.000     6       9
+     Thomas Weisel Partners LLC                  TWPT                         0.737     7      15
+     UBS Warburg                                 WARR, UBSW     7-May-2001    1.540    24      26
+     William Blair Company L.L.C.                WBLR                         0.197     8       9
+     Wachovia Securities, Inc.                   WCHV                         0.000     5      12
+     Wells Fargo Securities, LLC                 WELS                         0.000    11      14
+
+
+21
+     These are the 42 firms for whom I have analyst recommendations and market making combinations. MMID
+
+ is the market maker identity observed in the Nastraq database. Merger dates are the days in which the
+
+ MMID changes in the Nastraq database. Share is the market share of volume for that market maker in all
+
+ Nasdaq national market securities for the month of December 2000. Up (Down) is the number of upgrades
+
+ (downgrades) in the sample from the analyst firm.
+
+                                                       28
+                                             Table I
+                             Inside Market Maker Counts - Upgrades22
+
+
+
+
+                                                1999-2000
+                         Begin     End     Press Total Frequency             p-value
+                            -5       -1      208    327    0.6361
+                           -10       -6      181    327    0.5535              0.0013
+                           -15      -11      180    317    0.5678              0.0023
+                           -20      -16      179    312    0.5737              0.0030
+
+                               0       5      210      336         0.6250      0.5449
+                               6      10      208      336         0.6190      0.4553
+                              11      15      216      336         0.6429      0.7873
+                              16      20      203      336         0.6042      0.2516
+
+
+
+
+                                                    2001
+                         Begin     End     Press    Total     Frequency      p-value
+                            -5       -1      101      179         0.5642
+                           -10       -6      101      179         0.5642       0.5000
+                           -15      -11      108      177         0.6102       0.9173
+                           -20      -16      109      177         0.6158       0.9389
+
+                               0       5      121      179         0.6760      0.9993
+                               6      10      109      178         0.6124      0.9169
+                              11      15      113      178         0.6348      0.9785
+                              16      20       96      178         0.5393      0.2738
+
+
+
+
+22
+     The frequency is the ratio of market makers whose inside bid counts trades exceed inside ask counts. The
+
+ p-value is the probability of observing the inside frequency counts in the week prior to the recommendation
+
+ change given the frequency for the reference week.
+
+
+                                                       29
+                                            Table II
+                            Inside Market Maker Counts - Downgrades23
+
+
+
+
+                                                  1999-2000
+
+
+
+                          Begin     End    Press     Total    Frequency       p-value
+                             -5       -1     128       327        0.3914
+                            -10       -6     131       327        0.4006        0.6325
+                            -15      -11     133       321        0.4143        0.8461
+                            -20      -16     118       318        0.3711        0.2808
+
+                               0       5       153      334         0.4581      0.9860
+                               6      10       126      334         0.3772      0.2147
+                              11      15       134      333         0.4024      0.5445
+                              16      20       137      333         0.4114      0.6720
+
+
+
+                                                     2001
+
+
+
+                          Begin     End    Press     Total    Frequency       p-value
+                             -5       -1      93       259        0.3591
+                            -10       -6     100       259        0.3861        0.8142
+                            -15      -11     107       259        0.4131        0.9614
+                            -20      -16     104       259        0.4015        0.9184
+
+                               0       5       128      259         0.4942      1.0000
+                               6      10       105      257         0.4086      0.9505
+                              11      15       116      257         0.4514      0.9987
+                              16      20        93      255         0.3647      0.5518
+
+
+
+
+23
+     The frequency is the ratio of market makers whose inside ask counts exceed inside bid counts. The p-value
+
+ is the probability of observing the inside frequency counts in the week prior to the recommendation change
+
+ given the frequency for the reference week.
+
+
+                                                       30
+                                           Table III
+                           Inside Market Maker Liquidity - Upgrades24
+
+
+
+
+                                                1999-2000
+
+
+
+                         Begin    End     Press    Total    Frequency      p-value
+                            -5      -1      201      327        0.6147
+                           -10      -6      173      327        0.5291       0.0010
+                           -15     -11      171      317        0.5394       0.0012
+                           -20     -16      162      312        0.5192       0.0001
+
+                              0       5      206      336         0.6131     0.6729
+                              6      10      190      336         0.5655     0.0933
+                             11      15      197      336         0.5863     0.2898
+                             16      20      196      336         0.5833     0.2534
+
+
+
+                                                   2001
+
+
+
+                         Begin    End     Press    Total    Frequency      p-value
+                            -5      -1      105      179        0.5866
+                           -10      -6       92      179        0.5140       0.0259
+                           -15     -11      108      177        0.6102       0.7795
+                           -20     -16      105      177        0.5932       0.6202
+
+                              0       5      117      179         0.6536     0.9703
+                              6      10      100      178         0.5618     0.2728
+                             11      15      106      178         0.5955     0.6200
+                             16      20       91      178         0.5112     0.0256
+
+
+
+
+24
+     The frequency is the ratio of market makers whose aggregate inside bid depth exceeds their inside ask
+
+ depth. The p-value is the probability of observing the inside frequency counts in the week prior to the
+
+ recommendation change given the frequency for the reference week.
+
+
+                                                     31
+                                           Table IV
+                          Inside Market Maker Liquidity - Downgrades25
+
+
+
+
+                                                1999-2000
+
+
+
+                         Begin    End     Press    Total    Frequency      p-value
+                            -5      -1      134      327        0.4098
+                           -10      -6      139      327        0.4251       0.7120
+                           -15     -11      140      321        0.4361       0.8698
+                           -20     -16      138      318        0.4340       0.8457
+
+                              0       5      159      334         0.4760     0.9858
+                              6      10      133      334         0.3982     0.2512
+                             11      15      148      333         0.4444     0.8395
+                             16      20      141      333         0.4234     0.5878
+
+
+
+                                                   2001
+
+
+
+                         Begin    End     Press    Total    Frequency      p-value
+                            -5      -1       99      259        0.3822
+                           -10      -6       99      259        0.3822       0.5000
+                           -15     -11      112      259        0.4324       0.9485
+                           -20     -16      104      259        0.4015       0.7369
+
+                              0       5      136      259         0.5251     1.0000
+                              6      10      125      257         0.4864     0.9996
+                             11      15      124      257         0.4825     0.9994
+                             16      20      108      255         0.4235     0.8975
+
+
+
+
+25
+     The frequency is the ratio of market makers whose aggregate inside ask depth exceeds their inside bid
+
+ depth. The p-value is the probability of observing the inside frequency counts in the week prior to the
+
+ recommendation change given the freqeuency for the reference week.
+
+
+                                                     32
+                                                Table V
+                                      Trading Activity - Upgrades26
+
+
+
+
+                                                  1999-2000
+
+
+
+                          Begin     End     Press    Total     Frequency      p-value
+                             -5       -1      202      327         0.6177
+                            -10       -6      176      327         0.5382       0.0020
+                            -15      -11      176      317         0.5552       0.0047
+                            -20      -16      164      312         0.5256       0.0001
+
+                                0      5       210      336          0.6250     0.7134
+                                6     10       199      336          0.5863     0.2527
+                               11     15       202      336          0.6012     0.3691
+                               16     20       216      336          0.6429     0.8948
+
+
+
+                                                      2001
+
+
+
+                          Begin     End     Press    Total     Frequency      p-value
+                             -5       -1      102      179         0.5698
+                            -10       -6       92      179         0.5140       0.0674
+                            -15      -11      107      177         0.6045       0.8218
+                            -20      -16       98      177         0.5537       0.3251
+
+                                0      5       113      179          0.6313     0.9558
+                                6     10        91      178          0.5112     0.0669
+                               11     15        95      178          0.5337     0.1837
+                               16     20        98      178          0.5506     0.3256
+
+
+
+
+26
+     The frequency is the ratio of market makers whose buyer initiated trades exceed seller trades. The p-value
+
+ is the probability of observing the inside frequency counts in the week prior to the recommendation change
+
+ given the frequency for the reference week.
+
+
+                                                        33
+                                               Table VI
+                                    Trading Activity - Downgrades27
+
+
+
+
+                                                  1999-2000
+
+
+
+                          Begin     End     Press    Total     Frequency      p-value
+                             -5       -1      116      327         0.3547
+                            -10       -6      120      327         0.3670       0.6769
+                            -15      -11      119      321         0.3707       0.7560
+                            -20      -16      113      318         0.3553       0.5926
+
+                                0      5       146      334          0.4371     0.9986
+                                6     10       129      334          0.3862     0.8695
+                               11     15       139      333          0.4174     0.9869
+                               16     20       126      333          0.3784     0.7855
+
+
+
+                                                      2001
+
+
+
+                          Begin     End     Press    Total     Frequency      p-value
+                             -5       -1       94      259         0.3629
+                            -10       -6       92      259         0.3552       0.3976
+                            -15      -11      103      259         0.3977       0.8734
+                            -20      -16       96      259         0.3707       0.6015
+
+                                0      5       109      259          0.4208     0.9705
+                                6     10       102      257          0.3969     0.8744
+                               11     15       108      257          0.4202     0.9710
+                               16     20       109      255          0.4275     0.9786
+
+
+
+
+27
+     The frequency is the ratio of market makers whose seller initiated trades exceed buyer trades. The p-value
+
+ is the probability of observing the inside frequency counts in the week prior to the recommendation change
+
+ given the frequency for the reference week.
+
+
+                                                        34
+                                       Table VII
+               Random Market Maker Inside Bid Counts - Upgrades 1999-200028
+
+
+
+                                             All Market Makers
+
+
+                          Begin     End     Press     Total     Frequency       p-value
+                             -5       -1      179       327         0.5474       0.0006
+                            -10       -6      176       327         0.5382       0.0002
+                            -15      -11      161       316         0.5095       0.0000
+                            -20      -16      163       311         0.5241       0.0000
+
+                                0       5       167      336          0.4970      0.0000
+                                6      10       158      336          0.4702      0.0000
+                               11      15       181      336          0.5387      0.0002
+                               16      20       165      336          0.4911      0.0000
+
+
+
+                                       Market Maker Analyst Pairs
+
+
+
+                          Begin     End     Press     Total     Frequency       p-value
+                             -5       -1      177       317         0.5584       0.0023
+                            -10       -6      179       317         0.5647       0.0046
+                            -15      -11      168       305         0.5508       0.0010
+                            -20      -16      182       303         0.6007       0.0957
+
+                                0       5       187      327          0.5719      0.0095
+                                6      10       175      327          0.5352      0.0001
+                               11      15       180      327          0.5505      0.0009
+                               16      20       196      327          0.5994      0.0878
+
+
+
+
+28
+     The frequency is the ratio of market makers whose inside bid counts exceed inside ask counts. The p-value is
+
+ the probability of observing the inside frequency counts from Table I in the week prior to the recommendation
+
+ change using the randomly selected market maker bid frequencies.
+
+
+                                                        35
+                                          Table VIII
+                 Inside Quote Activity by Market Maker Upgrades 1999-200029
+                                 MM        Total   Bid Press     Control    p-value
+                                 MLCO         29          18          12      0.0118
+                                 FBCO         13          10           6      0.0130
+                                 JPMS          6           4           2      0.0416
+                                 WBLR          6           4           2      0.0416
+                                 PIPR          6           5           3      0.0512
+                                 AGED          7           6           4      0.0633
+                                 DLJP         10           8           6      0.0984
+                                 GSCO         10           7           5      0.1030
+                                 FACT          3           3           2      0.1103
+                                 CIBC         12           8           6      0.1241
+                                 SBSH         19          10           8      0.1764
+                                 NEED         11           8           7      0.2654
+                                 BEST         12           7           6      0.2819
+                                 MSCO         24          15          14      0.3394
+                                 ABNA         24          17          17      0.5000
+                                 ADAM          3           2           2      0.5000
+                                 COWN         13           8           8      0.5000
+                                 HAMR          5           3           3      0.5000
+                                 LEHM         10           6           6      0.5000
+                                 MONT         16          10          10      0.5000
+                                 PRUS         26          17          17      0.5000
+                                 PWJC         10           6           6      0.5000
+                                 TWPT          2           1           1      0.5000
+                                 RSSF         17          11          12      0.7027
+                                 SNDV         12           4           5      0.7209
+                                 UBSW          9           5           6      0.7602
+                                 DBAB          5           2           3      0.8193
+                                 ADVS          1           1           1      1.0000
+                                 BBHC          0           0           0      1.0000
+                                 BERN          0           0           0      1.0000
+                                 CEUT          2           1           0      1.0000
+                                 DAIN          2           1           0      1.0000
+                                 DRKW          0           0           0      1.0000
+                                 ITEC          0           0           0      1.0000
+                                 KBRO          0           0           0      1.0000
+                                 LEGG          1           0           1      1.0000
+                                 RBCD          0           0           0      1.0000
+                                 SASI          1           0           0      1.0000
+                                 SNDS          0           0           0      1.0000
+                                 TGUL          0           0           0      1.0000
+                                 WCHV          0           0           0      1.0000
+                                 WELS          0           0           0      1.0000
+
+29
+     Total is the total number of upgrades. Bid Press is the number of times the inside bid count exceeds the
+
+ inside ask count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+
+                                                       36
+                                           Table IX
+                    Inside Quote Activity by Market Maker Upgrades 200130
+                                 MM        Total   Bid Press     Control    p-value
+                                 FBCO         11          10           4      0.0001
+                                 AGED          7           7           4      0.0110
+                                 MSCO         11           7           4      0.0300
+                                 JPMS         13           8           5      0.0436
+                                 DAIN          2           2           1      0.0786
+                                 ABNA          3           2           1      0.1103
+                                 CIBC          9           6           6      0.5000
+                                 FACT          5           3           3      0.5000
+                                 MLCO         12           5           5      0.5000
+                                 MONT          5           3           3      0.5000
+                                 PRUS         10           5           5      0.5000
+                                 RSSF          7           4           4      0.5000
+                                 SBSH         11           5           6      0.7276
+                                 GSCO         10           7           8      0.7854
+                                 UBSW         11           3           5      0.8871
+                                 NEED         13           8          10      0.9060
+                                 COWN          5           0           3      0.9969
+                                 ADAM          1           0           1      1.0000
+                                 ADVS          0           0           0      1.0000
+                                 BBHC          0           0           0      1.0000
+                                 BERN          0           0           0      1.0000
+                                 BEST          6           1           5      1.0000
+                                 CEUT          1           0           1      1.0000
+                                 DBAB          2           1           2      1.0000
+                                 DLJP          0           0           0      1.0000
+                                 DRKW          1           0           1      1.0000
+                                 HAMR          2           1           2      1.0000
+                                 ITEC          0           0           0      1.0000
+                                 KBRO          1           0           0      1.0000
+                                 LEGG          2           1           2      1.0000
+                                 LEHM          4           1           4      1.0000
+                                 PIPR          5           4           3      1.0000
+                                 PWJC          0           0           0      1.0000
+                                 RBCD          0           0           0      1.0000
+                                 SASI          0           0           0      1.0000
+                                 SNDS          0           0           0      1.0000
+                                 SNDV          3           2           3      1.0000
+                                 TGUL          0           0           0      1.0000
+                                 TWPT          5           5           0      1.0000
+                                 WBLR          1           0           0      1.0000
+                                 WCHV          0           0           0      1.0000
+                                 WELS          0           0           0      1.0000
+
+30
+     Total is the total number of upgrades. Bid Press is the number of times the inside bid count exceeds the
+
+ inside ask count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+
+                                                       37
+                                          Table X
+               Inside Quote Activity by Market Maker Downgrades 1999-200031
+                                 MM        Total   Ask Press     Control     p-value
+                                 AGED         11           8           4      0.0061
+                                 HAMR          8           3           1      0.0163
+                                 LEHM         12           6           3       0.0228
+                                 PIPR          7           5           3      0.0633
+                                 MSCO         25          13          10      0.1103
+                                 ABNA         18           6           4      0.1284
+                                 TWPT          6           2           1      0.1367
+                                 DBAB          7           2           1      0.1400
+                                 CIBC          5           3           2      0.1807
+                                 SBSH         21          10           9      0.3296
+                                 MLCO         26          15          14      0.3470
+                                 CEUT          4           2           2      0.5000
+                                 COWN         17           8           8      0.5000
+                                 DLJP          7           2           2      0.5000
+                                 JPMS         10           4           4      0.5000
+                                 NEED          9           2           2      0.5000
+                                 SNDV         12           7           7      0.5000
+                                 BEST         11           4           5      0.7276
+                                 PWJC         10           2           3      0.7549
+                                 GSCO          7           2           3      0.7775
+                                 FBCO         18           6           8      0.8286
+                                 PRUS         14           3           5       0.8677
+                                 UBSW          9           1           3      0.9214
+                                 RSSF          8           1           3      0.9279
+                                 WBLR          7           2           4      0.9367
+                                 MONT         26           5          14      0.9998
+                                 ADAM          2           1           2      1.0000
+                                 ADVS          0           0           0      1.0000
+                                 BBHC          0           0           0      1.0000
+                                 BERN          0           0           0      1.0000
+                                 DAIN          3           0           3       1.0000
+                                 DRKW          0           0           0       1.0000
+                                 FACT          0           0           0      1.0000
+                                 ITEC          0           0           0       1.0000
+                                 KBRO          1           0           0      1.0000
+                                 LEGG          1           0           0      1.0000
+                                 RAJA          2           2           0       1.0000
+                                 SASI          1           0           0       1.0000
+                                 SNDS          1           1           0      1.0000
+                                 TGUL          1           0           1      1.0000
+                                 WCHV          0           0           0      1.0000
+                                 WELS          0           0           0      1.0000
+
+31
+     Total is the total number of upgrades. Ask Press is the number of times the inside ask count exceeds the
+
+ inside bid count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+
+                                                       38
+                                           Table XI
+                  Inside Quote Activity by Market Maker Downgrades 200132
+                                 MM        Total   Ask Press     Control     p-value
+                                 MLCO         20          11           5      0.0010
+                                 LEGG          4           3           1      0.0105
+                                 RSSF         12           7           4      0.0331
+                                 BEST          3           2           1      0.1103
+                                 NEED          9           2           1      0.1444
+                                 MSCO         20           9           7      0.1742
+                                 LEHM          8           4           3      0.2326
+                                 JPMS         17           6           6      0.5000
+                                 SNDV          6           2           2      0.5000
+                                 UBSW         16           8           8      0.5000
+                                 ABNA         12           4           5      0.7209
+                                 CIBC          9           3           4      0.7488
+                                 TWPT          9           3           4      0.7488
+                                 MONT          5           1           2      0.8193
+                                 SBSH         14           3           5      0.8677
+                                 DRKW          4           0           1       0.8759
+                                 FACT          4           0           1      0.8759
+                                 PRUS         12           2           4       0.8897
+                                 FBCO         21           8          11      0.9050
+                                 PIPR          9           2           4      0.9101
+                                 GSCO          6           1           3      0.9488
+                                 COWN         12           5           8      0.9669
+                                 HAMR          4           0           2      0.9772
+                                 DBAB          9           1           4      0.9779
+                                 ADAM          4           1           3      0.9895
+                                 ADVS          0           0           0      1.0000
+                                 AGED          7           4           0      1.0000
+                                 BBHC          0           0           0      1.0000
+                                 BERN          0           0           0      1.0000
+                                 CEUT          1           0           0      1.0000
+                                 DAIN          0           0           0       1.0000
+                                 DLJP          0           0           0      1.0000
+                                 ITEC          0           0           0       1.0000
+                                 KBRO          0           0           0      1.0000
+                                 PWJC          0           0           0      1.0000
+                                 RBCD          0           0           0      1.0000
+                                 SASI          0           0           0       1.0000
+                                 SNDS          0           0           0      1.0000
+                                 TGUL          0           0           0      1.0000
+                                 WBLR          1           0           1      1.0000
+                                 WCHV          1           1           0      1.0000
+                                 WELS          0           0           0      1.0000
+
+32
+     Total is the total number of upgrades. Ask Press is the number of times the inside ask count exceeds the
+
+ inside bid count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+
+                                                       39
+                                          Table XII
+                    Bid Pressure by Market Making Subsidiaries: Upgrades33
+
+
+
+
+                   Analyst     Subsidiary      Date Eﬀ.      Pairs    Pressure      p-value
+                   MSCO        DEAN            01-01-1999       14           9        0.0015
+                   DBAB        NDBC            01-07-2000        2           2        0.0787
+                   JPMS        MASH            01-01-1999       19          13        0.3172
+                   FBCO        MASH            01-01-1999       24          17        0.1071
+                   MLCO        HRZG            06-06-2000       16          11        0.0668
+                   GSCO        SLKC            11-09-2000       11          10        0.0300
+
+
+
+
+33
+     Date eﬀective is January 1, 1999 if the merger took place before our sample started. Pairs is the number
+
+ of upgrades in which the subsidiary made markets. Pressure is the number of times the inside bid count
+
+ exceeded the inside ask count for the subsidiary market maker. The p-value is based on the two weeks prior
+
+ frequency of the market maker being on the inside.
+
+
+                                                       40
+                                           Table XIII
+                      Inside Quote Activity by Stock: Upgrades 1999-200034
+                                 Stock    Total   Bid Press    Control    p-value
+                                 SPLS         7           5          1      0.0000
+                                 QCOM         7           6          2      0.0004
+                                 BGEN         5           3          1      0.0127
+                                 LLTC         8           6          3      0.0142
+                                 AMAT        15          13          9      0.0175
+                                 MSFT         5           4          2      0.0339
+                                 YHOO         7           4          2      0.0471
+                                 TLAB         6           5          3     0.0512
+                                 ORCL        16          10          7      0.0653
+                                 CTAS         2           2          1      0.0786
+                                 PSFT         9           5          3      0.0786
+                                 PAYX         3           2          1      0.1103
+                                 SBUX        12           8          6      0.1241
+                                 VTSS         4           4          3      0.1241
+                                 SSCC         5           5          4      0.1318
+                                 SPOT         6           6          5      0.1367
+                                 ERICY       16           8          6      0.1508
+                                 DELL        16          11          9      0.1568
+                                 INTC        18          13         11      0.1668
+                                 ADBE         5           3          2      0.1807
+                                 PCAR         6           3          2      0.1932
+                                 KLAC         8           5          4      0.2398
+                                 ATML         5           3          3      0.5000
+                                 BMET         4           3          3      0.5000
+                                 CHIR         4           3          3      0.5000
+                                 COST         5           3          3      0.5000
+                                 FISV         4           3          3      0.5000
+                                 INTU         4           3          3      0.5000
+                                 MCHP         7           4          4      0.5000
+                                 MOLX         3           2          2      0.5000
+                                 MXIM         4           3          3      0.5000
+                                 NXTL         6           4          4      0.5000
+                                 VRTS         6           3          3      0.5000
+                                 SUNW        10           5          6      0.7407
+                                 GENZ         8           4          5      0.7674
+                                 AAPL        13          10         11      0.7790
+                                 BBBY         5           3          4      0.8682
+                                 XLNX        11           2          4      0.8950
+                                 ADCT         8           4          6      0.9488
+                                 AMGN         6           1          3      0.9488
+                                 AMZN         9           3          6      0.9831
+                                 ALTR        13           6         10      0.9958
+                                 CPWR         0           0          0      1.0000
+                                 CSCO         1           0          0      1.0000
+                                 CTXS         4           4          4      1.0000
+                                 ERTS         0           0          0      1.0000
+                                 USAI         1           1          1      1.0000
+
+
+34
+     Total is the total number of upgrades. Bid press is the number of times the inside bid count exceeds the
+
+ inside ask count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+                                                       41
+                                           Table XIV
+                         Inside Quote Activity by Stock: Upgrades 200135
+                                 Stock    Total   Bid Press    Control    p-value
+                                 ORCL         8           8          3      0.0001
+                                 AMAT        13          12          7      0.0027
+                                 CHIR         4           4          2      0.0228
+                                 CTAS         2           2          1      0.0786
+                                 PAYX         2           2          1      0.0786
+                                 INTC        10           6          4      0.0984
+                                 AMGN         3           2          1      0.1103
+                                 GENZ         3           2          1      0.1103
+                                 CTXS         4           3          2      0.1587
+                                 NXTL         5           4          3      0.1807
+                                 DELL        10           4          3      0.2451
+                                 AAPL         2           1          1      0.5000
+                                 COST         3           1          1      0.5000
+                                 LLTC         2           1          1      0.5000
+                                 MCHP         2           1          1      0.5000
+                                 MXIM         2           1          1      0.5000
+                                 PCAR         2           1          1      0.5000
+                                 USAI         4           1          1      0.5000
+                                 VRTS         6           3          3      0.5000
+                                 VTSS        10           6          6      0.5000
+                                 PSFT         7           3          4      0.7775
+                                 QCOM         7           2          3      0.7775
+                                 MSFT         6           2          3      0.7929
+                                 BBBY         5           3          4      0.8682
+                                 BMET         5           3          4      0.8682
+                                 INTU         3           1          2      0.8897
+                                 KLAC         9           4          6      0.9214
+                                 ALTR         5           1          3      0.9661
+                                 ERTS         4           0          2      0.9772
+                                 CSCO         9           4          7      0.9919
+                                 YHOO         6           2          5      0.9995
+                                 ADBE         2           1          2      1.0000
+                                 ADCT         0           0          0      1.0000
+                                 AMZN         2           1          2      1.0000
+                                 ATML         1           1          0      1.0000
+                                 BGEN         1           1          1      1.0000
+                                 CPWR         0           0          0      1.0000
+                                 ERICY        1           1          1      1.0000
+                                 FISV         1           1          1      1.0000
+                                 MOLX         0           0          0      1.0000
+                                 SBUX         0           0          0      1.0000
+                                 SPLS         1           0          0      1.0000
+                                 SPOT         0           0          0      1.0000
+                                 SSCC         0           0          0      1.0000
+                                 SUNW         4           3          4      1.0000
+                                 TLAB         0           0          0     1.0000
+                                 XLNX         3           2          3      1.0000
+
+
+35
+     Total is the total number of upgrades. Bid press is the number of times the inside bid count exceeds the
+
+ inside ask count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+                                                       42
+                                           Table XV
+                    Inside Quote Activity by Stock: Downgrades 1999-200036
+                                 Stock     Total   Ask Press    Control    p-value
+                                 YHOO         11           5          2      0.0095
+                                 FISV          5           3          1      0.0127
+                                 XLNX         12           6          3     0.0228
+                                 AAPL         14           7          4      0.0380
+                                 LLTC          6           4          2      0.0416
+                                 ERICY         9           4          2      0.0544
+                                 AMAT         15           4          2      0.0644
+                                 SSCC          3           2          1     0.1103
+                                 BBBY          4           4          3      0.1241
+                                 CTAS          4           4          3      0.1241
+                                 SUNW          9           2          1     0.1444
+                                 INTC         18           7          5     0.1463
+                                 DELL         21           9          7      0.1773
+                                 AMGN          6           4          3      0.2071
+                                 VTSS          7           4          3      0.2225
+                                 ADCT          5           1          1      0.5000
+                                 AMZN         12           3          3      0.5000
+                                 BGEN         10           6          6      0.5000
+                                 NXTL          4           2          2      0.5000
+                                 ORCL         12           6          6      0.5000
+                                 SBUX         14           7          7      0.5000
+                                 VRTS          3           1          1      0.5000
+                                 ALTR         12           4          5      0.7209
+                                 MSFT          9           2          3      0.7602
+                                 SPLS          9           2          3      0.7602
+                                 MCHP          6           2          3      0.7929
+                                 ERTS          5           2          3      0.8193
+                                 COST          3           0          1      0.8897
+                                 PAYX          3           1          2      0.8897
+                                 SPOT         10           3          5      0.8970
+                                 QCOM          7           2          4     0.9367
+                                 PCAR          6           2          4      0.9584
+                                 KLAC         11           3          6      0.9654
+                                 CHIR          5           0          2      0.9661
+                                 GENZ          6           2          5      0.9995
+                                 CTXS          4           0          3      0.9997
+                                 MXIM          4           0          3      0.9997
+                                 ADBE          3           2          3      1.0000
+                                 ATML          3           1          0      1.0000
+                                 BMET          2           1          0      1.0000
+                                 CPWR          0           0          0      1.0000
+                                 CSCO          1           1          1      1.0000
+                                 INTU          3           0          3      1.0000
+                                 MOLX          2           0          2      1.0000
+                                 PSFT          1           0          0     1.0000
+                                 TLAB          6           3          0      1.0000
+                                 USAI          2           0          2      1.0000
+
+
+36
+     Total is the total number of downgrades. Ask press is the number of times the inside ask count exceeds the
+
+ inside bid count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+                                                        43
+                                            Table XVI
+                        Inside Quote Activity by Stock: Downgrades 200137
+                                 Stock     Total   Ask Press    Control    p-value
+                                 LLTC          4           4          1     0.0003
+                                 MCHP          3           3          1     0.0072
+                                 BGEN          6           3          1     0.0142
+                                 DELL          6           3          1     0.0142
+                                 ADCT         12           8          5     0.0395
+                                 MSFT          7           4          2     0.0471
+                                 CSCO         20          10          7     0.0798
+                                 AMAT          5           2          1     0.1318
+                                 ALTR          8           2          1     0.1425
+                                 ADBE          2           1          1     0.5000
+                                 AMGN          5           3          3     0.5000
+                                 ATML          6           2          2     0.5000
+                                 CTAS          3           1          1     0.5000
+                                 INTC          5           1          1     0.5000
+                                 INTU          3           1          1     0.5000
+                                 KLAC          5           2          2     0.5000
+                                 PAYX          2           1          1     0.5000
+                                 VTSS         15           6          6     0.5000
+                                 TLAB         14           4          5     0.7115
+                                 NXTL         11           4          5     0.7276
+                                 XLNX          6           2          3     0.7929
+                                 PSFT          6           1          2     0.8068
+                                 USAI          6           1          2     0.8068
+                                 SPOT          4           1          2     0.8413
+                                 SBUX          4           0          1     0.8759
+                                 SUNW          4           0          1     0.8759
+                                 ERICY        11           4          6     0.8871
+                                 AMZN         12           2          4     0.8897
+                                 MXIM          3           0          1     0.8897
+                                 ORCL         18           5          8     0.9226
+                                 YHOO         13           4          8     0.9887
+                                 VRTS          7           1          4     0.9890
+                                 AAPL          1           0          1     1.0000
+                                 BBBY          3           1          0     1.0000
+                                 BMET          3           0          3     1.0000
+                                 CHIR          3           1          0     1.0000
+                                 COST          1           0          0     1.0000
+                                 CPWR          0           0          0     1.0000
+                                 CTXS          2           1          2     1.0000
+                                 ERTS          1           1          1     1.0000
+                                 FISV          1           0          0     1.0000
+                                 GENZ          1           0          1     1.0000
+                                 MOLX          4           2          0     1.0000
+                                 PCAR          0           0          0     1.0000
+                                 QCOM          2           1          2     1.0000
+                                 SPLS          1           0          0     1.0000
+                                 SSCC          0           0          0     1.0000
+
+
+37
+     Total is the total number of downgrades. Ask press is the number of times the inside ask count exceeds the
+
+ inside bid count in the week prior to the upgrade. Control is the same count in the period two weeks prior.
+
+ The p-value is the probability of observing the first count given the frequency in the control group week.
+                                                        44
+                                              Table XVII
+                              Inside Instinet ECN Counts - Upgrades38
+
+
+
+
+                                                  1999-2000
+
+
+
+                         Begin     End     Press     Total    Frequency      p-value
+                            -5        1      152       327        0.4648
+                           -10       -6      152       327        0.4648       0.5000
+                           -15      -11      131       317        0.4132       0.0435
+                           -20      -16      126       312        0.4071       0.0324
+
+                               0       5       172     336         0.5119      0.9682
+                               6      10       167     336         0.4970      0.9048
+                              11      15       172     336         0.5119      0.9682
+                              16      20       166     336         0.4940      0.8850
+
+
+
+                                                     2001
+
+
+
+                         Begin     End     Press     Total    Frequency      p-value
+                            -5        1       74       179        0.4693
+                           -10       -6       88       179        0.4916       0.9818
+                           -15      -11       71       177        0.4011       0.3795
+                           -20      -16       78       177        0.4407       0.7755
+
+                               0       5       87      179         0.4860      0.9741
+                               6      10       74      178         0.4157      0.5000
+                              11      15       88      178         0.4944      0.9821
+                              16      20       92      178         0.5169      0.9965
+
+
+
+
+38
+     The frequency is the ratio of Instinet ECN inside bid counts exceeding inside ask counts. The p-value is
+
+ the probability of observing the inside frequency counts in the week prior to the recommendation change
+
+ given the frequency for the reference week.
+
+
+                                                       45
+                                            Table XVIII
+                            Inside Instinet ECN Counts - Downgrades39
+
+
+
+
+                                                  1999-2000
+
+
+
+                         Begin     End     Press     Total    Frequency      p-value
+                            -5        1      186       327        0.5688
+                           -10       -6      173       327        0.5291       0.0749
+                           -15      -11      181       321        0.5639       0.4110
+                           -20      -16      186       318        0.5849       0.6755
+
+                               0       5       208     334         0.6228      0.9789
+                               6      10       205     334         0.6168      0.9641
+                              11      15       181     333         0.5435      0.1610
+                              16      20       178     333         0.5345      0.0937
+
+
+
+                                                     2001
+
+
+
+                         Begin     End     Press     Total    Frequency      p-value
+                            -5       -1      154       259        0.5946
+                           -10       -6      150       259        0.5792       0.3073
+                           -15      -11      146       259        0.5637       0.1581
+                           -20      -16      168       259        0.6486       0.9658
+
+                               0       5       159     259         0.6139      0.7383
+                               6      10       170     257         0.6615      0.9875
+                              11      15       155     257         0.6031      0.6006
+                              16      20       146     255         0.5725      0.1878
+
+
+
+
+39
+     The frequency is the ratio of Instinet ECN inside ask counts exceeding inside bid counts. The p-value is
+
+ the probability of observing the inside frequency counts in the week prior to the recommendation change
+
+ given the frequency for the reference week.
+
+
+                                                       46
+                                        Table XIX
+                 Abnormal Returns Pre- and Post-Recommendation Change40
+
+
+
+
+          Sample                     5 to 20    -1 to 4    -1 to 20    -1 to -5    -6 to -10     N
+          Upgrades 1999-2000             0.32       5.73        6.11       -0.17        -0.06   327
+          Upgrades 2001                  1.70       5.00        6.99        0.94        -0.16   179
+          Downgrades 1999-2000           1.69      -7.24       -5.23       -1.14        -0.02   327
+          Downgrades 2001                0.86      -5.01       -4.14       -1.16         0.60   259
+
+
+
+
+40
+     The abnormal return is the stock return over the time period listed less the return on the Nasdaq 100
+
+ index.
+
+
+                                                     47
+                                           Table XX
+                              Regression Results Ex-Post Returns41
+
+
+
+
+             Dep. Var.          Constant      R(-1,-5)      ED      PushDum       N      R2
+             Up 1999-2000           4.939        -0.096    0.004         3.290   327   0.041
+                                   (8.47)       (-1.66)   (2.37)        (2.32)
+
+             Up 2001                  4.738      -0.256    -0.001        3.256   179   0.066
+                                     (6.89)     (-2.77)   (-0.44)       (1.91)
+
+             Down 1999-2000          -7.163      -0.150    -0.007        0.035   327   0.021
+                                    (-7.17)     (-1.43)   (-2.18)       (0.01)
+
+             Down 2001               -5.012       0.044    0.000         0.434   259   0.001
+                                    (-6.41)      (0.52)   (0.18)        (0.21)
+
+
+
+
+41
+     The dependent variable is the 5 day abnormal return, relative to the Nasdaq 100 index, from 1 day
+
+ prior to the upgrade to 4 days after. R(−1, −5) is the abnormal return from −5 to −1 days before the
+
+ recommendation change. Excess demand is the net diﬀerence between inside bid and ask appearances in
+
+ the week prior. PushDum is a dummy for market makers with significant patterns of pre-recommendation
+
+ activity.
+
+
+                                                   48
+                                             Table XXI
+                              Profitability Estimates for 1999-200042
+                    Market Maker      Marginal Abnormal Return %         Excess Profits ($mn)
+                    RSSF                                  20.5238                     292.4179
+                    FBCO                                  13.0812                     192.1587
+                    MSCO                                   -0.4189                      79.9783
+                    CIBC                                    6.1482                      65.5510
+                    LEHM                                    6.0789                      64.1398
+                    MONT                                   -2.0767                      44.1134
+                    PWJC                                    1.2739                      32.5183
+                    DBKS                                    2.0400                      27.9919
+                    AGED                                    2.4726                      23.2679
+                    AANA                                    5.8994                      20.7097
+                    NEED                                    1.3740                       9.5520
+                    WBLR                                    1.0208                       5.8297
+                    SNDV                                    2.0126                       2.8218
+                    TWPT                                    0.5002                       2.0518
+                    ADAM                                    0.1522                       1.2954
+                    FACT                                    0.3240                       1.1239
+                    PIPR                                    4.8802                       1.0372
+                    ADVS                                    0.0453                       0.5702
+                    CEUT                                    0.0068                       0.0531
+                    DAIN                                   -0.0103                      -0.0421
+                    JPMS                                    2.5307                      -0.3619
+                    HAMR                                    0.6028                      -0.3849
+                    SASI                                   -0.1103                      -1.7760
+                    LEGG                                   -0.3300                      -3.0309
+                    COWN                                    2.0562                      -3.4683
+                    DLJP                                    5.9276                      -4.2401
+                    BEST                                   -1.4885                      -6.0906
+                    WARR                                   -0.4318                     -27.0480
+                    GSCO                                   -0.8550                     -31.6505
+                    MLCO                                   -2.9027                     -47.1708
+                    PRUS                                  10.5838                      -62.1068
+                    SBSH                                   -5.8617                     -87.7342
+                    Total                                 75.0492                     592.0770
+
+
+
+
+42
+     Marginal abnormal returns are based on the estimates from Table XX for market making excess demand.
+
+ Profitability estimates are computed from market maker inside bid and ask frequencies, daily volumes, and
+
+ 5-day ex-post abnormal returns.
+
+
+                                                    49
+Figure 1: Nasdaq SuperMontage Level II Display
+
+
+
+
+                      50
+
