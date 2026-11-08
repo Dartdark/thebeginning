@@ -2148,3 +2148,20 @@ causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the 
 15:00UTC is a provisional ordinary-session overlap, still requiring authenticated calendars and later fills.
 This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
 rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.
+
+### E09/E19 follow-up — Locked arbitrage cashflow versus future convergence
+
+Aktaş, *The Two Primitives of Spot Market Strategy*, SSRN6736280, May 2026;
+[full review](results/spot_primitives_6736280_review.md),
+[constructed audit](../../analysis/outputs/codex_spot_primitives_6736280/audit.json).
+The source's §5.3 describes pure simultaneous arbitrage as depending on future convergence and bearing widening
+risk before closure. Distinguish a locked executable spread in identical fungible deliverable units from a
+position held for risky convergence. With both legs and delivery assured by assumption, buy ask 99/sell bid 101
+less assumed total cost 0.20 yields 1.80 immediately; no later convergence is required. This is a mathematical
+example, not observed quotes or an available opportunity. The source's narrow single-market premise itself
+excludes this cross-venue case, but its later taxonomy explicitly includes it.
+Practical replication still needs synchronized executable bid/ask, legging/settlement/financing/delivery risks,
+native units and cash/borrow ledgers; correlation or a strategy label supplies none. Source §3.6 already
+acknowledges dividends/coupons: retain income separately from price gain instead of omitting it from accounting.
+Evidence: source reading and constructed checks only; no market-return trial, measured execution savings,
+new data-shopping entry, policy change, arbitrage bot or live change. Existing clock/cashflow controls remain.

@@ -1,0 +1,83 @@
+{
+  "kind": "Source inspection and constructed mathematical/cashflow checks, not historical or empirical alpha evidence",
+  "return_trials": 0,
+  "checks_passed": 10,
+  "checks": [
+    "stationary finite probability law sums to one",
+    "stationary level mean and variance",
+    "positive level autocorrelation with conditional reversion",
+    "level and arithmetic-change correlations differ",
+    "fixed-reference middle does not imply zero expected price change",
+    "illustrative positive risk-premium expectation after assumed costs",
+    "locked two-venue cash spread needs no later price convergence",
+    "total-return income at unchanged price",
+    "nearly perfect return correlation can coexist with nonstationary spread",
+    "growing expected fundamentals do not mechanically force a price gain"
+  ],
+  "source_claims": {
+    "new_empirical_evidence": false,
+    "standalone_backtest": false,
+    "claimed_exhaustive_primitives": [
+      "mean reversion",
+      "momentum"
+    ],
+    "author_acknowledges_yield": true,
+    "ex_ante_regime_algorithm": false
+  },
+  "examples": {
+    "stationary_two_state": {
+      "prices": [
+        99,
+        101
+      ],
+      "stay_probability": 0.9,
+      "level_lag1_correlation": 0.8,
+      "arithmetic_change_lag1_correlation": -0.10000000000000002,
+      "expected_next_price_given101": 100.80000000000001,
+      "scope": "Distinguish levels, changes and horizons; no claim that every reversion strategy has this law"
+    },
+    "fixed_reference": {
+      "entry": 100.0,
+      "reference": 100.0,
+      "up_probability": 0.55,
+      "possible_next_prices": [
+        99,
+        101
+      ],
+      "expected_price_gain": 0.10000000000000853,
+      "assumed_total_cost": 0.02,
+      "expected_net": 0.08000000000000852,
+      "scope": "Assumed one-period priced-risk distribution; not a discovered trading edge"
+    },
+    "simultaneous_arbitrage": {
+      "buy_ask": 99,
+      "sell_bid": 101,
+      "assumed_total_cost": 0.2,
+      "locked_net": 1.8,
+      "scope": "Outside narrow single-venue scope, but corrects the paper's own multi-venue extension; simultaneous execution/settlement assumed"
+    },
+    "income": {
+      "entry": 100,
+      "exit": 100,
+      "cash_income": 5,
+      "total_gain": 5,
+      "scope": "Source already acknowledges income in section3.6; it excludes/relabels it rather than proving it absent"
+    },
+    "correlated_log_random_walks": {
+      "return_correlation": 0.9999500037496877,
+      "spread_variance_at100": 0.01,
+      "spread_variance_at1000": 0.1,
+      "scope": "Correlation alone does not establish cointegration or profitable convergence"
+    },
+    "expected_growth": {
+      "earnings_before": 10,
+      "earnings_after": 12,
+      "price_before": 100,
+      "price_after": 100,
+      "scope": "Hypothetical already-anticipated growth; not a valuation model or company observation"
+    }
+  },
+  "source_pdf_sha256": "d1ad82658ad893f8833af78733ae091c05ed5765a9faed6e20bcce929861db3f",
+  "code_sha256": "9974a6f0abca71e4ac7bfa1438a0fb4ba72dce86696af65e35883f776067a6b4",
+  "decision": "DO NOT TEST: no new complete rule, causal regime classifier or CME evidence; taxonomy is not an alpha hypothesis"
+}
