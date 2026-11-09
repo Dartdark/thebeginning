@@ -5,7 +5,7 @@ github.com/Dartdark/thebeginning (branch `claude/nq-trading-strategy-params-5h9d
 Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history of this brief (up to 2026-10-28) is in
 `archive/brief_history_2026-10.md`; ticked to-dos are in `archive/TODO_done_2026-10.md`.
 
-## Now (2026-11-05; research update 2026-11-08)
+## Now (2026-11-05; research update 2026-11-09)
 
 - **No live accounts.** #1 (10/26), #3 (10/30), #2 and #4 (11/04) all failed. Live replay 10/20-11/04: VB 15/15 trades match the
   backtest, ONB matches bar the known 10/27 miss: execution OK, a losing stretch (~6.5th percentile, ~5 a year;
@@ -68,6 +68,12 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   but time-outs rise 2 -> 16%: holdout pass 43.2% vs 43.4% (D). **User 11/09: the Apex evaluation has a 30-day limit**, so a time-out is a
   lost fee like a fail and the current concentrated set stays. Screen for future evaluation add-ons: mean per unit of variance, low
   correlation with VB / ONB, flat or positive on their stop days.
+- **Late 11/09 (user decisions):** **150K evaluation from the next purchase: VB 20 -> 15 MNQ + Dual Thrust 2 MNQ (DT150)**
+  (`analysis/vb_vs_dt_eval.py`: all starts 38.3 -> 38.9%, 2025-26 starts +4.0%, band +0.5 / +7.5; quarterly check; FUNDED_PLAN + TODO).
+  Stop-day screen / vol gap fade (D), eval-profile screen (only Twin fits), near misses (none). **Personal: ZT continuation EntryZ 1.25
+  at 1 MNQ, IN while watched (WATCHLIST #36)**: user's vol-normalised-Z paste; as coded (EntryZ 2) it barely trades; ablation: engine =
+  vol-scaled EMA distance, earns only on Twin-active days; plateau 1.05-1.30; book median year +$1.4k, DD p95 +$0.2k; MC check pending
+  (`checks/candidates/zt_continuation/`). Rejected: Donchian + LWTI repaste (D, already tested 10/23), Overnight v2 trend + vol sizing (F).
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 
