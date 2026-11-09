@@ -25,13 +25,12 @@ Start > type `winver` > Enter. "Windows Server 2019/2022" -> use the **Server** 
 2. Same page: turn **off** "Get me up to date" (it restarts as soon as possible).
 3. Windows Update > **Pause updates** for 1 week whenever an update is waiting on a weekday; let it install on Saturday.
 
-## 3. A planned restart every Saturday 10:30 CT
-PowerShell as Administrator, one line:
-```
-schtasks /Create /TN "WeeklyRestart" /SC WEEKLY /D SAT /ST 10:30 /TR "shutdown /r /t 120 /c Weekly-restart" /RU SYSTEM /F
-```
-Check it: `schtasks /Query /TN "WeeklyRestart"` shows Next Run Time = next Saturday 10:30.
-All trades are flat by Friday 15:59, so nothing is open on Saturday.
+## 3. ~~A planned restart every Saturday~~ REMOVED (user 2026-11-09: no weekly restart)
+The 'WeeklyRestart' task is deleted by `push_trade_logs.ps1` on its next run. If it can't (the task runs as SYSTEM), the
+reason is in `C:\TradingLogs\push_errors.txt`; then once, PowerShell as Administrator: `schtasks /Delete /TN WeeklyRestart /F`.
+Check: `schtasks /Query /TN "WeeklyRestart"` says the task doesn't exist.
+Without the restart, half-closed MultiCharts copies can pile up: Sunday step 1 below (Task Manager, end leftovers) covers it.
+Windows Update still restarts when it installs (section 2): keep updates paused on weekdays.
 
 ## 4. Sunday before the open (by ~16:30 CT; the Bridge trade enters Sunday 19:00 CT)
 1. Log in to the VPS. Task Manager > Details: no MultiCharts64 / TradingServer / tsServer left over.

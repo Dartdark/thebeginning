@@ -27,6 +27,13 @@ schtasks /Query /TN "VpsWatchdog" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsWatchdog" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /RI 5 /DU 07:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\watchdog.ps1" /F | Out-Null
 }
+# user 2026-11-09: no weekly VPS restart any more -> remove the 'WeeklyRestart' task if it exists (created by hand from
+# VPS_MAINTENANCE.md section 3). If Windows refuses (the task runs as SYSTEM), the failure goes to push_errors.txt.
+schtasks /Query /TN "WeeklyRestart" 2>$null | Out-Null
+if ($LASTEXITCODE -eq 0) {
+    schtasks /Delete /TN "WeeklyRestart" /F 2>&1 | Out-Null
+    if ($LASTEXITCODE -ne 0) { "$(Get-Date) could not delete task WeeklyRestart (needs admin): run as admin: schtasks /Delete /TN WeeklyRestart /F" | Out-File -Append "$Logs\push_errors.txt" }
+}
 # one-time (2026-11-09): FINRA short-volume signal, weekdays 18:00-21:00 CT hourly (live/vps/finra_daily.ps1; idempotent)
 schtasks /Query /TN "FinraDaily" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
