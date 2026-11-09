@@ -110,3 +110,4 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - (2026-11-06, Friday review; Codex eval audit) A fixed dollar-risk stop can exceed the account's remaining cushion:
   three of four failures had the planned ONB stop above room-to-floor. Cap each entry's risk by the live cushion.
 - 2026-11-09: cutting a strategy's 'weak' side because the other side carried 2023+ never helped the books (4 of 4 pieces, `analysis/side_focus_test.py`): the weaker side still earns and smooths the other. Side splits are information; change a side only when it loses money in both periods.
+- 2026-11-09: borrowing a proven filter from one strategy for another strategy's engine failed 4 of 4 (`analysis/ingredient_combos_test.py`): a filter is proven only on its own engine. Combine ingredients only when the mechanism says the filter fixes that engine's failure mode, and expect the placebo to decide.

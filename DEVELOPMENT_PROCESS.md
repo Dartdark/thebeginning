@@ -533,6 +533,11 @@ carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on N
 flow does not predict Twin's morning side; the noise-area longs do better on calm VIX days (post hoc lead), not volatile ones. Next ingredient
 work should look for new mechanisms (other places / times), not move the three engines to other markets.
 
+**Combos (`analysis/ingredient_combos_test.py`, 2026-11-09, pre-registered):** an engine from one piece + a proven filter from another
+(flow z on VB, heavy night on S47, DI on Monday Long, LDF agreement on ES MOC) - none beat random skips (p 0.13-0.90). A filter is
+proven only on its own engine: it encodes that engine's mechanism (Bridge's DI picks Bridge's Sunday-night trend, T's heavy night
+picks an overreaction to fade). Next ingredient work: new engines (new data / places / times), not borrowed filters.
+
 **Round 10: Kusho v9, S47 v2, FC 2B (`analysis/ingredient_ablation10.py`, 2026-11-09, pre-registered; personal-book pieces on forward logs):**
 
 | Piece | Engine | Supporting | Decoration | Notes |
