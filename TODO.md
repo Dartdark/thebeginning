@@ -260,7 +260,7 @@ after 15:59 CT, never with a position open.
       (a) **Ricochet 1144 target 80** (WATCHLIST #35): `checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt`
       ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt)),
       @NQ 5 min, Exchange time, CME 24h, Bar Magnifier 1 min, IOG off, NumContracts 1, 2018 -> now; Claude matches it to python_trades_t80.csv.
-      (b) **S30 IBS with `IbsEntry` 0.10** (WATCHLIST #34): `checks/candidates/s30_ibs/S30_IBS.txt` on @NQ 1 min, Exchange time, 24h,
+      (b) **S30 IBS with `IbsEntry` 0.10** (WATCHLIST #34): `checks/candidates/s30_ibs/S30_IBS.txt` on @NQ **15 min** (the file counts 26 cash bars; 1 min gives 0 trades), back-adjusted continuous, Exchange time, 24h,
       IOG off, `IbsExit` 0.80, ContractQty 1, 2018 -> now (expect ~172 trades).
       (c) **ZT continuation EntryZ 1.25** (WATCHLIST #36): `checks/candidates/zt_continuation/NQ_ZT_Continuation.txt`
       ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/zt_continuation/NQ_ZT_Continuation.txt)),
