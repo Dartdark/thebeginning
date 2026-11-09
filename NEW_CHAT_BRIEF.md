@@ -80,6 +80,11 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   pass 36.3 -> 38.9% (2025+ starts 35.4 -> 41.5%); funded 150K 2y $19,988 -> $20,031 (Twin ~neutral); personal core book median year
   $26.3k -> $32.7k, DD p95 $4.86k -> $5.30k, return/DD 5.42 -> 6.17 (full book $40.5k -> $46.8k). Budget ramp rerun (`analysis/outputs/progress_ramp_output.txt`, same schedule as 11/08): 2027 payouts median $237k -> $296k (75% edge $72k -> $92k), first payout Mar 01 -> Feb 09, P(0 funded by Dec 31) 14 -> 12%. Your ONB ML chart code was pre-v2:
   re-import before funded use.
+- **11/09 night, automation (user: 'nothing manual'; NOT compiled yet):** 150K evaluation finish mode (`UseFinish`, half size from
+  $156k) in the 6 evaluation files; ONE helper per chart `apex_strategies/Apex_Chart_Guard.txt` (replaces logger / monitor /
+  target guard / stop guard, same rows); cushion guard on all 13 funded files; account read from each chart's Auto Trading gear
+  (GetAccountID), peak from VPS files (`live/vps/cushion_peak.ps1`), so no AccountName / PeakSeed typing; FINRA signal from the VPS
+  task FinraDaily (`live/vps/finra_daily.ps1` -> flag files, strategy `UseFlagFiles`); weekly VPS restart task removed.
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 
