@@ -57,4 +57,6 @@ These are source-feasibility lanes, not three approved backtests. Keep the batch
 
 The baseline and source-feasibility intake are completed; **strategy development remains open**. No new strategy return test or promotion occurred in phase A. Next work is the macro panel's no-return source/clock/vintage admission check and a distinct eligible source lane, plus independent verification of the baseline findings. This task file does not claim background execution after a chat ends.
 
+User correction / progress, same day: the price history, macro actual/forecast panel and saved official calendars are already owned. [Reconciliation](results/eval_owned_data_reconciliation_20261109.md) confirms the calendar matches and resolves the payroll clock error in a derived sidecar. Do not request duplicate acquisition; continue validation of forecast/initial-actual vintages and decision-time availability. Source values and return-admission flags remain unchanged.
+
 Reports begin with Summary (at most five lines), identify source/plan/code/input refs, disclose all economic trials and show key results directly in chat. Produce the exact report path for the user to forward to Claude. Never send external messages automatically.

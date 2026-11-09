@@ -525,3 +525,14 @@ were computed and scout budgets/history remain unchanged. **D51 stays NEEDS DATA
 Next: verify a primary first-release/forecast/clock observation and the exact
 SSRN1920401 source version, then audit complete coverage and revisions before
 admission or preregistration. The active evaluation task does not resume a schedule.
+
+**Same-day owned-data reconciliation:** the existing official BLS calendar corroborates
+all 60 design payroll and 60 CPI release dates. All CPI clocks match; 59 payroll clocks
+match. The March 6, 2020 payroll clock is now independently corroborated at 13:30 UTC
+(08:30 EST) by the BLS release header and repaired only in a derived sidecar. All 261
+claims dates match the already saved claims calendar; 249 printed clocks match and
+12 remain unknown. Retail is outside that saved agency-calendar packet. This is
+**data acquired / validation pending**, not a request for duplicate user acquisition.
+Forecast history, original-actual/revision provenance and receipt availability remain
+open; return admission is unchanged. [Reconciliation](results/eval_owned_data_reconciliation_20261109.md),
+[clock sidecar / provenance](inputs/eval_focus_20261109/macro_reconciliation/manifest.json).

@@ -1,0 +1,30 @@
+{
+  "return_tests": 0,
+  "source_macro_sha256": "3000f7da8b2e18be1be316f8b5b4bc9d017302a3d5ad3b117d3f0e9dbe952128",
+  "calendar": {
+    "path": "agents/codex/inputs/scout_acquisition_20261029/fx_calendar/primary_release_calendar_2018_2022.csv",
+    "sha256": "5db0d4ccc1e56c1c3a3c691886c116cd67d8640b009b45209bb226ad3a506771"
+  },
+  "claims": {
+    "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/claims_calendar_2018_2022.csv",
+    "sha256": "c485e085bcf1b2d2903be970f34fb1683b6a8cc3b0e24b93d84e8356a3df5cce"
+  },
+  "source_values_modified": false,
+  "clock_corrections": 1,
+  "return_admitted": false,
+  "remaining": [
+    "pre-release forecast history/provenance",
+    "first-actual vintages and corrections",
+    "publication-to-decision availability",
+    "retail official clock cross-check",
+    "12 claims embargo times"
+  ],
+  "primary_payroll_crosscheck": {
+    "url": "https://www.bls.gov/news.release/archives/empsit_03062020.pdf",
+    "inspected": "page 1, embargo header and headline, 2026-11-09",
+    "printed_clock": "2020-03-06 08:30 EST",
+    "utc": "2020-03-06T13:30:00Z",
+    "payroll_headline_thousands": 273,
+    "caveat": "PDF says reissued September 23, 2020; it is not an original March HTTP/feed receipt."
+  }
+}
