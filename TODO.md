@@ -123,6 +123,11 @@ bottom). Times are Central (CT).
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
       after tax ~3 (5 days/wk) / ~4 (6 days/wk); without tax 4 (5 days) / 4-5 (6 days). Dec 26 pay (3 days): ~2, January starts.
+- [ ] **150K evaluations from the next purchase (user 2026-11-09): Vault Break `NumContracts` 20 -> 15 (other VB inputs unchanged) and a
+      6th chart, Dual Thrust 2 MNQ** (`funded_strategies/NQ_Dual_Thrust.txt`, the same file as the 150K funded chart: 1-minute MNQ, Exchange
+      time = CT, CME 24h session, IOG off, `NumContracts` 2, `HeartbeatTag` DT150 or DT150-<n>). Compile, check 'compiled successfully';
+      Claude adds DT150 to expected_setup.json. Quarterly check in the Friday review: back to VB 20 / no DT if VB 20 wins the last 12 months
+      (FUNDED_PLAN '150K' section, `analysis/vb_vs_dt_eval.py`).
 - [ ] **150K accounts from the next purchase (user 2026-11-08): a 5th chart, Twin Continuation 150K** (`apex_strategies/Twin_Continuation_150K.txt`):
       MNQ 1-minute chart, 24h CME session, Data1 only, Intrabar Order Generation OFF; inputs Qty 2, BO_MaxStopMult 1 (defaults),
       HeartbeatTag TW150 (or TW150-<n> per account); funded accounts also UseCushion true + the cushion inputs (FUNDED_PLAN 'Cushion cap').

@@ -839,6 +839,11 @@ $154,600: Apex's pages, user's screenshots in reports/screenshots/, 2026-10-15).
 - **Evaluation:** the combine set x 2.5 passes 41.6% (2018–22 38.9%, 2023–26 45.4%; x 2 38.7%, x 3 40.7%), vs 50.1% on the
   50K: the 150K target is 2.25x its drawdown (50K 1.5x). Adding Twin cap1 does not help (39–42%).
   Inputs x 2.5: VB 20 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250.
+  **From the next 150K evaluation (user 2026-11-09): VB 20 -> 15 MNQ + Dual Thrust 2 MNQ** (with Twin cap1 2 MNQ, added 11/08):
+  `analysis/vb_vs_dt_eval.py`: all starts 38.3 -> 38.9%, 2025-26 starts +4.0% (band +0.5 / +7.5; the window picked from the user's
+  view that VB is weak lately: VB $49 a trade in 2026 vs DT $117), 2022 -4%, 2024 -3%. Full replacement (VB 0 + DT 8) 33.3%: VB stays
+  the main source of speed. Review each quarter (Friday review): switch back if VB 20 beats it on the latest 12 months.
+  150K evaluation inputs now: VB 15 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250, Twin cap1 2 MNQ, Dual Thrust 2 MNQ.
 - **Funded:** the funded plan x 1.5 with full size from a **$3,000** cushion: $15,731 / $19,743 (1 / 2 years), **blown 0% /
   0%**, all 6 payouts within 2 years 91% (real ladder; the assumed one gave $15,866 / $19,725). Bigger (x 2–3) or a faster cushion blows 9–37%; Twin adds nothing.
   Inputs x 1.5 (whole MNQ, rounded down): VB 4 (`FlaggedContracts` 1), ONB ML $600, Monday 1, EOS $1,050, LDF 3, NFP $750,
