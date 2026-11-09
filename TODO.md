@@ -256,7 +256,7 @@ after 15:59 CT, never with a position open.
 
 ## Swing Target NQ v2 (your file + Codex's test, 2026-10-25: B, personal candidate; not Apex-legal as written)
 
-- [ ] **MultiCharts backtests to run (research, home PC; send each Strategy Performance Report):**
+- [x] **MultiCharts backtests to run (research, home PC; send each Strategy Performance Report):** ALL THREE DONE 2026-11-09 (`analysis/outputs/mc_confirm_3_output.txt`: S30 169/169, ZT 604/604, Ricochet 99.2%)
       (a) **Ricochet 1144 target 80** (WATCHLIST #35): `checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt`
       ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt)),
       @NQ 5 min, Exchange time, CME 24h, Bar Magnifier 1 min, IOG off, NumContracts 1, 2018 -> now; Claude matches it to python_trades_t80.csv.
