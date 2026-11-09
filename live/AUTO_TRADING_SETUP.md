@@ -48,10 +48,10 @@ Sizes per account type (the combine set):
    - 'Stop auto-trading after N rejected orders' = **10**.
 4. **Inputs (Format Signals > Inputs):** sizes from the table in section 1. **Helper (since 2026-11-09): ONE signal per chart,
    `Apex Chart Guard`** (`apex_strategies/Apex_Chart_Guard.txt`; replaces Trade Logger, Chart Monitor, Target Guard and Stop
-   Guard): `Tag` = strategy name + the account suffix, `AccountName` = the account typed exactly, `TargetBalance` 159050 (150K
-   evaluation) / 53050 (50K) / 0 (funded, personal), `StopPoints` only on the Bridge Monday chart (a few ticks wider than its
-   stop), 0 elsewhere. No balance to type each evening: it reads Rithmic. 150K evaluations also: `UseFinish` true and
-   `FinishAccount` in each strategy (finish mode).
+   Guard): `Tag` = strategy name + the account suffix, `AccountName` = the account typed exactly, everything else default
+   (2026-11-09: AUTO from the account in the chart's Auto Trading gear: evaluation or funded, 50K or 150K, from the account
+   name and balance; target guard, finish mode and cushion guard switch themselves on for the right account type). The only
+   per-chart inputs left: the strategy's size inputs, its HeartbeatTag and the guard's `Tag`.
 5. **Symbol Mapping:** `@MNQ -> MNQZ6` (rolls to MNQH7 on 12/10; see TODO).
 6. **Rename each chart window** with the account number (e.g. "#3 VB 30m"), so the four sets can't be confused on screen.
 7. Fill in section 1's register.

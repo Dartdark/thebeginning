@@ -52,12 +52,12 @@ Inputs:
 	EarlyExitTime(1130),
 	NumContracts(1),
 	HeartbeatTag(""),      { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat }
-	UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
+	UseFinish(true),        { 150K EVALUATION finish mode: acts ONLY on Apex evaluation accounts (name APEX-...) of 150K; funded / personal: no effect }
 	FinishAccount(""),      { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
-	FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
+	FinishAt(0),            { 0 = auto: 156000 on a 150K evaluation (start + $6,000); 50K: off (not tested there) }
 	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
 Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ADX30 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
-Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0), FinAcct(""), FinAt(0);   { finish mode }
 
 Variables:
 	EntryBuf(0),
@@ -209,7 +209,9 @@ if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
 		FinRead = GetRTAccountEquity(IffString(FinishAccount <> "", FinishAccount, GetAccountID));
 		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
 	end;
-	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
+	FinAcct = IffString(FinishAccount <> "", FinishAccount, GetAccountID);
+	if FinishAt > 0 then FinAt = FinishAt else if FinEq > 100000 then FinAt = 156000 else FinAt = 0;
+	FinOn = (FinKey = FinKeyNow) and FinAt > 0 and (FinEq >= FinAt) and LeftStr(FinAcct, 5) = "APEX-";
 end;
 
 if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition = 0

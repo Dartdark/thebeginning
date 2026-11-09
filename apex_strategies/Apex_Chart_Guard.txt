@@ -9,7 +9,8 @@
 // Guard. Then auto-trading off / on (starting Flat, outside a trade window), as after any signal change. Inputs:
 //   Tag            the chart's logger tag (VB150-5, ONB150-5, ...: live/expected_setup.json)
 //   AccountName    leave EMPTY: the guard uses the account in this chart's Auto Trading gear (GetAccountID); type it only to override
-//   TargetBalance  EVALUATION charts: 159050 (150K) / 53050 (50K). FUNDED and personal charts: 0 (= off)
+//   TargetBalance  leave -1 = AUTO: Apex evaluation account (APEX-...) -> 159050 (150K) / 53050 (50K) from its balance;
+//                  funded (PA-...) and personal accounts -> off. Type a number only to override (0 = off)
 //   StopPoints     Bridge Monday chart only: a few ticks wider than its stop (as the old Stop Guard). Every other chart: 0
 //   leave the rest at the defaults.
 //
@@ -18,12 +19,12 @@
 //   POS:  strategy position vs the broker's position for this strategy, on every change and every HeartbeatMins
 //   ACCT: account, auto-trading on (1/0), net worth, equity, bar age (s), routed account, every MonitorMins
 
-inputs: Tag("VB-2"), AccountName(""), TargetBalance(0), StopPoints(0), Folder("C:\TradingLogs\"), HeartbeatMins(30),
+inputs: Tag("VB-2"), AccountName(""), TargetBalance(-1), StopPoints(0), Folder("C:\TradingLogs\"), HeartbeatMins(30),
 	MonitorMins(5), EquityHasOpenPL(true), LogHistory(false);
 variables: LastTT(0), LastEntryKey(0), K(0), N(0), EK(0), Live(false), SideTxt(""), Row(""), FileName(""), BarDay(""),
 	StratPos(0), BrokerPos(0), LastStrat(-999), LastBroker(-999), LastHB(-1), MinOfDay(0), HBKey(0),
 	MRoute(""), MNW(0), MEq(0), MAuto(0), MAge(0), MFile(""), MDay(""), MRow(""), MSlot(0), MLastSlot(-1), MMin(0),
-	Tk(0), GEq(0), GBase(0), GNeed(0), GPx(0), AcctUse("");
+	Tk(0), GEq(0), GBase(0), GNeed(0), GPx(0), AcctUse(""), TgtX(0);
 
 // keep calculating when no tick arrives, so a dead feed still produces ACCT rows with a growing bar age (as the Chart Monitor)
 RecalcLastBarAfter(60);
@@ -104,13 +105,18 @@ end;
 // ---------- 4. target guard (was Apex Target Guard v2; EVALUATION charts only, TargetBalance 0 = off) ----------
 // Closes this chart's position the moment the ACCOUNT would reach TargetBalance (balance from Rithmic Equity; other charts'
 // open profit counts while EquityHasOpenPL is true). No equity reading -> no target exit (it never guesses a balance).
-if TargetBalance > 0 and MarketPosition <> 0 and CurrentContracts > 0 and AcctUse <> "" and GetAppInfo(aiRealTimeCalc) = 1 then begin
+if TargetBalance <> 0 and MarketPosition <> 0 and CurrentContracts > 0 and AcctUse <> "" and GetAppInfo(aiRealTimeCalc) = 1 then begin
 	Tk = MinMove / PriceScale;
 	GEq = GetRTAccountEquity(AcctUse);
-	if GEq > 0 then begin
+	TgtX = TargetBalance;
+	if TargetBalance < 0 then begin   { auto (2026-11-09): only Apex evaluation accounts have a target }
+		if LeftStr(AcctUse, 5) <> "APEX-" then TgtX = 0
+		else if GEq > 100000 then TgtX = 159050 else TgtX = 53050;
+	end;
+	if GEq > 0 and TgtX > 0 then begin
 		if EquityHasOpenPL then GBase = GEq - OpenPositionProfit else GBase = GEq;
-		if TargetBalance > GBase then begin
-			GNeed = (TargetBalance - GBase) / (BigPointValue * CurrentContracts);
+		if TgtX > GBase then begin
+			GNeed = (TgtX - GBase) / (BigPointValue * CurrentContracts);
 			if MarketPosition > 0 then begin
 				GPx = IntPortion((AvgEntryPrice + GNeed) / Tk + 0.999999) * Tk;
 				Sell ("Target Guard LX") next bar at GPx limit;
@@ -120,7 +126,7 @@ if TargetBalance > 0 and MarketPosition <> 0 and CurrentContracts > 0 and AcctUs
 				BuyToCover ("Target Guard SX") next bar at GPx limit;
 			end;
 		end
-		else if GBase < TargetBalance * 1.05 then begin   // > 5% above = wrong account / bad data: do nothing
+		else if GBase < TgtX * 1.05 then begin   // > 5% above = wrong account / bad data: do nothing
 			if MarketPosition > 0 then Sell ("Target Guard LM") next bar at market
 			else BuyToCover ("Target Guard SM") next bar at market;
 		end;
