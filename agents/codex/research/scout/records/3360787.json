@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:3360787",
+  "ssrn_id": "3360787",
+  "title": "Is the Supply Curve for Commodity Futures Contracts Upward Sloping?",
+  "authors": [
+    "Lei Yan",
+    "Scott H. Irwin",
+    "Dwight R. Sanders"
+  ],
+  "url": "https://scotthirwin.com/wp-content/uploads/2019/08/yan_irwin_sanders_supply_curve_slope_public.pdf",
+  "aliases": [],
+  "source_version": "Author-hosted58-page February10,2019 draft; later-version parity unverified",
+  "about": "Identifies temporary futures price pressure from annual S&P GSCI reweighting.",
+  "findings": "Authors'24-commodity2004\u201317 event study peaks at59bp abnormal return, then fades; this is not net executable profit.",
+  "mechanism": "Announced changes in index demand meet temporarily inelastic supply.",
+  "build_on": "Conditional watch separate from monthly roll. Require original CPWs, full-universe price denominator, designated maturities and execution clocks; no generic January proxy.",
+  "can_strategy_code_be_made": "Conditional after full source/rules and native input/power/cost gates; no rule run.",
+  "owned_input_mapping": "GC/CL/NG continuous prices alone lack24-market weights/designated legs.2018\u201322 contains only five independent annual event clusters.",
+  "economic_family": "annual-commodity-index-net-weight-rebalance-pressure",
+  "verdict": "needs_data",
+  "full_text_read": false,
+  "reading_scope": "Selected abstract/introduction and Section2, approximately PDFpages10\u201314; Eq3/4 and weight/roll discussion. Remaining paper/appendix not fully reviewed.",
+  "evidence_level": "selected_primary_sections",
+  "summary": "Conditional watch separate from monthly roll. Require original CPWs, full-universe price denominator, designated maturities and execution clocks; no generic January proxy.",
+  "source_artifact": null,
+  "source_sha256": null,
+  "return_eligibility": "NOT_TEST",
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "independent_economic_verification": "not_performed",
+  "updated_at": "2026-11-09T18:47:36.980565+00:00",
+  "cycle_id": "scout-owned-source-20261109",
+  "report_path": "agents/codex/results/scout_owned_source_20261109.md",
+  "access_receipt": "agents/codex/inputs/scout_20261109/access.json",
+  "deeper_investigation": "Conditional watch only. Resume on genuinely new matching inputs/specification; do not repeat unchanged acquisition or spend a return definition now.",
+  "notification": {
+    "actionable": false,
+    "key_created": false
+  }
+}

@@ -2534,3 +2534,34 @@ syntax-only amendment `65de599`, design checkpoint `70e5d0a`. Fifteen definition
 - Next justified use is a separately frozen native implementation/quote-path comparison with real clock, contract,
   fee, closure and floor semantics. The retained standard-NQ fee differs from older micro-equivalent tables;
   never splice means across units/universes. No live execution saving, admission, allocation or VPS/broker change.
+
+### E09/E11/E19 follow-up — Reweighting inputs, causal jumps and price-discovery claims (2026-11-09)
+
+- **Annual net demand differs from a monthly roll.** Selected Section2 of Yan/Irwin/Sanders2019
+  ([author draft](https://scotthirwin.com/wp-content/uploads/2019/08/yan_irwin_sanders_supply_curve_slope_public.pdf),
+  [record3360787](research/scout/records/3360787.json)) distinguishes announced production weights from
+  market dollar weights. Its latter calculation uses the full index price denominator and designated contracts;
+  annual reweighting overlaps a monthly roll, whose two legs have different demand effects. A generic January
+  outright trade or current index weights cannot reproduce that event study. Settlement-time trading is an
+  assumption in the inspected discussion, not an observed fill receipt. Full draft/appendix not reviewed.
+- **Jump removal must match the causal source method.** Selected AppendixA.1 of
+  [Aleti/Bollerslev/Siggaard2025](https://public.econ.duke.edu/~boller/Papers/MS_2025.pdf)
+  ([record4388560](research/scout/records/4388560.json)) uses a rolling ex-ante jump threshold with time-of-day
+  adjustment. Do not misdescribe it as a full-day hindsight classifier. Complete initialization/settings still
+  require full reading, and its stock-factor return panel is absent from futures-only data. Forecast target,
+  tradable ETF and native futures are distinct objects; their costs/rolls cannot be silently interchanged.
+- **Efficient price discovery is not a signed subsequent-return rule.** The inspected
+  [bond-futures opening abstract](https://onlinelibrary.wiley.com/doi/abs/10.1002/fut.22015) and historical
+  [opening-consolidation metadata](research/scout/records/467120.json) describe information/market design.
+  Neither supplies an admitted directional futures trade. Similarly, calendar-spread liquidity observations
+  ([6087367](research/scout/records/6087367.json)) require simultaneous dated legs/books to model execution.
+- **New files retain their own information clocks.** November9 identity checks match13 prior selected raw files,
+  five macro snapshot files and five NQ gzip/original pairs. The NQ timestamp is minute close, not start;
+  UpVol/DownVol are claimed buyer/seller aggregates, not native uptick Volume or trader IDs. The new macro
+  catalog lacks the seven10:00ET release families needed by1920401, and historical forecast/actual receipt
+  vintages remain unresolved. UGL/GLL policy clocks do not supply actual per-date publication/reset execution.
+  [Inventory and exact mapping](inputs/scout_20261109/owned_input_inventory.json).
+- **Status/next check:** supporting source/intake evidence only; zero new return definitions, execution savings
+  or account comparisons. Park conditional watches until new matching inputs arrive. Then reconcile one
+  source event/forecast/leg/clock before coverage, costs, power and preregistration. Continue distinct discovery.
+  [Combined checkpoint](results/scout_owned_source_20261109.md). No live or allocation change.

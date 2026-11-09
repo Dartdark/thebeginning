@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:467120",
+  "ssrn_id": "467120",
+  "title": "Order Consolidation, Price Efficiency, and Extreme Liquidity Shocks",
+  "authors": [
+    "Michael J. Barclay",
+    "Terrence Hendershott",
+    "Charles M. Jones"
+  ],
+  "url": "https://faculty.haas.berkeley.edu/hender/Witching.pdf",
+  "aliases": [],
+  "source_version": "JFQA43(1),2008; DOI10.1017/S0022109000002763; public author PDF located, not opened",
+  "about": "Compares consolidated opening mechanisms under liquidity shocks.",
+  "findings": "Indexed primary abstract reports greater opening efficiency with consolidation, including expiry events. Not signed futures alpha.",
+  "mechanism": "Pooling auction liquidity may reduce transitory opening price errors.",
+  "build_on": "Keep venue/auction implementation context separate from predicting ES returns.",
+  "can_strategy_code_be_made": "Not a directional strategy from inspected metadata; requires stock auction/quote inputs.",
+  "owned_input_mapping": "ES/NQ bars do not reproduce historical stock opening-auction mechanisms or order books.",
+  "economic_family": "stock-opening-auction-consolidation-witching-liquidity",
+  "verdict": "metadata_only",
+  "full_text_read": false,
+  "reading_scope": "Indexed primary abstract; author PDF link discovery only.",
+  "evidence_level": "metadata_only",
+  "summary": "Keep venue/auction implementation context separate from predicting ES returns.",
+  "source_artifact": null,
+  "source_sha256": null,
+  "return_eligibility": "NOT_TEST",
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "independent_economic_verification": "not_performed",
+  "updated_at": "2026-11-09T18:47:36.980565+00:00",
+  "cycle_id": "scout-owned-source-20261109",
+  "report_path": "agents/codex/results/scout_owned_source_20261109.md",
+  "access_receipt": "agents/codex/inputs/scout_20261109/access.json",
+  "deeper_investigation": "Not a priority for further source/trial spending without new independent evidence and source-matched owned inputs.",
+  "notification": {
+    "actionable": false,
+    "key_created": false
+  }
+}

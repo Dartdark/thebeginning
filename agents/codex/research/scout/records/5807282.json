@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:5807282",
+  "ssrn_id": "5807282",
+  "title": "Does overnight return predict the first half-hour return for U.S. market indices?",
+  "authors": [
+    "Yasuhiro Iwanaga",
+    "Ryuta Sakemoto"
+  ],
+  "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5807282",
+  "aliases": [],
+  "source_version": "SSRN posted2025-12-13, revised2026-08-25; NAJEFSeptember2026,102707; DOI10.1016/j.najef.2026.102707; parity unread",
+  "about": "Relates overnight index moves to the next opening half hour.",
+  "findings": "Indexed source reports reversal in SPY, weaker in recent decades and stronger in volatile episodes; no native reproduction.",
+  "mechanism": "Different overnight and daytime clienteles could reverse temporary pressure.",
+  "build_on": "No new trial: prior gap/opening-reversal families and SSRN2730304 retain multiplicity. A new title/window is insufficient.",
+  "can_strategy_code_be_made": "Potentially with full rules, but no new economically distinct source-faithful definition established.",
+  "owned_input_mapping": "ES/NQ clocks overlap, but SPY overnight return and its fill/dividend convention are not automatically native futures returns.",
+  "economic_family": "overnight-to-opening-stock-index-reversal",
+  "verdict": "dont_test",
+  "full_text_read": false,
+  "reading_scope": "Indexed primary abstract/section snippets only.",
+  "evidence_level": "metadata_only",
+  "summary": "No new trial: prior gap/opening-reversal families and SSRN2730304 retain multiplicity. A new title/window is insufficient.",
+  "source_artifact": null,
+  "source_sha256": null,
+  "return_eligibility": "NOT_TEST",
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "independent_economic_verification": "not_performed",
+  "updated_at": "2026-11-09T18:47:36.980565+00:00",
+  "cycle_id": "scout-owned-source-20261109",
+  "report_path": "agents/codex/results/scout_owned_source_20261109.md",
+  "access_receipt": "agents/codex/inputs/scout_20261109/access.json",
+  "deeper_investigation": "Not a priority for further source/trial spending without new independent evidence and source-matched owned inputs.",
+  "notification": {
+    "actionable": false,
+    "key_created": false
+  }
+}

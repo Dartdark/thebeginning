@@ -762,3 +762,28 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   multi-day reversal. No price-sign substitute, ex-post holding-window selection, new return trial or allocation.
   Park and continue discovery. [Record](agents/codex/research/scout/records/1920401.json),
   [source checkpoint](agents/codex/results/scout_owned_source_20261108.md).
+
+  **2026-11-09 intake recheck:** the new15-series macro snapshot contains none of this draft's seven10:00ET
+  release families (consumer confidence, ISM/NAPM, LEI, factory orders, new home sales, construction spending,
+  business inventories). Its08:30actual/forecast rows and JOLTS are not substitutes. Historical forecast/first-actual
+  vintages remain unadmitted. No return test; park and continue. [Exact mapping](agents/codex/inputs/scout_20261109/owned_input_inventory.json).
+
+- [ ] **Annual GSCI net reweighting pressure — conditional personal WATCH, SSRN3360787 (2026-11-09).**
+  Merit: a specific announced-demand mechanism, distinct from monthly front/deferred roll; authors'24-market
+  2004–17event study reports59bp peak abnormal impact that later fades. This is neither net cash profit nor our test.
+  Need full source review, original announced old/new production weights, complete day-zero price denominator,
+  source-designated contracts, publication/trade clocks, delivery/roll costs and a credible power gate. Owned
+  GC/CL/NG continuous bars do not supply those inputs; five design years are only five annual event clusters.
+  Smallest next check only when matching inputs arrive: reconcile one announced reweight to its signed contract
+  demand without returns. No generic January/calendar proxy, rescue of failed roll definitions or Apex hold change.
+  [Record](agents/codex/research/scout/records/3360787.json) · [Checkpoint](agents/codex/results/scout_owned_source_20261109.md).
+
+- [ ] **Intraday factor-zoo market forecast — conditional low-priority WATCH, SSRN4388560 (2026-11-09).**
+  Merit: published implementable ETF market-timing claims after modeled costs, with a cross-sectional slow-price-
+  adjustment mechanism. Authors'net SPY Sharpe1.37/annual six-factor alpha20.83% are unreplicated, not futures profits.
+  Need the exact218-factor intraday panel, full methods/appendix and original market target, causal jump/forecast
+  initialization, matched history, costs and native adaptation/account eligibility. The public supplement was
+  checked, but no dataset payload was acquired; futures bars are not the missing factors. Smallest next check on
+  genuinely new availability: authenticate one factor/date and forecast information clock, then source coverage
+  before any reservation. No ES-only fit or source-free predictor substitute. Park; continue owned-compatible work.
+  [Record](agents/codex/research/scout/records/4388560.json) · [Checkpoint](agents/codex/results/scout_owned_source_20261109.md).

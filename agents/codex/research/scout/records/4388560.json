@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:4388560",
+  "ssrn_id": "4388560",
+  "title": "Intraday Market Return Predictability Culled from the Factor Zoo",
+  "authors": [
+    "Saketh Aleti",
+    "Tim Bollerslev",
+    "Mathias Siggaard"
+  ],
+  "url": "https://public.econ.duke.edu/~boller/Papers/MS_2025.pdf",
+  "aliases": [],
+  "source_version": "Final ManagementScience71(9),7731\u20137751,2025; DOI10.1287/mnsc.2023.01657;21-page author-hosted PDF",
+  "about": "Uses218 high-frequency stock-characteristic factor returns to forecast the aggregate market and trade ETFs.",
+  "findings": "Authors report net SPY Sharpe1.37 and annual six-factor alpha20.83%; unreplicated. Data1996\u20132020 are not our native futures panel.",
+  "mechanism": "Slow adjustment across the stock cross-section may predict market returns.",
+  "build_on": "Conditional watch: obtain exact factors, full methods, original target, costs and causal forecasts before native adaptation. Public supplement lists13parts; no data payload acquired.",
+  "can_strategy_code_be_made": "Feasible only after those inputs/rules are admitted; ES/NQ-only fitting is a different definition.",
+  "owned_input_mapping": "Owned futures bars do not contain the218 stock-factor returns or complete matching2018\u201322/2023+ histories.",
+  "economic_family": "intraday-market-forecast-from-crosssectional-factor-returns",
+  "verdict": "needs_data",
+  "full_text_read": false,
+  "reading_scope": "Selected abstract/data/trading implementation and AppendixA.1 sections only. No complete paper/online appendix review or original PDF bytes acquired.",
+  "evidence_level": "selected_primary_sections",
+  "summary": "Conditional watch: obtain exact factors, full methods, original target, costs and causal forecasts before native adaptation. Public supplement lists13parts; no data payload acquired.",
+  "source_artifact": null,
+  "source_sha256": null,
+  "return_eligibility": "NOT_TEST",
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "independent_economic_verification": "not_performed",
+  "updated_at": "2026-11-09T18:47:36.980565+00:00",
+  "cycle_id": "scout-owned-source-20261109",
+  "report_path": "agents/codex/results/scout_owned_source_20261109.md",
+  "access_receipt": "agents/codex/inputs/scout_20261109/access.json",
+  "deeper_investigation": "Conditional watch only. Resume on genuinely new matching inputs/specification; do not repeat unchanged acquisition or spend a return definition now.",
+  "notification": {
+    "actionable": false,
+    "key_created": false
+  }
+}
