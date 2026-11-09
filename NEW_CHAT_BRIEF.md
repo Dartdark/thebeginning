@@ -38,7 +38,10 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   onb_cushion, vb_cushion_sizing, profit_cap, twin_150k; funded engines keep the PA lock, correct) and 15 plan benches rerun: budget
   ramp 150K pass 38.1 -> 33.4% (75% edge 28.9 -> 24.4%), 2027 median (job ends, 1 a day) $252k -> $237k / $89k -> $72k; P(no funded
   by Dec 31) 14% / 31% unchanged; same-day batch fails together 48 -> 54% (firm_risk); every size / cap / filter ranking unchanged.
-  Not rerun: eval_sizing_bench part C (needs g24_ext), real_fee_bench and replace_weak_bench (need rs_trades.csv), candidate benches.
+  **Rerun 11/09 (after Dot's review): evaluation parts of real_fee_bench and replace_weak_bench (rs_trades.csv regenerated) and
+  eval_sizing_bench part C (g24_ext.pkl linked to g24.pkl, NQ to 11/04): 50K combine pass 50.1 -> 49.0%; every replacement / fee /
+  size ranking unchanged; the live stretch fails at every size (as live). Outputs `real_fee_bench_combine_output.txt`,
+  `replace_weak_bench_combine_output.txt`, `eval_sizing_bench_output.txt`.**
   Still not modelled: DLL fill at the limit, 30-calendar-day clock. (2) held-path gaps: 4% of long-after-green trades, result unchanged.
   (3) Bertola / long-after-green charged commission twice: fixed, reruns saved (verdicts unchanged). (4) green-day filters
   relabelled exploratory.
