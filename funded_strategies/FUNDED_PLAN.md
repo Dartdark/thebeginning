@@ -128,6 +128,12 @@ StartBalance / TrailDD / LockBalance / CushionRef (50K 50000 / 2000 / 50100 / 15
 the threshold is understated; 0 = no entries)**. Default UseCushion false: evaluations and backtests unchanged.
 Live sizing differs from the bench in one way: it reads equity at the signal (other charts' open P&L included), the bench
 at the day's start.
+**2026-11-09 (user: everything automated): all 13 funded charts carry the guard** (added: Bridge Monday, ES MOC, Relative
+Strength, Dual Thrust, Overnight Tick). **No typing:** `AccountName` empty = the account in the chart's Auto Trading gear
+(GetAccountID); **PeakSeed no longer retyped:** the VPS writes `C:\TradingLogs\peak\<account>_<peak>` after every push from the
+Apex Chart Guard's balance rows (`live/vps/cushion_peak.ps1`), and each strategy reads it once a day. Funded chart inputs now:
+`UseCushion` true, StartBalance / TrailDD / LockBalance / CushionRef (150K: 150000 / 4000 / 150100 / 3000; 50K: 50000 / 2000 /
+50100 / 1500), everything else default.
 
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 

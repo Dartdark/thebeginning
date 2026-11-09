@@ -111,10 +111,10 @@ bottom). Times are Central (CT).
       version 2026-11-08); read the Output tab for 'compiled successfully' on each (first compile of `GetRTAccountEquity`
       inside a strategy: if it fails, send Claude the error).
 - [ ] **You:** on every funded chart set the cushion guard inputs (`funded_strategies/FUNDED_PLAN.md`, 'Cushion cap'):
-      UseCushion true, AccountName = the funded account exactly, StartBalance / TrailDD / LockBalance / CushionRef
-      (50K: 50000 / 2000 / 50100 / 1500; 150K: 150000 / 4000 / 150100 / 3000), **PeakSeed = the start balance**.
-- [ ] **You, from then on:** after ANY MultiCharts restart or recompile, retype PeakSeed = the highest end-of-day balance so
-      far on every funded chart (0 = the strategy takes no trades).
+      UseCushion true, StartBalance / TrailDD / LockBalance / CushionRef (50K: 50000 / 2000 / 50100 / 1500; 150K: 150000 /
+      4000 / 150100 / 3000). AccountName and PeakSeed stay EMPTY / 0 (2026-11-09: automatic). All 13 funded files now
+      (Bridge Monday, ES MOC, RS, Dual Thrust, Overnight Tick added; code version 2026-11-09).
+- [x] ~~Retype PeakSeed after restarts~~ automated 2026-11-09 (VPS peak files, `live/vps/cushion_peak.ps1`).
 - [ ] **Claude:** first funded day: check from the logs that each entry's size matches the cushion (balance - threshold)
       and the stop cap; add the account to `FUNDED` in analysis/account_tools.py and to expected_setup.json.
 

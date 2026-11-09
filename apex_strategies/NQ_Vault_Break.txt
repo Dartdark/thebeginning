@@ -49,7 +49,7 @@ Inputs:
 	NumContracts(1),        { 1 for NQ backtests; 10 MNQ = 1 NQ }
 	HeartbeatTag(""),      { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat }
 	UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
-	FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+	FinishAccount(""),      { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
 	FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
 	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
 Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
@@ -165,7 +165,7 @@ FinOn = false;
 if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
 	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
 	if FinKeyNow <> FinKey then begin
-		FinRead = GetRTAccountEquity(FinishAccount);
+		FinRead = GetRTAccountEquity(IffString(FinishAccount <> "", FinishAccount, GetAccountID));
 		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
 	end;
 	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);

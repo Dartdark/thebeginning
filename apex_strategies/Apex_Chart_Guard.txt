@@ -8,7 +8,7 @@
 // chart: Format Signals > remove Apex Trade Logger / Apex Chart Monitor / Apex Target Guard / Apex Stop Guard > Add > Apex Chart
 // Guard. Then auto-trading off / on (starting Flat, outside a trade window), as after any signal change. Inputs:
 //   Tag            the chart's logger tag (VB150-5, ONB150-5, ...: live/expected_setup.json)
-//   AccountName    the Apex account typed exactly (APEX-681524-05 / PA-APEX-...): balance, ACCT rows and the target guard
+//   AccountName    leave EMPTY: the guard uses the account in this chart's Auto Trading gear (GetAccountID); type it only to override
 //   TargetBalance  EVALUATION charts: 159050 (150K) / 53050 (50K). FUNDED and personal charts: 0 (= off)
 //   StopPoints     Bridge Monday chart only: a few ticks wider than its stop (as the old Stop Guard). Every other chart: 0
 //   leave the rest at the defaults.
@@ -23,12 +23,13 @@ inputs: Tag("VB-2"), AccountName(""), TargetBalance(0), StopPoints(0), Folder("C
 variables: LastTT(0), LastEntryKey(0), K(0), N(0), EK(0), Live(false), SideTxt(""), Row(""), FileName(""), BarDay(""),
 	StratPos(0), BrokerPos(0), LastStrat(-999), LastBroker(-999), LastHB(-1), MinOfDay(0), HBKey(0),
 	MRoute(""), MNW(0), MEq(0), MAuto(0), MAge(0), MFile(""), MDay(""), MRow(""), MSlot(0), MLastSlot(-1), MMin(0),
-	Tk(0), GEq(0), GBase(0), GNeed(0), GPx(0);
+	Tk(0), GEq(0), GBase(0), GNeed(0), GPx(0), AcctUse("");
 
 // keep calculating when no tick arrives, so a dead feed still produces ACCT rows with a growing bar age (as the Chart Monitor)
 RecalcLastBarAfter(60);
 
 Live = LogHistory or GetAppInfo(aiRealTimeCalc) = 1;
+AcctUse = IffString(AccountName <> "", AccountName, GetAccountID);   { the gear's account unless typed }
 BarDay = NumToStr(Date + 19000000, 0);
 FileName = Folder + BarDay + ".csv";
 
@@ -83,18 +84,18 @@ if GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
 	if MSlot <> MLastSlot then begin
 		MLastSlot = MSlot;
 		MRoute = GetAccountID;
-		if AccountName = "" then begin
+		if AcctUse = "" then begin
 			MNW = 0; MEq = 0;
 		end
 		else begin
-			MNW = GetRTAccountNetWorth(AccountName);
-			MEq = GetRTAccountEquity(AccountName);
+			MNW = GetRTAccountNetWorth(AcctUse);
+			MEq = GetRTAccountEquity(AcctUse);
 		end;
 		MAuto = GetAppInfo(aiStrategyAuto);
 		MAge = (ComputerDateTime - DateTime) * 86400;
 		MDay = NumToStr(CurrentDate + 19000000, 0);
 		MFile = Folder + MDay + ".csv";
-		MRow = "ACCT," + Tag + "," + GetSymbolName + "," + AccountName + "," + NumToStr(MAuto, 0) + "," + NumToStr(MNW, 2) + ","
+		MRow = "ACCT," + Tag + "," + GetSymbolName + "," + AcctUse + "," + NumToStr(MAuto, 0) + "," + NumToStr(MNW, 2) + ","
 			+ NumToStr(MEq, 2) + "," + NumToStr(MAge, 0) + "," + MRoute + ",,,," + MDay + "," + NumToStr(CurrentTime, 0);
 		FileAppend(MFile, MRow + NewLine);
 	end;
@@ -103,9 +104,9 @@ end;
 // ---------- 4. target guard (was Apex Target Guard v2; EVALUATION charts only, TargetBalance 0 = off) ----------
 // Closes this chart's position the moment the ACCOUNT would reach TargetBalance (balance from Rithmic Equity; other charts'
 // open profit counts while EquityHasOpenPL is true). No equity reading -> no target exit (it never guesses a balance).
-if TargetBalance > 0 and MarketPosition <> 0 and CurrentContracts > 0 and AccountName <> "" and GetAppInfo(aiRealTimeCalc) = 1 then begin
+if TargetBalance > 0 and MarketPosition <> 0 and CurrentContracts > 0 and AcctUse <> "" and GetAppInfo(aiRealTimeCalc) = 1 then begin
 	Tk = MinMove / PriceScale;
-	GEq = GetRTAccountEquity(AccountName);
+	GEq = GetRTAccountEquity(AcctUse);
 	if GEq > 0 then begin
 		if EquityHasOpenPL then GBase = GEq - OpenPositionProfit else GBase = GEq;
 		if TargetBalance > GBase then begin

@@ -39,6 +39,8 @@ schtasks /Query /TN "FinraDaily" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "FinraDaily" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 18:00 /RI 60 /DU 03:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\finra_daily.ps1" /F | Out-Null
 }
+# cushion peak files for the funded cushion guard (2026-11-09; every push, so a new account's file appears within 30 min)
+& powershell -ExecutionPolicy Bypass -File "$Repo\live\vps\cushion_peak.ps1"
 # alerts the watchdog sent today go to the repo too (live/health/YYYYMMDD_alerts.txt)
 if (Test-Path "$Logs\alerts.txt") { Get-Content "$Logs\alerts.txt" | Where-Object { $_ -like "$((Get-Date).ToString('yyyy-MM-dd'))*" } | Set-Content "live\health\$(Get-Date -Format yyyyMMdd)_alerts.txt" }
 

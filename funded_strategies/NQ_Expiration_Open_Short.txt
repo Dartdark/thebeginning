@@ -63,10 +63,11 @@ Inputs:
 	CushionRef(1500),       { full size from this cushion (50K 1500 / 150K 3000) }
 	CushionMin(0.5),        { size floor of the cushion sizing }
 	UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
-	FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+	FinishAccount(""),      { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
 	FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
 	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
 Variables: CE(0), CEPrev(0), CK(0), CKLast(0), PeakEOD(0), Thr(0), Cush(0), CF(0);   { cushion guard }
+Variables: PeakAuto(0), PKey(0), PKeyLast(0), PAcct(""), PkI(0), PkFound(0);   { peak file (2026-11-09) }
 Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
 Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
 
@@ -150,7 +151,7 @@ FinOn = false;
 if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
 	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
 	if FinKeyNow <> FinKey then begin
-		FinRead = GetRTAccountEquity(FinishAccount);
+		FinRead = GetRTAccountEquity(IffString(FinishAccount <> "", FinishAccount, GetAccountID));
 		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
 	end;
 	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
@@ -165,10 +166,10 @@ if IsExpiration and Time = EntryBarTime and MarketPosition = 0 and TradedToday =
 	{ cushion guard (2026-11-08): size by the cushion above Apex's threshold, and never risk more than the cushion at the
 	  stop. Real time only (backtests unchanged). Equity missing or PeakSeed 0 -> no entry. }
 	if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 then begin
-		CE = GetRTAccountEquity(AccountName);
-		Thr = MinList(LockBalance, MaxList(PeakEOD, StartBalance, PeakSeed) - TrailDD);
+		CE = GetRTAccountEquity(IffString(AccountName <> "", AccountName, GetAccountID));
+		Thr = MinList(LockBalance, MaxList(PeakEOD, StartBalance, PeakSeed, PeakAuto) - TrailDD);
 		Cush = CE - Thr;
-		if CE <= 0 or Cush <= 0 or PeakSeed <= 0 then Qty = 0
+		if CE <= 0 or Cush <= 0 or (PeakSeed <= 0 and PeakAuto <= 0) then Qty = 0
 		else begin
 			CF = MinList(1, MaxList(CushionMin, Cush / CushionRef));
 			Qty = Floor(Qty * CF + 0.000001);
@@ -210,10 +211,26 @@ if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then
 	end;
 end;
 
+{ Peak from the VPS (2026-11-09, user: no retyping): each day after the close the VPS writes C:\TradingLogs\peak\<account>_<the
+  highest end-of-day balance so far, rounded UP to $100, capped at LockBalance + TrailDD> (live/vps/cushion_peak.ps1). Read once
+  per trading day here, so PeakSeed no longer needs retyping after a restart (PeakSeed > 0 still overrides upwards). No file
+  (and PeakSeed 0) = no entries, as before. Real time only. }
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then PKey = Date + 1 else PKey = Date;
+	PAcct = IffString(AccountName <> "", AccountName, GetAccountID);
+	if PKey <> PKeyLast and PAcct <> "" then begin      { until found today: a new account's file can appear during the day }
+		PkFound = 0;
+		for PkI = Ceiling((LockBalance + TrailDD) / 100) downto Floor(StartBalance / 100) begin
+			if PkFound = 0 and GetFileAttributesA("C:\TradingLogs\peak\" + PAcct + "_" + NumToStr(PkI * 100, 0)) <> -1 then PkFound = PkI * 100;
+		end;
+		if PkFound > 0 then begin PeakAuto = MaxList(PeakAuto, PkFound); PKeyLast = PKey; end;
+	end;
+end;
+
 // Cushion guard tracker (2026-11-08): the highest END-OF-DAY account equity (Apex trails the threshold on it). The day
 // rolls at 16:00 CT; the last equity read before the roll is that day's close. Real time only. Log only: no orders.
 if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 then begin
-	CE = GetRTAccountEquity(AccountName);
+	CE = GetRTAccountEquity(IffString(AccountName <> "", AccountName, GetAccountID));
 	if Time >= 1600 then CK = Date + 1 else CK = Date;
 	if CE > 0 then begin
 		if CKLast <> 0 and CK <> CKLast and CEPrev > 0 then PeakEOD = MaxList(PeakEOD, CEPrev);
