@@ -262,6 +262,10 @@ after 15:59 CT, never with a position open.
       @NQ 5 min, Exchange time, CME 24h, Bar Magnifier 1 min, IOG off, NumContracts 1, 2018 -> now; Claude matches it to python_trades_t80.csv.
       (b) **S30 IBS with `IbsEntry` 0.10** (WATCHLIST #34): `checks/candidates/s30_ibs/S30_IBS.txt` on @NQ 1 min, Exchange time, 24h,
       IOG off, `IbsExit` 0.80, ContractQty 1, 2018 -> now (expect ~172 trades).
+      (c) **ZT continuation EntryZ 1.25** (WATCHLIST #36): `checks/candidates/zt_continuation/NQ_ZT_Continuation.txt`
+      ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/zt_continuation/NQ_ZT_Continuation.txt)),
+      @NQ 15 min, Exchange time, CME 24h, IOG off, 1 contract, 2017-06 -> now (warm-up; expect ~600 trades from 2018); Claude matches it to python_trades_z125.csv.
+- [ ] **Personal account (when it starts): ZT continuation at 1 MNQ** (user 2026-11-09; watched, WATCHLIST #36): `NQ_ZT_Continuation.txt` on 15-min MNQ, Exchange time, 24h, IOG off, defaults as in the file (EntryZ 1.25, 08:35-14:45). No more than 1 MNQ (corr 0.41 with the book).
 - [ ] **Personal account (when it starts): Overnight Tick / VIX at 2 MNQ** (contracts input 1 -> 2; user 2026-11-08). Same chart and code as now.
 - [ ] **Personal account (when it starts): PAPERTREND v2 at `Qty` 1** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/papertrend/PAPERTREND_v2_claude.txt)), 5-min MNQ, Exchange time, IOG off, `StopATRMult` 2, logger tag `PT`.
 - [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).

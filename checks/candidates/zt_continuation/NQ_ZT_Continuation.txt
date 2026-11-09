@@ -1,0 +1,93 @@
+// ZT continuation (user's paste 2026-11-09), personal plan at 1 MNQ while watched (WATCHLIST #36).
+// Defaults set to the tested version: EntryZ 1.25, SignalMode 1 (continuation), UseTimeFilter true, 08:35-14:45 CT.
+// Chart: @NQ (or MNQ) 15 min, Exchange time (CT), CME 24h session, IOG off. Logic unchanged from the paste.
+Inputs:
+    Price(Close),
+    MeanLength(32),
+    VolatilityLength(32),
+    EntryZ(1.25),
+    SignalMode(1),
+    ExitZ(0.25),
+    StopZ(4.00),
+    MaxHoldingBars(8),
+    TrendMode(0),
+    TrendLength(64),
+    UseTimeFilter(True),
+    StartTime(0835),
+    EndTime(1445);
+
+Vars:
+    MeanPrice(0),
+    ReturnPct(0),
+    RealizedVol(0),
+    PriceVol(0),
+    ZT(0),
+    TrendPrice(0),
+    TrendUp(False),
+    TrendDown(False),
+    InTradeWindow(False),
+    AllowLong(False),
+    AllowShort(False),
+    RequiredBars(0);
+
+RequiredBars = MaxList(MeanLength, VolatilityLength, TrendLength) + 1;
+
+If StartTime <= EndTime then
+    InTradeWindow = Time >= StartTime and Time <= EndTime
+else
+    InTradeWindow = Time >= StartTime or Time <= EndTime;
+
+If CurrentBar > RequiredBars then begin
+    MeanPrice = XAverage(Price, MeanLength);
+    ReturnPct = Price / Price[1] - 1;
+    RealizedVol = StandardDev(ReturnPct, VolatilityLength, 1);
+    PriceVol = Price * RealizedVol * SquareRoot(MeanLength);
+
+    If PriceVol > 0 then
+        ZT = (Price - MeanPrice) / PriceVol
+    else
+        ZT = 0;
+
+    TrendPrice = XAverage(Price, TrendLength);
+    TrendUp = Price > TrendPrice;
+    TrendDown = Price < TrendPrice;
+
+    AllowLong = TrendMode = 0 or
+                (TrendMode = 1 and TrendUp) or
+                (TrendMode = 2 and not TrendUp);
+    AllowShort = TrendMode = 0 or
+                 (TrendMode = 1 and TrendDown) or
+                 (TrendMode = 2 and not TrendDown);
+
+    If MarketPosition = 0 and (not UseTimeFilter or InTradeWindow) then begin
+        If SignalMode = 0 then begin
+            If ZT <= -EntryZ and AllowLong then
+                Buy ("LE_ZFade") next bar at market;
+
+            If ZT >= EntryZ and AllowShort then
+                Sell Short ("SE_ZFade") next bar at market;
+        end
+        else begin
+            If ZT >= EntryZ and AllowLong then
+                Buy ("LE_ZContinuation") next bar at market;
+
+            If ZT <= -EntryZ and AllowShort then
+                Sell Short ("SE_ZContinuation") next bar at market;
+        end;
+    end;
+
+    If MarketPosition = 1 then begin
+        If AbsValue(ZT) <= ExitZ or ZT <= -StopZ or
+           BarsSinceEntry(0) >= MaxHoldingBars or
+           (UseTimeFilter and not InTradeWindow) then
+            Sell ("LX_ZFade") next bar at market;
+    end;
+
+    If MarketPosition = -1 then begin
+        If AbsValue(ZT) <= ExitZ or ZT >= StopZ or
+           BarsSinceEntry(0) >= MaxHoldingBars or
+           (UseTimeFilter and not InTradeWindow) then
+            BuyToCover ("SX_ZFade") next bar at market;
+    end;
+
+end;
