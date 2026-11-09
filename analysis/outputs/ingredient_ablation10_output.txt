@@ -1,0 +1,38 @@
+[provenance] code 3506447c dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Ingredient ablation, round 10 (user 2026-11-09: 'second batch'): Kusho v9, S47 v2, FC 2B, the personal-book pieces still on their
+
+1. Kusho v9:
+   as is (v9)                                     n  3175 $  109 t  5.32 PF 1.37 total $  345k maxDD $18.1k | 2018-22 $ 108 (t  4.5) 2023+ $ 109 (t  3.1) | worst $-3,837
+   split: v9 longs                                n  2718 $  100 t  4.68 PF 1.35 total $  272k maxDD $15.6k | 2018-22 $  95 (t  3.9) 2023+ $ 106 (t  2.8) | worst $-3,837
+   split: v9 shorts (DOWN days)                   n   457 $  160 t  2.55 PF 1.49 total $   73k maxDD $15.1k | 2018-22 $ 175 (t  2.2) 2023+ $ 130 (t  1.3) | worst $-2,512
+   longs only (FAR, no shorts)                    n  2743 $   98 t  4.63 PF 1.35 total $  269k maxDD $15.6k | 2018-22 $  93 (t  3.8) 2023+ $ 104 (t  2.8) | worst $-3,837
+   no wick filter                                 n  3928 $   91 t  4.71 PF 1.27 total $  358k maxDD $26.6k | 2018-22 $  93 (t  3.9) 2023+ $  89 (t  2.8) | worst $-4,732
+   no EMA filter                                  n  5311 $   57 t  4.07 PF 1.21 total $  300k maxDD $32.3k | 2018-22 $  71 (t  4.3) 2023+ $  37 (t  1.5) | worst $-3,837
+   flat by 15:45 (no overnight / weekend hold)    n  3175 $   91 t  4.82 PF 1.33 total $  290k maxDD $18.4k | 2018-22 $  89 (t  3.9) 2023+ $  95 (t  2.9) | worst $-3,837
+   random entries, same rate (p 0.067)            n  2022 $    4 t  0.17 PF 1.01 total $    7k maxDD $61.5k | 2018-22 $  46 (t  1.8) 2023+ $ -49 (t -1.4) | worst $-4,447
+
+2. S47 v2:
+   as is (v2)                                     n   721 $  347 t  4.10 PF 1.51 total $  250k maxDD $15.7k | 2018-22 $ 364 (t  3.5) 2023+ $ 326 (t  2.3) | worst $-4,612
+   split: longs                                   n   385 $  259 t  2.36 PF 1.38 total $  100k maxDD $12.7k | 2018-22 $ 324 (t  2.3) 2023+ $ 183 (t  1.1) | worst $-4,612
+   split: shorts                                  n   336 $  447 t  3.42 PF 1.64 total $  150k maxDD $23.5k | 2018-22 $ 409 (t  2.7) 2023+ $ 494 (t  2.2) | worst $-4,322
+   v1 (no 09:30 confirmation)                     n  1434 $  228 t  3.89 PF 1.32 total $  327k maxDD $36.5k | 2018-22 $ 267 (t  3.8) 2023+ $ 177 (t  1.8) | worst $-4,772
+   New York only (no London signal)               n  2159 $  114 t  2.46 PF 1.15 total $  246k maxDD $64.4k | 2018-22 $ 130 (t  2.5) 2023+ $  93 (t  1.1) | worst $-4,672
+   threshold 0                                    n  1084 $  246 t  3.59 PF 1.34 total $  267k maxDD $23.4k | 2018-22 $ 217 (t  2.8) 2023+ $ 280 (t  2.4) | worst $-4,657
+   threshold 0.125                                n   424 $  346 t  3.13 PF 1.50 total $  147k maxDD $24.0k | 2018-22 $ 340 (t  2.6) 2023+ $ 353 (t  1.9) | worst $-4,612
+   stop 0.25                                      n   721 $  220 t  3.17 PF 1.42 total $  158k maxDD $16.8k | 2018-22 $ 205 (t  2.5) 2023+ $ 237 (t  2.1) | worst $-2,362
+   stop 1.0                                       n   721 $  382 t  3.52 PF 1.48 total $  276k maxDD $24.3k | 2018-22 $ 336 (t  2.9) 2023+ $ 438 (t  2.3) | worst $-7,247
+   no stop                                        n   721 $  398 t  3.35 PF 1.49 total $  287k maxDD $30.2k | 2018-22 $ 309 (t  2.4) 2023+ $ 505 (t  2.4) | worst $-20,902
+   fade instead                                   n   721 $ -252 t -2.89 PF 0.74 total $ -181k maxDD $208.3k | 2018-22 $-210 (t -2.3) 2023+ $-301 (t -1.9) | worst $-4,812
+
+3. FC 2B (v1 rebuild):
+   as is                                          n   769 $  255 t  3.74 PF 1.46 total $  196k maxDD $16.7k | 2018-22 $ 288 (t  3.6) 2023+ $ 209 (t  1.8) | worst $-3,852
+   split: longs                                   n   380 $  284 t  3.03 PF 1.53 total $  108k maxDD $15.2k | 2018-22 $ 254 (t  2.4) 2023+ $ 325 (t  1.9) | worst $-2,407
+   split: shorts                                  n   389 $  226 t  2.29 PF 1.40 total $   88k maxDD $21.6k | 2018-22 $ 323 (t  2.7) 2023+ $ 100 (t  0.6) | worst $-3,852
+   no flow filter (every drive day)               n  2277 $  116 t  2.95 PF 1.19 total $  264k maxDD $34.1k | 2018-22 $ 119 (t  2.5) 2023+ $ 112 (t  1.7) | worst $-3,852
+   z >= 0.5                                       n  1440 $  208 t  4.20 PF 1.37 total $  300k maxDD $32.2k | 2018-22 $ 220 (t  3.7) 2023+ $ 192 (t  2.3) | worst $-3,852
+   z >= 1.5                                       n   344 $  244 t  2.42 PF 1.46 total $   84k maxDD $22.7k | 2018-22 $ 323 (t  2.8) 2023+ $ 143 (t  0.8) | worst $-3,852
+   opposite side                                  n   769 $ -220 t -3.33 PF 0.71 total $ -169k maxDD $170.8k | 2018-22 $-247 (t -3.2) 2023+ $-183 (t -1.6) | worst $-3,102
+   no trail                                       n   769 $  227 t  3.33 PF 1.41 total $  174k maxDD $19.2k | 2018-22 $ 288 (t  3.6) 2023+ $ 144 (t  1.2) | worst $-3,852
+   no break-even                                  n   769 $  267 t  3.68 PF 1.41 total $  205k maxDD $19.5k | 2018-22 $ 296 (t  3.5) 2023+ $ 228 (t  1.8) | worst $-3,852
+   stop 50                                        n   769 $  193 t  3.86 PF 1.59 total $  149k maxDD $18.4k | 2018-22 $ 285 (t  4.4) 2023+ $  70 (t  0.9) | worst $-3,852
+   stop 150                                       n   769 $  263 t  3.52 PF 1.40 total $  202k maxDD $26.6k | 2018-22 $ 318 (t  3.7) 2023+ $ 188 (t  1.4) | worst $-3,852

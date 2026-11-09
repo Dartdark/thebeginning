@@ -533,6 +533,17 @@ carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on N
 flow does not predict Twin's morning side; the noise-area longs do better on calm VIX days (post hoc lead), not volatile ones. Next ingredient
 work should look for new mechanisms (other places / times), not move the three engines to other markets.
 
+**Round 10: Kusho v9, S47 v2, FC 2B (`analysis/ingredient_ablation10.py`, 2026-11-09, pre-registered; personal-book pieces on forward logs):**
+
+| Piece | Engine | Supporting | Decoration | Notes |
+|---|---|---|---|---|
+| Kusho v9 ($109, t 5.32, 3,175 trades) | the strong 15-min up-bar entry (random entries at the same rate $4) | EMA50 filter (none: $57, 2023+ $37); small-wick filter (none: $91, DD $18k -> $27k); overnight / weekend hold (flat by 15:45: $91); DOWN-day shorts ($160 a trade) | - | robust in both periods ($108 / $109) |
+| S47 v2 ($347, t 4.10) | the London-open impulse (New York only: $114; fade: -$252) | the 09:30 confirmation (v1: $228, DD $16k -> $37k); stop 0.5 x overnight ATR (0.25: $220; none: worst -$20.9k) | - | shorts carry 2023+ ($494 vs longs $183) |
+| FC 2B ($255, t 3.74; v1 rebuild) | the flow z filter on the opening drive (no filter: $116; opposite: -$220) | the 150-point trail (none: 2023+ $144 vs $209) | break-even (none: $267, t 3.68) | shorts faded since 2023 ($100); z >= 0.5: t 4.20, total $300k vs $196k but $ a trade lower in both periods |
+
+Every version held up; no variant beats its current version on t AND both periods, so nothing changes. Leads: S47 shorts,
+FC 2B longs (both 'one side carries 2023+'), FC 2B z >= 0.5 as a capital-bench idea (more trades, higher t, lower $ a trade).
+
 **Round 9: Bridge Monday, ES MOC, T fade (`analysis/ingredient_ablation9.py`, 2026-11-09, pre-registered; rebuilds 218 / 202 / 376 vs MC 217 / 199 / 348):**
 
 | Piece | Engine | Supporting | Decoration | Notes |
