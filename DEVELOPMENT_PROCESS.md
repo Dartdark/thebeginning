@@ -533,6 +533,17 @@ carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on N
 flow does not predict Twin's morning side; the noise-area longs do better on calm VIX days (post hoc lead), not volatile ones. Next ingredient
 work should look for new mechanisms (other places / times), not move the three engines to other markets.
 
+**Round 9: Bridge Monday, ES MOC, T fade (`analysis/ingredient_ablation9.py`, 2026-11-09, pre-registered; rebuilds 218 / 202 / 376 vs MC 217 / 199 / 348):**
+
+| Piece | Engine | Supporting | Decoration | Notes |
+|---|---|---|---|---|
+| Bridge Monday Long ($560, t 4.44) | Monday (Tue -$137, Wed $157, Thu $169, Fri -$155) | DI+ > DI- (no filter: 2018-22 $121, 2023+ $742); the Sunday 19:00 entry (Monday 08:30: $419); target 100 (no target $779 but t 3.72, DD $18k) | the ADX 10-50 range (DI only $537, t 4.40) | 2023+ every Monday works (regime) |
+| ES MOC Follow ($158, t 3.47) | following a >= 0.3 ATR 14:00-14:50 move into the 15:00 cash close (fade -$150 t -3.5; every day -$13) | stop 0.25 (no stop $142); exit exactly 15:00 (14:55 $36, 15:15 $90) | - | 2023+ $99 (t 1.2): longs hold ($212, t 1.9), shorts faded ($34); same rule on NQ $255 but 2023+ $38 |
+| T fade ($221, t 3.39) | fading a HEAVY night (every night $20; quiet nights -$20; follow -$222) | stop 0.40 (none $187, worst -$7k); entry 08:29:00 before the bell (at the bell $171); exit ~08:44 (09:00 $189, 09:30 $145) | - | out 08:40 $234 t 3.81 but 2023+ lower ($243 vs $281): fails the two-bar rule |
+
+Every live version held up; no variant beats its current version on t AND both periods (two-bar rule), so nothing changes.
+Leads: ES MOC longs only (shorts flat since 2023; watch #20).
+
 **Round 8: ZT continuation (`analysis/zt_ablation.py` + `analysis/zt_plateau.py`, 2026-11-09; base 15-min, EntryZ 1, Apex window, $148 t 3.03):**
 engine = the vol-normalised distance from the 32-EMA (points from the EMA instead: $10, t 0.2; ATR denominator ~same, t 2.6), and it is
 Twin's engine (base trades on Twin-active days $343 t 5.6, on Twin-flat days −$194 t −2.5). Supporting: the |ZT| ≤ 0.25 exit (without
