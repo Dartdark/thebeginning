@@ -46,8 +46,12 @@ Sizes per account type (the combine set):
    - Mode **AA** (automated, asynchronous). **Initial position: Flat.** **No automatic position synchronisation.**
    - Intra-bar order generation **off** (unless the strategy file says otherwise).
    - 'Stop auto-trading after N rejected orders' = **10**.
-4. **Inputs (Format Signals > Inputs):** sizes from the table in section 1; Target Guard `StartBalance` = the Apex balance
-   today, `TargetBalance` 53050 (50K) / 159050 (150K); Trade Logger `Tag` = strategy name + the account suffix.
+4. **Inputs (Format Signals > Inputs):** sizes from the table in section 1. **Helper (since 2026-11-09): ONE signal per chart,
+   `Apex Chart Guard`** (`apex_strategies/Apex_Chart_Guard.txt`; replaces Trade Logger, Chart Monitor, Target Guard and Stop
+   Guard): `Tag` = strategy name + the account suffix, `AccountName` = the account typed exactly, `TargetBalance` 159050 (150K
+   evaluation) / 53050 (50K) / 0 (funded, personal), `StopPoints` only on the Bridge Monday chart (a few ticks wider than its
+   stop), 0 elsewhere. No balance to type each evening: it reads Rithmic. 150K evaluations also: `UseFinish` true and
+   `FinishAccount` in each strategy (finish mode).
 5. **Symbol Mapping:** `@MNQ -> MNQZ6` (rolls to MNQH7 on 12/10; see TODO).
 6. **Rename each chart window** with the account number (e.g. "#3 VB 30m"), so the four sets can't be confused on screen.
 7. Fill in section 1's register.
@@ -76,7 +80,7 @@ Then click **AA** (it turns green). If MultiCharts asks about the current positi
 
 - [ ] Accounts tab: every live account connected, Last Update current; balances as expected.
 - [ ] Open Positions: only positions the plan explains (e.g. Bridge long on Monday morning, ONB overnight).
-- [ ] Each chart's AA green, logger and Target Guard on it; Target Guard `StartBalance` = today's Apex balance.
+- [ ] Each chart's AA green, with its strategy and one Apex Chart Guard on it (nothing to type daily).
 - [ ] A failed or paused account: AA **off** on all of its charts.
 
 ---

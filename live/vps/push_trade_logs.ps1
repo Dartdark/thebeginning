@@ -27,6 +27,11 @@ schtasks /Query /TN "VpsWatchdog" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsWatchdog" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /RI 5 /DU 07:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\watchdog.ps1" /F | Out-Null
 }
+# one-time (2026-11-09): FINRA short-volume signal, weekdays 18:00-21:00 CT hourly (live/vps/finra_daily.ps1; idempotent)
+schtasks /Query /TN "FinraDaily" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "FinraDaily" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 18:00 /RI 60 /DU 03:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\finra_daily.ps1" /F | Out-Null
+}
 # alerts the watchdog sent today go to the repo too (live/health/YYYYMMDD_alerts.txt)
 if (Test-Path "$Logs\alerts.txt") { Get-Content "$Logs\alerts.txt" | Where-Object { $_ -like "$((Get-Date).ToString('yyyy-MM-dd'))*" } | Set-Content "live\health\$(Get-Date -Format yyyyMMdd)_alerts.txt" }
 
@@ -63,7 +68,10 @@ Copy-Item "$Logs\*.csv" "live\trades\" -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force "$Logs\bars" | Out-Null
 New-Item -ItemType Directory -Force "data\live_bars" | Out-Null
 Copy-Item "$Logs\bars\*.csv" "data\live_bars\" -Force -ErrorAction SilentlyContinue
-git add live/trades live/health data/live_bars
+# FINRA signal log (2026-11-09) -> live/finra/ (Claude follows WATCHLIST #32's forward log from it)
+New-Item -ItemType Directory -Force "live\finra" | Out-Null
+if (Test-Path "$Logs\finra\signals.csv") { Copy-Item "$Logs\finra\signals.csv" "live\finra\signals.csv" -Force }
+git add live/trades live/health data/live_bars live/finra
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     git commit -m "live trades + health $(Get-Date -Format yyyy-MM-dd) ($Mode)"

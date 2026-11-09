@@ -38,17 +38,28 @@ code = f"""{{ NQ FINRA Short-Volume Longs - RESEARCH / BACKTEST file (personal-a
   $7.25 per round trip (or $3.63 per side) + 1 tick slippage per side. Expected python trade list:
   checks/candidates/finra_longs/python_trades.csv (date, net per NQ after costs). Send the MultiCharts report for a trade-by-trade match. }}
 
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+
+{{ LIVE (2026-11-09, user: no manual daily steps): set UseFlagFiles true. The VPS task 'FinraDaily' (live/vps/finra_daily.ps1)
+  downloads FINRA's file each weekday evening, computes the same Z and, when Z >= 1, writes C:\TradingLogs\finra\SIG_<FINRA date>.
+  At the 08:30 bar the strategy looks for the flag of the previous weekday (= the next trading day of the backtest) instead of
+  the embedded dates below, so the file never needs regenerating. CME early-close days are skipped (as the backtest list), and
+  a position is never held past its entry day. UseFlagFiles false = the embedded dates (backtests, MultiCharts checks). }}
+
 Inputs:
 	EntryTime(830),         {{ bar closing 08:30 -> buy at the next bar's open (08:31) }}
 	ExitTime(1455),         {{ exit at the close of this bar }}
 	StopAtr(0.5),
 	AtrDays(15),
-	Qty(1);
+	Qty(1),
+	UseFlagFiles(false),    {{ LIVE: true = read the VPS flag files; false = the embedded dates }}
+	FlagFolder("C:\TradingLogs\finra\");
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
 	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
-	StopPts(0), IsSignal(false), Si(0), DayStartTrades(0), TradedToday(false), NSig({len(dates)});
+	StopPts(0), IsSignal(false), Si(0), DayStartTrades(0), TradedToday(false), NSig({len(dates)}),
+	PrevWkDay(0), CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false);
 
 Arrays:
 	TrHist[100](0), SigDate[{max(len(dates), 1) + 10}](0);
@@ -74,6 +85,7 @@ if Date <> Date[1] then begin
 	DayHi = High;
 	DayLo = Low;
 	DayStartTrades = TotalTrades;
+	if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then PrevWkDay = Date[1];   {{ the last weekday before today }}
 	{{ is today a signal date? }}
 	IsSignal = false;
 	for Si = 0 to NSig - 1 begin
@@ -95,6 +107,25 @@ if TrCount >= AtrDays then begin
 	ATRv = TrSum / AtrDays;
 end;
 
+{{ ---------- CME holiday half-days (same rule as the plan's files): no entry, as the backtest list ---------- }}
+CalMonth = Month(Date); CalDay = DayOfMonth(Date); CalDow = DayOfWeek(Date); CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = (CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday) or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday) or (CalDay = 5 and CalDow = 1)))
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1)));
+
+{{ live: the flag of the previous weekday decides (checked at the entry bar, so a chart loaded during the day still sees it) }}
+if UseFlagFiles and Time = EntryTime then
+	IsSignal = PrevWkDay > 0 and IsEarlyClose = false
+		and GetFileAttributesA(FlagFolder + "SIG_" + NumToStr(PrevWkDay + 19000000, 0)) <> -1;
+
 {{ ---------- Entry at the 08:31 open on signal dates; the stop also protects the entry bar ---------- }}
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 if Time = EntryTime and IsSignal and ATRv > 0 and MarketPosition = 0 and TradedToday = false then begin
@@ -107,6 +138,7 @@ end;
 if MarketPosition > 0 then begin
 	Sell ("FSV_SL") next bar at EntryPrice - StopPts stop;
 	if Time = ExitTime then Sell ("FSV_X") this bar at close;
+	if Date <> EntryDate then Sell ("FSV_DX") next bar at market;   {{ safety: never held past the entry day }}
 end;
 """
 open("checks/candidates/finra_longs/NQ_FINRA_Short_Volume_Longs.txt", "w").write(code)
