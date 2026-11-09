@@ -1,0 +1,44 @@
+[provenance] code 77c4bd7c dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Which strategies gain on Vault Break / ONB stop days? (user 2026-11-09: 'find a new strategy that gains on VB and ONB stop days').
+   days 2280; VB stop days 293, ONB stop days 260, both 52, either 501
+
+   $ per micro a day (sorted by the stop-day average):
+                          series  VB_stop  ONB_stop    both  either  other   diff  t_diff  corr_VB+ONB  active
+                   personal: S30   126.03     -8.00  126.29   56.45  14.21  42.24    2.01         0.12    0.43
+                     FINRA longs    19.58     10.99    0.62   17.09   9.19   7.90    1.19         0.14    0.16
+         personal: OvernightTick    26.69      2.89   15.82   15.47   6.75   8.72    1.77         0.03    0.24
+            personal: MondayLong    21.95     -7.42  -15.80   10.62   7.63   3.00    0.50         0.17    0.20
+   personal: CLSundayFade_perMCL    10.92      9.37   36.95    7.41   1.40   6.01    1.99        -0.01    0.04
+                     lab: OND_MC    19.69     -6.31   12.55    6.94   2.19   4.75    1.07         0.04    0.46
+                       LETF fade     6.03      7.53   10.93    6.30   2.49   3.81    1.28        -0.01    0.27
+      personal: BridgeMondayLong    12.11      3.25   26.68    6.00   4.85   1.15    0.45         0.06    0.10
+                  T_ONESIDE (MC)     7.83     -3.95   -4.87    3.03   3.99  -0.96   -0.31        -0.01    0.16
+                     lab: VCS_MC     3.24      3.24    5.68    2.98   0.86   2.12    1.22         0.02    0.03
+           X1 late relative flow     3.66      1.09    6.58    2.02   2.09  -0.07   -0.04        -0.02    0.19
+                   lab: LDF_MC_S     3.09      0.79    3.58    1.85   2.19  -0.34   -0.19        -0.02    0.18
+           personal: LateDayFlow    -0.32      4.31    4.96    1.53   4.05  -2.52   -0.97         0.07    0.39
+                     lab: NFP_MC     1.40      1.36    0.40    1.48   1.07   0.41    0.24        -0.02    0.03
+               personal: NFPFade     1.36      1.35    0.37    1.46   1.06   0.40    0.24        -0.02    0.03
+    personal: ESMOCFollow_perMES     3.14     -0.78   -0.12    1.45   1.32   0.13    0.09         0.01    0.09
+                   lab: LDF_MC_L    -3.20      3.71    1.53   -0.11   2.05  -2.16   -1.13         0.12    0.21
+        Swing Target shorts (MC)    -1.64      2.85    8.92   -0.40   6.79  -7.20   -2.30         0.07    0.12
+           personal: SwingTarget    -0.18      1.60   14.81   -0.81   9.97 -10.79   -2.26         0.13    0.26
+                EOS late (14:55)    -3.19     -1.65   -4.38   -2.27   5.33  -7.60   -2.53        -0.02    0.05
+   personal: ExpirationOpenShort    -3.71     -1.58   -4.40   -2.53   3.48  -6.01   -3.17        -0.01    0.05
+      personal: RelativeStrength     7.08    -20.38  -35.40   -2.76  20.40 -23.16   -2.32         0.21    0.51
+                  lab: ONB_ML2_L    -2.72    -11.30  -35.60   -3.76   6.80 -10.55   -3.25         0.59    0.07
+                        MO on ES    -4.66     -9.93   -9.27   -6.91   5.11 -12.02   -6.23         0.28    0.12
+noise-area shorts? (Bridge both)    -1.54    -14.18   -0.10   -8.25   5.43 -13.68   -4.81         0.15    0.29
+                   personal: S47   -12.08    -11.39  -35.45   -9.30  16.27 -25.57   -3.78         0.21    0.31
+                  lab: ONB_ML2_S     0.04    -19.31    0.00  -10.00   9.34 -19.34   -6.59         0.54    0.08
+      personal: TwinContinuation   -13.89     -6.15   -9.87  -10.29  21.43 -31.72   -5.31         0.32    0.42
+                      FVB shorts   -16.27     -7.60   -8.41  -12.58  17.95 -30.53   -6.11         0.09    0.33
+                 personal: Kusho   -30.00     -3.35  -53.43  -13.74  21.90 -35.64   -5.19         0.26    0.75
+       personal: OvernightBiasML    -2.74    -30.77  -35.75  -13.86  16.06 -29.93   -6.87         0.79    0.15
+                  personal: FC2B   -11.26    -22.89  -34.70  -14.87  16.12 -30.99   -6.46         0.23    0.34
+            personal: PaperTrend   -23.01    -19.08  -64.87  -16.63  17.06 -33.69   -5.62         0.28    0.25
+            personal: DualThrust    -5.12    -37.23  -38.23  -18.35  17.39 -35.74   -6.82         0.20    0.71
+            personal: VaultBreak  -112.57    -14.75 -122.08  -60.82  25.82 -86.64  -18.03         0.73    0.41
+   VB stop days   |gap| / ATR 0.28, gap up 65%, prior range / ATR 0.89, VIX above SMA25 57%, weekday {0: 0.15, 1: 0.2, 2: 0.23, 3: 0.2, 4: 0.21}
+   ONB stop days  |gap| / ATR 0.35, gap up 51%, prior range / ATR 0.78, VIX above SMA25 44%, weekday {0: 0.14, 1: 0.25, 2: 0.21, 3: 0.23, 4: 0.16}
+   other days     |gap| / ATR 0.22, gap up 55%, prior range / ATR 0.73, VIX above SMA25 39%, weekday {0: 0.22, 1: 0.2, 2: 0.19, 3: 0.2, 4: 0.2}
