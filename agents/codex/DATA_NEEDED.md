@@ -503,3 +503,25 @@ checkout issue. BOIL's 1,178 failures/82 zeros/40 design failures persist in the
 All 520 operation XMLs lack a parsed result-publication field; result documents retain earlier announcement times.
 Do not date accepted amounts/prices by that announcement field. D15 becomes primary-backed asset-history feasibility,
 not an admitted reset signal; no new strategy return or prior failed-rule reopening.
+
+### D51 shared-input acquisition — evaluation research (2026-11-09)
+
+New free public snapshot acquired from
+https://github.com/superpilot69/fred-us-macro-open-data at
+`c3e2d4c79868ee516dc0ed111e1e4a28608a3a8b`.
+[Intake and limitations](results/eval_focus_baseline_20261109.md),
+[source snapshot / hashes / coverage](inputs/eval_focus_20261109/macro_intake/manifest.json),
+[no-return intake script](../../analysis/codex_eval_macro_intake_20261109.py).
+The raw Investing occurrence panel contains actual+forecast on all 60 design CPI,
+60 core CPI, 60 payroll, 261 claims and 60 retail observations inspected (2018–22).
+This improves field coverage; it does not establish the original source's median
+consensus, forecast capture time, first-actual vintage or receipt availability.
+
+One payroll timestamp is 2020-03-06 12:30 UTC / 07:30 New York, an hour before
+the normal release clock. It is flagged and retained unchanged pending a primary
+release-calendar check. Do not use enriched FRED event timestamps/current revised
+values instead of the original announcement. No vendor code was run, no returns
+were computed and scout budgets/history remain unchanged. **D51 stays NEEDS DATA**.
+Next: verify a primary first-release/forecast/clock observation and the exact
+SSRN1920401 source version, then audit complete coverage and revisions before
+admission or preregistration. The active evaluation task does not resume a schedule.
