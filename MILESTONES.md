@@ -90,3 +90,41 @@ test are in `TIER_LIST.md`; the current state is in `NEW_CHAT_BRIEF.md`. Add new
 - **Live:** two Apex 50K evaluations on a VPS, logged and monitored automatically; account #3 (150K) around Oct 27.
 - **Next milestone:** the **mid-December gate**: 40-70 live trades at >= 75% of the backtest and no drift alarm, then
   scaling toward 20 accounts and a personal account from the first payouts.
+
+## Weeks 4-5: first live losses, then a stronger plan (Oct 22 - Nov 9)
+
+- **Oct 24-25: the personal book takes shape** (Dual Thrust, Kusho, S47, S30 IBS, Overnight Tick / VIX, Swing Target v3,
+  PAPERTREND v2): 19 pieces, about $41.5k a year at 1 micro each.
+- **Oct 26 - Nov 4: the first four Apex accounts all failed** (#1 10/26, #3 10/30, #2 and #4 11/04). The live replay showed
+  execution was right (VB 15 of 15 trades match the backtest): a losing stretch about 1 in 15, not a bug. Buying paused
+  until the job's paychecks (first payday likely Nov 17).
+- **Nov 1: safety.** Kill switch (phone -> VPS flag), override log, failover notes.
+- **Nov 6-8: Codex's review found the evaluation engines locked the trailing floor like a funded account.** All engines
+  fixed and every plan bench rerun: 150K pass rate 41% -> 36% (rankings unchanged). Funded per-stop cushion cap adopted
+  (blown 8.1% -> 2.3% at the same payouts).
+- **Nov 8-9: ingredient ablations of all 17 plan pieces** (every live version held up), new data (FINRA short volume,
+  leveraged-ETF flows, RRP, Treasury buybacks), and an evaluation-phase study (89% of failed evaluations die from one big
+  VB / ONB stop). Plan changes:
+  - 150K evaluation: **Twin Continuation 2 MNQ** added (11/08); **Vault Break 20 -> 15 + Dual Thrust 2 MNQ** (11/09).
+  - Personal: **Overnight Tick 1 -> 2 MNQ**; **ZT continuation 1 MNQ** and **FINRA short-volume longs 1 MNQ**, both in
+    while watched; both MultiCharts-confirmed (604 / 604 and 373 / 374).
+  - MultiCharts also confirmed S30 IBS < 0.10 (169 / 169, checker FAIL on the threshold choice only) and Ricochet
+    target 80 (99%).
+
+## Progress check (Nov 9; same engines, before = Nov 7)
+
+| Book | Before | Now |
+|---|---|---|
+| 150K evaluation pass rate (all starts 2018-26) | 36.3% | **38.9%** (starts since 2025: 35.4% -> **41.5%**) |
+| Budget ramp, 2027 payouts, median (backtest edge) | $237k | **$296k**, first payout Mar 01 -> **Feb 09** |
+| Budget ramp, 2027 payouts, median (75% of the edge) | $72k | **$92k** |
+| Funded 150K, 2-year payouts per account | $19,988 | $20,031 |
+| Personal, median year (core book / full book) | $26.3k / $40.5k | **$32.7k / $46.8k** |
+
+Sources: `analysis/outputs/progress_books_output.txt`, `analysis/outputs/progress_ramp_output.txt`.
+
+## Where it stands (Nov 9)
+
+- About **400 ideas tested**; S tier: Overnight Bias ML; A tier about a dozen.
+- **No live accounts.** Next 150K purchase after the first paycheck, one evaluation a day; six charts per account (VB 15,
+  ONB ADX30, Bridge Monday, EOS, Twin 150K, Dual Thrust).
