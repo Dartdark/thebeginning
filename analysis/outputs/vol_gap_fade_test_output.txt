@@ -1,0 +1,24 @@
+[provenance] code 40ed83f8 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Volatile-regime gap-up fade, NQ (user 2026-11-09: 'find a new strategy that gains on VB and ONB stop days'; from analysis/stopday_screen.py:
+   rule: high VIX, gap up >= 0.25 ATR, short  n   309 $  342 t  1.60 PF 1.30 total $  106k maxDD $20.5k | 2018-22 $ 122 (t  0.6) 2023+ $ 624 (t  1.5) | worst $-7,847
+      by year $: {2018: 1253, 2019: -12885, 2020: 2659, 2021: 3751, 2022: 26447, 2023: 4080, 2024: -4459, 2025: 53353, 2026: 31330}
+      on VB stop days: n 79 $-170 vs other $517
+      on ONB stop days: n 39 $692 vs other $291
+   mirror: high VIX, gap down, long (info)    n   201 $  224 t  0.85 PF 1.17 total $   45k maxDD $22.5k | 2018-22 $ 169 (t  0.5) 2023+ $ 288 (t  0.7) | worst $-8,683
+      by year $: {2018: 12176, 2019: -5322, 2020: -3706, 2021: 5832, 2022: 9452, 2023: 4428, 2024: 9360, 2025: -1482, 2026: 14207}
+      on VB stop days: n 23 $4299 vs other $-303
+      on ONB stop days: n 37 $-528 vs other $393
+   calm VIX gap up >= 0.25, short (info)      n   303 $  -66 t -0.47 PF 0.93 total $  -20k maxDD $40.4k | 2018-22 $-167 (t -1.2) 2023+ $  70 (t  0.3) | worst $-6,847
+      by year $: {2018: 1177, 2019: -1388, 2020: -17737, 2021: -17429, 2022: 6372, 2023: 2968, 2024: -8744, 2025: 20884, 2026: -6059}
+      on VB stop days: n 40 $102 vs other $-91
+      on ONB stop days: n 36 $-136 vs other $-56
+   random side (200 runs): $221, 95th $545; real $342; p 0.215
+   daily corr: {'VB': np.float64(-0.13), 'ONB_ML2_MC': np.float64(-0.06), 'TWIN': np.float64(0.02), 'EOS': np.float64(0.03), 'LDF_MC': np.float64(0.21)} 
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   + vol gap fade 2 MNQ               pass 37.6% (-0.7%; band -2.0% / +0.6%)
+   + vol gap fade 4 MNQ               pass 36.6% (-1.7%; band -3.2% / -0.3%)
+
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      + vol gap fade 2 MNQ               2y $ 19,824 blown  3.5% all 6 95.7% diff $ -207 beats 49.2%
