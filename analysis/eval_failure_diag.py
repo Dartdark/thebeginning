@@ -46,7 +46,7 @@ if __name__ == "__main__":
         if out is None: out = ("time", 21, s + 20, None)
         o, n, d, jb = out; rec = dict(start=dts[s], outcome=o, day=n, peak=peak, dll_hits=dll, end_bal=bal - r["st"])
         if o == "fail":
-            for k in P: rec["fail_" + k] = Rp[k][d][min(jb, 1439)]
+            for k in P: rec["fail_" + k] = Wp[k][d][min(jb, 1439)]          # open (worst-path) P&L at the fail minute; R is realized only at exits
             rec["fail_floor_gap_start"] = bal - floor                      # room left at the start of the fail day
         rows.append(rec)
     X = pd.DataFrame(rows); n = len(X)
