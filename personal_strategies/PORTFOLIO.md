@@ -153,7 +153,7 @@ extra capital (add order when capital grows):** Ricochet 1.7, FVB 1.0, ST both 0
 DP 0.5. **Ricochet plateau check (2026-11-09, `analysis/ricochet_plateau_test.py`): 6 of 7 neighbouring settings raise the book overall (+0.07 to
 +0.43), but none fixes 2018-22 beyond noise (stop 60: +0.02): robust but recent-weighted; first in the add order. **User 2026-11-09: the bench version is now TARGET 80** (better than target 100 in every period: 2018-26 6.24 vs 5.93, 2018-22 5.64 vs 5.52,
 2023+ 6.97 vs 6.86 with OT 2; max DD $16.9k vs $26.8k per NQ; chosen among 7 neighbours, so post hoc: still a bench piece, re-test at the next capital step).** **Book test of four leads (2026-11-08, `analysis/bench_leads_book_test.py`): S30 NQ with entry IBS < 0.10 improves the book in BOTH
-periods (5.81 -> 6.61; 2018-22 +0.16, 2023+ +1.30; +$4.3k a year at +$58 DD) -> WATCHLIST #34 (forward log; ES leg untested). FVB shorts only
+periods (5.81 -> 6.61; 2018-22 +0.16, 2023+ +1.30; +$4.3k a year at +$58 DD) -> WATCHLIST #34 (forward log; ES leg tested 11/08: replicates alone but duplicates NQ, corr 0.80 -> NQ only). FVB shorts only
 6.12 (+0.31, but 2018-22 -0.23; capital +$1.2k): replaces FVB both sides on this bench. S03 longs 5.77, Anson longs 5.49: stay.** DP 0.5. Added the same day from Codex's ledgers: R2Vault +$1.8k / 5.62 (-0.19) / +$2.4k (0.7 $ per $ of capital); S03 v2 +$2.9k / 5.46 (-0.35;
 2018-22 +0.05) / +$4.2k (0.7); Anson +$2.1k / 5.17 (-0.64, worse in both periods) / +$5.0k (0.4). Futures trend: never built, not retested.
 

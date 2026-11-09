@@ -251,6 +251,12 @@ after 15:59 CT, never with a position open.
 
 ## Swing Target NQ v2 (your file + Codex's test, 2026-10-25: B, personal candidate; not Apex-legal as written)
 
+- [ ] **MultiCharts backtests to run (research, home PC; send each Strategy Performance Report):**
+      (a) **Ricochet 1144 target 80** (WATCHLIST #35): `checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt`
+      ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt)),
+      @NQ 5 min, Exchange time, CME 24h, Bar Magnifier 1 min, IOG off, NumContracts 1, 2018 -> now; Claude matches it to python_trades_t80.csv.
+      (b) **S30 IBS with `IbsEntry` 0.10** (WATCHLIST #34): `checks/candidates/s30_ibs/S30_IBS.txt` on @NQ 1 min, Exchange time, 24h,
+      IOG off, `IbsExit` 0.80, ContractQty 1, 2018 -> now (expect ~172 trades).
 - [ ] **Personal account (when it starts): Overnight Tick / VIX at 2 MNQ** (contracts input 1 -> 2; user 2026-11-08). Same chart and code as now.
 - [ ] **Personal account (when it starts): PAPERTREND v2 at `Qty` 1** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/papertrend/PAPERTREND_v2_claude.txt)), 5-min MNQ, Exchange time, IOG off, `StopATRMult` 2, logger tag `PT`.
 - [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).
