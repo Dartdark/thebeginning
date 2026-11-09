@@ -11,6 +11,10 @@ Per item: trades, $ a trade, t, PF, years positive, 2018-22 vs 2023-26, longs / 
 Calmar / Ulcer and 2023+ bootstrap Sharpe band. Best Apex item by t (selection noted): random-side placebo (200 runs); if its t >= 2
 and 2023+ > 0: 150K evaluation + 2 MNQ, funded 150K x 1.5 + Twin 2 + 2 MNQ, personal + 1 MNQ (add, and replace Dual Thrust as the
 overlapping intraday momentum piece). Stop rule: if no Apex item has t >= 2, the benches are skipped.
+ADDENDUM 2026-11-09 after the first run (POST HOC, written before running it): at EntryZ 2 the rule almost never fires (|ZT| >= 2 on
+~0.01% of bars: 73 trades in 9 years on 5-min, 7-35 in the Apex window) because the denominator is the expected 32-bar move. Added:
+EntryZ 1.0 and 1.5 (|ZT| >= 1 on ~5% of bars, >= 1.5 on ~0.5%), same 8 cells each -> 24 items in all, bar t_threshold(24); the
+best of all 24 goes to the checks above (selection noted).
   tools/run_stamped.sh analysis/zt_volz_test.py > analysis/outputs/zt_volz_output.txt
 """
 import sys, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
@@ -60,7 +64,7 @@ def run(g, s, z, up, dn, mode=1, entry=2.0, exit_=0.25, stop=4.0, hold=8, trend=
 
 
 def line(T, nm):
-    if len(T) < 5: return f"   {nm:<34} n={len(T)}"
+    if len(T) < 5: return f"   {nm:<34} n={len(T)}", np.nan
     x = T.net; t = x.mean() / x.std() * np.sqrt(len(x)); gl = -x[x < 0].sum(); by = x.groupby(T.date.dt.year).sum()
     a, b = x[T.date < "2023"], x[T.date >= "2023"]; L_, S_ = x[T.side > 0], x[T.side < 0]
     tl = lambda v: v.mean() / v.std() * np.sqrt(len(v)) if len(v) > 2 else np.nan
@@ -76,22 +80,24 @@ def daily(T, g):
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
     g = pickle.load(open("scratch_data/g24.pkl", "rb")); APEX = (835, 1445); res = {}
-    print(f"   bar t for 8 items: {t_threshold(8):.2f}")
+    print(f"   bar t for 8 items: {t_threshold(8):.2f}; for 24 (with the post-hoc thresholds): {t_threshold(24):.2f}")
     for k in (5, 15, 30, 60):
         s = series(g, k); z, up, dn = zt(s["c"]); S = (s, z, up, dn)
         print(f"\n {k}-min bars: |ZT| >= 2 on {np.mean(np.abs(z[70:]) >= 2):.1%} of bars")
-        for mode, mn in ((1, "continuation"), (0, "fade")):
-            T = run(g, *S, mode=mode); print(line(T, f"{mn}, as coded 24 h")[0])
-            Ta = run(g, *S, mode=mode, window=APEX); ln, t = line(Ta, f"ITEM {mn}, Apex 08:35-14:45"); print(ln, flush=True)
-            res[(k, mn)] = (t, Ta, S, mode)
-    (kb, mb), (tb, Tb, Sb, modeb) = max(res.items(), key=lambda kv: kv[1][0])
-    print(f"\n Best Apex item by t: {kb}-min {mb} (t {tb:.2f}; picked after seeing all 8)")
+        for ez in (2.0, 1.5, 1.0):
+            for mode, mn in ((1, "continuation"), (0, "fade")):
+                tag = f"Z {ez:.1f} {mn}" + (" (post hoc)" if ez < 2 else "")
+                T = run(g, *S, mode=mode, entry=ez); print(line(T, f"{tag}, 24 h")[0])
+                Ta = run(g, *S, mode=mode, entry=ez, window=APEX); ln, t = line(Ta, f"ITEM {tag}, Apex"); print(ln, flush=True)
+                res[(k, mn, ez)] = (t if np.isfinite(t) else -9, Ta, S, mode, ez)
+    (kb, mb, _), (tb, Tb, Sb, modeb, ezb) = max(res.items(), key=lambda kv: kv[1][0])
+    print(f"\n Best Apex item by t: {kb}-min {mb} EntryZ {ezb} (t {tb:.2f}; picked after seeing all 24)")
     d = daily(Tb, g); P, H = perf(d), perf(d[d.index >= "2023"]); b = bootstrap(d[d.index >= "2023"].values, n=2000, block=10).loc["sharpe"]
     print(f"   daily Sharpe {P['sharpe']:.2f} Sortino {P['sortino']:.2f} PF {P['profit_factor']:.2f} Calmar {P['calmar']:.2f} Ulcer {P['ulcer']:.1f} DD ${P['max_dd']:,.0f} | 2023+ Sharpe {H['sharpe']:.2f} (band {b.p5:.2f} / {b.p95:.2f})")
     print(f"   by year $: {Tb.groupby(Tb.date.dt.year).net.sum().round(0).astype(int).to_dict()}")
     for tm, nm in ((1, "TrendMode 1 (with the 64-EMA)"), (2, "TrendMode 2 (against it)")):
-        print(line(run(g, *Sb, mode=modeb, window=APEX, trend=tm), f"context: {nm}")[0])
-    rng = np.random.default_rng(23); pm = np.array([run(g, *Sb, mode=modeb, window=APEX, rng=rng).net.mean() for _ in range(200)])
+        print(line(run(g, *Sb, mode=modeb, entry=ezb, window=APEX, trend=tm), f"context: {nm}")[0])
+    rng = np.random.default_rng(23); pm = np.array([run(g, *Sb, mode=modeb, entry=ezb, window=APEX, rng=rng).net.mean() for _ in range(200)])
     print(f"   random side (200 runs): ${pm.mean():.1f}, 95th ${np.percentile(pm, 95):.1f}; real ${Tb.net.mean():.1f}; p {np.mean(pm >= Tb.net.mean()):.3f}", flush=True)
     if not (tb >= 2 and Tb[Tb.date >= "2023"].net.mean() > 0):
         print("\n   Stop rule: best Apex item t < 2 or 2023+ <= 0 -> benches skipped."); sys.exit()
