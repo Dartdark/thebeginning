@@ -1,0 +1,26 @@
+[provenance] code afaca2cf dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Progress across the books, before (as of 2026-11-07) vs now (2026-11-09 decisions), same engines, same data (user 2026-11-09:
+
+1. 150K evaluation (pass / fail / time-out, all starts 2018 -> 2026-09; recent = starts 2025+):
+   before 11/08 (no Twin)         pass 36.3% fail 63.0% time-out 0.8% | recent pass 35.4% | fee per passed account $687
+   + Twin 2 (11/08)               pass 38.3% fail 60.7% time-out 1.0% | recent pass 37.5% | fee per passed account $651
+   now: + VB 15 / DT 2 (11/09)    pass 38.9% fail 60.0% time-out 1.2% | recent pass 41.5% | fee per passed account $641
+
+2. Funded 150K (2-year payouts per account):
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      before: plan x 1.5 (no Twin)       2y $ 19,988 blown  1.8% all 6 95.8% diff $  -42 beats 49.6%
+   (50K per-stop cushion cap, 11/08, quoted: 2-year payouts $11,778 -> $11,747, blown 8.1% -> 2.3%)
+
+3. Personal account (1-year bootstrap, 2,000 paths, blocks of 20 days):
+   core book (no forward-log pieces):
+      before (OT 1 MNQ)            backtest $ 26,864 a year | MC median year $ 26,330 p5 $ 14,304 | DD p95 $ 4,857 | return/DD 5.42
+      + OT 2nd MNQ (11/08)         backtest $ 29,066 a year | MC median year $ 28,467 p5 $ 15,637 | DD p95 $ 4,903 | return/DD 5.81
+      + ZT 1 MNQ (11/09)           backtest $ 30,640 a year | MC median year $ 29,988 p5 $ 16,234 | DD p95 $ 5,071 | return/DD 5.91
+      now: + FINRA 1 MNQ (11/09)   backtest $ 33,393 a year | MC median year $ 32,710 p5 $ 17,382 | DD p95 $ 5,300 | return/DD 6.17
+   full book (every piece):
+      before (OT 1 MNQ)            backtest $ 41,475 a year | MC median year $ 40,543 p5 $ 22,614 | DD p95 $ 7,222 | return/DD 5.61
+      + OT 2nd MNQ (11/08)         backtest $ 43,676 a year | MC median year $ 42,629 p5 $ 24,265 | DD p95 $ 7,197 | return/DD 5.92
+      + ZT 1 MNQ (11/09)           backtest $ 45,250 a year | MC median year $ 44,234 p5 $ 25,251 | DD p95 $ 7,281 | return/DD 6.08
+      now: + FINRA 1 MNQ (11/09)   backtest $ 48,003 a year | MC median year $ 46,771 p5 $ 26,062 | DD p95 $ 7,880 | return/DD 5.94
+   ZT and FINRA alone per MNQ: $1,574 / $2,753 a year; personal data end 2026-10-09
