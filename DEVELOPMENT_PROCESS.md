@@ -532,3 +532,10 @@ MultiCharts 598 / $316, same side 100%, P&L corr 0.96):**
 carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight
 flow does not predict Twin's morning side; the noise-area longs do better on calm VIX days (post hoc lead), not volatile ones. Next ingredient
 work should look for new mechanisms (other places / times), not move the three engines to other markets.
+
+**Round 8: ZT continuation (`analysis/zt_ablation.py` + `analysis/zt_plateau.py`, 2026-11-09; base 15-min, EntryZ 1, Apex window, $148 t 3.03):**
+engine = the vol-normalised distance from the 32-EMA (points from the EMA instead: $10, t 0.2; ATR denominator ~same, t 2.6), and it is
+Twin's engine (base trades on Twin-active days $343 t 5.6, on Twin-flat days −$194 t −2.5). Supporting: the |ZT| ≤ 0.25 exit (without
+$116 t 2.2), the EMA (SMA $96), mean 32 / vol 16-32. Decoration: the ±4 stop (never fires). Holding longer earns more per trade (16 bars
+$223 t 3.6) but hurts the evaluation (−2.9%) and the funded bench. Threshold plateau 15-min EntryZ 1.05-1.30 (t 3.4-3.8; ≥ 1.45 dies).
+Post hoc lead: EntryZ 1.25 ($246 t 3.5, DD $17.3k vs $32.8k) - the only variant that helps a book (personal +0.06 / +0.11 / +0.12).
