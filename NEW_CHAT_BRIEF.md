@@ -78,7 +78,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   10/11 (G9 PBO 0.71: 0.10 is the in-sample peak; plan on the 0.20 level, 1-min-marked DD $60.9k per NQ). **FINRA longs IN the personal
   plan at 1 MNQ while watched (user, like ZT).** Progress 11/07 -> now (`analysis/outputs/progress_books_output.txt`): 150K evaluation
   pass 36.3 -> 38.9% (2025+ starts 35.4 -> 41.5%); funded 150K 2y $19,988 -> $20,031 (Twin ~neutral); personal core book median year
-  $26.3k -> $32.7k, DD p95 $4.86k -> $5.30k, return/DD 5.42 -> 6.17 (full book $40.5k -> $46.8k). Your ONB ML chart code was pre-v2:
+  $26.3k -> $32.7k, DD p95 $4.86k -> $5.30k, return/DD 5.42 -> 6.17 (full book $40.5k -> $46.8k). Budget ramp rerun (`analysis/outputs/progress_ramp_output.txt`, same schedule as 11/08): 2027 payouts median $237k -> $296k (75% edge $72k -> $92k), first payout Mar 01 -> Feb 09, P(0 funded by Dec 31) 14 -> 12%. Your ONB ML chart code was pre-v2:
   re-import before funded use.
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
