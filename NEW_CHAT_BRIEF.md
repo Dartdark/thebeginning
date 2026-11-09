@@ -63,6 +63,11 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
     Dual Thrust was already MultiCharts-confirmed (stale 'pending' notes fixed). Shared bench helper `analysis/bench150.py`.
   - **Watch:** #31 LETF fade, #32 FINRA longs, #33 ONB ML price-term decay (refit only pre-registered on 2018-22). Capital-expansion
     bench + Swing Target 2nd MNQ on shorts only. Job starts 11/10, first payday likely 11/17 (not 11/13).
+- **Evaluation work 11/09:** diagnosis (`analysis/eval_failure_diag.py`): 89% of failed 150K evaluations die from one big VB / ONB stop
+  (each ~ the $2,000 daily limit) after one daily-limit pause. A capped evaluation set (`analysis/eval_set_builder.py`) cuts fails 60 -> 48%
+  but time-outs rise 2 -> 16%: holdout pass 43.2% vs 43.4% (D). **User 11/09: the Apex evaluation has a 30-day limit**, so a time-out is a
+  lost fee like a fail and the current concentrated set stays. Screen for future evaluation add-ons: mean per unit of variance, low
+  correlation with VB / ONB, flat or positive on their stop days.
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 
