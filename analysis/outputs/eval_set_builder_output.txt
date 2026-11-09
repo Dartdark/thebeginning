@@ -10,3 +10,26 @@ load_mc: dropped 1 unfinished trade(s) in mc_reports/Backtesting Strategy Perfor
    step 4: TWIN +1 -> design pass 17.4%  {VB: 4, ONB30: 5, EOS: 5, MON_BR: 2, TWIN: 3, RS: 3}
    step 5: ONB_ML +1 -> design pass 18.2%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 1, MON_BR: 2, TWIN: 3, RS: 3}
    step 6: ONB_ML +1 -> design pass 19.8%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 2, MON_BR: 2, TWIN: 3, RS: 3}
+   step 7: ONB_ML +1 -> design pass 20.9%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 3, MON_BR: 2, TWIN: 3, RS: 3}
+   step 8: ONB_ML +1 -> design pass 24.4%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 4, MON_BR: 2, TWIN: 3, RS: 3}
+   step 9: ONB_ML +1 -> design pass 26.1%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 5, MON_BR: 2, TWIN: 3, RS: 3}
+   step 10: LDF +1 -> design pass 27.4%  {VB: 4, ONB30: 5, EOS: 5, LDF: 1, ONB_ML: 5, MON_BR: 2, TWIN: 3, RS: 3}
+   step 11: LDF +1 -> design pass 27.9%  {VB: 4, ONB30: 5, EOS: 5, LDF: 2, ONB_ML: 5, MON_BR: 2, TWIN: 3, RS: 3}
+   step 12: DT +1 -> design pass 28.5%  {VB: 4, ONB30: 5, EOS: 5, LDF: 2, ONB_ML: 5, MON_BR: 2, TWIN: 3, DT: 1, RS: 3}
+   step 13: LDF +1 -> design pass 29.3%  {VB: 4, ONB30: 5, EOS: 5, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 3, DT: 1, RS: 3}
+   step 14: TWIN +1 -> design pass 29.8%  {VB: 4, ONB30: 5, EOS: 5, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 1, RS: 3}
+   step 15: DT +1 -> design pass 30.2%  {VB: 4, ONB30: 5, EOS: 5, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 2, RS: 3}
+   step 16: EOS -1 -> design pass 30.8%  {VB: 4, ONB30: 5, EOS: 4, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 2, RS: 3}
+
+   FINAL eval set: {VB: 4, ONB30: 5, EOS: 4, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 2, RS: 3}  (risk units = $250 at the stop)
+   design 2018-22   current  pass 34.1% fail 63.2% time-out 2.7% | median days to pass 8
+   design 2018-22   new      pass 30.8% fail 48.7% time-out 20.5% | median days to pass 12
+      new - current -3.4% (band -9.9% / +2.6%)
+   HOLDOUT 2023-26  current  pass 43.4% fail 55.0% time-out 1.6% | median days to pass 8
+   HOLDOUT 2023-26  new      pass 43.2% fail 47.7% time-out 9.1% | median days to pass 12
+      new - current -0.2% (band -11.5% / +12.7%)
+   all 2018-26      current  pass 37.9% fail 59.9% time-out 2.2% | median days to pass 8
+   all 2018-26      new      pass 36.2% fail 48.3% time-out 15.5% | median days to pass 12
+      new - current -1.7% (band -7.9% / +4.4%)
+   current  daily mean $371 sd $2,610 | days with an intraday low < -$2,000: 22.6%, < -$3,000: 12.1%
+   new      daily mean $300 sd $1,716 | days with an intraday low < -$2,000: 6.0%, < -$3,000: 0.9%
