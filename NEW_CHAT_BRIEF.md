@@ -85,6 +85,10 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   target guard / stop guard, same rows); cushion guard on all 13 funded files; account read from each chart's Auto Trading gear
   (GetAccountID), peak from VPS files (`live/vps/cushion_peak.ps1`), so no AccountName / PeakSeed typing; FINRA signal from the VPS
   task FinraDaily (`live/vps/finra_daily.ps1` -> flag files, strategy `UseFlagFiles`); weekly VPS restart task removed.
+- **Copier (user 11/09): Rithmic's built-in copier, two leaders (evaluations / funded), followers 1x.** Charts on the leaders only;
+  auto account rules (no per-account inputs); group sizing via VPS files: funded = weakest cushion, evaluations = finish mode when
+  the group mean is +$6k (40.0% vs 40.9% per account). Chart guard scans all accounts at 15:55 (needs testing: GetRTAccountEquity
+  on accounts no chart trades).
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 

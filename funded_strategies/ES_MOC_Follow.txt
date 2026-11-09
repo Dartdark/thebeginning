@@ -56,6 +56,7 @@ Inputs:
 	UseHolidayTimes(true),
 	HeartbeatTag(""),      { live guard: the chart's logger tag; empty = no heartbeat }
 	UseCushion(true),       { cushion guard: acts ONLY on Apex funded accounts (name PA-...); evaluations / personal: no effect }
+	CopierGroup(true),      { Rithmic copier (2026-11-09): follow the GROUP state the VPS writes (funded: the weakest account's cushion; evaluations: finish mode when the group's MEAN profit >= $6,000). false = this account only }
 	AccountName(""),        { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
 	StartBalance(0),        { 0 = auto: 150000 when the account balance is above 100,000, else 50000 }
 	TrailDD(0),             { 0 = auto: 4000 (150K) / 2000 (50K) }
@@ -65,7 +66,7 @@ Inputs:
 	CushionMin(0.5);        { size floor of the cushion sizing }
 Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("ES_MOC_Follow 2026-11-09");   { code version: bump the date on every change }
 Variables: CE(0), CEPrev(0), CK(0), CKLast(0), PeakEOD(0), Thr(0), Cush(0), CF(0), CQty(0);   { cushion guard }
-Variables: PeakAuto(0), PKey(0), PKeyLast(0), PAcct(""), PkI(0), PkFound(0), AcctX(""), EqX(0), xSB(0), xDD(0), xLB(0), xCR(0);   { peak file + auto account rules (2026-11-09) }
+Variables: PeakAuto(0), PKey(0), PKeyLast(0), PAcct(""), PkI(0), PkFound(0), AcctX(""), EqX(0), xSB(0), xDD(0), xLB(0), xCR(0), GrpCush(-1);   { peak file + auto account rules (2026-11-09) }
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -152,6 +153,7 @@ if Time = DecisionTime and IsEarlyClose = false and RefPx > 0 and ATRv > 0
 			CE = GetRTAccountEquity(IffString(AccountName <> "", AccountName, GetAccountID));
 			Thr = MinList(xLB, MaxList(PeakEOD, xSB, PeakSeed, PeakAuto) - xDD);
 			Cush = CE - Thr;
+			if GrpCush >= 0 then Cush = MinList(Cush, GrpCush);   { copier group: never size above the weakest account }
 			if CE <= 0 or Cush <= 0 or (PeakSeed <= 0 and PeakAuto <= 0) then Qty = 0
 			else begin
 				CF = MinList(1, MaxList(CushionMin, Cush / xCR));
@@ -213,6 +215,12 @@ if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountNa
 		PkFound = 0;
 		for PkI = Ceiling((xLB + xDD) / 100) downto Floor(xSB / 100) begin
 			if PkFound = 0 and GetFileAttributesA("C:\TradingLogs\peak\" + PAcct + "_" + NumToStr(PkI * 100, 0)) <> -1 then PkFound = PkI * 100;
+		end;
+		GrpCush = -1;                               { copier group: the weakest funded account's cushion (VPS file) }
+		if CopierGroup then begin
+			for PkI = 100 downto 0 begin
+				if GrpCush < 0 and GetFileAttributesA("C:\TradingLogs\group\FUNDED_C" + NumToStr(PkI * 100, 0)) <> -1 then GrpCush = PkI * 100;
+			end;
 		end;
 		if PkFound > 0 then begin PeakAuto = MaxList(PeakAuto, PkFound); PKeyLast = PKey; end;
 	end;

@@ -35,3 +35,44 @@ foreach ($acct in $any.Keys) {
     Get-ChildItem "$Dir\$($acct)_*" -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne $name } | Remove-Item -Force
     if (-not (Test-Path "$Dir\$name")) { New-Item -ItemType File -Force -Path "$Dir\$name" | Out-Null }
 }
+
+# ---------- Rithmic copier groups (2026-11-09) ----------
+# The copier sends the leader's orders to every follower, so the strategies size for the GROUP (user: one leader for the
+# evaluations, one for the funded accounts; followers 1x). From the latest day's close balances (the Apex Chart Guard's SCAN
+# rows cover every account, not only the leader):
+#   evaluations (APEX-..., 150K): alive = above its trailing floor (highest close - 4,000) and below the 159,000 target;
+#     the group's MEAN profit >= 6,000 -> file group\EVAL_FINISH (every evaluation trades half size), else group\EVAL_FULL
+#     (analysis/copier_finish_bench.py: the best rule a copier allows, +0.8 points vs no finish mode);
+#   funded (PA-APEX-...): cushion = close - min(start + 100, highest close - trailing drawdown); the smallest cushion of the
+#     accounts still above their threshold, rounded DOWN to $100 (0-10,000) -> file group\FUNDED_C<value>.
+# The strategies read these once a day (input CopierGroup true). No alive account of a type = its files are removed.
+$G = "$Logs\group"; New-Item -ItemType Directory -Force -Path $G | Out-Null
+$last = ($eod.Keys | ForEach-Object { $_.Split("|")[1] } | Sort-Object | Select-Object -Last 1)
+$evalProf = @(); $fundCush = @()
+if ($last) {
+    foreach ($acct in $any.Keys) {
+        $k = "$acct|$last"; if (-not $eod.ContainsKey($k)) { continue }
+        $close = $eod[$k][1]
+        if ($any[$acct] -gt 100000) { $start = 150000; $dd = 4000; $tgt = 159000 } else { $start = 50000; $dd = 2000; $tgt = 53000 }
+        $hi = $start
+        foreach ($kk in $eod.Keys) { if ($kk.StartsWith("$acct|") -and $eod[$kk][1] -gt $hi) { $hi = $eod[$kk][1] } }
+        if ($acct.StartsWith("PA-")) {
+            $thr = [math]::Min($start + 100, $hi - $dd); $c = $close - $thr
+            if ($c -gt 0) { $fundCush += $c }
+        } elseif ($acct.StartsWith("APEX-") -and $start -eq 150000) {
+            if ($close -gt ($hi - $dd) -and $close -lt $tgt) { $evalProf += ($close - $start) }
+        }
+    }
+}
+Get-ChildItem "$G\EVAL_*" -ErrorAction SilentlyContinue | Remove-Item -Force
+if ($evalProf.Count -gt 0) {
+    $m = ($evalProf | Measure-Object -Average).Average
+    $f = if ($m -ge 6000) { "EVAL_FINISH" } else { "EVAL_FULL" }
+    New-Item -ItemType File -Force -Path "$G\$f" | Out-Null
+}
+Get-ChildItem "$G\FUNDED_C*" -ErrorAction SilentlyContinue | Remove-Item -Force
+if ($fundCush.Count -gt 0) {
+    $mc = [math]::Max(0, [math]::Min(10000, [math]::Floor((($fundCush | Measure-Object -Minimum).Minimum) / 100) * 100))
+    New-Item -ItemType File -Force -Path "$G\FUNDED_C$([int]$mc)" | Out-Null
+}
+"$(Get-Date -Format 'yyyy-MM-dd HH:mm'),$last,evals=$($evalProf.Count),eval_mean=$(if ($evalProf.Count) { [math]::Round(($evalProf | Measure-Object -Average).Average, 0) }),funded=$($fundCush.Count),min_cushion=$(if ($fundCush.Count) { [math]::Round(($fundCush | Measure-Object -Minimum).Minimum, 0) })" | Add-Content "$G\group_log.csv"

@@ -135,6 +135,14 @@ Apex Chart Guard's balance rows (`live/vps/cushion_peak.ps1`), and each strategy
 Apex funded accounts (name PA-...); 50K / 150K rules come from the account's balance (above 100,000 = 150K); any 0 input = auto.
 The same files on an evaluation or personal account: cushion off. Finish mode (`UseFinish` true by default) acts only on 150K
 evaluation accounts (APEX-...); the Apex Chart Guard's `TargetBalance` -1 = auto (evaluations 159050 / 53050, others off).
+**Rithmic copier (user 2026-11-09): two leaders, one for the evaluations, one for the funded accounts; followers 1x.** The
+MultiCharts charts run on the two leaders only. Every account then trades the leader's size, so the size follows the GROUP:
+funded = the weakest funded account's cushion; evaluations = finish mode when the group's MEAN profit is >= $6,000
+(`../analysis/copier_finish_bench.py`: 40.0% vs 39.1% with no finish mode, band +0.2 / +1.5; per-account finish would be 40.9%,
+so the copier costs ~0.9 points of pass rate for no per-account setup). Built: the Apex Chart Guard scans every account's balance
+at 15:55 (ACCT rows tag SCAN), the VPS writes `C:\TradingLogs\group\EVAL_FINISH` / `EVAL_FULL` / `FUNDED_C<min cushion>`
+(`live/vps/cushion_peak.ps1`), the strategies read them once a day (`CopierGroup` true, default). Followers do NOT get their own
+target exit (only the leader's chart guard sees a target); a follower that touches $159,050 inside a trade is not closed there.
 
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 

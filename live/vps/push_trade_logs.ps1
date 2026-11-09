@@ -80,6 +80,8 @@ Copy-Item "$Logs\bars\*.csv" "data\live_bars\" -Force -ErrorAction SilentlyConti
 # FINRA signal log (2026-11-09) -> live/finra/ (Claude follows WATCHLIST #32's forward log from it)
 New-Item -ItemType Directory -Force "live\finra" | Out-Null
 if (Test-Path "$Logs\finra\signals.csv") { Copy-Item "$Logs\finra\signals.csv" "live\finra\signals.csv" -Force }
+# copier group state log (2026-11-09) -> live/health/group_log.csv
+if (Test-Path "$Logs\group\group_log.csv") { Copy-Item "$Logs\group\group_log.csv" "live\health\group_log.csv" -Force }
 git add live/trades live/health data/live_bars live/finra
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {

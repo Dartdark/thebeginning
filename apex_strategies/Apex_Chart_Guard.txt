@@ -17,14 +17,16 @@
 // Rows (14 columns, no header):
 //   OPEN / CLOSE: event,tag,symbol,side,contracts,entry_date,entry_time,entry_price,exit_date,exit_time,exit_price,profit_usd,bar_date,bar_time
 //   POS:  strategy position vs the broker's position for this strategy, on every change and every HeartbeatMins
+//   ACCT rows with tag SCAN: once a day between 15:55 and 16:00 CT, the balance of EVERY account of this Apex user that
+//         Rithmic reports (APEX-<id>-01..99 and PA-APEX-<id>-01..99): the VPS builds the copier GROUP state from them
 //   ACCT: account, auto-trading on (1/0), net worth, equity, bar age (s), routed account, every MonitorMins
 
 inputs: Tag("VB-2"), AccountName(""), TargetBalance(-1), StopPoints(0), Folder("C:\TradingLogs\"), HeartbeatMins(30),
-	MonitorMins(5), EquityHasOpenPL(true), LogHistory(false);
+	MonitorMins(5), EquityHasOpenPL(true), LogHistory(false), ScanAccounts(true);
 variables: LastTT(0), LastEntryKey(0), K(0), N(0), EK(0), Live(false), SideTxt(""), Row(""), FileName(""), BarDay(""),
 	StratPos(0), BrokerPos(0), LastStrat(-999), LastBroker(-999), LastHB(-1), MinOfDay(0), HBKey(0),
 	MRoute(""), MNW(0), MEq(0), MAuto(0), MAge(0), MFile(""), MDay(""), MRow(""), MSlot(0), MLastSlot(-1), MMin(0),
-	Tk(0), GEq(0), GBase(0), GNeed(0), GPx(0), AcctUse(""), TgtX(0);
+	Tk(0), GEq(0), GBase(0), GNeed(0), GPx(0), AcctUse(""), TgtX(0), ScanDay(0), ScanBase(""), ScanRest(""), ScanPos(0), ScanN(0), ScanNN(""), ScanName(""), ScanEq(0), ScanK(0);
 
 // keep calculating when no tick arrives, so a dead feed still produces ACCT rows with a growing bar age (as the Chart Monitor)
 RecalcLastBarAfter(60);
@@ -139,4 +141,34 @@ end;
 if StopPoints > 0 then begin
 	if MarketPosition > 0 and Low <= EntryPrice - StopPoints then Sell ("Stop Guard LX") next bar at market;
 	if MarketPosition < 0 and High >= EntryPrice + StopPoints then BuyToCover ("Stop Guard SX") next bar at market;
+end;
+
+// ---------- 6. account scan for the Rithmic copier groups (2026-11-09; ScanAccounts false = off) ----------
+// Once a day at 15:55-16:00 CT (computer clock), reads Rithmic's balance of every account of this Apex user (the user id is
+// taken from this chart's own account: APEX-<id>-NN / PA-APEX-<id>-NN) and writes one ACCT row per account found, tag SCAN.
+// The VPS (live/vps/cushion_peak.ps1) turns them into the group files the strategies read: the weakest funded account's
+// cushion and the evaluation group's finish mode. Log only: no orders.
+if ScanAccounts and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart and CurrentTime >= 1555 and CurrentTime <= 1600
+	and ScanDay <> CurrentDate and AcctUse <> "" then begin
+	ScanDay = CurrentDate;
+	ScanPos = InStr(AcctUse, "APEX-");
+	if ScanPos > 0 then begin
+		ScanRest = MidStr(AcctUse, ScanPos + 5, 30);
+		ScanPos = InStr(ScanRest, "-");
+		if ScanPos > 1 then begin
+			ScanBase = LeftStr(ScanRest, ScanPos - 1);
+			MDay = NumToStr(CurrentDate + 19000000, 0);
+			MFile = Folder + MDay + ".csv";
+			for ScanN = 1 to 99 begin
+				if ScanN < 10 then ScanNN = "0" + NumToStr(ScanN, 0) else ScanNN = NumToStr(ScanN, 0);
+				for ScanK = 0 to 1 begin
+					if ScanK = 0 then ScanName = "APEX-" + ScanBase + "-" + ScanNN else ScanName = "PA-APEX-" + ScanBase + "-" + ScanNN;
+					ScanEq = GetRTAccountEquity(ScanName);
+					if ScanEq > 0 then
+						FileAppend(MFile, "ACCT,SCAN," + GetSymbolName + "," + ScanName + ",,0," + NumToStr(ScanEq, 2) + ",,,,,," + MDay + ","
+							+ NumToStr(CurrentTime, 0) + NewLine);
+				end;
+			end;
+		end;
+	end;
 end;
