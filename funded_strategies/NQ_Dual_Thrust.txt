@@ -88,8 +88,13 @@ Inputs:
     NumContracts(1),
     UseHolidayFilter(true),
     PrintDT(false),
-	HeartbeatTag("");      { live guard: the chart's logger tag; empty = no heartbeat }
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Dual_Thrust 2026-11-05");   { code version: bump the date on every change }
+	HeartbeatTag(""),      { live guard: the chart's logger tag; empty = no heartbeat }
+	UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
+	FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+	FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
+	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Dual_Thrust 2026-11-09");   { code version: bump the date on every change }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
 
 Variables:
     intrabarpersist RTH_H(0), intrabarpersist RTH_L(999999),
@@ -188,6 +193,22 @@ If MarketPosition = 0 and PrevPos = 1 and Time < FlattenTime then BlockL = true;
 If MarketPosition = 0 and PrevPos = -1 and Time < FlattenTime then BlockS = true;
 PrevPos = MarketPosition;
 
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(FinishAccount);
+		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
+	end;
+	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
+end;
+FinQty = NumContracts;
+if FinOn then FinQty = MaxList(1, Floor(NumContracts * FinishMult + 0.5));
+
 // ── daily trade cap (v2) ────────────────────────────────────────
 If MaxTradesPerDay <= 0 then CapOK = true
 else CapOK = DayTrades < MaxTradesPerDay;
@@ -199,7 +220,7 @@ If Armed and DayBlocked = false and HolidayBlock = false and CapOK
     If Close > UpTrig and MarketPosition <> 1 and BlockL = false then begin
         If MarketPosition = -1 and AllowReverse = false then Value1 = 0
         else begin
-            Buy ("DT_L") NumContracts contracts next bar at market;
+            Buy ("DT_L") FinQty contracts next bar at market;
             If EntryBarStop and SLPoints > 0 then
                 Sell ("DT_SL0") next bar at Close - SLPoints stop;   // entry-bar protection
             BlockS = false;
@@ -209,7 +230,7 @@ If Armed and DayBlocked = false and HolidayBlock = false and CapOK
     else If Close < DnTrig and MarketPosition <> -1 and BlockS = false then begin
         If MarketPosition = 1 and AllowReverse = false then Value1 = 0
         else begin
-            SellShort ("DT_S") NumContracts contracts next bar at market;
+            SellShort ("DT_S") FinQty contracts next bar at market;
             If EntryBarStop and SLPoints > 0 then
                 BuyToCover ("DT_SL0s") next bar at Close + SLPoints stop;   // entry-bar protection
             BlockL = false;

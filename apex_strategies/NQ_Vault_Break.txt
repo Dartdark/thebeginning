@@ -47,8 +47,13 @@ Inputs:
 	EarlyLastEntry(1100),
 	EarlyFlattenTime(1130),
 	NumContracts(1),        { 1 for NQ backtests; 10 MNQ = 1 NQ }
-	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break 2026-11-05");   { code version (live guard 2026-10-30): bump the date on every change }
+	HeartbeatTag(""),      { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat }
+	UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
+	FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+	FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
+	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
 
 Variables:
 	BarVol(0), CumPV(0), CumVol(0), DayVwap(0),
@@ -152,6 +157,22 @@ if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 
 { tri-state (2026-11-05): -1 with any error other than 2 (file not found) / 3 (path not found) = state UNKNOWN -> no new entries }
 if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
 
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(FinishAccount);
+		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
+	end;
+	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
+end;
+FinQty = NumContracts;
+if FinOn then FinQty = MaxList(1, Floor(NumContracts * FinishMult + 0.5));
+
 { ---------- Entries ---------- }
 TradesToday = TotalTrades - DayStartTrades;
 if MarketPosition <> 0 then TradesToday = TradesToday + 1;
@@ -159,7 +180,7 @@ if MarketPosition <> 0 then TradesToday = TradesToday + 1;
 if ATRv > 0 and Time >= FirstDecision and Time < DayLastEntry
 	and MarketPosition = 0 and TradesToday < MaxTradesPerDay
 	and Close > Noise and Close > DayVwap and NoEntry = false then
-	Buy ("VaultBreak") NumContracts contracts next bar at market;
+	Buy ("VaultBreak") FinQty contracts next bar at market;
 
 { ---------- Exits ---------- }
 SetStopContract;

@@ -82,10 +82,15 @@ inputs:
     StopPts( 0 ),             // 0 = off, as in the test
     TargetPts( 100 ),         // 100 points = $2,000 per NQ (per contract)
     NumContracts( 1 ),        // NQ minis
-    HeartbeatTag( "" );       // live guard: the chart's logger tag (MON_BR-2 / MON_BR150); empty = no heartbeat
+    HeartbeatTag( "" ),       // live guard: the chart's logger tag (MON_BR-2 / MON_BR150); empty = no heartbeat
+    UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
+    FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+    FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
+    FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
 
 variables:
-    KillOn( false ), NoEntry(false), KillAttr( -1 ), KillErr( 0 ), HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ), HB_Ver( "Bridge_Monday_Long_L644NQ 2026-11-05" ),   { code version: bump the date on every change }
+    KillOn( false ), NoEntry(false), KillAttr( -1 ), KillErr( 0 ), HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ), HB_Ver( "Bridge_Monday_Long_L644NQ 2026-11-09" ),   { code version: bump the date on every change }
     NewSession( false ), SessionDay( 0 ), SessionDate( 0 ),
     Has830( false ), Has1200( false ), Has1500( false ), IsHoliday( false ), FirstRTHBar( true ),
     Open830( 0 ), Close1200( 0 ), Close1500( 0 ), RTHHigh( 0 ), RTHLow( 0 ), TodayClose( 0 ),
@@ -344,10 +349,26 @@ if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 
 { tri-state (2026-11-05): -1 with any error other than 2 (file not found) / 3 (path not found) = state UNKNOWN -> no new entries }
 if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
 
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(FinishAccount);
+		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
+	end;
+	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
+end;
+FinQty = NumContracts;
+if FinOn then FinQty = MaxList(1, Floor(NumContracts * FinishMult + 0.5));
+
 if Time = EntryTime and SessionDay = SessionWeekday and MarketPosition = 0
    and NoTradeDay = false and PrevADX >= 0 then begin
     if PrevADX >= AdxMin and PrevADX < AdxMax and PrevDIDiff > 0 and NoEntry = false then
-        Buy ( "MonLong" ) NumContracts contracts this bar on close;
+        Buy ( "MonLong" ) FinQty contracts this bar on close;
 end;
 
 // ==========================================================================

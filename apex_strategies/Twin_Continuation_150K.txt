@@ -84,7 +84,11 @@ Inputs:
     LockBalance( 150100 ),
     PeakSeed( 0 ),            { highest END-OF-DAY balance so far (new account: StartBalance); RETYPE after any restart; 0 = no entries }
     CushionRef( 3000 ),
-    CushionMin( 0.5 );
+    CushionMin( 0.5 ),
+    UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
+    FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+    FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
+    FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
 
 Arrays:
     CanH[6]( 0 ), CanL[6]( 0 ), SessRng[100]( 0 );
@@ -120,8 +124,9 @@ Vars:
     CalMonth( 0 ), CalDay( 0 ), CalDow( 0 ), CalYear( 0 ), IsWeekday( false ), IsEarlyClose( false ),
     HolNoEntry( false ), HolFlat( false ),
     KillOn( false ), NoEntry( false ), KillAttr( -1 ), KillErr( 0 ), HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ),
-    HB_Ver( "Twin_Continuation_150K 2026-11-08" ),
+    HB_Ver( "Twin_Continuation_150K 2026-11-09" ),
     QtyMO( 0 ), QtyBO( 0 ), StopBO( 0 ), CE( 0 ), CEPrev( 0 ), CK( 0 ), CKLast( 0 ), PeakEOD( 0 ), Thr( 0 ), Cush( 0 ), CF( 0 );
+Vars: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
 
 Once Begin
     If BarInterval <> 1 or BarType <> 1 Then
@@ -359,6 +364,20 @@ NoEntry = KillOn;
 If GetAppInfo( aiRealTimeCalc ) = 1 and GetFileAttributesA( "C:\TradingLogs" ) = -1 Then NoEntry = true;
 If GetAppInfo( aiRealTimeCalc ) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 Then NoEntry = true;
 
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(FinishAccount);
+		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
+	end;
+	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
+end;
+
 QtyMO = Qty; QtyBO = Qty;
 If BO_MaxStopMult > 0 Then StopBO = BO_MaxStopMult * AtrU Else StopBO = MaxList( LvlL - StpL, StpS - LvlS );
 If UseCushion and GetAppInfo( aiRealTimeCalc ) = 1 Then Begin
@@ -372,6 +391,10 @@ If UseCushion and GetAppInfo( aiRealTimeCalc ) = 1 Then Begin
         If MO_StopPoints > 0 Then QtyMO = MinList( QtyMO, Floor( Cush / ( MO_StopPoints * BigPointValue ) ) );
         If StopBO > 0 Then QtyBO = MinList( QtyBO, Floor( Cush / ( StopBO * BigPointValue ) ) );
     End;
+End;
+If FinOn Then Begin
+    If QtyMO >= 1 Then QtyMO = MaxList( 1, Floor( QtyMO * FinishMult + 0.5 ) );
+    If QtyBO >= 1 Then QtyBO = MaxList( 1, Floor( QtyBO * FinishMult + 0.5 ) );
 End;
 If NoEntry Then Begin SFire = 0; Armed = false; End;
 

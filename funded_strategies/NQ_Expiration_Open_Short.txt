@@ -61,9 +61,14 @@ Inputs:
 	LockBalance(50100),     { 50K 50100 / 150K 150100 }
 	PeakSeed(0),            { highest END-OF-DAY balance so far (new account: StartBalance); RETYPE after any restart / recompile; 0 = no entries }
 	CushionRef(1500),       { full size from this cushion (50K 1500 / 150K 3000) }
-	CushionMin(0.5);        { size floor of the cushion sizing }
+	CushionMin(0.5),        { size floor of the cushion sizing }
+	UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
+	FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+	FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
+	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
 Variables: CE(0), CEPrev(0), CK(0), CKLast(0), PeakEOD(0), Thr(0), Cush(0), CF(0);   { cushion guard }
-Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-11-08");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -137,6 +142,20 @@ if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 
 if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
 
 { ---------- Entry: short at the 8:30 open ---------- }
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(FinishAccount);
+		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
+	end;
+	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
+end;
+
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 if IsExpiration and Time = EntryBarTime and MarketPosition = 0 and TradedToday = false
 	and ATRv > 0 then begin
@@ -156,6 +175,7 @@ if IsExpiration and Time = EntryBarTime and MarketPosition = 0 and TradedToday =
 			if StopPts > 0 then Qty = MinList(Qty, Floor(Cush / (StopPts * BigPointValue)));
 		end;
 	end;
+	if FinOn and Qty >= 1 then Qty = MaxList(1, Floor(Qty * FinishMult + 0.5));
 	if Qty >= 1 and NoEntry = false then
 		SellShort ("Exp Open S") Qty contracts next bar at market;
 end;

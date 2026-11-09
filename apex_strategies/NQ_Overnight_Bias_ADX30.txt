@@ -51,8 +51,13 @@ Inputs:
 	EarlyLastEntry(1100),
 	EarlyExitTime(1130),
 	NumContracts(1),
-	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ADX30 2026-11-05");   { code version (live guard 2026-10-30): bump the date on every change }
+	HeartbeatTag(""),      { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat }
+	UseFinish(false),       { 150K EVALUATION finish mode (2026-11-09, analysis/eval_levers150.py): true on evaluation charts only }
+	FinishAccount(""),      { the Apex evaluation account, typed exactly, e.g. APEX-681524-05 (Rithmic Equity is read for it) }
+	FinishAt(156000),       { from a session-start balance at or above this (target $159,000 = $3,000 to go) ... }
+	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ADX30 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0);   { finish mode }
 
 Variables:
 	EntryBuf(0),
@@ -193,11 +198,26 @@ if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr
 { a trade that opened and closed inside one bar still counts }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(FinishAccount);
+		if FinRead > 0 then begin FinEq = FinRead; FinKey = FinKeyNow; end;
+	end;
+	FinOn = (FinKey = FinKeyNow) and (FinEq >= FinishAt);
+end;
+
 if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition = 0
 	and Time >= OREnd and Time < DayLastEntry and ADXv > ADXMin then begin
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if FinOn and Qty >= 1 then Qty = MaxList(1, Floor(Qty * FinishMult + 0.5));
 	if Qty >= 1 and NoEntry = false then begin
 		{ live fix (2026-10-14): a stop order on the wrong side of the market is rejected by the broker
 		  ("Invalid StopMarket order parameters"), so when price is already at / through the level
