@@ -23,7 +23,6 @@ if __name__ == "__main__":
     for k in ("OND_MC", "VCS_MC", "LDF_MC_L", "LDF_MC_S", "ONB_ML2_L", "ONB_ML2_S"):
         S["lab " + k] = (pd.Series(lab.C[k], index=ld).reindex(dts, fill_value=0).values, pd.Series(lab.W[k].min(axis=1), index=ld).reindex(dts, fill_value=0).values, True, k != "OND_MC" or True)
     Pp = pd.read_pickle("scratch_data/personal_P.pkl")
-    multi = {"S30", "Kusho", "SwingTarget": False}
     for c in Pp.columns:
         if c in ("VaultBreak", "OvernightBiasML", "MondayLong", "ExpirationOpenShort", "LateDayFlow", "NFPFade", "BridgeMondayLong", "TwinContinuation", "DualThrust",
                  "RelativeStrength", "OvernightTick", "CLSundayFade_perMCL", "ESMOCFollow_perMES"): continue      # already above with intraday paths
