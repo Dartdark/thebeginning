@@ -844,6 +844,11 @@ $154,600: Apex's pages, user's screenshots in reports/screenshots/, 2026-10-15).
   view that VB is weak lately: VB $49 a trade in 2026 vs DT $117), 2022 -4%, 2024 -3%. Full replacement (VB 0 + DT 8) 33.3%: VB stays
   the main source of speed. Review each quarter (Friday review): switch back if VB 20 beats it on the latest 12 months.
   150K evaluation inputs now: VB 15 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250, Twin cap1 2 MNQ, Dual Thrust 2 MNQ.
+  **Finish mode (user 2026-11-09, automated):** once the evaluation's balance at the session start is >= $156,000, every chart trades
+  half size (nearest whole contract, at least 1) until it passes: pass 38.9 -> 40.6% (+1.7, band +0.8 / +2.8; plateau $4,500-$7,500
+  at x0.5; `../analysis/eval_levers150.py`, `../analysis/eval_finish150_plateau.py`). Inputs on all six evaluation charts: `UseFinish`
+  true, `FinishAccount` = the evaluation account exactly, `FinishAt` 156000, `FinishMult` 0.5. Off on funded charts. Daily stops
+  (-$1,000 / -$1,500) and start-timing rules were tested: they hurt or did nothing.
 - **Funded:** the funded plan x 1.5 with full size from a **$3,000** cushion: $15,731 / $19,743 (1 / 2 years), **blown 0% /
   0%**, all 6 payouts within 2 years 91% (real ladder; the assumed one gave $15,866 / $19,725). Bigger (x 2–3) or a faster cushion blows 9–37%; Twin adds nothing.
   Inputs x 1.5 (whole MNQ, rounded down): VB 4 (`FlaggedContracts` 1), ONB ML $600, Monday 1, EOS $1,050, LDF 3, NFP $750,

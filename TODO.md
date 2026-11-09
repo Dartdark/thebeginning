@@ -123,6 +123,7 @@ bottom). Times are Central (CT).
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
       after tax ~3 (5 days/wk) / ~4 (6 days/wk); without tax 4 (5 days) / 4-5 (6 days). Dec 26 pay (3 days): ~2, January starts.
+- [ ] **150K evaluations from the next purchase: FINISH MODE on all six evaluation charts (user 2026-11-09)** - paste the new code of VB (`apex_strategies/NQ_Vault_Break.txt`), ONB ADX30, Bridge Monday, EOS (`funded_strategies/NQ_Expiration_Open_Short.txt`), Twin 150K and Dual Thrust (all HB_Ver 2026-11-09), compile each ('compiled successfully'), then set `UseFinish` true, `FinishAccount` = the evaluation account typed exactly, `FinishAt` 156000, `FinishMult` 0.5. Half size from a $156,000 session-start balance, automatic (reads Rithmic once a day). First check: the first time an account closes at $156,000+, Claude confirms in the logs that the next day's orders were half size.
 - [ ] **150K evaluations from the next purchase (user 2026-11-09): Vault Break `NumContracts` 20 -> 15 (other VB inputs unchanged) and a
       6th chart, Dual Thrust 2 MNQ** (`funded_strategies/NQ_Dual_Thrust.txt`, the same file as the 150K funded chart: 1-minute MNQ, Exchange
       time = CT, CME 24h session, IOG off, `NumContracts` 2, `HeartbeatTag` DT150 or DT150-<n>). Compile, check 'compiled successfully';
