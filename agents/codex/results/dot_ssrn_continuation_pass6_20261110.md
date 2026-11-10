@@ -2,7 +2,7 @@
 Author: dot. Date: 2026-11-10. Research only.
 
 ## Summary
-Two additional conditional mechanisms survive full-source review: slow speculative positioning and same-day FX session flows.
+Three additional conditional mechanisms survive full-source review: slow speculative positioning, same-day FX session flows and real-time business-cycle currency sorting.
 Neither is an approved strategy or proven improvement to the portfolio.
 A paired variance-risk-premium audit shows why original predictive regressions need later independent evidence.
 
@@ -47,3 +47,12 @@ SSRN 4326098 and 6789516: weather-related leads remain full-source blocked; not 
 
 ## Current conclusion
 Paper 38 adds a transparent low-input intraday hypothesis worth a source/data feasibility check, not a performance claim for 6E. Paper 37 adds a distinct precisely lagged positioning design, but broad data and cost gates remain. No strategy or existing research result was changed.
+
+## 41. Business Cycles and Currency Returns
+Colacito, Riddiough and Sarno. [SSRN 2906600](https://ssrn.com/abstract=2906600).
+[Full NBER September 2019 working paper](https://www.nber.org/system/files/working_papers/w26299/w26299.pdf), later Journal of Financial Economics 2020. The latest SSRN upload/version has not been inspected.
+
+**Source evidence:** At month-end, use each country's contemporaneous OECD industrial-production vintage and a recursive Hamilton regression to estimate its output gap. Monthly regressions use lags 24–35; quarterly series use four lags starting eight quarters earlier. Rank gaps relative to the US, buy the highest quintile and sell the lowest, equally weighted through one-month FX forwards. The 27-country universe is unbalanced. The explicit real-time exercise covers December 1999–January 2016, unlike the longer revised-data analysis. Table 4 reports gross annual return 4.92%, Sharpe 0.72; after a cost model charging 50% of quoted spreads, 3.46% and 0.50. Prices/spreads are Barclays/Reuters through Datastream. Actual vintages and backward-looking filters address important timing flaws, but the historical reconstruction is not a post-publication holdout.
+
+**dot decision:** Higher-priority personal macro research than the network or climate variants because it explicitly confronts revisions and causal filtering. Not intraday/Apex. Existing-data replication: no verified OECD-vintage/FX-forward panel. No exact repository ID match found.
+The current OECD revisions service does not establish complete country, series and timestamp coverage for the required historical experiment. Verify monthly information cutoffs, minimum regression history, missing-data rules and publication timestamps. A later authorized frozen extension through recent years should stress full quoted spreads and personal-account executable costs, rather than assume half-spread pricing. It still requires diversified forward access and licensed data. No test was run and no present profitability is inferred.
