@@ -102,7 +102,6 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 55 | [2939649](https://ssrn.com/abstract=2939649) | Commodity Option-IV Innovation | Personal monthly | No | No: options surfaces/native futures | Conditional; gross old sample/short-side risk |
 | 56 | [3019870](https://ssrn.com/abstract=3019870) | Low-Volume FX Reversal | Personal daily | No: overnight | No: CLS/Olsen/forward inputs | Conditional; historical delivery clock unresolved |
 | 57 | [6415558](https://ssrn.com/abstract=6415558) | Dividend-Payment FX Flows | Personal daily | No: overnight | No: as-of dividends/FX financing | Conditional; dissertation verified, SSRN parity gated |
-
 | 58 | [3747330](https://ssrn.com/abstract=3747330) | API Information Before EIA | Intraday CL research | Normal09:30–10:29 Eastern | Price adaptation possible; exact rows/calendar pending | Conditional gross evidence; consensus/cost/holdout gates |
 
 ## Guardrails for any later build
@@ -134,3 +133,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Intraday exclusions update](dot_ssrn_intraday_exclusions_update_20261110.md): fresh overnight-drift counterevidence, bounded ORB failures, and corrected range-forecast validation. No candidate-count inflation.
 
 - [Pass 19: API-to-EIA information](dot_ssrn_continuation_pass19_20261110.md), entry58: intraday CL source and separate lower-input price adaptation, neither net-validated nor data-admitted.
+
+- [Currency-hedging source update](dot_ssrn_currency_hedging_source_update_20261110.md): D23 draft specifications recovered, final-version and modern implementation gates remain. Related Israeli causal evidence is not a trade.
