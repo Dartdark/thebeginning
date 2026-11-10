@@ -104,6 +104,10 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 57 | [6415558](https://ssrn.com/abstract=6415558) | Dividend-Payment FX Flows | Personal daily | No: overnight | No: as-of dividends/FX financing | Conditional; dissertation verified, SSRN parity gated |
 | 58 | [3747330](https://ssrn.com/abstract=3747330) | API Information Before EIA | Intraday CL research | Normal09:30–10:29 Eastern | Price adaptation possible; exact rows/calendar pending | Conditional gross evidence; consensus/cost/holdout gates |
 
+| 59 | [4764451](https://ssrn.com/abstract=4764451) | Pre-FOMC Treasury Drift | Personal calendar | Crosses midnight; one CME session | No: native contract/endpoints unverified | Conditional gross calendar evidence |
+| 60 | [4326098](https://ssrn.com/abstract=4326098) | Extreme-Weather NG Spread | Personal multi-day | No | No: operational forecasts/native spread | Retrospective weather and return-accounting gates |
+| 61 | [3629061](https://ssrn.com/abstract=3629061) | Prospect Theory FX Sorting | Personal monthly | No | No: broad spot/forward panel | Modest old net evidence; modern holdout missing |
+
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
 
@@ -139,3 +143,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Agricultural source update](dot_ssrn_agriculture_source_update_20261110.md): private-forecast timestamp gates, ex-post coefficient correction and execution-only studies. Annual-rebalance SSRN identity resolved without adding a duplicate.
 
 - [Commodity anomaly audit](dot_ssrn_commodity_anomaly_audit_20261110.md): jump-factor source bridge unresolved; residual-volatility benchmark dependence and weak original commodity BAB evidence. No new qualified count.
+
+- [Pass 20: Treasury drift, weather spreads and prospect-theory FX](dot_ssrn_continuation_pass20_20261110.md): entries 59–61, with explicit historical-vintage, accounting and modern-validation gates. No new current-data admission.
