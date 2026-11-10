@@ -164,4 +164,4 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 
 - [Final commodity-currency linkage check](dot_ssrn_final_currency_linkage_audit_20261110.md): fresh publication, old sample, liquidity-sensitive predictive regressions; no verified net OOS trading promotion.
 
-- [Free-input acquisition supplement](dot_free_input_acquisition_20261110.md), dot, 2026-11-10: retained 72 advance FOMC schedule dates for2018–26, a1,007-row/19-market2018COT extraction and14EIA holiday exceptions. Existing COT ownership is acknowledged; historical vintages, receipt clocks, API/Bloomberg consensus and native curves remain gated. No returns/tests or candidate promotion.
+- [Free-input acquisition supplement](dot_free_input_acquisition_20261110.md), dot, 2026-11-10: retained 72 advance FOMC schedule dates for 2018–26, a 1,007-row/19-market 2018 COT extraction and 14 EIA holiday exceptions. Existing COT ownership is acknowledged; historical vintages, receipt clocks, API/Bloomberg consensus and native curves remain gated. No returns/tests or candidate promotion.
