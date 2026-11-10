@@ -47,7 +47,7 @@ def check(day, asof=None):
             for t in cfg["charts"]}
     for tag in cfg["charts"]:
         sig = df[(df.event == "SIG") & (df.tag == tag)]
-        if sig.empty and has_sig(tag):
+        if sig.empty:
             out.append(f"{tag}: the STRATEGY wrote no heartbeat today: not compiled, removed or stopped (chart may look normal).")
         a = df[(df.event == "ACCT") & (df.tag == tag)]
         if a.empty:
@@ -73,10 +73,14 @@ def check(day, asof=None):
         elif float(r.entry_price or 0) > 900: out.append(f"{tag}: chart's last bar {float(r.entry_price) / 60:.0f} min old (feed?).")
         if str(r.contracts) != "1": out.append(f"{tag}: auto-trading OFF (last line {int(r.bar_time):04d}).")
         if want[tag] and r.side != want[tag][0]: out.append(f"{tag}: monitor account {r.side}, expected {want[tag][0]}.")
+        expected = cfg["accounts"].get(cfg["charts"][tag].get("account", ""), {}).get("id")
+        route = "" if pd.isna(r.exit_date) else str(r.exit_date).strip()
+        if expected and route != expected:
+            out.append(f"{tag}: routed account {route or 'UNKNOWN'}, expected {expected} (Auto Trading gear).")
         p = df[(df.event == "POS") & (df.tag == tag)]
         if len(p) and p.iloc[-1].contracts != p.iloc[-1].profit_usd:
             out.append(f"{tag}: strategy position {p.iloc[-1].contracts} vs broker {p.iloc[-1].profit_usd}.")
-    for t in sorted(set(df[df.event.isin(["POS", "ACCT", "SIG"])].tag) - set(cfg["charts"])):
+    for t in sorted(set(df[df.event.isin(["POS", "ACCT", "SIG"])].tag) - set(cfg["charts"]) - {"SCAN"}):   # SCAN = the guard's daily account scan, not a chart
         out.append(f"{t}: unexpected chart running (retired account or wrong tag).")
     import live_guard as L                                    # 2026-10-30: failed accounts and code versions
     for n, a in L.floors(d, cfg).items():

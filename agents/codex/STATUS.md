@@ -152,3 +152,10 @@ Claude ran the price-only version of Alturki & Kurov (SSRN 3747330) on CL 2018-2
 timestamp), (2) EIA 'Crude Oil Inventories' actual + forecast (the consensus available before the release). Save as
 `data/codex_<date>/api_eia_crude.csv` (release_time_utc, series, actual, forecast, previous). No returns; Claude pre-registers and runs
 the signal (API actual - EIA forecast, follow into EIA-60 -> EIA-1). Note in the file that Investing's forecast is not Bloomberg's.
+
+## 2026-11-10 evening: Codex alert review (8a14dad3) ADOPTED
+Claude applied `agents/codex/code/alert_review_20261110/reliability.patch` unchanged (F1 evaluation floor no longer needs a
+funded lock: #5 floor 146,000 confirmed with live_guard.floors(); F2 failed alerts retried, not marked sent; F3 missing charts
+built from expected_setup; F5 routed-account check; F8 America/Chicago timestamps) + `max_stop` 2750 for #5. F4 (VB/ONB tags)
+fixed by the user the same evening (VB150-5 / ONB150-5). Open: F6 watchdog stops ~15:15 (Bridge Sunday window), F7 dashboard
+odds still the old 4-piece book x 2.5. Codex's PowerShell harness not rerun here (no pwsh); Windows acceptance = tomorrow's run.

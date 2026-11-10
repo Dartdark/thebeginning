@@ -31,20 +31,22 @@ if ($remoteKill -and -not (Test-Path $latch)) {
 # every minute: keep KILL in step with its latches (Codex follow-up 2026-11-02 #1: a hand-made or hand-deleted KILL file)
 $r = & powershell -NoProfile -ExecutionPolicy Bypass -File "C:\TradingRepo\live\vps\kill.ps1" -Check
 if ($r) { Say "kill check: $r" }
+if (-not $fetchOk) { Say "alert fetch FAILED; cursor unchanged"; exit 1 }
 $lines = @(git show "origin/${branch}:live/claude_alerts.txt" 2>$null)
+if ($LASTEXITCODE -ne 0) { Say "alert read FAILED; cursor unchanged"; exit 1 }
 if ($Diag) { Say "fetched; alert lines in repo: $($lines.Count)" }
 if ($lines.Count -eq 0) { Say "no alert file on the branch"; exit 0 }
-if (-not (Test-Path $State)) { Set-Content $State $lines.Count; Say "first run: recorded $($lines.Count) existing lines"; exit 0 }
+if (-not (Test-Path $State)) { Set-Content $State 0 -ErrorAction Stop; Say "first run: replay from first unacknowledged line" }
 $sent = [int]((Get-Content $State -Raw).Trim())
 if ($Resend -gt 0) { $sent = [math]::Max(0, $lines.Count - $Resend) }
 if ($sent -gt $lines.Count) { $sent = 0 }
 if ($Diag) { Say "already sent: $sent; to send now: $($lines.Count - $sent)" }
 for ($i = $sent; $i -lt $lines.Count; $i++) {
     try {
-        Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "Claude: $($lines[$i])" -Headers @{ Title = "Claude alert"; Priority = "high" } -ErrorAction Stop | Out-Null
-        Say "sent: $($lines[$i])"
-    } catch { Say "ntfy FAILED: $($_.Exception.Message)" }
+        Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "Claude: $($lines[$i])" -Headers @{ Title = "Claude alert"; Priority = "high" } -TimeoutSec 15 -ErrorAction Stop | Out-Null
+        Set-Content $State ($i + 1) -ErrorAction Stop
+        Say "accepted by ntfy: $($lines[$i])"
+    } catch { Say "delivery/checkpoint FAILED; pending line $i retained: $($_.Exception.Message)"; exit 1 }
     Start-Sleep -Seconds 1
 }
-Set-Content $State $lines.Count
 exit 0

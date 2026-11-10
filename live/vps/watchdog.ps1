@@ -54,7 +54,10 @@ Get-ChildItem "$Logs\2*.csv" | Sort-Object Name -Descending | Select-Object -Fir
 # only the charts that should be live (live/expected_setup.json): a closed account's tags (VB, ONB, EOS, MON_BR = #1)
 # stay in the last days' files and gave false 'no heartbeat today' alarms on 2026-10-29
 $cfg = Get-Content "C:\TradingRepo\live\expected_setup.json" -Raw | ConvertFrom-Json
-if ($cfg) { $live = @($cfg.charts.PSObject.Properties.Name); foreach ($t in @($tags.Keys)) { if ($live -notcontains $t) { $tags.Remove($t) } } }
+if ($cfg) {
+    $live = @($cfg.charts.PSObject.Properties | Where-Object { $cfg.accounts.($_.Value.account).status -eq "live" } | ForEach-Object { $_.Name })
+    $tags = @{}; foreach ($t in $live) { $tags[$t] = $true }
+} else { $problems += "CONFIG|Cannot read expected_setup.json: chart coverage is UNKNOWN" }
 $last = @{}
 if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "POS,*" } | ForEach-Object { $c = $_.Split(","); $last[$c[1]] = $c } }
 if ($hhmm -ge 845 -and $hhmm -le 1500) {
@@ -71,9 +74,20 @@ $acct = @{}
 if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "ACCT,*" } | ForEach-Object { $c = $_.Split(","); $acct[$c[1]] = $c } }
 if ($hhmm -ge 830 -and $hhmm -le 1500) {
     foreach ($t in $acct.Keys) {
+        if ($cfg -and $live -notcontains $t) { continue }
         $c = $acct[$t]
         if ($c[4] -eq "0") { $problems += "AUTOOFF_$t|Chart ${t}: auto-trading is OFF (account $($c[3])). Turn it on if this chart should trade." }
         if ([double]$c[7] -gt 600) { $problems += "FEED_$t|Chart ${t}: last bar is $([int]([double]$c[7] / 60)) min old. Data feed / Rithmic quiet? Check the connection status." }
+    }
+}
+
+# Unknown tags on a live account are a configuration fault, not retired-chart noise.
+if ($cfg) {
+    $liveIds = @($cfg.accounts.PSObject.Properties | Where-Object { $_.Value.status -eq "live" } | ForEach-Object { $_.Value.id })
+    foreach ($t in $acct.Keys) {
+        if ($t -ne "SCAN" -and $live -notcontains $t -and $liveIds -contains $acct[$t][3]) {
+            $problems += "UNEXPECTED_$t|Chart tag $t is on a live account but absent from expected_setup.json; reconcile Tag and HeartbeatTag."
+        }
     }
 }
 
@@ -96,15 +110,22 @@ if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {
     foreach ($ap in $cfg.accounts.PSObject.Properties) {
         $v = $ap.Value; if ($v.status -ne "live" -or -not $v.start) { continue }
         $peak = [double]$v.start; $eqNow = $null
-        Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge $v.started } | Sort-Object Name | ForEach-Object {
+        Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge ($v.started -replace "-", "") } | Sort-Object Name | ForEach-Object {
             $last = $null
             Get-Content $_.FullName | Where-Object { $_ -like "ACCT,*" } | ForEach-Object { $c = $_.Split(","); if ($c.Length -gt 6 -and $c[3] -eq $v.id) { $e = 0.0; if ([double]::TryParse($c[6], [ref]$e) -and $e -gt 0) { $last = $e } } }   # column 4 only (Codex review 2026-11-01 #1: column 9 = route)
             if ($null -ne $last) { if ($_.BaseName -eq $day) { $eqNow = $last } else { $peak = [math]::Max($peak, $last) } }
         }
         if ($null -eq $eqNow) { continue }
-        $floor = [math]::Min($peak - [double]$v.trail, [double]$v.lock); $room = $eqNow - $floor; $n = $ap.Name
+        $floor = $peak - [double]$v.trail
+        $phase = $v.phase; if (-not $phase) { $phase = if ($v.id -like "PA-*") { "funded" } else { "evaluation" } }
+        if ($phase -eq "funded") {
+            $lock = if ($null -ne $v.lock) { [double]$v.lock } else { [double]$v.start + 100 }
+            $floor = [math]::Min($floor, $lock)
+        } elseif ($phase -ne "evaluation") { $problems += "CONFIG|Unknown account phase for $($ap.Name)"; continue }
+        if ($null -eq $v.max_stop) { $problems += "CONFIG|Missing max_stop for $($ap.Name); thin-cushion threshold is UNKNOWN" }
+        $room = $eqNow - $floor; $n = $ap.Name
         if ($room -le 0) { $problems += "ACCTFAIL_$($v.id)|Account $n ($($v.id)): equity $([math]::Round($eqNow)) is at or below its floor $([math]::Round($floor)). Apex has likely failed it: turn auto-trading OFF on its charts, check Apex." }
-        elseif ($room -lt 0.5 * [double]$v.max_stop) { $problems += "NEARFLOOR_$($v.id)|Account ${n}: only $([math]::Round($room)) above its floor (half a stop is $([math]::Round(0.5 * [double]$v.max_stop)))." }
+        elseif ($room -le [double]$v.max_stop) { $problems += "NEARFLOOR_$($v.id)|Account ${n}: only $([math]::Round($room)) above its floor (one planned stop before costs/slippage is $([math]::Round([double]$v.max_stop)))." }
     }
 }
 
@@ -113,6 +134,7 @@ if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {
 $sigTags = @{}
 Get-ChildItem "$Logs\2*.csv" | Sort-Object Name -Descending | Select-Object -First 6 | ForEach-Object {
     Get-Content $_.FullName | Where-Object { $_ -like "SIG,*" } | ForEach-Object { $sigTags[$_.Split(",")[1]] = $true } }
+if ($cfg) { $sigTags = @{}; foreach ($t in $live) { $sigTags[$t] = $true } }
 $sigLast = @{}
 if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "SIG,*" } | ForEach-Object { $c = $_.Split(","); $sigLast[$c[1]] = [int]$c[13] } }
 if ($hhmm -ge 900 -and $hhmm -le 1500) {
@@ -151,13 +173,21 @@ if (-not $anyLive) {
     foreach ($p in $problems) { "$($now.ToString('yyyy-MM-dd HH:mm')) MUTED (no live account) $($p.Split('|', 2)[1])" | Add-Content "$Logs\alerts.txt" }
     $problems = @()
 }
+$sendFailed = $false
 foreach ($p in $problems) {
     $key, $text = $p.Split("|", 2); $k = "sent_" + ($key -replace '_\d+$', '')
     $lastSent = if ($state[$k]) { [datetime]$state[$k] } else { [datetime]::MinValue }
     if (($now - $lastSent).TotalMinutes -ge 60 -or $key -like "REJECT_*") {
-        try { Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } | Out-Null } catch {}
-        "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
-        $state[$k] = $now.ToString("o")
+        try {
+            Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } -TimeoutSec 15 -ErrorAction Stop | Out-Null
+            "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
+            $state[$k] = $now.ToString("o")
+        } catch {
+            "$($now.ToString('yyyy-MM-dd HH:mm')) SEND_FAILED $text" | Add-Content "$Logs\alerts.txt"
+            $sendFailed = $true
+        }
     }
 }
 $state | ConvertTo-Json | Set-Content $StateFile
+
+if ($sendFailed) { exit 1 }

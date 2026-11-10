@@ -53,7 +53,6 @@ def monitor_check(df, day, cfg):
         ever = {l.split(",")[1] for f in glob.glob("live/trades/*.csv") for l in open(f) if l.startswith("SIG,")}
         sig = df[df.event == "SIG"].copy(); sig["m"] = sig.bar_time.map(mins)
         for tag in cfg["charts"]:
-            if tag not in ever: continue
             g = sig[(sig.tag == tag) & (sig.m >= mins(830)) & (sig.m <= mins(1500))]
             if g.empty:
                 out.append(f"- **STRATEGY {tag}**: no heartbeat from the strategy during RTH: not compiled / removed / stopped. It could not trade.")
@@ -152,7 +151,7 @@ def check(day):
     al = f"live/health/{d}_alerts.txt"
     if os.path.exists(al):
         for l in open(al):
-            if l.strip(): out.append(f"- Alarm sent during the day: {l.strip()}")
+            if l.strip(): out.append(f"- Watchdog log (delivery status is in the entry): {l.strip()}")
     return out
 
 
