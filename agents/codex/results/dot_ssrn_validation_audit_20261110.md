@@ -39,5 +39,12 @@ Existing **SSRN[3521370](https://ssrn.com/abstract=3521370)** [final2024 paper](
 
 **Independent assessment:** Preserve its causal-data strengths, but label2019/2020 evidence, not a verified2026 update. Manuscript CC BY-NC-ND licensing does not license underlying commercial data or any unlocated code. Personal category; broad vintages/forwards missing.
 
+## Related BM corroboration with an unresolved FX formula issue
+**Understanding the Performance of Currency Basis-Momentum, SSRN[4925173](https://ssrn.com/abstract=4925173), EFM2025.** [Published full text](https://onlinelibrary.wiley.com/doi/full/10.1111/eufm.12555), [university PDF](https://pure.qub.ac.uk/files/636563351/Euro_Fin_Management_-_2025_-_Fan_-_Understanding_the_Performance_of_Currency_Basis_Momentum.pdf).
+
+AppendixE.1/TableE1A: 27GSCI constituents, December1984–October2020, equal-weight monthly terciles; BM12 earns.72% monthly,t3.14, monthly Sharpe.15. Other horizons are insignificant. Bloomberg nearby prices generate signals; GSCI indices provide returns. Commodity net costs are not established. In the main FX section, printed Eq6 equates expressions with apparently inconsistent signs; its long-cost formula uses negative forward-bid plus spot-ask, which credits spreads relative to midquotes. The printed PDF was visually checked.
+
+**Independent assessment:** Commodity results corroborate a related implementation, not a matched original replication or independent post2019 holdout. The FX discrepancy may be notation rather than implemented-code error. Do not declare the backtest disproved, but do not treat its net results as validated without code reconciliation. Personal/overnight; commercial inputs unverified. This supplementary audit is not a new deployable strategy slot.
+
 ## Decision impact
 The index's leading curve papers are priority **data-and-modern-validation gates**, not immediately buildable recommendations. COT flow is distinct but still needs a release-timed implementation. Read the [native-contract source audit](dot_ssrn_curve_data_feasibility_20261110.md) before treating a continuous series or public price webpage as adequate data. All next steps remain research-only unless separately authorized.
