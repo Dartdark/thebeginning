@@ -422,6 +422,18 @@ whole-strategy tests: it shows which part carries the edge and which parts are d
 **For new combinations:** build only from ingredients in the register below, at most 2-3 per strategy, rules and settings fixed
 before any result, then the full checker (incl. the parameter-perturbation check). Every combination tried counts as a trial.
 
+### Every new strategy: ingredients + full data sweep (user 2026-11-10, standing rule)
+
+Every strategy the user sends, whether or not it passes on its own, goes through three steps in the same reply chain:
+1. **Standard test** (testing standard in CLAUDE.md: costs, both periods, placebo, metrics, books add / replace).
+2. **Ingredient breakdown:** rebuild it, change ONE part at a time (entry trigger, filters, timing, stop, target, sides), find the
+   engine vs supporting vs decoration; record a row in the Ingredient register below.
+3. **Full data sweep:** `python3 analysis/strategy_data_sweep.py <trades.csv> <name>` splits its trades by every daily data series
+   x regime and judges the best version against the FAIR placebo (best of N random splits picked the same way). A version that beats
+   it is a LEAD: book bench (vs the same size spread evenly) and out-of-sample evidence before any plan change.
+A weak strategy with a strong version is still worth the user's time: that is how the CL fade OVX sizing and the Overnight Tick lead
+were found.
+
 ### New data: screen every piece (user 2026-11-10, standing rule)
 
 Whenever a new data source arrives (or an existing one is used in a new way), do not stop at the idea it was fetched for. Also
