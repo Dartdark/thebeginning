@@ -23,6 +23,8 @@ No fresh strategy has been shown here to improve the existing portfolio or accou
 
 - [Pass 6: speculative pressure, FX sessions and macro/VRP evidence](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass6_20261110.md)
 
+- [6E actual-row feasibility audit for paper 38](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_6e_data_feasibility_20261110.md)
+
 ## Classified inventory
 The count is research entries, not qualified strategies. Papers 11–15 are provisional reserves; 16–20 audit already-tested or blocked baselines, not five new successful ideas. See each linked report for the exact evidence status, source version, rules, costs and missing inputs.
 
@@ -65,7 +67,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 35 | [3411117](https://ssrn.com/abstract=3411117) | Fear of Hazards | Personal | No | No: vintage searches | Conditional; hindsight vocabulary |
 | 36 | [7395858](https://ssrn.com/abstract=7395858) | El Niño and Currency Returns | Personal | No | No: vintage climate/FX | Conditional; version/timing gate |
 | 37 | [3279425](https://ssrn.com/abstract=3279425) | Speculative Pressure | Personal | No | No: broad COT/price panel | Conditional; timing/cost gates |
-| 38 | [2099321](https://ssrn.com/abstract=2099321) | Intraday FX Session Flows | Intraday hypothesis | US leg same-day Pacific; 6E adaptation | 6E full-session/roll checks pending | Conditional; old net spot evidence |
+| 38 | [2099321](https://ssrn.com/abstract=2099321) | Intraday FX Session Flows | Intraday hypothesis | US leg same-day Pacific; 6E adaptation | Dec2017 endpoints verified; later years/roll/fills pending | Conditional; old net spot evidence |
 | 39 | [948309](https://ssrn.com/abstract=948309) | Variance Risk Premium Forecasting | Personal | No | Cash variance unavailable | Deprioritize |
 | 40 | [3929119](https://ssrn.com/abstract=3929119) | Equity Prediction Reassessment | Evidence audit | Not an entry rule | Not a strategy replication | Independent VRP counterevidence |
 | 41 | [2906600](https://ssrn.com/abstract=2906600) | Business Cycles and Currency Returns | Personal | No | No: vintages/forwards | Priority causal-data audit |
