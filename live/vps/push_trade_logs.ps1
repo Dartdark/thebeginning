@@ -41,6 +41,11 @@ if ($LASTEXITCODE -ne 0) {
 }
 # cushion peak files for the funded cushion guard (2026-11-09; every push, so a new account's file appears within 30 min)
 & powershell -ExecutionPolicy Bypass -File "$Repo\live\vps\cushion_peak.ps1"
+# one-time (2026-11-10): OVX flag for the personal CL fade (live/vps/ovx_daily.ps1; idempotent)
+schtasks /Query /TN "OvxDaily" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "OvxDaily" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 18:00 /RI 60 /DU 03:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\ovx_daily.ps1" /F | Out-Null
+}
 # alerts the watchdog sent today go to the repo too (live/health/YYYYMMDD_alerts.txt)
 if (Test-Path "$Logs\alerts.txt") { Get-Content "$Logs\alerts.txt" | Where-Object { $_ -like "$((Get-Date).ToString('yyyy-MM-dd'))*" } | Set-Content "live\health\$(Get-Date -Format yyyyMMdd)_alerts.txt" }
 
@@ -82,6 +87,7 @@ New-Item -ItemType Directory -Force "live\finra" | Out-Null
 if (Test-Path "$Logs\finra\signals.csv") { Copy-Item "$Logs\finra\signals.csv" "live\finra\signals.csv" -Force }
 # copier group state log (2026-11-09) -> live/health/group_log.csv
 if (Test-Path "$Logs\group\group_log.csv") { Copy-Item "$Logs\group\group_log.csv" "live\health\group_log.csv" -Force }
+if (Test-Path "$Logs\ovx\ovx_log.csv") { Copy-Item "$Logs\ovx\ovx_log.csv" "live\health\ovx_log.csv" -Force }
 git add live/trades live/health data/live_bars live/finra
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {

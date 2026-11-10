@@ -20,7 +20,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | Overnight Tick / VIX (long 17:05 → 03:00 CT after a down day, order-flow × VIX filter) | MNQ | $2,201 | $2,838 | $1,283 | 1.68 | A, MC-confirmed; personal + funded (50K 1, 150K 2) since 2026-10-24 (user); replaced Overnight Anomaly (C); data to 2026-07-07; **personal at 2 MNQ (user 2026-11-08)** |
 | Bridge Monday | MNQ | $1,295 | $1,478 | $1,689 | 1.39 | live on Apex (combine) |
 | Late-Day Flow | MNQ | $889 | $1,171 | $1,590 | 1.10 | funded plan |
-| CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | funded plan |
+| CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | funded plan **2026-11-10 (user): 2 MCL on high-OVX weekends, 1 otherwise, watched (WATCHLIST #37)**: Friday's OVX above its 1-year median (VPS flag, `live/vps/ovx_daily.ps1`); personal book return/DD 5.61 -> 5.71 (both periods up, median +$631 a year, DD flat; post hoc); chart inputs `UseOVX` true, `OVXQty` 2. Funded charts unchanged (no gain there) |
 | EOS | MNQ | $548 | $798 | $746 | 0.83 | live on Apex (combine) |
 | ES MOC | MES | $342 | $172 | $701 | 1.09 | funded plan |
 | Swing Target v3 (prior 2-day RTH level break, target 0.35 / stop 0.7 x range, BE, flat 14:59) | MNQ | $1,932 | $2,642 | $1,446 | 1.43 | B, MC-confirmed (t 4.55); personal (user 2026-10-25) + funded swaps; `funded_strategies/NQ_Swing_Target_v3.txt` |
