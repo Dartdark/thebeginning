@@ -1,12 +1,42 @@
 # Evaluation-first strategy development: active manual research task
 
-Summary: Develop a strategy that improves the current 50K/150K evaluation books within 30 calendar days.
-First baseline replay is complete; execution/cost sensitivity is more material than the calendar approximation.
-Prioritize an independent return source that can contribute before VB/ONB breach or exhaust the daily limit.
-The first new input lead is a free macro actual/consensus panel; it is acquired but not admitted for returns.
-No new strategy is qualified, and no live or scheduled program is changed by this task.
+Summary: Develop a strategy that improves the evaluation books within 30 calendar days; prioritize other markets.
+User steering November9,2026Pacific: seek diversification outside the NQ-heavy book; changing/replacing VB is allowed.
+Research markets with existing minute data: gold, crude oil, euro FX and Treasuries; measure strategy-level overlap.
+The completed new-data NQ batch qualified no strategy; do not repeat its failed funding/fear definitions.
+No market's low correlation or account benefit is assumed, and no live or scheduled program changes.
 
 User request, 2026-11-09: evaluation is the priority; develop a strategy to strengthen it, “all hands on deck.” This task does not create schedules or authorize external messages, broker/VPS/orders or portfolio changes. Work only on codex/work and preserve other work.
+
+## Latest direction: other markets first (user, November9,2026Pacific)
+
+The user explicitly wants the research focus moved to other markets because of potential low correlation with
+the existing book. Apply that direction to subsequent manual research; another NQ variant is no longer the default.
+This is a research-priority change, not authorization to trade, relax evidence gates, or resume paused programs.
+
+Prioritize **GC/MGC and CL/MCL**, then **6E and ZN** where native costs, sizing and source data permit.
+The repository has2018/2022/2026minute files for all four, with broader2017–26annual histories previously inventoried;
+file presence does not certify every session, roll, executable contract, micro feed or historical signal input.
+Use the market's own documented participants/flows and a genuinely new admitted hypothesis. Preserve old failures
+in gold breakouts/filters, commodity releases/settlement, FX fixes and Treasury month-end families.
+Do not relabel a failed NQ rule by changing the ticker. ES/YM remain eligible for a specific distinct mechanism,
+but have lower priority as sources of a different risk exposure than US equity-index trading.
+
+Separate three questions:
+1. Does the strategy have an edge after its actual contract costs and execution assumptions?
+2. Does its **strategy P&L**, including losses on VB/ONB stop days and common macro shocks, diversify the book?
+3. At integer size, does it improve passes/fees/time before the30-day deadline and before an intraday breach?
+
+Low covariance can let a modest positive edge contribute more than another correlated equity rule. It does not
+create an edge or guarantee better first-passage outcomes. Trading frequency, loss timing, executable maximum
+exposure and contract granularity still matter. Measure correlations across matched dates, eras and stress
+episodes; underlying market return correlation is not a substitute for the strategy/account comparison.
+General context, not a measured result for this book:
+[CME on changing cross-asset correlations](https://www.cmegroup.com/articles/2025/exploring-diversification-within-commodity-markets.html).
+
+Completed records to retain: [new-data strategy batch](results/new_data_strategies_20261110.md),
+[direct VB split-stop rejection](results/vb_loss_split_20261110.md). No candidate from those batches earned adoption.
+The earlier source lanes below remain historical leads/data gates; they do not override this new market priority.
 
 ## Read and synchronize
 
