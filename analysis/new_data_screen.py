@@ -14,7 +14,15 @@ A flagged piece is a LEAD (screen result): next steps are its book bench (post h
 import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
 from metrics import t_threshold
-from new_data_filters_test import prior
+
+
+def prior(series, dates, fn):
+    """fn(past values up to and including the last close before d) -> value, for each date d (same as new_data_filters_test)."""
+    s = series.dropna().sort_index(); idx = s.index.values; out = []
+    for d in dates:
+        k = np.searchsorted(idx, np.datetime64(d), side="left")
+        out.append(fn(s.iloc[:k]) if k > 0 else np.nan)
+    return np.array(out, dtype=float)
 
 RULES = {"above_median": lambda s: float(s.iloc[-1] > s.iloc[-252:].median()) if len(s) >= 120 else np.nan,
          "z_high": lambda s: float((s.iloc[-1] - s.iloc[-61:-1].mean()) / s.iloc[-61:-1].std() >= 1.0) if len(s) >= 61 else np.nan,
