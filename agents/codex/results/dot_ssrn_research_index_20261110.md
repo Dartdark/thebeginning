@@ -112,3 +112,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 13: monetary restrictiveness and currency-factor timing](dot_ssrn_continuation_pass13_20261110.md): entry 52 and a separate unnumbered FX reserve. Vintage-based source design does not establish modern net returns.
 
 - [Pass 14: FOMC reversal and intraday replication audit](dot_ssrn_continuation_pass14_20261110.md): entry 53, corrected Sharpe annualization, external fill/registration flaws and negative order-flow economics.
+
+- [Existing curve/Treasury source updates](dot_ssrn_curve_source_update_20261110.md): D06's independent replication was corrected by its author; delayed execution weakens the paper result. Two Treasury comparators are not new qualified SSRN strategies.
