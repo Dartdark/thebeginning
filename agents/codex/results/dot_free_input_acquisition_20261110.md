@@ -25,7 +25,7 @@ The 72 rows are NOT 72 completed regular announcements: March 18, 2020 is marked
 These are current retrievals of historical dated notices, not contemporaneously captured website versions or feed receipts. The notice publication time is not the later statement time. No blanket historical release-clock admission is granted. Original-calendar revisions, cancellation timing, exact ES observations, contract continuity and execution quotes/costs remain unresolved.
 
 ### #24 COT commercial positioning
-The free [2018 legacy archive](https://www.cftc.gov/files/dea/history/deacot2018.zip) is genuinely downloadable and parseable. The retained 19-market sample demonstrates commodity fields beyond a gold-only feasibility screen. It is a bounded sample, not the paper's exact full universe or full history. It does not provide native maturity prices.
+The free [2018 legacy archive](https://www.cftc.gov/files/dea/history/deacot2018.zip) is genuinely downloadable and parseable. The existing D50 register already records owned 2018–2022 legacy archives and CL/GC/NG coverage. This pass does not claim to discover a new archive: its retained 19-market extraction broadens the checked sample beyond those three markets. It is a bounded sample, not the paper's exact full universe or full history. It does not provide native maturity prices.
 
 Current archives can contain revisions. Position dates are not release dates. The 53 position observations per market include holiday Monday observations; never assume every row is Tuesday or available three days later. The January 29, 2019 [CFTC catch-up notice](https://www.cftc.gov/PressRoom/PressReleases/7864-19) says December 24, 2018 data were expected to be released February 1, 2019, after the shutdown. This is a planned release date, not proof of receipt.
 
@@ -47,7 +47,7 @@ The earlier [native-contract feasibility audit](dot_ssrn_curve_data_feasibility_
 ## Provenance, rights and limits
 Federal Reserve data/text: [public-domain policy](https://www.federalreserve.gov/disclaimer.htm), with source attribution and exceptions for third-party material. CFTC: [public-domain policy](https://www.cftc.gov/WebPolicy/index.htm), with attribution. EIA: [copyright/reuse policy](https://www.eia.gov/about/copyrights_reuse.php), with attribution. No logos/photos or vendor data copied into the compact artifacts.
 
-Raw source hashes describe bytes retrieved now. File verification timestamps are retrieval/normalization observations, not historical knowledge times. Earlier Python urllib requests returned 403; ordinary curl downloads already initiated through the available public route returned the official HTML/ZIP without login or altered credentials. No restricted source was bypassed or mirrored. The manifest records successful source bytes, not invented first-release vintages.
+Raw source hashes describe bytes retrieved now. File verification timestamps are retrieval/normalization observations, not historical knowledge times. The manifest records successful public-source bytes, not invented first-release vintages.
 
 ## Handoff
 Tell Claude: agents/codex/results/dot_free_input_acquisition_20261110.md.
