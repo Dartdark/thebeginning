@@ -272,7 +272,7 @@ after 15:59 CT, never with a position open.
       (c) **ZT continuation EntryZ 1.25** (WATCHLIST #36): `checks/candidates/zt_continuation/NQ_ZT_Continuation.txt`
       ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/zt_continuation/NQ_ZT_Continuation.txt)),
       @NQ 15 min, Exchange time, CME 24h, IOG off, 1 contract, 2017-06 -> now (warm-up; expect ~600 trades from 2018); Claude matches it to python_trades_z125.csv.
-- [ ] **(2026-11-10: the user's MultiCharts feed only reaches 2016. Step 1: export 2016-01 -> 2017-12 from MC now (same settings, start 01/01/2016). Step 2, optional: buy 2009-2015 1-min from a vendor (Databento / FirstRate Data / Kibot), Claude converts.)**
+- [ ] **BENCHED (user 2026-11-10): older-data validation on hold until the user decides to buy data.** MC feed only reaches 11/13/2016 (too little to add). When resumed: buy 2009-2016 1-min from a vendor (Databento / FirstRate Data / Kibot), Claude converts and runs the leads below.
 - [ ] **You (MultiCharts, any evening): export OLDER 1-minute bars, 2009-01 -> 2017-12, for NQ, ES, YM, GC and CL** (user 2026-11-10:
       'put all of them on the todo for older data'). Same way as the existing `data/<SYMBOL>_1min_<year>.csv` files
       (date,time,open,high,low,close,volume; Exchange time = CT; 24h session; continuous contract as now; one file per year).
