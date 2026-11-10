@@ -38,6 +38,8 @@ No fresh strategy has been shown here to improve the existing portfolio or accou
 
 - [Pass 10: deep momentum, changepoints and trend comparators](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass10_20261110.md)
 
+- [Pass 11: Treasury momentum and duration-neutral curve premia](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass11_20261110.md)
+
 ## Classified inventory
 The count is research entries, not qualified strategies. Papers 11–15 are provisional reserves; 16–20 audit already-tested or blocked baselines, not five new successful ideas. See each linked report for the exact evidence status, source version, rules, costs and missing inputs.
 
@@ -91,6 +93,8 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 46 | [4268371](https://ssrn.com/abstract=4268371) | Crypto Carry | Personal | No: expiry holds | No: native expiries/two-leg inputs | Capital/data/version gate |
 | 47 | [2826684](https://ssrn.com/abstract=2826684) | NG Analyst-Forecast Drift | Intraday research | Normal06:00–07:25Pacific; holiday calendar needed | No: timestamped analyst forecasts | Conditional source/timing/cost gate |
 | 48 | [3369195](https://ssrn.com/abstract=3369195) | Deep Momentum Networks | Personal method | No: daily overnight | No exact universe/ledger | Cost-sensitive method reserve |
+| 49 | [3965229](https://ssrn.com/abstract=3965229) | Yield Curve Momentum | Personal | No: monthly | Adaptation only; final futures rules gated | Directional-duration comparator |
+| 50 | [2956411](https://ssrn.com/abstract=2956411) | Yield Curve Premia | Personal | No: monthly | No: bond buckets/duration/FX hedge | Curve-relative-value foundation |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
