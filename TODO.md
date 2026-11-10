@@ -236,7 +236,7 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   reconciliation. Prior API price-follow/fade work remains weak; no automatic price-proxy/timing rescue.
   Smallest next check: one genuine sequential-release/consensus-to-fill ledger using owned or lawful free inputs.
   [Full uploaded-version review](agents/codex/results/ssrn_five_20261110.md)
-  · [D57](agents/codex/DATA_NEEDED.md). Zero new return tests; no allocation or paid acquisition.
+  · [D58](agents/codex/DATA_NEEDED.md). Zero new return tests; no allocation or paid acquisition.
 
 - [ ] **Low-turnover curve-aware commodity momentum — conditional PERSONAL / NEEDS DATA, SSRN 2485314.**
   Uploaded 2014 Table 2 conservative-cost source 8.42% annual excess/Sharpe 0.60 versus generic 3.98%/0.25.
@@ -245,7 +245,7 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   integer cash/roll costs. Reuse shared curve data needs; do not substitute one continuous contract. Next: one
   source-consistent formation/selected maturity/hold/roll/cash reconciliation, then coverage/cost/power gate.
   [Review](agents/codex/results/ssrn_five_20261110.md)
-  · [D58](agents/codex/DATA_NEEDED.md). No return test, fresh holdout or strategy promotion claimed.
+  · [D59](agents/codex/DATA_NEEDED.md). No return test, fresh holdout or strategy promotion claimed.
 
 - [ ] **Diversified trend/value/carry foundations — conditional PERSONAL research baselines.**
   Uploaded SSRN 2089463/2174501/2298565 verified against actual versions. Useful broad/monthly architecture,
@@ -829,3 +829,16 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   genuinely new availability: authenticate one factor/date and forecast information clock, then source coverage
   before any reservation. No ES-only fit or source-free predictor substitute. Park; continue owned-compatible work.
   [Record](agents/codex/research/scout/records/4388560.json) · [Checkpoint](agents/codex/results/scout_owned_source_20261109.md).
+
+- [ ] **Ranked-analyst NG storage forecast disagreement — conditional WATCH / NEEDS DATA, SSRN2826684 (2026-11-10).**
+  Full43-page upload upgrades the existing November1metadata lead. Merit: a specific nonprice predictor and85-minute
+  intraday NG rule; authors report Sharpe0.84/1.26 on271/153trades in2008–16, not independently verified net returns.
+  Compute prior-week topthree analysts' current forecast median minus overall consensus; buy negative/sell positive,
+  enter90minutes before the storage release and exit five minutes before. Skip zero and same-day petroleum reports.
+  Need analyst submissions/revisions and historical ranks/consensus available by entry, event/roll clocks and costs;
+  the stronger sample-quartile subset has no specified causal cutoff protocol. Owned NG bars and current alternative
+  rankings cannot supply the missing forecasts. Bounded free checks acquired no matching panel. Smallest next check
+  only on new matching availability: reconcile one dated prior-rank/forecast/consensus/entry transition without returns,
+  then coverage/power/cost gates before preregistration. No price-only/Thursday-short rescue;3575861stays closed.
+  [Full review](agents/codex/results/ng_informed_2826684_review_20261110.md) ·
+  [D57 data requirements](agents/codex/DATA_NEEDED.md#d57--ranked-analyst-ng-storage-disagreement-ssrn2826684).

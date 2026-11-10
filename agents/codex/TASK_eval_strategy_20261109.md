@@ -44,7 +44,7 @@ Uploaded-paper follow-up, November 10, 2026 Pacific: [five version-specific revi
 Four monthly personal-account foundations; API/EIA oil is a conditional intraday source lead. Recovered API 2021/22
 calendars and verified all 90 matched CL price endpoint/planned paths. Exact information/receipt clocks and pre-entry
 Bloomberg consensus remain unverified. Zero new return tests; do not request duplicate CL exports, port monthly rules
-mechanically to Apex, or rescue failed API price-follow families by changing the clock. Source/data needs are D57/D58.
+mechanically to Apex, or rescue failed API price-follow families by changing the clock. Source/data needs are D58/D59.
 
 Latest completion after user said "do it": [gold crowding feasibility](results/gold_crowding_feasibility_20261110.md).
 Committed no-return census `44df28eb`: 38 crowded entries in 2018–22; only 20.4% of 30-calendar-day windows contain one.

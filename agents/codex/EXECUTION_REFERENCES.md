@@ -2620,6 +2620,27 @@ Source: user-supplied Whop export; [dot review](results/dot_whop_review_20261110
 - Useful lesson: reconcile order IDs, submission/acknowledgement/fill/cancel clocks, position state and reconnect behavior against broker records; chart markers alone do not establish actual fills.
 - Smallest next check, if matching evidence becomes available: one complete order lifecycle with timezone, contract and account mapping. No live inspection/change, measured saving, new logger or schedule follows from retention.
 
+### E09/E11 follow-up — Forecast-entry deadlines and hindsight-aligned event plots (2026-11-10)
+
+Source: Gu/Kurov2018, SSRN2826684, full user-uploaded43-page manuscript;
+[review](results/ng_informed_2826684_review_20261110.md), [source/visual evidence](inputs/ng_informed_2826684/).
+Extends the information-clock reference; no execution savings or strategy profitability verified.
+
+- The source correctly lags analyst rank membership to the previous week. A modern reproduction also needs each
+  actual forecast/consensus revision available by **release−90minutes**, not merely before release. At a normal
+ 10:30ETevent, a10:00forecast cannot decide the09:00entry. Previous ranks do not cure a late current forecast.
+- Figure2signs returns/order flow with the **eventual actual surprise**. It is descriptive informed-trading
+  evidence, not an executable direction known before release. NG unsigned volume or price momentum is not the
+  forecast-disagreement signal. Figure6's overlapping24-month mean is not a drawdown/equity record.
+- Section5.3/TableXIII uses tail quartiles of nonzero disagreements without specifying a past-only cutoff protocol.
+  Freeze threshold initialization, quantile/tie treatment and frequency annualization before any adaptation;
+  retain reported153selected versus271nonzero observations instead of assuming exactly half.
+- Exiting five minutes before scheduled news avoids intended release exposure, but does not establish fill
+  success or floor protection. Match holiday/exception clocks, native nearby/next-contract mapping and costs.
+  The source has no explicit protective stop or itemized cost bridge. Do not append a stop and call it exact.
+- Smallest later check is one forecast/rank/entry/exit knowledge-time ledger on new matching inputs. No return
+  tests ran; modern strategy and personal/evaluation/funded comparisons remain gated. See [D57](DATA_NEEDED.md#d57--ranked-analyst-ng-storage-disagreement-ssrn2826684).
+
 ### E11/E53 follow-up — Uploaded curve, trend, carry and sequential-announcement sources
 
 Source: [five uploaded-version reviews](results/ssrn_five_20261110.md), November 10, 2026 Pacific; author evidence
@@ -2630,7 +2651,7 @@ and source/data QA, not independent strategy validation or observed native execu
 - TSMOM's volatility normalization and carry/value factor weights are not account sizing rules. Dollar risk depends
   on actual long/short notionals, margins, financing and overnight paths; multiple markets can hold one factor exposure.
 - Source option carry is highly spread-sensitive. Positive gross carry is not assured net P&L or protection from
-  funding shocks; do not transfer an institutional commodity cost assumption to micro futures or option fills.
+  funding shocks; do not transfer a source commodity cost assumption to micro futures or option fills.
 - Oil Table 8's API actual-minus-Bloomberg EIA consensus signal differs from its price-return regression. The paper's
   full API-through-EIA liquidity measure contains future observations, so it is not a causal entry filter. A final
   pre-release exit needs executable quotes and a failed-order fallback; nominal clock timing does not certify a fill.
@@ -2641,4 +2662,4 @@ and source/data QA, not independent strategy validation or observed native execu
   the dated PDF and reconcile definitions rather than silently choose a later version or favorable specification.
 
 Smallest next checks: one native maturity/roll/cash reconciliation or one original API/EIA/consensus-to-fill clock.
-Shared data needs D57/D58 and the earlier curve registers retain free-only constraints and prior failed families.
+Shared data needs D58/D59 and the earlier curve registers retain free-only constraints and prior failed families.
