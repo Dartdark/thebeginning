@@ -56,9 +56,9 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 9 | [2298565](https://ssrn.com/abstract=2298565) | Carry | Personal | No | No: native carry inputs | Foundation |
 | 10 | [2659431](https://ssrn.com/abstract=2659431) | Volatility-Managed Portfolios | Risk overlay | Not an entry rule | Adaptation only | Qualified by 26–27 |
 | 11 | [7546200](https://ssrn.com/abstract=7546200) | Harvesting the Value Area | Intraday reserve | Source-gated | No: tape/profile details | Full-source gate |
-| 12 | [3553682](https://ssrn.com/abstract=3553682) | Intraday Momentum in Crude Oil | Intraday ETF | Futures adaptation only | Native USO missing | Conditional/source incomplete |
+| 12 | [3553682](https://ssrn.com/abstract=3553682) | Intraday Momentum in Crude Oil | Intraday ETF | Futures adaptation only | Native USO missing | Full source recovered; annualization/cost concerns |
 | 13 | [5037563](https://ssrn.com/abstract=5037563) | Intraday Brent Seasonality | Intraday reserve | Unverified | No: ICE data | Embargo/source gate |
-| 14 | [885686](https://ssrn.com/abstract=885686) | CME FX Intraday Reversals | Intraday reserve | Potential timing fit | Exact replication unverified | Old/source incomplete |
+| 14 | [885686](https://ssrn.com/abstract=885686) | CME FX Intraday Reversals | Intraday reserve | Potential timing fit | Exact replication unverified | Full source recovered; descriptive/full-history thresholds |
 | 15 | [7155458](https://ssrn.com/abstract=7155458) | KDE Volume Nodes | Intraday reserve | Source-gated | No: level-one inputs | Not net strategy evidence |
 | 16 | [2440866](https://ssrn.com/abstract=2440866) | Market Intraday Momentum | Intraday baseline | Timing fit only | Existing adaptation tested | Failed baseline |
 | 17 | [2730304](https://ssrn.com/abstract=2730304) | Overnight-Intraday Reversal Everywhere | Intraday baseline | Timing fit only | Existing adaptation tested | Failed baseline |
