@@ -1,0 +1,27 @@
+# dot: SSRN continuation, pass 7
+Author: dot. 2026-11-10. Research only; no tests, purchases or strategy promotion.
+
+## Summary
+Two distinct mechanisms were inspected: Treasury month-end demand and naphtha relative value. Neither establishes a fresh intraday strategy. Treasury timing is a conditional Personal lead; naphtha is a practical-access and execution gate. Numbering continues the research inventory, not a count of qualified strategies.
+
+## 42. Predictable End-of-Month Treasury Returns
+**SSRN[3440417](https://ssrn.com/abstract=3440417), Hartley and Schwarz.** [Author full paper](https://kristaschwarz.com/EOM.pdf), dated November22,2019 internally; author website labels2022.
+
+Source summary: Long Treasury exposure from the close t trading days before the final trading day, exit month-end close. Table8's1990–2018 futures results for t=3 average.12%,.17%,.27% for5-,10-,30-year contracts, with standard errors.02%,.02%,.03%. These are monthly-window returns, not annualized or account returns. The mechanism is benchmark additions and insurer demand; cash results survive auction controls. Cash transaction-cost discussion cites2–3bp off-the-run spreads, not a futures execution simulation. No independent held-out/postpublication futures test identified. Futures close timestamp/roll convention are incomplete; Table4's2015–2019 heading conflicts with the stated2018 sample end.
+
+**Build:** Known exchange trading-day calendar plus validated contract prices can define a frozen month-end hypothesis. Specify entry as E−t close, not vaguely “last three dates.” Do not choose t after looking at local returns. Exact original replication needs its contract selection and closing-price definition; avoid importing cash Sharpe≈1 into futures.
+
+**Fit:** Personal only, multiple overnight holds. Intraday truncation would be a new hypothesis. Lower data complexity than curve strategies, but owned Treasury history, roll treatment and execution endpoints are not verified here. Default-branch ID/title/author searches found no exact paper entry; codex/work absence is not established. Overlaps the broad calendar/MOM–TOM family, though the insurer-demand mechanism and bond-specific evidence differ. Priority: source/data clarification, not immediate coding.
+
+## 43. Mean Reversion Trading on the Naphtha Crack
+**SSRN[5034739](https://ssrn.com/abstract=5034739) / [5032815](https://ssrn.com/abstract=5032815)** are same-title2024 records, counted once. [Author full paper](https://scaillet.ch/pdfs/naphtha.pdf), [Energy Economics2025 publication](https://doi.org/10.1016/j.eneco.2025.108620).
+
+Source summary: ICE naphtha-versus-Brent daily settlements, May2014–February2024. Fade large volatility-standardized daily moves, typically holding four days, with$1.50/bbl stop and$3 target. §§3.2–3.3,5.1–5.3/Table2 charge$.10/bbl each way plus$.20 stop slippage. Seven selected variants average$.62/bbl net per trade, but only1.1–3.6 trades/year. Validation uses five-fold80/20 rather than chronological forward holdout;24variants are further selected using validation performance. Naphtha's stale/illiquid19:30 settlement relative to16:30 active trading is central to the explanation. §3.1 describes retail absence and broker/clearing barriers.
+
+**Build:** Not currently practical. Signal/fill causality is decisive when settlement staleness generates the apparent opportunity: a synthetic closing crack value is not proof of simultaneously executable legs. Need licensed native quotes, leg units, execution timestamps, OTC/clearing access and chronological selection-free evidence. No purchase or acquisition proposed.
+
+**Fit:** Personal overnight only; no Apex/intraday or current-data qualification. Economic relative-value mechanism could diversify equity trend exposure in theory, but realized portfolio benefit is unproven and sparse events cannot carry a portfolio. No exact ID/title matches in repository search or inspected codex/work MINED_INDEX/TIER_LIST/TODO/WATCHLIST. Retain as mechanism reference, not ahead of accessible candidates.
+
+## Rejections from this pass
+- SSRN3760365, Hedging Demand and Market Intraday Momentum: exact repository duplicate. Treasury14:30–15:00ET follows previous-close-to14:30 sign; no costs in published results. Distinct from Gao's initial-half-hour predictor, but already studied here. [Author JFE source](https://academicweb.nd.edu/~zda/intramom.pdf).
+- Cusatis/Kulkarni/Thomas2009 Treasury note reversal:2000–2004 tick evidence, estimated round-trip cost only.20tick against gross.22–.30tick profits; no modern queue/holdout evidence or verified SSRN record. [Full paper](https://musabe.org/bfr20092020/40-260-1-PB.pdf). Not promoted.
