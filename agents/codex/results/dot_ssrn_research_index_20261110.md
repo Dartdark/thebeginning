@@ -97,6 +97,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 50 | [2956411](https://ssrn.com/abstract=2956411) | Yield Curve Premia | Personal | No: monthly | No: bond buckets/duration/FX hedge | Curve-relative-value foundation |
 | 51 | [5390453](https://ssrn.com/abstract=5390453) | Commodity Signed Variance | Personal monthly | No | No: broad native contract panel | Conditional; asymmetry-family overlap |
 | 52 | [5096662](https://ssrn.com/abstract=5096662) | Monetary Restrictiveness and Currency Returns | Personal monthly | No | No: vintage macro/forwards | Conditional; definition-break and cost gates |
+| 53 | [4182628](https://ssrn.com/abstract=4182628) | FOMC Announcement Reversal | Intraday event hypothesis | Same-day source holding | Conditional: exact ES rows/clocks/costs unverified | Modest historical evidence; no modern holdout |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
@@ -109,3 +110,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Expanded source audit](dot_ssrn_expanded_source_audit_20261110.md): Treasury-auction duplicate, VIX source gate, risk-targeting overlap and Zookeeper presentation-only reserve. These do not increase the qualified strategy count.
 
 - [Pass 13: monetary restrictiveness and currency-factor timing](dot_ssrn_continuation_pass13_20261110.md): entry 52 and a separate unnumbered FX reserve. Vintage-based source design does not establish modern net returns.
+
+- [Pass 14: FOMC reversal and intraday replication audit](dot_ssrn_continuation_pass14_20261110.md): entry 53, corrected Sharpe annualization, external fill/registration flaws and negative order-flow economics.
