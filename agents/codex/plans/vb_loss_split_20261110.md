@@ -64,3 +64,8 @@ Only a survivor earns unchanged2023+ historical replication and paired/bootstrap
 the same gate; report era/year outcomes. No claim of fresh holdout. Any positive result remains WATCH pending
 common-price/UNKNOWN-aware replay and independent verification; no automatic code/plan/live promotion.
 No funded/personal scope expansion, paper scout, extra candidate, schedule or message to another session.
+
+Pre-outcome input amendment: first launch stopped in raw-hash validation before any strategy generation.
+The current2026 day/overnight files differ from the frozen `fe35af99` source. Materialize that exact committed
+raw tree under `/workspace/vb_loss_split_source` and load both grid and DT from it; preserve the stop receipt.
+No shared data, rule, cost, date, variant or gate changes. Commit amended code before rerunning.

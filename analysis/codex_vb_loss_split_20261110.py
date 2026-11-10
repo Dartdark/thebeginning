@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 
 import numba
@@ -29,6 +30,22 @@ def sha(p):
 
 def dump(name, value):
     (OUT/name).write_text(json.dumps(value, indent=2, default=str)+'\n')
+
+
+def frozen_raw_root():
+    """Materialize exact preregistered Git bytes; never rewrite shared raw data."""
+    destination = Path('/workspace/vb_loss_split_source')
+    (destination/'data').mkdir(parents=True,exist_ok=True)
+    for year in range(2017,2027):
+        for prefix in ['NQ_1min_','NQ_1min_ON_']:
+            rel=f'data/{prefix}{year}.csv'
+            frozen=subprocess.check_output(['git','show',F.RAW_REF+':'+rel],cwd=ROOT)
+            p=destination/rel
+            if not p.exists() or p.read_bytes()!=frozen:
+                p.write_bytes(frozen)
+    if not (destination/'mc_reports').exists():
+        (destination/'mc_reports').symlink_to(ROOT/'mc_reports',target_is_directory=True)
+    return destination
 
 
 @numba.njit
@@ -153,8 +170,13 @@ def main():
         assert committed == (ROOT/name).read_bytes(), 'Commit plan and exact code before returns'
     OUT.mkdir(parents=True,exist_ok=True)
     prereg = subprocess.check_output(['git','log','-1','--format=%H','--',PLAN],cwd=ROOT,text=True).strip()
+    F.SOURCE = frozen_raw_root()
     g,trades,pp,B,receipt = F.load_inputs()
-    trades['DT'] = DTB.dt_trades(g)
+    try:
+        os.chdir(F.SOURCE)
+        trades['DT'] = DTB.dt_trades(g)
+    finally:
+        os.chdir(ROOT)
     # No new alternative outcome later than design; existing non-VB ledgers are frozen sources.
     trades = {k:t[t.date.lt('2023-01-01')].copy() for k,t in trades.items() if k!='VB'}
     pieces,stats = F.daily_paths(g,trades,pp,B)
