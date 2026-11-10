@@ -43,3 +43,10 @@ Unnumbered reserves: FX post-FOMC reversal [4386170](https://ssrn.com/abstract=4
 **Entry58 implication:**10:29 exit is inside the measured10:28–10:30 thinning interval. This justifies checking quotes, latency, failed fills and fallback execution; it does not quantify slippage or justify moving the exit. Passive queue errors are not market-order fill guarantees. Post-release NG results cannot be transferred to pre-release CL.
 
 [Public MIT engine, pinned release0.7.0](https://github.com/AnshDani2004/mbo-queue/commit/e6b79817dca1ed010dcfd50220be7d902ea3968e) models displayed outright liquidity, not hidden/implied liquidity. Default generic scripts use different windows, zero-latency shadows and midpoint markouts, not the paper's full event analysis or executable P&L. Do not run it and call the result a paper replication without reconstructing the specification. No code was run here.
+
+## Bounded owned-CL read outcome
+A fresh request for existing data/CL_1min_2018.csv, lines1–6, returned blob metadata but empty connector content. This is unavailable content, not an explicit access denial or proof of an empty file. No raw header/price rows obtained; no whole-file retries or return calculations.
+
+[Saved timestamp audit](https://github.com/Dartdark/thebeginning/blob/codex/work/analysis/outputs/codex_qj_donchian_20261030/CL_timestamp_sessions.csv#L415-L440) shows August20,2019 only238 stamps with maximum elapsed1230, then jumps to August23. Under its assumed CT mapping this stops at13:30, before the preceding API signal window; August21/22 also absent. Actual release clocks for this pair remain unauthenticated.
+
+[Exporter](https://github.com/Dartdark/thebeginning/blob/codex/work/tools/exporters/NQ_Bar_Exporter.txt) documents bar-close/chart-timezone and writes its volume field from Ticks. This is not proof of the actual CL export version, settings or trade-size-volume semantics. Saved zero duplicates/session counts do not establish event endpoints or held-path completeness. A readable predetermined bounded excerpt plus export provenance is still required; no raw-row admission claimed.
