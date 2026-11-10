@@ -235,6 +235,15 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   is a different rule and is not reopened. Novelty is unestablished. No backtest or automatic schedule authorized by
   this retention; no promotion or allocation. [dot review](agents/codex/results/dot_whop_review_20261110.md).
 
+- [ ] **Gold crowded-long liquidation — HYPOTHESIS / NEEDS DATA (2026-11-10 UTC).**
+  User requested the mechanism before returns. Proposed merit: published managed-money positioning is an
+  independent participant-state input to a fixed intraday downside trigger; no predictive edge demonstrated.
+  Local Legacy COT is not the required Disaggregated Managed Money series. Next: reconcile one genuine gold
+  sample and exceptional release clock, then count opportunities without returns before a separate bounded
+  preregistration. Preserve prior gold-clock, rates/dollar, COT-index and 52-week-paper failures; no automatic
+  test, new holdout claim or trading change. [Hypothesis](agents/codex/results/gold_market_hypothesis_20261110.md)
+  · [D56 data needs](agents/codex/DATA_NEEDED.md).
+
 - [ ] **Late-day relative-strength continuation — frozen design lead, advancement gate FAILED (2026-11-08).**
   NQ/ES residual at14:00CT, absZ>=1.25, stop0.25ATR, exit14:30, no ownmovehurdle.
   Owned2018–22:244trades, net$40163perNQ, t3.72, PF2.19, dailyDD$4157 versusLDF$15036;

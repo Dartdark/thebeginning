@@ -1961,6 +1961,13 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
 
 ### Evaluation audit — Remaining cushion, account rules and broker evidence
 
+Gold hypothesis follow-up, November 9, 2026 Pacific: [market map](results/gold_market_hypothesis_20261110.md).
+CFTC position date and public availability are different clocks; trader categories do not identify current
+leverage, stops or every trade's hedging purpose. Legacy non-commercial columns do not supply Disaggregated
+Managed Money. LBMA website benchmark prices can be delayed relative to live auction redistributor data,
+and auction start is not actual completion. These facts constrain a future gold hypothesis; 0 new returns,
+no causal liquidation finding, native execution saving or trading change. Preserve prior gold-clock/COT failures.
+
 New-data clock follow-up, November9,2026Pacific: [funding/fear tests](results/new_data_strategies_20261110.md)
 and [primary source notes](inputs/new_data_strategies_20261110/sources/clock_evidence.md). A reference rate's
 effective date precedes its next-day release; final core percentRate after the afternoon revision window differs

@@ -2,7 +2,7 @@
 
 Summary: Develop a strategy that improves the evaluation books within 30 calendar days; prioritize other markets.
 User steering November9,2026Pacific: seek diversification outside the NQ-heavy book; changing/replacing VB is allowed.
-Research markets with existing minute data: gold, crude oil, euro FX and Treasuries; measure strategy-level overlap.
+Immediate focus is gold's participants/mechanism and a hypothesis first; crude, FX and Treasuries follow.
 The completed new-data NQ batch qualified no strategy; do not repeat its failed funding/fear definitions.
 No market's low correlation or account benefit is assumed, and no live or scheduled program changes.
 
@@ -39,6 +39,13 @@ Completed records to retain: [new-data strategy batch](results/new_data_strategi
 The earlier source lanes below remain historical leads/data gates; they do not override this new market priority.
 
 ## Read and synchronize
+
+Latest user step, November 9, 2026 Pacific: explain why gold moves, who trades it and formulate a hypothesis before
+returns. Completed [market map / crowded-long liquidation hypothesis](results/gold_market_hypothesis_20261110.md)
+and [source/evidence sheet](evidence/gold_crowded_longs_20261110.md). Status NEEDS DATA / untested, 0 new returns;
+the key next check is disaggregated gold Managed Money fields plus actual publication exceptions, then a
+no-return frequency/power census. Existing local Legacy COT is not a substitute. No immediate strategy
+test or revived failed clock rule is implied; exact future parameters/code must be committed before returns.
 
 Read AGENTS, the entire Codex builder brief, RESEARCH_CONTROLS, current Claude NEW_CHAT_BRIEF, DEVELOPMENT_PROCESS, TIER_LIST, WATCHLIST, LESSONS and this task. Current inspected Claude head: `3e08d56` (evaluation diagnosis and builder). Refresh before continuing. Keep the paused lab/scout/t6/Hunt programs paused.
 
