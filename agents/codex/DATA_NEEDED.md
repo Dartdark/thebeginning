@@ -558,3 +558,15 @@ Author/origin: **dot**. [Contribution index](DOT_CONTRIBUTIONS.md).
 - **Listed providers:** [48 FRED series and four World Bank panels](results/dot_listed_providers_20261110.md) are current revised snapshots, not historical release/consensus vintages. Sources, hashes and coverage are in the linked package; raw data stays local. Other listed providers were not acquired for the documented permission/account/entitlement reasons.
 
 These are updates to acquisition status, not cleared inputs, approved strategies, a new schedule or permission to resume the scout/lab.
+
+
+## dot: bounded free-input acquisition update (2026-11-10)
+
+Shared update for D01/D50, commodity curves D06–D11, and SSRN index #53/#58; no new strategy IDs or test admission. [Acquisition report](results/dot_free_input_acquisition_20261110.md), [compact source inputs](inputs/dot_free_input_acquisition_20261110/).
+
+- **FOMC #53 / D01 shared calendar:** retained 72 tentative meeting-end dates for 2018–2026 from dated official advance notices, with notice publication times and URLs. Includes October28,2026. March18,2020 is explicitly cancelled and December9,2026 still future. Only the 2025–26 notice directly supplies a 14:00 Eastern statement clock. Earlier statement clocks, cancellation knowledge, actual receipts, exact ES/VX records and native contract/execution evidence remain missing. No scout calendar edited. Smallest next check: reconcile one source-specific event, advance notice and exact price/fill clocks without calculating returns.
+- **D50 COT:** existing 2018–22 CL/GC/NG archive inventory is preserved. New retained extraction checks 19 commodity market codes in the official 2018 legacy archive: 1,007 unique market/date records, January2–December31. This is a schema/coverage sample, not the exact26-market panel, original-release vintages or prices. Historical shutdown/ION delays and revisions prohibit automatic Tuesday-to-Friday joins. Next check remains one complete source-specific release-vintage/native-contract week. No prior failed rule reopened.
+- **#58 API/EIA:** acquired a current official EIA calendar snapshot with14holiday exceptions in2025–26. This is not an archived advance notice or actual-receipt ledger. API officially sells WSB through distributors; no verified free timestamped API-actual/Bloomberg-consensus panel was acquired. Exact historical clocks and source inputs remain blocked. No purchases/accounts/outreach. Price-only adaptation remains distinct.
+- **D06–D11 native curves:** no additional lawful free native maturity panel acquired. COT does not fill this gap; earlier source/license audit still applies.
+
+Only downloads, transcription/parsing and structural row checks were performed. No backtests, return computations, scout/lab changes or account/live operations.
