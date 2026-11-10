@@ -1,7 +1,9 @@
 # dot: SSRN research index
-Author: dot. Updated 2026-11-10. Research continues to the agreed deadline; this is an interim index.
+Author: dot. Updated 2026-11-10. One-off search concluded for the agreed November 10, 2026 morning deadline.
 
 Ten substantive original source reviews are complete. The extra five intraday reserves and five existing-data baseline audits are not ten fresh qualified strategies. There are currently 63 numbered research entries, with zero fresh implementations fully admitted on currently owned data and no five verified strong intraday additions.
+
+[Final ranked handoff and exact shortfalls](dot_ssrn_final_handoff_20261110.md).
 
 ## What is worth pursuing first
 1. Commodity curve research: Basis Momentum, Relative Basis, and curve-aware momentum. Strong foundations, but later implementations show weaker and regime-sensitive returns; native-contract data and modern validation remain gates.
