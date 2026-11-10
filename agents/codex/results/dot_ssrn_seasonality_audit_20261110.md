@@ -1,0 +1,26 @@
+# dot: seasonal-model and recent-source screen
+Author: dot. 2026-11-10. Research-only screening addendum; no new strategy promotion or return tests.
+
+## 1. SSRN2869969: different method, missing inputs
+[Portfolio Optimization of Commodity Futures with Seasonal Components and Higher Moments](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2869969). Reviewed [author-hosted January2017 thesis chapter, printed pp63–77](https://bjerring.github.io/assets/media/Phd_Thesis.pdf), not byte-verified November2016 SSRN.
+
+Monthly Bloomberg continuous futures for ten commodities plus French's broad US equity portfolio. AR(p) lag length uses AIC with12-lag cap, re-estimated monthly on120months. Joint residual-vector resampling preserves cross-asset dependence; long-only portfolios maximize Omega or Sharpe. OOS January1985–December2014 has360months. Omega version reports Sharpe.82, drawdown36.08% and average monthly turnover64.39%. Costs rely on discussion of a borrowed13bp estimate, not contract-specific net execution; continuous-roll construction is incomplete.
+
+**Assessment:** Honest rolling design but old evidence, substantial turnover, and no postpublication validation. This is AR allocation rather than a clean calendar anomaly. Personal only. No exact repository match for ID/sieve/Omega in search or codex/work MINED_INDEX. Direct data-directory review finds only GC overlapping its ten commodity markets; other nine absent. HANDOFF reports GC/CL beginning November2017 with unadjusted rolls, insufficient for120months training plus OOS. Existing CL/NQ/GC substitution would be a different hypothesis. Not current-data-qualified.
+
+## 2. SSRN4575549: version-sensitive caution
+[Return Seasonality in Commodity Futures](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4575549), [published2024 source](https://www.sciencedirect.com/science/article/pii/S1059056024002934). Full methods remain inaccessible; available publisher introduction is stronger than abstract-only but insufficient for coding.
+
+It reports replication of same-month returns at1.02% monthly for1975–2011, dominated by1990–1999;2004–2023 reports.95% with t1.52. Removing1990–1999 removes significance. The2023 SSRN abstract says seasonal additions weaken momentum;2024 published abstract instead reports significant combined momentum/reversal/seasonality returns and extends throughOctober2023.
+
+**Assessment:** Do not merge inconsistent version claims. Use only as qualified evidence that calendar effects can be regime-dependent. Exact costs, training and rolls unaudited; not a new implementation slot.
+
+## 3. arXiv2609.12227: reproducibility does not remove timing risk
+[Seasonal Trading in Commodity Futures](https://arxiv.org/pdf/2609.12227), [public repository](https://github.com/RPKosch/Seasonal-Trading-in-Commodity-Markets-Preprint-Version). No SSRN counterpart located.
+
+Fifteen commodities, rolling120months,2016–2024OOS; dummy regression, SSA and robustSSA, classic/vol-normalized. One contract per direction; regression requires correct beta sign and Newey–West p≤.10 or cash. SSA selects even with forecast signs opposing direction. Costs8.6bp each side omit financing/margins/contract-specific impact. Regression-long Sharpe.245 versus benchmark.183; SSA long loses. None of18paired bootstrap Sharpe comparisons survives within-family Holm correction. Bootstrap keeps observed temporal ranks without explicitly preserving cross-contract dependence.
+
+**Independent read-only code finding:** [Builder lines105–120](https://github.com/RPKosch/Seasonal-Trading-in-Commodity-Markets-Preprint-Version/blob/main/Data%20Analysis/Helper%20Function/Compute_Monthly_Returns.py#L105-L120) checks future price coverage and the traded month's full average volume before selection at line157. Those facts are unavailable at month-start. A pre2016 universe screen does not fix that separate eligibility issue. Numerical impact was not tested; do not claim all results invalid. Software licensing does not grant underlying market-data rights.
+
+## Practical implication
+No new strategy here clears both evidence and existing-data gates. Public code is valuable for audit, not proof of causal execution or licensed data ownership. These sources do not justify reopening failed seasonality experiments or promoting an intraday adaptation.
