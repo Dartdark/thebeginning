@@ -128,3 +128,19 @@ for the next. Suggested to the user: cap the program or redirect it (e.g. data t
   the guard reads it itself, no typing, and with open P&L included it guards the account's target, not one chart's.
   Not installed until the next live trade shows whether Equity includes open P&L. Codex's 14 checks remain a useful
   reference (tick rounding, already-met target).
+
+## Update 2026-11-10 (Claude read codex/work b44f159b; summaries read, no Codex script rerun)
+- **VB split stop** (7 of 15 MNQ out at -37.5 pts): REJECT, 150K design pass 38.3 -> 35.7% (adverse DLL fills 35.0 -> 33.8%);
+  VB removed entirely 31.9%: VB earns its place. Agrees with Claude's earlier VB loss-trim results.
+- **VB / ONB tail review + dot loss map:** the 4 lost accounts had an ONB stop larger than the cushion left (e.g. $1,940 room vs
+  $2,478 risk). No costless fix found; finish mode (adopted) is the best lead. Claude's 11/08 cushion-cap bench already covered the
+  'cap the stop at the room' idea for evaluations (fewer fails, fewer passes: not adopted); funded charts have the cushion guard.
+- **New-data strategies (NY Fed funding, VIX9D):** 3 arms, all fail design; best pre-open fear rebound t 1.47 at 1 MNQ (gate 2.5).
+- **Gold crowded-long liquidation:** feasibility census fails (38 events 2018-22); no returns run. Claude's papers_1110 COT test
+  had GC alone t 2.5 for fading weekly non-commercial changes (1 of 8 markets, not an item): a different signal; note only.
+- **Papers:** NG informed-forecast (SSRN 2826684) WATCH / needs analyst forecast data; five commodity-curve papers (2485314 etc.)
+  need a contract panel; dot's validation audit adds that basis-momentum weakened in later samples (Baba-Yara & Bondatti, SSRN
+  4345427) and that 'A Tale of Two Premiums Revisited' (2023) supports the weekly position-change premium (no executable timing).
+  Same verdicts as Claude's batches today (TIER_LIST basis-momentum / relative basis / KRT / FX sessions rows).
+- **Whop / Unbiased Trading reviews:** one lead, MNQ two-bar compression (community claim PF 1.59 on 110 trades): unverified.
+- Nothing changes in any plan.
