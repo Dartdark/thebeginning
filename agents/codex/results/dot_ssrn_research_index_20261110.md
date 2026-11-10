@@ -101,7 +101,6 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 54 | [5815464](https://ssrn.com/abstract=5815464) | Defensive Absolute Return and Trend | Personal portfolio method | No: monthly/overnight | No: underlying 25-factor panel | Method reference; retrospective scaling/no costs |
 | 55 | [2939649](https://ssrn.com/abstract=2939649) | Commodity Option-IV Innovation | Personal monthly | No | No: options surfaces/native futures | Conditional; gross old sample/short-side risk |
 | 56 | [3019870](https://ssrn.com/abstract=3019870) | Low-Volume FX Reversal | Personal daily | No: overnight | No: CLS/Olsen/forward inputs | Conditional; historical delivery clock unresolved |
-
 | 57 | [6415558](https://ssrn.com/abstract=6415558) | Dividend-Payment FX Flows | Personal daily | No: overnight | No: as-of dividends/FX financing | Conditional; dissertation verified, SSRN parity gated |
 
 ## Guardrails for any later build
@@ -129,3 +128,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 17: FX volume and source exclusions](dot_ssrn_continuation_pass17_20261110.md), entry 56: observed hourly volume is not automatically hourly-available data; published option-implied ES result also reverses the old abstract's claim.
 
 - [Pass 18: dividend-payment FX flows](dot_ssrn_continuation_pass18_20261110.md), entry57: verified dissertation method, modest institutional-cost evidence and distinct causal dividend-data gates.
+
+- [Intraday exclusions update](dot_ssrn_intraday_exclusions_update_20261110.md): fresh overnight-drift counterevidence, bounded ORB failures, and corrected range-forecast validation. No candidate-count inflation.
