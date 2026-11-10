@@ -1,6 +1,8 @@
 # dot: SSRN research index
 Author: dot. Updated 2026-11-10. Research continues to the agreed deadline; this is an interim index.
 
+Ten substantive original source reviews are complete. The extra five intraday reserves and five existing-data baseline audits are not ten fresh qualified strategies. There are currently 62 numbered research entries, with zero fresh implementations fully admitted on currently owned data and no five verified strong intraday additions.
+
 ## What is worth pursuing first
 1. Commodity curve research: Basis Momentum, Relative Basis, and curve-aware momentum. Strong foundations, but later implementations show weaker and regime-sensitive returns; native-contract data and modern validation remain gates.
 2. Publication-lag-aware commercial-position changes: A Tale of Two Premiums. Distinct from the failed gold-only crowding screen, but broad data, costs and a clean holdout remain missing.
@@ -103,11 +105,9 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 56 | [3019870](https://ssrn.com/abstract=3019870) | Low-Volume FX Reversal | Personal daily | No: overnight | No: CLS/Olsen/forward inputs | Conditional; historical delivery clock unresolved |
 | 57 | [6415558](https://ssrn.com/abstract=6415558) | Dividend-Payment FX Flows | Personal daily | No: overnight | No: as-of dividends/FX financing | Conditional; dissertation verified, SSRN parity gated |
 | 58 | [3747330](https://ssrn.com/abstract=3747330) | API Information Before EIA | Intraday CL research | Normal09:30–10:29 Eastern | Price adaptation possible; exact rows/calendar pending | Conditional gross evidence; consensus/cost/holdout gates |
-
 | 59 | [4764451](https://ssrn.com/abstract=4764451) | Pre-FOMC Treasury Drift | Personal calendar | Crosses midnight; one CME session | No: native contract/endpoints unverified | Conditional gross calendar evidence |
 | 60 | [4326098](https://ssrn.com/abstract=4326098) | Extreme-Weather NG Spread | Personal multi-day | No | No: operational forecasts/native spread | Retrospective weather and return-accounting gates |
 | 61 | [3629061](https://ssrn.com/abstract=3629061) | Prospect Theory FX Sorting | Personal monthly | No | No: broad spot/forward panel | Modest old net evidence; modern holdout missing |
-
 | 62 | [4104888](https://ssrn.com/abstract=4104888) | Commodity Twitter Sentiment Shifts | Personal monthly | No | No: licensed timestamped text/native contracts | Conditional vintage, rights and modern-net gates |
 
 ## Guardrails for any later build
