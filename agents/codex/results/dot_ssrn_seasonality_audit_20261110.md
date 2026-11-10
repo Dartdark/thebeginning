@@ -46,3 +46,18 @@ Original 2022 abstract favors BTC in stock/bond minimum-volatility portfolios; 2
 **Assessment:** Portfolio allocation, not independent alpha. Intraday estimation data do not imply intraday-flat holdings. A retrospective monetary-regime split is not an established causal switching rule. No new qualified entry.
 
 Actual BTC_1min_2018.csv inspection confirms first row December 17, 2018 at 02:29 and last December 31 at 15:59, with date/time/OHLC/volume and no expiry ID. Filename does not imply full-year coverage. GC2017/ZN2017/ES2018 reads returned metadata but empty content, so remained unread, not proven empty. Matching four tickers cannot establish synchronized covariance inputs or faithful replication. No tests were run.
+
+## Further seasonal sources, not new qualified strategies
+### Fixed-expiry energy seasonality
+[SSRN3792028](https://ssrn.com/abstract=3792028), [complete February2021 author draft](https://www.researchgate.net/publication/349633507_Trading_Time_Seasonality_in_Commodity_Futures_An_Opportunity_for_Arbitrage_in_the_Natural_Gas_and_Crude_Oil_Markets): NG buy February F5–F36, sell June matching F1–F32; expanded panel reaches F60. WTI short July F6–F60, cover December matching expiries. Samples end July2020, start1997/2002/2006. Entry months chosen from full-sample patterns. Monthly-average descriptive prices; separate CAPM pairs every entry-month date with corresponding exit-month dates. Modeled costs NG$51.50/WTI$21.50 per contract per transaction; ample liquidity/margin assumed. Recursive CAPM is not rolling strategy selection.
+
+Assessment: overlapping observations and maturities do not create hundreds of independent years. Approximately23/19/14 annual episodes;2008 important. Positive CAPM alpha is not arbitrage. [Final2022 record](https://eprints.gla.ac.uk/281581/) confirms publication, but final PDF unavailable in this pass. Draft parity, native fills, cluster inference, rights and modern holdout remain gates. Personal multimonth, not intraday.
+
+### Seasonal ranking and trend costs
+Baltas [SSRN2710334](https://ssrn.com/abstract=2710334), [full published source](https://www.revue-banque.fr/binrepository/0000000000000000000_RB00764_MG108084026.pdf), pp.47–62. Rank upcoming month's average commodity returns over prior ten years (minimum five); long/short quintiles.1992–February2015 Bloomberg generic continuous futures. Optional7% target uses trailing100-day volatility. Standalone raw Sharpe .49 gross/.34 modeled net; targeted .49/−.11. Costs turnover×25bp. Seasonal trend veto gives commodity targeted trend .85→.89 at10bp, but .77→.75 at25bp; paired improvement p=.0766. Causal histories do not establish untouched selection or native execution. Method/cost reference, not new independent trend alpha.
+
+### Front-running seasonal patterns: explicit post-selection
+[SSRN5048183](https://ssrn.com/abstract=5048183), [full author article](https://quantpedia.com/traders-guide-to-front-running-commodity-seasonality/). Four commodity ETFs,2007–June2024. Each takes±25% based on a chosen lag's return rank within its own12-month history. Lag12 loses4.54% annually; authors shift to lag11, reporting6.71% CAR/.55 Sharpe/−20.43% drawdown, then add a correlation filter. This narrative changes the rule after observing failure. No untouched net validation, native-futures equivalence or verified financing/borrow ledger. Anticipatory-trading explanation is conjectural.
+
+### Original arXiv audit independently reconfirmed
+The full traded-month volume/future-coverage eligibility gate remains noncausal for first-day orders; impact untested. None of18 paired comparisons survives Holm. Code/documentation GPL does not cover market-data redistribution. No code or strategy returns run here.
