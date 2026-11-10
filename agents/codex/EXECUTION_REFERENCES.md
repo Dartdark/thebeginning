@@ -2590,3 +2590,11 @@ syntax-only amendment `65de599`, design checkpoint `70e5d0a`. Fifteen definition
   or account comparisons. Park conditional watches until new matching inputs arrive. Then reconcile one
   source event/forecast/leg/clock before coverage, costs, power and preregistration. Continue distinct discovery.
   [Combined checkpoint](results/scout_owned_source_20261109.md). No live or allocation change.
+
+### dot follow-up: shared account losses and source-review limits (2026-11-10)
+
+Author/origin: **dot**, supplementing the existing evaluation-audit entry rather than a new strategy.
+- [Loss-path map](results/dot_vb_onb_loss_map_20261110.md): documented ONB planned loss exceeded remaining cushion; the November 4 accounts were below reconstructed floors before later VB chart trades. Shared direction is one market event with separate account paths. Chart markers do not establish broker fills.
+- The older 89% statistic spans any one of five components exceeding 70% of modeled failure-day loss; it is not VB/ONB-specific or a live failure-rate estimate.
+- [Unbiased Trading review](results/dot_unbiased_trading_review_20261110.md): executable-cost and concentration lessons are methods, not verified alpha. The [Hyperliquid audit](results/hyperliquid_data_audit_20261110.md) distinguishes final settlements, forecasts, oracle prices and cash entitlement.
+- Missing broker fills/floor history and historical funding receipt/payment evidence remain explicit. Smallest next check is evidence reconciliation, not an unregistered timing/size optimization. No measured execution savings, new return tests, allocation or program restart.

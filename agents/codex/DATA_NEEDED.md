@@ -548,3 +548,12 @@ claims dates match the already saved claims calendar; 249 printed clocks match a
 Forecast history, original-actual/revision provenance and receipt availability remain
 open; return admission is unchanged. [Reconciliation](results/eval_owned_data_reconciliation_20261109.md),
 [clock sidecar / provenance](inputs/eval_focus_20261109/macro_reconciliation/manifest.json).
+
+## dot acquisition follow-up, November 10, 2026
+
+Author/origin: **dot**. [Contribution index](DOT_CONTRIBUTIONS.md).
+- **D32 remains NEEDS DATA:** the [Hyperliquid audit](results/hyperliquid_data_audit_20261110.md) acquired 24 settled BTC funding observations for November 8 with prior-minute perpetual references, plus bounded history probes. The 2018-22 probe was empty and the capped 2023 page changes from roughly eight-hour to hourly settlement. Historical forecast receipt, payment oracle, signed payment reconciliation, executable hedge history and use rights remain missing. No return test or new definition.
+- **Earlier CME candidate, not admitted:** [ES/NQ acquisition](results/dot_pre2018_acquisition_20261110.md) starts May 29, 2016. Feed, continuous-roll construction, bar labels and rights remain unresolved. Raw files stay separate on the PC; compare overlap and resolve source conventions before admission, not a duplicate acquisition request.
+- **Listed providers:** [48 FRED series and four World Bank panels](results/dot_listed_providers_20261110.md) are current revised snapshots, not historical release/consensus vintages. Sources, hashes and coverage are in the linked package; raw data stays local. Other listed providers were not acquired for the documented permission/account/entitlement reasons.
+
+These are updates to acquisition status, not cleared inputs, approved strategies, a new schedule or permission to resume the scout/lab.
