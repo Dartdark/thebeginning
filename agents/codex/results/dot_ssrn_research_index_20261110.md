@@ -159,3 +159,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 22: trader-count FOMC timing](dot_ssrn_continuation_pass22_20261110.md): entry 63 is a distinct same-day working-paper hypothesis, not verified net ES evidence or a recovered final-publication result.
 
 - [Final intraday replication audit](dot_ssrn_final_intraday_audit_20261110.md): Baltussen signal/window clarified; newer changed-rule studies do not establish faithful modern net replication.
+
+- [Final commodity-currency linkage check](dot_ssrn_final_currency_linkage_audit_20261110.md): fresh publication, old sample, liquidity-sensitive predictive regressions; no verified net OOS trading promotion.
