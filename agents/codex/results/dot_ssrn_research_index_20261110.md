@@ -108,6 +108,8 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 60 | [4326098](https://ssrn.com/abstract=4326098) | Extreme-Weather NG Spread | Personal multi-day | No | No: operational forecasts/native spread | Retrospective weather and return-accounting gates |
 | 61 | [3629061](https://ssrn.com/abstract=3629061) | Prospect Theory FX Sorting | Personal monthly | No | No: broad spot/forward panel | Modest old net evidence; modern holdout missing |
 
+| 62 | [4104888](https://ssrn.com/abstract=4104888) | Commodity Twitter Sentiment Shifts | Personal monthly | No | No: licensed timestamped text/native contracts | Conditional vintage, rights and modern-net gates |
+
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
 
@@ -147,3 +149,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 20: Treasury drift, weather spreads and prospect-theory FX](dot_ssrn_continuation_pass20_20261110.md): entries 59–61, with explicit historical-vintage, accounting and modern-validation gates. No new current-data admission.
 
 - [Physical supply/demand source audit](dot_ssrn_physical_signal_audit_20261110.md): Baltic predictor targets spot indexes, satellite work predicts demand rather than returns, and shipping/crop sources remain gated. No count increase.
+
+- [Pass 21: commodity sentiment and D51 version correction](dot_ssrn_continuation_pass21_20261110.md): entry 62 is distinct language-based research; published macro-jump paper does not validate the older trading draft.
