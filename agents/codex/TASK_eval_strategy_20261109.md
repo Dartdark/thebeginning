@@ -40,6 +40,12 @@ The earlier source lanes below remain historical leads/data gates; they do not o
 
 ## Read and synchronize
 
+Latest completion after user said "do it": [gold crowding feasibility](results/gold_crowding_feasibility_20261110.md).
+Committed no-return census `44df28eb`: 38 crowded entries in 2018–22; only 20.4% of 30-calendar-day windows contain one.
+Event-count and opportunity-coverage gates fail. Free Managed Money data partially reconciled; original vintages and
+native execution remain unverified. Zero economic returns, no recent/account stage. Close this implementation without
+retuning; the prior data-gate next step below is historical, not an instruction to rerun the failed candidate.
+
 Latest user step, November 9, 2026 Pacific: explain why gold moves, who trades it and formulate a hypothesis before
 returns. Completed [market map / crowded-long liquidation hypothesis](results/gold_market_hypothesis_20261110.md)
 and [source/evidence sheet](evidence/gold_crowded_longs_20261110.md). Status NEEDS DATA / untested, 0 new returns;

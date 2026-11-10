@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "one_event_per_date": true,
+    "design_only": true,
+    "publication_plus_buffer_precedes_decision": true,
+    "report_age_bounded": true,
+    "crowding_matches_frozen_threshold": true,
+    "entry_after_trigger_next_bar": true,
+    "planned_horizon_30minutes": true,
+    "trigger_in_frozen_window": true,
+    "corrected_gold_row_never_admitted": true,
+    "juneteenth_delayed_row_never_admitted": true,
+    "shutdown_trade_blackout": true,
+    "only_tuesday_observations_admitted": true,
+    "every_rank_recomputed_from_52_prior_admitted_reports": true,
+    "census_counts_reconcile": true,
+    "failed_gate_stays_failed": true,
+    "no_economic_return_columns": true,
+    "census_code_matches_recorded_hash": true,
+    "input_price_hashes_match": true
+  },
+  "passed": true,
+  "check_count": 18,
+  "current_git_head": "44df28ebf503f8337c7eaae89a37d5fa9e69f4ff",
+  "independent_review": false,
+  "economic_returns_computed": false
+}

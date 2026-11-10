@@ -1961,6 +1961,13 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
 
 ### Evaluation audit — Remaining cushion, account rules and broker evidence
 
+Gold follow-through: [completed feasibility census](results/gold_crowding_feasibility_20261110.md), November 9, 2026 Pacific.
+Official April3,2019 notice identifies a corrected gold position row for March26; the current free mirror cannot be
+assumed to retain original release values. Ordinary-calendar buffers also do not repair shutdown backlogs. Exclude
+known uncertain states explicitly, retain source/hash/observation/availability clocks, and distinguish a reduced
+research subset from the complete strategy. Source/date/OI parity and maker QA pass; opportunity frequency fails.
+No P&L, measured execution saving, account benefit or native fill validation follows.
+
 Gold hypothesis follow-up, November 9, 2026 Pacific: [market map](results/gold_market_hypothesis_20261110.md).
 CFTC position date and public availability are different clocks; trader categories do not identify current
 leverage, stops or every trade's hedging purpose. Legacy non-commercial columns do not supply Disaggregated

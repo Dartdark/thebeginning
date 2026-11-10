@@ -12,6 +12,10 @@ Local starting head `cc168c49`; current Claude tier checked at `9810a528`. Sourc
 [`gold_crowded_longs_20261110.md`](../evidence/gold_crowded_longs_20261110.md).
 No economic preregistration is claimed: the economics come before parameter/code selection in this phase.
 
+**Follow-up after user authorized testing:** [frozen feasibility census](gold_crowding_feasibility_20261110.md)
+fails for this evaluation implementation: 38 entries in 2018–22; only 20.4% of 30-day windows have an entry.
+No P&L returns were computed. The market map below remains the original hypothesis record, not a pending test instruction.
+
 ## Why gold moves
 
 The useful distinction is between changing the desired ownership of gold and the orders that transmit

@@ -1,10 +1,13 @@
-# Gold crowded-long liquidation: HYPOTHESIS / NEEDS DATA
+# Gold crowded-long liquidation: DON'T TEST — evaluation feasibility failed
 
-Summary: User asks to explain gold's movers and build a hypothesis before testing.
-Propose testing whether published managed-money crowding amplifies subsequent intraday downside breaks.
-Positioning is a state proxy, not observed current leverage, stops or compelled order flow.
-Owned GC prices are present; inspected local COT archives are Legacy, not the required disaggregated panel.
-No economic definition has been tested and no return/preregistration/plan adoption is claimed.
+Summary: The user's subsequent authorization earned a frozen no-return census, not an economic test.
+The reduced release-aware rule produces only 38 crowded entries in 2018–22, across 23 report clusters.
+Only 20.4% of 30-day windows have an entry; event-count and frequency gates fail.
+Free disaggregated fields acquired and partially reconciled; original vintages/native execution remain unverified.
+Do not advance this evaluation implementation; profitability remains untested and no account benefit is claimed.
+
+Completed [feasibility report](../results/gold_crowding_feasibility_20261110.md), protocol/code commit `44df28eb`.
+The original hypothesis reasoning below is retained as history; its next-gate wording is superseded by this failure.
 
 Source map: [gold_market_hypothesis_20261110.md](../results/gold_market_hypothesis_20261110.md).
 Return trials: **0 new**. Prior COT, gold-clock, rates/dollar and breakout failures remain counted.

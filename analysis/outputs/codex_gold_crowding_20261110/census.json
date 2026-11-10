@@ -1,0 +1,69 @@
+{
+  "settings": {
+    "rank_reports": 52,
+    "crowding_percentile": 0.8,
+    "max_age_days": 14,
+    "signal_start": 720,
+    "signal_end": 1100,
+    "hold_minutes": 30,
+    "reference_min_coverage": 0.95,
+    "roll_jump_atr": 0.25,
+    "min_events": 40,
+    "min_report_clusters": 20,
+    "minimum_30day_any_opportunity_fraction": 0.25,
+    "assumed_30min_sd_atr": 0.12,
+    "assumed_gross_effect_atr": 0.1,
+    "mgc_point_value": 10.0,
+    "tick": 0.1,
+    "fee_roundtrip": 3.0,
+    "primary_slippage_ticks_per_fill": 1,
+    "stress_slippage_ticks_per_fill": 2,
+    "stop_atr": 0.25,
+    "stop_min_oz": 0.5,
+    "stop_max_oz": 8.0,
+    "size_mgc": 1
+  },
+  "trading_days": 1297,
+  "base_events": 228,
+  "crowded_events": 38,
+  "independent_report_clusters": 23,
+  "excluded_days": {
+    "rank_warmup_or_no_admitted_report": 25,
+    "no_downside_cross": 768,
+    "reference_session_incomplete": 41,
+    "report_too_old": 165,
+    "shutdown_uncertain_trade_date": 70
+  },
+  "crowded_events_by_year": {
+    "2018": 3,
+    "2019": 22,
+    "2020": 3,
+    "2021": 2,
+    "2022": 8
+  },
+  "windows_30calendar_days": 1275,
+  "fraction_windows_with_event": 0.20392156862745098,
+  "median_events_per_window": 0.0,
+  "assumed_sd_atr": 0.12,
+  "assumed_effect_gross_atr": 0.1,
+  "required_net_mean_atr_report_cluster": 0.050043459373697946,
+  "assumed_cost_atr_at_median_entry_atr": 0.02228495023027781,
+  "gates": {
+    "enough_events": false,
+    "enough_report_clusters": true,
+    "plausible_assumed_power": true,
+    "enough_30day_opportunities": false
+  },
+  "count_gate_pass": false,
+  "economic_returns_computed": false,
+  "git_head": "44df28ebf503f8337c7eaae89a37d5fa9e69f4ff",
+  "script_sha256": "e0798cbb1f14e6afaac87e0fcce6c828e276e131becb6c836f43f5220bb91e3d",
+  "price_hashes": {
+    "data/GC_1min_2017.csv": "2052cdeaa921ebd6450e79ab9be72ffb0436302ce6d890d0f9e6895cdeb55d32",
+    "data/GC_1min_2018.csv": "6ace4f1d2c8772beb6939d8263c22a7c36854315388ccc77d3930a0e22ec39e9",
+    "data/GC_1min_2019.csv": "771a307ae8147901e45f6f838b149910474047e2db9c54d0f67535fdccd26555",
+    "data/GC_1min_2020.csv": "0ca1eeaf8119e261325aaf1fd35f7bfbefea86190ed67ad7f9ced325fc5a226f",
+    "data/GC_1min_2021.csv": "ce1d6f1c85d2b8e2b53ac5ce8b29a3552a1c1f4d6f6a78dac375f35e9f18701a",
+    "data/GC_1min_2022.csv": "7a800cd77ec404766288b77c724c07ec08e81ac515cf63d075386738de3a663f"
+  }
+}
