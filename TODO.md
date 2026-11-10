@@ -272,11 +272,18 @@ after 15:59 CT, never with a position open.
       (c) **ZT continuation EntryZ 1.25** (WATCHLIST #36): `checks/candidates/zt_continuation/NQ_ZT_Continuation.txt`
       ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/zt_continuation/NQ_ZT_Continuation.txt)),
       @NQ 15 min, Exchange time, CME 24h, IOG off, 1 contract, 2017-06 -> now (warm-up; expect ~600 trades from 2018); Claude matches it to python_trades_z125.csv.
-- [ ] **You (MultiCharts, any evening): export NQ 1-minute bars 2009-01 -> 2017-12** (user 2026-11-10), same way as the existing
-      `data/NQ_1min_<year>.csv` files (date,time,open,high,low,close,volume; Exchange time = CT; 24h session; one file per year or
-      one file). Upload them; Claude then rebuilds Overnight Tick on 2009-2017 and tests the oil-volatility split out of sample
-      (WATCHLIST #37: high-OVX nights $53 vs $17 per MNQ in 2018-26, t 2.55, found by a screen - this makes it a real test;
-      also WATCHLIST #38: Overnight Tick / Swing Target / PaperTrend volatility-regime leads from the full data sweep).
+- [ ] **You (MultiCharts, any evening): export OLDER 1-minute bars, 2009-01 -> 2017-12, for NQ, ES, YM, GC and CL** (user 2026-11-10:
+      'put all of them on the todo for older data'). Same way as the existing `data/<SYMBOL>_1min_<year>.csv` files
+      (date,time,open,high,low,close,volume; Exchange time = CT; 24h session; continuous contract as now; one file per year).
+      Upload them; Claude then runs out-of-sample tests on data no screen has seen:
+        NQ: Overnight Tick x fear / oil volatility / stretched S&P (WATCHLIST #37, #38), Swing Target and PaperTrend regime leads (#38),
+            Twin RTH breakout + skip VXN-rising, Ricochet 1144 + skip Nasdaq-fear spikes, Donchian morning + skip VXN-rising,
+            Turn of the month + skip copper/gold-rising (rescue leads, `analysis/rejects_sweep.py`);
+        ES + YM: Fade YM vs ES + high FINRA short ratio (FINRA starts 2018-08: only the fade itself can be retested; the filter
+            needs new data);
+        GC: GC combo + fear-day filter (its taker-flow vote needs order-flow data, from 2018 only: partial retest);
+        CL: CL Sunday fade x OVX (WATCHLIST #37; OVX starts 2009-09).
+      Not testable on older data: FINRA short + DIX (FINRA from 2018-08) -> forward data only.
 - [ ] **Personal account (when it starts): CL Sunday fade with oil-volatility sizing** (user 2026-11-10; watched, WATCHLIST #37): `funded_strategies/CL_Sunday_Gap_Fade.txt` (version 2026-11-10) on the personal CL chart, `NumContracts` 1, **`UseOVX` true, `OVXQty` 2** (2 MCL on weekends after a high-OVX Friday). Automatic: the VPS task OvxDaily (installs itself) writes the flag; log `live/health/ovx_log.csv`. Funded charts keep `UseOVX` false.
 - [ ] **Personal account (when it starts): FINRA short-volume longs at 1 MNQ** (user 2026-11-09; watched, WATCHLIST #32): `checks/candidates/finra_longs/NQ_FINRA_Short_Volume_Longs.txt` on 1-min MNQ (file header), input **`UseFlagFiles` true**: fully automatic from the VPS task `FinraDaily` (`live/vps/finra_daily.ps1`, installs itself), nothing daily. Plus one Apex Chart Guard (`TargetBalance` 0).
 - [ ] **Personal account (when it starts): ZT continuation at 1 MNQ** (user 2026-11-09; watched, WATCHLIST #36): `NQ_ZT_Continuation.txt` on 15-min MNQ, Exchange time, 24h, IOG off, defaults as in the file (EntryZ 1.25, 08:35-14:45). No more than 1 MNQ (corr 0.41 with the book).
