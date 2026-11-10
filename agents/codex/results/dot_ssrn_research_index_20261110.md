@@ -98,3 +98,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
+
+## Additional audited context
+- [Curve Momentum comparator](dot_curve_momentum_comparator_20261110.md): full accepted paper reviewed; distinct within-curve design, but SSRN identity unverified and not counted among the 50 entries. Net modeled-cost aggregate evidence does not transfer to CL/GC-only exposure.
+- [Validation audit update](dot_ssrn_validation_audit_20261110.md): original-author Basis-Momentum charts extend through December 2025, with undisclosed implementation/cost continuity. The May 2025 Relative Basis revision still ends its return sample in 2019. Original ten, pre-TRA and COT descriptions now clarify log-price formula, collateral denominator, event scaling inference and prior-week OI.
