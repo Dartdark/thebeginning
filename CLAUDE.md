@@ -30,6 +30,9 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
   line (code commit + data range/fingerprint): run them as `tools/run_stamped.sh analysis/x.py ... > analysis/outputs/x.txt`.
   Promotion above C needs t >= `metrics.t_threshold(N_items)` (`analysis/trials.py`) or deflated Sharpe >= 0.95 unless
   pre-registered, and the `strategy-checker` agent on `checks/candidates/<name>/`. Longs and shorts analysed separately.
+- **Screen every piece against new data (user, 2026-11-10):** when new data arrives, besides the idea it was fetched for,
+  run `analysis/new_data_screen.py` over every plan piece (DEVELOPMENT_PROCESS 'New data: screen every piece'); leads get a book
+  bench vs the same size spread evenly, then out-of-sample evidence before any plan change.
 - **Add or replace (2026-10-18):** test every candidate as an addition AND as a replacement of the plan piece it overlaps
   most. **Capital-expansion bench (2026-10-24):** gains that only come from more capital go to that table in `PORTFOLIO.md`.
   Preferences: low correlation, funded payouts first; regime-dependent welcome, not preferred.

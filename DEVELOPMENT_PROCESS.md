@@ -422,6 +422,18 @@ whole-strategy tests: it shows which part carries the edge and which parts are d
 **For new combinations:** build only from ingredients in the register below, at most 2-3 per strategy, rules and settings fixed
 before any result, then the full checker (incl. the parameter-perturbation check). Every combination tried counts as a trial.
 
+### New data: screen every piece (user 2026-11-10, standing rule)
+
+Whenever a new data source arrives (or an existing one is used in a new way), do not stop at the idea it was fetched for. Also
+**screen every plan piece against it**: `python3 analysis/new_data_screen.py <csv> <date col> <value col> <regime> <name>` splits
+each personal-book piece's daily P&L by the regime the data defines and flags pieces whose gap clears the multiple-testing bar
+with the same sign in both periods. Origin: the OVX data fetched for the CL fade also showed Overnight Tick earning ~3x more on
+high-OVX nights (`analysis/ovx_screen.py`, WATCHLIST #37), the biggest book lead of the week. Rules for a screen result:
+- it is a LEAD (found by screening): bench it in the books (post hoc, information) and compare with the same average size spread
+  evenly, so a sizing gain is not just 'more of the piece';
+- adoption needs out-of-sample evidence: older data, another independent market, or the forward log;
+- report the screen with its bar (19-20 pieces -> |t| >= ~2.8), not the best line alone.
+
 ### Ingredient register (`analysis/ingredient_ablation.py`, 2026-11-08; per NQ, 2018-26) - historical component evidence (exploratory)
 
 Status words (Proven / Decoration / harmless) label already-seen ablations, not causal estimates: removing a part can change later
