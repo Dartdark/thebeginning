@@ -103,6 +103,8 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 56 | [3019870](https://ssrn.com/abstract=3019870) | Low-Volume FX Reversal | Personal daily | No: overnight | No: CLS/Olsen/forward inputs | Conditional; historical delivery clock unresolved |
 | 57 | [6415558](https://ssrn.com/abstract=6415558) | Dividend-Payment FX Flows | Personal daily | No: overnight | No: as-of dividends/FX financing | Conditional; dissertation verified, SSRN parity gated |
 
+| 58 | [3747330](https://ssrn.com/abstract=3747330) | API Information Before EIA | Intraday CL research | Normal09:30–10:29 Eastern | Price adaptation possible; exact rows/calendar pending | Conditional gross evidence; consensus/cost/holdout gates |
+
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
 
@@ -130,3 +132,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 18: dividend-payment FX flows](dot_ssrn_continuation_pass18_20261110.md), entry57: verified dissertation method, modest institutional-cost evidence and distinct causal dividend-data gates.
 
 - [Intraday exclusions update](dot_ssrn_intraday_exclusions_update_20261110.md): fresh overnight-drift counterevidence, bounded ORB failures, and corrected range-forecast validation. No candidate-count inflation.
+
+- [Pass 19: API-to-EIA information](dot_ssrn_continuation_pass19_20261110.md), entry58: intraday CL source and separate lower-input price adaptation, neither net-validated nor data-admitted.
