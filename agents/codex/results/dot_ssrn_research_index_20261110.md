@@ -34,6 +34,8 @@ No fresh strategy has been shown here to improve the existing portfolio or accou
 
 - [Pass8: metals, FX carry timing and crypto convergence](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass8_20261110.md)
 
+- [Pass9: gas forecast timing, intraday exclusions and network audits](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass9_20261110.md)
+
 ## Classified inventory
 The count is research entries, not qualified strategies. Papers 11–15 are provisional reserves; 16–20 audit already-tested or blocked baselines, not five new successful ideas. See each linked report for the exact evidence status, source version, rules, costs and missing inputs.
 
@@ -85,6 +87,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 44 | [1660864](https://ssrn.com/abstract=1660864) | Industrial Metals and Equity Allocation | Personal | No: monthly | No: metal index/vintage macro | Conditional causal-data lead |
 | 45 | [2399282](https://ssrn.com/abstract=2399282) | Cross-Asset FX Carry Timing | Personal | No: monthly | No: broad forwards/CRB | Conditional modest overlay |
 | 46 | [4268371](https://ssrn.com/abstract=4268371) | Crypto Carry | Personal | No: expiry holds | No: native expiries/two-leg inputs | Capital/data/version gate |
+| 47 | [2826684](https://ssrn.com/abstract=2826684) | NG Analyst-Forecast Drift | Intraday research | Normal06:00–07:25Pacific; holiday calendar needed | No: timestamped analyst forecasts | Conditional source/timing/cost gate |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
