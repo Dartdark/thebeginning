@@ -16,10 +16,10 @@ Mansoor Alqaydi (September 2026), [SSRN7546200](https://ssrn.com/abstract=754620
 ## Slot 12 — Intraday Momentum and Return Predictability: Evidence from the Crude Oil Market
 Wen, Gong, Ma and Xu, [SSRN3553682](https://ssrn.com/abstract=3553682); [Economic Modelling publication](https://doi.org/10.1016/j.econmod.2020.03.004).
 
-**Source status:** Abstract and publication information verified; full executable specification/cost tables not verified.
+**Source status:** Full coauthor manuscript inspected; see the later recovery below. Executable implementation and net evidence remain unresolved.
 **About/finds/mechanism:** One-minute USO ETF data2006–2018 show previous-close-to-first-half-hour returns predict the final half-hour. Overnight information contributes more than the opening half-hour. Inventory-announcement information does not itself predict the final half-hour.
 **Build/data:** Source-window interpretation is signal through10:00ET and holding15:30–16:00ET. Verify before coding. Measuring the previous overnight move does not mean holding overnight. Need native USO minute history for replication; CL would be a separate adaptation.
-**Can code?** Hypothesis yes, paper-faithful build no until source rules/costs are complete.
+**Can code?** Hypothesis yes; full-source clock inconsistencies, annualization and cost gaps prevent a defensible paper-faithful implementation. See later recovery.
 **Fit:** USO is not an Apex futures instrument. A CL adaptation can be intraday but is neither replicated nor known profitable. Same broad family as previously failed equity intraday momentum.
 **Decision:** Conditional oil-market adaptation, not a fresh proven non-equity edge.
 
@@ -36,9 +36,9 @@ Ewald, Haugom, Ouyang, Smith-Meyer and Størdal, [SSRN5037563](https://ssrn.com/
 ## Slot 14 — Intraday Price Reversal Patterns in the Currency Futures Market
 Rentzler, Tandon and Yu, [SSRN885686](https://ssrn.com/abstract=885686); [university record](https://digitalcommons.montclair.edu/acctg-finance-facpubs/71/).
 
-**Source status:** Primary publication record/abstract verified; exact complete trading specification unavailable.
+**Source status:** Full published text inspected; see the later recovery below. It is descriptive evidence, not a complete executable trading specification.
 **About/finds/mechanism:** Seven CME currency futures1988–2003; five exhibit significant intraday reversal after large price changes. GLOBEX reduced errors, while the euro's introduction altered patterns, emphasizing institutional regime dependence.
-**Build/data:** Freeze a prior-day/open-gap trigger and same-day exit only after reading the source thresholds and conventions. Requires correct historic session opens, contracts, quotes and cost estimates.
+**Build/data:** The recovered thresholds are full-history percentiles and the paper examines multiple markout horizons. A causal prior-day/open-gap trigger and frozen same-day exit would require a new specified implementation. Requires correct historic session opens, contracts, quotes and cost estimates.
 **Can code?** Generic hypothesis feasible; source-faithful contemporary replication not ready.
 **Fit:** Certain modern CME FX contracts are listed by Apex, but obsolete historical contracts cannot simply be relabeled. A standalone daytime position avoids overnight holding; actual exit windows still unverified.
 **Decision:** Historical research foundation. No contemporary net edge established; existing repo FX gap-fade failures are an adverse comparison, not ignored.
