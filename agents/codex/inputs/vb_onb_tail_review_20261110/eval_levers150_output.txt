@@ -1,0 +1,21 @@
+[provenance] code 6cef0b81 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+150K evaluation pass-rate levers (user 2026-11-09: 'how do we raise the pass rate' -> 'yes run both', plus 'a strategy with
+
+   starts 2234 (2018-01-02 -> 2026-09-01)
+   BASE (VB 15, ONB, Bridge Mon, EOS, Twin 2, DT 2) pass 38.9% fail 60.0% time-out 1.2% | 18-22 38.2% 23-26 39.8% | vs base +0.0% (band +0.0% / +0.0%)
+
+A. In-evaluation management:
+   A1 finish: x0.5 once profit >= $6,000        pass 40.6% fail 57.0% time-out 2.4% | 18-22 39.6% 23-26 41.8% | vs base +1.7% (band +0.8% / +2.8%)
+   A2 daily stop -$1,000                        pass 30.2% fail 59.4% time-out 10.4% | 18-22 26.2% 23-26 35.7% | vs base -8.6% (band -13.4% / -3.9%)
+   A3 daily stop -$1,500                        pass 35.8% fail 60.7% time-out 3.5% | 18-22 32.7% 23-26 40.1% | vs base -3.0% (band -6.2% / +0.1%)
+   A4 finish + daily stop -$1,500               pass 35.6% fail 59.9% time-out 4.5% | 18-22 32.8% 23-26 39.4% | vs base -3.3% (band -6.5% / -0.1%)
+
+B. When to start (base outcomes split by the start day's condition):
+   B1 VIX above its 1-year median (vs calm)     share  51% | pass 38.7% vs 39.0%: gap -0.3% (band -9.7% / +8.9%) | 18-22 -0.7% 23-26 +0.9%
+   B2 plan P&L last 10 days < 0 (vs > 0)        share  32% | pass 37.4% vs 39.5%: gap -2.1% (band -10.1% / +6.7%) | 18-22 -3.5% 23-26 +0.0%
+
+C. High-frequency offense (ZT continuation 5-min, EntryZ 1.0):
+   ZT 5-min: 2573 trades, 5.6 a week, $56 per NQ; active days 67%
+   C1 + ZT 5-min 1 MNQ                          pass 37.4% fail 61.5% time-out 1.1% | 18-22 37.9% 23-26 36.8% | vs base -1.4% (band -3.0% / -0.2%)
+   C2 + ZT 5-min 2 MNQ                          pass 36.0% fail 62.9% time-out 1.0% | 18-22 36.8% 23-26 35.0% | vs base -2.8% (band -5.0% / -0.8%)
+   C3 ZT 5-min 2 MNQ for 5 VB (VB 10)           pass 33.6% fail 63.5% time-out 2.9% | 18-22 32.5% 23-26 35.1% | vs base -5.2% (band -7.7% / -2.7%)

@@ -1,0 +1,23 @@
+[provenance] code bdc0dbd7 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+How do 150K evaluations fail? (user 2026-11-09: 'develop a strategy specifically to bolster the eval phase'; diagnosis before design).
+
+   starts 2234: pass 38.3%, fail 60.7%, time-out 1.0%
+
+1. When fails happen (trading day of the fail): {Interval(-0.001, 2.0, closed='right'): 185, Interval(2.0, 5.0, closed='right'): 514, Interval(5.0, 10.0, closed='right'): 461, Interval(10.0, 15.0, closed='right'): 152, Interval(15.0, 21.0, closed='right'): 45}
+   fails that were UP >= $4,500 (half the target) before failing: 23%; up >= $2,000: 39%; never up $1,000: 53%
+   room to the floor at the start of the fail day: median $2,000 (quartiles $1,425 / $2,000)
+   fails with a daily-loss-limit pause before: 100%
+
+2. The fail day, by piece (average $ at the fail minute; share of fail days the piece lost):
+   VB      $   -804  lost on 50% of fail days
+   ONB     $   -970  lost on 56% of fail days
+   MON_BR  $    -72  lost on 5% of fail days
+   EOS     $    -17  lost on 3% of fail days
+   TWIN    $    -22  lost on 33% of fail days
+   total $-1,886; fail days where ONE piece lost > 70% of the day's loss: 89%
+
+3. Passes: days to pass {'25%': 4.0, '50%': 7.0, '75%': 11.0} | passes with a DLL pause on the way 60%
+   by year: pass / fail / time-out: {2018: '13% / 87% / 0%', 2019: '36% / 60% / 4%', 2020: '43% / 54% / 3%', 2021: '50% / 50% / 0%', 2022: '45% / 54% / 1%', 2023: '29% / 71% / 0%', 2024: '52% / 47% / 1%', 2025: '44% / 56% / 0%', 2026: '28% / 72% / 0%'}
+
+4. The set's daily P&L (150K sizes): mean $414, sd $2,952, days < -$2,000 16.7%, days > +$2,000 17.5%; worst-intraday < -$4,000 on 6.4% of days
+   daily corr between pieces: {'VB': {'VB': 1.0, 'ONB': 0.22, 'MON_BR': 0.06, 'EOS': -0.01, 'TWIN': 0.18}, 'ONB': {'VB': 0.22, 'ONB': 1.0, 'MON_BR': -0.01, 'EOS': 0.03, 'TWIN': 0.35}, 'MON_BR': {'VB': 0.06, 'ONB': -0.01, 'MON_BR': 1.0, 'EOS': -0.01, 'TWIN': 0.05}, 'EOS': {'VB': -0.01, 'ONB': 0.03, 'MON_BR': -0.01, 'EOS': 1.0, 'TWIN': 0.06}, 'TWIN': {'VB': 0.18, 'ONB': 0.35, 'MON_BR': 0.05, 'EOS': 0.06, 'TWIN': 1.0}}

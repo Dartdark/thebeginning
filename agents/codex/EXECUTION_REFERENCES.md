@@ -1961,6 +1961,14 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
 
 ### Evaluation audit — Remaining cushion, account rules and broker evidence
 
+Follow-up2026-11-10: [VB/ONB terminal-loss evidence reconciliation](results/vb_onb_tail_review_20261110.md)
+preserves latest Claude management outputs and separates the user's live89% report from a differently
+defined simulated89% attribution. Exact-threshold liquidation and fractional portfolio scaling cannot certify
+an executable account guard. The saved150K near-target half-size lead improves passes38.9%→40.6% on
+its VB15/DT2 book; tighter daily stops reduce passes. This is reviewed legacy-model evidence, not a fresh
+test or a result for the separate VB20 book. Next check: frozen integer sizing/native costs/calendar expiry,
+common-price floor checks and adverse fills on the intended book; no new threshold search or live change.
+
 [November4 loss forensics](inputs/eval_audit_20261104/loss_forensics.md),
 [rule audit](inputs/eval_audit_20261104/engine_audit.md) and
 [dated calendar evidence](inputs/eval_audit_20261104/calendar_audit.md).
