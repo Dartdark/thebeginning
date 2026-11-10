@@ -137,3 +137,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Currency-hedging source update](dot_ssrn_currency_hedging_source_update_20261110.md): D23 draft specifications recovered, final-version and modern implementation gates remain. Related Israeli causal evidence is not a trade.
 
 - [Agricultural source update](dot_ssrn_agriculture_source_update_20261110.md): private-forecast timestamp gates, ex-post coefficient correction and execution-only studies. Annual-rebalance SSRN identity resolved without adding a duplicate.
+
+- [Commodity anomaly audit](dot_ssrn_commodity_anomaly_audit_20261110.md): jump-factor source bridge unresolved; residual-volatility benchmark dependence and weak original commodity BAB evidence. No new qualified count.
