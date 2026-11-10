@@ -145,3 +145,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Commodity anomaly audit](dot_ssrn_commodity_anomaly_audit_20261110.md): jump-factor source bridge unresolved; residual-volatility benchmark dependence and weak original commodity BAB evidence. No new qualified count.
 
 - [Pass 20: Treasury drift, weather spreads and prospect-theory FX](dot_ssrn_continuation_pass20_20261110.md): entries 59–61, with explicit historical-vintage, accounting and modern-validation gates. No new current-data admission.
+
+- [Physical supply/demand source audit](dot_ssrn_physical_signal_audit_20261110.md): Baltic predictor targets spot indexes, satellite work predicts demand rather than returns, and shipping/crop sources remain gated. No count increase.
