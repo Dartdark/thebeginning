@@ -35,3 +35,7 @@ Do not rerun rejected screens: [latest Codex new-data screen](results/new_data_s
 ## Whop review addendum (2026-11-10)
 
 Author/origin: **dot**. [Source review](results/dot_whop_review_20261110.md): MNQ two-bar compression retained for a rule/parity check; Turnaround Tuesday low priority; Kusho broker/chart anecdote retained with unverified status. No new strategy tests or rank/plan changes. Private export and screenshots are not republished. Prepared against `cc168c49`; published separately from the acquisition package above.
+
+## Community Research page addendum (2026-11-10)
+
+Author/origin: **dot**. [Second-page source review](results/dot_whop_community_research_20261110.md): existing Fast Alphas negative screen, RollZone parity limits, VIX/Relative Strength/regime research, event-news selection warning and absent NinjaTrader MCP package. No new validated candidate, tests, strategy changes or installation. Private export and screenshots are not republished.
