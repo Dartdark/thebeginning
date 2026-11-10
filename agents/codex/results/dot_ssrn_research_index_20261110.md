@@ -100,6 +100,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 53 | [4182628](https://ssrn.com/abstract=4182628) | FOMC Announcement Reversal | Intraday event hypothesis | Same-day source holding | Conditional: exact ES rows/clocks/costs unverified | Modest historical evidence; no modern holdout |
 | 54 | [5815464](https://ssrn.com/abstract=5815464) | Defensive Absolute Return and Trend | Personal portfolio method | No: monthly/overnight | No: underlying 25-factor panel | Method reference; retrospective scaling/no costs |
 | 55 | [2939649](https://ssrn.com/abstract=2939649) | Commodity Option-IV Innovation | Personal monthly | No | No: options surfaces/native futures | Conditional; gross old sample/short-side risk |
+| 56 | [3019870](https://ssrn.com/abstract=3019870) | Low-Volume FX Reversal | Personal daily | No: overnight | No: CLS/Olsen/forward inputs | Conditional; historical delivery clock unresolved |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
@@ -122,3 +123,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 16: commodity IV and alternative-data sources](dot_ssrn_continuation_pass16_20261110.md), entry 55 plus unnumbered climate/news reserves. No missing rights, release clocks or holdouts are assumed solved.
 
 - [Entry 53 actual-data feasibility](dot_ssrn_fomc_data_feasibility_20261110.md): saved ES census verified, exact event endpoints still unread, and October 28, 2026 is missing from the existing event seed. No calendar or strategy changes made.
+
+- [Pass 17: FX volume and source exclusions](dot_ssrn_continuation_pass17_20261110.md), entry 56: observed hourly volume is not automatically hourly-available data; published option-implied ES result also reverses the old abstract's claim.
