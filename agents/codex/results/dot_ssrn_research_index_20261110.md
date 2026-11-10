@@ -99,6 +99,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 52 | [5096662](https://ssrn.com/abstract=5096662) | Monetary Restrictiveness and Currency Returns | Personal monthly | No | No: vintage macro/forwards | Conditional; definition-break and cost gates |
 | 53 | [4182628](https://ssrn.com/abstract=4182628) | FOMC Announcement Reversal | Intraday event hypothesis | Same-day source holding | Conditional: exact ES rows/clocks/costs unverified | Modest historical evidence; no modern holdout |
 | 54 | [5815464](https://ssrn.com/abstract=5815464) | Defensive Absolute Return and Trend | Personal portfolio method | No: monthly/overnight | No: underlying 25-factor panel | Method reference; retrospective scaling/no costs |
+| 55 | [2939649](https://ssrn.com/abstract=2939649) | Commodity Option-IV Innovation | Personal monthly | No | No: options surfaces/native futures | Conditional; gross old sample/short-side risk |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
@@ -117,3 +118,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Existing curve/Treasury source updates](dot_ssrn_curve_source_update_20261110.md): D06's independent replication was corrected by its author; delayed execution weakens the paper result. Two Treasury comparators are not new qualified SSRN strategies.
 
 - [Pass 15: defensive portfolio methods](dot_ssrn_continuation_pass15_20261110.md), entry 54: correlation-sorted factor hedge, with explicit retrospective-sizing and benchmark-drawdown limits.
+
+- [Pass 16: commodity IV and alternative-data sources](dot_ssrn_continuation_pass16_20261110.md), entry 55 plus unnumbered climate/news reserves. No missing rights, release clocks or holdouts are assumed solved.
