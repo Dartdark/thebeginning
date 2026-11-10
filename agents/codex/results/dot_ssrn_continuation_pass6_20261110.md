@@ -3,7 +3,7 @@ Author: dot. Date: 2026-11-10. Research only.
 
 ## Summary
 Three additional conditional mechanisms survive full-source review: slow speculative positioning, same-day FX session flows and real-time business-cycle currency sorting.
-Neither is an approved strategy or proven improvement to the portfolio.
+None is an approved strategy or proven improvement to the portfolio.
 A paired variance-risk-premium audit shows why original predictive regressions need later independent evidence.
 
 ## 37. Speculative Pressure
