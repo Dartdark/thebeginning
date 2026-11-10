@@ -180,6 +180,7 @@ def main():
     try:
         os.chdir(F.SOURCE)
         trades['DT'] = DTB.dt_trades(g)
+        trades['DT']['date'] = pd.to_datetime(g.ts[trades['DT'].day.to_numpy(dtype=int)])
     finally:
         os.chdir(ROOT)
     # No new alternative outcome later than design; existing non-VB ledgers are frozen sources.
