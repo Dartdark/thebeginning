@@ -157,3 +157,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [FOMC commodity-liquidity identity audit](dot_ssrn_fomc_liquidity_source_audit_20261110.md): existing Liu source watch is not unlocked by a different BoE event-study paper.
 
 - [Pass 22: trader-count FOMC timing](dot_ssrn_continuation_pass22_20261110.md): entry 63 is a distinct same-day working-paper hypothesis, not verified net ES evidence or a recovered final-publication result.
+
+- [Final intraday replication audit](dot_ssrn_final_intraday_audit_20261110.md): Baltussen signal/window clarified; newer changed-rule studies do not establish faithful modern net replication.
