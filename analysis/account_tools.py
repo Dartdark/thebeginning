@@ -21,10 +21,8 @@ import numpy as np, pandas as pd
 
 OUT = "analysis/outputs/dashboard"
 # evaluation rules per live account (keep in step with dashboard_data.ACCOUNTS / live_panels.ACCTS)
-EVALS = {"#2": dict(mult=1.0, target=53000.0, trail=2000.0, start_bal=50000.0, deadline=None,
-                    max_loss={"Vault Break (8 MNQ, 75 pts)": 1200.0, "Overnight Bias (risk)": 1100.0}),   # #3 blown 2026-10-30
-         "#4": dict(mult=2.5, target=159000.0, trail=4000.0, start_bal=150000.0, deadline=None,
-                    max_loss={"Vault Break (20 MNQ, 75 pts)": 3000.0, "Overnight Bias (risk)": 2750.0})}
+EVALS = {"#5": dict(mult=2.5, target=159000.0, trail=4000.0, start_bal=150000.0, deadline=None,
+                    max_loss={"Vault Break (15 MNQ, 75 pts)": 2250.0, "Overnight Bias (risk)": 2750.0})}   # #2-#4 removed 2026-11-10
 # funded accounts (2026-10-30): add each one when it passes; payouts = [(date, amount)] as requested from Apex
 FUNDED = {}   # e.g. "#4": dict(id="APEX-xxxxxx-04", size="150K", funded="2026-12-02", payouts=[])
 PAYOUT_RULES = {"150K": dict(start=150_000.0, safe=154_100.0, qday=350.0, caps=[2500.0, 3000.0, 3000.0, 3000.0, 4000.0, 5000.0]),

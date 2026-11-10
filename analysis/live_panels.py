@@ -24,9 +24,7 @@ OUT = "analysis/outputs/dashboard"
 NAMES = {"VB": "Vault Break", "ONB30": "Overnight Bias ADX30", "MON_BR": "Bridge Monday Long", "EOS": "EOS"}
 LOGTAG = {"VB": "VB", "ONB30": "ONB", "MON_BR": "MON_BR", "EOS": "EOS"}
 # live accounts: start date and balance; the current balance comes from accounts.json (analysis/dashboard_data.py, run first)
-ACCTS = [dict(account="#2", size="50K", mult=1.0, start="2026-10-20", start_bal=50000.0),
-         dict(account="#3", size="150K", mult=2.5, start="2026-10-26", start_bal=150000.0),
-         dict(account="#4", size="150K", mult=2.5, start="2026-11-02", start_bal=150000.0)]
+ACCTS = [dict(account="#5", size="150K", mult=2.5, start="2026-11-11", start_bal=150000.0)]   # #2-#4 removed 2026-11-10
 COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
         "exit_time", "exit_price", "profit_usd", "bar_date", "bar_time"]
 
