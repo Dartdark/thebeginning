@@ -96,7 +96,6 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 49 | [3965229](https://ssrn.com/abstract=3965229) | Yield Curve Momentum | Personal | No: monthly | Adaptation only; final futures rules gated | Directional-duration comparator |
 | 50 | [2956411](https://ssrn.com/abstract=2956411) | Yield Curve Premia | Personal | No: monthly | No: bond buckets/duration/FX hedge | Curve-relative-value foundation |
 | 51 | [5390453](https://ssrn.com/abstract=5390453) | Commodity Signed Variance | Personal monthly | No | No: broad native contract panel | Conditional; asymmetry-family overlap |
-
 | 52 | [5096662](https://ssrn.com/abstract=5096662) | Monetary Restrictiveness and Currency Returns | Personal monthly | No | No: vintage macro/forwards | Conditional; definition-break and cost gates |
 
 ## Guardrails for any later build
