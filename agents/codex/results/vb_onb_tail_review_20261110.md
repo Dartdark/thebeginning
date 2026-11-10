@@ -1,6 +1,6 @@
 # VB / ONB evaluation losses: protect progress; no proven costless tail fix
 
-Summary: The user's 89% describes live evaluation failures, per their explicit clarification.
+Summary: User correction: 89% is from the backtest; all four recent live accounts reportedly failed on a large VB/ONB loss.
 No new return test was run; this is a reconciliation of existing evidence across both branches.
 The strongest existing management lead is reducing exposure near the profit target, not tighter stops everywhere.
 The latest saved 150K study improves simulated passes 38.9% → 40.6% with half exposure above $6,000 profit.
@@ -11,10 +11,15 @@ This is WATCH, not an executable recommendation: fractional sizing, legacy costs
 Reviewed Codex head `b70cfb4f` and Claude head `72bf8eda` after fetching both branches.
 Claude's current brief reports no active accounts; older root documents on Codex retain stale account status.
 The user's main objective is avoiding fatal VB/ONB losses without damaging the evaluation book.
-Their reported live 89% has no verified denominator or broker-ledger reconstruction in this review.
-Separately, Claude's saved simulation reports 89% of failure days have **one component contributing
-over 70% of that day's loss**. That is a different statistic: neither proves that 89% of failures
-can be prevented by changing VB, nor substitutes for the user's live observation.
+The user corrected the earlier clarification after the initial review: **89% is a backtest figure,
+while 4/4 of the latest live accounts ended on a large VB or ONB loss**. This supersedes this report's
+original attribution of 89% to live results. The four-account observation is user-reported;
+this review did not independently reconstruct all four terminal losses from broker ledgers.
+Claude's saved simulation defines its 89% as failure days with **one component contributing
+over 70% of that day's loss**. That definition is narrower than proving a full VB/ONB strategy stop
+caused every such failure. The live observation reinforces the practical priority; four potentially
+correlated accounts do not estimate a long-run failure percentage or establish that a proposed
+intervention would have saved them without losing passes.
 
 Latest Claude sources are byte-preserved in
 [`../inputs/vb_onb_tail_review_20261110/`](../inputs/vb_onb_tail_review_20261110/), with hashes and source commit
@@ -99,6 +104,8 @@ Existing common-price replay audits also retain UNKNOWN outcomes where sizing/hi
 Near-target sizing addresses only part of the problem. In the separate saved VB20/Twin failure diagnosis,
 53% of failed starts never reached +$1,000 and only 23% reached +$4,500. These are simulated accounts,
 not proportions established for the user's live sample. A finish rule will not solve most early failures.
+The user's 4/4 recent live observation keeps single-loss survival throughout the evaluation as the main
+research objective; near-target sizing is a limited existing lead, not a complete answer to that objective.
 There is no demonstrated way here to remove most fatal stops while preserving the original book's opportunities.
 
 Smallest justified follow-up is **verification of the existing frozen finish policy** against its actual intended

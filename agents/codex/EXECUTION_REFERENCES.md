@@ -1962,8 +1962,10 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
 ### Evaluation audit — Remaining cushion, account rules and broker evidence
 
 Follow-up2026-11-10: [VB/ONB terminal-loss evidence reconciliation](results/vb_onb_tail_review_20261110.md)
-preserves latest Claude management outputs and separates the user's live89% report from a differently
-defined simulated89% attribution. Exact-threshold liquidation and fractional portfolio scaling cannot certify
+preserves latest Claude management outputs. The user's later correction supersedes the original live89%
+attribution:89% is a backtest figure;4/4 recent live accounts reportedly ended on a large VB/ONB loss.
+The saved backtest defines89% as one component contributing over70% of failure-day loss; that is not
+a verified count of avoidable full-stop failures. Exact-threshold liquidation and fractional portfolio scaling cannot certify
 an executable account guard. The saved150K near-target half-size lead improves passes38.9%→40.6% on
 its VB15/DT2 book; tighter daily stops reduce passes. This is reviewed legacy-model evidence, not a fresh
 test or a result for the separate VB20 book. Next check: frozen integer sizing/native costs/calendar expiry,
