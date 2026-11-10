@@ -69,7 +69,7 @@ foreach ($r in $roots) {
             # count only lines stamped today (MultiCharts writes dd.MM.yyyy/HH:mm:ss): a log file touched today still
             # holds older days' lines (10/28 counted 3,228, the last from 10/26) (2026-10-29)
             $hits = @($hits | Where-Object { $_.Line -like ("*" + (Get-Date).ToString("dd.MM.yyyy") + "/*") })
-            if ($hits) { $rej += @($hits).Count; $rejmsg = ($hits[-1].Line -replace ',', ';' -replace '\s+', ' ').Substring(0, [math]::Min(160, $hits[-1].Line.Length)) }
+            if ($hits) { $rej += @($hits).Count; $rejclean = ($hits[-1].Line -replace ',', ';' -replace '\s+', ' '); $rejmsg = $rejclean.Substring(0, [math]::Min(160, $rejclean.Length))   # length of the CLEANED line (2026-11-10 fix) }
         }
 }
 New-Item -ItemType Directory -Force "live\health" | Out-Null
