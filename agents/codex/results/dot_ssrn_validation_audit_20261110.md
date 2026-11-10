@@ -46,5 +46,14 @@ Appendix E.1/Table E1A: 27 GSCI constituents, December 1984–October 2020, equa
 
 **Independent assessment:** Commodity results corroborate a related implementation, not a matched original replication or independent post 2019 holdout. The FX discrepancy may be notation rather than implemented-code error. Do not declare the backtest disproved, but do not treat its net results as validated without code reconciliation. Personal/overnight; commercial inputs unverified. This supplementary audit is not a new deployable strategy slot.
 
+## Policy slope: independent counterevidence, not a new lead
+Neuhierl/Weber's SSRN2748290/2867577/2868930/2895997 are one paper family. Reviewed [January2018 full paper](https://bfi.uchicago.edu/wp-content/uploads/predictability.pdf) and [July2019 full paper](https://www.ecb.europa.eu/press/conferences/shared/pdf/20191007_mo_po_conf/Monetary_policy_communication_policy_slope_and_the_stock_market.pdf).
+
+Weekly Wednesday changes in three-month fed-funds futures residualized on one-month changes forecast next-week equities; negative slope predicts higher returns. Baseline residualization uses the full sample. Appendix trains both stages on1988–1994 and evaluates1995–2007, OOS R²0.27%; descriptions of rolling versus fixed estimation are inconsistent. Extension after2007 changes tenors to six versus three months. Claimed weekly Sharpe0.0731→0.0900 is an analytical mean-variance calculation, not net trading P&L. Comparing spread against absolute market moves does not establish profitable implementation.
+
+[Moench/Stein's published2019 comment](https://www.emanuelmoench.com/files/papers/Moench_Stein(JMEcomment2019).pdf) uses author-shared data. Slope t-statistics are−0.86 in1994–1998,−6.02 in1999–2001 and−1.24 in2002–2007. Error-difference gains largely occur in the middle period. The speech-tone result depends on two influential speeches and classification choices.
+
+**Assessment:** Same-sample robustness criticism, not a modern replication, but enough to deprioritize the headline. Weekly Personal exposure only; native ZQ contracts and licensed equity data are unverified. Current free CME settlement delivery at midnight CT is not evidence of availability before that day's equity close; licensed contemporaneous feeds are a separate possibility. Do not declare every paper specification noncausal, and do not invent a sign-only ES rule. No tests or changes to prior pre-FOMC experiments.
+
 ## Decision impact
 The index's leading curve papers are priority **data-and-modern-validation gates**, not immediately buildable recommendations. COT flow is distinct but still needs a release-timed implementation. Read the [native-contract source audit](dot_ssrn_curve_data_feasibility_20261110.md) before treating a continuous series or public price webpage as adequate data. All next steps remain research-only unless separately authorized.
