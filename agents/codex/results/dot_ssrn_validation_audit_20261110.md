@@ -57,3 +57,11 @@ Weekly Wednesday changes in three-month fed-funds futures residualized on one-mo
 
 ## Decision impact
 The index's leading curve papers are priority **data-and-modern-validation gates**, not immediately buildable recommendations. COT flow is distinct but still needs a release-timed implementation. Read the [native-contract source audit](dot_ssrn_curve_data_feasibility_20261110.md) before treating a continuous series or public price webpage as adequate data. All next steps remain research-only unless separately authorized.
+
+## Author continuation and newer Relative Basis manuscript
+
+The [Boons author page](https://sites.google.com/site/martijnboons/) links [Returns.pdf](https://drive.google.com/file/d/136AzSf2Cle_92OmN3YBj-GXEBDefRBMB/view?usp=sharing), a one-page update described as ending December 2025. Two cumulative-return panels compare basis-momentum, momentum and basis in first-nearby and spreading implementations. The outright BM curve rises strongly after 2022; spreading BM ends below its pre-pandemic high. No out-of-sample cutoff, updated universe, exact construction, costs, leverage, downloadable return series or code accompany the chart. Cost status is undisclosed, not verified gross or net.
+
+**Assessment:** Author-maintained graphical continuation supports persistence, particularly outright. It corrects any blanket claim that no modern evidence exists, but is not independent replication, documented original-rule continuity or frozen prospective net-cost validation. Contrary studies using changed implementations do not invalidate this chart, nor does the chart erase their qualifications.
+
+The [May 2025 Relative Basis draft](https://ifr.hkust.edu.hk/tc/public/uploads/upload/files/20250727/1a5308fcc8f0ab2ad6dd00436509570e.pdf), Tables 4–5 and Appendix A15, retains 24 commodities over January 1979–December 2019. The 0.81% monthly high-minus-low return (t=3.99), 0.685% alpha (t=3.48), and 0.633% alpha with traditional basis controlled (t=3.35) remain. The added BM alpha evidence uses overlapping history. A newer draft date is not newer performance or contemporary net execution validation.
