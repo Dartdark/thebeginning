@@ -5,7 +5,7 @@ Author: dot. Updated 2026-11-10. Research continues to the agreed deadline; this
 1. Commodity curve research: Basis Momentum, Relative Basis, and curve-aware momentum. Strong foundations, but later implementations show weaker and regime-sensitive returns; native-contract data and modern validation remain gates.
 2. Publication-lag-aware commercial-position changes: A Tale of Two Premiums. Distinct from the failed gold-only crowding screen, but broad data, costs and a clean holdout remain missing.
 3. Pre-refunding Treasury timing: a small calendar overlay hypothesis, not a standalone Sharpe-4 strategy.
-4. Intraday factor-zoo SPY forecasting: stronger OOS design, but requires a separate equity-factor data pipeline and an explicitly flat-overnight adaptation if that is the goal.
+4. Intraday factor-zoo SPY forecasting: stronger OOS design, but requires a separate equity-factor data pipeline. Its appendix already studies a flat-overnight SPY implementation; a futures translation remains unvalidated.
 
 No fresh strategy has been shown here to improve the existing portfolio or account survival. No return tests were run. “Intraday” below means holding-time fit or a labeled adaptation, not a blanket certification of Apex eligibility. Existing-data status never follows from ticker names alone.
 
@@ -76,7 +76,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 29 | [2903629](https://ssrn.com/abstract=2903629) | Following Asset Price Jumps | FX hypothesis | Bar horizon not sufficient | ES/CL evidence negative | Reject ES/CL |
 | 30 | [1108050](https://ssrn.com/abstract=1108050) | Investor Inattention and LEI | Personal | No | No: vintage signal | Conditional / ex-post design |
 | 31 | [2515900](https://ssrn.com/abstract=2515900) | MOM–TOM Effect | Personal / source audit | Not original implementation | Subset adaptation different | Known family; calendar mismatch |
-| 32 | [4388560](https://ssrn.com/abstract=4388560) | Intraday Factor-Zoo Prediction | Personal equity | Overnight removal changes design | No: 272 factors | Strong research; data-gated |
+| 32 | [4388560](https://ssrn.com/abstract=4388560) | Intraday Factor-Zoo Prediction | Personal equity | Flat-overnight SPY version studied; futures adaptation unvalidated | No: 272 factors | Strong research; data-gated |
 | 33 | [5795584](https://ssrn.com/abstract=5795584) | Volume-Driven Intraday Volatility | Risk overlay | RTH adaptation only | Partial; full sessions unverified | Forecast evidence, no trading costs |
 | 34 | [4534287](https://ssrn.com/abstract=4534287) | Trade Network and Currency Returns | Personal | No | No: trade/FX panels | Conditional; vintage gate |
 | 35 | [3411117](https://ssrn.com/abstract=3411117) | Fear of Hazards | Personal | No | No: vintage searches | Conditional; hindsight vocabulary |
