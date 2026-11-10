@@ -20,59 +20,65 @@
    "id": "APEX-681524-04",
    "suffix": "150",
    "status": "closed 2026-11-04"
+  },
+  "#5": {
+   "id": "APEX-681524-05",
+   "suffix": "150-5",
+   "status": "live",
+   "phase": "evaluation",
+   "start": 150000,
+   "trail": 4000,
+   "target": 159050,
+   "started": "2026-11-10"
   }
  },
  "charts": {
-  "VB-2": {
+  "VB150-5": {
    "strategy": "Vault Break",
-   "qty": 8,
-   "account": "#2"
+   "qty": 15,
+   "account": "#5"
   },
-  "ONB-2": {
-   "strategy": "Overnight Bias ADX30",
-   "qty": null,
-   "max_qty": 10,
-   "account": "#2"
-  },
-  "EOS-2": {
-   "strategy": "EOS",
-   "qty": null,
-   "max_qty": 6,
-   "account": "#2"
-  },
-  "MON_BR-2": {
-   "strategy": "Bridge Monday Long",
-   "qty": 2,
-   "account": "#2"
-  },
-  "VB150": {
-   "strategy": "Vault Break",
-   "qty": 20,
-   "account": "#4"
-  },
-  "ONB150": {
+  "ONB150-5": {
    "strategy": "Overnight Bias ADX30",
    "qty": null,
    "max_qty": 25,
-   "account": "#4"
+   "account": "#5"
   },
-  "EOS150": {
+  "EOS150-5": {
    "strategy": "EOS",
    "qty": null,
    "max_qty": 15,
-   "account": "#4"
+   "account": "#5"
   },
-  "MON_BR150": {
+  "MON_BR150-5": {
    "strategy": "Bridge Monday Long",
    "qty": 5,
-   "account": "#4"
+   "account": "#5"
+  },
+  "TW150-5": {
+   "strategy": "Twin Continuation 150K",
+   "qty": 2,
+   "account": "#5"
+  },
+  "DT150-5": {
+   "strategy": "Dual Thrust",
+   "qty": 2,
+   "account": "#5"
   }
  },
  "retired_tags": [
-  "VB",
-  "ONB",
   "EOS",
-  "MON_BR"
+  "EOS-2",
+  "EOS150",
+  "MON_BR",
+  "MON_BR-2",
+  "MON_BR150",
+  "ONB",
+  "ONB-2",
+  "ONB150",
+  "VB",
+  "VB-2",
+  "VB150"
  ],
  "_accounts_about": "start / trail / lock / max_stop / started per live account (2026-10-30): the watchdog computes the Apex EOD trailing floor from the Chart Monitor's equity (floor = min(peak EOD equity - trail, lock)) and alarms when equity nears or touches it. phase: evaluation or funded.",
  "_charts_account_about": "account per chart (2026-11-01): the watchdog compares it with the Chart Monitor's route_account (GetAccountID) and its typed AccountName",
