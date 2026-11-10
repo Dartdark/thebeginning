@@ -275,7 +275,8 @@ after 15:59 CT, never with a position open.
 - [ ] **You (MultiCharts, any evening): export NQ 1-minute bars 2009-01 -> 2017-12** (user 2026-11-10), same way as the existing
       `data/NQ_1min_<year>.csv` files (date,time,open,high,low,close,volume; Exchange time = CT; 24h session; one file per year or
       one file). Upload them; Claude then rebuilds Overnight Tick on 2009-2017 and tests the oil-volatility split out of sample
-      (WATCHLIST #37: high-OVX nights $53 vs $17 per MNQ in 2018-26, t 2.55, found by a screen - this makes it a real test).
+      (WATCHLIST #37: high-OVX nights $53 vs $17 per MNQ in 2018-26, t 2.55, found by a screen - this makes it a real test;
+      also WATCHLIST #38: Overnight Tick / Swing Target / PaperTrend volatility-regime leads from the full data sweep).
 - [ ] **Personal account (when it starts): CL Sunday fade with oil-volatility sizing** (user 2026-11-10; watched, WATCHLIST #37): `funded_strategies/CL_Sunday_Gap_Fade.txt` (version 2026-11-10) on the personal CL chart, `NumContracts` 1, **`UseOVX` true, `OVXQty` 2** (2 MCL on weekends after a high-OVX Friday). Automatic: the VPS task OvxDaily (installs itself) writes the flag; log `live/health/ovx_log.csv`. Funded charts keep `UseOVX` false.
 - [ ] **Personal account (when it starts): FINRA short-volume longs at 1 MNQ** (user 2026-11-09; watched, WATCHLIST #32): `checks/candidates/finra_longs/NQ_FINRA_Short_Volume_Longs.txt` on 1-min MNQ (file header), input **`UseFlagFiles` true**: fully automatic from the VPS task `FinraDaily` (`live/vps/finra_daily.ps1`, installs itself), nothing daily. Plus one Apex Chart Guard (`TargetBalance` 0).
 - [ ] **Personal account (when it starts): ZT continuation at 1 MNQ** (user 2026-11-09; watched, WATCHLIST #36): `NQ_ZT_Continuation.txt` on 15-min MNQ, Exchange time, 24h, IOG off, defaults as in the file (EntryZ 1.25, 08:35-14:45). No more than 1 MNQ (corr 0.41 with the book).
