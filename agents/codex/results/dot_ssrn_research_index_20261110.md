@@ -98,6 +98,7 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 51 | [5390453](https://ssrn.com/abstract=5390453) | Commodity Signed Variance | Personal monthly | No | No: broad native contract panel | Conditional; asymmetry-family overlap |
 | 52 | [5096662](https://ssrn.com/abstract=5096662) | Monetary Restrictiveness and Currency Returns | Personal monthly | No | No: vintage macro/forwards | Conditional; definition-break and cost gates |
 | 53 | [4182628](https://ssrn.com/abstract=4182628) | FOMC Announcement Reversal | Intraday event hypothesis | Same-day source holding | Conditional: exact ES rows/clocks/costs unverified | Modest historical evidence; no modern holdout |
+| 54 | [5815464](https://ssrn.com/abstract=5815464) | Defensive Absolute Return and Trend | Personal portfolio method | No: monthly/overnight | No: underlying 25-factor panel | Method reference; retrospective scaling/no costs |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
@@ -114,3 +115,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 14: FOMC reversal and intraday replication audit](dot_ssrn_continuation_pass14_20261110.md): entry 53, corrected Sharpe annualization, external fill/registration flaws and negative order-flow economics.
 
 - [Existing curve/Treasury source updates](dot_ssrn_curve_source_update_20261110.md): D06's independent replication was corrected by its author; delayed execution weakens the paper result. Two Treasury comparators are not new qualified SSRN strategies.
+
+- [Pass 15: defensive portfolio methods](dot_ssrn_continuation_pass15_20261110.md), entry 54: correlation-sorted factor hedge, with explicit retrospective-sizing and benchmark-drawdown limits.
