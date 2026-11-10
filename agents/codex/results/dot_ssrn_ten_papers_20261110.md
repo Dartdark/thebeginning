@@ -2,7 +2,7 @@
 Author: dot | 2026-11-10 | Source review only
 
 ## Decision summary
-- Ten distinct papers, not ten independent strategies: nine full-paper methods/results reviews and one clearly marked source-verification gap.
+- Ten distinct papers, not ten independent strategies: ten full-paper methods/results reviews, including a later source recovery for #5.
 - Start with Basis-Momentum and Relative Basis, conditional on a legally usable native-contract panel.
 - Use diversified trend and value/carry as portfolio foundations; volatility management is a risk overlay, not new alpha.
 - Prefer monthly research over daily curve trading for this account context; none is approved for live trading or a prop-account adaptation.
@@ -55,17 +55,15 @@ Gorton, Hayashi and Rouwenhorst. [SSRN 996930](https://ssrn.com/abstract=996930)
 **Our decision:** Already present in repository as commodity storage/momentum and rejected for NQ scope. Included transparently as a distinct strong foundation, NOT a new discovery or permission to reopen that rejection. Relevant to a broad personal commodity book, not an NQ intraday signal.
 
 ## 5. Exploiting Commodity Momentum Along the Futures Curves
-de Groot, Karstanje and Zhou. [SSRN 2485314](https://ssrn.com/abstract=2485314). Journal of Banking & Finance 48 (2014), 79–93. [Institutional publication record](https://repub.eur.nl/pub/84083/) and [publisher record](https://www.sciencedirect.com/science/article/abs/pii/S0378426614002751).
+de Groot, Karstanje and Zhou. [SSRN 2485314](https://ssrn.com/abstract=2485314), Journal of Banking & Finance 2014. **Source gap resolved:** [coauthor’s public Erasmus dissertation](https://repub.eur.nl/pub/78346/Dissertation-D-Karstanje.pdf), Chapter 3, Sections 3.2–3.5 and Tables 3.2/3.8, contains the full study.
 
-**Evidence status: LIMITED.** Publication, mechanism and abstract are verified; accessible full-paper methods were not successfully obtained in this run. Do not represent this as a completed replication-ready review.
+**About / finds / why money:** Maturity selection improves roll economics and reduces turnover. Universe: 24 GSCI commodities, January1990–September2011 data. Monthly front-contract 12-month momentum sorts allocate equally to top/bottom halves. Optimal-roll chooses the largest adjacent-contract slope for longs and smallest for shorts, within12months. Low-turnover retains that contract until expiry approaches or side changes. Conservative-cost annual return is8.42%, t2.74, Sharpe0.60 versus generic3.98%, t1.15, Sharpe0.25. Cost scenarios use $10 plus one tick or $20 plus three ticks; a liquidity-dependent model varies costs by maturity. The one-day-lag signal check remains positive. Subperiod checks are not prospective validation.
 
-**About / finds / why money:** Contract maturity choice can improve a commodity momentum strategy by incorporating expected roll yield or maturity-specific momentum and reducing turnover. The institutional record reports more than twice the traditional strategy’s net return for a low-turnover alternative under the authors’ cost assumptions. This is a relative historical comparison, not a return forecast.
+**Build:** Prioritize low-turnover maturity selection as an execution layer, not an independent directional bet. Audit the source’s front-slope extrapolation, contract eligibility and imminent-expiry rule before freezing a specification.
 
-**Build:** The proposed research object is a maturity selector on top of an existing commodity momentum ranking, not another directional signal. Exact universe, ranking window, permitted maturities, holding/exit rule, sample and cost assumptions must be extracted from the full source before preregistration.
+**Can code?** Conditional yes after native maturity-panel admission. Need actual contract prices, expiries, historical multipliers/ticks and liquidity. Backfilled historical volume assumptions are unsuitable for a clean point-in-time replication.
 
-**Can code?** Not yet to source fidelity. Needs maturity-by-maturity prices, bid/ask or defensible execution assumptions, volume/open interest, delivery filters and a complete specification.
-
-**Our decision:** Worth retaining among the ten substantive leads because turnover is economically important, but SOURCE BLOCKED for implementation. Does not count as a tenth verified strategy. Do not infer parameters from summaries or pay for access without permission.
+**Our decision:** Upgraded from source-blocked to conditional personal-account research. No recent holdout or contemporary retail execution established. Same commodity panel blocker remains; source access does not make current continuous-series data sufficient.
 
 ## 6. Exploiting the Dynamics of Commodity Futures Curves
 Bianchi, Fan, Miffre and Zhang. [SSRN 3749061](https://ssrn.com/abstract=3749061). [Full July 2023 manuscript](https://arxiv.org/pdf/2308.00383), Sections 2–3 and Table 5. Journal of Banking & Finance 154 (2023).
@@ -133,7 +131,7 @@ Priority order for preparation, not test authorization:
 2. Define #10 as a book-risk question, without changing sizing or running a return test.
 3. Use #7/#8/#9 as one coordinated diversified-sleeve research design, not three independent allocations.
 4. Use #3/#4 to validate the commodity return accounting and economic mechanism.
-5. Resolve #5 full text before a specification; place #6 behind a strict execution-cost and timestamp gate.
+5. Finish #5 contract-rule and data audit before a specification; place #6 behind a strict execution-cost and timestamp gate.
 
 ## Common implementation and evidence gates
 
@@ -144,5 +142,5 @@ Priority order for preparation, not test authorization:
 - **Survival:** Evaluate joint intraday drawdowns, margin calls, liquidity and gap scenarios rather than only daily-return correlation or Sharpe. Low notional directional exposure does not mean low calendar-spread risk.
 - **Validation:** None of these author results establishes present-day alpha. Keep a genuinely untouched period, document specification choices and avoid treating many closely related maturity signals as independent trials.
 - **Account fit:** Most evidence requires monthly or overnight exposure across many markets. No evidence here supports porting it unchanged into a small NQ/MNQ/ES/MES book, ordinary prop flat rules or current capital limits. Actual account constraints were not accessed.
-- **Status:** Ten papers found; nine have full-source methods/evidence inspected; #5 is explicitly limited. No strategy is admitted, no schedule is started, and no return test has been run.
+- **Status:** Ten papers found; all ten now have full-source methods/evidence inspected; #5 source was recovered in the coauthor’s dissertation. No strategy is admitted, no schedule is started, and no return test has been run.
 
