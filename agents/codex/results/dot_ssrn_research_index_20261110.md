@@ -28,6 +28,8 @@ No fresh strategy has been shown here to improve the existing portfolio or accou
 - [Independent commodity/FX validation and version audit](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_validation_audit_20261110.md)
 - [Native-contract data sources, coverage and license audit](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_curve_data_feasibility_20261110.md)
 
+- [Pass 7: Treasury month-end and naphtha relative value](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass7_20261110.md)
+
 ## Classified inventory
 The count is research entries, not qualified strategies. Papers 11–15 are provisional reserves; 16–20 audit already-tested or blocked baselines, not five new successful ideas. See each linked report for the exact evidence status, source version, rules, costs and missing inputs.
 
@@ -74,6 +76,9 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 39 | [948309](https://ssrn.com/abstract=948309) | Variance Risk Premium Forecasting | Personal | No | Cash variance unavailable | Deprioritize |
 | 40 | [3929119](https://ssrn.com/abstract=3929119) | Equity Prediction Reassessment | Evidence audit | Not an entry rule | Not a strategy replication | Independent VRP counterevidence |
 | 41 | [2906600](https://ssrn.com/abstract=2906600) | Business Cycles and Currency Returns | Personal | No | No: vintages/forwards | Priority causal-data audit |
+
+| 42 | [3440417](https://ssrn.com/abstract=3440417) | End-of-Month Treasury Returns | Personal | No: multi-day | Calendar simple; Treasury coverage/roll unverified | Conditional calendar lead |
+| 43 | [5034739](https://ssrn.com/abstract=5034739) | Naphtha Crack Mean Reversion | Personal | No: multi-day | No: ICE/OTC executable prices | Access/execution gate |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
