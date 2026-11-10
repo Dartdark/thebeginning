@@ -151,3 +151,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Physical supply/demand source audit](dot_ssrn_physical_signal_audit_20261110.md): Baltic predictor targets spot indexes, satellite work predicts demand rather than returns, and shipping/crop sources remain gated. No count increase.
 
 - [Pass 21: commodity sentiment and D51 version correction](dot_ssrn_continuation_pass21_20261110.md): entry 62 is distinct language-based research; published macro-jump paper does not validate the older trading draft.
+
+- [FOMC commodity-liquidity identity audit](dot_ssrn_fomc_liquidity_source_audit_20261110.md): existing Liu source watch is not unlocked by a different BoE event-study paper.
