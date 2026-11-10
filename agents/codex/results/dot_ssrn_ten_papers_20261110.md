@@ -120,7 +120,7 @@ Moreira and Muir. [SSRN 2659431](https://ssrn.com/abstract=2659431); 2773438 is 
 
 **Can code?** Technically straightforward, but actual strategy-level daily P&L, reliable mark times and account constraints are essential. Public factor data can illustrate the method; they cannot validate its effect on this book. Costs include resizing and integer-lot discontinuities.
 
-**Our decision:** Highest practical account-survival research priority alongside data work, but NOT a new directional alpha and not a guarantee against a gap from a calm regime. Never let quiet markets authorize unlimited leverage. Do not stack it blindly on already volatility-scaled trend/carry.
+**Our decision:** A portfolio-risk question, NOT new directional alpha or a guarantee against gaps. Later source audits and existing repository sizing failures argue against promoting this into another build without genuinely new evidence. Never let quiet markets authorize unlimited leverage. Do not stack it blindly on already volatility-scaled trend/carry.
 
 ## Repository comparison and research priority
 
@@ -130,7 +130,7 @@ Current commodity research D06 weekly basis reversal (5250499), D07 roll spreads
 
 Priority order for preparation, not test authorization:
 1. Obtain a no-purchase data/source manifest for #1/#2 and reconcile the existing panel. Kill work early if no legally usable contract history exists.
-2. Define #10 as a book-risk question, without changing sizing or running a return test.
+2. Treat #10 as a book-risk reference only. Read the later validation and risk-method audits, including existing failed sizing experiments; do not reopen them or change sizing.
 3. Use #7/#8/#9 as one coordinated diversified-sleeve research design, not three independent allocations.
 4. Use #3/#4 to validate the commodity return accounting and economic mechanism.
 5. Finish #5 contract-rule and data audit before a specification; place #6 behind a strict execution-cost and timestamp gate.
