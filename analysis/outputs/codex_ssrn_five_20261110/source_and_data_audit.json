@@ -1,0 +1,112 @@
+{
+  "versions": {
+    "2485314": {
+      "pdf_sha256": "c1947fd9a89cebbd26d52f9b020cd53301ea67b152b35f29915f787e2123d9eb",
+      "pages": 51,
+      "embedded_ssrn_footer_matched": true,
+      "text_sha256": "1ec1548b1666c4d83e85d83b961018b8bb4cefe4d289bf2463dba04fd740c822"
+    },
+    "2089463": {
+      "pdf_sha256": "5675c7db5c17cf61a2286b4a55f7b76708bb09b2415bdee6d1d63d18d44bd9e4",
+      "pages": 62,
+      "embedded_ssrn_footer_matched": true,
+      "text_sha256": "4e82e8d18126b54d0926dbd51d87cb6a44c4b1ab310c46730986e44138a8e171"
+    },
+    "2174501": {
+      "pdf_sha256": "95f97d73155ad2f33a2d5113bdd627446fd9133fa01d01b20fbd253ab071f6f8",
+      "pages": 72,
+      "embedded_ssrn_footer_matched": true,
+      "text_sha256": "bf78327970c915f0dfc8da227becb7045bc10f935ac047178121209c2393cc88",
+      "version_issues": [
+        "body_1_42_vs_table_I_1_36_and_1_45",
+        "main_text_bond_past_return_vs_table_and_later_text_yield_change"
+      ]
+    },
+    "2298565": {
+      "pdf_sha256": "49cb4f72ca42844c44893a47f13e4e5bf9a1d91fc6949a77dbb8a84578d91130",
+      "pages": 67,
+      "embedded_ssrn_footer_matched": false,
+      "text_sha256": "4a9317beed1d2068cf5c0d35a664675391d01b9afa56d86c7fdab8a63ff43858"
+    },
+    "3747330": {
+      "pdf_sha256": "59a7fffe1665ab43744c789a71ddb19b5aa2375b0fdf219585fa7c7fa4b50fa9",
+      "pages": 39,
+      "embedded_ssrn_footer_matched": true,
+      "text_sha256": "4315ac0cb122495e3793375dcf4eb164577efd534df41386da412a4983706cef"
+    }
+  },
+  "source_claims": {
+    "2485314": {
+      "scope": "24 commodities,1990\u20132011,monthly",
+      "table": "Table2 PanelD",
+      "generic_net_annual_percent": 3.98,
+      "low_turnover_net_annual_percent": 8.42,
+      "generic_sharpe": 0.25,
+      "low_turnover_sharpe": 0.6,
+      "low_turnover_t": 2.74
+    },
+    "2089463": {
+      "scope": "58 instruments,1985\u20132009,monthly",
+      "table": "Equation5 and Section4.1/4.2",
+      "positive_instruments": 58,
+      "pointwise_significant_5pct": 52,
+      "factor_alpha_percent_per_month": 1.58
+    },
+    "2174501": {
+      "scope": "eight market groups,throughJuly2011,monthly",
+      "table": "TableI PanelB; bodySectionII.A",
+      "global_combo_P3_minus_P1_sharpe": 1.36,
+      "global_combo_factor_sharpe": 1.45,
+      "narrative_combo_sharpe": 1.42,
+      "gross_returns": true,
+      "bond_rule_internal_discrepancy": true
+    },
+    "2298565": {
+      "scope": "cross-asset monthly portfolios,November2016 draft",
+      "table": "TableII global and TableIX costs",
+      "global_gross_sharpe": 1.2,
+      "put_carry_gross_sharpe": 1.8,
+      "put_carry_two_half_spreads_sharpe": -0.67
+    },
+    "3747330": {
+      "scope": "WTI,2011\u2013August2019",
+      "table": "Table2 PanelA and Table8",
+      "events": 385,
+      "extreme_events": 77,
+      "full_sample_sharpe": 0.67,
+      "extreme_sharpe": 2.1,
+      "post_API_to_pre_EIA_OLS_slope": 0.17,
+      "regression_R2": 0.04,
+      "net_profit_verified": false
+    }
+  },
+  "cl_audit": {
+    "api_schedule_rows": 106,
+    "retrospectively_matched_normal_pairs": 90,
+    "all_endpoint_rows_present": 90,
+    "all_endpoint_and_planned_path_rows_present": 90,
+    "pairs_by_year": {
+      "2021": 46,
+      "2022": 44
+    },
+    "all_exact_eia_clocks_verified": false,
+    "all_original_release_bytes_verified": false,
+    "timestamp_timezone": "assumed Chicago close labels; upstream CL export settings not independently authenticated",
+    "actual_api_receipts_verified": false,
+    "bloomberg_consensus_panel_present": false,
+    "native_contract_ids_present": false,
+    "signal_returns_computed": false,
+    "forward_returns_computed": false,
+    "price_hashes": {
+      "data/CL_1min_2021.csv": "5f032d4260084867b9ecc027e8e13238e116edbc40b298334b69f457a0e12f3b",
+      "data/CL_1min_2022.csv": "102b1e4d88b8396425f257f79090360817b28324f22340e3f3c603e50a660823"
+    },
+    "api_schedule_sha256": "b55fd46e70f5804083005bb802110208e52dc44345b808dff3dd1c778932fa6e",
+    "eia_archive_calendar_sha256": "160c79b581f946ad1d585eae98d0067ad092d92eabdebfc653806400240ec84c"
+  },
+  "new_return_trials": 0,
+  "economic_rule_preregistered": false,
+  "independent_validation": false,
+  "script_sha256": "bb8e7fcebb8f886207c7e7928487d2297b7a67c06992e7766511dce72d7641a8",
+  "git_head": "0d23ef14f8bf68910eb9a9e08d84cbdfb9d23020"
+}

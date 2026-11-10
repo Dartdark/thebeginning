@@ -2619,3 +2619,26 @@ Source: user-supplied Whop export; [dot review](results/dot_whop_review_20261110
 - A Kusho community report describes asynchronous broker-fill/chart-state mismatch. This is an unverified third-party anecdote, not an inspected user setting or confirmed cause of the user's losses.
 - Useful lesson: reconcile order IDs, submission/acknowledgement/fill/cancel clocks, position state and reconnect behavior against broker records; chart markers alone do not establish actual fills.
 - Smallest next check, if matching evidence becomes available: one complete order lifecycle with timezone, contract and account mapping. No live inspection/change, measured saving, new logger or schedule follows from retention.
+
+### E11/E53 follow-up — Uploaded curve, trend, carry and sequential-announcement sources
+
+Source: [five uploaded-version reviews](results/ssrn_five_20261110.md), November 10, 2026 Pacific; author evidence
+and source/data QA, not independent strategy validation or observed native execution savings.
+
+- Maturity selection changes convergence, liquidity and turnover. The source's lower-turnover commodity result uses
+  its own collateral/cost assumptions; deferred quotes, expiry and integer cash/roll accounting remain necessary.
+- TSMOM's volatility normalization and carry/value factor weights are not account sizing rules. Dollar risk depends
+  on actual long/short notionals, margins, financing and overnight paths; multiple markets can hold one factor exposure.
+- Source option carry is highly spread-sensitive. Positive gross carry is not assured net P&L or protection from
+  funding shocks; do not transfer an institutional commodity cost assumption to micro futures or option fills.
+- Oil Table 8's API actual-minus-Bloomberg EIA consensus signal differs from its price-return regression. The paper's
+  full API-through-EIA liquidity measure contains future observations, so it is not a causal entry filter. A final
+  pre-release exit needs executable quotes and a failed-order fallback; nominal clock timing does not certify a fill.
+- New audit recovers API 2021/22 schedules and verifies required CL endpoints/planned-path rows for 90 matched pairs.
+  Schedules/retrospective EIA dates do not supply actual release receipts or a pre-entry consensus vintage. No new
+  return calculation followed; price coverage is partly resolved while information clocks/native fills remain gated.
+- Uploaded draft identity matters: Value/Momentum's body/table Sharpe and bond-value definitions differ. Preserve
+  the dated PDF and reconcile definitions rather than silently choose a later version or favorable specification.
+
+Smallest next checks: one native maturity/roll/cash reconciliation or one original API/EIA/consensus-to-fill clock.
+Shared data needs D57/D58 and the earlier curve registers retain free-only constraints and prior failed families.

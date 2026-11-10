@@ -228,6 +228,33 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **API information before EIA — NEEDS DATA, uploaded SSRN 3747330.**
+  Source API actual minus Bloomberg EIA consensus; normal EIA−60/−1 minute hold. Source Sharpe 0.67 overall,
+  2.10 on 77 extreme events, no demonstrated native-cost/rolling-decile/net-holdout validation. New source-only
+  audit recovered API 2021/22 schedules and confirms all 90 matched CL endpoint/planned paths exist. Do not request
+  duplicate CL exports. Need original API/EIA/consensus clocks, pre-entry median and native contract/execution
+  reconciliation. Prior API price-follow/fade work remains weak; no automatic price-proxy/timing rescue.
+  Smallest next check: one genuine sequential-release/consensus-to-fill ledger using owned or lawful free inputs.
+  [Full uploaded-version review](agents/codex/results/ssrn_five_20261110.md)
+  · [D57](agents/codex/DATA_NEEDED.md). Zero new return tests; no allocation or paid acquisition.
+
+- [ ] **Low-turnover curve-aware commodity momentum — conditional PERSONAL / NEEDS DATA, SSRN 2485314.**
+  Uploaded 2014 Table 2 conservative-cost source 8.42% annual excess/Sharpe 0.60 versus generic 3.98%/0.25.
+  Merit: maturity selection and lower turnover, not a new independent directional engine or Apex daily-flat rule.
+  Missing 24-name native maturity/expiry/liquidity panel, exact front-slope extrapolation/expiry convention and
+  integer cash/roll costs. Reuse shared curve data needs; do not substitute one continuous contract. Next: one
+  source-consistent formation/selected maturity/hold/roll/cash reconciliation, then coverage/cost/power gate.
+  [Review](agents/codex/results/ssrn_five_20261110.md)
+  · [D58](agents/codex/DATA_NEEDED.md). No return test, fresh holdout or strategy promotion claimed.
+
+- [ ] **Diversified trend/value/carry foundations — conditional PERSONAL research baselines.**
+  Uploaded SSRN 2089463/2174501/2298565 verified against actual versions. Useful broad/monthly architecture,
+  not three independent verified additions. Need native excess-return/value/carry/roll/cost panels and long
+  warmup; the 2012 value/momentum draft also conflicts on bond-value definition and headline/table Sharpe.
+  Smallest check is a source-matched formation/roll/cash example and version reconciliation before returns.
+  BTC versions would be new adaptations; no source BTC result or automatic intraday/NQ/failed-family port.
+  [Five-question reviews](agents/codex/results/ssrn_five_20261110.md) · [Shared data needs](agents/codex/DATA_NEEDED.md).
+
 - [ ] **MNQ two-bar compression — NEEDS RULE/PARITY CHECK (dot, 2026-11-10).**
   October 18 Whop commenter claims 110 trades, PF 1.59 versus baseline 1.11, halves 1.76/1.45; unverified.
   Merit: a specific MNQ comparison. Need exact compression/lookback, session, trigger, side, exit, dates and costs;
