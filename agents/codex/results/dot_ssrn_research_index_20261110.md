@@ -135,3 +135,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 19: API-to-EIA information](dot_ssrn_continuation_pass19_20261110.md), entry58: intraday CL source and separate lower-input price adaptation, neither net-validated nor data-admitted.
 
 - [Currency-hedging source update](dot_ssrn_currency_hedging_source_update_20261110.md): D23 draft specifications recovered, final-version and modern implementation gates remain. Related Israeli causal evidence is not a trade.
+
+- [Agricultural source update](dot_ssrn_agriculture_source_update_20261110.md): private-forecast timestamp gates, ex-post coefficient correction and execution-only studies. Annual-rebalance SSRN identity resolved without adding a duplicate.
