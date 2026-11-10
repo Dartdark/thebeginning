@@ -1961,6 +1961,13 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
 
 ### Evaluation audit — Remaining cushion, account rules and broker evidence
 
+Direct-VB follow-up2026-11-10: [loss-side split-stop screen](results/vb_loss_split_20261110.md), one new
+fixed proposal/four controls and candidate definitions. Retaining Twin2/DT2/finish mode, a7/8split at37.5/75points
+lowers nominal15MNQ stop exposure2250→1725 but reduces design passes38.27%→35.75% (adverse DLL35.04%→33.78%).
+Saved full-stop losses are outweighed by foregone recoveries. REJECT; no2023+variant outcomes or threshold rescue.
+Model caveats include nonsimultaneous sleeve extrema, inherited held-path gaps and NQ-as-MNQ pricing; no
+native/UNKNOWN-aware replay or live protection proved. The user explicitly allows changing/replacing the book.
+
 Follow-up2026-11-10: [VB/ONB terminal-loss evidence reconciliation](results/vb_onb_tail_review_20261110.md)
 preserves latest Claude management outputs. The user's later correction supersedes the original live89%
 attribution:89% is a backtest figure;4/4 recent live accounts reportedly ended on a large VB/ONB loss.

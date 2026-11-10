@@ -90,6 +90,12 @@ Existing common-price replay audits also retain UNKNOWN outcomes where sizing/hi
 
 ## Recommendation and remaining uncertainty
 
+**Later user scope correction:** preserving the existing book is not a constraint. Twin2, DT2 and finish mode
+are already implemented in the research branch; the unresolved focus is direct VB improvement or replacement.
+See the completed [split-stop test](vb_loss_split_20261110.md), which retains those baseline additions and
+rejects one new loss-side partial exit on its committed design gate. The recommendations below record the
+earlier synthesis, not a request to repeat changes already made.
+
 1. **Prioritize a verified near-target reduction.** Preserve early opportunity; reduce how much progress a late
    VB/ONB stop can erase. The existing $6,000/half policy is the fixed lead, not permission for another threshold sweep.
    Settle which book is intended first: the branches describe different sizes/components.
