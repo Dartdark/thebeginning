@@ -95,7 +95,6 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 48 | [3369195](https://ssrn.com/abstract=3369195) | Deep Momentum Networks | Personal method | No: daily overnight | No exact universe/ledger | Cost-sensitive method reserve |
 | 49 | [3965229](https://ssrn.com/abstract=3965229) | Yield Curve Momentum | Personal | No: monthly | Adaptation only; final futures rules gated | Directional-duration comparator |
 | 50 | [2956411](https://ssrn.com/abstract=2956411) | Yield Curve Premia | Personal | No: monthly | No: bond buckets/duration/FX hedge | Curve-relative-value foundation |
-
 | 51 | [5390453](https://ssrn.com/abstract=5390453) | Commodity Signed Variance | Personal monthly | No | No: broad native contract panel | Conditional; asymmetry-family overlap |
 
 ## Guardrails for any later build
