@@ -17,18 +17,12 @@ NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridg
 # tag suffix -> account. "" = #1 (50K, -01), "-2" = #2 (50K, -02), "150" = #3 (150K No-Activation, -03)
 ACCOUNTS = [
     # update last_balance / last_date whenever the user reports an Apex end-of-day balance
-    dict(account="#1", id="APEX-681524-01", size="50K evaluation", status="Blown", start=50000, floor=None,
-         last_balance=None, last_date="2026-10-26", note="Blown 2026-10-26; trades after that are not counted."),
-    dict(account="#2", id="APEX-681524-02", size="50K evaluation", status="Blown", start=50000, floor=48764.42,
-         last_balance=50764.42, last_date="2026-10-28",
-         note="Blown 2026-11-04 (user). Balance from the Order and Position Tracker 10/28 evening. Floor assumes 10/28 is its highest end-of-day balance (peak - $2,000). 10/26 #3's 150K-size orders hit this account: logged P&L that day may not match fills."),
-    dict(account="#3", id="APEX-681524-03", size="150K No-Activation", status="Blown", start=150000, floor=None,
-         last_balance=147822.60, last_date="2026-10-28",
-         note="Blown 2026-10-30: Apex liquidated the Overnight Bias short at 28,780 (09:38 CT) when equity touched the $146,000 floor intraday. $4,000 EOD trailing; target +$9,000. Started 10/26. Balance from the Order and Position Tracker 10/28 evening (user screenshot)."),
-    dict(account="#4", id="APEX-681524-04", size="150K No-Activation", status="Blown", start=150000, floor=146000.0,
-         last_balance=150000.0, last_date="2026-11-01",
-         note="Blown 2026-11-04 (user). Bought 2026-11-01 (despite the buy gate's PAUSE: live/overrides.csv). First session 11/02. Reuses the VB150 / ONB150 / EOS150 / MON_BR150 charts."),
+    # 2026-11-10: #1-#4 (all blown) removed from the dashboard at the user's request; history in git
+    dict(account="#5", id="APEX-681524-05", size="150K No-Activation", status="Live", start=150000, floor=146000.0,
+         last_balance=150000.0, last_date="2026-11-10",
+         note="Bought 2026-11-10. 6 charts: VB 15, ONB ADX30 $2,750, Bridge 5, EOS $1,250, Twin 2, Dual Thrust 2; finish mode; Apex Chart Guard. Tags *150-5."),
 ]
+
 CLOSED_AFTER = {"#1": "20261026", "#3": "20261030", "#2": "20261104", "#4": "20261104"}   # #2, #4 blown 2026-11-04 (user)
 OUT = "analysis/outputs/dashboard"
 
@@ -76,7 +70,7 @@ def main():
                           trades=sum(t["account"] == a["account"] for t in trades),
                           net_logged=round(sum(t["pnl"] for t in trades if t["account"] == a["account"]), 2)))
     health = []
-    for f in sorted(glob.glob("live/health/*.csv")):
+    for f in sorted(glob.glob("live/health/2*.csv")):   # dated files only (group_log.csv etc. skipped)
         for line in open(f):
             p = line.strip().split(",")
             kv = dict(x.split("=", 1) for x in p[2:] if "=" in x and not x.startswith("last_reject"))
@@ -86,7 +80,7 @@ def main():
                                rejected=int(kv["rejected_today"]) if "rejected_today" in kv else None))
     import re, vps_health
     checks = []
-    for day in sorted({os.path.basename(f)[:8] for f in glob.glob("live/trades/*.csv") + glob.glob("live/health/*.csv")})[-10:]:
+    for day in sorted({os.path.basename(f)[:8] for f in glob.glob("live/trades/2*.csv") + glob.glob("live/health/2*.csv")})[-10:]:
         d = dt.date(int(day[:4]), int(day[4:6]), int(day[6:]))
         for i, line in enumerate(vps_health.check(d)):
             text = line.lstrip("- ").strip()
