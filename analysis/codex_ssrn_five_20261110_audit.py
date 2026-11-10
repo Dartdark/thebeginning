@@ -24,12 +24,15 @@ def main():
     for id in IDS:
         pdf=INPUT/'source'/f'ssrn-{id}.pdf'
         text=subprocess.check_output(['pdftotext','-layout',str(pdf),'-'],text=True)
-        assert f'abstract={id}' in text
+        footer_matched=f'abstract={id}' in text
+        # The uploaded Carry draft has no SSRN footer; retain filename provenance and title/authors instead.
+        if id!='2298565':
+            assert footer_matched
         pages=text.split('\f')
         info=subprocess.check_output(['pdfinfo',str(pdf)],text=True)
         n=int(re.search(r'^Pages:\s*(\d+)',info,re.M)[1])
         assert len([p for p in pages if p.strip()])==n
-        versions[id]=dict(pdf_sha256=sha(pdf),pages=n,ssrn_identity_matched=True,
+        versions[id]=dict(pdf_sha256=sha(pdf),pages=n,embedded_ssrn_footer_matched=footer_matched,
                           text_sha256=hashlib.sha256(text.encode()).hexdigest())
         if id=='2174501':
             assert 'Current Version: June 2012' in text
@@ -39,7 +42,7 @@ def main():
             versions[id]['version_issues']=['body_1_42_vs_table_I_1_36_and_1_45',
                 'main_text_bond_past_return_vs_table_and_later_text_yield_change']
         if id=='2298565':
-            assert 'November 2016' in text
+            assert 'November 2016' in text and 'Carry' in text and 'Koijen' in text and 'Vrugt' in text
             assert '1.80' in text and '-0.67' in text and '-1.62' in text
         if id=='2485314':
             assert 'May 21, 2014' in text and '8.42%' in text and '3.98%' in text
