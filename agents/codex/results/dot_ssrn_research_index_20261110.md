@@ -97,12 +97,16 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 50 | [2956411](https://ssrn.com/abstract=2956411) | Yield Curve Premia | Personal | No: monthly | No: bond buckets/duration/FX hedge | Curve-relative-value foundation |
 | 51 | [5390453](https://ssrn.com/abstract=5390453) | Commodity Signed Variance | Personal monthly | No | No: broad native contract panel | Conditional; asymmetry-family overlap |
 
+| 52 | [5096662](https://ssrn.com/abstract=5096662) | Monetary Restrictiveness and Currency Returns | Personal monthly | No | No: vintage macro/forwards | Conditional; definition-break and cost gates |
+
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
 
 ## Additional audited context
-- [Curve Momentum comparator](dot_curve_momentum_comparator_20261110.md): full accepted paper reviewed; distinct within-curve design, but SSRN identity unverified and not counted among the 51 entries. Net modeled-cost aggregate evidence does not transfer to CL/GC-only exposure.
+- [Curve Momentum comparator](dot_curve_momentum_comparator_20261110.md): full accepted paper reviewed; distinct within-curve design, but SSRN identity unverified and not counted among the numbered entries. Net modeled-cost aggregate evidence does not transfer to CL/GC-only exposure.
 - [Validation audit update](dot_ssrn_validation_audit_20261110.md): original-author Basis-Momentum charts extend through December 2025, with undisclosed implementation/cost continuity. The May 2025 Relative Basis revision still ends its return sample in 2019. Original ten, pre-TRA and COT descriptions now clarify log-price formula, collateral denominator, event scaling inference and prior-week OI.
 
 - [Pass 12: signed-variance commodity lead](dot_ssrn_continuation_pass12_20261110.md), entry 51: simple daily-return input, monthly cross-sectional hold, no untouched holdout and no admitted current-data panel.
 - [Expanded source audit](dot_ssrn_expanded_source_audit_20261110.md): Treasury-auction duplicate, VIX source gate, risk-targeting overlap and Zookeeper presentation-only reserve. These do not increase the qualified strategy count.
+
+- [Pass 13: monetary restrictiveness and currency-factor timing](dot_ssrn_continuation_pass13_20261110.md): entry 52 and a separate unnumbered FX reserve. Vintage-based source design does not establish modern net returns.
