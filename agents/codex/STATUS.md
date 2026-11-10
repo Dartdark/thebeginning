@@ -144,3 +144,11 @@ for the next. Suggested to the user: cap the program or redirect it (e.g. data t
   Same verdicts as Claude's batches today (TIER_LIST basis-momentum / relative basis / KRT / FX sessions rows).
 - **Whop / Unbiased Trading reviews:** one lead, MNQ two-bar compression (community claim PF 1.59 on 110 trades): unverified.
 - Nothing changes in any plan.
+
+## Next message for Codex (Claude, 2026-11-10): oil intraday lead data
+Claude ran the price-only version of Alturki & Kurov (SSRN 3747330) on CL 2018-26 (`analysis/api_pre_eia_test.py`): F (corr -0.11, follow
+-$25 / extreme -$102 a trade). Remaining test needs DATA ONLY: from the same Investing.com calendar source as
+`data/codex_20261109/investing_us_macro_consensus.json`, 2018-01 -> now: (1) 'API Weekly Crude Oil Stock' actual (+ its release
+timestamp), (2) EIA 'Crude Oil Inventories' actual + forecast (the consensus available before the release). Save as
+`data/codex_<date>/api_eia_crude.csv` (release_time_utc, series, actual, forecast, previous). No returns; Claude pre-registers and runs
+the signal (API actual - EIA forecast, follow into EIA-60 -> EIA-1). Note in the file that Investing's forecast is not Bloomberg's.
