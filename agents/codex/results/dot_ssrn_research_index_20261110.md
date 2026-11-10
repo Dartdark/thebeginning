@@ -120,3 +120,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 15: defensive portfolio methods](dot_ssrn_continuation_pass15_20261110.md), entry 54: correlation-sorted factor hedge, with explicit retrospective-sizing and benchmark-drawdown limits.
 
 - [Pass 16: commodity IV and alternative-data sources](dot_ssrn_continuation_pass16_20261110.md), entry 55 plus unnumbered climate/news reserves. No missing rights, release clocks or holdouts are assumed solved.
+
+- [Entry 53 actual-data feasibility](dot_ssrn_fomc_data_feasibility_20261110.md): saved ES census verified, exact event endpoints still unread, and October 28, 2026 is missing from the existing event seed. No calendar or strategy changes made.
