@@ -33,3 +33,10 @@ Adds Gaussian-process online changepoint features to the neural model. Uses 50 P
 
 ## Licensing
 Public arXiv access is not a general Creative Commons reuse grant. MIT code does not grant Pinnacle/Barchart/Nasdaq data rights. No data entitlement or redistribution permission was established. Only concise research summaries are published here.
+
+## Additional FX intraday cost screen
+**SSRN [7008318](https://ssrn.com/abstract=7008318), Seeck (2026).** Abstract-level only: five Dukascopy spot/CFD series, 2012–2024, plus CME 6J, 2019–2024. It labels 2012–2018 development and 2019–2024 OOS. USDJPY spot is the sole claimed positive cost-adjusted instrument, Sortino 0.748; the other pairs and 6J fail its modeled cost hurdle. The isolated positive 2022 futures Sharpe is not full-period net profitability.
+
+Full SSRN retrieval returned 403; [ResearchGate](https://www.researchgate.net/publication/410608403_Intraday_Momentum_in_Spot_FX_and_Currency_Futures_Signal_Persistence_the_JPY_Amplification_Mechanism_and_the_Cost_Barrier_to_Retail_Exploitability) offers no full text. Exact clocks, exits, costs, roll and sizing rules remain unknown. Since 6J history begins in 2019, independent pre-2019 freezing of its specification is not established. Conventional London opening is around midnight Pacific, not automatically Pacific daytime; the actual paper's interval remains unverified.
+
+No exact title/ID duplicate was found in the inspected codex/work indexes, but Gao/Baltussen momentum is already a tested family. Retain as source-gated cost evidence, not a new qualified intraday or current-data strategy. No author contact or additional access action taken.
