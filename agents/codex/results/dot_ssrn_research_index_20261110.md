@@ -9,6 +9,9 @@ Author: dot. Updated 2026-11-10. Research continues to the agreed deadline; this
 
 No fresh strategy has been shown here to improve the existing portfolio or account survival. No return tests were run. “Intraday” below means holding-time fit or a labeled adaptation, not a blanket certification of Apex eligibility. Existing-data status never follows from ticker names alone.
 
+5. Business-cycle FX sorting with real-time macro vintages: stronger timing discipline than most public-macro candidates, still requiring broad licensed forward data and current validation.
+6. Same-day EUR/USD session flows: a transparent low-input intraday hypothesis, with old institutional spot evidence rather than proven 6E results.
+
 ## Reports
 - [Original ten](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_ten_papers_20261110.md)
 - [Five provisional intraday reserves](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_intraday_slots_20261110.md)
@@ -17,6 +20,8 @@ No fresh strategy has been shown here to improve the existing portfolio or accou
 - [Pass 3: COT, expiration and volatility-overlay evidence](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass3_20261110.md)
 - [Pass 4: EIA, jump, LEI, MOM–TOM and factor prediction](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass4_20261110.md)
 - [Pass 5: volume risk, trade networks, search and climate](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass5_20261110.md)
+
+- [Pass 6: speculative pressure, FX sessions and macro/VRP evidence](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass6_20261110.md)
 
 ## Classified inventory
 The count is research entries, not qualified strategies. Papers 11–15 are provisional reserves; 16–20 audit already-tested or blocked baselines, not five new successful ideas. See each linked report for the exact evidence status, source version, rules, costs and missing inputs.
@@ -59,6 +64,12 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 34 | [4534287](https://ssrn.com/abstract=4534287) | Trade Network and Currency Returns | Personal | No | No: trade/FX panels | Conditional; vintage gate |
 | 35 | [3411117](https://ssrn.com/abstract=3411117) | Fear of Hazards | Personal | No | No: vintage searches | Conditional; hindsight vocabulary |
 | 36 | [7395858](https://ssrn.com/abstract=7395858) | El Niño and Currency Returns | Personal | No | No: vintage climate/FX | Conditional; version/timing gate |
+
+| 37 | [3279425](https://ssrn.com/abstract=3279425) | Speculative Pressure | Personal | No | No: broad COT/price panel | Conditional; timing/cost gates |
+| 38 | [2099321](https://ssrn.com/abstract=2099321) | Intraday FX Session Flows | Intraday hypothesis | Yes in spot; 6E adaptation | 6E full-session/roll checks pending | Conditional; old net spot evidence |
+| 39 | [948309](https://ssrn.com/abstract=948309) | Variance Risk Premium Forecasting | Personal | No | Cash variance unavailable | Deprioritize |
+| 40 | [3929119](https://ssrn.com/abstract=3929119) | Equity Prediction Reassessment | Evidence audit | Not an entry rule | Not a strategy replication | Independent VRP counterevidence |
+| 41 | [2906600](https://ssrn.com/abstract=2906600) | Business Cycles and Currency Returns | Personal | No | No: vintages/forwards | Priority causal-data audit |
 
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
