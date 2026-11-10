@@ -76,7 +76,6 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 39 | [948309](https://ssrn.com/abstract=948309) | Variance Risk Premium Forecasting | Personal | No | Cash variance unavailable | Deprioritize |
 | 40 | [3929119](https://ssrn.com/abstract=3929119) | Equity Prediction Reassessment | Evidence audit | Not an entry rule | Not a strategy replication | Independent VRP counterevidence |
 | 41 | [2906600](https://ssrn.com/abstract=2906600) | Business Cycles and Currency Returns | Personal | No | No: vintages/forwards | Priority causal-data audit |
-
 | 42 | [3440417](https://ssrn.com/abstract=3440417) | End-of-Month Treasury Returns | Personal | No: multi-day | Calendar simple; Treasury coverage/roll unverified | Conditional calendar lead |
 | 43 | [5034739](https://ssrn.com/abstract=5034739) | Naphtha Crack Mean Reversion | Personal | No: multi-day | No: ICE/OTC executable prices | Access/execution gate |
 
