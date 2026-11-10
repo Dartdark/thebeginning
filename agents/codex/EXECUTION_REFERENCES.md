@@ -1961,6 +1961,14 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
 
 ### Evaluation audit — Remaining cushion, account rules and broker evidence
 
+New-data clock follow-up, November9,2026Pacific: [funding/fear tests](results/new_data_strategies_20261110.md)
+and [primary source notes](inputs/new_data_strategies_20261110/sources/clock_evidence.md). A reference rate's
+effective date precedes its next-day release; final core percentRate after the afternoon revision window differs
+from summary percentiles that can be updated later. Delayed core-rate research is now supported by explicit
+policy clocks, not actual receipt logs. For index features retain UNKNOWN separately: NaN==1 is false and would
+otherwise silently put unavailable observations in the OFF group. All three new candidate arms fail design;
+no measured execution saving, account improvement or new strategy admission follows from these clock lessons.
+
 Direct-VB follow-up2026-11-10: [loss-side split-stop screen](results/vb_loss_split_20261110.md), one new
 fixed proposal/four controls and candidate definitions. Retaining Twin2/DT2/finish mode, a7/8split at37.5/75points
 lowers nominal15MNQ stop exposure2250→1725 but reduces design passes38.27%→35.75% (adverse DLL35.04%→33.78%).

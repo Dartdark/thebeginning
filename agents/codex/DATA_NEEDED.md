@@ -475,6 +475,18 @@ match page totals;1,089supplemental requests saved, including521valid XML/527PDF
 Historical public-first-release/revision clocks, exact benchmark/reset/creation offsets and original NYFed
 announced schedules remain open. No return tests or automatic strategy admission; past failures preserved.
 
+### D15 core reference-rate clock follow-up (2026-11-09 Pacific)
+
+[New-data strategy test](results/new_data_strategies_20261110.md),
+[primary policy/source notes](inputs/new_data_strategies_20261110/sources/clock_evidence.md).
+NYFed policy and the historical ARRC2021guide establish next-business-day publication and same-publication-day
+revision of core SOFR/EFFR. A separately committed derived clock uses those final core percentRate values only
+after3pmEastern on the following rate business date. Original source available_at fields stay blank; no actual
+historical feed receipt is invented. Retrospective percentile/volume updates remain outside admission.
+The tested delayed funding short failed design; this narrows the data-clock question, not a strategy endorsement.
+Official Cboe VIX9D/VIX closes were used with a two-session delay; exact missing source dates remain unknown.
+No original ETF NAV/share/reset, macro first-actual/forecast-vintage or buyback announcement gap is closed by this.
+
 ### D15 historical clock follow-up (2026-11-08)
 
 [Primary clock audit](results/gold_clocks_20261108.md),

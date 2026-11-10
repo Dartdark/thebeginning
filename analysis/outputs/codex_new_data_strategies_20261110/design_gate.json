@@ -1,0 +1,76 @@
+{
+  "candidates": [
+    {
+      "candidate": "FUND_SHORT",
+      "control": "FUND_CONTROL",
+      "tests": {
+        "count": true,
+        "net": false,
+        "pf": false,
+        "t": false,
+        "positive_years": false,
+        "stress": false,
+        "removed_mean_negative": false
+      },
+      "cheap_pass": false,
+      "removed_count": 1062,
+      "removed_net": 1605.5,
+      "removed_mean": 1.5117702448210923,
+      "removed_t": 0.5026150148163528,
+      "control_total": 1129.0,
+      "candidate_total": -476.5,
+      "unresolved_paths": 0
+    },
+    {
+      "candidate": "FEAR_EARLY",
+      "control": "EARLY_CONTROL",
+      "tests": {
+        "count": true,
+        "net": true,
+        "pf": true,
+        "t": false,
+        "positive_years": true,
+        "stress": true,
+        "removed_mean_negative": true
+      },
+      "cheap_pass": false,
+      "removed_count": 373,
+      "removed_net": -752.75,
+      "removed_mean": -2.0180965147453085,
+      "removed_t": -0.7288754127435824,
+      "control_total": 584.25,
+      "candidate_total": 1337.0,
+      "unresolved_paths": 0
+    },
+    {
+      "candidate": "FEAR_MORNING",
+      "control": "MORNING_CONTROL",
+      "tests": {
+        "count": true,
+        "net": false,
+        "pf": false,
+        "t": false,
+        "positive_years": false,
+        "stress": false,
+        "removed_mean_negative": true
+      },
+      "cheap_pass": false,
+      "removed_count": 373,
+      "removed_net": -1952.25,
+      "removed_mean": -5.233914209115282,
+      "removed_t": -1.182745136371489,
+      "control_total": -2872.25,
+      "candidate_total": -920.0,
+      "unresolved_paths": 0
+    }
+  ],
+  "selected_nulls": [],
+  "survivors": [],
+  "status": "STOP: all new definitions fail design",
+  "hypotheses": 2,
+  "candidate_arms": 3,
+  "candidate_control_definitions": 6,
+  "conditional_null_definitions": 0,
+  "alternative_2023_outcomes_run": false,
+  "standing_screen_comparisons": 44
+}
