@@ -1,0 +1,25 @@
+[provenance] code 2867d40c dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Untested data as filters (user 2026-11-09: 'do we have data you haven't tested ideas on yet?' -> 'yes'). PRE-REGISTERED (header
+
+1. OVX x CL Sunday fade (per MCL, booked on Monday):
+   all weekends             n  96 $  65.3 t 3.18 | 2018-22 $54.0 2023+ $73.7
+   high OVX (kept by A)     n  60 $  89.7 t 2.88 | 2018-22 $75.7 2023+ $100.4
+   low OVX (skipped)        n  36 $  24.6 t 1.53 | 2018-22 $16.3 2023+ $30.5
+   kept - skipped t 1.86 | random weekends: 95th $91.3, kept $89.7, p 0.066
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      CLS -> A (high OVX only)           2y $ 20,059 blown  2.0% all 6 97.5% diff $  +28 beats 50.1%
+      CLS -> B (1.5x high / 0.5x low)    2y $ 20,036 blown  2.2% all 6 97.2% diff $   +5 beats 50.1%
+
+   150K evaluation base (current set): pass 38.9%
+
+2. VVIX spike -> half size, whole evaluation set:
+   spike days 15.7% of days; big VB / ONB loss days: 27.5% of all days, 36.2% of spike days, 25.9% of other days
+   half size on VVIX-spike days             pass 38.1% (-0.8%, band -2.6% / +0.9%; 18-22 -1.7%, 23+ +0.5%)
+      random days, same count (20 runs): mean 36.8%, max 40.0%; p 0.20
+
+3. Credit stress (HYG / LQD) -> half size on VB and ONB:
+   VB 15        $ a day: stress $146 vs other $85 (stress days 36%; big-loss share 25.9% vs 28.4%)
+   ONB $2,750   $ a day: stress $234 vs other $198 (stress days 36%; big-loss share 25.9% vs 28.4%)
+   half VB + ONB on credit-stress days      pass 32.7% (-6.2%, band -9.4% / -3.2%; 18-22 -7.7%, 23+ -4.1%)
+      random days, same count (20 runs): mean 34.7%, max 38.0%; p 0.80
