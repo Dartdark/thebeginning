@@ -65,3 +65,18 @@ The user's agreement handling is acknowledged. No trading, automation deployment
 
 ## Status
 Five additional papers identified; zero promoted to fully verified strong intraday strategies. Source gaps, data gaps and prior failed families remain real. Further research should prioritize exact source access and data feasibility before any return test. No tests, paid data or schedules run.
+
+## Later full-source recovery: reserves12 and14 downgraded, not promoted
+### 12. USO intraday momentum,3553682
+[Complete37-page coauthor manuscript](https://www.researchgate.net/profile/Yahua-Xu/publication/339877949_Intraday_momentum_and_return_predictability_Evidence_from_the_crude_oil_market/links/5e7308a84585152cdbfd6c7f/Intraday-momentum-and-return-predictability-Evidence-from-the-crude-oil-market.pdf), [Xu's March2020 upload provenance](https://www.researchgate.net/publication/339877949_Intraday_momentum_and_return_predictability_Evidence_from_the_crude_oil_market). This supersedes abstract-only status, not final-version parity.
+USO minute quote/trade-count/volume, April2006–December2018,3,171 days after<500-trade exclusions. Signal prior16:00→10:00 log return; Eq10 follows sign during15:30–16:00 Eastern. Prose wrongly says first-half-hour entry. Recursive2010–18 forecast OOS R² .659%, not net trading validation. Table7 annual mean1.85%, dispersion .21%, printed Sharpe8.99; dispersion matches daily return scale. Consistent annualization implies roughly .56 gross, about .734bp/day. No cost/borrow ledger.
+
+Assessment: this arithmetic audit is not a return test. Tiny gross edge, quote construction and inconsistent clock/annualization prevent promotion. CL substitution remains a changed study. Exclusions based on full-day trade count also require causal treatment for any trading selector.
+
+### 14. CME FX reversals,885686
+Full published42-page paper recovered via [Tandon](https://www.academia.edu/24730756/Intraday_price_reversal_patterns_in_the_currency_futures_market_The_impact_of_the_introduction_of_GLOBEX_and_the_euro) and [Rentzler](https://www.academia.edu/3416047/Intraday_price_reversal_patterns_in_the_currency_futures_market_The_impact_of_the_introduction_of_GLOBEX_and_the_euro) listings. Floor-only07:20–14:00 Central; first minute transaction, stale-price carry and closing quote. Lead contract uses trade-count dominance, thin-day exclusion compares with prior-day volume. Previous-day return/opening-gap events use full-history5th/95th percentile thresholds rounded to10bp. Ten markout horizons,40-minute increments through floor close. No frozen chosen exit, sizing, costs or net portfolio.
+
+Assessment: descriptive reversal evidence, not an executable modern electronic strategy. Contract dominance, full-history thresholds and observing/filling opening prints need causal reconstruction. Historical subperiods are not prospective holdouts. No prior failed FX protocol reopened.
+
+### Remaining reserves
+7546200: no new lawful full source recovered.7155458: public record offers only author-request access; none requested.5037563: embargo respected. Five verified net intraday strategies have **not** been produced by these five reserves.
