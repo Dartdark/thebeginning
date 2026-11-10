@@ -1,0 +1,60 @@
+[provenance] code c4d36b3a dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Paper batch 2026-11-10 (user upload, 5 PDFs). PRE-REGISTERED (header committed before the first run). 9 items, bar t_threshold(9),
+   items 9, bar t >= 2.54
+
+A. FOMC announcement reversal (fade the 24h pre-announcement move), $ per contract:
+   ES: corr(pre 12:45->12:45, post 13:00->14:59) +0.11 over 68 meetings
+   ITEM ES fade, 12:50 -> 14:50                   n   68 avg   199.78 PF 1.31 t  0.78 win 59% | 18-22   303.97 23+    59.66 | yrs+ 5/9  fail
+   ITEM ES fade, 13:20 -> 15:20                   n   68 avg    77.54 PF 1.11 t  0.30 win 53% | 18-22    66.15 23+    92.84 | yrs+ 4/9  fail
+   NQ: corr(pre 12:45->12:45, post 13:00->14:59) +0.19 over 69 meetings
+   ITEM NQ fade, 12:50 -> 14:50                   n   69 avg  -290.51 PF 0.79 t -0.70 win 52% | 18-22   117.88 23+  -821.42 | yrs+ 4/9  fail
+   ITEM NQ fade, 13:20 -> 15:20                   n   69 avg  -504.50 PF 0.67 t -1.14 win 49% | 18-22   -71.74 23+ -1067.08 | yrs+ 2/9  fail
+
+B. 6E local-hours effect, $ per 6E:
+   ITEM short 6E 01:00 -> 07:00 CT                n 2281 avg    -4.57 PF 0.97 t -0.61 win 50% | 18-22    -2.03 23+    -7.92 | yrs+ 2/9  fail
+   ITEM long 6E 07:00 -> 15:00 CT                 n 2281 avg   -13.73 PF 0.92 t -1.43 win 47% | 18-22   -15.04 23+   -12.00 | yrs+ 2/9  fail
+      (gross) short 01:00 -> 07:00                n 2281 avg    12.93 PF 1.10 t  1.73 win 51% | 18-22    15.47 23+     9.58 | yrs+ 8/9
+      (gross) long 07:00 -> 15:00                 n 2281 avg     3.77 PF 1.02 t  0.39 win 48% | 18-22     2.46 23+     5.50 | yrs+ 5/9
+
+C. Commercials' liquidity premium (fade the week's non-commercial net change), weekly, vol-normalised:
+      NQ (% a week, unscaled)                     n  458 avg    -0.05 PF 0.96 t -0.34 win 52% | 18-22     0.03 23+    -0.15 | yrs+ 5/9
+      ES (% a week, unscaled)                     n  458 avg    -0.12 PF 0.87 t -1.05 win 50% | 18-22    -0.21 23+    -0.01 | yrs+ 5/9
+      YM (% a week, unscaled)                     n  458 avg     0.07 PF 1.09 t  0.62 win 52% | 18-22     0.12 23+     0.02 | yrs+ 6/9
+      GC (% a week, unscaled)                     n  458 avg     0.26 PF 1.36 t  2.46 win 54% | 18-22     0.13 23+     0.42 | yrs+ 8/9
+      CL (% a week, unscaled)                     n  458 avg     0.26 PF 1.13 t  0.91 win 50% | 18-22     0.34 23+     0.15 | yrs+ 5/9
+      NG (% a week, unscaled)                     n  458 avg     0.32 PF 1.11 t  0.84 win 53% | 18-22    -0.41 23+     1.30 | yrs+ 6/9
+      6E (% a week, unscaled)                     n  458 avg    -0.01 PF 0.98 t -0.16 win 52% | 18-22    -0.01 23+    -0.00 | yrs+ 6/9
+      ZN (% a week, unscaled)                     n  458 avg     0.02 PF 1.08 t  0.60 win 52% | 18-22     0.07 23+    -0.04 | yrs+ 6/9
+   ITEM C1 equal-weight 8 markets (vol units)     n  450 avg     0.04 PF 1.21 t  1.52 win 55% | 18-22     0.01 23+     0.07 | yrs+ 6/9  fail
+
+D. Speculators' steepening -> pre-FOMC drift (long 08:30 -> 12:45 CT):
+   STEEP on FOMC days: > 0 on 26 of 69
+      ES every FOMC day                           n   69 avg   -93.59 PF 0.67 t -1.21 win 36% | 18-22    24.49 23+  -247.08 | yrs+ 4/9
+   ITEM ES STEEP > 0                              n   26 avg  -146.35 PF 0.58 t -1.10 win 35% | 18-22   -94.58 23+  -190.71 | yrs+ 2/6  fail
+      ES STEEP = 0                                n   43 avg   -61.69 PF 0.75 t -0.65 win 37% | 18-22    77.41 23+  -296.41 | yrs+ 2/8
+      NQ every FOMC day                           n   69 avg  -110.22 PF 0.80 t -0.68 win 46% | 18-22   103.90 23+  -388.58 | yrs+ 5/9
+   ITEM NQ STEEP > 0                              n   26 avg  -232.63 PF 0.60 t -0.94 win 42% | 18-22   -71.42 23+  -370.82 | yrs+ 2/6  fail
+      NQ STEEP = 0                                n   43 avg   -36.20 PF 0.93 t -0.17 win 49% | 18-22   181.82 23+  -404.12 | yrs+ 3/8
+
+E. Volatility-managed sizing (context): annualised Sharpe of daily P&L, plain -> managed (2019-22 | 2023+)
+   VaultBreak                  1.40 ->  1.15 | 19-22  1.41 ->  0.63 | 23+  1.42 ->  1.70
+   OvernightBiasML             1.70 ->  0.39 | 19-22  1.96 ->  0.56 | 23+  1.54 ->  1.28
+   MondayLong                  1.25 ->  1.09 | 19-22  0.76 ->  0.74 | 23+  1.63 ->  1.40
+   ExpirationOpenShort         0.89 -> -0.34 | 19-22  0.78 ->  0.63 | 23+  0.99 -> -0.53
+   LateDayFlow                 1.06 -> -0.28 | 19-22  0.96 -> -0.56 | 23+  1.16 ->  0.58
+   NFPFade                     0.59 -> -0.20 | 19-22  0.37 -> -0.30 | 23+  0.82 ->  0.53
+   BridgeMondayLong            1.27 ->  0.32 | 19-22  1.49 -> -0.43 | 23+  1.13 ->  1.05
+   CLSundayFade_perMCL         1.24 ->  0.44 | 19-22  1.29 ->  0.64 | 23+  1.25 ->  0.56
+   ESMOCFollow_perMES          1.20 ->  0.41 | 19-22  1.77 ->  0.79 | 23+  0.51 ->  0.12
+   RelativeStrength            1.30 ->  1.13 | 19-22  1.28 ->  0.86 | 23+  1.35 ->  1.54
+   FC2B                        1.32 ->  1.06 | 19-22  1.59 ->  1.05 | 23+  1.10 ->  1.08
+   TwinContinuation            1.89 ->  1.12 | 19-22  1.26 ->  0.60 | 23+  2.48 ->  1.53
+   OvernightTick               1.79 ->  0.60 | 19-22  1.79 ->  0.07 | 23+  1.84 ->  0.86
+   DualThrust                  1.36 ->  1.31 | 19-22  1.21 ->  1.23 | 23+  1.51 ->  1.40
+   Kusho                       1.70 ->  1.05 | 19-22  2.00 ->  1.31 | 23+  1.43 ->  0.90
+   S47                         1.33 ->  1.05 | 19-22  1.54 ->  1.17 | 23+  1.15 ->  0.94
+   S30                         0.99 ->  0.00 | 19-22  1.48 -> -0.06 | 23+  0.66 ->  0.31
+   SwingTarget                 1.45 ->  0.67 | 19-22  1.20 ->  0.04 | 23+  1.69 ->  1.22
+   PaperTrend                  1.41 -> -0.56 | 19-22  1.63 ->  0.79 | 23+  1.24 -> -0.97
+   TOTAL                       3.30 ->  2.79 | 19-22  3.53 ->  2.52 | 23+  3.17 ->  3.07
+   NQ buy-hold (bp)            0.96 ->  0.87 | 19-22  0.64 ->  0.51 | 23+  1.44 ->  1.21
