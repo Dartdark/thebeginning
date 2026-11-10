@@ -1,0 +1,71 @@
+{
+  "status": "Manually transcribed source claims; not independently reproduced trading outcomes.",
+  "source_pdf_sha256": "44131ff279db2c545c08758f8f94db889fc97c66a049ee1ab14b55941e69829b",
+  "sample": {
+    "start": "2008-07",
+    "end": "2016-01",
+    "announcements": 387,
+    "excluded_same_day_petroleum": 53,
+    "retained": 334,
+    "zero_predictor": 63,
+    "nonzero_predictor": 271
+  },
+  "table_XIII": {
+    "pdf_page": 37,
+    "printed_page": 36,
+    "annualization": "Per-event ratio times square root of average events per year; not sqrt252 daily scaling.",
+    "costs": "No specified commission/spread/slippage deduction in reported trading exercise; no verified net result.",
+    "all_nonzero": {
+      "events": 271,
+      "sharpe": 0.84,
+      "sortino": 1.4
+    },
+    "large_predictor": {
+      "events": 153,
+      "sharpe": 1.26,
+      "sortino": 2.12,
+      "selection": "First/fourth quartiles of nonzero predictor values; no causal training-only/rolling cutoff protocol specified."
+    },
+    "reported_net_profit": null,
+    "reported_profit_factor": null,
+    "reported_max_drawdown": null
+  },
+  "table_XII": {
+    "pdf_page": 36,
+    "metric": "Out-of-sample mean-squared-forecast-error improvement against historical-mean benchmark, percent; not Sharpe or dollar profit.",
+    "rows": [
+      {
+        "from": "2010-01",
+        "to": "2016-01",
+        "inventory_surprise": 14.42,
+        "preannouncement_return": 3.43
+      },
+      {
+        "from": "2012-01",
+        "to": "2016-01",
+        "inventory_surprise": 13.51,
+        "preannouncement_return": 2.9
+      },
+      {
+        "from": "2014-01",
+        "to": "2016-01",
+        "inventory_surprise": 21.77,
+        "preannouncement_return": 17.68
+      }
+    ]
+  },
+  "table_VI": {
+    "pdf_page": 30,
+    "predictor_return_pre_release_r_squared": 0.05,
+    "predictor_return_release_window_r_squared": 0,
+    "interpretation": "No significant post-release predictor coefficient; the paper does not establish a post-release substitute."
+  },
+  "figure_2": {
+    "pdf_page": 39,
+    "warning": "Returns and order flow sign-aligned using eventual actual surprise. Descriptive hindsight plot, not an executable pre-event direction."
+  },
+  "figure_6": {
+    "pdf_page": 43,
+    "warning": "Overlapping24-month moving average, not a tradable equity curve or maximum-drawdown record."
+  }
+}

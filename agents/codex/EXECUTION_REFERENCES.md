@@ -2619,3 +2619,24 @@ Source: user-supplied Whop export; [dot review](results/dot_whop_review_20261110
 - A Kusho community report describes asynchronous broker-fill/chart-state mismatch. This is an unverified third-party anecdote, not an inspected user setting or confirmed cause of the user's losses.
 - Useful lesson: reconcile order IDs, submission/acknowledgement/fill/cancel clocks, position state and reconnect behavior against broker records; chart markers alone do not establish actual fills.
 - Smallest next check, if matching evidence becomes available: one complete order lifecycle with timezone, contract and account mapping. No live inspection/change, measured saving, new logger or schedule follows from retention.
+
+### E09/E11 follow-up — Forecast-entry deadlines and hindsight-aligned event plots (2026-11-10)
+
+Source: Gu/Kurov2018, SSRN2826684, full user-uploaded43-page manuscript;
+[review](results/ng_informed_2826684_review_20261110.md), [source/visual evidence](inputs/ng_informed_2826684/).
+Extends the information-clock reference; no execution savings or strategy profitability verified.
+
+- The source correctly lags analyst rank membership to the previous week. A modern reproduction also needs each
+  actual forecast/consensus revision available by **release−90minutes**, not merely before release. At a normal
+ 10:30ETevent, a10:00forecast cannot decide the09:00entry. Previous ranks do not cure a late current forecast.
+- Figure2signs returns/order flow with the **eventual actual surprise**. It is descriptive informed-trading
+  evidence, not an executable direction known before release. NG unsigned volume or price momentum is not the
+  forecast-disagreement signal. Figure6's overlapping24-month mean is not a drawdown/equity record.
+- Section5.3/TableXIII uses tail quartiles of nonzero disagreements without specifying a past-only cutoff protocol.
+  Freeze threshold initialization, quantile/tie treatment and frequency annualization before any adaptation;
+  retain reported153selected versus271nonzero observations instead of assuming exactly half.
+- Exiting five minutes before scheduled news avoids intended release exposure, but does not establish fill
+  success or floor protection. Match holiday/exception clocks, native nearby/next-contract mapping and costs.
+  The source has no explicit protective stop or itemized cost bridge. Do not append a stop and call it exact.
+- Smallest later check is one forecast/rank/entry/exit knowledge-time ledger on new matching inputs. No return
+  tests ran; modern strategy and personal/evaluation/funded comparisons remain gated. See [D57](DATA_NEEDED.md#d57--ranked-analyst-ng-storage-disagreement-ssrn2826684).

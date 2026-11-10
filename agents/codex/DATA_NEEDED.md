@@ -570,3 +570,35 @@ Shared update for D01/D50, commodity curves D06–D11, and SSRN index #53/#58; n
 - **D06–D11 native curves:** no additional lawful free native maturity panel acquired. COT does not fill this gap; earlier source/license audit still applies.
 
 Only downloads, transcription/parsing and structural row checks were performed. No backtests, return computations, scout/lab changes or account/live operations.
+
+## D57 — Ranked-analyst NG storage disagreement, SSRN2826684
+
+Full uploaded March25,2018manuscript reviewed2026-11-10, updating the existing November1metadata lead.
+**Conditional WATCH / NEEDS DATA**, with no new return trial. Specific merit is a nonprice forecast-processing
+mechanism and an85-minute pre-release NG rule. Authors'0.84/1.26Sharpes are not verified net profits.
+[Review](results/ng_informed_2826684_review_20261110.md) · [Evidence](evidence/ng_informed_2826684_20261110.md).
+
+- Need stable analyst IDs, inventory-change forecasts in Bcf, original submission/revision/publication/receipt
+  timestamps, and the overall survey median frozen as of release−90minutes. A forecast published just before
+  release may be too late for the09:00ETentry. Need previous-week topthree membership as historically known;
+  alternatively, complete past individual forecasts, first-release actuals and dispersion to reconstruct the
+  source24-month scoring. Do not rank analysts with the current report or use today's full-history leaderboard.
+- Source replication spans July2008–January2016; modern design2018–22and later earned validation are separate.
+  Reconstructing24-month design ranks may require2016–17warm-up, unless historical rank vintages supply them.
+  Source's large-predictor quartiles require a declared causal cutoff/initialization/tie rule before adaptation.
+- Need actual historical NG storage and petroleum-report advance calendars/exception times to reproduce same-day
+  exclusions, plus dated NG/next-contract prices and roll map (source changes three trading days before expiry),
+  native quotes/fees/size and risk paths. Actual inventory changes are ranking labels/descriptive surprises, not
+  pre-entry direction. No source protective stop is supplied; any added stop is a separate frozen adaptation.
+- **Owned/free check:**10corrected NG2017–26archive/original pairs match their existing hashes. The15-series macro
+  catalog lacks NG surveys and analyst/rank fields. New COT/petroleum-calendar acquisitions do not supply them.
+  Three public searches plus publisher metadata, the author-authored Columbia discussion and public Estimize
+  rankings acquired no historical source-matched panel. Estimize has a different survey/ranking population;
+  current display is not Bloomberg history. No site ranking data redistributed, subscription, account, contact,
+  key request or purchase. [Access receipt](inputs/ng_informed_2826684/access.json),
+  [input identities](inputs/ng_informed_2826684/owned_input_gate.json).
+- **Smallest next check on genuinely new matching inputs:** reconstruct one event's prior-rank/forecast/consensus
+  snapshot by entry, then one source contract/clock transition without returns. Only then census coverage,
+  missingness, effective power and native gross/cost hurdles before a bounded committed proposal/code/lease.
+  Park and continue compatible discovery; do not repeat unchanged vendor crawls or substitute the closed
+  unconditional NG storage short3575861. Generic NG market-data context remains D12; there is no duplicate export request.
