@@ -69,3 +69,6 @@ Pre-outcome input amendment: first launch stopped in raw-hash validation before 
 The current2026 day/overnight files differ from the frozen `fe35af99` source. Materialize that exact committed
 raw tree under `/workspace/vb_loss_split_source` and load both grid and DT from it; preserve the stop receipt.
 No shared data, rule, cost, date, variant or gate changes. Commit amended code before rerunning.
+The next launch also stopped before strategy generation because the inherited loader resolves Git blobs
+relative to its data root. Give that isolated root separate Git metadata with an object-store alternate;
+this preserves exact blob verification without changing or duplicating the shared repository's metadata.

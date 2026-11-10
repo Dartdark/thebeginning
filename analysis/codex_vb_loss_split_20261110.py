@@ -36,6 +36,11 @@ def frozen_raw_root():
     """Materialize exact preregistered Git bytes; never rewrite shared raw data."""
     destination = Path('/workspace/vb_loss_split_source')
     (destination/'data').mkdir(parents=True,exist_ok=True)
+    # The inherited provenance check resolves Git blobs relative to SOURCE.
+    # Give the snapshot its own metadata and read-only access to existing objects.
+    subprocess.run(['git','init','-q',str(destination)],check=True)
+    common=subprocess.check_output(['git','rev-parse','--path-format=absolute','--git-common-dir'],cwd=ROOT,text=True).strip()
+    (destination/'.git/objects/info/alternates').write_text(str(Path(common)/'objects')+'\n')
     for year in range(2017,2027):
         for prefix in ['NQ_1min_','NQ_1min_ON_']:
             rel=f'data/{prefix}{year}.csv'
