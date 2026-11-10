@@ -30,6 +30,8 @@ No fresh strategy has been shown here to improve the existing portfolio or accou
 
 - [Pass 7: Treasury month-end and naphtha relative value](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_continuation_pass7_20261110.md)
 
+- [Seasonal allocation, version and public-code timing audit](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_seasonality_audit_20261110.md)
+
 ## Classified inventory
 The count is research entries, not qualified strategies. Papers 11–15 are provisional reserves; 16–20 audit already-tested or blocked baselines, not five new successful ideas. See each linked report for the exact evidence status, source version, rules, costs and missing inputs.
 
