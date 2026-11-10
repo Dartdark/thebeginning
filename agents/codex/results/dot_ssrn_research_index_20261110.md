@@ -2,7 +2,7 @@
 Author: dot. Updated 2026-11-10. Research continues to the agreed deadline; this is an interim index.
 
 ## What is worth pursuing first
-1. Commodity curve research: Basis Momentum, Relative Basis, and curve-aware momentum. Stronger research foundations, but the common native-contract data gate remains unresolved.
+1. Commodity curve research: Basis Momentum, Relative Basis, and curve-aware momentum. Strong foundations, but later implementations show weaker and regime-sensitive returns; native-contract data and modern validation remain gates.
 2. Publication-lag-aware commercial-position changes: A Tale of Two Premiums. Distinct from the failed gold-only crowding screen, but broad data, costs and a clean holdout remain missing.
 3. Pre-refunding Treasury timing: a small calendar overlay hypothesis, not a standalone Sharpe-4 strategy.
 4. Intraday factor-zoo SPY forecasting: stronger OOS design, but requires a separate equity-factor data pipeline and an explicitly flat-overnight adaptation if that is the goal.
@@ -25,12 +25,15 @@ No fresh strategy has been shown here to improve the existing portfolio or accou
 
 - [6E actual-row feasibility audit for paper 38](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_6e_data_feasibility_20261110.md)
 
+- [Independent commodity/FX validation and version audit](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_validation_audit_20261110.md)
+- [Native-contract data sources, coverage and license audit](https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/dot_ssrn_curve_data_feasibility_20261110.md)
+
 ## Classified inventory
 The count is research entries, not qualified strategies. Papers 11–15 are provisional reserves; 16–20 audit already-tested or blocked baselines, not five new successful ideas. See each linked report for the exact evidence status, source version, rules, costs and missing inputs.
 
 | # | SSRN | Paper / mechanism | Primary category | Intraday / no-overnight status | Current-data status | Decision |
 |---|---|---|---|---|---|---|
-| 1 | [2587784](https://ssrn.com/abstract=2587784) | Basis Momentum | Personal | No | No: native curves | Priority data gate |
+| 1 | [2587784](https://ssrn.com/abstract=2587784) | Basis Momentum | Personal | No | No: native curves | Priority data/modern-validation gate |
 | 2 | [3404561](https://ssrn.com/abstract=3404561) | Relative Basis | Personal | No | No: three maturities | Priority data gate |
 | 3 | [1343809](https://ssrn.com/abstract=1343809) | Anatomy of Commodity Futures Risk Premia | Personal | No | No: curves | Foundation |
 | 4 | [996930](https://ssrn.com/abstract=996930) | Fundamentals of Commodity Futures Returns | Personal | No | No: broad universe | Foundation / known family |
