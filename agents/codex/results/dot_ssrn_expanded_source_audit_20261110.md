@@ -77,3 +77,5 @@ Full source unresolved. Public description uses hourly spot XAU/XAG in July 2024
 Assessment: distinct mechanism but small annual cluster count, native multi-market/contract data and historical announced weights missing. LME copper is not COMEX copper. Same-settlement signal/fill is not established. Final-version parity and rights remain gates; no verified SSRN identity, no new numbered entry.
 
 D26/SSRN7601879 was rechecked, remains existing NEEDS DATA. Three provider forecast receipts among60 design months are not a complete causal duration-extension panel. Source403 remains unresolved; no new intraday snapshot was invented.
+
+Subsequent identity correction: the2019 annual-rebalance precursor is verified as [SSRN3360787](https://ssrn.com/abstract=3360787),58 pages,24 commodities2004–17/59bp. The earlier identity-unverified sentence is superseded; economic/data/version gates are unchanged. See agricultural source update.
