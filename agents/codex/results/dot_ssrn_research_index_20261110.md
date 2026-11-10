@@ -1,7 +1,7 @@
 # dot: SSRN research index
 Author: dot. Updated 2026-11-10. Research continues to the agreed deadline; this is an interim index.
 
-Ten substantive original source reviews are complete. The extra five intraday reserves and five existing-data baseline audits are not ten fresh qualified strategies. There are currently 62 numbered research entries, with zero fresh implementations fully admitted on currently owned data and no five verified strong intraday additions.
+Ten substantive original source reviews are complete. The extra five intraday reserves and five existing-data baseline audits are not ten fresh qualified strategies. There are currently 63 numbered research entries, with zero fresh implementations fully admitted on currently owned data and no five verified strong intraday additions.
 
 ## What is worth pursuing first
 1. Commodity curve research: Basis Momentum, Relative Basis, and curve-aware momentum. Strong foundations, but later implementations show weaker and regime-sensitive returns; native-contract data and modern validation remain gates.
@@ -110,6 +110,8 @@ The count is research entries, not qualified strategies. Papers 11–15 are prov
 | 61 | [3629061](https://ssrn.com/abstract=3629061) | Prospect Theory FX Sorting | Personal monthly | No | No: broad spot/forward panel | Modest old net evidence; modern holdout missing |
 | 62 | [4104888](https://ssrn.com/abstract=4104888) | Commodity Twitter Sentiment Shifts | Personal monthly | No | No: licensed timestamped text/native contracts | Conditional vintage, rights and modern-net gates |
 
+| 63 | [3371461](https://ssrn.com/abstract=3371461) | Yield-Spread Trader Counts / FOMC | Intraday event hypothesis | Source same-day; exact contract unresolved | No: released counts/model specification | Historical pseudo-OOS; costs and normalization gated |
+
 ## Guardrails for any later build
 Source fidelity first; causal release timestamps and fills; realistic spread, commissions and rolls; complete sessions and contract identifiers; frozen holdout; portfolio overlap and loss-limit effects. Existing test failures are not erased by finding a similarly titled paper. Source discrepancies are documented without reopening paused experiments.
 
@@ -153,3 +155,5 @@ Source fidelity first; causal release timestamps and fills; realistic spread, co
 - [Pass 21: commodity sentiment and D51 version correction](dot_ssrn_continuation_pass21_20261110.md): entry 62 is distinct language-based research; published macro-jump paper does not validate the older trading draft.
 
 - [FOMC commodity-liquidity identity audit](dot_ssrn_fomc_liquidity_source_audit_20261110.md): existing Liu source watch is not unlocked by a different BoE event-study paper.
+
+- [Pass 22: trader-count FOMC timing](dot_ssrn_continuation_pass22_20261110.md): entry 63 is a distinct same-day working-paper hypothesis, not verified net ES evidence or a recovered final-publication result.
