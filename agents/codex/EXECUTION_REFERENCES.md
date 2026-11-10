@@ -2663,3 +2663,25 @@ and source/data QA, not independent strategy validation or observed native execu
 
 Smallest next checks: one native maturity/roll/cash reconciliation or one original API/EIA/consensus-to-fill clock.
 Shared data needs D58/D59 and the earlier curve registers retain free-only constraints and prior failed families.
+
+### E04/E11 follow-up — Alert acknowledgments, account phase and chart identity (2026-11-10)
+
+Source: [Claude alert/new-150K review](results/claude_alert_review_20261110.md), pinned software plus isolated
+Python and actual PowerShell-script fault replays. Engineering evidence; no measured trading or execution saving.
+
+- A successful task exit, local log line or Git queue write does not prove notification delivery. Advance a relay
+  cursor only after acceptance, retain failed messages for retry, and preserve the distinction between queued,
+  accepted by the service and received by the phone. Missing-state replay and duplicate/concurrency behavior need review.
+- Required chart/strategy presence comes from the live configuration. Discovering requirements only from previously
+  observed heartbeats cannot detect a never-started chart; retired tags also need filtering after an account changes.
+- Match account phase, original risk fields, guard Tag, strategy HeartbeatTag and actual routed account. A correct
+  typed monitor account does not prove order routing. Snapshot route evidence does not prove compilation or future fills.
+- Evaluation and funded floor rules differ. Missing numeric metadata can become zero in PowerShell while raising an
+  exception in Python. A warning at half a planned stop can arrive after one full planned stop already exceeds cushion;
+  test that boundary explicitly, including costs/slippage. Alerts do not supply a hard loss cap.
+- Use Chicago's named timezone, coherent EOD history and actual account expiry. Validate dashboard model membership
+  and the monitoring schedule against the current chart set and its trading windows, including Sunday sessions.
+
+Smallest remaining acceptance: installed Windows-copy parity, all six versioned strategy/guard identities and routing,
+actual Apex threshold reconciliation, operational scheduler state, and an explicitly authorized notification receipt.
+The review patch is staged only. No live/VPS/broker, chart input, schedule or notification was changed.

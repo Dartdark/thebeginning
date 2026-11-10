@@ -1,0 +1,191 @@
+--- a/analysis/send_alert.py
++++ b/analysis/send_alert.py
+@@ -7,2 +7,5 @@
+ import sys, subprocess, datetime as dt
++from pathlib import Path
++from zoneinfo import ZoneInfo
++ROOT = Path(__file__).resolve().parents[1]
+ 
+@@ -13,13 +16,20 @@
+     text = " ".join(text.split())[:300]
+-    now = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=5)).strftime("%Y-%m-%d %H:%M")
+-    run = lambda *a: subprocess.run(a, check=False, capture_output=True, text=True)
++    if not text:
++        raise ValueError("An alert message is required")
++    now = dt.datetime.now(ZoneInfo("America/Chicago")).strftime("%Y-%m-%d %H:%M")
++    def run(*args):
++        return subprocess.run(args, check=True, capture_output=True, text=True, cwd=ROOT)
++    head = run("git", "rev-parse", "--abbrev-ref", "HEAD").stdout.strip()
++    if not head.startswith("claude/"):
++        raise RuntimeError("Alert publisher must run on the designated Claude branch")
++    if run("git", "diff", "--cached", "--name-only").stdout.strip():
++        raise RuntimeError("Finish the staged commit before publishing an alert")
+     run("git", "pull", "-q", "--no-rebase", "origin", BRANCHES[0])
+-    with open("live/claude_alerts.txt", "a") as f: f.write(f"{now} CT | {text}\n")
++    with (ROOT / "live/claude_alerts.txt").open("a", encoding="utf-8") as f:
++        f.write(f"{now} CT | {text}\n")
+     run("git", "add", "live/claude_alerts.txt")
+-    run("git", "commit", "-q", "-m", f"alert: {text[:60]}")
+-    head = run("git", "rev-parse", "--abbrev-ref", "HEAD").stdout.strip()
+-    for b in BRANCHES + ([head] if head not in BRANCHES else []):
+-        r = run("git", "push", "-q", "origin", f"HEAD:{b}")
+-        if r.returncode: print("push failed", b, r.stderr.strip())
+-    print("queued for the phone:", text)
++    run("git", "commit", "-q", "-m", f"alert: {text[:60]}", "--only", "--", "live/claude_alerts.txt")
++    for branch in BRANCHES + ([head] if head not in BRANCHES else []):
++        run("git", "push", "-q", "origin", f"HEAD:{branch}")
++    print("queued on GitHub for the phone relay (delivery not confirmed):", text)
+ 
+@@ -27,2 +37,2 @@
+ if __name__ == "__main__":
+-    send(" ".join(sys.argv[1:]) or "test alert from Claude")
++    send(" ".join(sys.argv[1:]))
+--- a/analysis/live_guard.py
++++ b/analysis/live_guard.py
+@@ -24,3 +24,3 @@
+             d = os.path.basename(f)[:8]
+-            if d < v["started"] or (day and d > day): continue
++            if d < str(v["started"]).replace("-", "") or (day and d > day): continue
+             rows = [r for r in (l.split(",") for l in open(f) if l.startswith("ACCT,")) if len(r) > 6 and r[3] == v["id"]]   # column 4 only (route_account added 2026-11-01)
+@@ -30,5 +30,10 @@
+         last = max(eod); peak = max([v["start"]] + [e for d, e in eod.items() if d < last])
+-        floor = min(peak - v["trail"], v["lock"])
++        floor = peak - v["trail"]
++        phase = v.get("phase") or ("funded" if v["id"].startswith("PA-") else "evaluation")
++        if phase == "funded":
++            floor = min(floor, v.get("lock") or v["start"] + 100)
++        elif phase != "evaluation":
++            raise ValueError(f"Unknown account phase for {name}: {phase}")
+         out[name] = dict(id=v["id"], date=last, equity=eod[last], peak=peak, floor=floor, room=round(eod[last] - floor, 2),
+-                         max_stop=v["max_stop"])
++                         max_stop=v.get("max_stop"))
+     return out
+--- a/analysis/premarket_check.py
++++ b/analysis/premarket_check.py
+@@ -49,3 +49,3 @@
+         sig = df[(df.event == "SIG") & (df.tag == tag)]
+-        if sig.empty and has_sig(tag):
++        if sig.empty:
+             out.append(f"{tag}: the STRATEGY wrote no heartbeat today: not compiled, removed or stopped (chart may look normal).")
+@@ -75,2 +75,6 @@
+         if want[tag] and r.side != want[tag][0]: out.append(f"{tag}: monitor account {r.side}, expected {want[tag][0]}.")
++        expected = cfg["accounts"].get(cfg["charts"][tag].get("account", ""), {}).get("id")
++        route = "" if pd.isna(r.exit_date) else str(r.exit_date).strip()
++        if expected and route != expected:
++            out.append(f"{tag}: routed account {route or 'UNKNOWN'}, expected {expected} (Auto Trading gear).")
+         p = df[(df.event == "POS") & (df.tag == tag)]
+--- a/analysis/vps_health.py
++++ b/analysis/vps_health.py
+@@ -55,3 +55,2 @@
+         for tag in cfg["charts"]:
+-            if tag not in ever: continue
+             g = sig[(sig.tag == tag) & (sig.m >= mins(830)) & (sig.m <= mins(1500))]
+@@ -154,3 +153,3 @@
+         for l in open(al):
+-            if l.strip(): out.append(f"- Alarm sent during the day: {l.strip()}")
++            if l.strip(): out.append(f"- Watchdog log (delivery status is in the entry): {l.strip()}")
+     return out
+--- a/live/vps/claude_alert_relay.ps1
++++ b/live/vps/claude_alert_relay.ps1
+@@ -33,6 +33,8 @@
+ if ($r) { Say "kill check: $r" }
++if (-not $fetchOk) { Say "alert fetch FAILED; cursor unchanged"; exit 1 }
+ $lines = @(git show "origin/${branch}:live/claude_alerts.txt" 2>$null)
++if ($LASTEXITCODE -ne 0) { Say "alert read FAILED; cursor unchanged"; exit 1 }
+ if ($Diag) { Say "fetched; alert lines in repo: $($lines.Count)" }
+ if ($lines.Count -eq 0) { Say "no alert file on the branch"; exit 0 }
+-if (-not (Test-Path $State)) { Set-Content $State $lines.Count; Say "first run: recorded $($lines.Count) existing lines"; exit 0 }
++if (-not (Test-Path $State)) { Set-Content $State 0 -ErrorAction Stop; Say "first run: replay from first unacknowledged line" }
+ $sent = [int]((Get-Content $State -Raw).Trim())
+@@ -43,8 +45,8 @@
+     try {
+-        Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "Claude: $($lines[$i])" -Headers @{ Title = "Claude alert"; Priority = "high" } -ErrorAction Stop | Out-Null
+-        Say "sent: $($lines[$i])"
+-    } catch { Say "ntfy FAILED: $($_.Exception.Message)" }
++        Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "Claude: $($lines[$i])" -Headers @{ Title = "Claude alert"; Priority = "high" } -TimeoutSec 15 -ErrorAction Stop | Out-Null
++        Set-Content $State ($i + 1) -ErrorAction Stop
++        Say "accepted by ntfy: $($lines[$i])"
++    } catch { Say "delivery/checkpoint FAILED; pending line $i retained: $($_.Exception.Message)"; exit 1 }
+     Start-Sleep -Seconds 1
+ }
+-Set-Content $State $lines.Count
+ exit 0
+--- a/live/vps/watchdog.ps1
++++ b/live/vps/watchdog.ps1
+@@ -56,3 +56,6 @@
+ $cfg = Get-Content "C:\TradingRepo\live\expected_setup.json" -Raw | ConvertFrom-Json
+-if ($cfg) { $live = @($cfg.charts.PSObject.Properties.Name); foreach ($t in @($tags.Keys)) { if ($live -notcontains $t) { $tags.Remove($t) } } }
++if ($cfg) {
++    $live = @($cfg.charts.PSObject.Properties | Where-Object { $cfg.accounts.($_.Value.account).status -eq "live" } | ForEach-Object { $_.Name })
++    $tags = @{}; foreach ($t in $live) { $tags[$t] = $true }
++} else { $problems += "CONFIG|Cannot read expected_setup.json: chart coverage is UNKNOWN" }
+ $last = @{}
+@@ -73,2 +76,3 @@
+     foreach ($t in $acct.Keys) {
++        if ($cfg -and $live -notcontains $t) { continue }
+         $c = $acct[$t]
+@@ -76,2 +80,12 @@
+         if ([double]$c[7] -gt 600) { $problems += "FEED_$t|Chart ${t}: last bar is $([int]([double]$c[7] / 60)) min old. Data feed / Rithmic quiet? Check the connection status." }
++    }
++}
++
++# Unknown tags on a live account are a configuration fault, not retired-chart noise.
++if ($cfg) {
++    $liveIds = @($cfg.accounts.PSObject.Properties | Where-Object { $_.Value.status -eq "live" } | ForEach-Object { $_.Value.id })
++    foreach ($t in $acct.Keys) {
++        if ($t -ne "SCAN" -and $live -notcontains $t -and $liveIds -contains $acct[$t][3]) {
++            $problems += "UNEXPECTED_$t|Chart tag $t is on a live account but absent from expected_setup.json; reconcile Tag and HeartbeatTag."
++        }
+     }
+@@ -98,3 +112,3 @@
+         $peak = [double]$v.start; $eqNow = $null
+-        Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge $v.started } | Sort-Object Name | ForEach-Object {
++        Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge ($v.started -replace "-", "") } | Sort-Object Name | ForEach-Object {
+             $last = $null
+@@ -104,5 +118,12 @@
+         if ($null -eq $eqNow) { continue }
+-        $floor = [math]::Min($peak - [double]$v.trail, [double]$v.lock); $room = $eqNow - $floor; $n = $ap.Name
++        $floor = $peak - [double]$v.trail
++        $phase = $v.phase; if (-not $phase) { $phase = if ($v.id -like "PA-*") { "funded" } else { "evaluation" } }
++        if ($phase -eq "funded") {
++            $lock = if ($null -ne $v.lock) { [double]$v.lock } else { [double]$v.start + 100 }
++            $floor = [math]::Min($floor, $lock)
++        } elseif ($phase -ne "evaluation") { $problems += "CONFIG|Unknown account phase for $($ap.Name)"; continue }
++        if ($null -eq $v.max_stop) { $problems += "CONFIG|Missing max_stop for $($ap.Name); thin-cushion threshold is UNKNOWN" }
++        $room = $eqNow - $floor; $n = $ap.Name
+         if ($room -le 0) { $problems += "ACCTFAIL_$($v.id)|Account $n ($($v.id)): equity $([math]::Round($eqNow)) is at or below its floor $([math]::Round($floor)). Apex has likely failed it: turn auto-trading OFF on its charts, check Apex." }
+-        elseif ($room -lt 0.5 * [double]$v.max_stop) { $problems += "NEARFLOOR_$($v.id)|Account ${n}: only $([math]::Round($room)) above its floor (half a stop is $([math]::Round(0.5 * [double]$v.max_stop)))." }
++        elseif ($room -le [double]$v.max_stop) { $problems += "NEARFLOOR_$($v.id)|Account ${n}: only $([math]::Round($room)) above its floor (one planned stop before costs/slippage is $([math]::Round([double]$v.max_stop)))." }
+     }
+@@ -115,2 +136,3 @@
+     Get-Content $_.FullName | Where-Object { $_ -like "SIG,*" } | ForEach-Object { $sigTags[$_.Split(",")[1]] = $true } }
++if ($cfg) { $sigTags = @{}; foreach ($t in $live) { $sigTags[$t] = $true } }
+ $sigLast = @{}
+@@ -153,2 +175,3 @@
+ }
++$sendFailed = $false
+ foreach ($p in $problems) {
+@@ -157,5 +180,10 @@
+     if (($now - $lastSent).TotalMinutes -ge 60 -or $key -like "REJECT_*") {
+-        try { Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } | Out-Null } catch {}
+-        "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
+-        $state[$k] = $now.ToString("o")
++        try {
++            Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } -TimeoutSec 15 -ErrorAction Stop | Out-Null
++            "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
++            $state[$k] = $now.ToString("o")
++        } catch {
++            "$($now.ToString('yyyy-MM-dd HH:mm')) SEND_FAILED $text" | Add-Content "$Logs\alerts.txt"
++            $sendFailed = $true
++        }
+     }
+@@ -163 +191,3 @@
+ $state | ConvertTo-Json | Set-Content $StateFile
++
++if ($sendFailed) { exit 1 }
+--- a/live/expected_setup.json
++++ b/live/expected_setup.json
+@@ -30,2 +30,3 @@
+    "trail": 4000,
++   "max_stop": 2750,
+    "target": 159050,

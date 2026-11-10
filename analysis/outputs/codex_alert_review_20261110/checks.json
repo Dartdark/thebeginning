@@ -1,0 +1,210 @@
+{
+  "original": {
+    "new_account_floor": {
+      "ok": false,
+      "error": "KeyError: 'lock'"
+    },
+    "evaluation_floor_keeps_trailing": {
+      "ok": false,
+      "floor": 150100
+    },
+    "funded_floor_still_locks": {
+      "ok": true,
+      "floor": 150100
+    },
+    "premarket_detects_wrong_route": {
+      "ok": false
+    },
+    "premarket_requires_new_strategy_heartbeat": {
+      "ok": false
+    },
+    "health_requires_new_strategy_heartbeat": {
+      "ok": false
+    },
+    "publisher_pull_failure": {
+      "ok": false,
+      "exception": null,
+      "falsely_queued": true
+    },
+    "failed_pull_does_not_append": {
+      "ok": false
+    },
+    "publisher_commit_failure": {
+      "ok": false,
+      "exception": null,
+      "falsely_queued": true
+    },
+    "publisher_push_failure": {
+      "ok": false,
+      "exception": null,
+      "falsely_queued": true
+    },
+    "publisher_uses_winter_Chicago_time": {
+      "ok": false,
+      "recorded_hour": "16:00"
+    },
+    "relay_fail": {
+      "attempts": 3,
+      "cursor": 3,
+      "exit": 0,
+      "ok": false
+    },
+    "relay_retry": {
+      "first_attempts": 3,
+      "first_cursor": 3,
+      "retry_attempts": 0,
+      "cursor": 3,
+      "exit": 0,
+      "ok": false
+    },
+    "relay_bootstrap": {
+      "attempts": 0,
+      "cursor": 3,
+      "exit": 0,
+      "ok": false
+    },
+    "watchdog_floor": {
+      "attempts": 0,
+      "floor": 0.0,
+      "sent": [],
+      "exit": 0,
+      "ok": false
+    },
+    "watchdog_thin": {
+      "attempts": 0,
+      "floor": 146000.0,
+      "sent": [],
+      "exit": 0,
+      "ok": false
+    },
+    "watchdog_missing": {
+      "attempts": 0,
+      "floor": null,
+      "sent": [],
+      "exit": 0,
+      "ok": false
+    },
+    "watchdog_retired": {
+      "attempts": 2,
+      "floor": 0.0,
+      "sent": [
+        "sent_NOSTRAT_OLD",
+        "sent_AUTOOFF_OLD"
+      ],
+      "exit": 0,
+      "ok": false
+    },
+    "watchdog_fail": {
+      "ok": false,
+      "sent": [
+        "sent_AUTOOFF_VB150-5"
+      ],
+      "exit": 0
+    }
+  },
+  "candidate": {
+    "new_account_floor": {
+      "ok": true,
+      "floor": 146000
+    },
+    "evaluation_floor_keeps_trailing": {
+      "ok": true,
+      "floor": 152000.0
+    },
+    "funded_floor_still_locks": {
+      "ok": true,
+      "floor": 150100
+    },
+    "premarket_detects_wrong_route": {
+      "ok": true
+    },
+    "premarket_requires_new_strategy_heartbeat": {
+      "ok": true
+    },
+    "health_requires_new_strategy_heartbeat": {
+      "ok": true
+    },
+    "publisher_pull_failure": {
+      "ok": true,
+      "exception": "CalledProcessError",
+      "falsely_queued": false
+    },
+    "failed_pull_does_not_append": {
+      "ok": true
+    },
+    "publisher_commit_failure": {
+      "ok": true,
+      "exception": "CalledProcessError",
+      "falsely_queued": false
+    },
+    "publisher_push_failure": {
+      "ok": true,
+      "exception": "CalledProcessError",
+      "falsely_queued": false
+    },
+    "publisher_uses_winter_Chicago_time": {
+      "ok": true,
+      "recorded_hour": "15:00"
+    },
+    "relay_fail": {
+      "attempts": 2,
+      "cursor": 1,
+      "exit": 1,
+      "ok": true
+    },
+    "relay_retry": {
+      "first_attempts": 2,
+      "first_cursor": 1,
+      "retry_attempts": 2,
+      "cursor": 3,
+      "exit": 0,
+      "ok": true
+    },
+    "relay_bootstrap": {
+      "attempts": 3,
+      "cursor": 3,
+      "exit": 0,
+      "ok": true
+    },
+    "watchdog_floor": {
+      "attempts": 1,
+      "floor": 146000.0,
+      "sent": [
+        "sent_ACCTFAIL_APEX-DEMO-05"
+      ],
+      "exit": 0,
+      "ok": true
+    },
+    "watchdog_thin": {
+      "attempts": 1,
+      "floor": 146000.0,
+      "sent": [
+        "sent_NEARFLOOR_APEX-DEMO-05"
+      ],
+      "exit": 0,
+      "ok": true
+    },
+    "watchdog_missing": {
+      "attempts": 2,
+      "floor": null,
+      "sent": [
+        "sent_NOSTRAT_VB150-5",
+        "sent_STALE_VB150-5"
+      ],
+      "exit": 0,
+      "ok": true
+    },
+    "watchdog_retired": {
+      "attempts": 0,
+      "floor": 146000.0,
+      "sent": [],
+      "exit": 0,
+      "ok": true
+    },
+    "watchdog_fail": {
+      "ok": true,
+      "sent": [],
+      "exit": 1
+    }
+  }
+}

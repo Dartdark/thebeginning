@@ -1,0 +1,88 @@
+{
+  "status_blob_sha": "25be0acec73af663a46b6f8b8c3b8fb47a9ab569",
+  "tail_blob_sha": "ed9d121f0c8127e92160b91a6cbd1cbedcdc9bb9",
+  "time_local": "2026-11-10 16:25:04",
+  "tz": "Central Standard Time",
+  "tasks": [
+    {
+      "task": "ClaudeAlertRelay",
+      "last_run": "2026-11-10 16:25",
+      "last_result": 0
+    },
+    {
+      "task": "PushTradeLogs",
+      "last_run": "2026-11-10 16:10",
+      "last_result": 0
+    },
+    {
+      "task": "VpsHealthOpen",
+      "last_run": "2026-11-10 08:15",
+      "last_result": 0
+    },
+    {
+      "task": "VpsIntradayPush",
+      "last_run": "2026-11-10 15:15",
+      "last_result": 0
+    },
+    {
+      "task": "VpsWatchdog",
+      "last_run": "2026-11-10 15:15",
+      "last_result": 0
+    },
+    {
+      "task": "VIXUpdate",
+      "last_run": "2026-11-10 15:30",
+      "last_result": 0
+    },
+    {
+      "task": "VpsStatusPush",
+      "last_run": "2026-11-10 16:25",
+      "last_result": 267009
+    }
+  ],
+  "guard_rows": {
+    "DT150-5": {
+      "fields": 14,
+      "auto": "1",
+      "date": "20261110",
+      "time": "1625"
+    },
+    "EOS150-5": {
+      "fields": 14,
+      "auto": "1",
+      "date": "20261110",
+      "time": "1625"
+    },
+    "TW150-5": {
+      "fields": 14,
+      "auto": "1",
+      "date": "20261110",
+      "time": "1625"
+    },
+    "MON_BR150-5": {
+      "fields": 14,
+      "auto": "1",
+      "date": "20261110",
+      "time": "1625"
+    },
+    "ONB-5": {
+      "fields": 14,
+      "auto": "1",
+      "date": "20261110",
+      "time": "1625"
+    },
+    "VB-5": {
+      "fields": 14,
+      "auto": "1",
+      "date": "20261110",
+      "time": "1625"
+    }
+  },
+  "known_config_mismatches": {
+    "VB150-5": "VB-5",
+    "ONB150-5": "ONB-5"
+  },
+  "route_matches_registered_account_for_all_six": true,
+  "route_check_method": "ACCT field 9 (GetAccountID), separately checked against the registered live account; field 4 is the monitor account.",
+  "limitations": "Read-only repository snapshots; 200-row tail is not a complete strategy heartbeat/compile, fill or phone-delivery check. No account balance, account ID, private topic, session or screenshot retained."
+}
