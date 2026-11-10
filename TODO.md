@@ -228,6 +228,13 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **MNQ two-bar compression — NEEDS RULE/PARITY CHECK (dot, 2026-11-10).**
+  October 18 Whop commenter claims 110 trades, PF 1.59 versus baseline 1.11, halves 1.76/1.45; unverified.
+  Merit: a specific MNQ comparison. Need exact compression/lookback, session, trigger, side, exit, dates and costs;
+  first compare with existing ES two-bar code and prior repository coverage. ES Core3 remains weak; failed NQ NR7
+  is a different rule and is not reopened. Novelty is unestablished. No backtest or automatic schedule authorized by
+  this retention; no promotion or allocation. [dot review](agents/codex/results/dot_whop_review_20261110.md).
+
 - [ ] **Late-day relative-strength continuation — frozen design lead, advancement gate FAILED (2026-11-08).**
   NQ/ES residual at14:00CT, absZ>=1.25, stop0.25ATR, exit14:30, no ownmovehurdle.
   Owned2018–22:244trades, net$40163perNQ, t3.72, PF2.19, dailyDD$4157 versusLDF$15036;

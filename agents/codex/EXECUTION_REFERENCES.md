@@ -2598,3 +2598,10 @@ Author/origin: **dot**, supplementing the existing evaluation-audit entry rather
 - The older 89% statistic spans any one of five components exceeding 70% of modeled failure-day loss; it is not VB/ONB-specific or a live failure-rate estimate.
 - [Unbiased Trading review](results/dot_unbiased_trading_review_20261110.md): executable-cost and concentration lessons are methods, not verified alpha. The [Hyperliquid audit](results/hyperliquid_data_audit_20261110.md) distinguishes final settlements, forecasts, oracle prices and cash entitlement.
 - Missing broker fills/floor history and historical funding receipt/payment evidence remain explicit. Smallest next check is evidence reconciliation, not an unregistered timing/size optimization. No measured execution savings, new return tests, allocation or program restart.
+
+### dot follow-up: Whop broker/chart lifecycle anecdote (2026-11-10)
+
+Source: user-supplied Whop export; [dot review](results/dot_whop_review_20261110.md). Extends E04 rather than introducing a new execution hypothesis.
+- A Kusho community report describes asynchronous broker-fill/chart-state mismatch. This is an unverified third-party anecdote, not an inspected user setting or confirmed cause of the user's losses.
+- Useful lesson: reconcile order IDs, submission/acknowledgement/fill/cancel clocks, position state and reconnect behavior against broker records; chart markers alone do not establish actual fills.
+- Smallest next check, if matching evidence becomes available: one complete order lifecycle with timezone, contract and account mapping. No live inspection/change, measured saving, new logger or schedule follows from retention.

@@ -31,3 +31,7 @@ Prior acquisition/audit checks are reported as prior checks; they were not rerun
 Only explicit package paths are staged. Existing raw Hyperliquid responses and matched observations remain untracked and untouched because redistribution rights remain unresolved.
 The included acquisition scripts describe earlier work. Running them can write files or contact providers; they are not executed by this documentation task. Fresh downloads are not exact replay of an immutable capture.
 Do not rerun rejected screens: [latest Codex new-data screen](results/new_data_strategies_20261110.md) is separate Codex work and found no qualifying candidate.
+
+## Whop review addendum (2026-11-10)
+
+Author/origin: **dot**. [Source review](results/dot_whop_review_20261110.md): MNQ two-bar compression retained for a rule/parity check; Turnaround Tuesday low priority; Kusho broker/chart anecdote retained with unverified status. No new strategy tests or rank/plan changes. Private export and screenshots are not republished. Prepared against `cc168c49`; published separately from the acquisition package above.
