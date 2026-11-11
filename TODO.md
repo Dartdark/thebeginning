@@ -228,6 +228,14 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **dot arXiv evaluation complement — source-reviewed, untested; NEEDS DATA/RULES.**
+  Prioritize calendar-spread feedback (2501.03171) for frequent counter-moves and drift-burst reversal (2601.08974)
+  for direct CME relevance; queue imbalance (1512.03492) is the transparent native-book baseline. No proven CME
+  high-win sleeve or pass-rate benefit. First check paired/native quote availability, causal event timing and complete
+  exits, then distinctness from closed flow-fade families. No paused program or automatic backtest resumed.
+  [dot's ranked reviews and book-fit criteria](agents/codex/results/dot_arxiv_eval_shortlist_20261111.md)
+  · [Shared input admission](agents/codex/DATA_NEEDED.md#dot-arxiv-evaluation-complement--native-quotes-and-causal-rules-2026-11-11).
+
 - [ ] **Three-paper candle-pressure/jump model — NEEDS RULES; third-party screenshot, not independently verified.**
   Papers 0803.1769v1 / 2106.07040v1 / cond-mat0307332v2 motivate jump normalization and pressure/liquidity response.
   Screenshot claims 855 trades, 82.22% wins, PF 1.41; arithmetic fits roughly 0.3R winners/1R losers. Need one annotated
