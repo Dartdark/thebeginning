@@ -2736,3 +2736,18 @@ reviews. Source evidence only; no native replication, measured execution saving 
 Smallest next check: one complete native event-to-quote-to-order-to-fill sequence with realistic delay and risk.
 Relevant sources are arXiv 1011.6402, 1512.03492, 2112.13213, 2501.03171, 2601.08974, 2409.12721 and 1710.03870.
 Shared input admission is retained in DATA_NEEDED; no paused scout or strategy family was restarted.
+
+
+### E10/E11 follow-up — Cost-aware reversal exits and deadlines (dot, 2026-11-11)
+
+Source: [dot's Archive-attempt reading supplement](results/dot_archive_eval_reading_20261111.md).
+Retain Leung/Li (2015), Kitapbayev/Leung (2018) and Nagel (2011/2012) as research methods/mechanism references.
+The linked review gives primary sources, precise evidence limits and the five paper-review answers.
+
+Use: specify the signal, exit, stop, fill and session clock together before an authorized test. Distinguish a
+post-entry holding window from a common session-close deadline. Keep theoretical solver output separate from
+empirical profitability and liquidity-provider results separate from a retail trader's executable fills.
+
+Smallest justified next check: apply these distinctions to one already-admitted signal's written specification.
+No new signal, measured execution saving, data acquisition, trial reservation or account promotion is implied.
+The existing failed pressure/gap/fade families and paused programs remain unchanged.
