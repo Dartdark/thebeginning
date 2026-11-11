@@ -858,7 +858,7 @@ $154,600: Apex's pages, user's screenshots in reports/screenshots/, 2026-10-15).
   `analysis/vb_vs_dt_eval.py`: all starts 38.3 -> 38.9%, 2025-26 starts +4.0% (band +0.5 / +7.5; the window picked from the user's
   view that VB is weak lately: VB $49 a trade in 2026 vs DT $117), 2022 -4%, 2024 -3%. Full replacement (VB 0 + DT 8) 33.3%: VB stays
   the main source of speed. Review each quarter (Friday review): switch back if VB 20 beats it on the latest 12 months.
-  150K evaluation inputs now: VB 15 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250, Twin cap1 2 MNQ, Dual Thrust 2 MNQ.
+  150K evaluation inputs now (user 2026-11-11: **Vault Break REMOVED** from the evaluation, 'blew out the DLL again today, performance underwhelming'; backtest cost per Codex 11/10: design pass 38.3% -> 31.9%): ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250, Twin cap1 2 MNQ, Dual Thrust 2 MNQ.
   **Finish mode (user 2026-11-09, automated):** once the evaluation's balance at the session start is >= $156,000, every chart trades
   half size (nearest whole contract, at least 1) until it passes: pass 38.9 -> 40.6% (+1.7, band +0.8 / +2.8; plateau $4,500-$7,500
   at x0.5; `../analysis/eval_levers150.py`, `../analysis/eval_finish150_plateau.py`). Inputs on all six evaluation charts: `UseFinish`

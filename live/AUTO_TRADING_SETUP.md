@@ -26,7 +26,7 @@ Sizes per account type (the combine set):
 
 | Strategy | Chart | 50K evaluation | 150K evaluation (x 2.5) |
 |---|---|---|---|
-| Vault Break | 30-min | `NumContracts` 8 | `NumContracts` 20 |
+| ~~Vault Break~~ (removed from 150K evaluations 2026-11-11) | 30-min | `NumContracts` 8 | none |
 | ONB ADX30 | 15-min | risk $1,100 | risk $2,750 |
 | Expiration Open Short | 5-min | risk $500 | risk $1,250 |
 | Bridge Monday Long | 5-min | 2 | 5 |

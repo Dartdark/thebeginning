@@ -20,7 +20,7 @@ ACCOUNTS = [
     # 2026-11-10: #1-#4 (all blown) removed from the dashboard at the user's request; history in git
     dict(account="#5", id="APEX-681524-05", size="150K No-Activation", status="Live", start=150000, floor=146000.0,
          last_balance=150000.0, last_date="2026-11-10",
-         note="Bought 2026-11-10. 6 charts: VB 15, ONB ADX30 $2,750, Bridge 5, EOS $1,250, Twin 2, Dual Thrust 2; finish mode; Apex Chart Guard. Tags *150-5."),
+         note="Bought 2026-11-10. VB removed 2026-11-11 (user). 5 charts: ONB ADX30 $2,750, Bridge 5, EOS $1,250, Twin 2, Dual Thrust 2; finish mode; Apex Chart Guard. Tags *150-5."),
 ]
 
 CLOSED_AFTER = {"#1": "20261026", "#3": "20261030", "#2": "20261104", "#4": "20261104"}   # #2, #4 blown 2026-11-04 (user)

@@ -34,11 +34,6 @@
   }
  },
  "charts": {
-  "VB150-5": {
-   "strategy": "Vault Break",
-   "qty": 15,
-   "account": "#5"
-  },
   "ONB150-5": {
    "strategy": "Overnight Bias ADX30",
    "qty": null,
@@ -79,7 +74,8 @@
   "ONB150",
   "VB",
   "VB-2",
-  "VB150"
+  "VB150",
+  "VB150-5"
  ],
  "_accounts_about": "start / trail / lock / max_stop / started per live account (2026-10-30): the watchdog computes the Apex EOD trailing floor from the Chart Monitor's equity (floor = min(peak EOD equity - trail, lock)) and alarms when equity nears or touches it. phase: evaluation or funded.",
  "_charts_account_about": "account per chart (2026-11-01): the watchdog compares it with the Chart Monitor's route_account (GetAccountID) and its typed AccountName",
