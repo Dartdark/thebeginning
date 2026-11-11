@@ -1,0 +1,37 @@
+{
+  "prereg": "0d61f59e",
+  "source_commit": "c852212af6f8b84238cb2356b1f947f52005181b",
+  "source_path": "analysis/outputs/codex_pressure_build_20261110/batch1_design_qa2/RESID2_signals.csv.gz",
+  "source_blob": "838e96ef6f1eea72cb927b696f5469afd30da406",
+  "source_sha256": "04f654b2706abc3c2eacbbe4d3bd2d3c2a12f962dfec50dfe1748561227c6ea1",
+  "code": {
+    "agents/codex/plans/pressure_passive_20261110.md": "8214dfddb45d7def95584f305fbf582463e22d6e60966bd18c27dd10844d6676",
+    "agents/codex/evidence/pressure_passive_20261110.md": "9e4cf841177c609857d50d01fb0cc1065aef633bf9229a4c8e0cb47d01f82a54",
+    "analysis/codex_pressure_passive_20261110.py": "be19e7f62f8f2040d51309a3d9a7b69f00d1b217f7100d7cd20eacbaa3836f97",
+    "analysis/codex_pressure_build_20261110_inputs.py": "2d8d3e9094ea656c8d9293bc257cb5449744ac28e7fc13d431b474b9d761ef4a",
+    "analysis/codex_pressure_build_20261110_replay.py": "a10524f68d7aff46d55ea65a278dd09b492553c0dcffe7e9b4cf19bd0dab1a72"
+  },
+  "dependencies": {
+    "analysis/codex_cash_open_repair.py": "c701bd877dc33494487ac7973df5173f3410074a9f4c9a40b973800fe5080718",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/codex_s03_calendar.py": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+    "agents/codex/inputs/bridge_native_2018_22_20261108/transfer_manifest.json": "889848785814eec127fff1a271b24795c6af1486a11ca45690fdb286e3c5b7b2"
+  },
+  "models": [
+    "L1",
+    "L2",
+    "MARKET"
+  ],
+  "selectable": [
+    "L1",
+    "L2"
+  ],
+  "unselectable": [
+    "MARKET"
+  ],
+  "historical_validation_read": false,
+  "new_economic_definitions": 3,
+  "execution": "NQ OHLC conditional proxy; 1pointthrough is not native queue acceptance; no rebates; full RT fees; immediate bracket, stopfirst; passive fillbar TP requires closingtrade through target+1, MARKET entry at known open may use its later high/low through target",
+  "execution_stress": "full independent-policy replay with no fillbar target credit for all three models; unselectable",
+  "missing_policy": "unknown activepending/held exposure halts day and blocks all advancement"
+}
