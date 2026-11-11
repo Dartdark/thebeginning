@@ -464,6 +464,7 @@ trades, so a new combination still needs its own pre-registered design gate (Cod
 | Daily trade / stop limits | noise-area | no effect (t 5.47 vs 5.50) | Decoration |
 | Volatility cap filter (skip after a 2x range day) | Twin | no effect ($248 vs $243) | Decoration (keeps tail days out; harmless) |
 | Shorts on NQ trend / momentum rules | noise-area, Donchian | noise-area with shorts $62 -> $40 a trade | Weak (NQ shorts) |
+| Jump score: 5-min move / (bipower volatility x time-of-day factor), Marcaccioli 2021 | pino1 jump study (`analysis/jump_lib.py`, 2026-11-11) | Trigger \|J\| > 3 follow, 08:30-15:00: 30-min hold $115 (t 3.1) in 2018-22, -$70 in 2023+; swapping the exit to a 0.3R target lifts wins 52% -> 78% and cuts the net to $13; fade instead: PF 0.90; overnight instead of day: $0; precursor (endogenous / exogenous) filter: no gap | **Decoration** as a direction signal (the 0.3R target only buys win rate); usable as volatility normalisation |
 
 Post hoc leads from the ablation (not adopted, need their own pre-registered test): Overnight Tick's order-flow x VIX cell on any day
 (t 4.8 vs the full rule's 5.2, twice the nights); Twin's breakout entries in RTH only ($309 vs $248 a trade, total $246k vs $274k).

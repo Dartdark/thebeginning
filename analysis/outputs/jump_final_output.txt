@@ -1,0 +1,143 @@
+[provenance] code ed9973c dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+== Screenshot arithmetic (pino1, NQ 5-min, 7y10m): 855 trades, 82.22% wins -> 703 wins avg $337, 152 losses avg $1,102;
+   win/loss size 0.306 (= the 0.3R target, so NO costs in his report); breakeven win rate at 0.3R = 76.9%; edge = +5.3 points
+   of win rate = +0.069R = $81 a trade; z vs breakeven 3.7 IF nothing was tuned. 0.42% of time in market = ~20 min a trade.
+   Max drawdown $9,963 = 2.5x the Apex 150K trailing limit ($4,000) at this size.
+
+== P1 J>3 RTH tgt 1R, 30 min
+   design 2018-22               n   746 win 54.2% net $  106.7 total $   79,622 PF 1.41 t  3.39
+   HOLDOUT 2023-26              n   585 win 46.2% net $  -33.2 total $  -19,411 PF 0.94 t -0.53
+   all 2018-26                  n  1331 win 50.6% net $   45.2 total $   60,210 PF 1.11 t  1.39
+   longs all                    n   463 win 52.5% net $   44.1 total $   20,438 PF 1.10 t  0.68
+   shorts all                   n   868 win 49.7% net $   45.8 total $   39,772 PF 1.12 t  1.27
+   longs holdout                n   194 win 44.8% net $  -17.4 total $   -3,366 PF 0.97 t -0.13
+   shorts holdout               n   391 win 46.8% net $  -41.0 total $  -16,045 PF 0.92 t -0.62
+   by year: 2018 $3,039 (145)  2019 $11,199 (165)  2020 $-1,038 (159)  2021 $12,747 (159)  2022 $53,674 (118)  2023 $-12,164 (133)  2024 $-312 (154)  2025 $-11,527 (161)  2026 $4,592 (137)
+   metrics all    Sharpe 0.46 Sortino 0.74 PF 1.11 Calmar 0.25 Ulcer 4.60 maxDD $26,710 annual $6,632
+   metrics 2023+  Sharpe -0.27 Sortino -0.42 PF 0.94 Calmar -0.18 Ulcer 9.65 maxDD $26,710 annual $-4,911
+   metrics longs  Sharpe 0.23 Sortino 0.38 PF 1.10 Calmar 0.08 Ulcer 5.50 maxDD $29,540 annual $2,251
+   metrics shorts Sharpe 0.42 Sortino 0.69 PF 1.12 Calmar 0.14 Ulcer 4.47 maxDD $32,298 annual $4,380
+
+== P2 J>3 RTH no tgt, 30 min
+   design 2018-22               n   681 win 51.7% net $  114.5 total $   77,978 PF 1.44 t  3.07
+   HOLDOUT 2023-26              n   532 win 41.7% net $  -70.3 total $  -37,417 PF 0.88 t -1.03
+   all 2018-26                  n  1213 win 47.3% net $   33.4 total $   40,561 PF 1.08 t  0.91
+   longs all                    n   436 win 50.0% net $   26.8 total $   11,674 PF 1.06 t  0.39
+   shorts all                   n   777 win 45.8% net $   37.2 total $   28,887 PF 1.10 t  0.89
+   longs holdout                n   181 win 41.4% net $ -100.8 total $  -18,252 PF 0.84 t -0.74
+   shorts holdout               n   351 win 41.9% net $  -54.6 total $  -19,165 PF 0.90 t -0.72
+   by year: 2018 $1,761 (133)  2019 $6,728 (154)  2020 $-8,082 (143)  2021 $9,338 (141)  2022 $68,232 (110)  2023 $-17,664 (124)  2024 $-4,424 (144)  2025 $-20,037 (141)  2026 $4,708 (123)
+   metrics all    Sharpe 0.30 Sortino 0.49 PF 1.08 Calmar 0.08 Ulcer 7.84 maxDD $52,968 annual $4,467
+   metrics 2023+  Sharpe -0.51 Sortino -0.78 PF 0.88 Calmar -0.18 Ulcer 17.51 maxDD $52,968 annual $-9,467
+   metrics longs  Sharpe 0.13 Sortino 0.22 PF 1.06 Calmar 0.04 Ulcer 6.10 maxDD $29,000 annual $1,286
+   metrics shorts Sharpe 0.28 Sortino 0.49 PF 1.10 Calmar 0.09 Ulcer 5.25 maxDD $36,582 annual $3,182
+
+== P3 J>3 RTH tgt 0.3R, 240 min
+   design 2018-22               n   828 win 80.4% net $   18.2 total $   15,037 PF 1.09 t  0.74
+   HOLDOUT 2023-26              n   647 win 75.3% net $    6.7 total $    4,319 PF 1.02 t  0.16
+   all 2018-26                  n  1475 win 78.2% net $   13.1 total $   19,356 PF 1.05 t  0.58
+   longs all                    n   509 win 79.0% net $   37.2 total $   18,940 PF 1.13 t  0.87
+   shorts all                   n   966 win 77.7% net $    0.4 total $      416 PF 1.00 t  0.02
+   longs holdout                n   214 win 75.2% net $   78.4 total $   16,768 PF 1.21 t  1.01
+   shorts holdout               n   433 win 75.3% net $  -28.8 total $  -12,449 PF 0.93 t -0.60
+   by year: 2018 $3,382 (157)  2019 $13,496 (186)  2020 $-20,269 (173)  2021 $11,721 (175)  2022 $6,707 (137)  2023 $5,174 (147)  2024 $-1,754 (166)  2025 $-48 (177)  2026 $947 (157)
+   metrics all    Sharpe 0.18 Sortino 0.25 PF 1.05 Calmar 0.09 Ulcer 5.84 maxDD $23,160 annual $2,132
+   metrics 2023+  Sharpe 0.08 Sortino 0.11 PF 1.02 Calmar 0.05 Ulcer 5.47 maxDD $23,160 annual $1,093
+   metrics longs  Sharpe 0.27 Sortino 0.37 PF 1.13 Calmar 0.12 Ulcer 4.62 maxDD $16,858 annual $2,086
+   metrics shorts Sharpe 0.01 Sortino 0.01 PF 1.00 Calmar 0.00 Ulcer 5.27 maxDD $32,534 annual $46
+
+== P4 s>6 overnight no tgt, 30 min
+   design 2018-22               n  1130 win 46.6% net $   46.7 total $   52,742 PF 1.35 t  2.82
+   HOLDOUT 2023-26              n   731 win 45.8% net $  -21.8 total $  -15,905 PF 0.92 t -0.67
+   all 2018-26                  n  1861 win 46.3% net $   19.8 total $   36,838 PF 1.10 t  1.22
+   longs all                    n   859 win 47.0% net $   11.4 total $    9,812 PF 1.06 t  0.51
+   shorts all                   n  1002 win 45.7% net $   27.0 total $   27,026 PF 1.14 t  1.16
+   longs holdout                n   332 win 48.8% net $  -22.7 total $   -7,522 PF 0.92 t -0.48
+   shorts holdout               n   399 win 43.4% net $  -21.0 total $   -8,383 PF 0.93 t -0.47
+   by year: 2018 $722 (190)  2019 $9,904 (274)  2020 $12,770 (198)  2021 $4,700 (242)  2022 $24,646 (226)  2023 $-8,056 (216)  2024 $8,362 (188)  2025 $7,385 (191)  2026 $-23,596 (136)
+   metrics all    Sharpe 0.41 Sortino 0.64 PF 1.10 Calmar 0.14 Ulcer 3.77 maxDD $29,574 annual $4,057
+   metrics 2023+  Sharpe -0.35 Sortino -0.51 PF 0.92 Calmar -0.14 Ulcer 6.31 maxDD $29,574 annual $-4,024
+   metrics longs  Sharpe 0.17 Sortino 0.24 PF 1.06 Calmar 0.06 Ulcer 3.39 maxDD $19,335 annual $1,081
+   metrics shorts Sharpe 0.39 Sortino 0.64 PF 1.14 Calmar 0.17 Ulcer 2.46 maxDD $17,044 annual $2,977
+
+== Screenshot window 2019-01 .. 2026-11, P3 shape (0.3R target): with our costs / without costs (his report has none)
+   our costs                    n  1318 win 77.9% net $   12.1 total $   15,974 PF 1.04 t  0.48
+   no costs                     n  1318 win 78.0% net $   25.5 total $   33,590 PF 1.08 t  1.01
+   J>3 24h no costs             n  6366 win 76.8% net $   14.5 total $   92,230 PF 1.08 t  1.83
+   J>4 24h no costs             n  2455 win 76.0% net $   17.3 total $   42,435 PF 1.07 t  1.08
+   J>4 RTH no costs             n   461 win 78.7% net $   16.0 total $    7,375 PF 1.04 t  0.29
+   J>5 24h no costs             n  1207 win 73.3% net $    5.5 total $    6,600 PF 1.02 t  0.20
+   FADE J>3 RTH no costs        n  1318 win 74.2% net $  -34.8 total $  -45,925 PF 0.90 t -1.27
+
+== MultiCharts 5-minute bar fills without Bar Magnifier vs 1-minute truth (P3 shape, no costs, 2019-2026)
+   5-min bar fills: n 1319 win 78.0% net $23.6 PF 1.08   (1-minute truth: the 'no costs' line above)
+
+== Placebo (all 2018-26): random 5-min bar of the same window on the same sessions, direction = that bar's move, same exits; 200 runs
+   P1 J>3 RTH tgt 1R, 30 min          real $45.2 | placebo mean $-6.8, p95 $20.1, p(placebo >= real) 0.000
+   P2 J>3 RTH no tgt, 30 min          real $33.4 | placebo mean $11.8, p95 $48.0, p(placebo >= real) 0.150
+   P4 s>6 overnight no tgt, 30 min    real $19.8 | placebo mean $-16.8, p95 $-3.8, p(placebo >= real) 0.000
+
+== Bootstrap + drawdown permutation on the 2023+ holdout (1 NQ, capital 150K)
+                                                actual        p5       p50        p95
+name                            metric                                               
+P1 J>3 RTH tgt 1R, 30 min       sharpe           -0.27     -1.12     -0.27       0.51
+                                sortino          -0.42     -1.55     -0.43       0.90
+                                pf_day            0.92      0.71      0.92       1.18
+                                calmar           -0.18     -0.24     -0.11       0.40
+                                ulcer             9.65      4.88     14.24      32.99
+                                max_dd       26,709.50 21,632.69 45,625.75  88,712.60
+                                P(Sharpe<=0)       NaN       NaN      0.71        NaN
+P2 J>3 RTH no tgt, 30 min       sharpe           -0.51     -1.37     -0.49       0.38
+                                sortino          -0.78     -1.88     -0.75       0.68
+                                pf_day            0.85      0.65      0.85       1.14
+                                calmar           -0.18     -0.25     -0.16       0.24
+                                ulcer            17.51      6.32     19.03      40.76
+                                max_dd       52,968.00 26,362.45 57,423.50 106,644.61
+                                P(Sharpe<=0)       NaN       NaN      0.82        NaN
+P3 J>3 RTH tgt 0.3R, 240 min    sharpe            0.08     -0.89      0.01       0.92
+                                sortino           0.11     -1.11      0.02       1.55
+                                pf_day            1.02      0.77      1.00       1.35
+                                calmar            0.05     -0.22      0.01       0.80
+                                ulcer             5.47      3.28      8.80      22.68
+                                max_dd       23,159.50 15,545.49 30,986.62  63,002.27
+                                P(Sharpe<=0)       NaN       NaN      0.49        NaN
+P4 s>6 overnight no tgt, 30 min sharpe           -0.35     -1.11     -0.30       0.43
+                                sortino          -0.51     -1.50     -0.44       0.67
+                                pf_day            0.91      0.76      0.93       1.12
+                                calmar           -0.14     -0.23     -0.12       0.30
+                                ulcer             6.31      3.62      9.53      21.99
+                                max_dd       29,574.25 14,358.86 29,233.38  58,564.32
+                                P(Sharpe<=0)       NaN       NaN      0.76        NaN
+                                actual_dd pct_rank    dd50    dd95    dd99 P(dd>=2000) P(dd>=4000) P(dd>=6000)
+P1 J>3 RTH tgt 1R, 30 min         $26,710       1% $45,462 $65,431 $73,518        100%        100%        100%
+P2 J>3 RTH no tgt, 30 min         $52,968      33% $57,730 $77,879 $87,585        100%        100%        100%
+P3 J>3 RTH tgt 0.3R, 240 min      $23,160      23% $27,960 $42,327 $48,502        100%        100%        100%
+P4 s>6 overnight no tgt, 30 min   $29,574      39% $31,482 $44,218 $49,678        100%        100%        100%
+
+== Monte Carlo at trading size (1 NQ and 2 MNQ = x0.2; Apex 150K trailing $4,000)
+   Monte Carlo P1 J>3 RTH tgt 1R, 30 min (x1): trades 1331 | total p5 $-10,635 / p50 $59,998 / p95 $131,331, P(total <= 0) 8.3%
+      max DD actual $30,325 (rank 46%), shuffled p50 $31,363 / p95 $59,699 / p99 $77,276; losing streak actual 10, p95 13
+      252-day block bootstrap: P&L p5 $-16,177 / p50 $6,668 / p95 $30,110, P(loss) 31.0%, max DD p50 $11,338 / p95 $25,287, return/DD 0.59, P(hit $4,000 trailing, EOD check only) 72.7%
+   Monte Carlo P1 J>3 RTH tgt 1R, 30 min (x0.2): trades 1331 | total p5 $-2,127 / p50 $12,000 / p95 $26,266, P(total <= 0) 8.3%
+      max DD actual $6,065 (rank 46%), shuffled p50 $6,273 / p95 $11,940 / p99 $15,455; losing streak actual 10, p95 13
+      252-day block bootstrap: P&L p5 $-3,235 / p50 $1,334 / p95 $6,022, P(loss) 31.0%, max DD p50 $2,268 / p95 $5,057, return/DD 0.59, P(hit $4,000 trailing, EOD check only) 12.7%
+   Monte Carlo P2 J>3 RTH no tgt, 30 min (x1): trades 1213 | total p5 $-32,120 / p50 $40,671 / p95 $113,786, P(total <= 0) 17.6%
+      max DD actual $56,252 (rank 87%), shuffled p50 $35,612 / p95 $69,625 / p99 $90,884; losing streak actual 10, p95 14
+      252-day block bootstrap: P&L p5 $-19,954 / p50 $4,702 / p95 $31,468, P(loss) 36.9%, max DD p50 $12,590 / p95 $27,573, return/DD 0.37, P(hit $4,000 trailing, EOD check only) 77.6%
+   Monte Carlo P2 J>3 RTH no tgt, 30 min (x0.2): trades 1213 | total p5 $-6,424 / p50 $8,134 / p95 $22,757, P(total <= 0) 17.6%
+      max DD actual $11,250 (rank 87%), shuffled p50 $7,122 / p95 $13,925 / p99 $18,177; losing streak actual 10, p95 14
+      252-day block bootstrap: P&L p5 $-3,991 / p50 $940 / p95 $6,294, P(loss) 36.9%, max DD p50 $2,518 / p95 $5,515, return/DD 0.37, P(hit $4,000 trailing, EOD check only) 17.6%
+   Monte Carlo P3 J>3 RTH tgt 0.3R, 240 min (x1): trades 1475 | total p5 $-36,099 / p50 $19,716 / p95 $75,033, P(total <= 0) 28.2%
+      max DD actual $23,160 (rank 23%), shuffled p50 $31,053 / p95 $61,797 / p99 $80,806; losing streak actual 5, p95 6
+      252-day block bootstrap: P&L p5 $-17,596 / p50 $1,782 / p95 $22,368, P(loss) 44.3%, max DD p50 $10,482 / p95 $23,919, return/DD 0.17, P(hit $4,000 trailing, EOD check only) 77.0%
+   Monte Carlo P3 J>3 RTH tgt 0.3R, 240 min (x0.2): trades 1475 | total p5 $-7,220 / p50 $3,943 / p95 $15,007, P(total <= 0) 28.2%
+      max DD actual $4,632 (rank 23%), shuffled p50 $6,211 / p95 $12,359 / p99 $16,161; losing streak actual 5, p95 6
+      252-day block bootstrap: P&L p5 $-3,519 / p50 $356 / p95 $4,474, P(loss) 44.3%, max DD p50 $2,097 / p95 $4,784, return/DD 0.17, P(hit $4,000 trailing, EOD check only) 10.8%
+   Monte Carlo P4 s>6 overnight no tgt, 30 min (x1): trades 1861 | total p5 $-12,933 / p50 $36,188 / p95 $85,845, P(total <= 0) 11.3%
+      max DD actual $29,574 (rank 75%), shuffled p50 $22,642 / p95 $43,106 / p99 $55,604; losing streak actual 12, p95 15
+      252-day block bootstrap: P&L p5 $-11,348 / p50 $3,924 / p95 $20,200, P(loss) 34.7%, max DD p50 $8,167 / p95 $16,986, return/DD 0.48, P(hit $4,000 trailing, EOD check only) 70.8%
+   Monte Carlo P4 s>6 overnight no tgt, 30 min (x0.2): trades 1861 | total p5 $-2,587 / p50 $7,238 / p95 $17,169, P(total <= 0) 11.3%
+      max DD actual $5,915 (rank 75%), shuffled p50 $4,528 / p95 $8,621 / p99 $11,121; losing streak actual 12, p95 15
+      252-day block bootstrap: P&L p5 $-2,270 / p50 $785 / p95 $4,040, P(loss) 34.7%, max DD p50 $1,633 / p95 $3,397, return/DD 0.48, P(hit $4,000 trailing, EOD check only) 2.1%
+
+== Multiple-testing bar: t_threshold(473 ranked items) = 3.70; about 250 design configurations were also looked at here.

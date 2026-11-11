@@ -1,0 +1,12 @@
+[provenance] code ed9973c dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Standing rule (user 2026-11-10): EVERY new strategy the user sends, good or bad on its own, goes against ALL the data to look for a
+   jump5_P3: 813 trade days, $24 a day, t 0.55 (2018-22 $33, 2023+ $12); 63 regimes, gap bar |t| >= 3.16
+      SPX                       z_high        keep off gap t -2.44 | subset n 338 $154 t 2.02 (89 / 252)
+      SPX                       rising        keep off gap t -2.40 | subset n 219 $224 t 2.12 (53 / 436)
+      RRP                       z_high        keep on  gap t  2.16 | subset n 133 $192 t 2.43 (123 / 488)
+      RRP                       above_median  keep on  gap t  2.06 | subset n 279 $139 t 2.19 (107 / 302)
+      RRP                       rising        keep on  gap t  1.78 | subset n 370 $109 t 1.61 (90 / 147)
+      GEX (SqueezeMetrics)      above_median  keep off gap t -1.59 | subset n 313 $118 t 1.40 (42 / 261)
+      VIX9D/VIX                 above_median  keep on  gap t  1.54 | subset n 378 $97 t 1.28 (68 / 133)
+      OVX                       rising        keep on  gap t  1.50 | subset n 368 $97 t 1.36 (76 / 122)
+   BEST VERSION: RRP z_high keep on: t 0.55 -> 2.43; fair placebo (best of 63 random splits): median 2.26, 95th 3.12 -> p 0.300 (luck explains it)
