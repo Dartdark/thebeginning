@@ -88,6 +88,7 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - The weekly review must check Claude's own week of code, not only Codex's: five defects this week were all in new Claude code (2026-10-30).
 
 ## Corrections from the user (one line per correction, added in the same reply; user rule 2026-11-01)
+- 2026-11-11, user's Orders log ('wait was it a dual thrust trade?'): I said a 2-lot BUY STP on the VB chart came from no strategy. It was Twin's breakout entry: MultiCharts draws every working order of the same account + symbol on EVERY chart. Rule: before calling an order 'not from a strategy', check the Orders / Logs tab's Strategy column and every chart on that symbol, not only the chart it is drawn on.
 - 2026-11-06: "lettering is too bold" (re-rendering the edited resume nested bold inside bold rows: Inter-Black). Rule: after re-rendering a document, compare its fonts (pdffonts) and look with the previous approved version before sending.
 - 2026-11-09: "80 is a legit improvement. Yea it's still negative in 18-22 but it's less negative so it still is an improvement" (I judged a
   variant only against the book and missed that it beats the current version in every period). Rule: judge a variant on TWO bars - vs
