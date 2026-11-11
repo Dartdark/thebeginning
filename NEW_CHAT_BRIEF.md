@@ -1,11 +1,28 @@
-# New-chat brief (rewritten 2026-10-29): read this first
+# New-chat brief (rewritten 2026-10-29; Now updated 2026-11-11): read this first
 
 Opener for a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, `TODO.md` and `LESSONS.md` in
 github.com/Dartdark/thebeginning (branch `claude/nq-trading-strategy-params-5h9d20`) and continue from there."*
 Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history of this brief (up to 2026-10-28) is in
 `archive/brief_history_2026-10.md`; ticked to-dos are in `archive/TODO_done_2026-10.md`.
 
-## Now (2026-11-05; research update 2026-11-09)
+## Now (2026-11-11)
+
+- **One live account: #5 APEX-681524-05, 150K evaluation** (bought 11/10; floor 146,000, target 159,050, DLL $2,000).
+  Charts (tags `<name>150-5`): ONB, EOS, MON_BR (5), Twin (2), DT (2). **VB removed from the evaluation 11/11 (user):** it blew the DLL
+  twice (11/11: −$2,257.50 on one stop). Plan docs, expected_setup.json and dashboards updated; the user still has to close the VB chart.
+- **11/11 result:** −$2,455 (DT −$200, VB −$2,257.50), DLL hit, account paused. Balance $147,998.08 = **$1,998 above the floor**, less
+  than one ONB stop ($2,750). Proposed: ONB `RiskPerTrade` ~1500 until it recovers (waiting on the user). Chart rows after 10:30 were
+  rejected orders (735), not trades. DT guard showed broker 2 / strategy 0 all afternoon; equity flat, so stale; user to confirm flat.
+- **Overrides 11/10-11/11** (`live/overrides.csv`): Twin closed early by hand +$261 (its target would have made +$536); manual re-entry +$192.
+- **Fixes 11/11:** Apex_Chart_Guard sends the target limit only within `TgtNearPct` (1%) of the price (a far limit was rejected 10x and
+  MC switched Twin off): **user must recompile it and turn Twin back on while flat.** `live/vps/push_trade_logs.ps1` line 72 parse
+  error (my edit; logs were down all day) fixed and parse-checked with pwsh. `.claude/settings.json` allows the pwsh download/parse check.
+- **Scheduled jobs RESUMED 11/11:** pre-market check 08:21 CT and 16:40 journal/dashboard. Watch that tomorrow's runs see the logs.
+- **Budget:** −$605 (eval #5 −$250, Claude −$20; MC already counted). Dashboard dataset 'ledger' v2.
+- **Research 11/10:** satellite Cushing, 6J pivot continuation, curve papers, 5 papers, API pre-EIA: rows in TIER_LIST (nothing promoted).
+  Codex has the API/EIA data task. Older-data validation BENCHED (MC data only from 11/2016).
+
+## Earlier (2026-11-05; research update 2026-11-09)
 
 - **No live accounts.** #1 (10/26), #3 (10/30), #2 and #4 (11/04) all failed. Live replay 10/20-11/04: VB 15/15 trades match the
   backtest, ONB matches bar the known 10/27 miss: execution OK, a losing stretch (~6.5th percentile, ~5 a year;
