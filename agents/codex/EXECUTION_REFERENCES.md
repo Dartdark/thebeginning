@@ -2705,6 +2705,18 @@ Academic descriptive mechanisms, screenshot claims and arithmetic QA; no new nat
 Smallest next check: a specified annotated entry reconciled against closed-bar information and executable quotes/fills.
 No live change, new monitor, promoted strategy, execution saving or account benefit is established.
 
+**2026-11-10 authorized build follow-up:** [causal strategy research](results/pressure_strategy_build_20261110.md)
+now tests explicit adaptations rather than stopping at the missing private rule. First15definitions fail design gates;
+the two-hour pre-event memory extension is in preparation, not yet a result. Preserve these failures separately from
+the unknown third-party code. The resting-entry attempt loses after including delayed activation, missed orders,
+strict trade-through and conservative fill-bar chronology; a cheaper entry cannot be assumed to save the signal.
+Input/replay code QA also exposed hidden missing time-exit tails and the different information available for a market
+entry known at the bar open versus a passive fill occurring later within that bar. These were fixed before returns.
+Archived OF depth scalars match native prices/flow but do not supply a full ladder, event order or receipt/build/revision
+vintages. Historical GetAt(BarKey) and monotonic depth sums establish neither original availability nor queue priority.
+The positive linear book result is weak and cost-fragile, not verified execution savings or an adopted trading sleeve.
+Source search and static checks are retained under `inputs/pressure_book_20261110/`; no native MC/live change occurred.
+
 
 ### E10/E11 follow-up — Native-book signals and small-winner fills (dot, 2026-11-11)
 

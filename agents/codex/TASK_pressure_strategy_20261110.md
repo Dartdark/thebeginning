@@ -65,3 +65,24 @@ independent raw-spec check -> earned accountcomparisons -> exact testedPowerLang
 Failedbatch stops dependent tests; continue only newly justifiedcommittedhypotheses, notthreshold/direction/timingrescue.
 No live/VPS/broker/API/chart/settings/purchase/notification changes. Keepuser updated during sustainedwork; no invisible
 backgroundwork/success claims. Final result must include actualfindings, code/artifacts, allfailures/trials and limits.
+
+## Latest checkpoint, after first15 actual definitions
+
+- Firstfivebatches and report pushed safely tocodex/work ate943327e; excluded salary commits remain outside.
+- Batch5 e898078b completed: HGB_BOOK878trades/73.23%/−10325.50NQ/PF.9208; RIDGE_BOOK699/76.39%/+6057.25/PF1.0564;
+  HGB_NOBOOK743/73.49%/−11906.75/PF.8863. Allbasicgatesfail; RIDGE_BOOK microproxy only+245.74 over5years,
+  stress−7007.75/NQ,3positiveyears/t.583/NW5.490. No selection/laterhistory/account/PLearned. Sourcevintagealso unresolved.
+- Inputonlybookintake20hashes/515156rows allnativeclose/buy/sell EXACT;11quoteinvalidunknown; historicalGetAt claim
+  conditional. No originalDLL/build/cache/manual or nativepricedladder/eventstream found by boundedownedfilesearch.
+- Currentreport `agents/codex/results/pressure_strategy_build_20261110.md`; aggregation
+  `analysis/codex_pressure_study_20261110_report.py`. Whole/side/year detailedmetrics perbatch.
+- Prospectivelyaccepted batch6: SINGLE120minpre-eventprofile endingsignalT−5, no currenteventbar inprofile;
+  profile adds9summaries+4sideinteractions to original21features. HGB_MEMORY/RIDGE_MEMORYselectables,HGB_LOCALcontrol,
+  exactbatch2cache/no newlabels, same126slot/month/.02R/.10ATR/.3R/costs. Parent MUSTinspect/freeze source+plan BEFOREfits.
+- pressure_paper_2021 ownsONLY `analysis/codex_pressure_memory_20261110.py`; pressure_prior_data ownsONLY matching
+  plan/evidence pressure_memory_20261110.md. pressure_paper_2003 sourceonly scientificreview. Allblindto batch5returns.
+- κ=.12/minutesmoother verified in uploaded2021PDFp5 (J1minp3), but ournormalizedu isnotpaperJ. No4.36jumpthreshold,
+  sourcepowerlawestimate/nativeHawkesclaim, centeredprofiles, clock/windowsearch or privatecode-reproductionclaim.
+- Fourprospectiveadditionaldefinitions wouldbring19; matchingRIDGE_LOCALcontrol added BEFOREoutcomes by source review.
+  Notyetactualtrial untilrun. FinalizeTODO/data/library updates
+  afterresult, rerunaggregate, updatehandoffstate, commit/pull/push. No askinguserwhetherto do authorizedwork.

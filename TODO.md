@@ -241,8 +241,11 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   Screenshot claims 855 trades, 82.22% wins, PF 1.41; arithmetic fits roughly 0.3R winners/1R losers. Need one annotated
   entry or the exact pressure, comparison window, fade/follow, stop/target, timing, session, size and fill/cost rules.
   Owned NQ bars/aggressor aggregates support a labeled adaptation; exact event-time quote/book/news inputs remain partial.
-  First check is a causal source-matched bar reconciliation without returns. Prior innovation-fade and absorption failures
-  remain closed; this is not a fresh independent family or an automatic proxy rescue. No new return tests or 150K benefit.
+  User then authorized actual derived-strategy work: first15explicit adaptations fail frozen2018–22 design gates;
+  two-hourpre-eventmemory extension is in preparation. Positive linearbook variant is weak/cost-fragile, not selected.
+  Original screenshot rules remain missing; owned nativeprice/aggressor and archiveddepth inputs have been audited.
+  Exactnative ladder/event/receipt/buildvintage prerequisites remain missing; prior failedfamilies stay closed.
+  [Actual build/test report](agents/codex/results/pressure_strategy_build_20261110.md). No150Kbenefit established.
   [Full reconstruction and five-question reviews](agents/codex/results/pressure_papers_reconstruction_20261110.md)
   · [Shared data/rule gaps](agents/codex/DATA_NEEDED.md#three-paper-candle-pressure-model--source-rule-gap-2026-11-10).
 
