@@ -1,0 +1,133 @@
+{
+  "nq_input": {
+    "files": {
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2018.csv.gz": {
+        "rows": 349082,
+        "compressed_sha256": "c2482cce0ded7488def67070e6806eecf358e563b8618e2fdb64997e2465ccc3",
+        "original_sha256": "70b42a96d851e30d5b02629a02add33e9080c0df4b357f2ea61cc65b7963130a"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2019.csv.gz": {
+        "rows": 349844,
+        "compressed_sha256": "62d47b02618ec5909dbcf81321898341c3d5e317948b46fef6ab5c8d47237b22",
+        "original_sha256": "a79247379812b63a2077ce0da6aa4f391f0df59ccc03cd6cb701eb1a4fdf799e"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2020.csv.gz": {
+        "rows": 348926,
+        "compressed_sha256": "216b312952c080a3c36cca64699dfa46aaf6e134c5a68de9aefca6121eec4392",
+        "original_sha256": "a3fdf4a3f60f4081a83c1acdfa288d0b03fce9d8c0b4f7ceac29e3646f2e60c8"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2021.csv.gz": {
+        "rows": 353393,
+        "compressed_sha256": "e62d4d37d27ab6ff9ac5373d6cdc9296def40f21887a31541a7f715dc06973ce",
+        "original_sha256": "de717ad7aaece8892d979b3708236404ce6a7ec996b9476bcf5c65a9482d95fc"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2022.csv.gz": {
+        "rows": 354112,
+        "compressed_sha256": "cc1c40967a93445923ecec70282c87b23c5b4e8b7e394e903daf4b69b6db17e3",
+        "original_sha256": "bf49bdd2b9608738de96c1446e9d9c53eb7947f249bd6eb06929c1de01d82c37"
+      }
+    },
+    "transfer_manifest_sha256": "889848785814eec127fff1a271b24795c6af1486a11ca45690fdb286e3c5b7b2",
+    "rows": 1755357,
+    "first": "2018-01-01 17:01:00",
+    "last": "2022-12-30 16:00:00",
+    "timestamp": "America/New_York close -> America/Chicago close; no extra minute added",
+    "duplicate_keys": 0,
+    "missing_minutes_filled": 0,
+    "total_volume": "native Volume, verified equal to UpVol+DownVol",
+    "provenance_limits": [
+      "roll/build provenance unverified",
+      "historical receipt/corrections unknown",
+      "session gaps retained",
+      "not native PowerLanguage up-tick Volume",
+      "no returns computed"
+    ],
+    "source": "native 2018--22, no price/flow splicing"
+  },
+  "es_input": {
+    "scope": "Frozen ES input-only OHLCV for common-market feature",
+    "source_files": [
+      {
+        "path": "data/ES_1min_2018.csv",
+        "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+        "bytes": 17506050,
+        "rows": 346940,
+        "first": "2018-01-01 17:02:00-06:00",
+        "last": "2018-12-31 16:00:00-06:00",
+        "duplicate_keys": 0
+      },
+      {
+        "path": "data/ES_1min_2019.csv",
+        "sha256": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+        "bytes": 17631102,
+        "rows": 349251,
+        "first": "2019-01-01 17:02:00-06:00",
+        "last": "2019-12-31 16:00:00-06:00",
+        "duplicate_keys": 0
+      },
+      {
+        "path": "data/ES_1min_2020.csv",
+        "sha256": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+        "bytes": 17667404,
+        "rows": 348715,
+        "first": "2020-01-01 17:02:00-06:00",
+        "last": "2020-12-31 16:00:00-06:00",
+        "duplicate_keys": 0
+      },
+      {
+        "path": "data/ES_1min_2021.csv",
+        "sha256": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+        "bytes": 17835299,
+        "rows": 353073,
+        "first": "2021-01-03 17:02:00-06:00",
+        "last": "2021-12-31 16:00:00-06:00",
+        "duplicate_keys": 0
+      },
+      {
+        "path": "data/ES_1min_2022.csv",
+        "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+        "bytes": 17909640,
+        "rows": 353752,
+        "first": "2022-01-02 17:02:00-06:00",
+        "last": "2022-12-30 16:00:00-06:00",
+        "duplicate_keys": 0
+      }
+    ],
+    "rows": 1751731,
+    "duplicate_keys": 0,
+    "clock": "Naive Chicago minute-CLOSE labels by repository convention; original export clock unverified",
+    "separate_overnight_file_needed": false,
+    "full_session_export": true,
+    "native_contract_or_roll_ids_present": false,
+    "original_vendor_rights_verified": false,
+    "es_point_value": 50.0,
+    "mes_point_value": 5.0,
+    "tick_size": 0.25,
+    "execution_costs": "No ES execution in feature-only model; legacy $5/ES RT ($0.50/MES scaled) is not native fee verification",
+    "synthetic_aggressor_fields_added": false,
+    "price_returns_or_signals_computed": false
+  },
+  "es_five_minute": {
+    "bar_minutes": 5,
+    "complete_bars": 348116,
+    "incomplete_nonempty_bins": 2985,
+    "empty_bins": 174199,
+    "invalid_input_minutes": 0,
+    "construction": "complete, right-closed/right-labelled, anchored to midnight; no fill or interpolation",
+    "empty_bin_note": "Includes scheduled closures/weekends; not an outage count"
+  },
+  "models": [
+    "FULL",
+    "COMMON_ONLY",
+    "FLOW_ONLY"
+  ],
+  "selectable": [
+    "FULL"
+  ],
+  "nq_season": "08:45--14:00, own prior20 normal-cash slots, rolls excluded without replacement, min15 perclock",
+  "es_season": "08:35--14:00, own prior20 normal-cash slots, rolls excluded without replacement, min15 perclock",
+  "es_lags": "current-day shifted priorATR_ES and each lag's actual clock seasonal factor",
+  "common_training_rows": true,
+  "current_day_fit": false,
+  "limits": "ES is a common-market conditioning input, not an executed hedge; cross-feed receipt, roll and native micro parity remain unverified"
+}

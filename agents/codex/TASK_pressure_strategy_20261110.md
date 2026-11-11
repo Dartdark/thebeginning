@@ -38,6 +38,26 @@ substitution; cannot support a positivecurrent150Kclaim. `codex_eval_engine_2026
 inclusive4kfloor, actualDLLovershoot/costs, explicit30calendar expiry and UNKNOWNs. Integerfinish rounds sleeves separately.
 Use BASE/EMPTY(noVB)/ADD/REPLACE at frozenintegerallocation; offset must arrive before failure, not lateratEOD.
 
+## Completed continuation / next active inputs
+
+- Batch2 frozen c852212a completed: RIDGE128trades,73.44%wins,PF.7864,−4,333/NQ; HGB752,72.61%,PF.8321,
+  −18,802; HGB_PRICEcontrol770,74.29%,PF.9069,−9,922.50. REJECT; no2023+read. Outputs
+  `analysis/outputs/codex_pressure_learning_20261110/`, decision saved. Source independently audited before interpretation.
+- Batch3 resting-entry frozen0d61f59e completed: L1 326trades,57.67%,PF.5566,−16,223.50/NQ; L2 342,49.12%,PF.3700,
+  −18,339.50; MARKETcontrol925,63.03%,PF.6356,−32,126.25. REJECT. Strict1pointfills/stopfirst, conditionalqueue model.
+  Preserve23plantedchecks, allorder/fill/no-fillbar-stressledgers and sourceevent binding. Newdefs9cumulative.
+- Batch4 ES-common-input frozen8e405d69 completed: FULL1437trades,67.64%,PF.6297,−50,403.25; COMMON_ONLY1471,
+  68.12%,PF.6709,−42,469.75; FLOW_ONLY1298,67.95%,PF.6872,−35,910.50. REJECT. NativeNQ prices remainunspliced,
+  ESstrictownedhashes/complete5min, featureonly. Outputs `analysis/outputs/codex_pressure_market_20261110/`.
+- All12studydefinitions plusolderpressure/pattern/booksearches remaincounted. No laterhistory/account/PLstageearned.
+- Next meaningfulinput study: legacyOFhistoricalbar bookstates (spread/top/depth10/50) exist; pressure_prior_data agent
+  owns `analysis/codex_pressure_book_20261110_inputs.py`, parentmustinspect input-onlyjoins/sentinel/provenance before
+  anyeconomicadmission. ClosedDLL useshistoricalGetAt(BarKey), butoriginalbuild/receipt/revisionvintagesunverified.
+- pressure_paper_2021 agent owns `analysis/codex_pressure_book_learning_20261110.py`: samefrozenmonthlypayofflearner,
+  fixedbookfragility/capacity inputs, HGB_BOOK/RIDGE_BOOK selectables +same-eligibilityHGB_NOBOOKcontrol. Parentmustwrite
+  plan/evidence, verifyexactfeatures/gates andcommit code BEFOREactualnewfits/outcomes. Threeadditionaldefsreserved;
+  potential15cumulative. Do not count preparation as a result or promoteprice/marketcontrols from failedbatches.
+
 ## Completion standard
 
 Frozen design passes -> commitselection -> once-only historical2023+validation -> cost/latencystress/placebos/bootstrap/
