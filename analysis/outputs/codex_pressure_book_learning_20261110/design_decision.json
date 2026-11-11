@@ -1,0 +1,43 @@
+{
+  "status": "REJECT",
+  "selected": null,
+  "checks": {
+    "HGB_BOOK": {
+      "trades": true,
+      "dates": true,
+      "long_count": true,
+      "short_count": true,
+      "net": false,
+      "micro_net": false,
+      "trade_t": false,
+      "daily_nw5": false,
+      "profit_factor": false,
+      "years": false,
+      "stress_net": false,
+      "stop_first_net": false,
+      "held_paths": true
+    },
+    "RIDGE_BOOK": {
+      "trades": true,
+      "dates": true,
+      "long_count": true,
+      "short_count": true,
+      "net": true,
+      "micro_net": true,
+      "trade_t": false,
+      "daily_nw5": false,
+      "profit_factor": false,
+      "years": false,
+      "stress_net": false,
+      "stop_first_net": true,
+      "held_paths": true
+    }
+  },
+  "design_stage_complete": true,
+  "source_gate_complete": false,
+  "validation_allowed": false,
+  "results_sha256": "312655f15022eb4f23354d12f9f8f3aedbfaa97319366f67bd787690347baff9",
+  "economic_definitions": 3,
+  "cumulative_study_definitions": 15,
+  "reason": "Neither selectable clears frozen basic gates; Ridge weak net gain fails significance, years, PF and four-tick cost stress. Original book availability gate also unresolved. No control promotion or rescue tuning."
+}

@@ -1,0 +1,44 @@
+{
+  "scope": "Read-only input provenance, filenames and CSV headers; no price values, source strategy outcomes or returns read",
+  "workspace_root": "/workspace",
+  "searched_patterns": [
+    "*.bin",
+    "*.db",
+    "*.sqlite*",
+    "*.dbn*",
+    "*.zst*",
+    "*.pcap*",
+    "*.parquet*",
+    "*.h5*",
+    "*.mbo*",
+    "*OrderFlowBridge*",
+    "*ofb_hist*",
+    "*ofb_bars_NQ*",
+    "*MatFin*",
+    "*manual*",
+    "*Manual*"
+  ],
+  "excluded_runtime_dirs": [
+    ".git",
+    "venvs",
+    "node_modules",
+    "review_tools"
+  ],
+  "native_bin_db_eventstream_candidates": [],
+  "found_native_cache_or_eventstream": false,
+  "actual_windows_source_paths_not_accessed": [
+    "C:\\OFB\\ofb_hist.bin",
+    "C:\\OFB\\OrderFlowBridge.dll",
+    "C:\\OFB\\ofb_bars_NQ.csv"
+  ],
+  "source_file_sha256": {
+    "tools/exporters/OFB_OrderFlow_Exporter.txt": "5cdd6eba3feed00cce9f2707c6c43bb6f02f59c1ecb8d5d239fa7377c97ab62b",
+    "tools/exporters/OFB_Gamma_Exporter.txt": "dd6967f4279af06aa6a598ef179487d257ac1ac90c08192bcc66ee651ef1bd25",
+    "agents/codex/inputs/hunt_v2_native_OF_gap_intake/source_manifest.json": "f35b2002565c679ead84c85d83196a7d44d0f30d7850d235c6ef8ea1538f79d6",
+    "agents/codex/research/hunt_v2_native_OF_gap_source.md": "511c819919170a6367745b865344ca1a360c12f95b8cb17114f624b43ef79cd0",
+    "agents/codex/inputs/bridge_native_2018_22_20261108/transfer_manifest.json": "889848785814eec127fff1a271b24795c6af1486a11ca45690fdb286e3c5b7b2"
+  },
+  "finding": "Owned OF CSV files provide bar-keyed scalar summaries but not original native price ladders or ordered event/receipt histories. Absence is limited to this workspace; does not establish what exists on the user PC.",
+  "price_returns_computed": false,
+  "strategy_outcomes_read": false
+}

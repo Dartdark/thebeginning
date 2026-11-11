@@ -1,0 +1,693 @@
+{
+  "cache": {
+    "source_commit": "0d61f59e30304a5a9850ef1a20b33a2d1f04cc2d",
+    "source_path": "analysis/outputs/codex_pressure_learning_20261110/features_and_labels.csv.gz",
+    "source_git_blob": "7c4f1638768161c902b40ec5972f48b45fa4ed97",
+    "compressed_sha256": "4993fdd04a51437fac5c1993a185e091535beedab18474666750ca5a513a9664",
+    "rows": 135964,
+    "labels_regenerated": false,
+    "label_values_changed": false,
+    "rule": "Exact batch-2 fixed-bracket net payoffs; no future-label filter on forecast eligibility"
+  },
+  "native": {
+    "files": {
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2018.csv.gz": {
+        "rows": 349082,
+        "compressed_sha256": "c2482cce0ded7488def67070e6806eecf358e563b8618e2fdb64997e2465ccc3",
+        "original_sha256": "70b42a96d851e30d5b02629a02add33e9080c0df4b357f2ea61cc65b7963130a"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2019.csv.gz": {
+        "rows": 349844,
+        "compressed_sha256": "62d47b02618ec5909dbcf81321898341c3d5e317948b46fef6ab5c8d47237b22",
+        "original_sha256": "a79247379812b63a2077ce0da6aa4f391f0df59ccc03cd6cb701eb1a4fdf799e"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2020.csv.gz": {
+        "rows": 348926,
+        "compressed_sha256": "216b312952c080a3c36cca64699dfa46aaf6e134c5a68de9aefca6121eec4392",
+        "original_sha256": "a3fdf4a3f60f4081a83c1acdfa288d0b03fce9d8c0b4f7ceac29e3646f2e60c8"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2021.csv.gz": {
+        "rows": 353393,
+        "compressed_sha256": "e62d4d37d27ab6ff9ac5373d6cdc9296def40f21887a31541a7f715dc06973ce",
+        "original_sha256": "de717ad7aaece8892d979b3708236404ce6a7ec996b9476bcf5c65a9482d95fc"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2022.csv.gz": {
+        "rows": 354112,
+        "compressed_sha256": "cc1c40967a93445923ecec70282c87b23c5b4e8b7e394e903daf4b69b6db17e3",
+        "original_sha256": "bf49bdd2b9608738de96c1446e9d9c53eb7947f249bd6eb06929c1de01d82c37"
+      }
+    },
+    "transfer_manifest_sha256": "889848785814eec127fff1a271b24795c6af1486a11ca45690fdb286e3c5b7b2",
+    "rows": 1755357,
+    "first": "2018-01-01 17:01:00",
+    "last": "2022-12-30 16:00:00",
+    "timestamp": "America/New_York close -> America/Chicago close; no extra minute added",
+    "duplicate_keys": 0,
+    "missing_minutes_filled": 0,
+    "total_volume": "native Volume, verified equal to UpVol+DownVol",
+    "provenance_limits": [
+      "roll/build provenance unverified",
+      "historical receipt/corrections unknown",
+      "session gaps retained",
+      "not native PowerLanguage up-tick Volume",
+      "no returns computed"
+    ],
+    "source": "native 2018--22, no price/flow splicing"
+  },
+  "book": {
+    "files": {
+      "data/OF_1min_2018_1.csv": {
+        "sha256": "2bc0e1ad344cc93d8685b6016b255ef1e642f30d6364245f51557e6999eff114",
+        "rows": 25188,
+        "first": "2018-01-02 08:30:00",
+        "last": "2018-03-29 15:15:00"
+      },
+      "data/OF_1min_2018_2.csv": {
+        "sha256": "5639a66d95ab2435c0f75896245bc21d20c1685b53c7fd68c89b051d817e9414",
+        "rows": 26195,
+        "first": "2018-04-02 08:30:00",
+        "last": "2018-06-29 15:15:00"
+      },
+      "data/OF_1min_2018_3.csv": {
+        "sha256": "7dd6824acaea62821ae9e785d528c9532c3b92dedbd7d8640c20faae473db696",
+        "rows": 25820,
+        "first": "2018-07-02 08:30:00",
+        "last": "2018-09-28 15:15:00"
+      },
+      "data/OF_1min_2018_4.csv": {
+        "sha256": "805500d67bd03bbacb9245957b8c9d0e9b33edf3006370779637515767a76ff7",
+        "rows": 25430,
+        "first": "2018-10-01 08:30:00",
+        "last": "2018-12-31 15:15:00"
+      },
+      "data/OF_1min_2019_1.csv": {
+        "sha256": "ae84a55a44fe0379a6afbf4ae781b59fd1604bf584d37c97531174df804836fc",
+        "rows": 25188,
+        "first": "2019-01-02 08:30:00",
+        "last": "2019-03-29 15:15:00"
+      },
+      "data/OF_1min_2019_2.csv": {
+        "sha256": "15933657a4e742254b5dd3a854dae2ea4eb3dbc42e4efafa62a607eaee6a4845",
+        "rows": 25789,
+        "first": "2019-04-01 08:30:00",
+        "last": "2019-06-28 15:15:00"
+      },
+      "data/OF_1min_2019_3.csv": {
+        "sha256": "995f81a181173d2c7879fd108bbf6c47055286eede57d9b2b55c604a6445735a",
+        "rows": 26226,
+        "first": "2019-07-01 08:30:00",
+        "last": "2019-09-30 15:15:00"
+      },
+      "data/OF_1min_2019_4.csv": {
+        "sha256": "667ed887abdcd91bb02cb3419b5a49c0ef003d19466c7658f7a78107cbac4b69",
+        "rows": 25835,
+        "first": "2019-10-01 08:30:00",
+        "last": "2019-12-31 15:15:00"
+      },
+      "data/OF_1min_2020_1.csv": {
+        "sha256": "67c7fb1166730e4d5eedf871f2a08875e2c71a8889f048bd81282c98ce9ae0f4",
+        "rows": 25218,
+        "first": "2020-01-02 08:30:00",
+        "last": "2020-03-31 15:15:00"
+      },
+      "data/OF_1min_2020_2.csv": {
+        "sha256": "be8963123cc649e11298d626f79beb3e31306fa9ccb3f4f247aa7ddccd11d95f",
+        "rows": 25425,
+        "first": "2020-04-01 08:30:00",
+        "last": "2020-06-30 09:11:00"
+      },
+      "data/OF_1min_2020_3.csv": {
+        "sha256": "b7501ad273ccd4259f909614ac7be8838588ee62df5f5038086a4cd82e0ec72d",
+        "rows": 26406,
+        "first": "2020-07-01 08:30:00",
+        "last": "2020-09-30 15:15:00"
+      },
+      "data/OF_1min_2020_4.csv": {
+        "sha256": "603d3fea3f59b2d97d67f1bb6613b54da3a6a7f548fa071a85d74d41cc376cc6",
+        "rows": 25835,
+        "first": "2020-10-01 08:30:00",
+        "last": "2020-12-31 15:15:00"
+      },
+      "data/OF_1min_2021_1.csv": {
+        "sha256": "0a7d801e97cbe38a414ca0207d09de5494eb0671f3b719c2f5e3c2d611251483",
+        "rows": 25188,
+        "first": "2021-01-04 08:30:00",
+        "last": "2021-03-31 15:15:00"
+      },
+      "data/OF_1min_2021_2.csv": {
+        "sha256": "0fcd3408675768576890e38f93c52359feffa3fd47e01d6e9ee10d69566b93fe",
+        "rows": 25789,
+        "first": "2021-04-01 08:30:00",
+        "last": "2021-06-30 15:15:00"
+      },
+      "data/OF_1min_2021_3.csv": {
+        "sha256": "64efc51c20ba33489377e3e2e620fee4415f565a6c7e434701741a35b7fa7f12",
+        "rows": 26406,
+        "first": "2021-07-01 08:30:00",
+        "last": "2021-09-30 15:15:00"
+      },
+      "data/OF_1min_2021_4.csv": {
+        "sha256": "60bf703a22c44cd6c928ff8d475a1199574a061d0fb86b5a37711055ed7837ab",
+        "rows": 26015,
+        "first": "2021-10-01 08:30:00",
+        "last": "2021-12-31 15:15:00"
+      },
+      "data/OF_1min_2022_1.csv": {
+        "sha256": "b5ec87cbadb2c62cd502a15b0d6cc595a0c383815a97a62b3687f14e7b1dac45",
+        "rows": 25594,
+        "first": "2022-01-03 08:30:00",
+        "last": "2022-03-31 15:15:00"
+      },
+      "data/OF_1min_2022_2.csv": {
+        "sha256": "5938d4a02c8b1bfac001da685758deb77cc679b9704c0303d697f1ae8f721cbe",
+        "rows": 25594,
+        "first": "2022-04-01 08:30:00",
+        "last": "2022-06-30 15:15:00"
+      },
+      "data/OF_1min_2022_3.csv": {
+        "sha256": "e935c507d69c4adc899d7e1b3d2488a7b2f6d2fa77df9b0e331828496c120028",
+        "rows": 26406,
+        "first": "2022-07-01 08:30:00",
+        "last": "2022-09-30 15:15:00"
+      },
+      "data/OF_1min_2022_4.csv": {
+        "sha256": "59f4b0dc8596ea7772a801b65db33b1ef98cda594932fb6b8d16ffab4d2a4a5b",
+        "rows": 25609,
+        "first": "2022-10-03 08:30:00",
+        "last": "2022-12-30 15:15:00"
+      }
+    },
+    "rows": 515156,
+    "by_year": {
+      "2018": {
+        "rows": 102633,
+        "dates": 258,
+        "quote_positive": 102631,
+        "depth_positive": 102633,
+        "depth_monotonic": 102633,
+        "top_within_depth10": 102633,
+        "book_support_known": 102631,
+        "native_key_known": 102633,
+        "close_exact_match": 102633,
+        "close_match": 102633,
+        "buy_exact_match": 102633,
+        "sell_exact_match": 102633,
+        "book_known": 102631
+      },
+      "2019": {
+        "rows": 103038,
+        "dates": 258,
+        "quote_positive": 103035,
+        "depth_positive": 103038,
+        "depth_monotonic": 103038,
+        "top_within_depth10": 103038,
+        "book_support_known": 103035,
+        "native_key_known": 103038,
+        "close_exact_match": 103038,
+        "close_match": 103038,
+        "buy_exact_match": 103038,
+        "sell_exact_match": 103038,
+        "book_known": 103035
+      },
+      "2020": {
+        "rows": 102884,
+        "dates": 259,
+        "quote_positive": 102879,
+        "depth_positive": 102884,
+        "depth_monotonic": 102884,
+        "top_within_depth10": 102884,
+        "book_support_known": 102879,
+        "native_key_known": 102884,
+        "close_exact_match": 102884,
+        "close_match": 102884,
+        "buy_exact_match": 102884,
+        "sell_exact_match": 102884,
+        "book_known": 102879
+      },
+      "2021": {
+        "rows": 103398,
+        "dates": 258,
+        "quote_positive": 103397,
+        "depth_positive": 103398,
+        "depth_monotonic": 103398,
+        "top_within_depth10": 103398,
+        "book_support_known": 103397,
+        "native_key_known": 103398,
+        "close_exact_match": 103398,
+        "close_match": 103398,
+        "buy_exact_match": 103398,
+        "sell_exact_match": 103398,
+        "book_known": 103397
+      },
+      "2022": {
+        "rows": 103203,
+        "dates": 258,
+        "quote_positive": 103203,
+        "depth_positive": 103203,
+        "depth_monotonic": 103203,
+        "top_within_depth10": 103203,
+        "book_support_known": 103203,
+        "native_key_known": 103203,
+        "close_exact_match": 103203,
+        "close_match": 103203,
+        "buy_exact_match": 103203,
+        "sell_exact_match": 103203,
+        "book_known": 103203
+      }
+    },
+    "duplicate_keys": 0,
+    "selected_fields": [
+      "spread_ticks",
+      "bid_sz_top",
+      "ask_sz_top",
+      "s48",
+      "s49",
+      "s50",
+      "s51",
+      "s52",
+      "s53",
+      "close",
+      "upvol",
+      "downvol"
+    ],
+    "native_input_audit": {
+      "files": {
+        "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2018.csv.gz": {
+          "rows": 349082,
+          "compressed_sha256": "c2482cce0ded7488def67070e6806eecf358e563b8618e2fdb64997e2465ccc3",
+          "original_sha256": "70b42a96d851e30d5b02629a02add33e9080c0df4b357f2ea61cc65b7963130a"
+        },
+        "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2019.csv.gz": {
+          "rows": 349844,
+          "compressed_sha256": "62d47b02618ec5909dbcf81321898341c3d5e317948b46fef6ab5c8d47237b22",
+          "original_sha256": "a79247379812b63a2077ce0da6aa4f391f0df59ccc03cd6cb701eb1a4fdf799e"
+        },
+        "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2020.csv.gz": {
+          "rows": 348926,
+          "compressed_sha256": "216b312952c080a3c36cca64699dfa46aaf6e134c5a68de9aefca6121eec4392",
+          "original_sha256": "a3fdf4a3f60f4081a83c1acdfa288d0b03fce9d8c0b4f7ceac29e3646f2e60c8"
+        },
+        "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2021.csv.gz": {
+          "rows": 353393,
+          "compressed_sha256": "e62d4d37d27ab6ff9ac5373d6cdc9296def40f21887a31541a7f715dc06973ce",
+          "original_sha256": "de717ad7aaece8892d979b3708236404ce6a7ec996b9476bcf5c65a9482d95fc"
+        },
+        "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2022.csv.gz": {
+          "rows": 354112,
+          "compressed_sha256": "cc1c40967a93445923ecec70282c87b23c5b4e8b7e394e903daf4b69b6db17e3",
+          "original_sha256": "bf49bdd2b9608738de96c1446e9d9c53eb7947f249bd6eb06929c1de01d82c37"
+        }
+      },
+      "transfer_manifest_sha256": "889848785814eec127fff1a271b24795c6af1486a11ca45690fdb286e3c5b7b2",
+      "rows": 1755357,
+      "first": "2018-01-01 17:01:00",
+      "last": "2022-12-30 16:00:00",
+      "timestamp": "America/New_York close -> America/Chicago close; no extra minute added",
+      "duplicate_keys": 0,
+      "missing_minutes_filled": 0,
+      "total_volume": "native Volume, verified equal to UpVol+DownVol",
+      "provenance_limits": [
+        "roll/build provenance unverified",
+        "historical receipt/corrections unknown",
+        "session gaps retained",
+        "not native PowerLanguage up-tick Volume",
+        "no returns computed"
+      ],
+      "source": "native 2018--22, no price/flow splicing"
+    },
+    "clock": "ET close label -> naive CT close label, America/New_York to America/Chicago; no extra minute",
+    "legacy_total": "CSV Volume ignored: it is buyer volume in these exports; buy/sell use UpTicks/DownTicks mapped fields",
+    "availability": "Conditional archival indexed-DLL close values; original receipt, calculation and revision vintages unverified",
+    "support_rule": "positive spread/top/six depths; monotonic10<=20<=50; top<=depth10; native key/closewithin.25/buy/sell matches",
+    "unsupported": "No complete quote-price ladder, native gap spacing, order-ID/add/cancel stream or individual replenishment receipts",
+    "raw_zero_policy": "Do not blanket-convert all derived zeros. Support invalidity is explicit, raw rows retained."
+  },
+  "endpoints": {
+    "source": {
+      "files": {
+        "data/OF_1min_2018_1.csv": {
+          "sha256": "2bc0e1ad344cc93d8685b6016b255ef1e642f30d6364245f51557e6999eff114",
+          "rows": 25188,
+          "first": "2018-01-02 08:30:00",
+          "last": "2018-03-29 15:15:00"
+        },
+        "data/OF_1min_2018_2.csv": {
+          "sha256": "5639a66d95ab2435c0f75896245bc21d20c1685b53c7fd68c89b051d817e9414",
+          "rows": 26195,
+          "first": "2018-04-02 08:30:00",
+          "last": "2018-06-29 15:15:00"
+        },
+        "data/OF_1min_2018_3.csv": {
+          "sha256": "7dd6824acaea62821ae9e785d528c9532c3b92dedbd7d8640c20faae473db696",
+          "rows": 25820,
+          "first": "2018-07-02 08:30:00",
+          "last": "2018-09-28 15:15:00"
+        },
+        "data/OF_1min_2018_4.csv": {
+          "sha256": "805500d67bd03bbacb9245957b8c9d0e9b33edf3006370779637515767a76ff7",
+          "rows": 25430,
+          "first": "2018-10-01 08:30:00",
+          "last": "2018-12-31 15:15:00"
+        },
+        "data/OF_1min_2019_1.csv": {
+          "sha256": "ae84a55a44fe0379a6afbf4ae781b59fd1604bf584d37c97531174df804836fc",
+          "rows": 25188,
+          "first": "2019-01-02 08:30:00",
+          "last": "2019-03-29 15:15:00"
+        },
+        "data/OF_1min_2019_2.csv": {
+          "sha256": "15933657a4e742254b5dd3a854dae2ea4eb3dbc42e4efafa62a607eaee6a4845",
+          "rows": 25789,
+          "first": "2019-04-01 08:30:00",
+          "last": "2019-06-28 15:15:00"
+        },
+        "data/OF_1min_2019_3.csv": {
+          "sha256": "995f81a181173d2c7879fd108bbf6c47055286eede57d9b2b55c604a6445735a",
+          "rows": 26226,
+          "first": "2019-07-01 08:30:00",
+          "last": "2019-09-30 15:15:00"
+        },
+        "data/OF_1min_2019_4.csv": {
+          "sha256": "667ed887abdcd91bb02cb3419b5a49c0ef003d19466c7658f7a78107cbac4b69",
+          "rows": 25835,
+          "first": "2019-10-01 08:30:00",
+          "last": "2019-12-31 15:15:00"
+        },
+        "data/OF_1min_2020_1.csv": {
+          "sha256": "67c7fb1166730e4d5eedf871f2a08875e2c71a8889f048bd81282c98ce9ae0f4",
+          "rows": 25218,
+          "first": "2020-01-02 08:30:00",
+          "last": "2020-03-31 15:15:00"
+        },
+        "data/OF_1min_2020_2.csv": {
+          "sha256": "be8963123cc649e11298d626f79beb3e31306fa9ccb3f4f247aa7ddccd11d95f",
+          "rows": 25425,
+          "first": "2020-04-01 08:30:00",
+          "last": "2020-06-30 09:11:00"
+        },
+        "data/OF_1min_2020_3.csv": {
+          "sha256": "b7501ad273ccd4259f909614ac7be8838588ee62df5f5038086a4cd82e0ec72d",
+          "rows": 26406,
+          "first": "2020-07-01 08:30:00",
+          "last": "2020-09-30 15:15:00"
+        },
+        "data/OF_1min_2020_4.csv": {
+          "sha256": "603d3fea3f59b2d97d67f1bb6613b54da3a6a7f548fa071a85d74d41cc376cc6",
+          "rows": 25835,
+          "first": "2020-10-01 08:30:00",
+          "last": "2020-12-31 15:15:00"
+        },
+        "data/OF_1min_2021_1.csv": {
+          "sha256": "0a7d801e97cbe38a414ca0207d09de5494eb0671f3b719c2f5e3c2d611251483",
+          "rows": 25188,
+          "first": "2021-01-04 08:30:00",
+          "last": "2021-03-31 15:15:00"
+        },
+        "data/OF_1min_2021_2.csv": {
+          "sha256": "0fcd3408675768576890e38f93c52359feffa3fd47e01d6e9ee10d69566b93fe",
+          "rows": 25789,
+          "first": "2021-04-01 08:30:00",
+          "last": "2021-06-30 15:15:00"
+        },
+        "data/OF_1min_2021_3.csv": {
+          "sha256": "64efc51c20ba33489377e3e2e620fee4415f565a6c7e434701741a35b7fa7f12",
+          "rows": 26406,
+          "first": "2021-07-01 08:30:00",
+          "last": "2021-09-30 15:15:00"
+        },
+        "data/OF_1min_2021_4.csv": {
+          "sha256": "60bf703a22c44cd6c928ff8d475a1199574a061d0fb86b5a37711055ed7837ab",
+          "rows": 26015,
+          "first": "2021-10-01 08:30:00",
+          "last": "2021-12-31 15:15:00"
+        },
+        "data/OF_1min_2022_1.csv": {
+          "sha256": "b5ec87cbadb2c62cd502a15b0d6cc595a0c383815a97a62b3687f14e7b1dac45",
+          "rows": 25594,
+          "first": "2022-01-03 08:30:00",
+          "last": "2022-03-31 15:15:00"
+        },
+        "data/OF_1min_2022_2.csv": {
+          "sha256": "5938d4a02c8b1bfac001da685758deb77cc679b9704c0303d697f1ae8f721cbe",
+          "rows": 25594,
+          "first": "2022-04-01 08:30:00",
+          "last": "2022-06-30 15:15:00"
+        },
+        "data/OF_1min_2022_3.csv": {
+          "sha256": "e935c507d69c4adc899d7e1b3d2488a7b2f6d2fa77df9b0e331828496c120028",
+          "rows": 26406,
+          "first": "2022-07-01 08:30:00",
+          "last": "2022-09-30 15:15:00"
+        },
+        "data/OF_1min_2022_4.csv": {
+          "sha256": "59f4b0dc8596ea7772a801b65db33b1ef98cda594932fb6b8d16ffab4d2a4a5b",
+          "rows": 25609,
+          "first": "2022-10-03 08:30:00",
+          "last": "2022-12-30 15:15:00"
+        }
+      },
+      "rows": 515156,
+      "by_year": {
+        "2018": {
+          "rows": 102633,
+          "dates": 258,
+          "quote_positive": 102631,
+          "depth_positive": 102633,
+          "depth_monotonic": 102633,
+          "top_within_depth10": 102633,
+          "book_support_known": 102631,
+          "native_key_known": 102633,
+          "close_exact_match": 102633,
+          "close_match": 102633,
+          "buy_exact_match": 102633,
+          "sell_exact_match": 102633,
+          "book_known": 102631
+        },
+        "2019": {
+          "rows": 103038,
+          "dates": 258,
+          "quote_positive": 103035,
+          "depth_positive": 103038,
+          "depth_monotonic": 103038,
+          "top_within_depth10": 103038,
+          "book_support_known": 103035,
+          "native_key_known": 103038,
+          "close_exact_match": 103038,
+          "close_match": 103038,
+          "buy_exact_match": 103038,
+          "sell_exact_match": 103038,
+          "book_known": 103035
+        },
+        "2020": {
+          "rows": 102884,
+          "dates": 259,
+          "quote_positive": 102879,
+          "depth_positive": 102884,
+          "depth_monotonic": 102884,
+          "top_within_depth10": 102884,
+          "book_support_known": 102879,
+          "native_key_known": 102884,
+          "close_exact_match": 102884,
+          "close_match": 102884,
+          "buy_exact_match": 102884,
+          "sell_exact_match": 102884,
+          "book_known": 102879
+        },
+        "2021": {
+          "rows": 103398,
+          "dates": 258,
+          "quote_positive": 103397,
+          "depth_positive": 103398,
+          "depth_monotonic": 103398,
+          "top_within_depth10": 103398,
+          "book_support_known": 103397,
+          "native_key_known": 103398,
+          "close_exact_match": 103398,
+          "close_match": 103398,
+          "buy_exact_match": 103398,
+          "sell_exact_match": 103398,
+          "book_known": 103397
+        },
+        "2022": {
+          "rows": 103203,
+          "dates": 258,
+          "quote_positive": 103203,
+          "depth_positive": 103203,
+          "depth_monotonic": 103203,
+          "top_within_depth10": 103203,
+          "book_support_known": 103203,
+          "native_key_known": 103203,
+          "close_exact_match": 103203,
+          "close_match": 103203,
+          "buy_exact_match": 103203,
+          "sell_exact_match": 103203,
+          "book_known": 103203
+        }
+      },
+      "duplicate_keys": 0,
+      "selected_fields": [
+        "spread_ticks",
+        "bid_sz_top",
+        "ask_sz_top",
+        "s48",
+        "s49",
+        "s50",
+        "s51",
+        "s52",
+        "s53",
+        "close",
+        "upvol",
+        "downvol"
+      ],
+      "native_input_audit": {
+        "files": {
+          "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2018.csv.gz": {
+            "rows": 349082,
+            "compressed_sha256": "c2482cce0ded7488def67070e6806eecf358e563b8618e2fdb64997e2465ccc3",
+            "original_sha256": "70b42a96d851e30d5b02629a02add33e9080c0df4b357f2ea61cc65b7963130a"
+          },
+          "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2019.csv.gz": {
+            "rows": 349844,
+            "compressed_sha256": "62d47b02618ec5909dbcf81321898341c3d5e317948b46fef6ab5c8d47237b22",
+            "original_sha256": "a79247379812b63a2077ce0da6aa4f391f0df59ccc03cd6cb701eb1a4fdf799e"
+          },
+          "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2020.csv.gz": {
+            "rows": 348926,
+            "compressed_sha256": "216b312952c080a3c36cca64699dfa46aaf6e134c5a68de9aefca6121eec4392",
+            "original_sha256": "a3fdf4a3f60f4081a83c1acdfa288d0b03fce9d8c0b4f7ceac29e3646f2e60c8"
+          },
+          "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2021.csv.gz": {
+            "rows": 353393,
+            "compressed_sha256": "e62d4d37d27ab6ff9ac5373d6cdc9296def40f21887a31541a7f715dc06973ce",
+            "original_sha256": "de717ad7aaece8892d979b3708236404ce6a7ec996b9476bcf5c65a9482d95fc"
+          },
+          "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2022.csv.gz": {
+            "rows": 354112,
+            "compressed_sha256": "cc1c40967a93445923ecec70282c87b23c5b4e8b7e394e903daf4b69b6db17e3",
+            "original_sha256": "bf49bdd2b9608738de96c1446e9d9c53eb7947f249bd6eb06929c1de01d82c37"
+          }
+        },
+        "transfer_manifest_sha256": "889848785814eec127fff1a271b24795c6af1486a11ca45690fdb286e3c5b7b2",
+        "rows": 1755357,
+        "first": "2018-01-01 17:01:00",
+        "last": "2022-12-30 16:00:00",
+        "timestamp": "America/New_York close -> America/Chicago close; no extra minute added",
+        "duplicate_keys": 0,
+        "missing_minutes_filled": 0,
+        "total_volume": "native Volume, verified equal to UpVol+DownVol",
+        "provenance_limits": [
+          "roll/build provenance unverified",
+          "historical receipt/corrections unknown",
+          "session gaps retained",
+          "not native PowerLanguage up-tick Volume",
+          "no returns computed"
+        ],
+        "source": "native 2018--22, no price/flow splicing"
+      },
+      "clock": "ET close label -> naive CT close label, America/New_York to America/Chicago; no extra minute",
+      "legacy_total": "CSV Volume ignored: it is buyer volume in these exports; buy/sell use UpTicks/DownTicks mapped fields",
+      "availability": "Conditional archival indexed-DLL close values; original receipt, calculation and revision vintages unverified",
+      "support_rule": "positive spread/top/six depths; monotonic10<=20<=50; top<=depth10; native key/closewithin.25/buy/sell matches",
+      "unsupported": "No complete quote-price ladder, native gap spacing, order-ID/add/cancel stream or individual replenishment receipts",
+      "raw_zero_policy": "Do not blanket-convert all derived zeros. Support invalidity is explicit, raw rows retained."
+    },
+    "endpoint_rows": 104059,
+    "feature_known_rows": 96534,
+    "status_counts": {
+      "KNOWN": 96534,
+      "BASELINE20_UNKNOWN": 6231,
+      "LAG5_UNKNOWN": 1294
+    },
+    "feature_columns": [
+      "spread",
+      "topimb",
+      "depth10imb",
+      "depth50imb",
+      "near_fraction",
+      "log_depth10_ratio",
+      "log_depth10_growth5min",
+      "spread_change5min",
+      "imbalance_change5min"
+    ],
+    "change_imbalance": "depth10 imbalance current minus exact t-5min",
+    "no_fill": true,
+    "native_book_gap_claim": false
+  },
+  "attachment": {
+    "base_paired_rows": 135964,
+    "retained_paired_rows": 135964,
+    "retained_decisions": 67982,
+    "unknown_paired_rows": 0,
+    "endpoint_status_counts": {
+      "KNOWN": 135964
+    },
+    "book_context_known_rows": 135964,
+    "capacities_require_positive_depth": true,
+    "inference_filter": "Only known finite current/lag/baseline book context and native bar capacity inputs; never label_valid",
+    "features": [
+      "body0",
+      "range0",
+      "loc0",
+      "body1",
+      "body2",
+      "q0",
+      "q1",
+      "q2",
+      "efficiency3",
+      "log_volume_ratio",
+      "vol3_atr",
+      "hour",
+      "side",
+      "side_x_body0",
+      "side_x_body1",
+      "side_x_body2",
+      "side_x_loc0",
+      "side_x_q0",
+      "side_x_q1",
+      "side_x_q2",
+      "side_x_efficiency3",
+      "spread",
+      "topimb",
+      "depth10imb",
+      "depth50imb",
+      "near_fraction",
+      "log_depth10_ratio",
+      "log_depth10_growth5min",
+      "spread_change5min",
+      "imbalance_change5min",
+      "capacity_buy",
+      "capacity_sell",
+      "side_x_topimb",
+      "side_x_depth10imb",
+      "side_x_depth50imb",
+      "side_x_imbalance_change5min",
+      "side_x_capacity_difference"
+    ],
+    "no_book_control_features": [
+      "body0",
+      "range0",
+      "loc0",
+      "body1",
+      "body2",
+      "q0",
+      "q1",
+      "q2",
+      "efficiency3",
+      "log_volume_ratio",
+      "vol3_atr",
+      "hour",
+      "side",
+      "side_x_body0",
+      "side_x_body1",
+      "side_x_body2",
+      "side_x_loc0",
+      "side_x_q0",
+      "side_x_q1",
+      "side_x_q2",
+      "side_x_efficiency3"
+    ],
+    "capacity": "log1p(native completed five-minute buy/ask_depth10), log1p(sell/bid_depth10)",
+    "capacity_limit": "Five-minute historical trades divided by endpoint archival depth; no observed queue depletion or full LOB gaps",
+    "conditional_archive": true
+  }
+}

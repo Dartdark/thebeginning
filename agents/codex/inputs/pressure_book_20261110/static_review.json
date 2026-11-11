@@ -1,0 +1,23 @@
+{
+  "review": "Independent agent static source and planted-fixture audit, not independent economic/native verification",
+  "reviewer": "pressure_replay",
+  "actual_cache_inputs_labels_fits_outcomes_read": false,
+  "blocking_causal_label_leak_bugs_found": false,
+  "findings": [
+    "exact t-5 and previous20slot causal baseline",
+    "inference never label_valid filtered",
+    "training-only monthly scalers and mature labels",
+    "frozen cache and inherited execution unchanged",
+    "HGB_NOBOOK contains original q features and uses identical known-book eligibility",
+    "noncanonical root binding gap corrected before prereg freeze"
+  ],
+  "source_sha256": {
+    "analysis/codex_pressure_book_20261110_inputs.py": "1ed5423d9568752fea5b16a85835dbe469f787002d92ea24a47aa930cab8d4c2",
+    "analysis/codex_pressure_book_learning_20261110.py": "f76d7cc51eed5b6158671d416f562055dfea945a6f10f27e1cda3515d7d555f3"
+  },
+  "limits": [
+    "Archive receipt/build/revision unknown",
+    "positive support excludes empty-book states",
+    "No actual queue native fills or economic review established"
+  ]
+}
