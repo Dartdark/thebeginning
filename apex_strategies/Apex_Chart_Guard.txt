@@ -1,4 +1,4 @@
-// Apex Chart Guard (2026-11-09) - ONE helper signal per live chart, next to the strategy. Replaces FOUR separate signals:
+// Apex Chart Guard (2026-11-11: target limit only near the price) - ONE helper signal per live chart, next to the strategy. Replaces FOUR separate signals:
 //   Apex Trade Logger (OPEN / CLOSE / POS rows), Apex Chart Monitor (ACCT rows), Apex Target Guard v1 / v2 (evaluation
 //   finish line) and Apex Stop Guard (Bridge Monday only). It writes the SAME rows to the SAME daily file as before
 //   (C:\TradingLogs\YYYYMMDD.csv), so the watchdog, the 16:40 health check and the journal read it unchanged.
@@ -22,7 +22,8 @@
 //   ACCT: account, auto-trading on (1/0), net worth, equity, bar age (s), routed account, every MonitorMins
 
 inputs: Tag("VB-2"), AccountName(""), TargetBalance(-1), StopPoints(0), Folder("C:\TradingLogs\"), HeartbeatMins(30),
-	MonitorMins(5), EquityHasOpenPL(true), LogHistory(false), ScanAccounts(true);
+	MonitorMins(5), EquityHasOpenPL(true), LogHistory(false), ScanAccounts(true),
+	TgtNearPct(1.0);   { 2026-11-11: work the target limit only within this % of the price (Rithmic rejects far limits: "price crossed high limit") }
 variables: LastTT(0), LastEntryKey(0), K(0), N(0), EK(0), Live(false), SideTxt(""), Row(""), FileName(""), BarDay(""),
 	StratPos(0), BrokerPos(0), LastStrat(-999), LastBroker(-999), LastHB(-1), MinOfDay(0), HBKey(0),
 	MRoute(""), MNW(0), MEq(0), MAuto(0), MAge(0), MFile(""), MDay(""), MRow(""), MSlot(0), MLastSlot(-1), MMin(0),
@@ -119,13 +120,16 @@ if TargetBalance <> 0 and MarketPosition <> 0 and CurrentContracts > 0 and AcctU
 		if EquityHasOpenPL then GBase = GEq - OpenPositionProfit else GBase = GEq;
 		if TgtX > GBase then begin
 			GNeed = (TgtX - GBase) / (BigPointValue * CurrentContracts);
+			// 2026-11-11 fix: on a small chart (Twin / DT 2 MNQ) the target price is thousands of points away; Rithmic rejected
+			// that limit every bar, and after 10 rejections MultiCharts switched the chart's auto-trading OFF, cancelling the
+			// strategy's own stop and target. Now the limit is sent only when it is within TgtNearPct % of the price.
 			if MarketPosition > 0 then begin
 				GPx = IntPortion((AvgEntryPrice + GNeed) / Tk + 0.999999) * Tk;
-				Sell ("Target Guard LX") next bar at GPx limit;
+				if GPx - Close <= Close * TgtNearPct / 100 then Sell ("Target Guard LX") next bar at GPx limit;
 			end
 			else begin
 				GPx = IntPortion((AvgEntryPrice - GNeed) / Tk + 0.000001) * Tk;
-				BuyToCover ("Target Guard SX") next bar at GPx limit;
+				if Close - GPx <= Close * TgtNearPct / 100 then BuyToCover ("Target Guard SX") next bar at GPx limit;
 			end;
 		end
 		else if GBase < TgtX * 1.05 then begin   // > 5% above = wrong account / bad data: do nothing

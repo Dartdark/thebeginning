@@ -274,3 +274,11 @@ failed, auto-trading off on all its charts. EOD-trailing accounts still fail on 
   10/30 -03 and 11/03 -04 the same. NetWorth reads 0 for Apex. So Target Guard v2's EquityHasOpenPL = true. Not yet verified:
   that GetRTAccountEquity compiles and returns the same inside a SIGNAL (the monitor is an indicator) -> check the funded
   strategies' first live day (cushion guard, 2026-11-08).
+
+## Rithmic "price crossed high limit" on a far-away limit order (2026-11-11, account #5 Twin)
+The Chart Guard's target exit sent a Sell Limit at the price where the WHOLE account would reach its $9,000 target. On a
+2 MNQ chart that price was ~2,260 points away (30,394 vs 28,129); Rithmic rejected it every bar, and after 10 rejections
+MultiCharts switched the chart's auto-trading OFF, which cancelled the strategy's own stop and target (position left
+unmanaged until closed by hand). Fix: only send a limit when it is near the market (Apex Chart Guard `TgtNearPct` 1%).
+Also: MultiCharts draws every working order of the same account + symbol on EVERY chart of that symbol: read the
+Orders tab's Strategy Name / Order Name column before blaming the chart an order is drawn on.
