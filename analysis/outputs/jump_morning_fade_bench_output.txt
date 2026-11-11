@@ -1,0 +1,32 @@
+[provenance] code 4e309df dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Morning jump fade (WATCHLIST #40, POST-HOC lead, analysis/jump_morning_fade.py) against the current books: add AND replace
+lead: 694 trades, $117.5 per NQ, PF 1.35, per MNQ $11.20 a trade
+mapped to Apex trading days: 694 of 694 (dropped 0: not a grid trading day)
+daily correlation with the funded-plan pieces: VB -0.07, ONB_ML2_MC -0.11, MON_MC +0.07, EOS -0.00, LDF_MC -0.11, NFP_MC +0.09, MON_BR_MC -0.01, CLS +0.02, TWIN -0.06
+days both the lead and ONB trade: 82 of 530 lead days
+daily correlation with the 150K evaluation pieces: VB -0.07, ONB30 -0.07, MON_BR -0.01, EOS -0.00, TWIN -0.06
+
+== 150K evaluation (pass rate, paired diff and 5-95% block band)
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   + lead 1 MNQ                       pass 38.8% (+0.5%; band +0.0% / +1.2%)
+   + lead 2 MNQ                       pass 38.0% (-0.2%; band -1.3% / +0.8%)
+   + lead 3 MNQ                       pass 37.3% (-0.9%; band -2.3% / +0.2%)
+   + lead 2 MNQ, MON_BR 5 -> 3        pass 36.5% (-1.7%; band -3.5% / -0.1%)
+   MON_BR 5 -> 3 alone (control)      pass 37.2% (-1.1%; band -2.6% / +0.2%)
+   + lead 2 MNQ, Twin 2 -> 0          pass 35.7% (-2.6%; band -4.1% / -1.3%)
+   Twin 2 -> 0 alone (control)        pass 36.3% (-2.0%; band -3.2% / -1.1%)
+
+== Funded 150K x 1.5 + Twin 2 (600 paired 2-year histories)
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      + lead 1 MNQ                       2y $ 20,109 blown  1.8% all 6 97.8% diff $  +78 beats 50.2%
+      + lead 2 MNQ                       2y $ 20,143 blown  1.7% all 6 98.0% diff $ +112 beats 50.5%
+      + lead 3 MNQ                       2y $ 20,013 blown  2.3% all 6 97.3% diff $  -18 beats 50.2%
+      + lead 2 MNQ, Twin 2 -> 0          2y $ 20,151 blown  1.5% all 6 97.5% diff $ +120 beats 50.3%
+      Twin 2 -> 0 alone (control)        2y $ 19,988 blown  1.8% all 6 95.8% diff $  -42 beats 49.6%
+
+== Personal book (1-year block-bootstrap MC: median year / p95 drawdown), every piece 1 micro + OT 2 MNQ as in the plan
+   correlation with personal pieces: NFPFade +0.09, MondayLong +0.07, ESMOCFollow_perMES +0.03, CLSundayFade_perMCL +0.02, SwingTarget -0.00; most overlapped: NFPFade
+   2018-26: book $28,194 / $4,892 = 5.76 | + lead 1 MNQ $29,173 / $4,714 = 6.19 (+0.43) | + lead 2 MNQ $30,071 / $4,693 = 6.41 (+0.64) | - NFPFade + lead 1 MNQ $28,896 / $4,689 = 6.16 (+0.40) | - NFPFade (control) $27,837 / $4,906 = 5.67 (-0.09)
+   2018-22: book $21,371 / $3,745 = 5.71 | + lead 1 MNQ $21,705 / $3,617 = 6.00 (+0.29) | + lead 2 MNQ $21,994 / $3,667 = 6.00 (+0.29) | - NFPFade + lead 1 MNQ $21,594 / $3,566 = 6.06 (+0.35) | - NFPFade (control) $21,342 / $3,752 = 5.69 (-0.02)
+   2023+: book $37,903 / $5,795 = 6.54 | + lead 1 MNQ $39,382 / $5,479 = 7.19 (+0.65) | + lead 2 MNQ $41,245 / $5,481 = 7.53 (+0.99) | - NFPFade + lead 1 MNQ $38,863 / $5,593 = 6.95 (+0.41) | - NFPFade (control) $37,271 / $5,879 = 6.34 (-0.20)
