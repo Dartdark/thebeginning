@@ -2706,8 +2706,8 @@ Smallest next check: a specified annotated entry reconciled against closed-bar i
 No live change, new monitor, promoted strategy, execution saving or account benefit is established.
 
 **2026-11-10 authorized build follow-up:** [causal strategy research](results/pressure_strategy_build_20261110.md)
-now tests explicit adaptations rather than stopping at the missing private rule. First15definitions fail design gates;
-the two-hour pre-event memory extension is in preparation, not yet a result. Preserve these failures separately from
+now tests explicit adaptations rather than stopping at the missing private rule. All19definitions across6batches fail
+design gates, including the two-hour pre-event memory extension. Preserve these failures separately from
 the unknown third-party code. The resting-entry attempt loses after including delayed activation, missed orders,
 strict trade-through and conservative fill-bar chronology; a cheaper entry cannot be assumed to save the signal.
 Input/replay code QA also exposed hidden missing time-exit tails and the different information available for a market

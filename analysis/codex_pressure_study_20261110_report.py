@@ -21,10 +21,10 @@ def main():
     for family, rel, selectable in SOURCES:
         path = ROOT / 'analysis/outputs' / rel / 'results.json'
         if not path.exists():
-            if family == 'long_memory':
-                continue  # Reserved only; not reported as a completed trial.
             raise FileNotFoundError(path)
         result = json.loads(path.read_text())
+        if result['selected'] is not None or result['validation_allowed']:
+            raise ValueError('This closed negative-study report requires no selection or later validation')
         receipt[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
         for name, item in result['stats'].items():
             s = item['summary']
@@ -43,6 +43,8 @@ def main():
                              selected=False, source_result=str(path.relative_to(ROOT)),
                              prereg=result.get('prereg')))
     table = pd.DataFrame(rows)
+    assert len(table) == 19 and table.variant.nunique() == 19
+    assert (table.gross_per_NQ - table.cost_per_NQ - table.net_per_NQ).abs().max() < 1e-6
     OUT.mkdir(parents=True, exist_ok=True)
     table.to_csv(OUT / 'all_definitions.csv', index=False)
     (OUT / 'report_receipt.json').write_text(json.dumps(dict(

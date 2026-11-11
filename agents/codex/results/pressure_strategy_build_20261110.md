@@ -1,10 +1,10 @@
 # Three-paper pressure strategy build: no qualified candidate from completed batches
 
 Summary: Built and tested causal NQ adaptations of the uploaded pressure/jump papers; the screenshot rule is unknown.
-First five batches /15 definitions fail their frozen design gates. The only profitable selectable, RIDGE_BOOK,
+All six batches /19 definitions fail their frozen design gates. The only profitable selectable, RIDGE_BOOK,
 earns $6,057.25/NQ but only $245.74/MNQ proxy over2018–22, PF1.056, t0.583; four-tick stress loses $7,007.75/NQ.
 No version has earned later-history validation, executable MultiCharts code, account testing or a VB-protection claim.
-The two-hour pre-event memory extension is being prepared prospectively; preparation is not a result.
+The two-hour pre-event memory models also lose, including before costs. No similar-or-better strategy was established.
 
 Author: Codex. Active user build mandate, 2026-11-10; separate from paused scout/lab programs and budgets.
 Source review: [papers and screenshot reconstruction](pressure_papers_reconstruction_20261110.md).
@@ -51,6 +51,10 @@ failed and repeated-baseline definitions; older pressure/absorption/book searche
 | HGB_BOOK | primary |878|73.23|−10,325.50|0.921|
 | RIDGE_BOOK | alternate |699|76.39|+6,057.25|1.056|
 | HGB_NOBOOK | control |743|73.49|−11,906.75|0.886|
+| HGB_MEMORY | primary |751|71.90|−20,914.75|0.814|
+| RIDGE_MEMORY | alternate |484|73.14|−7,489.00|0.886|
+| HGB_LOCAL | control |745|73.42|−12,891.25|0.878|
+| RIDGE_LOCAL | control |133|74.44|−3,429.25|0.829|
 
 The saved `metrics.csv` per batch contains whole/long/short/year trade counts, win rate, gross/net/costs, trade and
 daily-dependence t-statistics, Sharpe, Sortino, PF, Calmar, Ulcer and closed-trade drawdown. Full ledgers, calendar-zero
@@ -61,6 +65,12 @@ RIDGE_BOOK has only three positive design years, $11,330.50 closed-trade drawdow
 Its one-MNQ proxy earns about35c net/trade. Positive net alone therefore fails the precommitted evidence threshold.
 It is not selected, scaled up, promoted as an independent factor, or passed to account tests.
 
+The final memory test adds one fixed120minute pre-event profile endingT−5, excluding the current five-minute bar.
+It measures activity buildup/concentration, pressure persistence and source-style .12coefficient EMAs, with strictly
+prior-day same-clock normalization. Each learner has its own matched local-feature control on the same observations.
+HGB_MEMORY gross−10,605/cost10,309.75; RIDGE_MEMORY gross−860/cost6,629 perNQ. Their MNQ proxies lose2,478.24/998.16.
+No window, decay, normalizer, entry-hurdle or direction sweep was run. All four definitions remain counted.
+
 ## Protocols, code and outputs
 
 | Batch | Frozen protocol | Main source | Output below `analysis/outputs/` |
@@ -70,9 +80,10 @@ It is not selected, scaled up, promoted as an independent factor, or passed to a
 |3|0d61f59e|`codex_pressure_passive_20261110.py`|`codex_pressure_build_20261110/passive_design/`|
 |4|8e405d69|`codex_pressure_market_20261110.py`|`codex_pressure_market_20261110/`|
 |5|e898078b|`codex_pressure_book_learning_20261110.py`|`codex_pressure_book_learning_20261110/`|
+|6|4a851fb6|`codex_pressure_memory_20261110.py`|`codex_pressure_memory_20261110/`|
 
 Matching evidence and exact plans live under `agents/codex/evidence/` and `plans/`, names pressure_build,
-pressure_learning,pressure_passive,pressure_market,pressure_book_learning with suffix20261110.md.
+pressure_learning,pressure_passive,pressure_market,pressure_book_learning,pressure_memory with suffix20261110.md.
 Batch1 initial binding-only run was interrupted before any outcome artifact because repeated roll-calendar calculation
 consumed CPU; its interruption receipt remains. The frozen engineering amendment caches identical date flags and fixes
 unknown time-exit tails/empty stress schema. It does not change economic rules after a result.
@@ -103,6 +114,20 @@ aggregate depletion cannot order additions/cancels/replenishment. Stored search 
 
 Independent agents audited source clocks, model isolation, replay chronology and planted fixtures. This is code QA,
 not independent raw-spec reproduction of economic returns or native MultiCharts acceptance.
+The memory source has nine planted checks, independently rerun, plus independent boundary/zero-handling spot checks.
+Stored static receipts identify exactly which source/specification was checked; no independent return acceptance claimed.
+
+## Remaining source-supported next check
+
+These negative results reject the explicit six adaptations, not the unknown trader's private strategy. The code models
+one-full-minute processing allowance after the decision; it does not resolve subsecond book response or prove such a
+fast effect is absent. A faithful test of native gaps/replenishment needs identified contract-level initial books and
+ordered trade/add/cancel events with capture/receipt clocks, plus producing build/revision rules. The archived summaries
+cannot reconstruct those inputs. Alternatively the private written rule and one annotated example would establish
+what that claimed implementation actually does. Neither missing packet is present in this workspace.
+
+All19design definitions and earlier family history remain visible. No profitable validated sleeve or solution to the
+VB/ONB loss concentration has been found. Further parameter changes are not an earned validation stage for these rules.
 
 ## PowerLanguage differences
 

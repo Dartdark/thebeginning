@@ -20,10 +20,10 @@ quote signing, book replenishment and historical news receipts needed by the pap
 quote/depth/fill fields remain under D42–D45. Prior five-minute innovation fades and pre-open absorption failed; no
 threshold/clock/direction rescue follows from these uploads. No paid data or new acquisition loop is authorized here.
 
-**Authorized build update:** the user subsequently requested an actual derived strategy. First15explicit adaptation
+**Authorized build update:** the user subsequently requested an actual derived strategy. All19explicit adaptation
 definitions fail frozen2018–22 design gates; retain the full [build report](results/pressure_strategy_build_20261110.md).
 This rejects those rules without claiming to reproduce/reject the private screenshot model. The two-hour pre-event
-memory extension is in preparation, not a result. LegacyOF spread/top/depth10/20/50 scalars exist and match515,156native
+memory extension also fails, including gross. LegacyOF spread/top/depth10/20/50 scalars exist and match515,156native
 price/aggressor keys exactly; only11rows lack positivequote support. Do not request those same aggregates again.
 They are conditional historicalGetAt values, not original-vintage native ladders. No actual bridgeDLL/ofb_hist.bin,
 upstream builder/manual or native ordered quote/trade/add/cancel history was found in the bounded owned-file search.

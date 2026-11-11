@@ -1,88 +1,80 @@
-# Active user task: build a pressure/jump strategy and test 150K book utility
+# Pressure/jump strategy build: completed negative research, no selected strategy
 
-User explicitly requests sustained build/code/test work inspired by the3uploaded papers and screenshot. They want
-similar/better economic results and a solution to VB/ONB stop concentration. Do not declare success from a high win rate,
-selected design result or screenshot. Never manufacture success or promise it. Continue earned stages autonomously.
+User requested code and similar-or-better performance than the third-party screenshot, with VB/ONB account utility.
+The goal has NOT been achieved. Actual bounded research is complete for six explicit adaptations /19definitions.
+All fail frozen2018–22 design gates. Do not present the task as a profitable strategy or a solved VB problem.
 
-## Active research state
+## Authoritative artifacts
 
-- Worktree: `/workspace/thebeginning_papers_20261110`, branch `codex/work`. Other original worktree contains unapproved
-  salary-projection commits a89eec86/24d8f681; do not include them in this research branch.
-- Uploaded-paper explanation and screenshot arithmetic are committed at380070b6; originals localattachments, manifests saved.
-- Full native design input QA completed:1,755,357minutes,350,252complete5minbars, verified5gzip/rawhashes. Input adapter
-  `analysis/codex_pressure_build_20261110_inputs.py`. Realrecentflow ends2026-07-07, notOctpriceend.
-- Batch1 protocol67fbba5d, engineeringamendment258badc7. First run interrupted before any outcome artifacts while a
-  deterministic roll-calendar map consumedCPU. Original binding/interruption receipt retained; same-dateflags cached.
-- Independent sourceQA also corrected hiddenmissing time-exit tails and zero-trade stressschema before outcomes.
-- Completed batch1QA2: **REJECT**,3economicdefinitions. RESID2:1300trades,67.923%win,PF.6876,net−35,875/NQ;
-  PRICE2:1500,69.2%,PF.7219,−34,030;NO_CONFIRM:2066,63.94%,PF.5974,−63,733.50.
-  No2023+ returns/accountbench/PL. Complete results and rejection receipt in
-  `analysis/outputs/codex_pressure_build_20261110/batch1_design_qa2/`.
-- Batch2 plans/evidence `pressure_learning_20261110.md`: monthly126priorcashday direct net-barrier-payoff forecast,
-  Ridge primary/HGBalternate/price-onlyHGBcontrol; .3Rtarget,.10ATRstop, strictlymaturelabels, fixedhyperparameters.
-  Agent preparing `analysis/codex_pressure_learning_20261110.py`; DO NOTRUNactual labels/returns untilcode+plan committed.
-  Sourcefeature/fit readiness and tests must be checked before that commit. Three moredefinitionsreserved,6studydefinitions
-  including firstbatch; this does not erase earlier repo multiplicity or reset pausedscout/lab history.
+- Report: `agents/codex/results/pressure_strategy_build_20261110.md`.
+- Paper/screenshot review: `agents/codex/results/pressure_papers_reconstruction_20261110.md`.
+- Reproducible complete trial summary: `analysis/codex_pressure_study_20261110_report.py` ->
+  `analysis/outputs/codex_pressure_study_20261110/all_definitions.csv` + hash receipt.
+- Evidence/exact plans: pressure_build, pressure_learning, pressure_passive, pressure_market,
+  pressure_book_learning, pressure_memory under agents/codex/evidence and plans, suffix20261110.md.
+- Research worktree `/workspace/thebeginning_papers_20261110`, branch codex/work. Keep original workspace financial
+  commits a89eec86/24d8f681 excluded. Publication contains research only; pull before every push.
 
-## Agents / file ownership
+## Actual completed results, net per one NQ, design2018–22
 
-`pressure_prior_data` owns only the learning source file; dataadapter completed. `pressure_replay` completed replayhelper.
-`pressure_paper_2021` independently audited batch1source and is proposing a backup resting-limit hypothesis only.
-`strategy_screenshot_math` audited accountinterfaces read-only. Do not let anyagent run economic outcomes beforeprereg.
+1. Impact/rejection: RESID2 1300trades,67.92%wins,−35875,PF.688; PRICE2−34030; NO_CONFIRM−63733.50.
+   Protocol67fbba5d /pre-outcome engineeringQA258badc7; outputs pressure_build.../batch1_design_qa2.
+2. Monthly net payoff: RIDGE128,73.44%,−4333,PF.786; HGB752,72.61%,−18802,PF.832;
+   HGB_PRICE−9922.50. Protocolc852212a; outputs codex_pressure_learning_20261110.
+3. Delayed resting entry: L1 326,57.67%,−16223.50,PF.557; L2 342,49.12%,−18339.50,PF.370;
+   MARKET−32126.25. Protocol0d61f59e; outputs pressure_build.../passive_design.
+4. ES common factor: FULL1437,67.64%,−50403.25,PF.630; COMMON_ONLY−42469.75; FLOW_ONLY−35910.50.
+   Protocol8e405d69; outputs codex_pressure_market_20261110.
+5. Archived book: HGB_BOOK878,73.23%,−10325.50,PF.921; RIDGE_BOOK699,76.39%,+6057.25,PF1.056;
+   HGB_NOBOOK−11906.75. Protocole898078b; outputs codex_pressure_book_learning_20261110.
+   Ridge only+245.74 perMNQproxy over5years, fourtick−7007.75/NQ, t.583/NW5.490,3positiveyears. REJECT.
+6. Fixed120min pre-event profile: HGB_MEMORY751,71.90%,−20914.75,PF.814; RIDGE_MEMORY484,73.14%,−7489,PF.886;
+   HGB_LOCAL−12891.25; RIDGE_LOCAL−3429.25. Protocol4a851fb6; outputs codex_pressure_memory_20261110.
+   Both candidates lose gross as well as net. No basicpass. Four matched-estimator definitions, cumulative19.
 
-## Account work only after standalone passes
+Every batch has full whole/long/short/year metrics, input/code identities, ledgers and formal rejection. No control
+promotion, threshold/window/direction/hurdle search or later-return rescue. All older AR/pressure/39book searches
+remain counted. This active build did not restart paused scout/lab programs or their budgets.
 
-CurrentClaude reference25ca9556; baseVB15/ONB2750/Bridge5/EOS1250/Twin2/DT2. bench150.setup default is olderVB20withoutDT
-and runs simulations onimport/setup. Legacyaccount benches use21sessions, fractionalfinish, clippedDLL and missingdata
-substitution; cannot support a positivecurrent150Kclaim. `codex_eval_engine_20261104` supports common-price events,
-inclusive4kfloor, actualDLLovershoot/costs, explicit30calendar expiry and UNKNOWNs. Integerfinish rounds sleeves separately.
-Use BASE/EMPTY(noVB)/ADD/REPLACE at frozenintegerallocation; offset must arrive before failure, not lateratEOD.
+## Engineering / source limits
 
-## Completed continuation / next active inputs
+Native design:1755357minute rows,350252complete5min, five gzip/rawhashes. Total=buy+sell, claimed vendor aggressor
+categories; raw quote signing/correction/receipt/continuousroll provenance incomplete. ETclose->CTclose, no legacy
+price splicing or missingflowzero. Recent fullprice throughOct30 does not extend actualflow beyondJuly7,2026.
 
-- Batch2 frozen c852212a completed: RIDGE128trades,73.44%wins,PF.7864,−4,333/NQ; HGB752,72.61%,PF.8321,
-  −18,802; HGB_PRICEcontrol770,74.29%,PF.9069,−9,922.50. REJECT; no2023+read. Outputs
-  `analysis/outputs/codex_pressure_learning_20261110/`, decision saved. Source independently audited before interpretation.
-- Batch3 resting-entry frozen0d61f59e completed: L1 326trades,57.67%,PF.5566,−16,223.50/NQ; L2 342,49.12%,PF.3700,
-  −18,339.50; MARKETcontrol925,63.03%,PF.6356,−32,126.25. REJECT. Strict1pointfills/stopfirst, conditionalqueue model.
-  Preserve23plantedchecks, allorder/fill/no-fillbar-stressledgers and sourceevent binding. Newdefs9cumulative.
-- Batch4 ES-common-input frozen8e405d69 completed: FULL1437trades,67.64%,PF.6297,−50,403.25; COMMON_ONLY1471,
-  68.12%,PF.6709,−42,469.75; FLOW_ONLY1298,67.95%,PF.6872,−35,910.50. REJECT. NativeNQ prices remainunspliced,
-  ESstrictownedhashes/complete5min, featureonly. Outputs `analysis/outputs/codex_pressure_market_20261110/`.
-- All12studydefinitions plusolderpressure/pattern/booksearches remaincounted. No laterhistory/account/PLstageearned.
-- Next meaningfulinput study: legacyOFhistoricalbar bookstates (spread/top/depth10/50) exist; pressure_prior_data agent
-  owns `analysis/codex_pressure_book_20261110_inputs.py`, parentmustinspect input-onlyjoins/sentinel/provenance before
-  anyeconomicadmission. ClosedDLL useshistoricalGetAt(BarKey), butoriginalbuild/receipt/revisionvintagesunverified.
-- pressure_paper_2021 agent owns `analysis/codex_pressure_book_learning_20261110.py`: samefrozenmonthlypayofflearner,
-  fixedbookfragility/capacity inputs, HGB_BOOK/RIDGE_BOOK selectables +same-eligibilityHGB_NOBOOKcontrol. Parentmustwrite
-  plan/evidence, verifyexactfeatures/gates andcommit code BEFOREactualnewfits/outcomes. Threeadditionaldefsreserved;
-  potential15cumulative. Do not count preparation as a result or promoteprice/marketcontrols from failedbatches.
+Firstbinding-only run interrupted before outcomes due repeated deterministic roll-date calculation; receipt retained.
+Pre-outcome QA fixed date caching, unknown time-exit tails, empty stress schema, and market-vs-passive fillbar chronology.
+Actual economic rules never changed after outcomes. All tests retain onefullminute decision allowance, fees,1point
+TPthrough, stopgaps, unknownpath gates and declared ambiguity stresses. These negative results do not measure a
+subsecond native-book strategy or prove that no faster effect exists.
 
-## Completion standard
+Book archive:20hashes/515156rows, ALL nativeclose/buy/sell exactmatch;11unsupportedquote rowsunknown. Top<=depth10<=20<=50.
+Historical GetAt(BarKey) shows indexedlookup, not originalvintage; exporter can delete/rebuild history. No actualDLL,
+ofb_hist.bin, upstreambuilder/manual or nativepricedladder/eventstream found in boundedownedsearch. Stored inputonly
+and staticQA receipts: agents/codex/inputs/pressure_book_20261110. Finalized scalars cannot reconstruct native gaps,
+ordered cancellations or replenishment. Book positives would still require availability proof, even if economic gates passed.
 
-Frozen design passes -> commitselection -> once-only historical2023+validation -> cost/latencystress/placebos/bootstrap/
-independent raw-spec check -> earned accountcomparisons -> exact testedPowerLanguage with explicit nativeMCpending.
-Failedbatch stops dependent tests; continue only newly justifiedcommittedhypotheses, notthreshold/direction/timingrescue.
-No live/VPS/broker/API/chart/settings/purchase/notification changes. Keepuser updated during sustainedwork; no invisible
-backgroundwork/success claims. Final result must include actualfindings, code/artifacts, allfailures/trials and limits.
+Memory profile:120exactreturnsT−124..T−5,121closesT−125..T−5; ninefeatures+4interactions=34total. Same scheduled09–14
+originaldecision set; no retrospective jumpselection. Prior20sameclockseasonality with min15FINITE observations,
+validzerosretained/positivemedian required. EMA recursion .12x+.88S initialized0, not exp(−.12dt), and u is NOT exactpaperJ.
+Exactbatch2labelcache0d61f59e reused unchanged. Four matching-model comparisons share input/label/fold eligibility.
+Nineplantedchecks pass; independent source/fixture audits pass. StaticQA is not independent economic/nativeMC acceptance.
 
-## Latest checkpoint, after first15 actual definitions
+## Unearned stages / next admissible input
 
-- Firstfivebatches and report pushed safely tocodex/work ate943327e; excluded salary commits remain outside.
-- Batch5 e898078b completed: HGB_BOOK878trades/73.23%/−10325.50NQ/PF.9208; RIDGE_BOOK699/76.39%/+6057.25/PF1.0564;
-  HGB_NOBOOK743/73.49%/−11906.75/PF.8863. Allbasicgatesfail; RIDGE_BOOK microproxy only+245.74 over5years,
-  stress−7007.75/NQ,3positiveyears/t.583/NW5.490. No selection/laterhistory/account/PLearned. Sourcevintagealso unresolved.
-- Inputonlybookintake20hashes/515156rows allnativeclose/buy/sell EXACT;11quoteinvalidunknown; historicalGetAt claim
-  conditional. No originalDLL/build/cache/manual or nativepricedladder/eventstream found by boundedownedfilesearch.
-- Currentreport `agents/codex/results/pressure_strategy_build_20261110.md`; aggregation
-  `analysis/codex_pressure_study_20261110_report.py`. Whole/side/year detailedmetrics perbatch.
-- Prospectivelyaccepted batch6: SINGLE120minpre-eventprofile endingsignalT−5, no currenteventbar inprofile;
-  profile adds9summaries+4sideinteractions to original21features. HGB_MEMORY/RIDGE_MEMORYselectables,HGB_LOCALcontrol,
-  exactbatch2cache/no newlabels, same126slot/month/.02R/.10ATR/.3R/costs. Parent MUSTinspect/freeze source+plan BEFOREfits.
-- pressure_paper_2021 ownsONLY `analysis/codex_pressure_memory_20261110.py`; pressure_prior_data ownsONLY matching
-  plan/evidence pressure_memory_20261110.md. pressure_paper_2003 sourceonly scientificreview. Allblindto batch5returns.
-- κ=.12/minutesmoother verified in uploaded2021PDFp5 (J1minp3), but ournormalizedu isnotpaperJ. No4.36jumpthreshold,
-  sourcepowerlawestimate/nativeHawkesclaim, centeredprofiles, clock/windowsearch or privatecode-reproductionclaim.
-- Fourprospectiveadditionaldefinitions wouldbring19; matchingRIDGE_LOCALcontrol added BEFOREoutcomes by source review.
-  Notyetactualtrial untilrun. FinalizeTODO/data/library updates
-  afterresult, rerunaggregate, updatehandoffstate, commit/pull/push. No askinguserwhetherto do authorizedwork.
+No2023+ outcomes read for this task; no bootstrap/placebo/account stages earned; no deployablePowerLanguage or live
+change. Exact trader rules still unknown. User's desired similar/better result and protection remain unestablished.
+Next faithful microstructure test needs already-owned identified-contract initial ladder +ordered trade/add/cancel
+records +event/receipt clocks +producingbuild/revision packet, or the private written rule/annotated trade. Shared
+missing-input record is DATA_NEEDED.md. No paid data, external messages, VPS/broker/chart/API/alert changes authorized.
+
+If a genuinely different future input/rule earns a TEST, preserve these failures, preregister it separately and proceed
+through all earned stages. Do not revive failed rules by renaming, inversion or parameter rescue.
+
+## Current150K account caveat for future earned work
+
+Refresh Claude before comparisons. Inspectedreference25ca9556: VB15,ONB2750,Bridge5,EOS1250,Twin2,DT2 with sleeve-level
+integer finish rounding. OlderVB20/noDT research book is different. Legacy engines use21sessions/fractionalfinish/
+clippedDLL/missingpath substitution. Use a common-price UNKNOWN-aware event engine, actual30calendar expiry, inclusive
+4ktrail and actual2kDLL cost/overshoot for BASE/EMPTY/ADD/REPLACE at frozen integer exposure. Candidate offsets must
+arrive before breach, not later same-day. None of those account benefits was simulated or established here.

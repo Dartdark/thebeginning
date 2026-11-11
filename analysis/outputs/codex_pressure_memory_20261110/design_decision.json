@@ -1,0 +1,42 @@
+{
+  "status": "REJECT",
+  "selected": null,
+  "basic_gates": {
+    "HGB_MEMORY": {
+      "trades": true,
+      "dates": true,
+      "long_count": true,
+      "short_count": true,
+      "net": false,
+      "micro_net": false,
+      "trade_t": false,
+      "daily_nw5": false,
+      "profit_factor": false,
+      "years": false,
+      "stress_net": false,
+      "stop_first_net": false,
+      "held_paths": true
+    },
+    "RIDGE_MEMORY": {
+      "trades": true,
+      "dates": true,
+      "long_count": true,
+      "short_count": true,
+      "net": false,
+      "micro_net": false,
+      "trade_t": false,
+      "daily_nw5": false,
+      "profit_factor": false,
+      "years": false,
+      "stress_net": false,
+      "stop_first_net": false,
+      "held_paths": true
+    }
+  },
+  "design_stage_complete": true,
+  "validation_allowed": false,
+  "results_sha256": "7c7945c56c426dcd1c66637b37e9600117d732f7b9efb50ef94182a857c70b70",
+  "economic_definitions": 4,
+  "cumulative_study_definitions": 19,
+  "reason": "Both pre-event-memory candidates lose net and gross; matched local controls lose too. Neither clears significance/year/PF/cost/stop-first gates. No model, window, direction, normalizer or hurdle rescue; all controls remain unselectable."
+}

@@ -1,0 +1,153 @@
+{
+  "cache": {
+    "source_commit": "0d61f59e30304a5a9850ef1a20b33a2d1f04cc2d",
+    "source_path": "analysis/outputs/codex_pressure_learning_20261110/features_and_labels.csv.gz",
+    "compressed_sha256": "4993fdd04a51437fac5c1993a185e091535beedab18474666750ca5a513a9664",
+    "rows": 135964,
+    "labels_regenerated": false,
+    "label_values_changed": false
+  },
+  "native": {
+    "files": {
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2018.csv.gz": {
+        "rows": 349082,
+        "compressed_sha256": "c2482cce0ded7488def67070e6806eecf358e563b8618e2fdb64997e2465ccc3",
+        "original_sha256": "70b42a96d851e30d5b02629a02add33e9080c0df4b357f2ea61cc65b7963130a"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2019.csv.gz": {
+        "rows": 349844,
+        "compressed_sha256": "62d47b02618ec5909dbcf81321898341c3d5e317948b46fef6ab5c8d47237b22",
+        "original_sha256": "a79247379812b63a2077ce0da6aa4f391f0df59ccc03cd6cb701eb1a4fdf799e"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2020.csv.gz": {
+        "rows": 348926,
+        "compressed_sha256": "216b312952c080a3c36cca64699dfa46aaf6e134c5a68de9aefca6121eec4392",
+        "original_sha256": "a3fdf4a3f60f4081a83c1acdfa288d0b03fce9d8c0b4f7ceac29e3646f2e60c8"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2021.csv.gz": {
+        "rows": 353393,
+        "compressed_sha256": "e62d4d37d27ab6ff9ac5373d6cdc9296def40f21887a31541a7f715dc06973ce",
+        "original_sha256": "de717ad7aaece8892d979b3708236404ce6a7ec996b9476bcf5c65a9482d95fc"
+      },
+      "agents/codex/inputs/bridge_native_2018_22_20261108/NQ_1min_native_ET_close_2022.csv.gz": {
+        "rows": 354112,
+        "compressed_sha256": "cc1c40967a93445923ecec70282c87b23c5b4e8b7e394e903daf4b69b6db17e3",
+        "original_sha256": "bf49bdd2b9608738de96c1446e9d9c53eb7947f249bd6eb06929c1de01d82c37"
+      }
+    },
+    "transfer_manifest_sha256": "889848785814eec127fff1a271b24795c6af1486a11ca45690fdb286e3c5b7b2",
+    "rows": 1755357,
+    "first": "2018-01-01 17:01:00",
+    "last": "2022-12-30 16:00:00",
+    "timestamp": "America/New_York close -> America/Chicago close; no extra minute added",
+    "duplicate_keys": 0,
+    "missing_minutes_filled": 0,
+    "total_volume": "native Volume, verified equal to UpVol+DownVol",
+    "provenance_limits": [
+      "roll/build provenance unverified",
+      "historical receipt/corrections unknown",
+      "session gaps retained",
+      "not native PowerLanguage up-tick Volume",
+      "no returns computed"
+    ],
+    "source": "native 2018--22, no price/flow splicing"
+  },
+  "profile": {
+    "requested_endpoints": 67982,
+    "known_endpoints": 67472,
+    "status_counts": {
+      "KNOWN": 67472,
+      "SEASONAL_OR_RETURN_UNKNOWN": 488,
+      "PROFILE_PRICE_UNKNOWN": 22
+    },
+    "features": [
+      "activity120",
+      "activity_accel15_105",
+      "ema_abs_u",
+      "ema_u",
+      "ema_sign_u",
+      "pressure120",
+      "pressure_accel",
+      "alignment120",
+      "peak_fraction120"
+    ],
+    "interval": "120returns at T-124..T-5,121closes T-125..T-5; excludes current five-minute bar",
+    "normalizer": "(minute close difference)/prior-day sharedATR15 / own minute factor; exact previous20normal-cash slots, min15finite, positive median; valid zeros retained",
+    "clock_center": "Cross-median of all admittedpositive finite00:00--23:59 clock medians; roll-date history retained",
+    "source_adaptation": "kappa=.12 perminute from2021pp5-6; u is not paper J; no4.36 classification or jump exclusion;120min finite profile is not a fitted long-memory/Hawkes kernel",
+    "early_hours": "09:00 decisions include observed CME preopen history, unlike the source's stock cash-session setting",
+    "no_future_jump_class": true,
+    "no_fill": true
+  },
+  "attachment": {
+    "base_paired_rows": 135964,
+    "retained_paired_rows": 134944,
+    "retained_decisions": 67472,
+    "unknown_paired_rows": 1020,
+    "status_counts": {
+      "KNOWN": 134944,
+      "SEASONAL_OR_RETURN_UNKNOWN": 976,
+      "PROFILE_PRICE_UNKNOWN": 44
+    },
+    "inference_filter": "Only observed historical profile/normalizer availability; never label_valid or future payoff",
+    "features": [
+      "body0",
+      "range0",
+      "loc0",
+      "body1",
+      "body2",
+      "q0",
+      "q1",
+      "q2",
+      "efficiency3",
+      "log_volume_ratio",
+      "vol3_atr",
+      "hour",
+      "side",
+      "side_x_body0",
+      "side_x_body1",
+      "side_x_body2",
+      "side_x_loc0",
+      "side_x_q0",
+      "side_x_q1",
+      "side_x_q2",
+      "side_x_efficiency3",
+      "activity120",
+      "activity_accel15_105",
+      "ema_abs_u",
+      "ema_u",
+      "ema_sign_u",
+      "pressure120",
+      "pressure_accel",
+      "alignment120",
+      "peak_fraction120",
+      "side_x_ema_u",
+      "side_x_ema_sign_u",
+      "side_x_pressure120",
+      "side_x_pressure_accel"
+    ],
+    "local_control_features": [
+      "body0",
+      "range0",
+      "loc0",
+      "body1",
+      "body2",
+      "q0",
+      "q1",
+      "q2",
+      "efficiency3",
+      "log_volume_ratio",
+      "vol3_atr",
+      "hour",
+      "side",
+      "side_x_body0",
+      "side_x_body1",
+      "side_x_body2",
+      "side_x_loc0",
+      "side_x_q0",
+      "side_x_q1",
+      "side_x_q2",
+      "side_x_efficiency3"
+    ]
+  }
+}
