@@ -2704,3 +2704,23 @@ Academic descriptive mechanisms, screenshot claims and arithmetic QA; no new nat
 
 Smallest next check: a specified annotated entry reconciled against closed-bar information and executable quotes/fills.
 No live change, new monitor, promoted strategy, execution saving or account benefit is established.
+
+
+### E10/E11 follow-up — Native-book signals and small-winner fills (dot, 2026-11-11)
+
+Source: [dot's arXiv evaluation shortlist](results/dot_arxiv_eval_shortlist_20261111.md), free full-text methods/results
+reviews. Source evidence only; no native replication, measured execution saving or account benefit.
+
+- Queue imbalance, aggressor-volume imbalance and event-based OFI are different measurements. Book additions and
+  cancellations cannot be reconstructed from candle volume; contemporaneous explanatory fit is not forward alpha.
+- Resolve signal receipt, cross-contract synchronization and order arrival separately. A spread-screened strategy
+  can still omit costs; a one-tick forecast can disappear before a retail order arrives.
+- A locally selected event extremum requires later confirmation; do not enter retrospectively at its peak/trough.
+- Favorable limit fills, adverse fills and cancellation races must be coupled to the price path. Passive small-win
+  strategies can load on liquidity-withdrawal losses. Do not port an illustrative fixed fill probability as a fact.
+- Classification scores, clearing-member fees and zero-latency examples do not establish retail CME profitability.
+  Evaluate errors conditional on fills and inventory, not accuracy alone.
+
+Smallest next check: one complete native event-to-quote-to-order-to-fill sequence with realistic delay and risk.
+Relevant sources are arXiv 1011.6402, 1512.03492, 2112.13213, 2501.03171, 2601.08974, 2409.12721 and 1710.03870.
+Shared input admission is retained in DATA_NEEDED; no paused scout or strategy family was restarted.

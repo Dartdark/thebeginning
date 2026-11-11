@@ -619,3 +619,25 @@ mechanism and an85-minute pre-release NG rule. Authors'0.84/1.26Sharpes are not 
   missingness, effective power and native gross/cost hurdles before a bounded committed proposal/code/lease.
   Park and continue compatible discovery; do not repeat unchanged vendor crawls or substitute the closed
   unconditional NG storage short3575861. Generic NG market-data context remains D12; there is no duplicate export request.
+
+
+## dot arXiv evaluation complement — native quotes and causal rules (2026-11-11)
+
+Source-only [ranked review by dot](results/dot_arxiv_eval_shortlist_20261111.md). Conditional leads, not a TEST
+verdict: calendar-spread feedback, drift-burst reversal, queue imbalance and lagged cross-asset OFI. No returns.
+These share input infrastructure with existing native-execution/paired-maturity needs; no duplicate purchase request.
+
+- Required for ES/NQ first: actual contract IDs, exchange and receive timestamps, best bid/ask prices and quantities,
+  prints/size, sessions, roll mapping and missing-event markers. Multi-level OFI additionally needs deeper levels.
+- Calendar feedback needs simultaneous front/next maturity quotes and a point-in-time liquidity selector; continuous
+  prices or unrelated-index pairs do not replace them. Resolve intervening exit/reversal semantics and protective risk.
+- Drift-burst replication needs event-time quotes/noise treatment and a causal first-crossing or confirmed-extremum
+  definition. Paper event selection is not a ready entry. Keep any coarse minute adaptation explicitly separate.
+- Target design 2018–22 where valid and available; later chronological/native-micro evidence remains distinct.
+  Native micro execution cannot be inferred from mini prices plus a fee adjustment.
+- Owned-field check: filename tree, existing intake/reconciliation and prior flow specs inspected; first-lines read
+  of data/OF_1min_2018_1.csv returned empty through the connector, not a new schema audit. Existing documentation
+  establishes minute price/aggressor aggregates, not complete native quote/depth or paired-delivery histories.
+- No newly verified free full panel, new account, paid data, live access or bulk download claimed. Sources inspected
+  are free full texts; receipt retains exact URLs. Next step is one native quote/event availability and clock audit
+  with complete rules, not a return test. Preserve earlier rejections and all pause/budget gates.
