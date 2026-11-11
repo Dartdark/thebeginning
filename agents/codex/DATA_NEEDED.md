@@ -6,6 +6,20 @@ Created 2026-10-31 at the user's request. This is the central shopping/export li
 
 **Status matters:** NEEDS DATA does not establish profitability. Some entries also need source clarification or a causal mechanism before collecting a large panel is worthwhile. A failed proxy remains failed even when an exact-source version is still blocked. Multi-day stock/FX/commodity ideas are generally personal-account research, not Apex intraday candidates as written. No live/VPS/broker changes are part of an export request.
 
+## Three-paper candle-pressure model — source-rule gap (2026-11-10)
+
+[Uploaded-paper/screenshot reconstruction](results/pressure_papers_reconstruction_20261110.md): interesting third-party
+jump/pressure claim, **NEEDS RULES**, not a new independent verified strategy. Papers supply descriptive mechanisms;
+the screenshot does not supply entry direction, pressure formula, window, thresholds, confirmation clock, stop/0.3R
+target semantics, sessions, size or fill/cost settings. Smallest next check: one annotated trade or full written rule,
+then reconcile causally on a few owned bars without returns. Do not invent the missing private rule to claim reproduction.
+
+Owned-data checks already locate 2018–22 native OHLC/total/buy/sell minute bars (receipt below), so do not request duplicate
+price/aggressor exports. Legacy OF total-volume naming is wrong; preserve native total=buy+sell. Actual event-time trade/
+quote signing, book replenishment and historical news receipts needed by the papers are distinct missing inputs. Shared
+quote/depth/fill fields remain under D42–D45. Prior five-minute innovation fades and pre-open absorption failed; no
+threshold/clock/direction rescue follows from these uploads. No paid data, new acquisition loop or economic trial.
+
 ## Find the data once, support several leads
 
 | Dataset or export | Leads it could support | Minimum useful delivery |

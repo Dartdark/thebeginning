@@ -228,6 +228,16 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Three-paper candle-pressure/jump model — NEEDS RULES; third-party screenshot, not independently verified.**
+  Papers 0803.1769v1 / 2106.07040v1 / cond-mat0307332v2 motivate jump normalization and pressure/liquidity response.
+  Screenshot claims 855 trades, 82.22% wins, PF 1.41; arithmetic fits roughly 0.3R winners/1R losers. Need one annotated
+  entry or the exact pressure, comparison window, fade/follow, stop/target, timing, session, size and fill/cost rules.
+  Owned NQ bars/aggressor aggregates support a labeled adaptation; exact event-time quote/book/news inputs remain partial.
+  First check is a causal source-matched bar reconciliation without returns. Prior innovation-fade and absorption failures
+  remain closed; this is not a fresh independent family or an automatic proxy rescue. No new return tests or 150K benefit.
+  [Full reconstruction and five-question reviews](agents/codex/results/pressure_papers_reconstruction_20261110.md)
+  · [Shared data/rule gaps](agents/codex/DATA_NEEDED.md#three-paper-candle-pressure-model--source-rule-gap-2026-11-10).
+
 - [ ] **API information before EIA — NEEDS DATA, uploaded SSRN 3747330.**
   Source API actual minus Bloomberg EIA consensus; normal EIA−60/−1 minute hold. Source Sharpe 0.67 overall,
   2.10 on 77 extreme events, no demonstrated native-cost/rolling-decile/net-holdout validation. New source-only

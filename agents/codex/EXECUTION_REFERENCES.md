@@ -2685,3 +2685,22 @@ Python and actual PowerShell-script fault replays. Engineering evidence; no meas
 Smallest remaining acceptance: installed Windows-copy parity, all six versioned strategy/guard identities and routing,
 actual Apex threshold reconciliation, operational scheduler state, and an explicitly authorized notification receipt.
 The review patch is staged only. No live/VPS/broker, chart input, schedule or notification was changed.
+
+### E10/E11 follow-up — Pressure, impact decay and retrospective jump profiles (2026-11-10)
+
+Source: [three uploaded jump/impact papers and screenshot reconstruction](results/pressure_papers_reconstruction_20261110.md).
+Academic descriptive mechanisms, screenshot claims and arithmetic QA; no new native strategy/execution validation.
+
+- Persistent signed flow can be offset by decaying impact/liquidity replenishment. It does not imply persistent
+  directional returns or a free market-order fade. Market-maker spread capture and liquidity-taking returns differ.
+- Candle color/body/wick/volume are pressure proxies; they do not reconstruct trade aggressor signing or actual
+  replenishment. Trade-time kernels and stock-minute thresholds do not transfer mechanically to five-minute NQ.
+- Post-jump volatility relaxation describes move sizes, not necessarily price retracement. Centered event profiles,
+  post-event decay and completed cluster labels are available later than the first jump; preserve their knowledge times.
+- The screenshot's 0.3R target geometry needs about 76.92% winners before costs. High hit rate alone does not show a
+  safer evaluation path. Stops, actual loss tails, target fills, latency, sizing and the account trail need joint paths.
+- Native one-minute buy/sell aggregates are owned, but original contract/build/roll, receipt and exceptional-side
+  conventions remain partial. Preserve earlier failed pressure/absorption families rather than rename them from a paper.
+
+Smallest next check: a specified annotated entry reconciled against closed-bar information and executable quotes/fills.
+No live change, new monitor, promoted strategy, execution saving or account benefit is established.
