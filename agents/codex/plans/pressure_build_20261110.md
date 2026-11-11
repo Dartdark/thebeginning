@@ -77,3 +77,8 @@ from old21session/fractionalfinish/clippedDLL/summedindependentextrema engines. 
 Each failed batch closes its dependent validation, not the whole authorized research task. Continue only with a genuinely
 specified alternative mechanism and a new committed protocol, preserving trials; never tune until the screenshot matches.
 Initial batch economicdefinitions=3; maintain append-only study trial records including later batches and controls.
+
+Pre-outcome engineering amendment: initial run67fbba5d was interrupted with only its binding written, during repeated
+calendar roll checks. Preserve that directory and receipt. Cache the same deterministic date flags, cover missing
+scheduled time-exit tails in held-path QA, support empty-control stress columns, and use batch1_design_qa2 for execution.
+No signal, cost, parameter, session or selection rule changed; all3 economic definitions remain counted once.

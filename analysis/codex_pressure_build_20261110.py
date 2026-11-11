@@ -41,13 +41,16 @@ def model_signals(minutes, grid):
     calendar=pd.DatetimeIndex([d for d in pd.to_datetime(grid.ts) if C.normal_cash(d)])
     b=b[(b.j>=525)&(b.j<=845)].copy()
     train=b[(b.j<=840)&(b[['q','q1','q2','raw_y','atr']].notna().all(axis=1))&(b.atr>0)]
+    rollfree=set(d for d in calendar if not C.roll_guard(d))
+    train=train.copy(); train['rollfree']=train.date.isin(rollfree)
     signals={name:[] for name in MODELS}; fits=[]
     columns=['date','day','signal_j','event_j','side','stop_price','max_stop','target_R','exit_j','z','price_z','fit_last_date']
     daymap={pd.Timestamp(d):i for i,d in enumerate(grid.ts)}
     for k,date in enumerate(calendar):
+        if k%100==0: print('feature fit',date.date(),'days done',k,flush=True)
         if k<20 or C.roll_guard(date): continue
         prior=calendar[k-20:k]
-        hist=train[train.date.isin(prior)&~train.date.map(C.roll_guard)]
+        hist=train[train.date.isin(prior)&train.rollfree]
         if len(hist)<600 or hist.date.nunique()<15: continue
         season=hist.groupby('j').raw_y.agg(lambda x: np.median(np.abs(x)))
         counts=hist.groupby('j').date.nunique(); season=season[counts>=15]
@@ -104,10 +107,11 @@ def design(prereg):
     for path in paths:
         frozen=subprocess.check_output(['git','show',f'{prereg}:{path}'],cwd=ROOT)
         if frozen!=(ROOT/path).read_bytes(): raise ValueError(f'Uncommitted/unfrozen protocol: {path}')
-    dest=OUT/'batch1_design'
+    dest=OUT/'batch1_design_qa2'
     if (dest/'results.json').exists(): raise ValueError('Design results already exist; do not overwrite')
     dest.mkdir(parents=True,exist_ok=True)
     dump(dest/'binding.json',dict(prereg=prereg,code={p:digest(ROOT/p) for p in paths},models=MODELS,
+        dependencies={p:digest(ROOT/p) for p in ['analysis/grid.py','analysis/grid24.py','analysis/metrics.py','analysis/codex_cash_open_repair.py','analysis/codex_s03_calendar.py','agents/codex/inputs/bridge_native_2018_22_20261108/transfer_manifest.json']},
         prior_families='all raw/AR fades, absorption, participation and jump searches retained; not fresh selection',
         validation_outcomes_read=False,new_economic_definitions=3))
     minute=I.load_design_native(); grid=I.make_grid(minute)

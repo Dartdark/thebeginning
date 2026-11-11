@@ -23,7 +23,7 @@ LEDGER = ["day", "date", "signal_j", "j0", "j1", "side", "entry", "exit",
           "gross", "pnl", "commission", "slippage", "net", "net_mnq",
           "mnq_commission", "mnq_slippage", "net_mnq_fee150", "stress_four_ticks",
           "qty", "mae_shared_fullbar_proxy", "unobserved_held_minutes",
-          "invalid_held_ohlc_minutes", "path_valid"]
+          "invalid_held_ohlc_minutes", "path_valid", "stop_first_net", "ambiguous_exit_bar", "time_exit_rewound"]
 
 
 def _invalid_rows(grid, day, start, end):
@@ -118,7 +118,8 @@ def replay(signals, minute_frame=None, *, grid=None, max_trades=4,
             target_px = entry + side * target_distance
             out_j, out_px, kind, worst = _walk(grid.o[d], grid.h[d], grid.l[d], grid.c[d],
                                                start, end, side, stop_px, target_px, fill_through)
-            invalid, missing = _invalid_rows(grid, d, start, int(out_j))
+            rewound = bool(kind == 2 and out_j < end)
+            invalid, missing = _invalid_rows(grid, d, start, end if kind == 2 else int(out_j))
             slips = 1 + int(kind != 1)
             gross = float((out_px - entry) * side * 20.)
             bh = (grid.l[d, int(out_j)] <= stop_px and grid.h[d, int(out_j)] >= target_px + fill_through) if side > 0 else (grid.h[d, int(out_j)] >= stop_px and grid.l[d, int(out_j)] <= target_px - fill_through)
@@ -136,7 +137,7 @@ def replay(signals, minute_frame=None, *, grid=None, max_trades=4,
                        ambiguous_exit_bar=bool(bh), stop_first_net=conservative_net,
                        mae_shared_fullbar_proxy=float(abs(worst - entry) * 20.),
                        unobserved_held_minutes=missing, invalid_held_ohlc_minutes=invalid,
-                       path_valid=invalid == 0 and np.isfinite(out_px))
+                       time_exit_rewound=rewound, path_valid=invalid == 0 and not rewound and np.isfinite(out_px))
             # Retain input features for audit without allowing overwrite of fills/cash.
             row.update({k: v for k, v in r._asdict().items() if k not in row})
             rows.append(row)
@@ -268,6 +269,13 @@ def synthetic_checks():
     g = fresh(); g.o[0, 542] = 102.; g.h[0, 542] = 103.; g.l[0, 542] = 101.; g.c[0, 542] = 102.
     t, ct = replay(pd.DataFrame([anchored]), grid=g)
     checks["quote_risk_cap_skips"] = bool(t.empty and ct["quote_risk_above_maximum"] == 1)
+    g = fresh()
+    for key in OHLC: getattr(g,key)[0,549:551]=np.nan
+    t,ct=replay(pd.DataFrame([dict(day=0,signal_j=540,side=1,stop=2.,target=10.,exit_j=550)]),grid=g)
+    checks['missing_exit_tail_not_hidden']=bool(t.time_exit_rewound.iloc[0] and t.unobserved_held_minutes.iloc[0]==2 and not t.path_valid.iloc[0])
+    empty=pd.DataFrame(columns=['day','signal_j','side','stop','target','exit_j'])
+    t,_=replay(empty,grid=fresh())
+    checks['zero_trade_stress_summary']=metrics_summary(t,[pd.Timestamp('2020-01-02')],column='stop_first_net')['total']==0
     if not all(checks.values()): raise AssertionError(checks)
     return checks
 
