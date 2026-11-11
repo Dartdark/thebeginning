@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sSL -o p.tgz https://github.com/PowerShell/PowerShell/releases/download/*)",
+      "Bash(./pwsh -NoProfile -Command *)"
+    ]
+  },
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Downloading the official Microsoft PowerShell Linux release tarball from github.com/PowerShell/PowerShell/releases into the session scratchpad, extracting it there, and running that pwsh binary to parse-check or test the repository's own .ps1 scripts (live/vps/*.ps1) before the user runs them on the VPS (user request 2026-11-11)."
+    ]
+  }
+}
