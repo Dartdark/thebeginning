@@ -1,4 +1,4 @@
-{ NQ JUMP FADE  (morning 5-minute jump fade)  -  2026-11-12, WATCHLIST #40, POST-HOC LEAD: FORWARD LOG / SIM ONLY
+{ NQ JUMP FADE v2 (morning 5-minute jump fade)  -  2026-11-12 (v2: stop and target re-sent every bar), WATCHLIST #40, POST-HOC LEAD: FORWARD LOG / SIM ONLY
   =====================================================================================================================
   Research: analysis/jump_morning_fade.py (2018-2026: 694 trades, 77.5% wins, $117 per NQ after costs, PF 1.35, t 2.7 vs the
   multiple-testing bar 3.70; found after 4,368 versions, so NOT proven). Books: analysis/jump_morning_fade_bench.py.
@@ -152,13 +152,19 @@ If DoFin and FinN >= 3 Then Begin
         If EntR >= MinRPts and R5 <> 0 Then Begin
             RPts = Round( EntR * 4, 0 ) / 4;
             TgtPts = Round( TgtFrac * RPts * 4, 0 ) / 4;
-            SetStopShare;
-            SetStopLoss( RPts * BigPointValue );
-            SetProfitTarget( TgtPts * BigPointValue );
             If R5 > 0 Then SellShort ( "JF SE" ) Qty contracts next bar at market
             Else Buy ( "JF LE" ) Qty contracts next bar at market;
         End;
     End;
+End;
+
+{ ===== stop and target: re-sent on EVERY bar (v2 fix, 2026-11-12). Set* exits only exist on bars where the statement runs: v1 set them
+  on the signal bar only, so the target lived for the entry minute alone (user's report: 26 target exits vs ~535 in Python). They act
+  only while a position is open; RPts / TgtPts keep the last entry's values. ===== }
+If RPts > 0 Then Begin
+    SetStopShare;
+    SetStopLoss( RPts * BigPointValue );
+    SetProfitTarget( TgtPts * BigPointValue );
 End;
 
 { ===== exits: time, flat time, early close, and the bar-close stop guard (MULTICHARTS_PITFALLS 'Live order rejections') ===== }

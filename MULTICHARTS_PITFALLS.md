@@ -36,6 +36,11 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Bar-time minutes vs HHMM**: when porting, 15:30 CT is minute 1350 / HHMM 1530, not 1290 (a Python port bug,
   FillEnd 1290). Convert with one helper (`jof` in `analysis/grid24.py`), never by hand.
 
+- **`SetProfitTarget` / `SetStopLoss` set only inside the entry block live for one bar** (2026-11-12, NQ Jump Fade v1, VERIFIED from
+  the user's report): Set* exits exist only on bars where the statement executes. Called on the signal bar only, the target worked on
+  the entry minute alone: 26 'Profit Target' exits (all within 1 minute) vs ~535 in the Python port; trades rode to the time exit.
+  Fix: call SetStopShare / SetStopLoss / SetProfitTarget on EVERY bar (outside the entry condition) with stored point values.
+
 ## Found in reviews of others' code (2026-10-21, Antigravity's VB Combined)
 - **`AvgTrueRange(n)` on an intraday chart is the ATR of n intraday bars**, not n days (30-min ATR ~ 1/10 of the daily one).
   Fix: per-date true ranges in an array (as `NQ_Vault_Break.txt`) or a daily Data2.
