@@ -15,6 +15,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   'The evaluation plan NOW'). `BN.setup()` now benches every candidate against THIS set (incl. DT 2 + JF 2) and prints it; 15 older
   scripts that edited the base by hand are pinned to `setup(base="legacy")`. **Change all three in the same commit whenever a chart or
   size changes** (user 11/12: "dont test upcoming shit on past shit"). Funded base `BASE_FUNDED` still has VB (no funded account live).
+- **Eval sizes checked 11/12 (`analysis/outputs/eval_size_live_output.txt`): the live sizes are at the optimum within noise** (no one-at-a-time change has a band above 0 in both fresh and from-#5 measures). ONB is the engine: $1,500 would cut #5's pass 18.2% -> 12.4% (the user's choice to keep $2,750 was right); $3,500 +1.3 / +2.1 pt, bands include 0.
 - **Jump Fade v4** (`apex_strategies/NQ_Jump_Fade.txt`): morning 5-min jump fade, 1-min @MNQ 24h chart, `MinVolRatio` 0, Qty 2, kill
   switch + heartbeat, no cushion guard. MultiCharts report = Python (v2 683/694, v3 434/436 matched). Eval bench on the corrected base
   (`analysis/outputs/jump_fade_v2_eval_now_output.txt`): fresh eval +0.9 pt; **from #5's state +1.8 pt (band +0.9/+2.8) at 2 MNQ**.
