@@ -1,0 +1,66 @@
+[provenance] code bcd8989 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Drift-burst fade + order-flow turn (user 2026-11-12, combination 1; PRE-REGISTERED: checks/candidates/drift_burst/PREREG.md, committed
+
+   calibrated threshold c = 2.93 (paper's 221 events a year in 2018-22)
+===== GC: 2017-11-30 .. 2026-10-13; T in window: sd 0.84, |T| > 4 0.00000 (normal 0.00006), > 4.5 0.00000; events 1884 (215 a year), confirmed within 15 min 21%
+   5-min reversal at the PEAK (paper, look-ahead)   n 1883  reversal 64.3%  next 5 min against the burst  +3.93 bp  (burst 5-min move  29.3 bp)
+   5-min reversal at the first crossing (causal)    n 1883  reversal 54.8%  next 5 min against the burst  +0.20 bp  (burst 5-min move  27.0 bp)
+   5-min reversal at the confirmed turn (causal)    n  390  reversal 50.8%  next 5 min against the burst  -0.57 bp  (burst 5-min move  25.7 bp)
+   A first cross, 5 min               n 1849 win 23.9% gross $   9.1 net $ -15.9 PF 0.77 t -2.83 | 18-22 n 1094 $ -19.9 | 23+ n 755 $ -10.2 | risk $   88
+   B confirmed turn, 5 min (primary)  n  390 win 37.4% gross $ -20.8 net $ -45.8 PF 0.63 t -2.42 | 18-22 n 240 $ -29.2 | 23+ n 150 $ -72.2 | risk $  227
+      B longs (fade a drop)           n  222 win 42.8% gross $  -5.8 net $ -30.8 PF 0.77 t -1.11 | 18-22 n 133 $ -15.5 | 23+ n 89 $ -53.5 | risk $  271
+      B shorts (fade a rise)          n  168 win 30.4% gross $ -40.6 net $ -65.6 PF 0.43 t -2.72 | 18-22 n 107 $ -46.3 | 23+ n 61 $ -99.4 | risk $  170
+   B by year: 2018 $-1,015 (53)  2019 $-1,645 (59)  2020 $-2,010 (46)  2021 $-715 (43)  2022 $-1,635 (39)  2023 $-1,545 (41)  2024 $-1,560 (32)  2025 $-1,900 (46)  2026 $-5,825 (31)
+   B, hold 15 min (info)              n  390 win 34.1% gross $ -16.4 net $ -41.4 PF 0.71 t -1.94 | 18-22 n 240 $ -35.0 | 23+ n 150 $ -51.6 | risk $  227
+   B, hold 30 min (info)              n  390 win 27.4% gross $ -22.6 net $ -47.6 PF 0.70 t -1.92 | 18-22 n 240 $ -50.2 | 23+ n 150 $ -43.5 | risk $  227
+   placebo B (random bars, fade the last 5 min, same exits, 200 runs): mean $-26.4, p95 $-15.1; real $-45.8, p 0.995
+
+   calibrated threshold c = 2.92 (paper's 268 events a year in 2018-22)
+===== CL: 2017-11-30 .. 2026-10-13; T in window: sd 0.85, |T| > 4 0.00001 (normal 0.00006), > 4.5 0.00000; events 2118 (241 a year), confirmed within 15 min 21%
+   5-min reversal at the PEAK (paper, look-ahead)   n 2115  reversal 63.4%  next 5 min against the burst +11.67 bp  (burst 5-min move  81.9 bp)
+   5-min reversal at the first crossing (causal)    n 2115  reversal 52.6%  next 5 min against the burst  +2.25 bp  (burst 5-min move  75.5 bp)
+   5-min reversal at the confirmed turn (causal)    n  455  reversal 48.6%  next 5 min against the burst  -1.75 bp  (burst 5-min move  68.6 bp)
+   A first cross, 5 min               n 2082 win 20.2% gross $   2.8 net $ -22.2 PF 0.58 t -7.22 | 18-22 n 1321 $ -16.6 | 23+ n 761 $ -31.8 | risk $   53
+   B confirmed turn, 5 min (primary)  n  455 win 34.7% gross $  -4.0 net $ -29.0 PF 0.63 t -3.25 | 18-22 n 299 $ -29.5 | 23+ n 156 $ -28.1 | risk $  149
+      B longs (fade a drop)           n  264 win 37.1% gross $   4.1 net $ -20.9 PF 0.74 t -1.57 | 18-22 n 174 $ -21.7 | 23+ n 90 $ -19.3 | risk $  170
+      B shorts (fade a rise)          n  191 win 31.4% gross $ -15.2 net $ -40.2 PF 0.47 t -3.81 | 18-22 n 125 $ -40.3 | 23+ n 66 $ -40.2 | risk $  119
+   B by year: 2018 $-2,570 (76)  2019 $-3,800 (58)  2020 $-40 (58)  2021 $-580 (62)  2022 $-1,825 (45)  2023 $-840 (28)  2024 $390 (34)  2025 $-1,600 (44)  2026 $-2,340 (50)
+   B, hold 15 min (info)              n  455 win 30.8% gross $   0.3 net $ -24.7 PF 0.75 t -1.94 | 18-22 n 299 $ -30.4 | 23+ n 156 $ -13.7 | risk $  149
+   B, hold 30 min (info)              n  455 win 26.2% gross $  -0.5 net $ -25.5 PF 0.77 t -1.67 | 18-22 n 299 $ -27.2 | 23+ n 156 $ -22.2 | risk $  149
+   placebo B (random bars, fade the last 5 min, same exits, 200 runs): mean $-24.5, p95 $-16.5; real $-29.0, p 0.805
+
+   calibrated threshold c = 3.25 (paper's 69 events a year in 2018-22)
+===== ES: 2017-11-01 .. 2026-10-11; T in window: sd 0.87, |T| > 4 0.00001 (normal 0.00006), > 4.5 0.00000; events 640 (73 a year), confirmed within 15 min 40%
+   5-min reversal at the PEAK (paper, look-ahead)   n  640  reversal 63.4%  next 5 min against the burst  +3.79 bp  (burst 5-min move  28.4 bp)
+   5-min reversal at the first crossing (causal)    n  640  reversal 54.7%  next 5 min against the burst  +1.27 bp  (burst 5-min move  26.8 bp)
+   5-min reversal at the confirmed turn (causal)    n  254  reversal 49.6%  next 5 min against the burst  -0.06 bp  (burst 5-min move  20.6 bp)
+   A first cross, 5 min               n  629 win 18.0% gross $  -1.5 net $ -31.5 PF 0.52 t -5.31 | 18-22 n 337 $ -26.7 | 23+ n 292 $ -37.0 | risk $   65
+   B confirmed turn, 5 min            n  254 win 32.7% gross $  -6.2 net $ -36.2 PF 0.61 t -2.20 | 18-22 n 136 $ -35.4 | 23+ n 118 $ -37.0 | risk $  164
+      B longs (fade a drop)           n  164 win 29.9% gross $ -10.4 net $ -40.4 PF 0.54 t -2.43 | 18-22 n 84 $ -33.9 | 23+ n 80 $ -47.2 | risk $  153
+      B shorts (fade a rise)          n   90 win 37.8% gross $   1.5 net $ -28.5 PF 0.72 t -0.81 | 18-22 n 52 $ -37.9 | 23+ n 38 $ -15.5 | risk $  185
+   B by year: 2018 $1,552 (17)  2019 $-2,250 (35)  2020 $-82 (29)  2021 $-1,355 (31)  2022 $-2,682 (24)  2023 $-885 (27)  2024 $-1,195 (44)  2025 $-4,988 (30)  2026 $2,702 (17)
+   B, hold 15 min (info)              n  253 win 30.0% gross $ -12.1 net $ -42.1 PF 0.64 t -2.15 | 18-22 n 135 $ -51.0 | 23+ n 118 $ -31.8 | risk $  165
+   B, hold 30 min (info)              n  252 win 27.4% gross $   2.1 net $ -27.9 PF 0.78 t -1.17 | 18-22 n 134 $ -47.1 | 23+ n 118 $  -6.1 | risk $  165
+   placebo B (random bars, fade the last 5 min, same exits, 200 runs): mean $-31.1, p95 $-17.6; real $-36.2, p 0.725
+
+   calibrated threshold c = 3.33 (paper's 69 events a year in 2018-22)
+===== NQ: 2017-11-01 .. 2026-11-06; T in window: sd 0.88, |T| > 4 0.00001 (normal 0.00006), > 4.5 0.00000; events 616 (70 a year), confirmed within 15 min 51%
+   5-min reversal at the PEAK (paper, look-ahead)   n  614  reversal 62.2%  next 5 min against the burst  +3.78 bp  (burst 5-min move  35.8 bp)
+   5-min reversal at the first crossing (causal)    n  614  reversal 53.3%  next 5 min against the burst  +0.86 bp  (burst 5-min move  33.8 bp)
+   5-min reversal at the confirmed turn (causal)    n  311  reversal 48.6%  next 5 min against the burst  -1.44 bp  (burst 5-min move  26.4 bp)
+   A first cross, 5 min               n  605 win 12.6% gross $ -10.2 net $ -27.4 PF 0.62 t -2.86 | 18-22 n 340 $ -16.7 | 23+ n 265 $ -41.3 | risk $   73
+   B confirmed turn, 5 min            n  311 win 31.5% gross $ -67.2 net $ -84.5 PF 0.49 t -3.77 | 18-22 n 176 $ -54.0 | 23+ n 135 $-124.2 | risk $  254
+      B longs (fade a drop)           n  181 win 28.2% gross $ -72.7 net $ -89.9 PF 0.46 t -3.72 | 18-22 n 95 $ -59.7 | 23+ n 86 $-123.3 | risk $  252
+      B shorts (fade a rise)          n  130 win 36.2% gross $ -59.6 net $ -76.8 PF 0.53 t -1.84 | 18-22 n 81 $ -47.2 | 23+ n 49 $-125.7 | risk $  257
+   B by year: 2018 $1,302 (30)  2019 $-2,268 (50)  2020 $-1,246 (25)  2021 $-4,032 (41)  2022 $-3,258 (30)  2023 $-886 (25)  2024 $-6,588 (50)  2025 $-9,447 (32)  2026 $157 (28)
+   B, hold 15 min (info)              n  311 win 23.2% gross $ -71.9 net $ -89.1 PF 0.56 t -3.30 | 18-22 n 176 $ -44.8 | 23+ n 135 $-147.0 | risk $  254
+   B, hold 30 min (info)              n  309 win 21.4% gross $ -58.6 net $ -75.9 PF 0.65 t -2.32 | 18-22 n 174 $ -35.3 | 23+ n 135 $-128.1 | risk $  255
+   placebo B (random bars, fade the last 5 min, same exits, 200 runs): mean $-16.7, p95 $3.4; real $-84.5, p 1.000
+
+===== C: NQ 08:30-15:00 CT, order flow at the confirmed turn (aggressor delta of the last 2 bars; data to 2026-07-07)
+   B in the order-flow window         n  159 win 28.3% gross $-116.0 net $-133.3 PF 0.39 t -3.46 | 18-22 n 92 $ -63.4 | 23+ n 67 $-229.2 | risk $  304
+   C flow turned (primary)            n   51 win 27.5% gross $-168.4 net $-185.7 PF 0.22 t -2.44 | 18-22 n 32 $ -52.4 | 23+ n 19 $-410.1 | risk $  349
+   flow still with the burst (control) n  108 win 28.7% gross $ -91.3 net $-108.5 PF 0.48 t -2.46 | 18-22 n 60 $ -69.3 | 23+ n 48 $-157.6 | risk $  283
+   C by year: 2018 $-194 (6)  2019 $-338 (10)  2020 $364 (5)  2021 $-411 (5)  2022 $-1,098 (6)  2023 $-686 (5)  2024 $-1,511 (7)  2025 $-5,631 (5)  2026 $36 (2)
+      C longs                         n   35 win 25.7% gross $-110.0 net $-127.2 PF 0.35 t -2.21 | 18-22 n 23 $ -46.4 | 23+ n 12 $-282.2 | risk $  326
+      C shorts                        n   16 win 31.2% gross $-296.2 net $-313.5 PF 0.06 t -1.51 | 18-22 n 9 $ -67.8 | 23+ n 7 $-629.4 | risk $  400

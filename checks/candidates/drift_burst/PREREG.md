@@ -27,3 +27,11 @@ Written 2026-11-12 BEFORE any return of this rule was computed. Papers: Christen
 - **Variants judged:** B on GC, B on CL, C on NQ (3). A, B on ES / NQ, and the longer exits are information.
 - **Bars:** design 2018-22: t >= 2.0, PF >= 1.15, >= 80 trades; holdout 2023+ (one look): same sign, t >= 1.5, PF >= 1.1; random-time
   placebo with the same exits (p < 0.05). Reference: the paper's look-ahead measure (reversal from the true peak) on our data.
+
+## Amendment 1 (2026-11-12, before any valid return; the first run had a timestamp-unit bug, and its trades came from a broken statistic)
+On 1-minute bars the paper's statistic with h = 5 minutes rests on ~5 returns; being self-normalised it stays below ~3.5 (sd 0.84,
+never > 4 in 2018-26 on GC), so c = 4.5 gives no events: the paper samples every 5 SECONDS (~60 returns per bandwidth), which our
+data cannot do. Change: same statistic and bandwidths; the threshold c per market is set so the number of events per year in the
+DESIGN period 2018-22 matches the paper's rate at c = 4.0 (Table 3: GC 1,324 / 6 y = 221, CL 1,606 / 6 y = 268, ES 549 / 8 y = 69 a
+year; NQ uses the ES rate). Re-arm stays |T| < 2, confirmation = a 1.0 drop from the running max. Everything else unchanged.
+Consequence to state in the result: this is a 1-minute approximation of a tick-data detector, not the paper's test.
