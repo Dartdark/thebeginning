@@ -386,6 +386,20 @@ Source: Shabashev 2026, "Fine-Tuning an Order-Flow Foundation Model for Sub-Seco
   top fee tier. For us: book / order-flow signals are execution information (limit placement, adverse selection), not entries.
 - Limits: crypto only, two weeks, no futures; needs L3 data and ~10 ms GPU inference. Status: author claim; no test, no strategy.
 
+### E34 — Most passive fills on CME futures are adverse; touch-fill backtests overstate limit exits
+
+Source: Lalor & Swishchuk 2024, "Market Simulation under Adverse Selection", arXiv 2409.12721 (`papers/arxiv-2409.12721.pdf`); Cartea,
+Donnelly & Jaimungal 2018, "Enhancing trading strategies with order book signals" (`papers/cartea_2018_order_book_signals.pdf`);
+author claims (user upload 2026-11-12).
+- Use: a simple near-touch posting strategy on one 2024 day each (Trading Technologies simulator with queue position) had 82% (ES),
+  66% (NQ), 83% (CL), 89% (ZN) of its limit fills adverse: the next quote moved against the fill. A limit order is filled most often
+  when price is about to go through it. For us: our limit TARGETS fill on a touch in Python (`walk`) and on 1 tick through in
+  MultiCharts; a target that is only touched is the case most likely NOT to fill live, and a target that fills is the case most
+  likely to keep running. High-win-rate small-target rules (0.3R jump fade, IBS) are the most exposed: re-test them with targets that
+  need 1-2 ticks through before trusting the win rate.
+- Limits: one day per contract, simulator not live fills; market-making context. Status: author claim; check against our live
+  target fills (live/trades) when enough exist.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
