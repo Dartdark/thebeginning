@@ -1,5 +1,9 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
+> **RETIRED 2026-11-12 (user, all plans, until further notice; WATCHLIST #41 `analysis/vb_watch.py`)**: Vault Break (all sizes, both 50K and 150K tables below) is out of the funded plan. Its last-250-trade average
+> R fell below its 2018-24 minimum (data to 11/06); the edge after its breakout entries is gone in 2026 (`analysis/outputs/vb_drawdown_diag_output.txt`).
+> Benches: `analysis/bench150.py` BASE_FUNDED no longer contains VB. Tables below are history until re-run.
+
 ## Account and growth plan (agreed 2026-10-16)
 
 Priority order (details in the sections below and in `../reports/Trading_Business_Plan.pdf`):
@@ -157,7 +161,7 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
-| Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **`NumContracts` 2**, `FlaggedContracts` 1 (back to 2 / 1 2026-10-31, Swing Target reverted; 1 / 1 2026-10-25 to 10-31; 3 / 1 until 2026-10-17) | ~107 a year |
+| ~~Vault Break~~ **RETIRED 2026-11-12 (user, all plans, until further notice; WATCHLIST #41 `analysis/vb_watch.py`)** | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **0 (retired)**; was `NumContracts` 2, `FlaggedContracts` 1 (back to 2 / 1 2026-10-31, Swing Target reverted; 1 / 1 2026-10-25 to 10-31; 3 / 1 until 2026-10-17) | ~107 a year |
 | **Swing Target v3 (2026-10-25)** | `NQ_Swing_Target_v3.txt` | 1 min MNQ | **not in the funded plans since 2026-10-31** (tie after the exit-kind fix; personal only) | ~70 a year |
 | Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
 | ~~Monday Long~~ **50K: replaced 2026-10-24** by Overnight Tick / VIX (150K keeps it at 1) | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |

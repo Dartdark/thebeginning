@@ -4,7 +4,8 @@
                                       live/expected_setup.json; printed on every run), funded lab with VB_F / VB_N / TWIN
   setup(base="legacy")                the pre-2026-11-12 eval base (VB 20, ONB30, MON_BR 5, EOS, Twin 2; no DT, no JF) to reproduce old outputs
   RULE (user 2026-11-12: 'dont test upcoming shit on past shit'): when a live chart / size changes, update LIVE_EVAL in the same
-  commit as expected_setup.json. Funded base: BASE_FUNDED (no funded account live; VB still in the funded plan).
+  commit as expected_setup.json. Funded base: BASE_FUNDED (no funded account live). VB RETIRED from all plans 2026-11-12 (user): out of LIVE_EVAL,
+  BASE_FUNDED and the personal bench; base="legacy" restores the old VB bases.
   to_nq_days(ctx, gx, W, R)           per-row minute paths of another market's grid -> NQ trading-day rows
   eval_bench(ctx, {name: (W, R)})     W, R already sized ($, NQ trading-day rows x 1440), added to the base; paired pass-rate diff + block band
   funded_bench(ctx, {name: plan}, extra={key: (W, C)})   600 paired 2-year histories, 150K x 1.5 + Twin 2 as the base plan
@@ -25,9 +26,10 @@ import montecarlo as MC
 
 LIVE_EVAL = {"ONB30": ("risk", 2750), "EOS": ("risk", 1250), "MON_BR": 5, "TWIN": 2, "DT": 2, "JF": 2}   # #5 as of 2026-11-12 (VB out 11/11, JF in 11/12)
 LEGACY_EVAL = {"VB": 20, "ONB30": ("risk", 2750), "MON_BR": 5, "EOS": ("risk", 1250), "TWIN": 2}
-PLAN = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
+PLAN_LEGACY = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
+PLAN = {k: v for k, v in PLAN_LEGACY.items() if k not in ("VB_N", "VB_F")}   # VB RETIRED from all plans 2026-11-12 (user; WATCHLIST #41)
 sc = lambda p, k: {n: (("risk", v[1] * k) if isinstance(v, tuple) else v * k) for n, v in p.items()}
-BASE_FUNDED = {**sc(PLAN, 1.5), "TWIN": 2}
+BASE_FUNDED = {**sc(PLAN, 1.5), "TWIN": 2}; BASE_FUNDED_LEGACY = {**sc(PLAN_LEGACY, 1.5), "TWIN": 2}
 
 
 def setup(twin_trades=None, base="live"):
@@ -41,6 +43,8 @@ def setup(twin_trades=None, base="live"):
         w, rr = paths(g, t_); P[k] = (w[trr] / 10, rr[trr] / 10)
     atr = g.daily_atr(15); risk = lambda d, m_: np.floor(d / (np.nan_to_num(m_ * atr[trr], nan=1e12) * 2))[:, None]
     spec = LIVE_EVAL if base == "live" else LEGACY_EVAL
+    global BASE_FUNDED
+    if base != "live": BASE_FUNDED = BASE_FUNDED_LEGACY        # old scripts reproduce their saved outputs
     if "DT" in spec:
         import dual_thrust_bench as DTB
         w, rr = paths(g, DTB.dt_trades(g)); P["DT"] = (w[trr] / 10, rr[trr] / 10)
@@ -105,7 +109,7 @@ def funded_bench(ctx, variants, extra=None, end="2026-10-09", label="Funded 150K
 
 def personal(cands, drop=(), end=None):
     """cands: {name: daily $ Series (already sized, costs in)} added to the personal book (minus `drop` columns)."""
-    Pp = pd.read_pickle("scratch_data/personal_P.pkl"); Pp = Pp[[c for c in Pp.columns if c not in ("FC2B", "Kusho", "S47", "S30")]]
+    Pp = pd.read_pickle("scratch_data/personal_P.pkl"); Pp = Pp[[c for c in Pp.columns if c not in ("FC2B", "Kusho", "S47", "S30", "VaultBreak")]]   # VaultBreak retired 2026-11-12
     if end is not None: Pp = Pp[Pp.index <= end]
     base = Pp.drop(columns=[c for c in drop if c in Pp]).sum(axis=1)
     mcf = lambda x: (lambda d_: d_["pnl_p50"] / d_["dd_p95"])(MC.daily_mc(x.values, horizon=252, n=2000, block=20, trail=1e12, seed=1))

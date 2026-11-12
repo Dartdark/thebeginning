@@ -1,5 +1,8 @@
 # Personal-account portfolio (2026-10-23; noise-area 15-min longs added 2026-11-03; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25; Swing Target v3 and PAPERTREND v2 added 2026-10-25)
 
+> **RETIRED 2026-11-12 (user, all plans, until further notice; WATCHLIST #41 `analysis/vb_watch.py`)**: Vault Break is out of the personal book (all capital rows below that list VB: size 0). The personal bench
+> (`bench150.personal`) drops the VaultBreak column. Tables are history until re-run.
+
 From everything tested so far; numbers from `analysis/personal_portfolio.py` (output in
 `analysis/outputs/personal_portfolio_output.txt`). Backtest 2018-01 → 2026-10, after costs, micro commissions charged at
 ~$1.25 a round trip. No Apex rules: overnight holds allowed, no trailing limit, no payout cap.
@@ -16,7 +19,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | ONB ML | MNQ | $2,410 | $2,773 | $1,564 | 1.62 | S; funded plan (the combine runs plain ONB ADX30) |
 | FC 2B v2 | MNQ | $2,366 | $2,213 | $1,534 | 1.33 | A, MC-confirmed, **forward log first** |
 | Monday Long | MNQ | $2,104 | $3,912 | $2,086 | 1.09 | funded plan |
-| Vault Break | MNQ | $1,723 | $2,237 | $1,385 | 1.30 | live on Apex (combine) |
+| ~~Vault Break~~ | MNQ | $1,723 | $2,237 | $1,385 | 1.30 | RETIRED 2026-11-12 (all plans) |
 | Overnight Tick / VIX (long 17:05 → 03:00 CT after a down day, order-flow × VIX filter) | MNQ | $2,201 | $2,838 | $1,283 | 1.68 | A, MC-confirmed; personal + funded (50K 1, 150K 2) since 2026-10-24 (user); replaced Overnight Anomaly (C); data to 2026-07-07; **personal at 2 MNQ (user 2026-11-08)** |
 | Bridge Monday | MNQ | $1,295 | $1,478 | $1,689 | 1.39 | live on Apex (combine) |
 | Late-Day Flow | MNQ | $889 | $1,171 | $1,590 | 1.10 | funded plan |
