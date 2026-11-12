@@ -54,7 +54,7 @@ def personal(col, mask_dates, label):
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts, lab = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]; ts = pd.DatetimeIndex(g.ts)
+    ctx = BB.setup(base="legacy"); g, trr, D, dts, lab = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]; ts = pd.DatetimeIndex(g.ts)
     FB.add_moc_mes(lab); ld = pd.DatetimeIndex(lab.g.ts[lab.tr]).normalize()
     # ---------------- C1
     print("\nC1 Flow-confirmed Vault Break:")

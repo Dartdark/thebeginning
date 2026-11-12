@@ -37,7 +37,7 @@ def prior(series, dates, fn):
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts, lab = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]
+    ctx = BB.setup(base="legacy"); g, trr, D, dts, lab = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]
     rd = lambda f: pd.read_csv(f, parse_dates=["date"]).set_index("date").close_index_points.astype(float)
     ovx, vvix = rd("data/codex_20261108/OVX.csv"), rd("data/codex_20261108/VVIX.csv")
     mac = pd.read_csv("data/macro_proxies_daily.csv", parse_dates=["date"]).set_index("date"); ratio = (mac.HYG / mac.LQD).dropna()

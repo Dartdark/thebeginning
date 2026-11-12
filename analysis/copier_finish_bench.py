@@ -56,7 +56,7 @@ def cohort(W, R, c0, rule):
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"]; P = {}
+    ctx = BB.setup(base="legacy"); g, trr, D, dts = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"]; P = {}
     for nm, t in (("VB", with_slippage(load_mc(g, REPORTS["VB"][0]))), ("DT", DTB.dt_trades(g))): w, r = paths(g, t); P[nm] = (w[trr] / 10, r[trr] / 10)
     W = ctx["Wb"] - 5 * P["VB"][0] + 2 * P["DT"][0]; R = ctx["Rb"] - 5 * P["VB"][1] + 2 * P["DT"][1]
     c_lo, c_hi = int(np.argmax(dts >= "2018-01-02")), int(np.argmax(dts >= "2026-07-01"))

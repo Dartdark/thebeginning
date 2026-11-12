@@ -31,8 +31,8 @@ for t, e in zip(T.itertuples(), ix):
 W, R = W / 10, R / 10
 fee = np.zeros(ctx["D"]); np.add.at(fee, [tpos[pd.Timestamp(x).normalize()] for x in T.ts if pd.Timestamp(x).normalize() in tpos.index], EXTRA)
 W -= fee[:, None]; R -= fee[:, None]
-vw, vr = paths(g, with_slippage(load_mc(g, REPORTS["VB"][0]))); ctx["Wb"] = ctx["Wb"] - 20 * vw[trr] / 10; ctx["Rb"] = ctx["Rb"] - 20 * vr[trr] / 10
-print("BASE (live plan, VB out): ONB30 $2,750 risk, MON_BR 5, EOS $1,250 risk, Twin 2 MNQ")
+ctx["Wb"] = ctx["Wb"] - 2 * ctx["P"]["JF"][0]; ctx["Rb"] = ctx["Rb"] - 2 * ctx["P"]["JF"][1]
+print("BASE = bench150 LIVE_EVAL minus JF (re-added below as the candidate): ONB30 $2,750 risk, EOS $1,250 risk, MON_BR 5, Twin 2, DT 2")
 d = R[:, -1]; act = d != 0
 print(f"lead per MNQ: days traded {act.sum()}, worst day ${d.min():,.0f}, worst intraday ${W.min():,.0f}, worst 5-day sum ${pd.Series(d).rolling(5).sum().min():,.0f}")
 print("\n== (1) fresh 150K evaluation, 21 days (bench150 engine)")

@@ -1,35 +1,32 @@
-# New-chat brief (rewritten 2026-10-29; Now updated 2026-11-11): read this first
+# New-chat brief (rewritten 2026-10-29; Now updated 2026-11-12): read this first
 
 Opener for a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, `TODO.md` and `LESSONS.md` in
 github.com/Dartdark/thebeginning (branch `claude/nq-trading-strategy-params-5h9d20`) and continue from there."*
 Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history of this brief (up to 2026-10-28) is in
 `archive/brief_history_2026-10.md`; ticked to-dos are in `archive/TODO_done_2026-10.md`.
 
-## Now (2026-11-11)
+## Now (2026-11-12, evening)
 
-- **One live account: #5 APEX-681524-05, 150K evaluation** (bought 11/10; floor 146,000, target 159,050, DLL $2,000).
-  Charts (tags `<name>150-5`): ONB, EOS, MON_BR (5), Twin (2), DT (2). **VB removed from the evaluation 11/11 (user):** it blew the DLL
-  twice (11/11: −$2,257.50 on one stop). Plan docs, expected_setup.json and dashboards updated; the user still has to close the VB chart.
-- **11/11 result:** −$2,455 (DT −$200, VB −$2,257.50), DLL hit, account paused. Balance $147,998.08 = **$1,998 above the floor**, less
-  than one ONB stop ($2,750). Proposed: ONB `RiskPerTrade` ~1500 until it recovers (waiting on the user). Chart rows after 10:30 were
-  rejected orders (735), not trades. DT guard showed broker 2 / strategy 0 all afternoon; equity flat, so stale; user to confirm flat.
-- **Overrides 11/10-11/11** (`live/overrides.csv`): Twin closed early by hand +$261 (its target would have made +$536); manual re-entry +$192.
-- **Fixes 11/11:** Apex_Chart_Guard sends the target limit only within `TgtNearPct` (1%) of the price (a far limit was rejected 10x and
-  MC switched Twin off): **user must recompile it and turn Twin back on while flat.** `live/vps/push_trade_logs.ps1` line 72 parse
-  error (my edit; logs were down all day) fixed and parse-checked with pwsh. `.claude/settings.json` allows the pwsh download/parse check.
-- **Scheduled jobs RESUMED 11/11:** pre-market check 08:21 CT and 16:40 journal/dashboard. Watch that tomorrow's runs see the logs.
-- **Budget:** −$605 (eval #5 −$250, Claude −$20; MC already counted). Dashboard dataset 'ledger' v2.
-- **Jump Fade ADDED to #5 11/12 (user decision): `apex_strategies/NQ_Jump_Fade.txt` v3 with MinVolRatio 0 (= the unfiltered version), 2 MNQ**, 1-min @MNQ 24h chart. Eval bench (VB out): fresh +1.3 pt, from #5's state +1.0 pt (band +0.1/+2.0). Worst trade ~$1,460 at 2 MNQ vs the $1,998 cushion. **v4 (11/12): kill switch + heartbeat added (tag JF150-5, in expected_setup.json); MinVolRatio default 0; no cushion guard. User confirmed 11/12: v4 compiled and set, Chart Guard recompiled on all #5 charts.** 11/12 user: VB chart closed, DT flat, ONB RiskPerTrade left as is (declined ~1500).
-- **Drift-burst fade + order-flow turn 11/12 (user's combination 1):** F. Reversal 62-64% from the after-the-fact peak, a coin flip once the turn is confirmed; all four markets PF 0.5-0.6. Combinations 2-3 still to come from the user.
-- **Combination 2 (calendar-spread feedback + queue imbalance) 11/12:** D, not testable (no second-month data; a 500 ms HFT edge); NQ queue imbalance predicts nothing at 1-15 min (corr -0.002).
-- **Combination 3 (queue signal + quoting + adverse selection) 11/12:** D, no test (engine dead at our scale; market making needs co-location). E34: 66-89% of CME limit fills are adverse -> re-test small-target rules with targets needing 1-2 ticks through.
-- **11/12 later:** IBS v6 (no stop, exit 0.7) PF 1.70, both periods better, holds on NQ; still fails the personal book rule (TIER_LIST C+). Jump fade MultiCharts code `apex_strategies/NQ_Jump_Fade.txt` (port-verified, not compiled; forward log / sim only).
-- **IBS Globex ES v5 11/12 (user's forum post + file):** rebuilt to the post (306 vs 301 trades); our costs PF 1.46, 2018-22 PF 1.16 / 2023+ 1.93; personal book +1 MES fails 2018-22. TIER_LIST C (S30 is the better version). Sweep look-ahead bug found and fixed (LESSONS).
-- **Jump study 11/11 (user: pino1 screenshot, 82% wins / PF 1.41, three CFM papers):** not reproduced. Rebuilt as a 5-min jump-score rule: the 0.3R shape gives 78% wins, PF 1.05 (t 0.6);
-  30-min follow versions passed 2018-22 (t 3.1-3.4) and failed the one holdout look (PF 0.88-0.94). TIER_LIST D (2 rows), `analysis/outputs/jump_final_output.txt`, `checks/candidates/jump5/`.
-  Post-hoc lead: morning jump fade 07:00-09:59 CT (WATCHLIST #40, t 2.7 vs bar 3.70; forward log, MNQ only). Not asked yet: pino1 for his rule / trade list.
-- **Research 11/10:** satellite Cushing, 6J pivot continuation, curve papers, 5 papers, API pre-EIA: rows in TIER_LIST (nothing promoted).
-  Codex has the API/EIA data task. Older-data validation BENCHED (MC data only from 11/2016).
+- **One live account: #5 APEX-681524-05, 150K evaluation** (bought 11/10; floor 146,000, target 159,050, DLL $2,000). Balance
+  $147,998.08 = **$1,998 above the floor** (after 11/11: -$2,455, DLL hit). Charts (tags `<name>150-5`, all with Apex Chart Guard
+  recompiled 11/12 with TgtNearPct): **ONB ($2,750 risk, left as is by the user 11/12), EOS ($1,250 risk), MON_BR 5, Twin 2, DT 2,
+  Jump Fade 2 (JF150-5, added 11/12).** VB OUT since 11/11 (chart closed 11/12). DT confirmed flat 11/12.
+- **The live evaluation base is in code: `analysis/bench150.py` `LIVE_EVAL`** (= live/expected_setup.json = apex_strategies/README.md
+  'The evaluation plan NOW'). `BN.setup()` now benches every candidate against THIS set (incl. DT 2 + JF 2) and prints it; 15 older
+  scripts that edited the base by hand are pinned to `setup(base="legacy")`. **Change all three in the same commit whenever a chart or
+  size changes** (user 11/12: "dont test upcoming shit on past shit"). Funded base `BASE_FUNDED` still has VB (no funded account live).
+- **Jump Fade v4** (`apex_strategies/NQ_Jump_Fade.txt`): morning 5-min jump fade, 1-min @MNQ 24h chart, `MinVolRatio` 0, Qty 2, kill
+  switch + heartbeat, no cushion guard. MultiCharts report = Python (v2 683/694, v3 434/436 matched). Eval bench on the corrected base
+  (`analysis/outputs/jump_fade_v2_eval_now_output.txt`): fresh eval +0.9 pt; **from #5's state +1.8 pt (band +0.9/+2.8) at 2 MNQ**.
+  Worst trade ~$1,460 at 2 MNQ. Still a post-hoc lead (t 2.7 vs bar 3.70): its forward record decides (WATCHLIST #40).
+- **Twin's 19:35 sell-stop on 11/12 was a normal breakout order** (user: Twin stays as it is, breakout risk accepted).
+- **Tomorrow (11/13):** first JF entries possible from 07:00 CT. 08:21 check: JF150-5 heartbeat present; 16:40 journal: JF entries = 2,
+  Chart Guard rows (OPEN / CLOSE / POS / ACCT) arrive, Twin's target only within 1%.
+- **Overrides 11/10-11/11** (`live/overrides.csv`): Twin closed early by hand +$261; manual re-entry +$192.
+- **Budget:** -$605 (eval #5 -$250, Claude -$20). Dashboard dataset 'ledger' v2. Scheduled jobs: 08:21 + 16:40 CT running.
+- **Research 11/12 (all in TIER_LIST):** pino1 jump study not reproduced (D) -> morning jump fade lead (above); IBS Globex v5 C / v6 C+
+  (S30 better); drift-burst + order flow F; combinations 2-3 D; ML in Futures Markets (JRFM 2021) D (ML t ~2, risk-scaled t 1-2,
+  no reversal). Lessons 11/12: entry-date regimes, datetime units, ratio roll adjustment, Set* exits every bar, bench base = live set.
 
 ## Earlier (2026-11-05; research update 2026-11-09)
 

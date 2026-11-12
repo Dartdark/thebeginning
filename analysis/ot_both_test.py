@@ -17,7 +17,7 @@ if __name__ == "__main__":
     hi = N.hi25.astype(bool); cell = ((N.rsv < 0) & hi) | ((N.rsv >= 0) & ~hi)
     S = {"parent": N[N.down & cell], "any day": N[cell], "extra up-day nights": N[~N.down & cell]}
     for k, t in S.items(): print(f"   {k:<20} n {len(t)} ${t.net.mean():.0f}")
-    ctx = BB.setup(); dts, D = ctx["dts"], ctx["D"]; dpos = pd.Series(np.arange(D), index=dts); PT = {}
+    ctx = BB.setup(base="legacy"); dts, D = ctx["dts"], ctx["D"]; dpos = pd.Series(np.arange(D), index=dts); PT = {}
     for k, t in S.items(): PT[k] = daypaths(D, [(int(dpos[d]) if d in dpos.index else None, a, n) for d, a, n in zip(t.date, t.adv, t.net)])
     dm = lambda t: (t.groupby("date").net.sum() / 10 - 0.55 * t.groupby("date").size())
     print("\n   Personal book 1-year MC return / DD p95 (OT already 2 MNQ; to 2026-07-07):")

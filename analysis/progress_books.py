@@ -23,7 +23,7 @@ import bench150 as BB
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts, yr = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["yr"]
+    ctx = BB.setup(base="legacy"); g, trr, D, dts, yr = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["yr"]
     P = {}
     for nm, t in (("VB", with_slippage(load_mc(g, REPORTS["VB"][0]))), ("DT", DTB.dt_trades(g))): w, r = paths(g, t); P[nm] = (w[trr] / 10, r[trr] / 10)
     ok = (yr >= 2018) & (dts <= pd.Timestamp("2026-09-01"))

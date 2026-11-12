@@ -37,7 +37,7 @@ def screen(pieces, dts, S):
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts, lab = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]; S = series()
+    ctx = BB.setup(base="legacy"); g, trr, D, dts, lab = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]; S = series()
     ld = pd.DatetimeIndex(lab.g.ts[lab.tr]).normalize()
     # ---------- pieces
     fk = {"VB": "VB", "ONB ML": "ONB_ML2_MC", "Monday Long": "MON_MC", "EOS": "EOS", "LDF": "LDF_MC", "NFP": "NFP_MC", "Bridge Monday": "MON_BR_MC", "CL fade": "CLS", "Twin": "TWIN"}

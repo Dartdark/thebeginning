@@ -16,7 +16,7 @@ import bench150 as BB
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts, yr = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["yr"]; ts = pd.DatetimeIndex(g.ts)
+    ctx = BB.setup(base="legacy"); g, trr, D, dts, yr = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["yr"]; ts = pd.DatetimeIndex(g.ts)
     vb = with_slippage(load_mc(g, REPORTS["VB"][0])); dt = DTB.dt_trades(g)
     print("\nA. Trades per year and $ a trade per NQ:")
     for nm, t in (("Vault Break", vb), ("Dual Thrust", dt)):

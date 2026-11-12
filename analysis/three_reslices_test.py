@@ -43,7 +43,7 @@ def challenge(W, R, s, D, mode=None):
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"]
+    ctx = BB.setup(base="legacy"); g, trr, D, dts = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"]
     # ---------------- 1
     print("\n1. Funded 150K, each piece removed:")
     var = {f"without {k}": {q: v for q, v in BB.BASE_FUNDED.items() if q != k} for k in BB.BASE_FUNDED if k != "VB_F"}

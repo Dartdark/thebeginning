@@ -37,7 +37,7 @@ def challenge(W, R, s, D, finish=False, recover=False):
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    ctx = BB.setup(); g, trr, D, dts = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"]
+    ctx = BB.setup(base="legacy"); g, trr, D, dts = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"]
     print("\n1. Funded 150K, VB normal-day size (now 3 MNQ):")
     var = {f"VB_N {q}": {**BB.BASE_FUNDED, "VB_N": q} for q in (2, 1)}; var["VB_N 0"] = {k: v for k, v in BB.BASE_FUNDED.items() if k != "VB_N"}
     BB.funded_bench(ctx, var); BB.funded_bench(ctx, var, end="2022-12-31", label="   same, histories drawn from 2018-22 only")

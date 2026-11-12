@@ -25,7 +25,7 @@ T = S.trades(b, M, (yr >= 2018) & (aJ > 3) & np.isin(hc, [7, 8, 9]), -sgn, "rng"
 ix = np.searchsorted(M.ts, T.ts.to_numpy())                                   # entry minute index in the 1-min frame
 print(f"lead: {len(T)} trades, ${T.net.mean():.1f} per NQ, PF {T.net[T.net > 0].sum() / -T.net[T.net < 0].sum():.2f}, per MNQ ${T.net.mean() / 10 - EXTRA:.2f} a trade")
 
-ctx = BN.setup(); g = ctx["g"]; trr = ctx["trr"]; dts = ctx["dts"]
+ctx = BN.setup(base="legacy"); g = ctx["g"]; trr = ctx["trr"]; dts = ctx["dts"]
 row_of = pd.Series(np.arange(g.D), index=pd.DatetimeIndex(g.ts)); tpos = pd.Series(np.arange(len(trr)), index=dts)
 W = np.zeros((ctx["D"], 1440)); R = np.zeros((ctx["D"], 1440)); hi, lo = M.arr[1], M.arr[2]; miss = 0
 for t, e in zip(T.itertuples(), ix):

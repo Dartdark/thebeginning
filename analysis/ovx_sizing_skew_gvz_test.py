@@ -57,7 +57,7 @@ if __name__ == "__main__":
             for per, m in (("2018-26", np.ones(len(P), bool)), ("2018-22", P.index.year <= 2022), ("2023+", P.index.year >= 2023)):
                 x, y = f(b[m]), f(a[m]); parts.append(f"{per} {x[2]:.2f} -> {y[2]:.2f} ({y[2] - x[2]:+.2f}; median ${y[0] - x[0]:+,.0f}, DD ${y[1] - x[1]:+,.0f})")
             print(f"   high-OVX x{k}, {lab} book: " + " | ".join(parts), flush=True)
-    ctx = BB.setup(); g, trr, D, dts, lab_ = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]
+    ctx = BB.setup(base="legacy"); g, trr, D, dts, lab_ = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["lab"]
     ld = pd.DatetimeIndex(lab_.g.ts[lab_.tr]).normalize(); hset = set(on.index[hi])
     ext = {}; var = {}
     for k in (1.5, 2.0):

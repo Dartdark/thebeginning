@@ -86,7 +86,7 @@ if __name__ == "__main__":
     v9 = pd.read_csv(CD + "VIX9D.csv", parse_dates=["date"]).set_index("date").close_index_points
     vx = pd.read_csv("data/VIX_daily.csv", parse_dates=["DATE"]).set_index("DATE").CLOSE
     ratio = (v9 / vx).dropna().sort_index()
-    ctx = BB.setup(); dts = ctx["dts"]; yr = ctx["yr"]
+    ctx = BB.setup(base="legacy"); dts = ctx["dts"]; yr = ctx["yr"]
     inv = np.array([bool((ratio[ratio.index < d] >= 1.0).iloc[-1]) if (ratio.index < d).any() else False for d in dts])
     print(f"   inverted days (2018+): {inv[yr >= 2018].mean():.0%} of trading days")
     lab = ctx["lab"]; base = BB.BASE_FUNDED
