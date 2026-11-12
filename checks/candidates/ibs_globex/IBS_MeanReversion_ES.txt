@@ -1,0 +1,105 @@
+{=============================================================================
+ IBS MEAN REVERSION | ES | Long only
+ Based on Kakushadze & Serur, "151 Trading Strategies" (2018), sec. 4.4
+-----------------------------------------------------------------------------
+ CHART
+ Data source     TradeStation
+ Symbol          @ES (continuous)
+ Resolution      1 Minute
+ Session         CME Equity Index Futures [E-mini] (GLOBEX)
+ Time zone       Exchange (all time inputs are CT)
+ Max bars back   10
+ Bar Magnifier   off
+ Costs           commission $2.50 + slippage $4.00 per contract per fill
+
+ SIZING
+ MinContracts = MaxContracts = 1   reproduces the posted results (1 ES)
+ Otherwise: contracts = RiskPerTrade / stop distance in $
+=============================================================================}
+
+Inputs:
+    IBSEntry(0.2),
+    IBSExit(0.8),
+    MaxHoldDays(5),
+    StopATRMult(2.5),
+    ATRLen(10),
+    DecisionTime(1459),
+    SessionStart(1700),
+    RiskPerTrade(1000),
+    MinContracts(1),
+    MaxContracts(1);
+
+Variables:
+    SessHi(0), SessLo(0), SessPrevCl(0),
+    TodayTR(0), DoneTR(0), TRCount(0), SumTR(0), ATRNow(0),
+    Rng(0), IBS(0.5), Qty(0), StopPx(0),
+    DaysHeld(0), EntryATR(0), Decided(false), TRIdx(0);
+
+Arrays:
+    TRHist[50](0);
+
+if CurrentBar = 1 or (Time > SessionStart and Time[1] <= SessionStart)
+   or (Time > SessionStart and Date <> Date[1] and Time[1] > SessionStart) then begin
+    if SessHi > 0 then begin
+        if SessPrevCl > 0 then
+            DoneTR = MaxList(SessHi, SessPrevCl) - MinList(SessLo, SessPrevCl)
+        else
+            DoneTR = SessHi - SessLo;
+        for TRIdx = 49 downto 1 begin
+            TRHist[TRIdx] = TRHist[TRIdx - 1];
+        end;
+        TRHist[0] = DoneTR;
+        TRCount = TRCount + 1;
+        SessPrevCl = Close[1];
+    end;
+    SessHi = High;
+    SessLo = Low;
+    Decided = false;
+    if MarketPosition = 1 then
+        DaysHeld = DaysHeld + 1;
+end
+else begin
+    if High > SessHi then SessHi = High;
+    if Low < SessLo then SessLo = Low;
+end;
+
+if MarketPosition = 1 and EntryATR > 0 then begin
+    StopPx = EntryPrice - StopATRMult * EntryATR;
+    Sell ("Stop LX") all contracts next bar at StopPx stop;
+end;
+
+if Time >= DecisionTime and Time < SessionStart and Decided = false and SessHi > 0 then begin
+    Decided = true;
+
+    Rng = SessHi - SessLo;
+    if Rng > 0 then
+        IBS = (Close - SessLo) / Rng
+    else
+        IBS = 0.5;
+
+    ATRNow = 0;
+    if SessPrevCl > 0 and TRCount >= ATRLen - 1 then begin
+        TodayTR = MaxList(SessHi, SessPrevCl) - MinList(SessLo, SessPrevCl);
+        SumTR = TodayTR;
+        for TRIdx = 0 to ATRLen - 2 begin
+            SumTR = SumTR + TRHist[TRIdx];
+        end;
+        ATRNow = SumTR / ATRLen;
+    end;
+
+    if MarketPosition = 1 then begin
+        if IBS > IBSExit then
+            Sell ("IBS LX") all contracts next bar at market
+        else if MaxHoldDays > 0 and DaysHeld >= MaxHoldDays then
+            Sell ("Time LX") all contracts next bar at market;
+    end;
+
+    if MarketPosition = 0 and IBS < IBSEntry and ATRNow > 0 then begin
+        Qty = IntPortion(RiskPerTrade / (StopATRMult * ATRNow * BigPointValue));
+        if Qty < MinContracts then Qty = MinContracts;
+        if Qty > MaxContracts then Qty = MaxContracts;
+        EntryATR = ATRNow;
+        DaysHeld = 0;
+        Buy ("IBS LE") Qty contracts next bar at market;
+    end;
+end;
