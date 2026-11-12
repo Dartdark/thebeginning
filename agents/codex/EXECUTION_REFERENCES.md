@@ -376,6 +376,16 @@ Source: lab Q007 (2026-10-31), `analysis/lab_Q007.py`, `checks/candidates/lab_Q0
   fade -$57 gross, vs $25 round-trip cost (2018-22, 131 trades). Same result as CL EIA (TIER_LIST F).
 - Limits: 1-minute bars; 11:00 CT holiday releases not detected (skipped). Status: verified behaviour; no strategy.
 
+### E33 — Order-flow forecasts live under one second and below the cost of a trade
+
+Source: Shabashev 2026, "Fine-Tuning an Order-Flow Foundation Model for Sub-Second Forecasting", arXiv 2611.14117
+(`papers/arxiv-2611.14117.pdf`, user upload 2026-11-12); author claim (crypto L3, Bitstamp / Bitfinex, 2 weeks).
+- Use: a 300M transformer pretrained on Level-3 order flow and fine-tuned predicts the next 0.2-1 s microprice move (corr
+  0.39-0.45 vs order-book imbalance 0.23, gradient boosting 0.31-0.39); the skill falls 60-80% within one horizon of lead, ties
+  imbalance by 5 s and loses to it at 10-30 s. Predicted moves are sub-basis-point, below a ~2 bp one-way cost even at the
+  top fee tier. For us: book / order-flow signals are execution information (limit placement, adverse selection), not entries.
+- Limits: crypto only, two weeks, no futures; needs L3 data and ~10 ms GPU inference. Status: author claim; no test, no strategy.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
@@ -394,4 +404,3 @@ Market/platform and timing limits:
 Data/prerequisites:
 Smallest justified next check:
 Status and superseding evidence:
-- **Order-flow predictability is sub-second and below cost** (Shabashev 2026, arXiv 2611.14117, `papers/arxiv-2611.14117.pdf`; crypto L3): a fine-tuned order-flow transformer predicts the next 0.2-1 s microprice move (corr ~0.4-0.45, beats book imbalance 0.23), but the skill falls 60-80% within one horizon of lead and ties simple imbalance by 5 s; predicted moves are sub-basis-point, below a ~2 bp one-way cost. For us (1-min bars, retail latency): order-book / order-flow signals are execution information (when to place a limit, adverse selection), not alpha; do not build entries on them.
