@@ -18,3 +18,8 @@ Unit: R = net / (stop points x $20) per trade (risk-normalised, because a scaled
 account the size would be set from the stop). Also $ per NQ.
 Pass (P vs F): 2018-24 avg R >= F's, AND 2025-26 avg R > 0 AND > F's, AND 2023+ positive. Report: by year, win / exit mix,
 Sharpe / Sortino / PF / Calmar / Ulcer on daily R, t, bootstrap 95% interval of 2025-26 avg R, DSR at N_items.
+
+## Result (2026-11-12, `analysis/outputs/vb_atr_bracket_test_output.txt`, data to 11/06): FAIL
+Primary P (0.163 / 0.305 ATR): avg R 2018-24 +0.032 vs fixed +0.059; 2025-26 -0.006 vs +0.051; 2026 -$115 per NQ vs +$5.
+Best grid (0.20 / 0.20, selected on 2018-24): 2025-26 +0.007 R vs fixed +0.051. Every scaled variant is worse than the fixed bracket
+in 2025-26. Since 2026-08-01: fixed -0.074 R, P -0.130 R. The bracket is not the cause; the entry's post-breakout drift is.

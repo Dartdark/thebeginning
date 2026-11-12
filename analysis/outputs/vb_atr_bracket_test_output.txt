@@ -1,0 +1,61 @@
+[provenance] code 9b7d74f dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Vault Break with an ATR-scaled bracket (pre-registered: checks/candidates/vb_atr_bracket/PREREG.md, user 2026-11-12).
+data to 2026-11-06
+PRIMARY from 2018-24 medians: tp 0.163 x ATR, sl 0.305 x ATR (fixed 40 / 75 at the median ATR 246 pts)
+
+== Variants (R = net / stop $; 1 NQ, costs in)
+   F fixed 40/75 (control)    n 1777 win 65.4% tgt/stop/time  51%/ 20%/ 29% | avg R 18-24 +0.059 (t  3.7) 25-26 +0.051 (t  1.6) 23+ +0.055 | all +0.057 t  4.0 | $/NQ    85
+   P primary 0.163/0.305      n 1737 win 61.9% tgt/stop/time  48%/ 20%/ 32% | avg R 18-24 +0.032 (t  1.9) 25-26 -0.006 (t -0.2) 23+ +0.022 | all +0.024 t  1.7 | $/NQ    36
+   G 0.10/0.20                n 2185 win 67.3% tgt/stop/time  62%/ 24%/ 14% | avg R 18-24 +0.050 (t  3.3) 25-26 +0.014 (t  0.5) 23+ +0.042 | all +0.043 t  3.1 | $/NQ    44
+   G 0.10/0.30                n 2080 win 70.6% tgt/stop/time  65%/ 16%/ 19% | avg R 18-24 +0.024 (t  2.0) 25-26 -0.002 (t -0.1) 23+ +0.020 | all +0.019 t  1.7 | $/NQ    32
+   G 0.10/0.40                n 2031 win 72.1% tgt/stop/time  66%/ 11%/ 22% | avg R 18-24 +0.013 (t  1.3) 25-26 -0.007 (t -0.3) 23+ +0.007 | all +0.009 t  1.0 | $/NQ    22
+   G 0.15/0.20                n 1939 win 59.4% tgt/stop/time  48%/ 29%/ 24% | avg R 18-24 +0.061 (t  3.1) 25-26 +0.020 (t  0.5) 23+ +0.058 | all +0.053 t  3.0 | $/NQ    52
+   G 0.15/0.30                n 1798 win 63.3% tgt/stop/time  51%/ 20%/ 30% | avg R 18-24 +0.035 (t  2.2) 25-26 -0.003 (t -0.1) 23+ +0.023 | all +0.027 t  2.0 | $/NQ    40
+   G 0.15/0.40                n 1729 win 65.1% tgt/stop/time  52%/ 14%/ 34% | avg R 18-24 +0.022 (t  1.7) 25-26 -0.009 (t -0.4) 23+ +0.016 | all +0.016 t  1.4 | $/NQ    30
+   G 0.20/0.20                n 1736 win 55.6% tgt/stop/time  37%/ 32%/ 31% | avg R 18-24 +0.082 (t  3.5) 25-26 +0.007 (t  0.2) 23+ +0.068 | all +0.067 t  3.2 | $/NQ    60
+   G 0.20/0.30                n 1600 win 60.2% tgt/stop/time  40%/ 22%/ 38% | avg R 18-24 +0.054 (t  2.9) 25-26 -0.005 (t -0.1) 23+ +0.040 | all +0.042 t  2.6 | $/NQ    59
+   G 0.20/0.40                n 1529 win 62.2% tgt/stop/time  41%/ 16%/ 43% | avg R 18-24 +0.034 (t  2.2) 25-26 -0.009 (t -0.3) 23+ +0.025 | all +0.026 t  1.9 | $/NQ    48
+   best grid on 2018-24 avg R: G 0.20/0.20 (secondary, selected)
+
+== F fixed 40/75 (control) by year: avg R / win / $ per NQ / exits
+   2018: n 136 avg R +0.022 win 58.8% $    33 tgt/stop/time  25%/  8%/ 67%
+   2019: n 122 avg R +0.016 win 55.7% $    24 tgt/stop/time  15%/  3%/ 82%
+   2020: n 202 avg R +0.085 win 63.9% $   127 tgt/stop/time  49%/ 14%/ 37%
+   2021: n 191 avg R +0.094 win 67.0% $   141 tgt/stop/time  49%/ 15%/ 36%
+   2022: n 217 avg R +0.049 win 68.7% $    74 tgt/stop/time  59%/ 26%/ 15%
+   2023: n 219 avg R +0.080 win 68.5% $   120 tgt/stop/time  55%/ 20%/ 25%
+   2024: n 217 avg R +0.041 win 65.9% $    62 tgt/stop/time  56%/ 25%/ 19%
+   2025: n 228 avg R +0.101 win 69.3% $   152 tgt/stop/time  63%/ 21%/ 16%
+   2026: n 245 avg R +0.004 win 64.1% $     5 tgt/stop/time  62%/ 29%/  9%
+   daily R (x $1,000 risk): Sharpe 1.25 Sortino 1.91 PF 1.24 Calmar 1.19 Ulcer 1.57 maxDD $9,270 annual $11,026
+   2025-26 avg R bootstrap 95%: -0.011 .. +0.110
+
+== P primary 0.163/0.305 by year: avg R / win / $ per NQ / exits
+   2018: n 203 avg R -0.016 win 58.6% $    -2 tgt/stop/time  49%/ 23%/ 28%
+   2019: n 179 avg R -0.007 win 54.2% $    -1 tgt/stop/time  42%/ 18%/ 40%
+   2020: n 212 avg R +0.026 win 59.9% $     9 tgt/stop/time  45%/ 19%/ 36%
+   2021: n 205 avg R +0.082 win 66.3% $   118 tgt/stop/time  50%/ 17%/ 33%
+   2022: n 171 avg R +0.045 win 69.0% $   101 tgt/stop/time  46%/ 21%/ 33%
+   2023: n 223 avg R +0.069 win 67.3% $   100 tgt/stop/time  57%/ 22%/ 21%
+   2024: n 202 avg R +0.017 win 62.4% $    21 tgt/stop/time  50%/ 24%/ 26%
+   2025: n 179 avg R +0.025 win 62.0% $    68 tgt/stop/time  44%/ 19%/ 37%
+   2026: n 163 avg R -0.039 win 55.8% $  -115 tgt/stop/time  40%/ 20%/ 39%
+   daily R (x $1,000 risk): Sharpe 0.54 Sortino 0.77 PF 1.10 Calmar 0.33 Ulcer 5.23 maxDD $14,143 annual $4,609
+   2025-26 avg R bootstrap 95%: -0.071 .. +0.056
+
+== G 0.20/0.20 by year: avg R / win / $ per NQ / exits
+   2018: n 195 avg R +0.033 win 52.8% $    16 tgt/stop/time  39%/ 34%/ 27%
+   2019: n 179 avg R +0.014 win 48.0% $     7 tgt/stop/time  32%/ 28%/ 39%
+   2020: n 207 avg R +0.041 win 53.6% $    25 tgt/stop/time  34%/ 34%/ 32%
+   2021: n 197 avg R +0.139 win 60.4% $   125 tgt/stop/time  39%/ 27%/ 34%
+   2022: n 177 avg R +0.101 win 60.5% $   158 tgt/stop/time  38%/ 33%/ 28%
+   2023: n 226 avg R +0.200 win 63.7% $   187 tgt/stop/time  48%/ 31%/ 21%
+   2024: n 209 avg R +0.027 win 53.1% $    20 tgt/stop/time  38%/ 38%/ 24%
+   2025: n 180 avg R +0.053 win 57.2% $    65 tgt/stop/time  32%/ 30%/ 38%
+   2026: n 166 avg R -0.042 win 49.4% $   -96 tgt/stop/time  30%/ 35%/ 36%
+   daily R (x $1,000 risk): Sharpe 1.00 Sortino 1.56 PF 1.18 Calmar 0.76 Ulcer 3.07 maxDD $16,670 annual $12,651
+   2025-26 avg R bootstrap 95%: -0.082 .. +0.096
+
+== PASS RULE (P vs F): 2018-24 P >= F: False; 2025-26 P > 0: False and > F (-0.006 vs +0.051): False; 2023+ positive: True -> FAIL
+   since 2026-08-01: F avg R -0.074 (n 65), P -0.130 (n 42)
+   bar: t_threshold(N_items) see analysis/trials.py; P is a pre-registered single variant of an existing strategy's exit
