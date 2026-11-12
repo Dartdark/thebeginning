@@ -1,0 +1,20 @@
+DT v4 trades 1624 (design 888); entropy missing 2; design cut q30 = 1.3505
+=== Gate 1: design 2018-2022
+primary q30: diff $61.2 per NQ, Welch t 0.67
+   gate on (low entropy)          n  266 win 47.0% $  168.0 PF 1.33 t  2.12  stop/target/flat {'flat': 68, 'stop': 127, 'target': 71}
+   rest                           n  622 win 48.2% $  106.8 PF 1.25 t  2.34  stop/target/flat {'flat': 277, 'stop': 232, 'target': 113}
+   placebo random subsets of 266: mean $123.5, p = 0.232
+--- information only (design)
+cut q20: diff $86.9 per NQ, Welch t 0.81
+   gate on (low entropy)          n  178 win 48.3% $  194.6 PF 1.39 t  1.99  stop/target/flat {'flat': 45, 'stop': 84, 'target': 49}
+   rest                           n  710 win 47.7% $  107.7 PF 1.24 t  2.48  stop/target/flat {'flat': 300, 'stop': 275, 'target': 135}
+cut q50: diff $23.7 per NQ, Welch t 0.30
+   gate on (low entropy)          n  445 win 45.8% $  136.9 PF 1.27 t  2.27  stop/target/flat {'flat': 124, 'stop': 207, 'target': 114}
+   rest                           n  443 win 49.9% $  113.3 PF 1.28 t  2.17  stop/target/flat {'flat': 221, 'stop': 152, 'target': 70}
+longs: diff $92.2 per NQ, Welch t 0.73
+   gate on (low entropy)          n  124 win 50.0% $  219.3 PF 1.49 t  1.97  stop/target/flat {'flat': 44, 'stop': 52, 'target': 28}
+   rest                           n  324 win 51.5% $  127.1 PF 1.31 t  2.08  stop/target/flat {'flat': 160, 'stop': 117, 'target': 47}
+shorts: diff $38.6 per NQ, Welch t 0.29
+   gate on (low entropy)          n  142 win 44.4% $  123.2 PF 1.22 t  1.09  stop/target/flat {'flat': 24, 'stop': 75, 'target': 43}
+   rest                           n  298 win 44.6% $   84.7 PF 1.18 t  1.24  stop/target/flat {'flat': 117, 'stop': 115, 'target': 66}
+   by year (gate on - rest): 2018 $-181  2019 $86  2020 $-157  2021 $109  2022 $297
