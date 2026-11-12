@@ -4,6 +4,11 @@ Started 2026-10-17. Claude ticks items off when you say they're done and reminds
 bottom). Times are Central (CT).
 
 ## This week and next
+- [ ] **You, NOW (2026-11-12): JF150-5 inputs on the VPS:** set `HeartbeatTag` = `JF150-5` (blank, so the alarm said "not
+  running" while it traded +$145) and check the contract size (entered 1 MNQ, plan 2). The 08:21 check now names both.
+- [ ] **Settings report, recompile later (2026-11-12, user yes):** Claude adds the size + account inputs to each live strategy's
+  heartbeat line (2 lines each: ONB, EOS, Bridge Monday, Twin, DT, JF), checker reviews, then you recompile all 6 after a close
+  on a quiet evening. Then the 08:21 check sees a wrong size BEFORE the first trade (today it only sees it after an entry).
 
 - [x] (2026-11-04, VB + ONB live replay 10/20-11/04: `analysis/outputs/live_replay_1020_1104_output.txt`; VB 15/15 trades identical, ONB: 10/27 missed (known compile miss), 11/04 entered one bar later (ADX 30.12 at 09:15 = knife-edge), same loss) **Claude: re-run the backtests on the extended NQ data (daily feed, data now to 10/28; 2026-10-29).** Rebuild
   scratch_data (`analysis/build_lab.py`), refresh `analysis/live_panels.py` (bt_cache.json) and the plan benches, and compare
