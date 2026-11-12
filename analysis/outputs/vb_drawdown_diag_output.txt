@@ -1,0 +1,72 @@
+[provenance] code c83169b dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Why is Vault Break losing now? (user 2026-11-12: the Bridge's lorenzobruno says VB passed its 9-10 year max drawdown, 17.345 vs
+data 2017-05-01 .. 2026-11-06
+
+== VB v1: 1777 trades, net $151,547, avg $85, PF 1.24
+   current drawdown $-11,913 from the peak on 2026-08-07 (59 trades since); worst 5 episodes:
+      $  -15,802  peak 2023-11-27 -> low 2024-04-05  (125 trades)
+      $  -12,476  peak 2024-08-29 -> low 2024-10-25  (67 trades)
+      $  -11,913  peak 2026-08-07 -> low 2026-11-06  (59 trades, STILL OPEN)
+      $  -11,059  peak 2025-11-14 -> low 2026-02-24  (131 trades)
+      $  -10,726  peak 2026-05-08 -> low 2026-05-26  (42 trades)
+
+== VB v8: 1900 trades, net $145,010, avg $76, PF 1.21
+   current drawdown $-12,634 from the peak on 2026-09-22 (33 trades since); worst 5 episodes:
+      $  -17,506  peak 2023-11-27 -> low 2024-04-05  (139 trades)
+      $  -13,690  peak 2024-08-29 -> low 2024-10-25  (83 trades)
+      $  -12,966  peak 2026-01-12 -> low 2026-02-24  (95 trades)
+      $  -12,634  peak 2026-09-22 -> low 2026-11-06  (33 trades, STILL OPEN)
+      $  -12,229  peak 2026-05-08 -> low 2026-05-26  (67 trades)
+
+== (2) v1 by year and the current stretch (per NQ): n, win, target / stop / time exits, avg win, avg loss, avg
+   2018                   n  136 win 58.8% tgt 25.0% stop  8.1% time 66.9% | avg win $ 498 loss $  -633 | avg $   33 | ATR  128 pts, stop/ATR 0.694
+   2019                   n  122 win 55.7% tgt 14.8% stop  3.3% time 82.0% | avg win $ 386 loss $  -432 | avg $   24 | ATR  115 pts, stop/ATR 0.717
+   2020                   n  202 win 63.9% tgt 48.5% stop 14.4% time 37.1% | avg win $ 682 loss $  -853 | avg $  127 | ATR  277 pts, stop/ATR 0.330
+   2021                   n  191 win 67.0% tgt 48.7% stop 15.2% time 36.1% | avg win $ 658 loss $  -911 | avg $  141 | ATR  238 pts, stop/ATR 0.339
+   2022                   n  217 win 68.7% tgt 58.5% stop 26.3% time 15.2% | avg win $ 713 loss $ -1326 | avg $   74 | ATR  388 pts, stop/ATR 0.201
+   2023                   n  219 win 68.5% tgt 55.3% stop 20.1% time 24.7% | avg win $ 688 loss $ -1114 | avg $  120 | ATR  238 pts, stop/ATR 0.322
+   2024                   n  217 win 65.9% tgt 55.8% stop 24.9% time 19.4% | avg win $ 718 loss $ -1206 | avg $   62 | ATR  294 pts, stop/ATR 0.270
+   2025                   n  228 win 69.3% tgt 62.7% stop 21.1% time 16.2% | avg win $ 739 loss $ -1174 | avg $  152 | ATR  414 pts, stop/ATR 0.199
+   2026                   n  245 win 64.1% tgt 62.0% stop 29.0% time  9.0% | avg win $ 767 loss $ -1353 | avg $    5 | ATR  499 pts, stop/ATR 0.162
+   2026 H1                n  164 win 67.7% tgt 64.6% stop 26.8% time  8.5% | avg win $ 758 loss $ -1374 | avg $   69 | ATR  480 pts, stop/ATR 0.169
+   2026 Jul-Sep           n   56 win 60.7% tgt 60.7% stop 26.8% time 12.5% | avg win $ 788 loss $ -1271 | avg $  -21 | ATR  517 pts, stop/ATR 0.154
+   2026 Oct-              n   25 win 48.0% tgt 48.0% stop 48.0% time  4.0% | avg win $ 788 loss $ -1403 | avg $ -352 | ATR  583 pts, stop/ATR 0.133
+   since the peak         n   59 win 52.5% tgt 52.5% stop 35.6% time 11.9% | avg win $ 788 loss $ -1298 | avg $ -202 | ATR  500 pts, stop/ATR 0.159
+   breakeven win rate for the bracket (40 win / 75 loss, after costs): ~65.6% (ignoring time exits)
+
+== (3) the fixed bracket vs volatility: all 2018-26 trades by stop / ATR (75 points / 15-day ATR)
+   stop/ATR 0.07-0.18     n  356 win 68.0% tgt 66.3% stop 27.5% time  6.2% | avg win $ 777 loss $ -1388 | avg $   83 | ATR  541 pts, stop/ATR 0.143 | years 2020-2026
+   stop/ATR 0.18-0.23     n  356 win 66.0% tgt 58.1% stop 23.3% time 18.5% | avg win $ 727 loss $ -1169 | avg $   83 | ATR  368 pts, stop/ATR 0.205 | years 2020-2026
+   stop/ATR 0.23-0.30     n  354 win 66.1% tgt 55.4% stop 19.8% time 24.9% | avg win $ 712 loss $ -1070 | avg $  108 | ATR  284 pts, stop/ATR 0.266 | years 2020-2026
+   stop/ATR 0.30-0.39     n  356 win 66.0% tgt 50.3% stop 18.5% time 31.2% | avg win $ 665 loss $ -1021 | avg $   92 | ATR  224 pts, stop/ATR 0.338 | years 2018-2026
+   stop/ATR 0.39-1.59     n  355 win 60.8% tgt 25.1% stop  8.5% time 66.5% | avg win $ 490 loss $  -606 | avg $   61 | ATR  129 pts, stop/ATR 0.655 | years 2018-2024
+   same, 2018-2024 only (before the recent stretch):
+   stop/ATR (0.0, 0.15]   n   51 win 74.5% tgt 72.5% stop 25.5% time  2.0% | avg win $ 777 loss $ -1517 | avg $  193 | ATR  539 pts, stop/ATR 0.139
+   stop/ATR (0.15, 0.2]   n  129 win 69.0% tgt 61.2% stop 23.3% time 15.5% | avg win $ 736 loss $ -1215 | avg $  131 | ATR  420 pts, stop/ATR 0.180
+   stop/ATR (0.2, 0.25]   n  194 win 62.9% tgt 52.1% stop 25.8% time 22.2% | avg win $ 697 loss $ -1176 | avg $    2 | ATR  335 pts, stop/ATR 0.225
+   stop/ATR (0.25, 0.35]  n  445 win 67.2% tgt 56.2% stop 18.7% time 25.2% | avg win $ 710 loss $ -1043 | avg $  135 | ATR  257 pts, stop/ATR 0.294
+   stop/ATR (0.35, 10.0]  n  485 win 61.6% tgt 29.9% stop 10.7% time 59.4% | avg win $ 529 loss $  -696 | avg $   59 | ATR  149 pts, stop/ATR 0.579
+
+== (4) signal vs bracket: points from entry to the 14:30 close, max up / down before 14:30 (per trade)
+   2018-2024       n 1304 | drift to 14:30   +8.8 pts (+0.037 ATR) | MFE 0.219 ATR, MAE 0.226 ATR | VB $   89 vs random time same days $   66 (signal edge $  +23)
+   2025            n  228 | drift to 14:30  +18.6 pts (+0.027 ATR) | MFE 0.206 ATR, MAE 0.206 ATR | VB $  152 vs random time same days $  -28 (signal edge $ +180)
+   2026            n  245 | drift to 14:30   +0.2 pts (-0.005 ATR) | MFE 0.176 ATR, MAE 0.203 ATR | VB $    5 vs random time same days $  -78 (signal edge $  +84)
+   since the peak  n   59 | drift to 14:30  -28.6 pts (-0.060 ATR) | MFE 0.136 ATR, MAE 0.231 ATR | VB $ -202 vs random time same days $  -59 (signal edge $ -142)
+
+== (5) bad luck or broken? block bootstrap (20-trade blocks) of 2018-2024 trades over 9 years of trades
+   current stretch: 59 trades, $-11,913; max DD before it $-15,802
+   P(max DD over 1777 trades <= current $-11,913) = 90.5%; median max DD $-16,278, p95 $-26,295
+   P(some 59-trade stretch in 1777 trades loses >= $11,913) = 58.4%
+
+== (6) market-wide intraday momentum on NQ (all weekdays): does the 08:30 -> 10:00 move continue 10:00 -> 14:30?
+   2017          days 153 | corr(am, pm) +0.058 | after am > +0.3 ATR (n  24) pm +0.107 ATR vs all days +0.018
+   2018          days 248 | corr(am, pm) +0.068 | after am > +0.3 ATR (n  43) pm +0.037 ATR vs all days -0.009
+   2019          days 249 | corr(am, pm) -0.080 | after am > +0.3 ATR (n  45) pm +0.047 ATR vs all days +0.017
+   2020          days 250 | corr(am, pm) -0.012 | after am > +0.3 ATR (n  39) pm -0.041 ATR vs all days +0.013
+   2021          days 251 | corr(am, pm) +0.102 | after am > +0.3 ATR (n  52) pm +0.108 ATR vs all days +0.032
+   2022          days 250 | corr(am, pm) +0.140 | after am > +0.3 ATR (n  48) pm +0.021 ATR vs all days -0.007
+   2023          days 248 | corr(am, pm) +0.079 | after am > +0.3 ATR (n  48) pm +0.039 ATR vs all days +0.066
+   2024          days 249 | corr(am, pm) +0.055 | after am > +0.3 ATR (n  47) pm +0.077 ATR vs all days +0.010
+   2025          days 247 | corr(am, pm) +0.038 | after am > +0.3 ATR (n  40) pm +0.007 ATR vs all days +0.003
+   2026 Aug-     days  69 | corr(am, pm) +0.067 | after am > +0.3 ATR (n  15) pm -0.009 ATR vs all days -0.038
+   2026 Jan-Jul  days 145 | corr(am, pm) +0.026 | after am > +0.3 ATR (n  28) pm -0.014 ATR vs all days +0.003
