@@ -15,6 +15,8 @@
   the pre-registration gates. A confirmed accounting / execution defect goes to the user immediately, not on Friday;
   judgement calls go to the user with both views, the uncertainty and a recommendation.
 
+- **VB watch rule (every Friday, user 2026-11-12, WATCHLIST #41):** after the data refresh run `tools/run_stamped.sh analysis/vb_watch.py > analysis/outputs/vb_watch_output.txt`; report the STATE line (WATCH / RETURN-ELIGIBLE / RETIRE) to the user when it changes.
+
 - **Stale-rule review (first Friday of each month, user 2026-11-01, 'harnesses decay'):** go through `CLAUDE.md`,
   `LESSONS.md`, `MULTICHARTS_PITFALLS.md`, `lab/README.md` and the skills. For each rule ask: which failure does it prevent,
   has that failure happened in the last 2 months, can code enforce it instead (move it into a check: `tools/prepush_check.py`,

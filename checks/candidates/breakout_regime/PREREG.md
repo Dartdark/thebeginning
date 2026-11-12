@@ -18,3 +18,10 @@ Variants (4), per NQ, $7.25 + 1 tick a market / stop fill:
 Pass for A and D: avg > 0 with t >= 2.0 over 2018-26 AND positive in both 2018-22 and 2023-26, AND beats a random-side placebo
 (same entries, side by coin, 200 runs) at p < 0.05. B passes if it beats VB-always in avg R in both periods.
 Not Apex-tested yet: a pass goes to a book bench (bench150 LIVE_EVAL) before anything else.
+
+## Result (2026-11-12, `analysis/outputs/breakout_regime_test_output.txt`, data to 11/06): FAIL (all variants)
+H1: S does not predict the next drift (Spearman -0.028, p 0.24; both halves ~0, slightly NEGATIVE: drift after cold stretches +0.050
+vs +0.022 after hot). A fade-when-cold -$162 a trade (t -3.5), negative 2018-25, +$16.5k only in 2026 (the stretch that prompted it);
+random side p 1.00. B VB-when-hot $79 vs VB-always $86 (worse). C switch $17 (t 0.8). D market-wide follow/fade by trailing corr
+-$61 (t -0.9, placebo p 0.75); always-follow control $105 (t 1.5) . D0: since Aug 2026 VB entries are flat at +30/+60 min and give back
+by 14:30 (-0.033 ATR), VWAP retests 42% vs 30%.
