@@ -592,3 +592,10 @@ Twin's engine (base trades on Twin-active days $343 t 5.6, on Twin-flat days −
 $116 t 2.2), the EMA (SMA $96), mean 32 / vol 16-32. Decoration: the ±4 stop (never fires). Holding longer earns more per trade (16 bars
 $223 t 3.6) but hurts the evaluation (−2.9%) and the funded bench. Threshold plateau 15-min EntryZ 1.05-1.30 (t 3.4-3.8; ≥ 1.45 dies).
 Post hoc lead: EntryZ 1.25 ($246 t 3.5, DD $17.3k vs $32.8k) - the only variant that helps a book (personal +0.06 / +0.11 / +0.12).
+
+
+## Resize after every plan change (user rule 2026-11-12)
+Any change to a plan (piece added / removed / resized / swapped) is followed, in the same reply, by `analysis/resize_book.py` on the
+updated `bench150.LIVE_EVAL`: one-at-a-time sizes (0 / 0.5x / 1.5x / 2x), a greedy search ranked on 2018-22 starts, then one holdout
+look (2023-26) and the account-now check. Change sizes only when both bands exclude 0. First run 2026-11-12 (book with NBL 3 + LDF $1,000):
+search moved JF 1 -> 0 and LDF -> $1,500, holdout -0.1 pt, account -0.3 pt: keep the live sizes.

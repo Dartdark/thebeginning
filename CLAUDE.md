@@ -37,6 +37,10 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
   changed at a time, DEVELOPMENT_PROCESS 'Ingredient register') and (2) the full data sweep `python3 analysis/strategy_data_sweep.py
   <trades.csv> <name>` (every data series x regime, with the fair best-of-N placebo), to look for a better version. Report both with
   the standard test; a better version is a lead until a book bench and out-of-sample evidence confirm it.
+- **Resize after every plan change (user, 2026-11-12):** whenever a piece is added, removed, resized or swapped, update
+  `bench150.LIVE_EVAL` (+ `live/expected_setup.json`) first, then run `tools/run_stamped.sh analysis/resize_book.py > analysis/outputs/resize_book_output.txt`
+  (account state in its `NOW` line) and report the result in the same reply; funded / personal changes: their benches. A size change
+  is recommended only if the holdout AND account-now bands are above 0.
 - **Add or replace (2026-10-18):** test every candidate as an addition AND as a replacement of the plan piece it overlaps
   most. **Capital-expansion bench (2026-10-24):** gains that only come from more capital go to that table in `PORTFOLIO.md`.
   Preferences: low correlation, funded payouts first; regime-dependent welcome, not preferred.
