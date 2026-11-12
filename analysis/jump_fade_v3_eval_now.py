@@ -3,6 +3,7 @@ if so im making the decision to add it rn. whats the harm'): (1) fresh-eval pass
 (2) account #5 FROM ITS STATE NOW: balance $147,998, EOD floor $146,000 (trailing $4,000), target $159,000, DLL $2,000, horizons
 20 and 60 trading days, every historical start day; fail = intraday touch of the floor. (3) the lead's own worst day / streak.
   tools/run_stamped.sh analysis/jump_fade_v3_eval_now.py > analysis/outputs/jump_fade_v3_eval_now_output.txt
+  ... novol > analysis/outputs/jump_fade_v2_eval_now_output.txt   (v2 = no volume filter)
 """
 import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
@@ -13,7 +14,8 @@ from build_lab import REPORTS
 EXTRA = 0.55
 print(__doc__.split("\n")[0])
 b = L.bars(); M = S.Mkt(); yr = b.ts.dt.year.to_numpy(); sgn = np.sign(b.r).fillna(0).to_numpy()
-mask = (yr >= 2018) & (b.J.abs().to_numpy() > 3) & np.isin(b.ts.dt.hour.to_numpy(), [7, 8, 9]) & (b.vz.to_numpy() >= 2)
+mask = (yr >= 2018) & (b.J.abs().to_numpy() > 3) & np.isin(b.ts.dt.hour.to_numpy(), [7, 8, 9]) & ((b.vz.to_numpy() >= 2) | ('novol' in sys.argv))
+print('VERSION:', 'v2 (no volume filter)' if 'novol' in sys.argv else 'v3 (vz >= 2)')
 T = S.trades(b, M, mask, -sgn, "rng", 1.5, tp=0.3, hold=240); ix = np.searchsorted(M.ts, T.ts.to_numpy())
 print(f"v3 trades {len(T)}, ${T.net.mean():.1f} per NQ, per MNQ ${T.net.mean() / 10 - EXTRA:.2f}; worst trade per MNQ ${T.net.min() / 10 - EXTRA:,.0f}")
 ctx = BN.setup(); g = ctx["g"]; trr = ctx["trr"]; dts = ctx["dts"]; tpos = pd.Series(np.arange(len(trr)), index=dts)
