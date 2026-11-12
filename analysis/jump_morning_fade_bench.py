@@ -17,6 +17,7 @@ from bridge_monday_confirm import load_bridge_mc
 from combine_levers_test import ONB30
 
 EXTRA = 0.55
+NOVB = "novb" in sys.argv          # VB removed from the 150K evaluation 2026-11-11 (user); novb also drops it from funded / personal
 print(__doc__.split("\n")[0])
 b = L.bars(); M = S.Mkt(); yr = b.ts.dt.year.to_numpy(); sgn = np.sign(b.r).fillna(0).to_numpy(); aJ = b.J.abs().to_numpy()
 hc = b.ts.dt.hour.to_numpy()
@@ -54,6 +55,12 @@ for k, t_ in {"VB": with_slippage(load_mc(g, REPORTS["VB"][0])), "ONB30": with_s
 ec = {k: float(np.corrcoef(lead_d.values, P[k][1][:, -1])[0, 1]) for k in P}
 ec["TWIN"] = float(np.corrcoef(lead_d.values, ctx["Rt"][:, -1])[0, 1])
 print("daily correlation with the 150K evaluation pieces: " + ", ".join(f"{k} {v:+.2f}" for k, v in ec.items()))
+if NOVB:
+    ctx["Wb"] = ctx["Wb"] - 20 * P["VB"][0]; ctx["Rb"] = ctx["Rb"] - 20 * P["VB"][1]
+    print("BASE WITHOUT VB: evaluation base = ONB30 $2,750 risk, MON_BR 5, EOS $1,250 risk, Twin 2 MNQ; funded = plan x 1.5 + Twin 2 minus VB_N / VB_F; personal minus VaultBreak")
+    BN.BASE_FUNDED = {k: v for k, v in BN.BASE_FUNDED.items() if k not in ("VB_N", "VB_F")}
+else:
+    print("BASE: evaluation VB 20, ONB30 $2,750 risk, MON_BR 5, EOS $1,250 risk, Twin 2 MNQ")
 atr = g.daily_atr(15); onb_n = np.floor(2750 / (np.nan_to_num(0.25 * atr[trr], nan=1e12) * 2))[:, None]
 
 print("\n== 150K evaluation (pass rate, paired diff and 5-95% block band)")
@@ -73,7 +80,7 @@ BN.funded_bench(ctx, {f"+ lead {k} MNQ": {**BN.BASE_FUNDED, "JMF": k} for k in (
 print("\n== Personal book (1-year block-bootstrap MC: median year / p95 drawdown), every piece 1 micro + OT 2 MNQ as in the plan")
 with contextlib.redirect_stdout(io.StringIO()):
     Pp = runpy.run_path("analysis/personal_portfolio.py", run_name="__main__")["P"]
-Pp = Pp[[c for c in Pp.columns if c not in ("FC2B", "Kusho", "S47", "S30")]]
+Pp = Pp[[c for c in Pp.columns if c not in ("FC2B", "Kusho", "S47", "S30") + (("VaultBreak",) if NOVB else ())]]
 base = Pp.sum(axis=1) + Pp.OvernightTick; lp = lead_d.reindex(Pp.index, fill_value=0.0)
 cpb = {c: float(np.corrcoef(lp, Pp[c])[0, 1]) for c in Pp}; top = max(cpb, key=lambda c: cpb[c])
 print("   correlation with personal pieces: " + ", ".join(f"{c} {v:+.2f}" for c, v in sorted(cpb.items(), key=lambda x: -x[1])[:5]) + f"; most overlapped: {top}")
