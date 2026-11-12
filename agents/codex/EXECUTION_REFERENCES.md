@@ -2751,3 +2751,11 @@ empirical profitability and liquidity-provider results separate from a retail tr
 Smallest justified next check: apply these distinctions to one already-admitted signal's written specification.
 No new signal, measured execution saving, data acquisition, trial reservation or account promotion is implied.
 The existing failed pressure/gap/fade families and paused programs remain unchanged.
+
+## dot addendum: paper interactions and native fill gates (2026-11-12)
+
+Source/review: [dot's synergistic paper packets](results/dot_synergistic_paper_packets_20261112.md). New companion: [Cartea, Donnelly and Jaimungal, Enhancing Trading Strategies with Order Book Signals](https://kclpure.kcl.ac.uk/ws/files/115267447/Enhancing_Trading_Strategies_CARTEA_Accepted_24_Jan_18_GREEN_AAM.pdf), accepted manuscript, Sections 3–5 and queue-fill extension. Its inventory/time-dependent quote withdrawal and liquidation architecture is useful alongside the existing queue-prediction and adverse-fill references. The authors' 2014 Nasdaq results are model/backtest evidence, not verified CME or retail execution savings. Initial front-of-queue assumptions have a probabilistic extension; that does not establish actual queue priority or cancellation latency.
+
+Additional methods check: Gould/Bonart samples a random point inside the interval between two successive price changes. An executable adaptation must sample on a causal clock instead of using the later change to select the observation time. Drift-burst local-extremum labels likewise cannot select an earlier entry. Preserve these distinctions before comparing classifier accuracy or reversal incidence with trading win rates.
+
+Missing prerequisites: ordered native quote/trade events with contract and receipt clocks, order lifecycle/queue handling, actual micro fees, stressed fills, integer inventory/risk constraints and a causal trade specification. Minute aggressor bars and summarized walls are not equivalents. Smallest justified step is the existing no-return input/rule admission, not a new backtest or live implementation. The review records three conditional research bundles, zero return trials and no paused-program restart. Keep prior pressure/OU/pairs failures in the selection history.
