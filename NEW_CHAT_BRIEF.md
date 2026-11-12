@@ -19,6 +19,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   error (my edit; logs were down all day) fixed and parse-checked with pwsh. `.claude/settings.json` allows the pwsh download/parse check.
 - **Scheduled jobs RESUMED 11/11:** pre-market check 08:21 CT and 16:40 journal/dashboard. Watch that tomorrow's runs see the logs.
 - **Budget:** −$605 (eval #5 −$250, Claude −$20; MC already counted). Dashboard dataset 'ledger' v2.
+- **11/12 later:** IBS v6 (no stop, exit 0.7) PF 1.70, both periods better, holds on NQ; still fails the personal book rule (TIER_LIST C+). Jump fade MultiCharts code `apex_strategies/NQ_Jump_Fade.txt` (port-verified, not compiled; forward log / sim only).
 - **IBS Globex ES v5 11/12 (user's forum post + file):** rebuilt to the post (306 vs 301 trades); our costs PF 1.46, 2018-22 PF 1.16 / 2023+ 1.93; personal book +1 MES fails 2018-22. TIER_LIST C (S30 is the better version). Sweep look-ahead bug found and fixed (LESSONS).
 - **Jump study 11/11 (user: pino1 screenshot, 82% wins / PF 1.41, three CFM papers):** not reproduced. Rebuilt as a 5-min jump-score rule: the 0.3R shape gives 78% wins, PF 1.05 (t 0.6);
   30-min follow versions passed 2018-22 (t 3.1-3.4) and failed the one holdout look (PF 0.88-0.94). TIER_LIST D (2 rows), `analysis/outputs/jump_final_output.txt`, `checks/candidates/jump5/`.
