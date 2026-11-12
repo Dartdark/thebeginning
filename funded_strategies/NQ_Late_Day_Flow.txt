@@ -38,9 +38,11 @@
 
   SIZE: funded plan NumContracts 2 on MNQ with RiskPerTrade 0 (at October
   2026 prices the 0.25 ATR stop is about $235 per MNQ, so a small RiskPerTrade
-  would skip most trades). Backtest on NQ: RiskPerTrade 0, NumContracts 1. }
+  would skip most trades). Backtest on NQ: RiskPerTrade 0, NumContracts 1.
+  150K EVALUATION #5 (2026-11-12, user): RiskPerTrade 1000 (~3 MNQ at Nov 2026 ATR), tag LDF150-5. Kill switch added 2026-11-12. }
 
 DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;   { peak file check (2026-11-09) }
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";   { kill-switch tri-state (2026-11-12) }
 
 Inputs:
 	OpenBarTime(835),       { first 5-minute bar of the session: its open is the 8:30 open }
@@ -64,7 +66,8 @@ Inputs:
 	CushionMin(0.5);        { size floor of the cushion sizing }
 Variables: CE(0), CEPrev(0), CK(0), CKLast(0), PeakEOD(0), Thr(0), Cush(0), CF(0);   { cushion guard }
 Variables: PeakAuto(0), PKey(0), PKeyLast(0), PAcct(""), PkI(0), PkFound(0), AcctX(""), EqX(0), xSB(0), xDD(0), xLB(0), xCR(0), GrpCush(-1);   { peak file + auto account rules (2026-11-09) }
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Late_Day_Flow 2026-11-09");   { code version: bump the date on every change }
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Late_Day_Flow 2026-11-12");
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0);   { kill switch (2026-11-12) }   { code version: bump the date on every change }
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -131,10 +134,20 @@ IsEarlyClose = UseHolidayTimes and (
 	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
 	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1))));
 
+{ ---------- kill switch (2026-11-12, as Twin_Continuation_150K.txt): no new entries, open position out at market. Real time only ---------- }
+KillOn = false; KillAttr = -1; KillErr = 0;
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	KillAttr = GetFileAttributesA("C:\TradingLogs\KILL");
+	if KillAttr <> -1 then KillOn = true else KillErr = GetLastError;
+end;
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
+if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
+
 { ---------- Entry at 14:00 in the direction of a big move ---------- }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 if Time = SignalTime and IsEarlyClose = false and OpenPx > 0 and ATRv > 0
-	and MarketPosition = 0 and TradedToday = false then begin
+	and MarketPosition = 0 and TradedToday = false and NoEntry = false then begin
 	MovePts = Close - OpenPx;
 	if AbsValue(MovePts) >= MinMoveAtr * ATRv then begin
 		StopPts = StopAtrPct * ATRv;
@@ -179,6 +192,9 @@ if MarketPosition > 0 and StopPts > 0 and Low <= EntryPrice - StopPts then
 	Sell ("LateFlow LSG") next bar at market;
 if MarketPosition < 0 and StopPts > 0 and High >= EntryPrice + StopPts then
 	BuyToCover ("LateFlow SSG") next bar at market;
+
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") all contracts next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") all contracts next bar at market;
 
 if MarketPosition <> 0 and Time >= ExitTime then begin
 	Sell ("LateFlow LX") this bar on close;

@@ -24,7 +24,8 @@ from plan_150k_test import evaluation, R150
 import funded_sim150 as F
 import montecarlo as MC
 
-LIVE_EVAL = {"ONB30": ("risk", 3500), "MON_BR": 5, "TWIN": 2, "DT": 2, "JF": 1}   # #5 as of 2026-11-12 (VB out 11/11, JF in 11/12, ONB $2,750 -> $3,500 11/12, JF 2 -> 1 11/12, EOS dropped 11/12)
+LIVE_EVAL = {"ONB30": ("risk", 3500), "MON_BR": 5, "TWIN": 2, "DT": 2, "JF": 1, "NBL": 3, "LDF": ("risk", 1000)}   # #5 as of 2026-11-12 (VB out 11/11, JF in 11/12, ONB $2,750 -> $3,500 11/12, JF 2 -> 1 11/12, EOS dropped 11/12, NBL 3 + LDF $1,000 added 11/12)
+RISK_MULT = {"ONB30": 0.25, "EOS": REPORTS["EOS"][1], "LDF": REPORTS["LDF_MC"][1]}   # stop = mult x ATR15 for risk-sized pieces
 LEGACY_EVAL = {"VB": 20, "ONB30": ("risk", 2750), "MON_BR": 5, "EOS": ("risk", 1250), "TWIN": 2}
 PLAN_LEGACY = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
 PLAN = {k: v for k, v in PLAN_LEGACY.items() if k not in ("VB_N", "VB_F")}   # VB RETIRED from all plans 2026-11-12 (user; WATCHLIST #41)
@@ -51,8 +52,14 @@ def setup(twin_trades=None, base="live"):
     if "JF" in spec:
         from jump_fade_paths import jf_paths
         P["JF"] = jf_paths(dts, D)
+    if "NBL" in spec:                                              # Bridge noise longs (python longs-only trades, MC-confirmed family)
+        nb_ = pd.read_csv("analysis/outputs/bridge_noise_15m_trades_rth_longs.csv", parse_dates=["date"]); nb_ = nb_[nb_.date >= "2018-01-01"]
+        nb_ = nb_.assign(day=nb_.row.astype(int), kind=nb_.kind.map({"stop": 0, "target": 1}).fillna(2).astype(int))
+        w, rr = paths(g, nb_[["day", "j0", "j1", "side", "entry", "exit", "kind"]].reset_index(drop=True)); P["NBL"] = (w[trr] / 10, rr[trr] / 10)
+    if "LDF" in spec:
+        w, rr = paths(g, with_slippage(load_mc(g, REPORTS["LDF_MC"][0]))); P["LDF"] = (w[trr] / 10, rr[trr] / 10)
     P["TWIN"] = (Wt, Rt)
-    rm = {"ONB30": 0.25, "EOS": REPORTS["EOS"][1]}
+    rm = RISK_MULT
     mult = {k: (risk(v[1], rm[k]) if isinstance(v, tuple) else float(v)) for k, v in spec.items()}
     Wb = sum(P[k][0] * m for k, m in mult.items()); Rb = sum(P[k][1] * m for k, m in mult.items())
     print(f"[bench150] eval base ({base}): " + ", ".join(f"{k} {'$' + str(v[1]) + ' risk' if isinstance(v, tuple) else v}" for k, v in spec.items()), flush=True)

@@ -19,6 +19,8 @@ Source of truth: `../live/expected_setup.json` (the 16:40 job checks every chart
 | TW150-5 | Twin Continuation (`Twin_Continuation_150K.txt`) | MNQ | 2 |
 | DT150-5 | Dual Thrust v4 (`../funded_strategies/NQ_Dual_Thrust.txt`) | 1 min MNQ | 2 |
 | JF150-5 | NQ Jump Fade v4 (`NQ_Jump_Fade.txt`, `MinVolRatio` 0) | 1 min MNQ, 24h | 1 (added 11/12 at 2; 1 from 11/12 evening while #5's cushion < ~$4,000) |
+| NBL150-5 | NQ Noise Longs (`NQ_Noise_Longs.txt`, longs only) | 15 min MNQ, 24h | `ContractsPerTrade` 3 (added 11/12) |
+| LDF150-5 | Late-Day Flow (`../funded_strategies/NQ_Late_Day_Flow.txt`) | 5 min MNQ, 24h, Bar Magnifier 1 min | `RiskPerTrade` 1000, `NumContracts` 1 (added 11/12) |
 | (each chart) | Apex Chart Guard (`Apex_Chart_Guard.txt`) | | helper |
 
 Vault Break: OUT of the evaluation since 2026-11-11 (DLL hit twice). Older 50K material below is history.

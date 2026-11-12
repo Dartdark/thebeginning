@@ -35,7 +35,7 @@ def ev_all(W, R, H, bal0, fl0, tgt, dd, dll, trail_fresh):
 
 
 ctx = BN.setup(); g, trr, D, dts, P = ctx["g"], ctx["trr"], ctx["D"], ctx["dts"], ctx["P"]
-atr = g.daily_atr(15); RM = {"ONB30": 0.25, "EOS": REPORTS["EOS"][1]}
+atr = g.daily_atr(15); RM = BN.RISK_MULT
 def mult(k, v): return np.floor(v / (np.nan_to_num(RM[k] * atr[trr], nan=1e12) * 2))[:, None] if k in RM else float(v)
 def book(spec):
     W = np.zeros((D, 1440)); R = np.zeros((D, 1440))
