@@ -5,6 +5,14 @@ Without 'holdout' only 2018-2022 is reported (gate 1); with it, the single 2023+
 import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
 HOLD = "holdout" in sys.argv
+import statistics
+if not hasattr(statistics, "NormalDist"):   # Python 3.7 on this PC: stand-in for metrics.py's import (cdf / inv_cdf only)
+    from scipy.stats import norm as _n
+    class _ND:
+        def __init__(self, mu=0.0, sigma=1.0): self.mu, self.sigma = mu, sigma
+        def cdf(self, x): return float(_n.cdf(x, self.mu, self.sigma))
+        def inv_cdf(self, p): return float(_n.ppf(p, self.mu, self.sigma))
+    statistics.NormalDist = _ND
 import dual_thrust_test as DT, jump_lib as JL
 
 days = DT.load(); t = DT.run(days, DT.setups(days))
