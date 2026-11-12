@@ -47,19 +47,19 @@ def line(x, lab):
     print(f'{lab:<30} n {len(n):4d} win {np.mean(n > 0):5.1%} ${n.mean():7.1f} PF {pf:4.2f} t {n.mean() / n.std() * np.sqrt(len(n)):5.2f} total ${n.sum():,.0f}')
 
 base = run()
-D = base[base.yr <= 2022]
+base = base[base.yr >= 2018]; D = base[base.yr <= 2022]
 print('=== Gate 1: design 2018-2022, primary (long, L60, z<=-2, H60, stop 1 sd)')
 line(D, 'primary longs')
 print('by year:', '  '.join(f'{y} ${g.net.sum():,.0f} ({len(g)})' for y, g in D.groupby('yr')))
 print('exits', D.why.value_counts().to_dict())
 rng = np.random.default_rng(1); only = set(D.date); pm = []
-for r in range(200):
-    p = run(rnd=rng, only=only); pm.append(p[p.yr <= 2022].net.mean())
-pm = np.array(pm); print(f'placebo random time same days (200 draws): mean ${pm.mean():.1f}, p = {np.mean(pm >= D.net.mean()):.3f}')
-sh = run(side=-1); line(sh[sh.yr <= 2022], 'control: mirror shorts z>=+2')
+for r in range(100):
+    p = run(rnd=rng, only=only); pm.append(p[(p.yr <= 2022) & (p.yr >= 2018)].net.mean())
+pm = np.array(pm); print(f'placebo random time same days (100 draws; gate 1 already failed on the mean, so shortened): mean ${pm.mean():.1f}, p = {np.mean(pm >= D.net.mean()):.3f}')
+sh = run(side=-1); line(sh[(sh.yr >= 2018) & (sh.yr <= 2022)], 'control: mirror shorts z>=+2')
 print('--- neighbours (information only)')
-for L in (30, 120): t_ = run(L=L); line(t_[t_.yr <= 2022], f'L{L}')
-for Z in (1.5, 2.5): t_ = run(Z=Z); line(t_[t_.yr <= 2022], f'z{Z}')
+for L in (30, 120): t_ = run(L=L); line(t_[(t_.yr >= 2018) & (t_.yr <= 2022)], f'L{L}')
+for Z in (1.5, 2.5): t_ = run(Z=Z); line(t_[(t_.yr >= 2018) & (t_.yr <= 2022)], f'z{Z}')
 print('--- entropy ingredient (design)')
 q = D.E.quantile(0.3); lo, hi = D[D.E <= q], D[D.E > q]
 print(f'low-entropy |move| {lo.move.mean():.1f} pt vs rest {hi.move.mean():.1f} pt (ratio {lo.move.mean() / hi.move.mean():.2f})')
