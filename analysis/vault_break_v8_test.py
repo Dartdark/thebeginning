@@ -49,8 +49,9 @@ def boundary(g, kind):
 
 
 def run(g, version="v8", atr_kind=None, vwap_exit=None, time_exit=None, holidays=None, mult=0.30, tp=40.0, sl=75.0,
-        first=1000, flat=1430, max_tr=3, years=(2018, 2026), use_vwap=True):
+        first=1000, flat=1430, max_tr=3, years=(2018, 2026), use_vwap=True, tp_atr=None, sl_atr=None):
     # use_vwap (2026-11-08, ingredient_ablation2.py): False drops the close > VWAP entry condition; default = as before
+    # tp_atr / sl_atr (2026-11-12, vb_atr_bracket_test.py): target / stop = x * the day's boundary ATR (rounded to ticks) instead of tp / sl
     v8 = version == "v8"
     atr_kind = atr_kind or ("range" if v8 else "tr")
     vwap_exit = (7 if v8 else 0) if vwap_exit is None else vwap_exit
@@ -74,7 +75,8 @@ def run(g, version="v8", atr_kind=None, vwap_exit=None, time_exit=None, holidays
                 m0 = next((m for m in mins if not np.isnan(g.o[d, m])), None)
                 if m0 is not None:
                     e = g.o[d, m0] + TICK; ef = e - TICK
-                    pos = dict(e=e, stop=ef - sl, tgt=ef + tp, j0=m0, first=m0)
+                    tp_d = round(tp_atr * B[d] * 4) / 4 if tp_atr else tp; sl_d = round(sl_atr * B[d] * 4) / 4 if sl_atr else sl
+                    pos = dict(e=e, stop=ef - sl_d, tgt=ef + tp_d, j0=m0, first=m0, sl=sl_d)
                 pend = False
             if pos is not None and xpend:
                 m0 = next((m for m in mins if not np.isnan(g.o[d, m])), None)
