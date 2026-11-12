@@ -1,4 +1,4 @@
-{ NQ JUMP FADE v3 (morning 5-minute jump fade)  -  2026-11-12 (v2: stop / target re-sent every bar, MC report matched 638 / 683 entries,
+{ NQ JUMP FADE v4 (morning 5-minute jump fade)  -  2026-11-12 (v4: kill switch + heartbeat, MinVolRatio default 0 = LIVE on #5 at 2 MNQ, user 11/12) (v2: stop / target re-sent every bar, MC report matched 638 / 683 entries,
   100% same sign; v3: jump-bar volume filter MinVolRatio, user 2026-11-12, EXPLORATORY: checks/candidates/jump_fade_volume/), WATCHLIST #40, POST-HOC LEAD: FORWARD LOG / SIM ONLY
   =====================================================================================================================
   Research: analysis/jump_morning_fade.py (2018-2026: 694 trades, 77.5% wins, $117 per NQ after costs, PF 1.35, t 2.7 vs the
@@ -20,11 +20,14 @@
   PROPS  Intrabar order generation OFF, no multiple entries, Bar Magnifier not needed (1-min chart), commission / slippage 0
          in the report (costs are added in Python), fill limit price exceeded by 1 tick.
   SIZE   Qty contracts (MNQ: the stop averages ~$200 per MNQ, worst research loss ~$730 per MNQ). Personal book bench: 1-2 MNQ.
-  NOT INCLUDED (forward log first): kill switch, heartbeat, cushion guard, finish mode. Add the live blocks
-         (apex_strategies/Strategy_Heartbeat_Snippet.txt, Twin_Continuation_150K.txt) before it trades a real account.
+  LIVE GUARDS (v4, same blocks as Twin_Continuation_150K.txt): kill switch (C:\TradingLogs\KILL, tri-state with GetLastError: no new
+         entries, an open position exits at market; no entries if C:\TradingLogs is unreadable) and heartbeat (HeartbeatTag, HB_Ver).
+         Real time only: backtests unchanged. NOT INCLUDED: cushion guard, finish mode.
   DIFFERENCES vs the Python research: entries are not skipped across a data gap; when a 5-min bucket has no bar at its
          :x0 / :x5 minute, the bar is closed one minute late (next bucket's first bar) and the entry is one minute later.
   ===================================================================================================================== }
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";
 
 Inputs:
     Qty( 1 ),
@@ -39,9 +42,10 @@ Inputs:
     UseHolidayTimes( true ),
     EarlyFlatten( 1130 ), { CT: flat from this bar on CME early-close days }
     KLen( 276 ), KMin( 138 ), SlotLen( 60 ), SlotMin( 20 ), NormLen( 5520 ), NormMin( 1380 ),
-    MinVolRatio( 2 ),     { v3: trade only when the jump bar's volume (Ticks) >= this x its slot's mean of the previous VolLen sessions; 0 = off }
+    MinVolRatio( 0 ),     { v3: trade only when the jump bar's volume (Ticks) >= this x its slot's mean of the previous VolLen sessions; 0 = off }
     VolLen( 20 ), VolMin( 10 ),
-    DebugLog( false );    { true: print every finished 5-min bar inside the window (date, time, r, sig, f, J) to the Output }
+    DebugLog( false ),    { true: print every finished 5-min bar inside the window (date, time, r, sig, f, J) to the Output }
+    HeartbeatTag( "" );   { live guard: the chart's logger tag, e.g. JF150-5; empty = no heartbeat }
 
 Arrays:
     Prod[276]( 0 ), ProdOk[276]( 0 ),
@@ -57,7 +61,9 @@ Vars:
     Sl( 0 ), SP( 0 ), FRaw( 0 ), FRawOk( false ), NSum( 0 ), NCnt( 0 ), NPos( 0 ), FNorm( 0 ), Fv( 0 ), JOk( false ), Jv( 0 ),
     BV( 0 ), FinV( 0 ), VzOk( false ), Vz( 0 ), VP( 0 ),
     EndHHMM( 0 ), RPts( 0 ), TgtPts( 0 ), EntR( 0 ),
-    CalMonth( 0 ), CalDay( 0 ), CalDow( 0 ), CalYear( 0 ), IsWeekday( false ), IsEarlyClose( false ), HolFlat( false );
+    CalMonth( 0 ), CalDay( 0 ), CalDow( 0 ), CalYear( 0 ), IsWeekday( false ), IsEarlyClose( false ), HolFlat( false ),
+    KillOn( false ), NoEntry( false ), KillAttr( -1 ), KillErr( 0 ), HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ),
+    HB_Ver( "NQ_Jump_Fade v4 2026-11-12" );
 
 Once Begin
     If BarInterval <> 1 or BarType <> 1 Then RaiseRunTimeError( "NQ Jump Fade must run on a 1-minute chart." );
@@ -80,6 +86,16 @@ IsEarlyClose = UseHolidayTimes and (
     or ( CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29 )
     or ( CalMonth = 12 and ( ( ( CalDay = 24 or CalDay = 25 ) and IsWeekday ) or ( CalDay = 26 and CalDow = 1 ) ) ) );
 HolFlat = IsEarlyClose and Time >= EarlyFlatten and Time < 1700;
+
+{ ===== live guards (v4, as Twin_Continuation_150K.txt): kill switch. Real time only: backtests unchanged ===== }
+KillOn = false; KillAttr = -1; KillErr = 0;
+If GetAppInfo( aiRealTimeCalc ) = 1 Then Begin
+    KillAttr = GetFileAttributesA( "C:\TradingLogs\KILL" );
+    If KillAttr <> -1 Then KillOn = true Else KillErr = GetLastError;
+End;
+NoEntry = KillOn;
+If GetAppInfo( aiRealTimeCalc ) = 1 and GetFileAttributesA( "C:\TradingLogs" ) = -1 Then NoEntry = true;
+If GetAppInfo( aiRealTimeCalc ) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 Then NoEntry = true;
 
 { ===== 5-minute buckets (t-5, t], keyed by date: a bar closing 23:56-00:00 belongs to the 00:00 bucket of the next date ===== }
 Mins = TimeToMinutes( Time );
@@ -159,7 +175,7 @@ If DoFin and FinN >= 3 Then Begin
 
     { --- entry: fade the jump, flat only --- }
     If JOk and MarketPosition = 0 and AbsValue( Jv ) > JThr and EndHHMM >= WinStart and EndHHMM <= WinEnd
-       and HolFlat = false and Time < FlatTime and ( MinVolRatio <= 0 or ( VzOk and Vz >= MinVolRatio ) ) Then Begin
+       and HolFlat = false and NoEntry = false and Time < FlatTime and ( MinVolRatio <= 0 or ( VzOk and Vz >= MinVolRatio ) ) Then Begin
         EntR = StopMult * ( FinH - FinL );
         If EntR >= MinRPts and R5 <> 0 Then Begin
             RPts = Round( EntR * 4, 0 ) / 4;
@@ -187,4 +203,19 @@ If MarketPosition <> 0 Then Begin
     End
     Else If MarketPosition = 1 and Low <= EntryPrice - RPts Then Sell ( "JF LSG" ) all contracts next bar at market
     Else If MarketPosition = -1 and High >= EntryPrice + RPts Then BuyToCover ( "JF SSG" ) all contracts next bar at market;
+End;
+
+{ ===== kill switch: flatten while C:\TradingLogs\KILL exists ===== }
+If KillOn and MarketPosition > 0 Then Sell ( "KILL LX" ) all contracts next bar at market;
+If KillOn and MarketPosition < 0 Then BuyToCover ( "KILL SX" ) all contracts next bar at market;
+
+{ ===== heartbeat for the Chart Monitor / watchdog (Strategy_Heartbeat_Snippet.txt) ===== }
+If HeartbeatTag <> "" and GetAppInfo( aiRealTimeCalc ) = 1 and LastBarOnChart Then Begin
+    HB_Key = CurrentDate * 10000 + CurrentTime;
+    If HB_Key <> HB_Last Then Begin
+        HB_Day = NumToStr( CurrentDate + 19000000, 0 );
+        FileAppend( "C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+            + NumToStr( MarketPosition * CurrentContracts, 0 ) + ",,,,,,,," + HB_Day + "," + NumToStr( CurrentTime, 0 ) + NewLine );
+        HB_Last = HB_Key;
+    End;
 End;
