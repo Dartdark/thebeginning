@@ -39,3 +39,7 @@ Author/origin: **dot**. [Source review](results/dot_whop_review_20261110.md): MN
 ## Community Research page addendum (2026-11-10)
 
 Author/origin: **dot**. [Second-page source review](results/dot_whop_community_research_20261110.md): existing Fast Alphas negative screen, RollZone parity limits, VIX/Relative Strength/regime research, event-news selection warning and absent NinjaTrader MCP package. No new validated candidate, tests, strategy changes or installation. Private export and screenshots are not republished.
+
+## Synergistic paper packets (2026-11-12)
+
+Author/origin: **dot**. [Ranked research packets](results/dot_synergistic_paper_packets_20261112.md) combine drift-burst reversal with quote-event supply/demand recovery; calendar feedback with a queue-state veto; and queue prediction with inventory-aware execution and adverse-fill validation. Includes primary-source methods, explicit interaction hypotheses, ablations, invalidation conditions, causal clocks, data requirements and proposed bounded trials. Latest inspected 150K reference excludes VB; no live installation claim. Native event/receipt inputs and complete trading specifications remain blockers. Zero backtests, reservations, purchases, live changes or paused-program restarts. Report publication: `0f713a1e60d2dd103815820fdee53cb3e1d4185c`.
