@@ -9,7 +9,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 
 - **One live account: #5 APEX-681524-05, 150K evaluation** (bought 11/10; floor 146,000, target 159,050, DLL $2,000). Balance
   $147,998.08 = **$1,998 above the floor** (after 11/11: -$2,455, DLL hit). Charts (tags `<name>150-5`, all with Apex Chart Guard
-  recompiled 11/12 with TgtNearPct): **ONB ($3,500 risk from 11/12 evening, user, after the size search), EOS ($1,250 risk), MON_BR 5, Twin 2, DT 2,
+  recompiled 11/12 with TgtNearPct): **ONB ($3,500 risk from 11/12 evening, user, after the size search), EOS DROPPED 11/12 (user), MON_BR 5, Twin 2, DT 2,
   Jump Fade 1 (JF150-5, added 11/12 at 2, set to 1 the same evening; back to 2 when the cushion is > ~$4,000).** VB OUT since 11/11 (chart closed 11/12). DT confirmed flat 11/12.
 - **The live evaluation base is in code: `analysis/bench150.py` `LIVE_EVAL`** (= live/expected_setup.json = apex_strategies/README.md
   'The evaluation plan NOW'). `BN.setup()` now benches every candidate against THIS set (incl. DT 2 + JF 2) and prints it; 15 older
