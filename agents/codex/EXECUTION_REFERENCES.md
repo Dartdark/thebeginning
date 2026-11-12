@@ -394,3 +394,4 @@ Market/platform and timing limits:
 Data/prerequisites:
 Smallest justified next check:
 Status and superseding evidence:
+- **Order-flow predictability is sub-second and below cost** (Shabashev 2026, arXiv 2611.14117, `papers/arxiv-2611.14117.pdf`; crypto L3): a fine-tuned order-flow transformer predicts the next 0.2-1 s microprice move (corr ~0.4-0.45, beats book imbalance 0.23), but the skill falls 60-80% within one horizon of lead and ties simple imbalance by 5 s; predicted moves are sub-basis-point, below a ~2 bp one-way cost. For us (1-min bars, retail latency): order-book / order-flow signals are execution information (when to place a limit, adverse selection), not alpha; do not build entries on them.
