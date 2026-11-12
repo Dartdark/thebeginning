@@ -1,0 +1,42 @@
+[provenance] code 4e87975 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Size COMBINATION search on the live #5 evaluation book (user 2026-11-12 'search combinations').
+[bench150] eval base (live): ONB30 $3500 risk, EOS $1250 risk, MON_BR 5, TWIN 2, DT 2, JF 1
+engine check (every 7th start): numba 0.3391 vs plan_150k_test 0.3391
+LIVE {'ONB30': 3500, 'EOS': 1250, 'MON_BR': 5, 'TWIN': 2, 'DT': 2, 'JF': 1}: fresh 2018-22 33.5%, 2023+ 39.3%, all 35.9% | from #5 now 21.1%
+live {'ONB30': 3500, 'EOS': 1250, 'MON_BR': 5, 'TWIN': 2, 'DT': 2, 'JF': 1}: fresh 18-22 33.5% 23-26 39.3% | #5 now 21.1%
+
+== MON_BR (live 5): 24 trading days a year (2018-26: 18:18, 19:31, 20:26, 21:25, 22:19, 23:29, 24:30, 25:26, 26:13)
+   per trade day $271, win 70%, best $994, worst $-3,086, total $58,728 2018-26
+   fresh 2018-22 : with 33.5% vs without 31.0% -> it adds +2.6% (band -1.4%/+6.4%); evaluations it turns into passes 60, passes it costs 27
+   fresh 2023-26 : with 39.3% vs without 35.7% -> it adds +3.6% (band +0.4%/+7.0%); evaluations it turns into passes 55, passes it costs 21
+   #5 from now   : with 21.1% vs without 19.8% -> it adds +1.3% (band -0.9%/+3.3%); evaluations it turns into passes 75, passes it costs 46
+
+== EOS (live 1250): 12 trading days a year (2018-26: 18:12, 19:12, 20:12, 21:12, 22:12, 23:12, 24:12, 25:12, 26:9)
+   per trade day $408, win 59%, best $3,718, worst $-1,270, total $42,886 2018-26
+   fresh 2018-22 : with 33.5% vs without 31.9% -> it adds +1.6% (band -0.2%/+3.8%); evaluations it turns into passes 30, passes it costs 9
+   fresh 2023-26 : with 39.3% vs without 38.8% -> it adds +0.4% (band -0.3%/+1.4%); evaluations it turns into passes 7, passes it costs 3
+   #5 from now   : with 21.1% vs without 20.5% -> it adds +0.6% (band -0.3%/+1.7%); evaluations it turns into passes 30, passes it costs 16
+
+== TWIN (live 2): 107 trading days a year (2018-26: 18:114, 19:113, 20:94, 21:111, 22:105, 23:123, 24:109, 25:111, 26:86)
+   per trade day $60, win 48%, best $4,012, worst $-689, total $57,699 2018-26
+   fresh 2018-22 : with 33.5% vs without 31.7% -> it adds +1.9% (band -0.5%/+4.7%); evaluations it turns into passes 37, passes it costs 13
+   fresh 2023-26 : with 39.3% vs without 36.1% -> it adds +3.2% (band +1.3%/+5.4%); evaluations it turns into passes 36, passes it costs 6
+   #5 from now   : with 21.1% vs without 19.3% -> it adds +1.8% (band +0.2%/+3.4%); evaluations it turns into passes 70, passes it costs 30
+
+== DT (live 2): 180 trading days a year (2018-26: 18:170, 19:180, 20:172, 21:177, 22:189, 23:191, 24:183, 25:196, 26:166)
+   per trade day $28, win 45%, best $398, worst $-208, total $45,611 2018-26
+   fresh 2018-22 : with 33.5% vs without 33.4% -> it adds +0.2% (band -2.4%/+2.9%); evaluations it turns into passes 31, passes it costs 29
+   fresh 2023-26 : with 39.3% vs without 37.4% -> it adds +1.9% (band +0.1%/+4.0%); evaluations it turns into passes 32, passes it costs 14
+   #5 from now   : with 21.1% vs without 19.5% -> it adds +1.6% (band +0.2%/+3.3%); evaluations it turns into passes 72, passes it costs 36
+
+== JF (live 1): 59 trading days a year (2018-26: 18:54, 19:84, 20:52, 21:68, 22:59, 23:45, 24:55, 25:63, 26:50)
+   per trade day $15, win 73%, best $1,453, worst $-729, total $7,775 2018-26
+   fresh 2018-22 : with 33.5% vs without 35.5% -> it adds -2.0% (band -4.4%/-0.2%); evaluations it turns into passes 2, passes it costs 28
+   fresh 2023-26 : with 39.3% vs without 38.7% -> it adds +0.5% (band +0.1%/+1.1%); evaluations it turns into passes 5, passes it costs 0
+   #5 from now   : with 21.1% vs without 21.8% -> it adds -0.6% (band -1.8%/+0.3%); evaluations it turns into passes 14, passes it costs 28
+
+== ONB30 (live 3500): 75 trading days a year (2018-26: 18:72, 19:71, 20:63, 21:77, 22:80, 23:86, 24:80, 25:78, 26:70)
+   per trade day $890, win 51%, best $10,483, worst $-3,745, total $602,324 2018-26
+   fresh 2018-22 : with 33.5% vs without  0.2% -> it adds +33.4% (band +26.2%/+41.3%); evaluations it turns into passes 430, passes it costs 0
+   fresh 2023-26 : with 39.3% vs without  0.2% -> it adds +39.0% (band +30.9%/+48.0%); evaluations it turns into passes 369, passes it costs 0
+   #5 from now   : with 21.1% vs without  0.0% -> it adds +21.1% (band +17.1%/+25.4%); evaluations it turns into passes 472, passes it costs 0

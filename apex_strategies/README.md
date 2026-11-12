@@ -13,12 +13,12 @@ Source of truth: `../live/expected_setup.json` (the 16:40 job checks every chart
 
 | Chart tag | Strategy (file) | Chart | Size |
 |---|---|---|---|
-| ONB150-5 | Overnight Bias ADX30 (`NQ_Overnight_Bias_ADX30.txt`) | 15 min MNQ | `RiskPerTrade` 2750 (max 25) |
-| EOS150-5 | Expiration Open Short (`NQ_Expiration_Open_Short.txt`) | MNQ | risk $1,250 (max 15) |
+| ONB150-5 | Overnight Bias ADX30 (`NQ_Overnight_Bias_ADX30.txt`) | 15 min MNQ | `RiskPerTrade` 3500 (max 25; was 2750 until 11/12) |
+| ~~EOS150-5~~ | Expiration Open Short | | DROPPED 2026-11-12 (user: no proven help, mon_eos_contrib) |
 | MON_BR150-5 | Bridge Monday Long | 5 min MNQ | 5 |
 | TW150-5 | Twin Continuation (`Twin_Continuation_150K.txt`) | MNQ | 2 |
 | DT150-5 | Dual Thrust v4 (`../funded_strategies/NQ_Dual_Thrust.txt`) | 1 min MNQ | 2 |
-| JF150-5 | NQ Jump Fade v4 (`NQ_Jump_Fade.txt`, `MinVolRatio` 0) | 1 min MNQ, 24h | 2 (added 11/12) |
+| JF150-5 | NQ Jump Fade v4 (`NQ_Jump_Fade.txt`, `MinVolRatio` 0) | 1 min MNQ, 24h | 1 (added 11/12 at 2; 1 from 11/12 evening while #5's cushion < ~$4,000) |
 | (each chart) | Apex Chart Guard (`Apex_Chart_Guard.txt`) | | helper |
 
 Vault Break: OUT of the evaluation since 2026-11-11 (DLL hit twice). Older 50K material below is history.
