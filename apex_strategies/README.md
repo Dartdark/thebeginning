@@ -13,7 +13,7 @@ Source of truth: `../live/expected_setup.json` (the 16:40 job checks every chart
 
 | Chart tag | Strategy (file) | Chart | Size |
 |---|---|---|---|
-| ONB150-5 | Overnight Bias ADX30 (`NQ_Overnight_Bias_ADX30.txt`) | 15 min MNQ | `RiskPerTrade` 2750 (max 25) |
+| ONB150-5 | Overnight Bias ADX30 (`NQ_Overnight_Bias_ADX30.txt`) | 15 min MNQ | `RiskPerTrade` 3500 (max 25; was 2750 until 11/12) |
 | EOS150-5 | Expiration Open Short (`NQ_Expiration_Open_Short.txt`) | MNQ | risk $1,250 (max 15) |
 | MON_BR150-5 | Bridge Monday Long | 5 min MNQ | 5 |
 | TW150-5 | Twin Continuation (`Twin_Continuation_150K.txt`) | MNQ | 2 |

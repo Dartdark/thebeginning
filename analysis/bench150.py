@@ -24,7 +24,7 @@ from plan_150k_test import evaluation, R150
 import funded_sim150 as F
 import montecarlo as MC
 
-LIVE_EVAL = {"ONB30": ("risk", 2750), "EOS": ("risk", 1250), "MON_BR": 5, "TWIN": 2, "DT": 2, "JF": 2}   # #5 as of 2026-11-12 (VB out 11/11, JF in 11/12)
+LIVE_EVAL = {"ONB30": ("risk", 3500), "EOS": ("risk", 1250), "MON_BR": 5, "TWIN": 2, "DT": 2, "JF": 2}   # #5 as of 2026-11-12 (VB out 11/11, JF in 11/12, ONB $2,750 -> $3,500 11/12)
 LEGACY_EVAL = {"VB": 20, "ONB30": ("risk", 2750), "MON_BR": 5, "EOS": ("risk", 1250), "TWIN": 2}
 PLAN_LEGACY = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
 PLAN = {k: v for k, v in PLAN_LEGACY.items() if k not in ("VB_N", "VB_F")}   # VB RETIRED from all plans 2026-11-12 (user; WATCHLIST #41)

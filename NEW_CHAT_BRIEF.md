@@ -9,7 +9,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 
 - **One live account: #5 APEX-681524-05, 150K evaluation** (bought 11/10; floor 146,000, target 159,050, DLL $2,000). Balance
   $147,998.08 = **$1,998 above the floor** (after 11/11: -$2,455, DLL hit). Charts (tags `<name>150-5`, all with Apex Chart Guard
-  recompiled 11/12 with TgtNearPct): **ONB ($2,750 risk, left as is by the user 11/12), EOS ($1,250 risk), MON_BR 5, Twin 2, DT 2,
+  recompiled 11/12 with TgtNearPct): **ONB ($3,500 risk from 11/12 evening, user, after the size search), EOS ($1,250 risk), MON_BR 5, Twin 2, DT 2,
   Jump Fade 2 (JF150-5, added 11/12).** VB OUT since 11/11 (chart closed 11/12). DT confirmed flat 11/12.
 - **The live evaluation base is in code: `analysis/bench150.py` `LIVE_EVAL`** (= live/expected_setup.json = apex_strategies/README.md
   'The evaluation plan NOW'). `BN.setup()` now benches every candidate against THIS set (incl. DT 2 + JF 2) and prints it; 15 older
@@ -17,6 +17,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   size changes** (user 11/12: "dont test upcoming shit on past shit"). Funded base `BASE_FUNDED` still has VB (no funded account live).
 - **Eval sizes checked 11/12 (`analysis/outputs/eval_size_live_output.txt`): the live sizes are at the optimum within noise** (no one-at-a-time change has a band above 0 in both fresh and from-#5 measures). ONB is the engine: $1,500 would cut #5's pass 18.2% -> 12.4% (the user's choice to keep $2,750 was right); $3,500 +1.3 / +2.1 pt, bands include 0.
 - **Size combination search 11/12 (`analysis/outputs/eval_size_combo_output.txt`, 972 combos ranked on 2018-22 starts):** live ranks 35/972. Top = ONB $3,500 + JF 0: holdout 2023-26 +3.1 pt (band -1.4/+7.5), from #5 +3.5 pt (+0.7/+6.4), fail 73.1 -> 74.4% (it finishes faster). Interaction: JF helps at ONB $2,750, hurts at $3,500. Lean, not proof; user to decide.
+- **JF size with ONB $3,500 (`analysis/outputs/jf_size_onb3500_output.txt`):** bigger JF does not help (3: +0.0, 4: -0.3, 6: -0.9 pt from #5); smaller helps a little from #5 (JF 1 +0.8, JF 0 +1.4 pt, bands just above 0). User keeps JF 2 unless they say otherwise.
 - **Jump Fade v4** (`apex_strategies/NQ_Jump_Fade.txt`): morning 5-min jump fade, 1-min @MNQ 24h chart, `MinVolRatio` 0, Qty 2, kill
   switch + heartbeat, no cushion guard. MultiCharts report = Python (v2 683/694, v3 434/436 matched). Eval bench on the corrected base
   (`analysis/outputs/jump_fade_v2_eval_now_output.txt`): fresh eval +0.9 pt; **from #5's state +1.8 pt (band +0.9/+2.8) at 2 MNQ**.
