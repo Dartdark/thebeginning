@@ -1,6 +1,6 @@
 """Standing rule (user 2026-11-10): EVERY new strategy the user sends, good or bad on its own, goes against ALL the data to look for a
 better version (and through an ingredient breakdown, DEVELOPMENT_PROCESS). This tool does the data part for one trade list:
-  python3 analysis/strategy_data_sweep.py TRADES.csv [NAME]      (TRADES.csv: date, net per contract after costs; extra columns ignored)
+  python3 analysis/strategy_data_sweep.py TRADES.csv [NAME]      (TRADES.csv: date, net per contract after costs; extra columns ignored; MULTI-DAY trades: add entry_date = the entry session, used for the regime)
 Splits the strategy's trades by every regime of every daily series in analysis/data_sweep.py (21 series x 3 regimes, last close
 before the trade day) and reports:
   - gap t (favourable vs unfavourable regime), same sign in 2018-22 and 2023+, bar t_threshold(63);
@@ -53,4 +53,8 @@ def sweep(x, name="strategy", runs=200, seed=1, S=None):
 
 if __name__ == "__main__":
     t = pd.read_csv(sys.argv[1]); t["date"] = pd.to_datetime(t.date.astype(str).str[:10])
+    if "entry_date" in t:                      # multi-day trades: key on the ENTRY session, else the regime is read after entry (look-ahead;
+        t["date"] = pd.to_datetime(t.entry_date.astype(str).str[:10])   # found 2026-11-12 on IBS Globex: GEX 'lead' t 3.4 -> -0.4 at entry)
+    elif "days" in t and (t.days > 0).any():
+        print("   WARNING: multi-day trades keyed on 'date' (exit?): add an entry_date column, or the regime split looks ahead")
     print(__doc__.split("\n")[0]); sweep(t.groupby(t.date.dt.normalize()).net.sum(), sys.argv[2] if len(sys.argv) > 2 else sys.argv[1])

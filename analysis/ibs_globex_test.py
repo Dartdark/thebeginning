@@ -142,14 +142,14 @@ if __name__ == "__main__":
     print("\n== Beta controls (2018-26, our costs)")
     c = d.close.to_numpy(); last = pd.Series(c).groupby(d.sess.to_numpy()).last(); bh = last.diff().reindex(days_idx).fillna(0) * pv
     inm = (D != 0).mean(); print(f"   ES held every session: ${bh.sum():,.0f}; x its time in market ({inm:.0%} of sessions with P&L) = ${bh.sum() * inm:,.0f}; IBS rule ${T18.net.sum():,.0f}")
-    hold_days = T18.days.to_numpy(); ok = S[S.ok & (S.sess >= "2018-01-01")].index.to_numpy(); o = d.open.to_numpy(); rng = np.random.default_rng(1); res = []
-    for _ in range(300):
-        tot = 0.0; k = ok[0]
+    hold_days = T18.days.to_numpy(); okk = np.flatnonzero((S.ok & (S.sess >= "2018-01-01")).to_numpy()); o = d.open.to_numpy(); rng = np.random.default_rng(1); res = []
+    DI = S.di.to_numpy().astype(int)
+    for _ in range(300):                                    # random decision sessions (only sessions with a decision bar), his hold lengths
+        tot = 0.0; p = 0
         for hd in rng.permutation(hold_days):
-            k = k + rng.integers(1, 6)
-            if k + hd >= ok[-1]: break
-            e = o[int(S.di.iat[k]) + 1]; x = o[int(S.di.iat[k + int(hd)]) + 1] if S.ok.iat[k + int(hd)] else c[int(S.b.iat[k + int(hd)]) - 1]
-            tot += (x - e) * pv - 30.0; k = k + int(hd)
+            p = p + int(rng.integers(1, 6))
+            if p + int(hd) >= len(okk): break
+            e = o[DI[okk[p]] + 1]; x = o[DI[okk[p + int(hd)]] + 1]; tot += (x - e) * pv - 30.0; p = p + int(hd)
         res.append(tot)
     res = np.array(res); print(f"   random entry days with the same hold lengths, 300 runs: mean ${res.mean():,.0f}, p95 ${np.percentile(res, 95):,.0f}; p(random >= rule) {np.mean(res >= T18.net.sum()):.3f}")
 
@@ -171,5 +171,6 @@ if __name__ == "__main__":
     B, P = RS.report({"IBS v5 ES": D[D.index.year >= 2023]}, n=3000, capital=150_000, limits=(10000, 20000, 40000)); print(B); print(P)
     print("\n== Monte Carlo at trading size (1 ES and 1 MES = x0.1; no trailing limit: personal account)")
     for size in (1.0, 0.1): print(MC.report(T18.net, D, size=size, label="IBS v5", trail=1e12))
-    T18.assign(date=pd.DatetimeIndex(T18.exit_ts).normalize().strftime("%Y-%m-%d"))[["date", "entry_ts", "exit_ts", "entry", "exit", "why", "days", "net"]].to_csv("checks/candidates/ibs_globex/trades.csv", index=False)
+    T18.assign(date=pd.DatetimeIndex(T18.exit_ts).normalize().strftime("%Y-%m-%d"),
+               entry_date=(pd.DatetimeIndex(T18.entry_ts) + pd.Timedelta(hours=7) - pd.Timedelta(minutes=1)).normalize().strftime("%Y-%m-%d"))[["date", "entry_date", "entry_ts", "exit_ts", "entry", "exit", "why", "days", "net"]].to_csv("checks/candidates/ibs_globex/trades.csv", index=False)
     D.to_csv("checks/candidates/ibs_globex/daily.csv", header=["net"])
