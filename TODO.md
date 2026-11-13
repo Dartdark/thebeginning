@@ -5,7 +5,7 @@ bottom). Times are Central (CT).
 
 ## This week and next
 - [ ] **You, NOW (2026-11-12): JF150-5 inputs on the VPS:** set `HeartbeatTag` = `JF150-5` (blank, so the alarm said "not
-  running" while it traded +$145) and check the contract size (entered 1 MNQ, plan 2). The 08:21 check now names both.
+  running" while it traded +$145). (Size 1 MNQ is CORRECT: Qty 1 since 11/12 per expected_setup; the "plan 2" flag came from a stale local copy, 11/13.)
 - [ ] **Settings report, recompile later (2026-11-12, user yes):** Claude adds the size + account inputs to each live strategy's
   heartbeat line (2 lines each: ONB, EOS, Bridge Monday, Twin, DT, JF), checker reviews, then you recompile all 6 after a close
   on a quiet evening. Then the 08:21 check sees a wrong size BEFORE the first trade (today it only sees it after an entry).
