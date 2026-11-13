@@ -36,6 +36,7 @@ BASE_FUNDED_LEGACY = {**sc(PLAN_LEGACY, 1.5), "TWIN": 2}
 # + Relative Strength 1 (both sides) + Dual Thrust 2 + Overnight Tick 2 + Twin 2. VB retired 11/12. The old BASE_FUNDED missed
 # MOC / RS / DT / OT. LIVE_FUNDED is the funded bench's base from now on (no funded account is live yet).
 LIVE_FUNDED = {**sc(PLAN, 1.5), "MOC_MES": 3.0, "RS": 1, "DT": 2, "OT": 2, "TWIN": 2}
+LIVE_FUNDED["LDF_MC"] = 4.0   # 150K funded LDF 3 -> 4 MNQ (user 2026-11-13; funded_ldf_int150: 1y +$132, blown 1.5 -> 1.0%; 5 worse)
 BASE_FUNDED = LIVE_FUNDED
 
 

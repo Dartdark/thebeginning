@@ -1,5 +1,9 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
+> **150K funded, Late-Day Flow 4 MNQ (user 2026-11-13).** Bench on the documented 150K plan (`analysis/bench150.py` LIVE_FUNDED,
+> `analysis/outputs/funded_ldf_int150_output.txt`): 1 year $17,424 vs $17,292, blown 1.0% vs 1.5%; 2 years cap-bound (+$34). LDF 5 is worse
+> (blown 2.2%). Every other 150K funded size is at its best within noise (`funded_resize150_output.txt`, `funded_speed150_output.txt`).
+
 > **RETIRED 2026-11-12 (user, all plans, until further notice; WATCHLIST #41 `analysis/vb_watch.py`)**: Vault Break (all sizes, both 50K and 150K tables below) is out of the funded plan. Its last-250-trade average
 > R fell below its 2018-24 minimum (data to 11/06); the edge after its breakout entries is gone in 2026 (`analysis/outputs/vb_drawdown_diag_output.txt`).
 > Benches: `analysis/bench150.py` BASE_FUNDED no longer contains VB. Tables below are history until re-run.
