@@ -19,6 +19,8 @@ from plan_150k_test import evaluation,R150
 
 SEED=20261113
 BASE=ROOT/'analysis/outputs/codex_book_joint_losses'
+LABEL='fade'
+CANDIDATE_KEY='FADE'
 
 
 def candidate(variant='heavy',size=1):
@@ -32,7 +34,7 @@ def candidate(variant='heavy',size=1):
 def canonical(g,t,days):
     pieces={}
     for k,tt in t.groupby('strategy',sort=False):
-        if k not in ['TWIN','JF']:
+        if k not in ['TWIN','JF','OT']:
             rr=tt.copy()
             rr['day']=np.searchsorted(g.ts,rr.date.to_numpy())
             rr['j0']=rr.entry_ts.dt.hour*60+rr.entry_ts.dt.minute
@@ -52,14 +54,14 @@ def canonical(g,t,days):
             i=int((x.entry_ts-pd.Timestamp(g.ts[0])).total_seconds()/60)
             j=int((x.exit_ts-pd.Timestamp(g.ts[0])).total_seconds()/60)
             idx=np.arange(i,j+1)
-            if k=='TWIN':idx=idx[np.isfinite(g.c.ravel()[idx])]
+            if k in ['TWIN','OT']:idx=idx[np.isfinite(g.c.ravel()[idx])]
             row,js=idx//1440,idx%1440;last=row[-1]
             net=x.net;fee=.55*x.qty if k=='JF' else 0.
             cost=(x.exit-x.entry)*x.side*2*x.qty-(net+fee)
             extreme=g.l.ravel()[idx] if x.side>0 else g.h.ravel()[idx]
             adv=(extreme-x.entry)*x.side*2*x.qty-cost
             is_target=str(x.kind) in ['1','tgt','target']
-            if k=='TWIN':adv[-1]=(net+fee) if str(x.kind)=='0' else min(adv[-1],net+fee)
+            if k in ['TWIN','OT']:adv[-1]=(net+fee) if str(x.kind)=='0' else min(adv[-1],net+fee)
             else:adv[-1]=(net+fee) if is_target else min(adv[-1],net+fee)
             logical=int(np.searchsorted(g.ts,x.date.to_datetime64()))
             if last!=logical:
@@ -179,11 +181,11 @@ def main():
         counts[k]=n
     replace=max(counts,key=counts.get)
     print('design overlap',counts,'replacement',replace,flush=True)
-    bp=canonical(g,base,days);fp=canonical(g,fade,days)['FADE'];lp=canonical(g,lag,days)['FADE']
+    bp=canonical(g,base,days);fp=canonical(g,fade,days)[CANDIDATE_KEY];lp=canonical(g,lag,days)[CANDIDATE_KEY]
     for k,(w,r) in bp.items():assert np.allclose(r[:,-1],daily[k]),k
     w0=sum(v[0] for v in bp.values());r0=sum(v[1] for v in bp.values())
     wc,rc=bp[replace]
-    streams={'base':(w0,r0),'+fade1':(w0+fp[0],r0+fp[1]),'+fade2':(w0+2*fp[0],r0+2*fp[1]),
+    streams={'base':(w0,r0),f'+{LABEL}1':(w0+fp[0],r0+fp[1]),f'+{LABEL}2':(w0+2*fp[0],r0+2*fp[1]),
              'empty_slot':(w0-wc,r0-rc),'replacement1':(w0-wc+fp[0],r0-rc+fp[1]),
              '+delay1':(w0+lp[0],r0+lp[1])}
     results=[];decisions=[]
@@ -191,8 +193,8 @@ def main():
     for model in ['canonical','common_price','close_only']:
         print('model',model,flush=True)
         if model!='canonical':
-            cases={'base':base,'+fade1':pd.concat([base,fade],ignore_index=True),
-                   '+fade2':pd.concat([base,candidate(size=2)],ignore_index=True),
+            cases={'base':base,f'+{LABEL}1':pd.concat([base,fade],ignore_index=True),
+                   f'+{LABEL}2':pd.concat([base,candidate(size=2)],ignore_index=True),
                    'empty_slot':base[base.strategy!=replace],
                    'replacement1':pd.concat([base[base.strategy!=replace],fade],ignore_index=True),
                    '+delay1':pd.concat([base,lag],ignore_index=True)}
@@ -218,7 +220,7 @@ def main():
                         results.append(row)
                         if reference=='base':print(per,stress,k,f"pass {row['pass_rate']:.3%} diff {row['pass_delta']:+.3%} [{lo:+.3%},{hi:+.3%}]",flush=True)
     table=pd.DataFrame(results);table.to_csv(OUT/'book_comparison.csv',index=False)
-    p=table[(table.model=='canonical')&(table.case=='+fade1')&(table.reference=='base')]
+    p=table[(table.model=='canonical')&(table.case==f'+{LABEL}1')&(table.reference=='base')]
     passbook=bool((p[p.period=='2018-22'].pass_delta>=0).all() and (p[p.period=='2023+'].band05>0).all())
     manifest=dict(code=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
                   primary_book_gate=passbook,overlap_minutes_design=counts,replacement=replace,
