@@ -27,3 +27,14 @@ Target fills need 1 tick through (NQ engine: 1 point; the NQ validation run uses
 avg > 0 after costs, t >= 2.5, positive in BOTH 2018-22 and 2023-26, and a random-side placebo (same entries / days, side by coin,
 100 runs) p < 0.05. A pass goes to the eval bench (bench150 LIVE_EVAL) at micro size, then needs a MultiCharts report. Report: by year,
 halves, longs / shorts, win rate, PF; the full metric battery only for passes (first-gate rule).
+
+## Result (2026-11-13, `analysis/outputs/jump_onb_other_markets_test_output.txt`): FAIL, both engines, all 7 markets
+Engine checks on NQ: Jump Fade 694 / 694 trades identical; Overnight Bias 684 / 684 identical.
+A. Jump Fade, per contract after costs (both sides): ES +$22 (t 0.9; 2018-22 -$4, 2023-26 +$59), YM -$3, GC -$78 (t -2.1), CL -$36,
+   ZN -$21 (t -3.0), 6E -$18 (t -2.2), NG -$26. Nothing reaches t 2. The NQ morning fade has NO support in the five independent markets
+   and only the same weak sign in ES: as an out-of-sample check of the (post-hoc) NQ lead this is negative.
+   Exploratory hour table: one cell above its bar (t 3.4 for 168 cells): GC fade, bars closing 10:00-10:59 CT, $139, t 3.8, placebo
+   p 0.000. Follow-up (`gc_h10_jump_fade_check_output.txt`): 2026 alone is $24.5k of $36.8k (gold's stops grew ~4x: $930 -> $3,874);
+   in risk units t 2.57 (below the bar), 2018-22 t 0.75, ex-2026 t 1.56; hours 9 and 11 are negative. NOT a lead.
+B. Overnight Bias ADX30 (both sides): ES +$63 (t 1.6; 2018-22 +$114, 2023-26 -$1), YM +$2, GC -$40, CL -$18, ZN -$44 (t -6.9),
+   6E -$36 (t -3.7), NG +$33 (t 1.3; shorts +$65, t 1.75, positive in 9 of 9 years but below every bar; 1 of 21 trials).
