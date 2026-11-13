@@ -61,6 +61,14 @@ def canonical(g,t,days):
             is_target=str(x.kind) in ['1','tgt','target']
             if k=='TWIN':adv[-1]=(net+fee) if not is_target else min(adv[-1],net+fee)
             else:adv[-1]=(net+fee) if is_target else min(adv[-1],net+fee)
+            logical=int(np.searchsorted(g.ts,x.date.to_datetime64()))
+            if last!=logical:
+                # Sunday cash flows must survive weekday row selection. The
+                # old shared grid leaves these on Sunday and drops them.
+                assert k=='TWIN' and last<logical
+                w[logical,0]+=min(float(adv.min()),net)
+                w[logical,1:]+=net;r[logical,:]+=net
+                continue
             m=row==last;a=adv[m].copy()
             if (~m).any():a[0]=min(a[0],adv[~m].min())
             w[last,js[m]]+=a;w[last,js[-1]+1:]+=net+fee;r[last,js[-1]:]+=net+fee
