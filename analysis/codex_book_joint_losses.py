@@ -15,6 +15,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / 'analysis/outputs/codex_book_joint_losses'
+CLI_ARGS = sys.argv[1:]
+# Older shared modules read argv[1] as a cache folder during import.
+sys.argv = [sys.argv[0], str(OUT / '_cache')]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import metrics as metrics
 import resampling as resampling
@@ -341,7 +346,7 @@ def market_audit(g,daily):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--grid',required=True);args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--grid',required=True);args=p.parse_args(CLI_ARGS)
     OUT.mkdir(parents=True,exist_ok=True)
     spec=roster();print('book:',spec,flush=True)
     cfg=json.loads((ROOT/'live/expected_setup.json').read_text())
