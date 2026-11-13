@@ -30,7 +30,13 @@ LEGACY_EVAL = {"VB": 20, "ONB30": ("risk", 2750), "MON_BR": 5, "EOS": ("risk", 1
 PLAN_LEGACY = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
 PLAN = {k: v for k, v in PLAN_LEGACY.items() if k not in ("VB_N", "VB_F")}   # VB RETIRED from all plans 2026-11-12 (user; WATCHLIST #41)
 sc = lambda p, k: {n: (("risk", v[1] * k) if isinstance(v, tuple) else v * k) for n, v in p.items()}
-BASE_FUNDED = {**sc(PLAN, 1.5), "TWIN": 2}; BASE_FUNDED_LEGACY = {**sc(PLAN_LEGACY, 1.5), "TWIN": 2}
+BASE_FUNDED_LEGACY = {**sc(PLAN_LEGACY, 1.5), "TWIN": 2}
+# 2026-11-13 (user: improve the funded book): the 150K FUNDED plan as documented (funded_strategies/README.md, FUNDED_PLAN.md):
+# the 50K table x 1.5 (ONB ML $600, Monday 1.5, EOS $1,050, LDF 3, NFP $750, Bridge Monday 1.5, CL Sunday 3 MCL, ES MOC 3 MES)
+# + Relative Strength 1 (both sides) + Dual Thrust 2 + Overnight Tick 2 + Twin 2. VB retired 11/12. The old BASE_FUNDED missed
+# MOC / RS / DT / OT. LIVE_FUNDED is the funded bench's base from now on (no funded account is live yet).
+LIVE_FUNDED = {**sc(PLAN, 1.5), "MOC_MES": 3.0, "RS": 1, "DT": 2, "OT": 2, "TWIN": 2}
+BASE_FUNDED = LIVE_FUNDED
 
 
 def setup(twin_trades=None, base="live"):
@@ -70,6 +76,11 @@ def setup(twin_trades=None, base="live"):
         Sp = pd.read_pickle("scratch_data/single_print_sessions.pkl"); flag = Sp.flag.reindex(dts).fillna(False).to_numpy().astype(bool)
         lab.W["VB_F"] = lab.W["VB"] * flag[:, None]; lab.C["VB_F"] = lab.C["VB"] * flag; lab.W["VB_N"] = lab.W["VB"] * ~flag[:, None]; lab.C["VB_N"] = lab.C["VB"] * ~flag
         lab.W["TWIN"] = Wt; lab.C["TWIN"] = Rt[:, -1]
+        if base == "live" and lab is not None:                         # 2026-11-13: the rest of the 150K funded plan (LIVE_FUNDED)
+            import funded_bootstrap as FB_, dual_thrust_bench as DTB_, overnight_tick_bench as OTB_
+            FB_.add_moc_mes(lab, "scratch_data/")
+            rs_ = pd.read_csv("scratch_data/rs_trades.csv"); rs_["kind"] = rs_.kind.map({"stop": 0, "target": 1, "flat": 2})
+            lab.add("RS", rs_); lab.add("DT", DTB_.dt_trades(lab.g), slippage=False); OTB_.add_ot(lab, OTB_.ot())
     except FileNotFoundError as e:
         print(f"[bench150] lab not built ({e.filename} missing): eval base only", flush=True); lab = None
     return dict(g=g, B=B, trr=trr, D=D, dts=dts, yr=yr, Wb=Wb, Rb=Rb, Wt=Wt, Rt=Rt, Tn=Tn, lab=lab, P=P, mult=mult, base=base)
