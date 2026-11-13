@@ -1,0 +1,34 @@
+{
+  "source_book_commit": "a5aeffec",
+  "audit_ledger_sha256": "70615ed0c1ee140d79bd20556fbfa5588363db469301f5f0540975b5ec9ab192",
+  "script_sha256": {
+    "codex_onb_heavy_night_fade.py": "13cf7289a01a1c2a5e2f5ec3e5c2cd0819795c36242c9112dc34987dd7b36215",
+    "codex_onb_fade_book.py": "ee02e2b1a22379dca1e93490c5e99eec6f67f79eef8535e3289900d70994ae97",
+    "codex_onb_overnight_tick.py": "f8231b2d3c9c911c8dc142b1561cf9192586d00bd13bed06b63aeaa87d4678c2",
+    "codex_onb_buffer_checks.py": "5538586bad28022eae58168c586bded0ad8cef605b894a265baed70af288cc47"
+  },
+  "versions": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "numpy": "2.4.6",
+    "pandas": "3.1.1",
+    "scipy": "1.17.1"
+  },
+  "definitions_run": [
+    "primary 1 MNQ",
+    "same rule 2 MNQ",
+    "1-minute delayed entry 1 MNQ",
+    "all-night fade control"
+  ],
+  "selection_history": "Existing frozen families; prior author/repo searches remain counted; recent years reused",
+  "seed": 20261113,
+  "independent_checker_run": false,
+  "funded_tests_run": false,
+  "reason_stopped": "pre-registered evaluation-book gate failed",
+  "revision_receipts": [
+    "Initial syntax/timestamp/import fixes did not alter trading definitions",
+    "T MC label mapping corrected from T-prefix to observed OFlg/OFsh; price outcomes unchanged",
+    "12 Sunday Twin cash flows retained on Monday before final comparison",
+    "Twin flat-exit marking matched to shared source before final comparison",
+    "OT shared account helper parameterization keeps identical base outcomes"
+  ]
+}
