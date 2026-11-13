@@ -28,3 +28,15 @@ GATES (as lab/README): G1 design 2018-22: avg > 0 and t >= 2.0. Fail -> stop, th
 G2 one holdout look 2023-26: avg > 0 and t >= 1.5; whole sample t >= 2.45 (7 trials, one-sided 5%). G3 random-side placebo (200 runs) p < 0.05.
 G4 evaluation bench on bench150.LIVE_EVAL at 1-3 MNQ: the 2023-26 band AND the account-now band above 0, then the resize rule.
 G5 strategy-checker + MultiCharts code before any live use. Expected before running: 0 or 1 of 7 reach G4.
+
+## Result of the 7 (2026-11-13, `analysis/outputs/edge_hunt_1113_output.txt`): 0 of 7 pass G1; no holdout opened
+Design 2018-22, per NQ: H1a -$3 (t -0.2), H1b -$20 (t -1.3), H2 +$10 (t 0.3), H3 -$19 (t -0.3; longs +$75, shorts -$100), H4 +$64 on 50 trades
+(the 1.5x volume threshold fires 8 times a year: too rare to judge; control ratio < 1: +$104, t 1.4 = the plain opening-drive follow),
+H5 -$46 (t -1.4, every year negative), H6 +$65 (t 0.6) but LONGS (after down weeks) +$498 (t 2.3) and SHORTS (after up weeks) -$258 (t -3.1).
+
+## Amendment 1 (written after the design results above, BEFORE any run of it; the 2023-26 holdout is still unopened for every rule)
+H6's two sides say the same thing: NQ rose on Friday afternoons in 2018-22 whatever the week did. Post hoc from design years only, so it
+gets its own gates: H6b FRIDAY AFTERNOON LONG: every Friday (no early close), long 13:01 -> 14:55 CT, stop 0.3 ATR. Mechanism candidates:
+short-covering / dealer hedging into the weekly options expiry and the weekend. Controls (design only): the same window Mon-Thu.
+Same gates: G1 design avg > 0, t >= 2.0 AND Fridays beat Mon-Thu; G2 holdout avg > 0, t >= 1.5, whole t >= 2.45 (now 8 trials: 2.50);
+G3 placebo = random weekday instead of Friday (same count), p < 0.05; G4 evaluation bench.
