@@ -290,7 +290,7 @@ def clock_audit(g, trades, daily):
             bpnl = pnl.sum(0); p = pp[:, :, sl]
             row = dict(period=period, hour=hour, days=len(rows),
                        occupied_fraction=float(np.any(p != 0, axis=0).mean()),
-                       multi_same_side_fraction=float(((p>0).sum(0)>=2).mean()+((p<0).sum(0)>=2).mean(),
+                       multi_same_side_fraction=float((((p>0).sum(0)>=2) | ((p<0).sum(0)>=2)).mean()),
                        mean_abs_net_mnq=float(np.abs(p.sum(0)).mean()),
                        negative_book_hour_sum=float(-np.minimum(bpnl,0).sum()),
                        mean_book_hour=float(bpnl.mean()))
