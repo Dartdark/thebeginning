@@ -1,0 +1,33 @@
+[provenance] code 6ec15fe dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+samuel.nys (X, 2026-11-13, user screenshot): 'Jobs report fade: opposite side of the first 5-minute move, exit 09:30 ET' — enter 08:35 ET
+NFP days found (spike proxy): 79 since 2018; traded 78
+   HIS RULE, our costs                          n  78 avg $  306 t 2.34 PF 2.16 win 58% total $23,880 worst $-2,737 | 2018-22 $  274 2023+ $  347
+        18:+0.3k 19:+0.5k 20:-1.2k 21:+6.7k 22:+5.7k 23:+3.8k 24:+1.3k 25:+7.2k 26:-0.5k
+   HIS RULE, his costs (2 pts + $5 a side)      n  78 avg $  233 t 1.78 PF 1.79 win 56% total $18,205 worst $-2,810 | 2018-22 $  201 2023+ $  275
+        18:-0.3k 19:-0.2k 20:-1.4k 21:+5.9k 22:+4.9k 23:+3.1k 24:+0.4k 25:+6.8k 26:-0.9k
+   his rule, our costs, from Jul 2020 (his chart) n  57 avg $  408 t 2.32 PF 2.27 win 61% total $23,252 worst $-2,737 | 2018-22 $  497 2023+ $  347
+        20:-1.0k 21:+6.7k 22:+5.7k 23:+3.8k 24:+1.3k 25:+7.2k 26:-0.5k
+   OUR NFP Fade (07:45 reaction, 09:00, stop 0.5 ATR) n  78 avg $  412 t 2.15 PF 1.98 win 54% total $32,119 worst $-2,847 | 2018-22 $  203 2023+ $  681
+        18:+0.9k 19:-1.4k 20:-2.7k 21:+5.9k 22:+6.2k 23:+6.9k 24:+4.0k 25:+3.5k 26:+8.8k
+   his rule + our 0.5 ATR stop                  n  78 avg $  306 t 2.34 PF 2.16 win 58% total $23,880 worst $-2,737 | 2018-22 $  274 2023+ $  347
+        18:+0.3k 19:+0.5k 20:-1.2k 21:+6.7k 22:+5.7k 23:+3.8k 24:+1.3k 25:+7.2k 26:-0.5k
+   our 07:45 reaction, exit 08:30, no stop      n  78 avg $  179 t 1.64 PF 1.65 win 55% total $13,970 worst $-2,707 | 2018-22 $   40 2023+ $  359
+        18:+0.8k 19:+0.1k 20:-0.3k 21:+2.8k 22:-1.7k 23:+0.0k 24:+3.5k 25:+5.1k 26:+3.5k
+   his 07:35 reaction, exit 09:00, no stop      n  78 avg $  329 t 1.77 PF 1.73 win 53% total $25,630 worst $-3,972 | 2018-22 $  358 2023+ $  291
+        18:+2.2k 19:-0.6k 20:+2.2k 21:+2.7k 22:+9.3k 23:+8.1k 24:-1.2k 25:-1.9k 26:+4.8k
+   random-side placebo (500 runs, same days and times): mean $-16, p95 $205 -> his rule p 0.014
+   same-day P&L correlation with our NFP Fade: +0.13 (78 days); same side 82%
+
+== eval book (bench150.LIVE_EVAL, #5) + his rule / our NFP Fade (resize rule: holdout and account-now bands)
+Size COMBINATION search on the live #5 evaluation book (user 2026-11-12 'search combinations').
+[bench150] eval base (live): ONB30 $3500 risk, MON_BR 5, TWIN 2, DT 2, JF 1, NBL 3, LDF $1000 risk
+engine check (every 7th start): numba 0.3563 vs plan_150k_test 0.3563
+LIVE {'ONB30': 3500, 'MON_BR': 5, 'TWIN': 2, 'DT': 2, 'JF': 1, 'NBL': 3, 'LDF': 1000}: fresh 2018-22 33.9%, 2023+ 43.0%, all 37.7% | from #5 now 22.5%
+   book: fresh 18-22 33.9% 23-26 43.0% | #5 now 22.5%
+   + his rule 2 MNQ               18-22 +0.2% | 23-26 +0.0% [+0.0%,+0.0%] | #5 now +0.0% [+0.0%,+0.0%]
+   + his rule 4 MNQ               18-22 +0.2% | 23-26 -1.6% [-4.4%,+0.1%] | #5 now -0.1% [-0.8%,+0.4%]
+   + his rule 6 MNQ               18-22 +0.2% | 23-26 -2.1% [-5.5%,+0.1%] | #5 now -0.2% [-1.0%,+0.4%]
+   + our NFP Fade $500            18-22 +0.0% | 23-26 +0.0% [+0.0%,+0.0%] | #5 now +0.0% [-0.1%,+0.1%]
+   + our NFP Fade $1000           18-22 -0.1% | 23-26 +0.2% [+0.0%,+0.6%] | #5 now +0.0% [-0.3%,+0.2%]
+   + our NFP Fade $1500           18-22 -0.2% | 23-26 -0.7% [-3.0%,+1.0%] | #5 now -0.3% [-1.1%,+0.4%]
+   + his 4 MNQ + our NFP $1000    18-22 +0.4% | 23-26 -2.1% [-5.5%,+0.1%] | #5 now -0.1% [-0.9%,+0.4%]
