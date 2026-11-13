@@ -64,11 +64,14 @@ def setup(twin_trades=None, base="live"):
     Wb = sum(P[k][0] * m for k, m in mult.items()); Rb = sum(P[k][1] * m for k, m in mult.items())
     print(f"[bench150] eval base ({base}): " + ", ".join(f"{k} {'$' + str(v[1]) + ' risk' if isinstance(v, tuple) else v}" for k, v in spec.items()), flush=True)
     sys.argv = ["x", "scratch_data"]
-    with contextlib.redirect_stdout(io.StringIO()):
-        lab = runpy.run_path("analysis/cl_sunday_fade_bench.py", run_name="__main__")["lab"]
-    Sp = pd.read_pickle("scratch_data/single_print_sessions.pkl"); flag = Sp.flag.reindex(dts).fillna(False).to_numpy().astype(bool)
-    lab.W["VB_F"] = lab.W["VB"] * flag[:, None]; lab.C["VB_F"] = lab.C["VB"] * flag; lab.W["VB_N"] = lab.W["VB"] * ~flag[:, None]; lab.C["VB_N"] = lab.C["VB"] * ~flag
-    lab.W["TWIN"] = Wt; lab.C["TWIN"] = Rt[:, -1]
+    try:                                                           # 2026-11-13: the lab needs cloud-only caches (s_rank_gap2 / gy.pkl);
+        with contextlib.redirect_stdout(io.StringIO()):            # the eval base above does not, so a PC without them still benches it
+            lab = runpy.run_path("analysis/cl_sunday_fade_bench.py", run_name="__main__")["lab"]
+        Sp = pd.read_pickle("scratch_data/single_print_sessions.pkl"); flag = Sp.flag.reindex(dts).fillna(False).to_numpy().astype(bool)
+        lab.W["VB_F"] = lab.W["VB"] * flag[:, None]; lab.C["VB_F"] = lab.C["VB"] * flag; lab.W["VB_N"] = lab.W["VB"] * ~flag[:, None]; lab.C["VB_N"] = lab.C["VB"] * ~flag
+        lab.W["TWIN"] = Wt; lab.C["TWIN"] = Rt[:, -1]
+    except FileNotFoundError as e:
+        print(f"[bench150] lab not built ({e.filename} missing): eval base only", flush=True); lab = None
     return dict(g=g, B=B, trr=trr, D=D, dts=dts, yr=yr, Wb=Wb, Rb=Rb, Wt=Wt, Rt=Rt, Tn=Tn, lab=lab, P=P, mult=mult, base=base)
 
 
