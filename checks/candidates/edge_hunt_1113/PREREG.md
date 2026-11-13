@@ -40,3 +40,8 @@ gets its own gates: H6b FRIDAY AFTERNOON LONG: every Friday (no early close), lo
 short-covering / dealer hedging into the weekly options expiry and the weekend. Controls (design only): the same window Mon-Thu.
 Same gates: G1 design avg > 0, t >= 2.0 AND Fridays beat Mon-Thu; G2 holdout avg > 0, t >= 1.5, whole t >= 2.45 (now 8 trials: 2.50);
 G3 placebo = random weekday instead of Friday (same count), p < 0.05; G4 evaluation bench.
+
+## Result of Amendment 1 (`analysis/outputs/edge_hunt_1113_h6b_output.txt`): G1 PASS, G2 FAIL
+Design 2018-22: Fridays +$156 a trade (t 2.25, 247 trades) vs Mon-Thu -$27; Friday minus Mon-Thu +$183 (t 2.33). ONE holdout look 2023-26:
+Fridays -$80 (t -0.76, 191 trades; 2026 -$17.0k), Mon-Thu -$51. Whole sample t 0.88; random-weekday placebo p 0.10. Dead: a 2020-22 effect.
+ROUND TOTAL: 8 pre-registered rules, 0 reach the evaluation bench. The holdout stayed unopened for the 7 that failed design.
