@@ -13,3 +13,8 @@ BASE $412 a trade, t 2.15, Sharpe/yr 0.73, max DD $7.6k (2018-22 $203, 2023-26 $
 disagree days were GOOD for ours, $586). V2 TWO LEGS: $359 a trade, t 2.93, Sharpe/yr 0.99, max DD $4.9k (2018-22 $239 t 1.5, 2023-26 $514
 t 2.7). Strict rule: V2 beats the base on t, Sharpe and DD and in 2018-22, but NOT on the 2023-26 average ($514 vs $681) -> not a clean pass:
 a RISK improvement (smoother, same idea spread over two windows), not more profit per trade. Funded plan only; decide at the next funded bench.
+
+## Funded bench, as a replacement (2026-11-13, `analysis/outputs/nfp_v2_funded_bench_output.txt`): NO GAIN
+150K x 1.5 + Twin 2, 600 paired 2-year histories: base $20,014 (blown 1.5%); V2 $20,100 (+$86, blown 1.3%, beats the base in 50.4% of
+histories); his leg alone +$72; controls: half NFP +$72, NO NFP +$26. Every variant, including removing NFP, is within noise: NFP is too
+small and rare to move the funded book. V2 not adopted; no MultiCharts code written.
