@@ -47,7 +47,7 @@ def load(g,recent):
             if not np.isfinite(entry):
                 excluded.append(dict(date=str(x.date.date()),reason='missing delayed endpoint'));continue
             gross=(x.exit-entry)*20
-            out.append(dict(date=x.date,entry_ts=x.entry_ts+pd.Timedelta(minutes=variant=='delay'),
+            out.append(dict(date=x.date,entry_ts=x.entry_ts+pd.Timedelta(minutes=int(variant=='delay')),
                             exit_ts=x.exit_ts,entry=entry,exit=x.exit,side=1,kind=2,
                             gross=gross,commission=12.75,slippage=10.,net=gross-22.75,
                             variant=variant,strategy='OT',qty=1.,j0=i%1440,j1=j%1440))
