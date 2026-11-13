@@ -73,7 +73,7 @@ def main():
     for f in sorted(glob.glob("live/health/2*.csv")):   # dated files only (group_log.csv etc. skipped)
         for line in open(f):
             p = line.strip().split(",")
-            kv = dict(x.split("=", 1) for x in p[2:] if "=" in x and not x.startswith("last_reject"))
+            kv = dict(x.split("=", 1) for x in p[2:] if "=" in x and not x.startswith("last_"))
             health.append(dict(check=f"{p[1]} {p[0]}", time=p[1], mode=p[0], mc_processes=int(kv.get("mc_processes", 0)),
                                disk_free_gb=float(kv.get("disk_free_gb", 0)), log_rows=int(kv.get("log_rows_today", 0)),
                                push_errors=int(kv.get("push_errors", 0)),

@@ -17,6 +17,25 @@ COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time
 def mins(t): t = int(t); return t // 100 * 60 + t % 100
 
 
+def new_today(tag, day):
+    """2026-11-13 (alerts review): True when the chart is new or its strategy version changed today (tag absent from the previous
+    trade-log day, or a different HB_Ver in its SIG rows). Its RTH gap clock then starts at its first heartbeat, not 08:30, so a
+    chart added at noon is not 'stale all morning'. A chart that never heartbeats is still flagged."""
+    import glob
+    prev = sorted(f for f in glob.glob("live/trades/2*.csv") if os.path.basename(f)[:8] < day.strftime("%Y%m%d"))
+    if not prev: return False
+    def vers(f):
+        out = {}
+        for l in open(f):
+            c = l.rstrip("\n").split(",")
+            if len(c) > 3 and c[1] == tag: out.setdefault(c[0], set()).add(c[3] if c[0] == "SIG" else "")
+        return out
+    p = vers(prev[-1]); t = vers(f"live/trades/{day.strftime('%Y%m%d')}.csv") if os.path.exists(f"live/trades/{day.strftime('%Y%m%d')}.csv") else {}
+    if not p: return True
+    if t.get("SIG") and not p.get("SIG"): return True          # first day with a strategy heartbeat (e.g. code with the guards)
+    return bool(t.get("SIG")) and bool(p.get("SIG")) and t["SIG"] != p["SIG"]
+
+
 def setup_check(df, day, path="live/expected_setup.json"):
     """Compare the day's log with live/expected_setup.json: every live chart heartbeats, no unknown chart, entry sizes
     as planned (catches a chart left on, a copied chart with old inputs, a size typo) (2026-10-29)."""
@@ -57,9 +76,10 @@ def monitor_check(df, day, cfg):
             if g.empty:
                 out.append(f"- **STRATEGY {tag}**: no heartbeat from the strategy during RTH: not compiled / removed / stopped. It could not trade.")
             else:
-                edges = [mins(830)] + sorted(g.m) + [mins(1500)]
+                start = min(g.m) if new_today(tag, day) else mins(830)
+                edges = [start] + sorted(g.m) + [mins(1500)]
                 gap = max(b - a for a, b in zip(edges, edges[1:]))
-                if gap > 70: out.append(f"- **STRATEGY {tag}**: a {gap}-minute gap in the strategy's heartbeat during RTH.")
+                if gap > 70: out.append(f"- **STRATEGY {tag}**: a {gap}-minute gap in the strategy's heartbeat during RTH" + (" (new / changed chart today: counted from its first heartbeat)" if start != mins(830) else "") + ".")
     a = df[df.event == "ACCT"].copy()
     if a.empty or day.weekday() >= 5: return out
     a["m"] = a.bar_time.map(mins); a = a[(a.m >= mins(830)) & (a.m <= mins(1500))]
@@ -107,7 +127,7 @@ def check(day):
                         out.append(f"- Mismatch {tag} seen in {bad.bar_time.nunique()} bars ({', '.join(f'{int(t):04d}' for t in bad.bar_time.unique())}), "
                                    "resolved by the last row (informational).")
                 rth = sorted(g[(g.m >= mins(830)) & (g.m <= mins(1500))].m)
-                edges = [mins(830)] + rth + [mins(1500)]
+                edges = [rth[0] if rth and new_today(tag, day) else mins(830)] + rth + [mins(1500)]
                 gap = max(b - a for a, b in zip(edges, edges[1:]))
                 if day.weekday() < 5 and gap > 70:
                     out.append(f"- **STALE {tag}**: a {gap}-minute gap in its heartbeat between 08:30 and 15:00 CT (frozen chart or feed?).")
@@ -124,6 +144,10 @@ def check(day):
         modes = {r[0] for r in rows}
         for r in rows:
             kv = dict(x.split("=", 1) for x in r[2:] if "=" in x)
+            if "warnings_today" in kv:      # 2026-11-13: VPS reports rejections and warnings apart
+                if kv.get("rejected_today", "0") not in ("0", ""): out.append(f"- **REJECTED ORDERS ({r[0]}): {kv['rejected_today']} today**, latest: `{kv.get('last_reject', '')}`. Check the Order and Position Tracker for the order and its reason.")
+                if kv.get("warnings_today", "0") not in ("0", ""): out.append(f"- MultiCharts warnings ({r[0]}): {kv['warnings_today']} (not order rejections), latest: `{kv.get('last_warning', '')[:110]}`.")
+                kv["rejected_today"] = "0"     # handled above; skip the old text-match branch
             if kv.get("mc_processes", "1") == "0": out.append(f"- **VPS ({r[0]} {r[1]}): MultiCharts not running.**")
             if float(kv.get("disk_free_gb", "99")) < 5: out.append(f"- VPS ({r[0]}): only {kv['disk_free_gb']} GB free on C:.")
             if kv.get("push_errors", "0") not in ("0", ""): out.append(f"- VPS: {kv['push_errors']} lines in push_errors.txt.")

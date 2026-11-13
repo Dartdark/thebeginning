@@ -22,7 +22,17 @@ import numpy as np, pandas as pd
 OUT = "analysis/outputs/dashboard"
 # evaluation rules per live account (keep in step with dashboard_data.ACCOUNTS / live_panels.ACCTS)
 EVALS = {"#5": dict(mult=2.5, target=159000.0, trail=4000.0, start_bal=150000.0, deadline=None,
-                    max_loss={"Overnight Bias (risk)": 2750.0})}   # VB removed 2026-11-11   # #2-#4 removed 2026-11-10
+                    max_loss={"Overnight Bias (risk)": None})}   # VB removed 2026-11-11   # #2-#4 removed 2026-11-10
+# 2026-11-13 (alerts review: the journal still said $2,750 after ONB went to $3,500): a None stop is read from
+# live/expected_setup.json accounts.<name>.max_stop, the same number the VPS watchdog uses (one source of truth)
+try:
+    _acc = json.load(open("live/expected_setup.json"))["accounts"]
+    for _n, _e in EVALS.items():
+        for _k, _v in _e["max_loss"].items():
+            if _v is None: _e["max_loss"][_k] = float(_acc.get(_n, {}).get("max_stop") or 0) or 3500.0
+except Exception:
+    for _e in EVALS.values():
+        for _k, _v in _e["max_loss"].items(): _e["max_loss"][_k] = _v or 3500.0
 # funded accounts (2026-10-30): add each one when it passes; payouts = [(date, amount)] as requested from Apex
 FUNDED = {}   # e.g. "#4": dict(id="APEX-xxxxxx-04", size="150K", funded="2026-12-02", payouts=[])
 PAYOUT_RULES = {"150K": dict(start=150_000.0, safe=154_100.0, qday=350.0, caps=[2500.0, 3000.0, 3000.0, 3000.0, 4000.0, 5000.0]),

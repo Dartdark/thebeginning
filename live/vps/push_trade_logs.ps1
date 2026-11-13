@@ -60,7 +60,7 @@ $rows = 0; if (Test-Path $today) { $rows = @(Get-Content $today).Count }
 $errs = 0; if (Test-Path "$Logs\push_errors.txt") { $errs = @(Get-Content "$Logs\push_errors.txt").Count }
 # rejected orders today: scan MultiCharts' own log files (TS Support folders) for 'Rejected' lines written today
 # (catches Symbol Mapping errors like 'Invalid Market order parameters ... @MNQ.CME', Apex locks, wrong accounts).
-$rej = 0; $rejmsg = ""
+$rej = 0; $rejmsg = ""; $warn = 0; $warnmsg = ""; $rejts = ""; $warnts = ""   # 2026-11-13: real rejections and other warnings counted apart
 $roots = @("$env:LOCALAPPDATA\TS Support", "$env:APPDATA\TS Support", "C:\ProgramData\TS Support") | Where-Object { Test-Path $_ }
 foreach ($r in $roots) {
     Get-ChildItem $r -Recurse -File -Include *.log, *.txt -ErrorAction SilentlyContinue |
@@ -69,11 +69,20 @@ foreach ($r in $roots) {
             # count only lines stamped today (MultiCharts writes dd.MM.yyyy/HH:mm:ss): a log file touched today still
             # holds older days' lines (10/28 counted 3,228, the last from 10/26) (2026-10-29)
             $hits = @($hits | Where-Object { $_.Line -like ("*" + (Get-Date).ToString("dd.MM.yyyy") + "/*") })
-            if ($hits) { $rej += @($hits).Count; $rejclean = ($hits[-1].Line -replace ',', ';' -replace '\s+', ' '); $rejmsg = $rejclean.Substring(0, [math]::Min(160, $rejclean.Length)) }   # 2026-11-11: Substring on the CLEANED line
+            # 2026-11-13 (alerts review): 'Session not found' and other 'not found' lines are warnings, not order rejections.
+            # Rejections = Rejected / Invalid order / done for day; one order writes several lines, so count the lines that
+            # name an order (OrderName=) when there are any (as watchdog.ps1). The line shown is the latest by its time stamp.
+            $rj = @($hits | Where-Object { $_.Line -match "Rejected|Invalid .* order|done for day" })
+            $wn = @($hits | Where-Object { $_.Line -notmatch "Rejected|Invalid .* order|done for day" })
+            $ro = @($rj | Where-Object { $_.Line -match "OrderName=" }); if ($ro.Count -eq 0) { $ro = $rj }
+            # latest = the line with the latest HH:mm:ss after today's date stamp, across all log files ($rejts / $warnts)
+            foreach ($h in $rj) { if ($h.Line -match '\d{2}\.\d{2}\.\d{4}/(\d{2}:\d{2}:\d{2})') { if ($Matches[1] -ge $rejts) { $rejts = $Matches[1]; $l = $h.Line -replace ',', ';' -replace '\s+', ' '; $rejmsg = $l.Substring(0, [math]::Min(160, $l.Length)) } } }
+            foreach ($h in $wn) { if ($h.Line -match '\d{2}\.\d{2}\.\d{4}/(\d{2}:\d{2}:\d{2})') { if ($Matches[1] -ge $warnts) { $warnts = $Matches[1]; $l = $h.Line -replace ',', ';' -replace '\s+', ' '; $warnmsg = $l.Substring(0, [math]::Min(160, $l.Length)) } } }
+            $rej += $ro.Count; $warn += $wn.Count
         }
 }
 New-Item -ItemType Directory -Force "live\health" | Out-Null
-$line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs,rejected_today=$rej,last_reject=$rejmsg"
+$line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs,rejected_today=$rej,warnings_today=$warn,last_warning=$warnmsg,last_reject=$rejmsg"
 if ($Mode -ne "intraday") { Add-Content "live\health\$day.csv" $line }
 
 New-Item -ItemType Directory -Force "live\trades" | Out-Null

@@ -164,7 +164,7 @@ if ($rej -gt $prev) {
 }
 $state["rej_day"] = $day; $state["rej_count"] = $rej
 
-# 4. alert (once an hour per problem), log, save state
+# 4. alert (once an hour per problem; thin-cushion NEARFLOOR once a day, 2026-11-13), log, save state
 # mute (user 2026-11-05): no phone alerts while no account in expected_setup.json has status "live"; the problems are still
 # written to alerts.txt (marked MUTED). Alerts come back on their own when an account is set to "live" there.
 $anyLive = $true
@@ -177,7 +177,10 @@ $sendFailed = $false
 foreach ($p in $problems) {
     $key, $text = $p.Split("|", 2); $k = "sent_" + ($key -replace '_\d+$', '')
     $lastSent = if ($state[$k]) { [datetime]$state[$k] } else { [datetime]::MinValue }
-    if (($now - $lastSent).TotalMinutes -ge 60 -or $key -like "REJECT_*") {
+    # thin cushion is a standing condition (user 2026-11-13, alerts review): alert it once a trading day, not every hour.
+    # Floor touches (ACCTFAIL), mismatches, rejections and every other alert keep their timing.
+    $due = if ($key -like "NEARFLOOR_*") { $lastSent.Date -ne $now.Date } else { ($now - $lastSent).TotalMinutes -ge 60 }
+    if ($due -or $key -like "REJECT_*") {
         try {
             Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } -TimeoutSec 15 -ErrorAction Stop | Out-Null
             "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
