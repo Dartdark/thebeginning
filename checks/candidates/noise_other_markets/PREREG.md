@@ -19,3 +19,9 @@ Costs: commission + 1 tick per market / stop fill (target = limit, no slip). 1 c
 Report per market: both sides, longs, shorts; by year; 2018-22 vs 2023+; random-side placebo (200 runs, same entries).
 Pass (per market and side): avg > 0, t >= 2.5 (7 markets x 3 sides = 21 trials), positive in BOTH halves, placebo p < 0.05.
 A pass goes to the eval bench (bench150 LIVE_EVAL) as an addition at micro size, then needs a MultiCharts report.
+
+## Result (2026-11-13, `analysis/outputs/noise_other_markets_test_output.txt`): FAIL in all 7 markets
+Per contract after costs, both sides: ES +$0.4 (t 0.1; longs +$10, t 1.3), YM -$8 (t -1.9), GC -$25 (t -2.9), CL -$18 (t -3.8),
+ZN -$28 (t -22.9), 6E -$14 (t -8.7), NG -$13 (t -2.9). Before costs (approx. commission + ~1.6 ticks a trade) every market is
+about flat: ZN / 6E / CL / NG / YM +$1-8, GC about -$4; only ES shows some (~+$25 gross both sides, longs ~+$35), well short of NQ.
+No placebo needed (nothing reached t 2). The noise-area momentum is an NQ (and weakly ES) effect.
