@@ -107,7 +107,7 @@ def eval_bench(ctx, cands, end="2026-09-01", label="150K evaluation (set + Twin 
     return out
 
 
-def funded_bench(ctx, variants, extra=None, end="2026-10-09", label="Funded 150K x 1.5 + Twin 2 MNQ"):
+def funded_bench(ctx, variants, extra=None, end="2026-10-09", label="Funded 150K x 1.5 + Twin 2 MNQ", H=500):   # H trading days (2026-11-13: 250 = 1 year)
     lab, dts = ctx["lab"], ctx["dts"]
     for k, (W, C) in (extra or {}).items(): lab.W[k] = W; lab.C[k] = C
     V = {"base: plan x 1.5 + Twin 2": BASE_FUNDED, **variants}
@@ -117,13 +117,13 @@ def funded_bench(ctx, variants, extra=None, end="2026-10-09", label="Funded 150K
         for i, k in enumerate(names): Bm[keys.index(k)] = b[i]
         bases[nm] = Bm
     chg = np.zeros(Wall.shape[2], bool); chg[-1] = True; chg[1:] |= (np.abs(np.diff(Wall, axis=2)) > 0).any(axis=(0, 1)); chg[0] |= (Wall[:, :, 0] != 0).any()
-    Wc = np.ascontiguousarray(Wall[:, :, chg]); days = np.where((dts >= "2018-01-01") & (dts <= end))[0]; rng = np.random.default_rng(1); n, H, L_ = 600, 500, 20
+    Wc = np.ascontiguousarray(Wall[:, :, chg]); days = np.where((dts >= "2018-01-01") & (dts <= end))[0]; rng = np.random.default_rng(1); n, L_ = 600, 20
     stb = rng.integers(0, len(days), (n, H // L_)); hist = days[((stb[:, :, None] + np.arange(L_)) % len(days)).reshape(n, -1)[:, :H]]; Rr = {nm: np.zeros((n, 3)) for nm in V}
     for hh in range(n):
         ix = hist[hh]; Wh = np.ascontiguousarray(Wc[:, ix]); Ch = np.ascontiguousarray(Call[:, ix])
         for nm, Bm in bases.items():
             r = F.simulate_sized(Wh, Ch, np.ascontiguousarray(Bm[:, ix]), horizon=H, starts=[0], fmin=0.5, fmax=1.0, ref=3000.0); Rr[nm][hh] = [r["paid"][0], r["blown"][0], r["payouts"][0] == 6]
-    b0 = Rr[list(V)[0]][:, 0]; print(f"   {label}, 600 paired histories (to {end}), 2 years:")
+    b0 = Rr[list(V)[0]][:, 0]; print(f"   {label}, 600 paired histories (to {end}), {H} trading days:")
     for nm, r in Rr.items(): print(f"      {nm:<34} 2y ${r[:, 0].mean():>7,.0f} blown {r[:, 1].mean():5.1%} all 6 {r[:, 2].mean():5.1%} diff ${(r[:, 0] - b0).mean():+5,.0f} beats {np.mean(r[:, 0] > b0) + 0.5 * np.mean(r[:, 0] == b0):5.1%}")
     return Rr
 
