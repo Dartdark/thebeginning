@@ -82,8 +82,9 @@ def parity(t):
     en=raw[raw.Type.astype(str).str.startswith('Entry')].reset_index(drop=True)
     ex=raw[raw.Type.astype(str).str.startswith('Exit')].reset_index(drop=True)
     print('MC entry signal labels',en.Signal.value_counts().to_dict(),flush=True)
-    # Source identifies the fade as T; exclude the OS momentum leg explicitly.
-    sel=en.Signal.astype(str).str.startswith('T')
+    # Actual export names the opening fade OFlg/OFsh, not T.
+    sel=en.Signal.astype(str).isin(['OFlg','OFsh'])
+    assert sel.any(), 'unrecognized MC fade labels; cannot assert parity'
     en,en_ex=en[sel].copy(),ex[sel].copy()
     en['date']=pd.to_datetime(en.Date).dt.normalize()
     en['side']=np.where(en.Type.str.contains('Long'),1,-1)
