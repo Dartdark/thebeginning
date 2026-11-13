@@ -89,6 +89,7 @@ def parity(t):
     en['date']=pd.to_datetime(en.Date).dt.normalize()
     en['side']=np.where(en.Type.str.contains('Long'),1,-1)
     en['exit']=en_ex.Price.to_numpy()
+    en=en[en.date.between('2023-01-01','2026-10-12')]
     m=t.merge(en[['date','side','Price','exit']],on=['date','side'],suffixes=('','_mc'))
     return dict(source=str(p.relative_to(ROOT)),fade_mc_count=len(en),matched=len(m),
                 candidate_count=len(t),same_entry=int(np.isclose(m.entry,m.Price).sum()),

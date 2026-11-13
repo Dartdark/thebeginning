@@ -59,7 +59,7 @@ def canonical(g,t,days):
             extreme=g.l.ravel()[idx] if x.side>0 else g.h.ravel()[idx]
             adv=(extreme-x.entry)*x.side*2*x.qty-cost
             is_target=str(x.kind) in ['1','tgt','target']
-            if k=='TWIN':adv[-1]=(net+fee) if not is_target else min(adv[-1],net+fee)
+            if k=='TWIN':adv[-1]=(net+fee) if str(x.kind)=='0' else min(adv[-1],net+fee)
             else:adv[-1]=(net+fee) if is_target else min(adv[-1],net+fee)
             logical=int(np.searchsorted(g.ts,x.date.to_datetime64()))
             if last!=logical:
