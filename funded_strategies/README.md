@@ -57,7 +57,7 @@ Tier list of everything tested: `../TIER_LIST.md`.
 | Overnight Bias ML v2 | 15 min MNQ | `RiskPerTrade` 400 |
 | Monday Long (replaced Overnight Drift) | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0. **150K only since 2026-10-24** (50K: replaced by Overnight Tick / VIX) |
 | Expiration Open Short | 5 min MNQ | `RiskPerTrade` 700 |
-| **Late-Day Flow** (added 2026-10-12) | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 |
+| **Late-Day Flow** (added 2026-10-12) | 5 min MNQ | 50K: `NumContracts` 2; **150K: `NumContracts` 4 (from 2026-11-13, user; was 3 = 2 x 1.5)**; `RiskPerTrade` 0. 150K half-size rule below a $3,000 cushion: 2 |
 | **CL Sunday Gap Fade** (added 2026-10-14) | 5 min MCL (Eastern exchange time) | `NumContracts` 2, `RiskPerTrade` 0, `ExitTime` 1000 |
 | **ES MOC Follow** (added 2026-10-17, `ES_MOC_Follow.txt`) | 5 min **MES**, Exchange time (Central) | `NumContracts` 2, `RiskPerTrade` 0; Symbol Mapping `@MES -> MESZ6` |
 | **Relative Strength** (added 2026-10-20, `NQ_Relative_Strength.txt`) | **1 min MNQ + 1 min @ES as Data2**, Exchange time | **50K: replaced 2026-10-28 by the T fade (below)**; 150K: `TradeDir` 0, `NumContracts` 1; off while the cushion is below full size |

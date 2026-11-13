@@ -30,7 +30,14 @@ LEGACY_EVAL = {"VB": 20, "ONB30": ("risk", 2750), "MON_BR": 5, "EOS": ("risk", 1
 PLAN_LEGACY = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
 PLAN = {k: v for k, v in PLAN_LEGACY.items() if k not in ("VB_N", "VB_F")}   # VB RETIRED from all plans 2026-11-12 (user; WATCHLIST #41)
 sc = lambda p, k: {n: (("risk", v[1] * k) if isinstance(v, tuple) else v * k) for n, v in p.items()}
-BASE_FUNDED = {**sc(PLAN, 1.5), "TWIN": 2}; BASE_FUNDED_LEGACY = {**sc(PLAN_LEGACY, 1.5), "TWIN": 2}
+BASE_FUNDED_LEGACY = {**sc(PLAN_LEGACY, 1.5), "TWIN": 2}
+# 2026-11-13 (user: improve the funded book): the 150K FUNDED plan as documented (funded_strategies/README.md, FUNDED_PLAN.md):
+# the 50K table x 1.5 (ONB ML $600, Monday 1.5, EOS $1,050, LDF 3, NFP $750, Bridge Monday 1.5, CL Sunday 3 MCL, ES MOC 3 MES)
+# + Relative Strength 1 (both sides) + Dual Thrust 2 + Overnight Tick 2 + Twin 2. VB retired 11/12. The old BASE_FUNDED missed
+# MOC / RS / DT / OT. LIVE_FUNDED is the funded bench's base from now on (no funded account is live yet).
+LIVE_FUNDED = {**sc(PLAN, 1.5), "MOC_MES": 3.0, "RS": 1, "DT": 2, "OT": 2, "TWIN": 2}
+LIVE_FUNDED["LDF_MC"] = 4.0   # 150K funded LDF 3 -> 4 MNQ (user 2026-11-13; funded_ldf_int150: 1y +$132, blown 1.5 -> 1.0%; 5 worse)
+BASE_FUNDED = LIVE_FUNDED
 
 
 def setup(twin_trades=None, base="live"):
@@ -70,6 +77,11 @@ def setup(twin_trades=None, base="live"):
         Sp = pd.read_pickle("scratch_data/single_print_sessions.pkl"); flag = Sp.flag.reindex(dts).fillna(False).to_numpy().astype(bool)
         lab.W["VB_F"] = lab.W["VB"] * flag[:, None]; lab.C["VB_F"] = lab.C["VB"] * flag; lab.W["VB_N"] = lab.W["VB"] * ~flag[:, None]; lab.C["VB_N"] = lab.C["VB"] * ~flag
         lab.W["TWIN"] = Wt; lab.C["TWIN"] = Rt[:, -1]
+        if base == "live" and lab is not None:                         # 2026-11-13: the rest of the 150K funded plan (LIVE_FUNDED)
+            import funded_bootstrap as FB_, dual_thrust_bench as DTB_, overnight_tick_bench as OTB_
+            FB_.add_moc_mes(lab, "scratch_data/")
+            rs_ = pd.read_csv("scratch_data/rs_trades.csv"); rs_["kind"] = rs_.kind.map({"stop": 0, "target": 1, "flat": 2})
+            lab.add("RS", rs_); lab.add("DT", DTB_.dt_trades(lab.g), slippage=False); OTB_.add_ot(lab, OTB_.ot())
     except FileNotFoundError as e:
         print(f"[bench150] lab not built ({e.filename} missing): eval base only", flush=True); lab = None
     return dict(g=g, B=B, trr=trr, D=D, dts=dts, yr=yr, Wb=Wb, Rb=Rb, Wt=Wt, Rt=Rt, Tn=Tn, lab=lab, P=P, mult=mult, base=base)
@@ -96,7 +108,7 @@ def eval_bench(ctx, cands, end="2026-09-01", label="150K evaluation (set + Twin 
     return out
 
 
-def funded_bench(ctx, variants, extra=None, end="2026-10-09", label="Funded 150K x 1.5 + Twin 2 MNQ"):
+def funded_bench(ctx, variants, extra=None, end="2026-10-09", label="Funded 150K x 1.5 + Twin 2 MNQ", H=500):   # H trading days (2026-11-13: 250 = 1 year)
     lab, dts = ctx["lab"], ctx["dts"]
     for k, (W, C) in (extra or {}).items(): lab.W[k] = W; lab.C[k] = C
     V = {"base: plan x 1.5 + Twin 2": BASE_FUNDED, **variants}
@@ -106,13 +118,13 @@ def funded_bench(ctx, variants, extra=None, end="2026-10-09", label="Funded 150K
         for i, k in enumerate(names): Bm[keys.index(k)] = b[i]
         bases[nm] = Bm
     chg = np.zeros(Wall.shape[2], bool); chg[-1] = True; chg[1:] |= (np.abs(np.diff(Wall, axis=2)) > 0).any(axis=(0, 1)); chg[0] |= (Wall[:, :, 0] != 0).any()
-    Wc = np.ascontiguousarray(Wall[:, :, chg]); days = np.where((dts >= "2018-01-01") & (dts <= end))[0]; rng = np.random.default_rng(1); n, H, L_ = 600, 500, 20
+    Wc = np.ascontiguousarray(Wall[:, :, chg]); days = np.where((dts >= "2018-01-01") & (dts <= end))[0]; rng = np.random.default_rng(1); n, L_ = 600, 20
     stb = rng.integers(0, len(days), (n, H // L_)); hist = days[((stb[:, :, None] + np.arange(L_)) % len(days)).reshape(n, -1)[:, :H]]; Rr = {nm: np.zeros((n, 3)) for nm in V}
     for hh in range(n):
         ix = hist[hh]; Wh = np.ascontiguousarray(Wc[:, ix]); Ch = np.ascontiguousarray(Call[:, ix])
         for nm, Bm in bases.items():
             r = F.simulate_sized(Wh, Ch, np.ascontiguousarray(Bm[:, ix]), horizon=H, starts=[0], fmin=0.5, fmax=1.0, ref=3000.0); Rr[nm][hh] = [r["paid"][0], r["blown"][0], r["payouts"][0] == 6]
-    b0 = Rr[list(V)[0]][:, 0]; print(f"   {label}, 600 paired histories (to {end}), 2 years:")
+    b0 = Rr[list(V)[0]][:, 0]; print(f"   {label}, 600 paired histories (to {end}), {H} trading days:")
     for nm, r in Rr.items(): print(f"      {nm:<34} 2y ${r[:, 0].mean():>7,.0f} blown {r[:, 1].mean():5.1%} all 6 {r[:, 2].mean():5.1%} diff ${(r[:, 0] - b0).mean():+5,.0f} beats {np.mean(r[:, 0] > b0) + 0.5 * np.mean(r[:, 0] == b0):5.1%}")
     return Rr
 

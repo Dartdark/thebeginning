@@ -1,0 +1,42 @@
+[provenance] code 0284da9 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+150K FUNDED book: what each piece contributes, and one-at-a-time resize (user 2026-11-13: 'improve the funded book's big pieces';
+[bench150] eval base (live): ONB30 $3500 risk, MON_BR 5, TWIN 2, DT 2, JF 1, NBL 3, LDF $1000 risk
+LIVE_FUNDED = {'ONB_ML2_MC': ('risk', 600.0), 'MON_MC': 1.5, 'EOS': ('risk', 1050.0), 'LDF_MC': 3.0, 'NFP_MC': ('risk', 750.0), 'MON_BR_MC': 1.5, 'CLS': 3.0, 'MOC_MES': 3.0, 'RS': 1, 'DT': 2, 'OT': 2, 'TWIN': 2}
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,245 blown  1.3% all 6 98.7% diff $   +0 beats 50.0%
+      ONB_ML2_MC -> 0 (contribution)     2y $ 20,222 blown  1.5% all 6 98.3% diff $  -23 beats 49.8%
+      ONB_ML2_MC x0.5 (('risk', 300))    2y $ 20,367 blown  0.8% all 6 99.2% diff $ +122 beats 50.2%
+      ONB_ML2_MC x1.5 (('risk', 900))    2y $ 19,758 blown  3.7% all 6 96.0% diff $ -487 beats 48.8%
+      MON_MC -> 0 (contribution)         2y $ 20,217 blown  1.5% all 6 98.3% diff $  -28 beats 49.8%
+      MON_MC x0.5 (0.75)                 2y $ 20,217 blown  1.5% all 6 98.3% diff $  -28 beats 49.8%
+      MON_MC x1.5 (2.25)                 2y $ 19,957 blown  2.8% all 6 97.0% diff $ -288 beats 49.2%
+      EOS -> 0 (contribution)            2y $ 20,238 blown  1.2% all 6 98.2% diff $   -8 beats 49.8%
+      EOS x0.5 (('risk', 500))           2y $ 20,348 blown  0.7% all 6 98.8% diff $ +102 beats 50.2%
+      EOS x1.5 (('risk', 1600))          2y $ 19,884 blown  3.2% all 6 96.7% diff $ -361 beats 49.0%
+      LDF_MC -> 0 (contribution)         2y $ 20,148 blown  1.8% all 6 98.0% diff $  -98 beats 49.7%
+      LDF_MC x0.5 (1.5)                  2y $ 20,020 blown  2.5% all 6 97.3% diff $ -225 beats 49.3%
+      LDF_MC x1.5 (4.5)                  2y $ 20,245 blown  1.3% all 6 98.7% diff $   +0 beats 50.0%
+      NFP_MC -> 0 (contribution)         2y $ 20,226 blown  1.5% all 6 98.3% diff $  -19 beats 49.8%
+      NFP_MC x0.5 (('risk', 400))        2y $ 20,200 blown  1.7% all 6 98.3% diff $  -45 beats 49.8%
+      NFP_MC x1.5 (('risk', 1100))       2y $ 20,217 blown  1.5% all 6 98.3% diff $  -28 beats 49.9%
+      MON_BR_MC -> 0 (contribution)      2y $ 20,213 blown  1.5% all 6 98.2% diff $  -32 beats 49.8%
+      MON_BR_MC x0.5 (0.75)              2y $ 20,213 blown  1.5% all 6 98.2% diff $  -32 beats 49.8%
+      MON_BR_MC x1.5 (2.25)              2y $ 20,154 blown  1.7% all 6 98.2% diff $  -91 beats 49.8%
+      CLS -> 0 (contribution)            2y $ 20,309 blown  1.0% all 6 99.0% diff $  +64 beats 50.2%
+      CLS x0.5 (1.5)                     2y $ 20,309 blown  1.0% all 6 99.0% diff $  +64 beats 50.2%
+      CLS x1.5 (4.5)                     2y $ 20,202 blown  1.5% all 6 98.3% diff $  -42 beats 49.8%
+      MOC_MES -> 0 (contribution)        2y $ 20,226 blown  1.5% all 6 98.5% diff $  -19 beats 49.9%
+      MOC_MES x0.5 (1.5)                 2y $ 20,301 blown  1.0% all 6 98.8% diff $  +56 beats 50.1%
+      MOC_MES x1.5 (4.5)                 2y $ 20,190 blown  1.7% all 6 98.3% diff $  -55 beats 49.8%
+      RS -> 0 (contribution)             2y $ 20,186 blown  1.7% all 6 98.3% diff $  -59 beats 49.8%
+      RS x0.5 (0.5)                      2y $ 20,186 blown  1.7% all 6 98.3% diff $  -59 beats 49.8%
+      RS x1.5 (1.5)                      2y $ 20,207 blown  1.5% all 6 98.3% diff $  -38 beats 49.8%
+      DT -> 0 (contribution)             2y $ 20,329 blown  0.8% all 6 99.0% diff $  +84 beats 50.2%
+      DT x0.5 (1.0)                      2y $ 20,305 blown  1.0% all 6 98.8% diff $  +60 beats 50.1%
+      DT x1.5 (3.0)                      2y $ 20,218 blown  1.3% all 6 98.5% diff $  -27 beats 49.9%
+      OT -> 0 (contribution)             2y $ 20,111 blown  2.0% all 6 97.7% diff $ -134 beats 49.6%
+      OT x0.5 (1.0)                      2y $ 20,123 blown  2.0% all 6 97.8% diff $ -122 beats 49.6%
+      OT x1.5 (3.0)                      2y $ 19,985 blown  2.7% all 6 97.3% diff $ -260 beats 49.3%
+      TWIN -> 0 (contribution)           2y $ 20,402 blown  0.5% all 6 99.3% diff $ +158 beats 50.4%
+      TWIN x0.5 (1.0)                    2y $ 20,330 blown  0.8% all 6 98.8% diff $  +85 beats 50.2%
+      TWIN x1.5 (3.0)                    2y $ 20,108 blown  2.0% all 6 98.0% diff $ -137 beats 49.7%

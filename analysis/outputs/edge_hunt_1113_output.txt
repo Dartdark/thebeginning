@@ -1,0 +1,41 @@
+[provenance] code e16a51d dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Edge hunt for the evaluation book: 7 pre-registered mechanisms (checks/candidates/edge_hunt_1113/PREREG.md, user 2026-11-13).
+
+== H1a periodicity RTH: 1699 trades 2018-26 (192 a year), avg stop $865
+   DESIGN 2018-22: both n  947 avg $  -3.3 t -0.16 PF 0.98 win 48% | longs n  582 avg $ -16.3 t -0.73 PF 0.92 win 49% | shorts n  365 avg $  17.4 t  0.44 PF 1.07 win 46%
+      18:-10.0k 19:-5.1k 20:+3.5k 21:-3.3k 22:+11.7k
+   G1 (avg > 0, t >= 2.0): FAIL -> holdout not opened
+
+== H1b periodicity overnight: 1657 trades 2018-26 (187 a year), avg stop $830
+   DESIGN 2018-22: both n  875 avg $ -20.4 t -1.33 PF 0.87 win 45% | longs n  538 avg $ -17.1 t -0.96 PF 0.88 win 45% | shorts n  337 avg $ -25.6 t -0.92 PF 0.86 win 43%
+      18:-2.4k 19:-2.7k 20:-4.3k 21:-4.5k 22:-3.9k
+   G1 (avg > 0, t >= 2.0): FAIL -> holdout not opened
+
+== H2 overnight-extreme sweep: 1439 trades 2018-26 (163 a year), avg stop $765
+   DESIGN 2018-22: both n  814 avg $   9.6 t  0.27 PF 1.03 win 36% | longs n  406 avg $  -4.5 t -0.08 PF 0.99 win 36% | shorts n  408 avg $  23.7 t  0.51 PF 1.07 win 36%
+      18:-12.1k 19:+4.9k 20:+11.9k 21:+3.3k 22:-0.1k
+   G1 (avg > 0, t >= 2.0): FAIL -> holdout not opened
+
+== H3 range-regime OR fade: 546 trades 2018-26 (62 a year), avg stop $1,444
+   DESIGN 2018-22: both n  323 avg $ -18.7 t -0.31 PF 0.96 win 53% | longs n  150 avg $  74.5 t  0.81 PF 1.17 win 58% | shorts n  173 avg $ -99.5 t -1.28 PF 0.79 win 49%
+      18:-2.6k 19:-2.8k 20:-5.5k 21:+1.8k 22:+3.1k
+   G1 (avg > 0, t >= 2.0): FAIL -> holdout not opened
+
+== H4 opening relative volume: 70 trades 2018-26 (8 a year), avg stop $1,030
+   DESIGN 2018-22: both n   50 avg $  63.6 t  0.22 PF 1.12 win 26% | longs n   23 avg $ 403.4 t  0.75 PF 1.90 win 30% | shorts n   27 avg $-225.8 t -0.86 PF 0.63 win 22%
+      18:+7.1k 19:+0.2k 20:-9.4k 21:-4.0k 22:+9.3k
+   G1 (avg > 0, t >= 2.0): FAIL -> holdout not opened
+
+== H5 London break of Asia range: 1774 trades 2018-26 (200 a year), avg stop $1,013
+   DESIGN 2018-22: both n  991 avg $ -46.2 t -1.43 PF 0.88 win 41% | longs n  575 avg $ -61.5 t -1.50 PF 0.83 win 43% | shorts n  416 avg $ -25.1 t -0.48 PF 0.94 win 40%
+      18:-10.2k 19:-5.9k 20:-8.6k 21:-10.6k 22:-10.5k
+   G1 (avg > 0, t >= 2.0): FAIL -> holdout not opened
+
+== H6 Friday de-risk fade: 219 trades 2018-26 (25 a year), avg stop $1,664
+   DESIGN 2018-22: both n  117 avg $  65.0 t  0.60 PF 1.17 win 45% | longs n   50 avg $ 497.6 t  2.31 PF 2.29 win 60% | shorts n   67 avg $-257.8 t -3.10 PF 0.33 win 34%
+      18:-1.0k 19:+2.4k 20:+8.3k 21:+0.6k 22:-2.7k
+   G1 (avg > 0, t >= 2.0): FAIL -> holdout not opened
+
+== info (controls, design years only): H3 on ADX > 30 days:  n  355 avg $ -51.6 t -0.89 PF 0.89 win 51% | H4 with relative volume < 1:  n  667 avg $ 103.7 t  1.44 PF 1.17 win 43%
+
+== reached G4 (evaluation bench): none
