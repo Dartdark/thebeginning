@@ -16,3 +16,10 @@ Report: whole book and per market: annual $ P&L, Sharpe, Sortino, max DD, Calmar
   correlation with the personal book; large-tick (GC CL NG ZN) vs small-tick (NQ ES YM 6E) groups.
 Pass: book Sharpe >= 0.5 in BOTH periods after costs, beats C1 (long-only) in the holdout, placebo p < 0.05. Then a personal-book bench
   (bench150.personal) before any plan change. Expectation set before running: CTA-style trend on 9 markets usually gives Sharpe 0.3-0.7.
+
+## Result (2026-11-13, `analysis/outputs/diversified_trend_test_output.txt`): FAIL
+TSMOM book 2019-26 Sharpe 0.62 (2019-22 0.83, 2023-26 0.37), $31.7k a year at $1,000 daily risk per market, max DD $75.9k, Calmar 0.42;
+placebo p 0.040. Fails on the holdout Sharpe (< 0.5) and on C1: vol-scaled long-only 0.90 overall, 1.11 in 2023-26 (beta beat trend).
+Secondary (disclosed): 12-month lookback alone 0.99 / 0.70, also below long-only in 2023-26. Large-tick group (GC CL NG ZN) 0.76 -> 0.06
+(the paper's prediction does NOT hold here in the holdout); small-tick 0.23 / 0.24. Best single markets: BTC 0.85, GC 0.44, NQ 0.44.
+Costs are negligible for this turnover (~$3.3k a year in total). Personal-book correlation not computed (personal_P.pkl absent; fails anyway).
