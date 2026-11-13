@@ -33,7 +33,7 @@ def evaluation(W, R, s, q, D):
             if lim == floor: return "fail", n
             bal = lim
         else: bal += r[-1]
-        floor = max(floor, min(bal - DD, LOCK))
+        floor = max(floor, bal - DD)   # evaluation: keeps trailing (Codex 2026-11-06 #1)
     return ("time", 21) if s + 21 <= D else None
 
 

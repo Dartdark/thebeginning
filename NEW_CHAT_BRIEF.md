@@ -1,45 +1,132 @@
-# New-chat brief (rewritten 2026-10-29): read this first
+# New-chat brief (rewritten 2026-10-29; Now updated 2026-11-12): read this first
 
 Opener for a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, `TODO.md` and `LESSONS.md` in
 github.com/Dartdark/thebeginning (branch `claude/nq-trading-strategy-params-5h9d20`) and continue from there."*
 Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history of this brief (up to 2026-10-28) is in
 `archive/brief_history_2026-10.md`; ticked to-dos are in `archive/TODO_done_2026-10.md`.
 
-## Now (2026-10-31)
+## Now (2026-11-12, evening)
 
-- **Live accounts (Apex, VPS QuantVPS Chicago, MultiCharts + Rithmic, data dxFeed):**
-  - #1 APEX-681524-01 50K: **blown 10/26**. #3 APEX-681524-03 150K: **blown 10/30** (Apex liquidated the ONB short on an
-    intraday touch of the $146,000 floor; MULTICHARTS_PITFALLS). Its 150 charts are retired (watchdog shows them OFF until closed).
-  - #2 APEX-681524-02 50K evaluation: ~$49,828, ~$1,064 above its $48,764 floor; model pass odds ~46%. Combine set VB 8,
-    ONB ADX30 $1,100, EOS $500, Bridge Monday 2. **Full size stays** (thin-cushion test, rerun with whole contracts).
-  - **#4: 150K No-Activation, user buys it Sunday 11/01** -> add its id to `live/expected_setup.json`, `ACCTS` in
-    `analysis/live_panels.py`, `ACCOUNTS` in `analysis/dashboard_data.py`, `account_tools.EVALS` (floor alarm). Set = combine x 2.5
-    (VB 20, ONB $2,750, EOS $1,250, Bridge 5). **No new 50Ks.**
-- **Buying plan (TODO):** job Nov 10 - Dec 24, $25/h x 8 h, paid weekly, all of it for evaluations: 150K No-Activation only,
-  3-4 per payday, one a day, stop on the drift alarm. `analysis/ramp_budget_test.py`: nothing funded by 12/31 13-31%; first
-  payouts late Feb - Mar 2027; 2027 at 75% edge ~$89-116k (job ends) / ~$176-182k (job kept*). Personal account ~Apr-May.
-  Business plan v3 (rewritten 10/30): `reports/Trading_Business_Plan_2026-10-30.pdf` (source html + `render_business_plan.js`).
-- **Live guard (10/30):** rejected-orders limit 10 on every strategy; watchdog Apex floor alarm (ACCTFAIL/NEARFLOOR, ran clean
-  on the VPS 10/30); `HB_Ver` code-version stamps in SIG rows (user repasted); `analysis/live_guard.py`; pre-market check 08:22 CT
-  (`premarket_check.py`: Chicago clock/DST, each ACCT/POS/SIG row aged vs its own interval + 15 min); payout tracker
-  (`account_tools.FUNDED`, fill as accounts pass); `live/vps/VPS_MAINTENANCE.md` (Saturday updates/restart, Sunday pre-open
-  routine by 16:30 CT, done by user).
-- **Weekly cross-review 10/30:** Codex found 5 defects in Claude's week code, all fixed; follow-ups fixed through a01be1b
-  (`agents/cross_review/2026-10-30_summary.md`, Codex `agents/codex/results/weekly_fix_reply_20261030.md`). Lesson: Claude's
-  weekly side reviews its OWN code too.
-- **Open for Claude:** full Swing Target account replay with the corrected exit kinds (Codex: adoption not yet re-proven);
-  heartbeat + HB_Ver in all 9 funded strategies + funded floor rules before the first funded account (~late Nov); Brier-score
-  pass odds after ~20 finished evaluations; rerun backtests on extended data; futures-trend upload waits in
-  `checks/candidates/futures_trend/` (test at ~$150k).
-- **Recent research verdicts:** CHoCH D, Nocturne C (WATCHLIST #26), Setup Generator F, Prior VWAP Trap bench-only; GreenORB and
-  video Drift rejected (Codex). Execution references E01-E31 (`agents/codex/EXECUTION_REFERENCES.md`, next E32). Paper scout:
-  `/scout`, also Mon/Wed/Fri in the Papers session.
-- **Sessions:** master `session_01Wk1fPXwvHF5qTjW7bUhYx9`; Papers `session_01Wk1fPYzv9RyXGytT4z6XbK`; scheduled jobs
-  `session_014DKffATms37kZigaa2xR2P` (16:40 journal + dashboard, Friday review 16:47, reminders Sun/Wed, MNQ roll 12/10).
-  Dashboard 'Apex Live Desk' https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8.
-- **Plans:** `funded_strategies/FUNDED_PLAN.md`, `funded_strategies/README.md`, `personal_strategies/PORTFOLIO.md` (50K funded:
-  RS longs -> T_ONESIDE 1; 150K funded: DT 2 -> Swing Target 2).
-- **Every reply ends with a PushNotification** (CLAUDE.md); alerts also via `python3 analysis/send_alert.py`.
+- **One live account: #5 APEX-681524-05, 150K evaluation** (bought 11/10; floor 146,000, target 159,050, DLL $2,000). Balance
+  $147,998.08 = **$1,998 above the floor** (after 11/11: -$2,455, DLL hit). Charts (tags `<name>150-5`, all with Apex Chart Guard
+  recompiled 11/12 with TgtNearPct): **ONB ($3,500 risk from 11/12 evening, user, after the size search), EOS DROPPED 11/12 (user; chart OFF confirmed 11/13), MON_BR 5, Twin 2, DT 2,
+  Jump Fade 1 (JF150-5, added 11/12 at 2, set to 1 the same evening; back to 2 when the cushion is > ~$4,000).** VB OUT since 11/11 (chart closed 11/12). DT confirmed flat 11/12.
+- **The live evaluation base is in code: `analysis/bench150.py` `LIVE_EVAL`** (= live/expected_setup.json = apex_strategies/README.md
+  'The evaluation plan NOW'). `BN.setup()` now benches every candidate against THIS set (incl. DT 2 + JF 2) and prints it; 15 older
+  scripts that edited the base by hand are pinned to `setup(base="legacy")`. **Change all three in the same commit whenever a chart or
+  size changes** (user 11/12: "dont test upcoming shit on past shit"). Funded base `BASE_FUNDED` still has VB (no funded account live).
+- **Eval sizes checked 11/12 (`analysis/outputs/eval_size_live_output.txt`): the live sizes are at the optimum within noise** (no one-at-a-time change has a band above 0 in both fresh and from-#5 measures). ONB is the engine: $1,500 would cut #5's pass 18.2% -> 12.4% (the user's choice to keep $2,750 was right); $3,500 +1.3 / +2.1 pt, bands include 0.
+- **Size combination search 11/12 (`analysis/outputs/eval_size_combo_output.txt`, 972 combos ranked on 2018-22 starts):** live ranks 35/972. Top = ONB $3,500 + JF 0: holdout 2023-26 +3.1 pt (band -1.4/+7.5), from #5 +3.5 pt (+0.7/+6.4), fail 73.1 -> 74.4% (it finishes faster). Interaction: JF helps at ONB $2,750, hurts at $3,500. Lean, not proof; user to decide.
+- **JF size with ONB $3,500 (`analysis/outputs/jf_size_onb3500_output.txt`):** bigger JF does not help (3: +0.0, 4: -0.3, 6: -0.9 pt from #5); smaller helps a little from #5 (JF 1 +0.8, JF 0 +1.4 pt, bands just above 0). User set JF to 1 (11/12 evening).
+- **Contribution per piece in the live book 11/12 (`analysis/outputs/mon_eos_contrib_output.txt`, removing each):** ONB +33-39 pt; MON_BR (24 days/yr) +2.6 / +3.6 (2023-26 band > 0) / #5 +1.3; Twin +1.9 / +3.2 / +1.8; DT +0.2 / +1.9 / +1.6; EOS (12 days/yr) +1.6 / +0.4 / +0.6, all bands include 0 (unproven help); JF 1 -2.0 / +0.5 / -0.6.
+- **Active-strategy scan 11/12 (`analysis/outputs/active_scan_eval_output.txt`, 13 candidates x 3 sizes vs the live book):** only NBL (Bridge noise longs) 3 MNQ passes alone (23-26 +2.2, #5 +1.0). Post-hoc combos: **NBL 3 + LDF $1,000: 18-22 +2.0, 23-26 +4.1 (band +2.0/+6.5), #5 +2.0 (+0.6/+3.6)**; + FINRA longs 2 adds little. NBL code (`checks/candidates/bridge_noise_15m/NQ_Noise_RTH_Anchor.txt`) needs kill switch + heartbeat before live (says 'backtest only'); LDF file has them. **User added both 11/12:** `apex_strategies/NQ_Noise_Longs.txt` (new: kill switch + heartbeat, longs only, 3 MNQ, tag NBL150-5) and LDF `RiskPerTrade` 1000 (kill switch added to `funded_strategies/NQ_Late_Day_Flow.txt`, tag LDF150-5). LIVE_EVAL + expected_setup updated; book from #5 22.5%. Both compiled and set 11/12 (user). **NBL longs-only MC report VERIFIED** (2,509 of 2,581 trades same bar, P&L corr 0.977, $76.9 vs $70.3 gross).
+- **Other markets 11/13 (user):** noise-area momentum ported to ES YM GC CL ZN 6E NG (pre-registered, engine = NQ trade for trade): F everywhere (only ES longs +$10, t 1.3). **Jump Fade and Overnight Bias ports 11/13 (pre-registered, engines = NQ trade for trade): F in all 7 markets too** (best: ES ONB +$63 t 1.6, dead since 2023; NG ONB shorts +$65 t 1.75, 9/9 years, below the bar; a GC 10:00-hour fade cell looked like t 3.8 but is 2026 + bigger stops: risk-normalised t 2.6). Three NQ engines ported, none travels: next round would be market-native ideas, not ports. **Diversified trend (TSMOM, 9 futures, personal only) 11/13: FAIL** (Sharpe 0.83 -> 0.37 in 2023-26; vol-scaled long-only 1.11 beats it).
+- **NEW RULE 11/12 (user): resize after every plan change** with `analysis/resize_book.py` (CLAUDE.md). First run on the current book: keep the live sizes (search's JF 0 / LDF $1,500 gave holdout -0.1, #5 -0.3 pt).
+- **Jump Fade v4** (`apex_strategies/NQ_Jump_Fade.txt`): morning 5-min jump fade, 1-min @MNQ 24h chart, `MinVolRatio` 0, Qty 2, kill
+  switch + heartbeat, no cushion guard. MultiCharts report = Python (v2 683/694, v3 434/436 matched). Eval bench on the corrected base
+  (`analysis/outputs/jump_fade_v2_eval_now_output.txt`): fresh eval +0.9 pt; **from #5's state +1.8 pt (band +0.9/+2.8) at 2 MNQ**.
+  Worst trade ~$1,460 at 2 MNQ. Still a post-hoc lead (t 2.7 vs bar 3.70): its forward record decides (WATCHLIST #40).
+- **Twin's 19:35 sell-stop on 11/12 was a normal breakout order** (user: Twin stays as it is, breakout risk accepted).
+- **Tomorrow (11/13):** first JF entries possible from 07:00 CT. 08:21 check: JF150-5 heartbeat present; 16:40 journal: JF entries = 2,
+  Chart Guard rows (OPEN / CLOSE / POS / ACCT) arrive, Twin's target only within 1%.
+- **Overrides 11/10-11/11** (`live/overrides.csv`): Twin closed early by hand +$261; manual re-entry +$192.
+- **Budget:** -$605 (eval #5 -$250, Claude -$20). Dashboard dataset 'ledger' v2. Scheduled jobs: 08:21 + 16:40 CT running.
+- **VB drawdown diagnosis 11/12 (user: the Bridge pulled VB, past its max DD):** `analysis/outputs/vb_drawdown_diag_output.txt`. Depth within history through 11/06 (data after 11/06 missing), but the post-breakout drift is gone in 2026 and the fixed 40/75 bracket is tiny vs ATR ~580. ATR-scaled bracket tested 11/12 (pre-registered): FAIL, worse than fixed in every period (the bracket is not the cause). Breakout-regime switch (fade when cold) F. **VB RETIRED FROM ALL PLANS 11/12 (user, until further notice):** funded and personal run the same VB signal (VB_SP = sizing only), so it left all three; bench150 funded / personal bases updated (legacy keeps VB). Return only via WATCHLIST #41 (`analysis/vb_watch.py`, Friday review; state at 11/06 RETIRE: trailing-250 avg R +0.006 < 2018-24 min +0.014). Open: new data export to update.
+- **Research 11/12 (all in TIER_LIST):** pino1 jump study not reproduced (D) -> morning jump fade lead (above); IBS Globex v5 C / v6 C+
+  (S30 better); drift-burst + order flow F; combinations 2-3 D; ML in Futures Markets (JRFM 2021) D (ML t ~2, risk-scaled t 1-2,
+  no reversal). Lessons 11/12: entry-date regimes, datetime units, ratio roll adjustment, Set* exits every bar, bench base = live set.
+
+## Earlier (2026-11-05; research update 2026-11-09)
+
+- **No live accounts.** #1 (10/26), #3 (10/30), #2 and #4 (11/04) all failed. Live replay 10/20-11/04: VB 15/15 trades match the
+  backtest, ONB matches bar the known 10/27 miss: execution OK, a losing stretch (~6.5th percentile, ~5 a year;
+  `analysis/outputs/bad_stretch_freq_output.txt`). Sizing can't fix it (`eval_sizing_bench_output.txt`). Buy gate PAUSE until 11/06;
+  next buy also needs the paycheck to cover the budget deficit.
+- **Budget:** start $500, balance -$335 (MultiCharts $152.65 due 11/08); recurring $252.64/month (MC, Claude, ChatGPT, VPS Lite).
+  `live/budget/` + dashboard https://claude.ai/artifact/9S2F8YHC2mdM8adWkzCB1v (steps: RUNBOOKS 'Budget dashboard'). User reports
+  paychecks weekly (job from Nov 10). VPS downgrade under consideration.
+- **Watchdog phone alerts muted 11/05 (user)** while no account in `live/expected_setup.json` is "live"; problems still go to
+  C:\TradingLogs\alerts.txt as MUTED. Setting a new account to "live" turns them back on. Kill / Claude relay alerts not muted.
+- **Stopped by the user 11/05:** strategy lab (`lab/STOP`), paper scout schedule, pre-market check, 16:40 journal/dashboard job (restart
+  both checks when an account is bought). Still on: morning brief 07:47 CT, Friday review, to-do reminders, MNQ roll 12/10.
+- **Research 11/03-11/05:** Bridge noise-area longs B (MC RTH-anchor 98.9% match, t 5.0) -> personal plan 1 MNQ (needs early-close
+  flat + fill-latency check before live). Ricochet 1144 C -> capital-expansion bench, last in line. BTC weekend beta C; Monday Long
+  BTC filter WATCHLIST #27 (post hoc, noise-level). Pre-screen soft guide (DEVELOPMENT_PROCESS): piece Sharpe > ~3.15 x corr with book.
+- **Career:** `career/APPLICATIONS.md` (Mercor, Outlier, Alignerr, Micro1, DataAnnotation, Upwork/Fiverr, Anthropic Residency by
+  Nov 22); waiting on the user's background to tailor; tick as applied.
+- **Done 11/05 (repo, not compiled on the VPS):** kill-switch tri-state (GetLastError; 6 files, HB_Ver 2026-11-05: paste all at
+  the next account setup), funded heartbeats (9 files) + `funded_rules` in expected_setup.json, pre-market VB 30-min stamp fix
+  (replayed 11/03 08:20: no flag), noise-area early-close flat (EL + replay `bridge_noise_15m_earlyclose_output.txt`: +$3.1k, 0 held).
+- **Cushion cap bench 11/08** (`analysis/outputs/cushion_cap_bench_output.txt`, after Codex's 11/04 loss audit): capping each
+  stop at the room above the floor cuts fails (50K 48 -> 37%) but pass rate falls (50 -> 48%), fee per funded $498 -> $519;
+  combined cap worse. Not adopted for evaluations. **Funded bench 11/08** (`cushion_cap_funded_vb2_output.txt`): blown 8.1 ->
+  2.3% per strategy at the same payouts: adopt for funded (FUNDED_PLAN 'Cushion cap'). Code written 11/08 (UseCushion, reads Rithmic Equity; 7 funded files;
+  not compiled). Rithmic Equity includes open P&L (verified from ACCT logs). funded_bootstrap.PLAN VB_N 3 -> 2.
+- **Codex weekly review 11/06 (read 11/08), 4 findings on Claude's code, all handled:** (1) evaluation engines locked the floor at
+  start + $100 (funded rule); Apex evaluations keep trailing: corrected engine (`cushion_cap_bench.run(evalrule=True)`,
+  `analysis/outputs/eval_rule_fix_check_output.txt`): **50K plan pass 50.0 -> 49.0%, 150K 41.0 -> 35.9% (fee per funded
+  $608 -> $693)**; ranking of sizes unchanged. **All engines fixed 11/08** (combine_levers_test, plan_150k_test, portfolio.challenge,
+  onb_cushion, vb_cushion_sizing, profit_cap, twin_150k; funded engines keep the PA lock, correct) and 15 plan benches rerun: budget
+  ramp 150K pass 38.1 -> 33.4% (75% edge 28.9 -> 24.4%), 2027 median (job ends, 1 a day) $252k -> $237k / $89k -> $72k; P(no funded
+  by Dec 31) 14% / 31% unchanged; same-day batch fails together 48 -> 54% (firm_risk); every size / cap / filter ranking unchanged.
+  **Rerun 11/09 (after Dot's review): evaluation parts of real_fee_bench and replace_weak_bench (rs_trades.csv regenerated) and
+  eval_sizing_bench part C (g24_ext.pkl linked to g24.pkl, NQ to 11/04): 50K combine pass 50.1 -> 49.0%; every replacement / fee /
+  size ranking unchanged; the live stretch fails at every size (as live). Outputs `real_fee_bench_combine_output.txt`,
+  `replace_weak_bench_combine_output.txt`, `eval_sizing_bench_output.txt`.**
+  Still not modelled: DLL fill at the limit, 30-calendar-day clock. (2) held-path gaps: 4% of long-after-green trades, result unchanged.
+  (3) Bertola / long-after-green charged commission twice: fixed, reruns saved (verdicts unchanged). (4) green-day filters
+  relabelled exploratory.
+- **Twin Continuation 150K added to the 150K plan 11/08 (user):** `apex_strategies/Twin_Continuation_150K.txt`, 2 MNQ, eval + funded;
+  not compiled yet (TODO 150K section). Python port gained `v21=True` (live holiday rules; 0 session-break crossings).
+- **Research day 11/08 (late; full rows in TIER_LIST / WATCHLIST / DEVELOPMENT_PROCESS 'Ingredient register'):**
+  - **Plan changes (user):** personal **Overnight Tick 1 -> 2 MNQ** (book median year +$2.2k, DD +$0.1k; PORTFOLIO, TODO). **FINRA
+    short-volume longs PENDING at 1 MNQ** (personal; WATCHLIST #32; long NQ the day after a high Nasdaq off-exchange short ratio, 08:31 ->
+    14:55, stop 0.5 ATR; $661 / t 3.51, random-day longs $138; **MultiCharts-confirmed 373/374**, report in mc_reports/; post hoc ->
+    ~6 months forward log; data `data/finra/`, file `checks/candidates/finra_longs/NQ_FINRA_Short_Volume_Longs.txt` regenerated by
+    `analysis/finra_mc_export.py` when FINRA days are appended). Apex: no FINRA version fits (all-day holds hurt the 150K books).
+  - **Ingredient ablations of all 17 plan pieces (rounds 1-5 + Codex's ONB/FC/T):** every live version held up; ~60 variants, 1 adopted.
+    Engines: open-breakout distance (VB, DT, PT, noise), morning momentum (Twin), closing flow x VIX (OT), NQ beyond ES (RS), forced-flow
+    windows (LDF 14:00-14:30, EOS expiry open, NFP overshoot, CL weekend gap, Monday). Moving engines to CL / GC / ZN / ES / YM failed.
+  - **New data tried:** leveraged-ETF flows (fade on NQ C, WATCHLIST #31, failed to replicate on ES / YM / CL / GC), FINRA (above),
+    NY Fed RRP (F), VIX9D / VIX (C), Treasury buybacks on ZN (C/D), order-flow absorption (D; Codex REJECT too). Codex's 11/08 data copied
+    to `data/codex_20261108/`; ProShares S&P / Dow funds in `data/letf/`; RRP in `data/nyfed/`.
+  - **Fixed:** `twin_continuation_bench.grids` marked non-NQ paths at NQ's $20 a point (Codex): `pv=` added, MO-on-ES rerun (still C).
+    Dual Thrust was already MultiCharts-confirmed (stale 'pending' notes fixed). Shared bench helper `analysis/bench150.py`.
+  - **Watch:** #31 LETF fade, #32 FINRA longs, #33 ONB ML price-term decay (refit only pre-registered on 2018-22). Capital-expansion
+    bench + Swing Target 2nd MNQ on shorts only. Job starts 11/10, first payday likely 11/17 (not 11/13).
+- **Evaluation work 11/09:** diagnosis (`analysis/eval_failure_diag.py`): 89% of failed 150K evaluations die from one big VB / ONB stop
+  (each ~ the $2,000 daily limit) after one daily-limit pause. A capped evaluation set (`analysis/eval_set_builder.py`) cuts fails 60 -> 48%
+  but time-outs rise 2 -> 16%: holdout pass 43.2% vs 43.4% (D). **User 11/09: the Apex evaluation has a 30-day limit**, so a time-out is a
+  lost fee like a fail and the current concentrated set stays. Screen for future evaluation add-ons: mean per unit of variance, low
+  correlation with VB / ONB, flat or positive on their stop days.
+- **Late 11/09 (user decisions):** **150K evaluation from the next purchase: VB 20 -> 15 MNQ + Dual Thrust 2 MNQ (DT150)**
+  (`analysis/vb_vs_dt_eval.py`: all starts 38.3 -> 38.9%, 2025-26 starts +4.0%, band +0.5 / +7.5; quarterly check; FUNDED_PLAN + TODO).
+  Stop-day screen / vol gap fade (D), eval-profile screen (only Twin fits), near misses (none). **Personal: ZT continuation EntryZ 1.25
+  at 1 MNQ, IN while watched (WATCHLIST #36)**: user's vol-normalised-Z paste; as coded (EntryZ 2) it barely trades; ablation: engine =
+  vol-scaled EMA distance, earns only on Twin-active days; plateau 1.05-1.30; book median year +$1.4k, DD p95 +$0.2k; MC check pending
+  (`checks/candidates/zt_continuation/`). Rejected: Donchian + LWTI repaste (D, already tested 10/23), Overnight v2 trend + vol sizing (F).
+- **11/09 evening:** MultiCharts confirmed S30 0.10 (169/169), ZT 1.25 (604/604), Ricochet T80 (99.2%). S30 0.10 strategy checker FAIL
+  10/11 (G9 PBO 0.71: 0.10 is the in-sample peak; plan on the 0.20 level, 1-min-marked DD $60.9k per NQ). **FINRA longs IN the personal
+  plan at 1 MNQ while watched (user, like ZT).** Progress 11/07 -> now (`analysis/outputs/progress_books_output.txt`): 150K evaluation
+  pass 36.3 -> 38.9% (2025+ starts 35.4 -> 41.5%); funded 150K 2y $19,988 -> $20,031 (Twin ~neutral); personal core book median year
+  $26.3k -> $32.7k, DD p95 $4.86k -> $5.30k, return/DD 5.42 -> 6.17 (full book $40.5k -> $46.8k). Budget ramp rerun (`analysis/outputs/progress_ramp_output.txt`, same schedule as 11/08): 2027 payouts median $237k -> $296k (75% edge $72k -> $92k), first payout Mar 01 -> Feb 09, P(0 funded by Dec 31) 14 -> 12%. Your ONB ML chart code was pre-v2:
+  re-import before funded use.
+- **11/09 night, automation (user: 'nothing manual'; NOT compiled yet):** 150K evaluation finish mode (`UseFinish`, half size from
+  $156k) in the 6 evaluation files; ONE helper per chart `apex_strategies/Apex_Chart_Guard.txt` (replaces logger / monitor /
+  target guard / stop guard, same rows); cushion guard on all 13 funded files; account read from each chart's Auto Trading gear
+  (GetAccountID), peak from VPS files (`live/vps/cushion_peak.ps1`), so no AccountName / PeakSeed typing; FINRA signal from the VPS
+  task FinraDaily (`live/vps/finra_daily.ps1` -> flag files, strategy `UseFlagFiles`); weekly VPS restart task removed.
+- **Copier (user 11/09): Rithmic's built-in copier, two leaders (evaluations / funded), followers 1x.** Charts on the leaders only;
+  auto account rules (no per-account inputs); group sizing via VPS files: funded = weakest cushion, evaluations = finish mode when
+  the group mean is +$6k (40.0% vs 40.9% per account). Chart guard scans all accounts at 15:55 (needs testing: GetRTAccountEquity
+  on accounts no chart trades).
+- **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
+  career tailoring (needs the user's background).
+
+## Earlier
+
+- 2026-10-31 to 11-04 details (accounts #2 / #4, VPS feed, kill switch, lab, plans): `archive/brief_history_2026-11.md`;
+  before that `archive/brief_history_2026-10.md`.
 
 ## Who / what
 

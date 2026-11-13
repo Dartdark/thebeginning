@@ -1,0 +1,24 @@
+[provenance] code c6c853f2 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Order-flow absorption, NQ (user 2026-11-08: 'build a strategy around its own mechanism'). PRE-REGISTERED (header committed before the
+   days with flow data 2188 (2018-01-02 -> 2026-07-07); |Z| >= 1 on 29% of days
+   rule: follow the price-vs-flow residual  n   603 $  230 t  2.19 PF 1.33 total $  139k maxDD $21.2k | 2018-22 $ 133 (t  1.4) 2023+ $ 372 (t  1.7) | worst $-4,869
+      longs                                 n   294 $  255 t  1.51 PF 1.39 total $   75k maxDD $13.7k | 2018-22 $ 127 (t  0.9) 2023+ $ 458 (t  1.2) | worst $-4,052
+      shorts                                n   309 $  205 t  1.62 PF 1.29 total $   63k maxDD $20.5k | 2018-22 $ 139 (t  1.0) 2023+ $ 296 (t  1.2) | worst $-4,869
+      by year $: {2018: 5341, 2019: 1511, 2020: -9760, 2021: 6477, 2022: 43919, 2023: 4301, 2024: 18895, 2025: 61507, 2026: 6356}
+   opposite (follow the flow)               n   603 $ -235 t -2.97 PF 0.73 total $ -142k maxDD $149.2k | 2018-22 $-184 (t -1.9) 2023+ $-310 (t -2.3) | worst $-5,215
+   no-flow control (sign of the price move) n   603 $  246 t  2.35 PF 1.36 total $  148k maxDD $21.3k | 2018-22 $ 174 (t  1.9) 2023+ $ 350 (t  1.6) | worst $-4,869
+   rule side = price-move side on 92% of trade days
+   random side (200 runs, same days): $-1, 95th $124; real $230; p 0.000
+   daily corr: {'VB': 0.17, 'ONB_ML2_MC': 0.14, 'MON_MC': 0.04, 'EOS': -0.01, 'LDF_MC': 0.25, 'TWIN': 0.14} 
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.8% (starts to 2026-06-01)
+   + absorption 2 MNQ                 pass 37.3% (-1.6%; band -3.0% / -0.2%)
+
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-07-07), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,001 blown  2.0% all 6 96.3% diff $   +0 beats 50.0%
+      + absorption 2 MNQ                 2y $ 19,631 blown  3.7% all 6 94.7% diff $ -370 beats 49.1%
+
+   Personal book 1-year MC return / DD p95 (+ 1 MNQ, to 2026-07-07):
+      2018-26: book 5.39 | + absorption 1 MNQ 5.17 (-0.23)
+      2018-22: book 5.45 | + absorption 1 MNQ 5.07 (-0.38)
+      2023+: book 6.65 | + absorption 1 MNQ 6.44 (-0.21)

@@ -1,26 +1,27 @@
+[provenance] code a5405579 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
 The plan scaled up on an Apex 150K account (user, 2026-10-15). 150K rules as in analysis/twin_150k_test.py (evaluation
 
 Check: the exact funded simulator (integer MNQ per strategy) with the 50K rules = the funded bench ($10,184 / $12,450, blown 3% / 3%):
-   50K plan, full size from a $1,500 cushion            1y $ 10,184 blown   3% paid  92% | 2y $ 12,450 blown   3% all 6  94%
+   50K plan, full size from a $1,500 cushion            1y $  9,315 blown  11% paid  84% | 2y $ 11,346 blown  12% all 6  85%
 
 B. Funded 150K PA (funded_sim150: same simulator, 150K numbers):
-   funded plan x 1.5, full size from $2,250 cushion     1y $ 16,025 blown   9% paid  92% | 2y $ 18,350 blown  10% all 6  89%
-   funded plan x 1.5, full size from $3,000 cushion     1y $ 15,731 blown   0% paid  91% | 2y $ 19,743 blown   0% all 6  91%
-   funded plan x 2.0, full size from $3,000 cushion     1y $ 16,040 blown  15% paid  89% | 2y $ 17,101 blown  17% all 6  83%
-   funded plan x 2.0, full size from $3,000 cushion     1y $ 16,040 blown  15% paid  89% | 2y $ 17,101 blown  17% all 6  83%
-   funded plan x 2.5, full size from $3,750 cushion     1y $ 16,166 blown  15% paid  89% | 2y $ 17,284 blown  16% all 6  84%
-   funded plan x 2.5, full size from $3,000 cushion     1y $ 15,553 blown  19% paid  85% | 2y $ 16,194 blown  22% all 6  78%
-   funded plan x 3.0, full size from $4,500 cushion     1y $ 15,262 blown  20% paid  84% | 2y $ 15,997 blown  23% all 6  77%
-   funded plan x 3.0, full size from $3,000 cushion     1y $ 12,461 blown  37% paid  71% | 2y $ 12,146 blown  42% all 6  58%
-   funded plan x 2.0 + Twin cap1 2 MNQ                  1y $ 15,520 blown  18% paid  85% | 2y $ 16,526 blown  20% all 6  80%
-   funded plan x 2.0 + Twin cap1 4 MNQ                  1y $ 15,122 blown  21% paid  83% | 2y $ 15,869 blown  23% all 6  77%
-   funded plan x 2.5 + Twin cap1 2 MNQ                  1y $ 15,592 blown  20% paid  85% | 2y $ 16,157 blown  22% all 6  78%
+   funded plan x 1.5, full size from $2,250 cushion     1y $ 14,797 blown   8% paid  84% | 2y $ 17,117 blown   9% all 6  81%
+   funded plan x 1.5, full size from $3,000 cushion     1y $ 14,496 blown   0% paid  84% | 2y $ 18,166 blown   0% all 6  83%
+   funded plan x 2.0, full size from $3,000 cushion     1y $ 14,663 blown  23% paid  81% | 2y $ 15,610 blown  24% all 6  76%
+   funded plan x 2.0, full size from $3,000 cushion     1y $ 14,663 blown  23% paid  81% | 2y $ 15,610 blown  24% all 6  76%
+   funded plan x 2.5, full size from $3,750 cushion     1y $ 14,777 blown  22% paid  82% | 2y $ 15,774 blown  23% all 6  76%
+   funded plan x 2.5, full size from $3,000 cushion     1y $ 14,219 blown  26% paid  78% | 2y $ 14,791 blown  28% all 6  71%
+   funded plan x 3.0, full size from $4,500 cushion     1y $ 13,944 blown  27% paid  77% | 2y $ 14,614 blown  29% all 6  71%
+   funded plan x 3.0, full size from $3,000 cushion     1y $ 11,384 blown  43% paid  65% | 2y $ 11,141 blown  47% all 6  53%
+   funded plan x 2.0 + Twin cap1 2 MNQ                  1y $ 14,179 blown  25% paid  78% | 2y $ 15,091 blown  27% all 6  73%
+   funded plan x 2.0 + Twin cap1 4 MNQ                  1y $ 13,809 blown  28% paid  76% | 2y $ 14,498 blown  30% all 6  70%
+   funded plan x 2.5 + Twin cap1 2 MNQ                  1y $ 14,238 blown  27% paid  78% | 2y $ 14,758 blown  29% all 6  71%
 
 A. 150K evaluation (every start day 2018-26):
-   combine set x 1.5                                    pass 30.6% (2018-22 26.0%, 2023-26 36.7%) blown 48.3% time 21.1% median days 13
-   combine set x 2.0                                    pass 38.7% (2018-22 33.0%, 2023-26 46.4%) blown 52.6% time  8.7% median days 10
-   combine set x 2.5                                    pass 41.6% (2018-22 38.9%, 2023-26 45.4%) blown 55.8% time  2.6% median days 8
-   combine set x 3.0                                    pass 40.7% (2018-22 37.4%, 2023-26 45.2%) blown 58.2% time  1.1% median days 7
-   combine set x 2.0 + Twin cap1 4 MNQ                  pass 41.8% (2018-22 37.6%, 2023-26 47.4%) blown 52.9% time  5.2% median days 9
-   combine set x 2.0 + Twin cap1 8 MNQ                  pass 39.2% (2018-22 38.0%, 2023-26 40.8%) blown 55.9% time  4.9% median days 8
-   combine set x 2.5 + Twin cap1 4 MNQ                  pass 41.4% (2018-22 40.7%, 2023-26 42.4%) blown 56.4% time  2.3% median days 7
+   combine set x 1.5                                    pass 27.2% (2018-22 22.3%, 2023-26 33.8%) blown 57.7% time 15.1% median days 12
+   combine set x 2.0                                    pass 33.0% (2018-22 27.9%, 2023-26 39.6%) blown 62.3% time  4.7% median days 9
+   combine set x 2.5                                    pass 35.4% (2018-22 34.4%, 2023-26 36.6%) blown 63.8% time  0.8% median days 7
+   combine set x 3.0                                    pass 35.7% (2018-22 32.9%, 2023-26 39.4%) blown 64.0% time  0.3% median days 6
+   combine set x 2.0 + Twin cap1 4 MNQ                  pass 35.7% (2018-22 33.3%, 2023-26 38.8%) blown 61.1% time  3.2% median days 8
+   combine set x 2.0 + Twin cap1 8 MNQ                  pass 33.7% (2018-22 33.4%, 2023-26 34.1%) blown 63.8% time  2.5% median days 7
+   combine set x 2.5 + Twin cap1 4 MNQ                  pass 36.3% (2018-22 35.9%, 2023-26 36.9%) blown 62.8% time  0.9% median days 7

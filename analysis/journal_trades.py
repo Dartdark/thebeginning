@@ -14,8 +14,10 @@ NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridg
 START, END = "<!-- auto-trades:start -->", "<!-- auto-trades:end -->"
 
 
-CLOSED = {"VB": "20261026",     # tag -> last live day; account #1 (APEX-681524-01, tag VB) blown 2026-10-26 (user)
-          **{t: "20261030" for t in ("VB150", "ONB150", "EOS150", "MON_BR150")}}   # #3 (150K) blown 2026-10-30
+CLOSED = {"VB": ("20261026", "99999999"),     # tag -> (last live day, next live day); #1 (tag VB) blown 2026-10-26 (user)
+          **{t: [("20261030", "20261102"), ("20261104", "99999999")] for t in ("VB150", "ONB150", "EOS150", "MON_BR150")},
+          # #3 blown 10/30; tags reused by #4 from 11/02; #4 blown 2026-11-04 (user)
+          **{t: ("20261104", "99999999") for t in ("VB-2", "ONB-2", "EOS-2", "MON_BR-2")}}   # #2 blown 2026-11-04 (user)
 
 
 def name(tag):
@@ -35,8 +37,9 @@ def load(day):
     if not files: return pd.DataFrame(columns=COLS)
     df = pd.concat([pd.read_csv(f, header=None, names=COLS, dtype=str) for f in files], ignore_index=True)
     df = df.drop_duplicates()
-    for tag, last in CLOSED.items():          # accounts closed: their chart may still log trades, which never fill
-        df = df[~((df.tag == tag) & (df.bar_date > last))]
+    for tag, spans in CLOSED.items():   # closed account: its chart may still log trades, which never fill
+        for last, reopen in (spans if isinstance(spans, list) else [spans]):
+            df = df[~((df.tag == tag) & (df.bar_date > last) & (df.bar_date < reopen))]
     return df
 
 

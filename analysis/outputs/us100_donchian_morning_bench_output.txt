@@ -1,0 +1,19 @@
+[provenance] code 839e5735 | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+US100 Donchian on NQ, stage 2 (after both arms passed the 2018-22 gate in us100_donchian_test.py). Controls and benches:
+   MORNING-ONLY entries 08:30-11:00 CT (post hoc, user 2026-11-08)
+   placebo SOURCE: real $142 vs random entries mean $36 (95th $129); p 0.01
+   placebo APEX: real $146 vs random entries mean $38 (95th $110); p 0.01
+   APEX daily corr with plan: {'VB': 0.29, 'ONB_ML2_MC': 0.23, 'MON_MC': 0.22, 'EOS': -0.02, 'LDF_MC': 0.03, 'NFP_MC': 0.0}
+   150K eval + APEX Donchian 1 MNQ: pass 35.4% vs 35.9% (-0.5%; -1.2% / +0.1%)
+   150K eval + APEX Donchian 2 MNQ: pass 34.5% vs 35.9% (-1.5%; -2.7% / -0.4%)
+   150K eval + APEX Donchian 4 MNQ: pass 33.1% vs 35.9% (-2.9%; -4.6% / -1.3%)
+
+   Funded 150K x 1.5, 600 paired histories, 2 years:
+      plan x 1.5           2y $ 19,799 blown  2.2% all 6 94.3% diff $    +0
+      + Donchian 1 MNQ     2y $ 19,813 blown  1.8% all 6 94.2% diff $   +14
+      + Donchian 2 MNQ     2y $ 19,859 blown  2.0% all 6 94.8% diff $   +60
+
+   Personal book + SOURCE Donchian 1 micro (return / DD p95):
+      2018-26: 5.42 -> 5.48 (+0.06); $ 26,330 -> 27,117; corr +0.17
+      2018-22: 5.45 -> 5.64 (+0.19); $ 19,897 -> 20,864; corr +0.14
+      2023+: 6.10 -> 6.03 (-0.07); $ 35,164 -> 35,773; corr +0.18

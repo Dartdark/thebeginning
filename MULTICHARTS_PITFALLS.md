@@ -36,6 +36,11 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Bar-time minutes vs HHMM**: when porting, 15:30 CT is minute 1350 / HHMM 1530, not 1290 (a Python port bug,
   FillEnd 1290). Convert with one helper (`jof` in `analysis/grid24.py`), never by hand.
 
+- **`SetProfitTarget` / `SetStopLoss` set only inside the entry block live for one bar** (2026-11-12, NQ Jump Fade v1, VERIFIED from
+  the user's report): Set* exits exist only on bars where the statement executes. Called on the signal bar only, the target worked on
+  the entry minute alone: 26 'Profit Target' exits (all within 1 minute) vs ~535 in the Python port; trades rode to the time exit.
+  Fix: call SetStopShare / SetStopLoss / SetProfitTarget on EVERY bar (outside the entry condition) with stored point values.
+
 ## Found in reviews of others' code (2026-10-21, Antigravity's VB Combined)
 - **`AvgTrueRange(n)` on an intraday chart is the ATR of n intraday bars**, not n days (30-min ATR ~ 1/10 of the daily one).
   Fix: per-date true ranges in an array (as `NQ_Vault_Break.txt`) or a daily Data2.
@@ -171,6 +176,9 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 ## Reading MultiCharts reports
 - No CSV conversion is needed: `analysis/portfolio.load_mc(g, "<report>.xlsx")` reads the "List of Trades" sheet
   directly (entry rows + exit rows), and `analysis/resampling.py` does the Monte Carlo / bootstrap.
+- **A position still open at the report's end is exported as an Exit row with signal `open`** (marked P&L, date 00:00):
+  it is not a closed trade. `load_mc`, `prop_sim.load_trades` and `live_vs_backtest.read_trades` drop it (2026-10-31,
+  found by Codex: `build_lab.py` crashed on ONB ML funded v2's 10/12 short). Any new report loader must do the same.
 
 ## "Can't open/create file" on a third-party strategy (2026-10-25, BB_MRM)
 `Print(File(path), ...)` fails and stops the study when the folder in `path` doesn't exist on this PC. BB_MRM's
@@ -245,3 +253,37 @@ with price 0 several times a second: all Rejected (the watchdog counted 2,301). 
 Read it this way: a 'Manual Trading' fill you didn't make = Apex closed the position; price-0 exit orders = the chart is out
 of sync. Fix: auto-trading OFF / ON (initial position Flat) on that chart, check Strategy Positions = Flat; if the account
 failed, auto-trading off on all its charts. EOD-trailing accounts still fail on an INTRADAY touch of the floor.
+
+## Reading live state (2026-11-01, after a false "wrong account" alarm)
+- ACCT rows' `account` = the Apex Chart Monitor's typed `AccountName` input, NOT where orders go. Order routing = the
+  strategy's Auto Trading gear -> Account. Only a screenshot of each chart's gear (or the first fill in the Order and
+  Position Tracker) proves routing.
+- Before calling any MultiCharts defect: name the source and what writes it; label VERIFIED or GUESS.
+- Since 2026-11-01 the Chart Monitor writes `GetAccountID` (the strategy's real Auto Trading account) in ACCT column 9
+  (route_account; empty while auto-trading is off). That column, not column 4, is the routing evidence.
+- EL Collections (`ELC.*`) is NOT installed on the VPS ("Unknown Function", 2026-11-01). To test whether a file exists use
+  `DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;` then `GetFileAttributesA(path) <> -1` (compiled on the VPS).
+
+- **Session template 'US Stocks (Regular Trading Hours)' on @NQ ran 09:30-16:00 CENTRAL, not 08:30-15:00 (2026-11-03, VERIFIED from the
+  user's report: first bar closed 09:45 CT, every entry at a bar open; the port on a 09:30-16:00 CT session matched 99.3% of 4,704 entries).
+  Claude recommended that template on a guess. For an NQ RTH chart use a custom session 08:30-15:00 in Exchange time, then check the
+  first bar of the day closes at 08:45 and the last at 15:00 before trusting the report.
+
+- **Kill-switch tri-state (2026-11-05, GUESS until compiled):** `DefineDLLFunc: "kernel32.dll", int, "GetLastError";` read
+  right after `GetFileAttributesA` returns -1; 2 / 3 = not found (no KILL), anything else = UNKNOWN -> no new entries. Risk:
+  MultiCharts may make other Windows calls between the two DLL calls on its thread and overwrite the error code; if the VPS
+  logs NoEntry with no KILL file, that is the cause (then drop the tri-state line, keep the folder check).
+
+- **Rithmic account Equity includes open P&L (VERIFIED 2026-11-08 from the Chart Monitor's ACCT logs, field 7 =
+  GetRTAccountEquity):** on 11/04 account -04 read 150,137 -> 148,691 -> 148,420 at 5-minute steps while ONB was open; on
+  10/30 -03 and 11/03 -04 the same. NetWorth reads 0 for Apex. So Target Guard v2's EquityHasOpenPL = true. Not yet verified:
+  that GetRTAccountEquity compiles and returns the same inside a SIGNAL (the monitor is an indicator) -> check the funded
+  strategies' first live day (cushion guard, 2026-11-08).
+
+## Rithmic "price crossed high limit" on a far-away limit order (2026-11-11, account #5 Twin)
+The Chart Guard's target exit sent a Sell Limit at the price where the WHOLE account would reach its $9,000 target. On a
+2 MNQ chart that price was ~2,260 points away (30,394 vs 28,129); Rithmic rejected it every bar, and after 10 rejections
+MultiCharts switched the chart's auto-trading OFF, which cancelled the strategy's own stop and target (position left
+unmanaged until closed by hand). Fix: only send a limit when it is near the market (Apex Chart Guard `TgtNearPct` 1%).
+Also: MultiCharts draws every working order of the same account + symbol on EVERY chart of that symbol: read the
+Orders tab's Strategy Name / Order Name column before blaming the chart an order is drawn on.

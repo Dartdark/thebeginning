@@ -1,0 +1,22 @@
+[provenance] code 30f4d98f dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+FINRA short volume, LONGS ONLY (user 2026-11-08). POST HOC (the long / short split was seen in finra_short_test.py: longs $661 t 3.5);
+   longs after a high short ratio             n   374 $  661 t  3.51 PF 1.78 total $  247k maxDD $23.9k | 2018-22 $ 361 (t  2.2) 2023+ $1053 (t  2.8) | worst $-6,526
+      by year $: {2018: -1171, 2019: 17764, 2020: 34397, 2021: 19883, 2022: 5636, 2023: 29840, 2024: 14579, 2025: 61411, 2026: 64799}
+      Z >= 2 only (info)                      n    87 $ 1143 t  3.38 PF 2.72 total $   99k maxDD $19.6k | 2018-22 $ 654 (t  1.7) 2023+ $1836 (t  3.1) | worst $-5,079
+   control: long every day (same exits)       n  1998 $  135 t  1.96 PF 1.12 total $  270k maxDD $57.4k | 2018-22 $  84 (t  1.1) 2023+ $ 190 (t  1.6) | worst $-9,434
+   random-day longs (same count per year, 500 runs): $138, 95th $347; real $661; p 0.000
+   2018-22: signal longs $361 vs every-day longs $84 (edge $+276)
+   2023+: signal longs $1053 vs every-day longs $190 (edge $+863)
+   daily corr: {'VB': 0.17, 'ONB_ML2_MC': 0.04, 'MON_MC': 0.19, 'EOS': -0.08, 'LDF_MC': 0.21, 'TWIN': 0.13} 
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   + FINRA longs 2 MNQ                pass 37.2% (-1.1%; band -2.1% / -0.3%)
+
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      + FINRA longs 2 MNQ                2y $ 19,902 blown  3.0% all 6 96.3% diff $ -128 beats 49.8%
+
+   Personal book 1-year MC return / DD p95 (+ 1 MNQ):
+      2018-26: book 5.42 | + FINRA longs 1 MNQ 5.70 (+0.28)
+      2018-22: book 5.45 | + FINRA longs 1 MNQ 5.33 (-0.12)
+      2023+: book 6.10 | + FINRA longs 1 MNQ 6.65 (+0.55)

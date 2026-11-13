@@ -1,0 +1,24 @@
+[provenance] code 2ade8264 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Budget ramp, before vs now (user 2026-11-09: 'I meant over months and years; the last time we did that was a week or two ago').
+
+=== backtest edge
+plan / scenario                                eval pass evals to Dec 31   funded Dec 31 p10-p50-p90  first payout    2027 payouts p10 / p50 / p90  P(0 funded)
+before: 5 d/wk, job ends 12/24, 1 a day            33.4%              23                  0 - 6 - 13        Mar 01             $0k / $237k / $397k          14%
+      cumulative payouts by month (median / p10 / p90): Jan27 $0k (0-10) | Mar27 $6k (0-63) | May27 $28k (0-130) | Jul27 $74k (0-215) | Sep27 $142k (0-325) | Nov27 $221k (0-379)
+before: 6 d/wk, job ends, 1 a day                  33.4%              28                  0 - 7 - 16        Mar 01             $0k / $253k / $410k          13%
+before: 5 d/wk, job kept*, 1 a day                 33.4%              23                  0 - 6 - 13        Mar 02             $8k / $303k / $413k          14%
+now: 5 d/wk, job ends 12/24, 1 a day               35.7%              23                  0 - 6 - 14        Feb 09             $0k / $296k / $410k          12%
+      cumulative payouts by month (median / p10 / p90): Jan27 $0k (0-15) | Mar27 $8k (0-87) | May27 $42k (0-168) | Jul27 $104k (0-257) | Sep27 $178k (0-330) | Nov27 $270k (0-397)
+now: 6 d/wk, job ends, 1 a day                     35.7%              28                  0 - 8 - 16        Feb 10             $0k / $302k / $422k          12%
+now: 5 d/wk, job kept*, 1 a day                    35.7%              23                  0 - 6 - 14        Feb 18            $10k / $350k / $428k          12%
+
+=== 75% of the edge
+plan / scenario                                eval pass evals to Dec 31   funded Dec 31 p10-p50-p90  first payout    2027 payouts p10 / p50 / p90  P(0 funded)
+before: 5 d/wk, job ends 12/24, 1 a day            24.4%              23                  0 - 3 - 10        Mar 24              $0k / $72k / $248k          31%
+      cumulative payouts by month (median / p10 / p90): Jan27 $0k (0-4) | Mar27 $0k (0-30) | May27 $0k (0-56) | Jul27 $15k (0-96) | Sep27 $34k (0-170) | Nov27 $62k (0-238)
+before: 6 d/wk, job ends, 1 a day                  24.4%              28                  0 - 4 - 12        Mar 24              $0k / $96k / $270k          29%
+before: 5 d/wk, job kept*, 1 a day                 24.4%              23                  0 - 3 - 10        Mar 31             $0k / $167k / $314k          31%
+now: 5 d/wk, job ends 12/24, 1 a day               25.3%              23                  0 - 3 - 11        Mar 09              $0k / $92k / $285k          29%
+      cumulative payouts by month (median / p10 / p90): Jan27 $0k (0-5) | Mar27 $0k (0-46) | May27 $5k (0-89) | Jul27 $22k (0-123) | Sep27 $47k (0-180) | Nov27 $90k (0-258)
+now: 6 d/wk, job ends, 1 a day                     25.3%              28                  0 - 4 - 13        Mar 08             $0k / $123k / $312k          29%
+now: 5 d/wk, job kept*, 1 a day                    25.3%              23                  0 - 3 - 11        Mar 12             $0k / $197k / $338k          29%

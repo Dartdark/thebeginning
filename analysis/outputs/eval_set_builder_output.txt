@@ -1,0 +1,35 @@
+[provenance] code a274e1fd dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Evaluation-specific 150K set (user 2026-11-09: 'develop a strategy to bolster the eval phase'; diagnosis analysis/eval_failure_diag.py:
+load_mc: dropped 1 unfinished trade(s) in mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx
+   unit caps (1st-pct worst day <= $1,500): {'VB': 4, 'ONB30': 5, 'EOS': 6, 'NFP': 6, 'LDF': 6, 'ONB_ML': 5, 'MON': 3, 'MON_BR': 2, 'TWIN': 7, 'DT': 14, 'RS': 3, 'OT': 3, 'CLS': 5, 'MOC': 17}
+   current set {'VB': 20, 'ONB30': 11, 'EOS': 5, 'NFP': 0, 'LDF': 0, 'ONB_ML': 0, 'MON': 0, 'MON_BR': 5, 'TWIN': 2, 'DT': 0, 'RS': 0, 'OT': 0, 'CLS': 0, 'MOC': 0}
+   design pass: current 34.1%, clipped to caps 8.2%
+   step 1: RS +1 -> design pass 11.0%  {VB: 4, ONB30: 5, EOS: 5, MON_BR: 2, TWIN: 2, RS: 1}
+   step 2: RS +1 -> design pass 14.2%  {VB: 4, ONB30: 5, EOS: 5, MON_BR: 2, TWIN: 2, RS: 2}
+   step 3: RS +1 -> design pass 16.0%  {VB: 4, ONB30: 5, EOS: 5, MON_BR: 2, TWIN: 2, RS: 3}
+   step 4: TWIN +1 -> design pass 17.4%  {VB: 4, ONB30: 5, EOS: 5, MON_BR: 2, TWIN: 3, RS: 3}
+   step 5: ONB_ML +1 -> design pass 18.2%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 1, MON_BR: 2, TWIN: 3, RS: 3}
+   step 6: ONB_ML +1 -> design pass 19.8%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 2, MON_BR: 2, TWIN: 3, RS: 3}
+   step 7: ONB_ML +1 -> design pass 20.9%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 3, MON_BR: 2, TWIN: 3, RS: 3}
+   step 8: ONB_ML +1 -> design pass 24.4%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 4, MON_BR: 2, TWIN: 3, RS: 3}
+   step 9: ONB_ML +1 -> design pass 26.1%  {VB: 4, ONB30: 5, EOS: 5, ONB_ML: 5, MON_BR: 2, TWIN: 3, RS: 3}
+   step 10: LDF +1 -> design pass 27.4%  {VB: 4, ONB30: 5, EOS: 5, LDF: 1, ONB_ML: 5, MON_BR: 2, TWIN: 3, RS: 3}
+   step 11: LDF +1 -> design pass 27.9%  {VB: 4, ONB30: 5, EOS: 5, LDF: 2, ONB_ML: 5, MON_BR: 2, TWIN: 3, RS: 3}
+   step 12: DT +1 -> design pass 28.5%  {VB: 4, ONB30: 5, EOS: 5, LDF: 2, ONB_ML: 5, MON_BR: 2, TWIN: 3, DT: 1, RS: 3}
+   step 13: LDF +1 -> design pass 29.3%  {VB: 4, ONB30: 5, EOS: 5, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 3, DT: 1, RS: 3}
+   step 14: TWIN +1 -> design pass 29.8%  {VB: 4, ONB30: 5, EOS: 5, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 1, RS: 3}
+   step 15: DT +1 -> design pass 30.2%  {VB: 4, ONB30: 5, EOS: 5, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 2, RS: 3}
+   step 16: EOS -1 -> design pass 30.8%  {VB: 4, ONB30: 5, EOS: 4, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 2, RS: 3}
+
+   FINAL eval set: {VB: 4, ONB30: 5, EOS: 4, LDF: 3, ONB_ML: 5, MON_BR: 2, TWIN: 4, DT: 2, RS: 3}  (risk units = $250 at the stop)
+   design 2018-22   current  pass 34.1% fail 63.2% time-out 2.7% | median days to pass 8
+   design 2018-22   new      pass 30.8% fail 48.7% time-out 20.5% | median days to pass 12
+      new - current -3.4% (band -9.9% / +2.6%)
+   HOLDOUT 2023-26  current  pass 43.4% fail 55.0% time-out 1.6% | median days to pass 8
+   HOLDOUT 2023-26  new      pass 43.2% fail 47.7% time-out 9.1% | median days to pass 12
+      new - current -0.2% (band -11.5% / +12.7%)
+   all 2018-26      current  pass 37.9% fail 59.9% time-out 2.2% | median days to pass 8
+   all 2018-26      new      pass 36.2% fail 48.3% time-out 15.5% | median days to pass 12
+      new - current -1.7% (band -7.9% / +4.4%)
+   current  daily mean $371 sd $2,610 | days with an intraday low < -$2,000: 22.6%, < -$3,000: 12.1%
+   new      daily mean $300 sd $1,716 | days with an intraday low < -$2,000: 6.0%, < -$3,000: 0.9%

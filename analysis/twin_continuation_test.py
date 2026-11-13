@@ -44,9 +44,24 @@ def half_day(d):
     return ((m == 7) & (dd == 3)) | ((m == 12) & (dd == 24)) | ((m == 11) & (dow == 4) & (dd >= 23) & (dd <= 29))
 
 
-def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, mo_target=0.0, pv=PV, tick=TICK, comm=COMM, mo_stop=75.0, mo_stop_atr=0.0):
+def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, mo_target=0.0, pv=PV, tick=TICK, comm=COMM, mo_stop=75.0, mo_stop_atr=0.0,
+             level_mode="swing6h", mo_window=(840, 930), off_dates=None, v21=False, vol_cap=2.0, bo_rth_only=False,
+             mo_exit=1450, mo_stop_pct=0.0):
+    # mo_exit (CT hhmm, MO flat from this bar) and mo_stop_pct (MO stop = pct x entry price, overrides mo_stop) added 2026-11-08 for
+    # other markets (mo_markets_test.py); defaults = v2.1
+    # vol_cap (0 = off) and bo_rth_only (breakout entries only 08:30-15:00 CT) added 2026-11-08 for the ingredient ablation; defaults = v2.1
+    # v21=True (2026-11-08): the live MultiCharts v2.1 holiday rules (CME early-close days per replica.is_early_close: no MO, no BO
+    # entries from 11:00 to 17:00, flat after the 11:30 bar). Default False = the original port (1,109 cap1 trades).
+    # 2026-11-08 variants (twin_ideas_test.py): level_mode swing6h (default) / prevday / prevweek / round100; mo_window = MO signal
+    # window (CT, bucket end); off_dates = set of session dates (YYYYMMDD) with no new entries (regime filter). Defaults = v2.1.
     n = len(B["c"]); o, h, l, c, sm, sess, j, date = (B[k] for k in ("o", "h", "l", "c", "sm", "sess", "j", "date"))
     halfd = half_day(date)
+    if v21:
+        from replica import is_early_close
+        ud = np.unique(date); em = {d: is_early_close(pd.Timestamp(str(int(d)))) for d in ud}
+        early = np.array([em[d] for d in date]); halfd = halfd | early
+        hhmm = (j // 60) * 100 + j % 60
+    else: early = np.zeros(n, bool); hhmm = np.zeros(n, int)
     # ---- precompute bucket boundaries (last existing bar of each 15m bucket / 6h candle / 10m bucket)
     k15 = sess * 100 + sm // 15; kc = sess * 10 + np.minimum(sm // 360, 3)
     k10 = B["row"] * 1000 + ((j - 1) % 1440) // 10
@@ -58,6 +73,7 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
     cH = cL = None; CH, CL = [], []
     swh = swl = None; swh_open = swl_open = False; got_h = got_l = None
     shi = slo = None; rngs = []; volratio = 0.0
+    pd_h = pd_l = pw_h = pw_l = wh = wl = None; cur_wk = -1; used_r = set()
     armed = False; okl = oks = False; lvll = lvls = stpl = stps = atru = 0.0; arm_trades = 0
     # MO
     a_piv, a_osc = 2 / 22, 2 / 4; mH = mL = None; mN = 0; mC = None; nb = 0; prevC = None; atrw = 0.0; piv = 0.0
@@ -68,7 +84,7 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
         # ---------------- fills during bar i (orders from bar i-1) ----------------
         if pos == 0 and pend_mo != 0:
             side = pend_mo if placebo_rng is None else placebo_rng.choice([-1, 1])
-            dist = mo_stop_atr * B["atr"][i] if mo_stop_atr > 0 else mo_stop
+            dist = mo_stop_atr * B["atr"][i] if mo_stop_atr > 0 else (mo_stop_pct * abs(o[i]) if mo_stop_pct > 0 else mo_stop)
             pos, setup, ent, ent_i = side, "MO", o[i], i; stop = ent - side * dist; pend_mo = 0
         elif pos == 0 and pend_bo:
             fl = fs = None
@@ -85,10 +101,12 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
                 if placebo_rng is not None and placebo_rng.random() < 0.5:
                     side = -side; d_st, d_tg = abs(px - st), abs(tg - px); st = px - side * d_st; tg = px + side * d_tg
                 pos, setup, ent, ent_i, stop, tgt = side, "BO", px, i, st, tg
+                if level_mode == "round100": used_r.add(lvll if side > 0 else lvls)
                 swh_open = swh_open and not (side > 0 and placebo_rng is None)
         elif pos != 0 and i > ent_i:
             px = None; kind = 2
-            if setup == "MO":
+            if v21 and early[i] and 1131 <= hhmm[i] < 1700: px, kind = o[i], 2      # v2.1: flat after the 11:30 bar
+            elif setup == "MO":
                 if mo_exit_pend: px, kind = o[i], 2
                 elif (pos > 0 and l[i] <= stop) or (pos < 0 and h[i] >= stop):
                     px, kind = (min(o[i], stop) if pos > 0 else max(o[i], stop)), 0
@@ -111,6 +129,15 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
         if swh_open and h[i] >= swh: swh_open = False
         if swl_open and l[i] <= swl: swl_open = False
         if newsess[i]:
+            if shi is not None:
+                pd_h, pd_l = shi, slo
+                wk = pd.Timestamp(str(int(date[i]))).isocalendar()[1]
+                if wk != cur_wk:
+                    pw_h, pw_l = wh, wl; wh, wl = shi, slo; cur_wk = wk
+                else:
+                    wh, wl = (shi, slo) if wh is None else (max(wh, shi), min(wl, slo))
+                if level_mode == "prevday": swh, swl = pd_h, pd_l; swh_open, swl_open = c[i] < swh, c[i] > swl
+                elif level_mode == "prevweek" and pw_h is not None: swh, swl = pw_h, pw_l; swh_open, swl_open = c[i] < swh, c[i] > swl
             if shi is not None and shi > slo:
                 rngs.append(shi - slo)
                 volratio = rngs[-1] / np.mean(rngs[-51:-1]) if len(rngs) > 50 else 0.0
@@ -134,17 +161,24 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
                 if trn == 14: atr = trsum / 14
             else: atr = (atr * 13 + tr) / 14
             prevc15 = c[i]; b15h = b15l = None
-            if got_h is not None:
-                swh = got_h; swh_open = c[i] < swh and h[i] < swh; got_h = None
-            if got_l is not None:
-                swl = got_l; swl_open = c[i] > swl and l[i] > swl; got_l = None
+            if level_mode == "swing6h":
+                if got_h is not None:
+                    swh = got_h; swh_open = c[i] < swh and h[i] < swh; got_h = None
+                if got_l is not None:
+                    swl = got_l; swl_open = c[i] > swl and l[i] > swl; got_l = None
+            elif level_mode == "round100":
+                up = np.floor(c[i] / 100) * 100 + 100; dn = np.ceil(c[i] / 100) * 100 - 100
+                swh, swl = up, dn; swh_open = up not in used_r; swl_open = dn not in used_r
             armed = False
             if pos == 0 and trn >= 14:
                 atru = atr; lvll, stpl, lvls, stps = (swh or 0), (swl or 0), (swl or 0), (swh or 0)
                 okl = swh_open and swl is not None and stpl < lvll
                 oks = swl_open and swh is not None and stps > lvls
                 armed = use_bo and (okl or oks) and sm[i] < 1350 - 1      # 15:30 CT = 1350 min after 17:00
-                if volratio > 2.0: armed = False
+                if vol_cap > 0 and volratio > vol_cap: armed = False
+                if bo_rth_only and not (510 <= (j[i] % 1440) - 0 < 900): armed = False   # j = close minute of day; 08:30-15:00 CT
+                if off_dates is not None and int(date[i]) in off_dates: armed = False
+                if v21 and early[i] and 1100 <= hhmm[i] < 1700: armed = False
                 arm_trades = ntr
         # MO 10-min bucket
         mH = h[i] if mH is None else max(mH, h[i]); mL = l[i] if mL is None else min(mL, l[i]); mN += 1; mC = c[i]
@@ -163,7 +197,8 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
                     oscp = osc; osc += (raw - osc) * a_osc
                     if osc > 100 and oscp <= 100: s = 1
                     elif osc < -100 and oscp >= -100: s = -1
-            if s != 0 and 840 <= endt <= 930 and full and traded_date != date[i] and not halfd[i] and pos == 0 and nb >= 60:
+            if s != 0 and mo_window[0] <= endt <= mo_window[1] and full and traded_date != date[i] and not halfd[i] and pos == 0 and nb >= 60 \
+                    and (off_dates is None or int(date[i]) not in off_dates):
                 traded_date = date[i]
                 if use_mo: fire = s
             mH = mL = None; mN = 0
@@ -172,7 +207,7 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
         if fire != 0: armed = False; pend_mo = fire; sig_piv = piv; sig_i = i
         if armed and (pos != 0 or ntr > arm_trades): armed = False
         pend_bo = armed and pos == 0 and sm[i] + 1 < 1350 and fire == 0
-        if pos != 0 and setup == "MO" and 1450 <= (j[i] // 60) * 100 + j[i] % 60 <= 1600: mo_exit_pend = True
+        if pos != 0 and setup == "MO" and mo_exit <= (j[i] // 60) * 100 + j[i] % 60 <= 1600: mo_exit_pend = True
     T = pd.DataFrame(trades)
     T["slips"] = np.where(T.kind == 1, 1, 2)
     T["net"] = (T.exit - T.entry) * T.side * pv - comm - T.slips * tick * pv

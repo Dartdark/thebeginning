@@ -57,7 +57,7 @@ def evaluation_cap(W, B, R, s, D, r, X):
             if lim == floor: return "fail", n
             bal = lim
         else: bal += rr[-1]
-        floor = max(floor, min(bal - r["dd"], r["lock"]))
+        floor = max(floor, bal - r["dd"])   # evaluation: keeps trailing (Codex 2026-11-06 #1)
     return ("time", 21) if s + 21 <= D else None
 
 

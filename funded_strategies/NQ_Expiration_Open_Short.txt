@@ -35,6 +35,10 @@
   2022, 2025; Juneteenth 2026). Add future ones to ClosedFriday1..6 when the
   exchange calendar is published (MultiCharts dates are 1YYMMDD, e.g.
   1260619 = 2026-06-19). }
+// kill-switch file check through Windows (2026-11-01: EL Collections is not installed on the VPS; this line compiled there)
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";   { kill-switch tri-state (Codex REVIEW_kill_reply_20261102) }
+
 
 Inputs:
 	EntryBarTime(830),      { the bar closing at 8:30 -> short at the next bar's open }
@@ -49,8 +53,24 @@ Inputs:
 	ClosedFriday4(1260619),
 	ClosedFriday5(0),
 	ClosedFriday6(0),
-	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-10-30");   { code version (live guard 2026-10-30): bump the date on every change }
+	HeartbeatTag(""),       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat }
+	UseCushion(true),       { cushion guard: acts ONLY on Apex funded accounts (name PA-...); evaluations / personal: no effect }
+	CopierGroup(true),      { Rithmic copier (2026-11-09): follow the GROUP state the VPS writes (funded: the weakest account's cushion; evaluations: finish mode when the group's MEAN profit >= $6,000). false = this account only }
+	AccountName(""),        { the Apex account, typed exactly, e.g. PA-APEX-681524-05 (Rithmic Equity is read for it) }
+	StartBalance(0),        { 0 = auto: 150000 when the account balance is above 100,000, else 50000 }
+	TrailDD(0),             { 0 = auto: 4000 (150K) / 2000 (50K) }
+	LockBalance(0),         { 0 = auto: start + 100 }
+	PeakSeed(0),            { highest END-OF-DAY balance so far (new account: xSB); RETYPE after any restart / recompile; 0 = no entries }
+	CushionRef(0),          { 0 = auto: 3000 (150K) / 1500 (50K) }
+	CushionMin(0.5),        { size floor of the cushion sizing }
+	UseFinish(true),        { 150K EVALUATION finish mode: acts ONLY on Apex evaluation accounts (name APEX-...) of 150K; funded / personal: no effect }
+	FinishAccount(""),      { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
+	FinishAt(0),            { 0 = auto: 156000 on a 150K evaluation (start + $6,000); 50K: off (not tested there) }
+	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
+Variables: CE(0), CEPrev(0), CK(0), CKLast(0), PeakEOD(0), Thr(0), Cush(0), CF(0);   { cushion guard }
+Variables: PeakAuto(0), PKey(0), PKeyLast(0), PAcct(""), PkI(0), PkFound(0), AcctX(""), EqX(0), xSB(0), xDD(0), xLB(0), xCR(0), GrpCush(-1);   { peak file + auto account rules (2026-11-09) }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0), FinAcct(""), FinAt(0), GrpFin(-1);   { finish mode }
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -106,14 +126,75 @@ IsExpiration = (IsThirdFri and IsClosedFri = false)
 	or (Dow = 4 and (NextDay = ClosedFriday1 or NextDay = ClosedFriday2 or NextDay = ClosedFriday3
 		or NextDay = ClosedFriday4 or NextDay = ClosedFriday5 or NextDay = ClosedFriday6));
 
+{ ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
+  While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
+KillOn = false;
+KillAttr = -1;
+KillErr = 0;
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	KillAttr = GetFileAttributesA("C:\TradingLogs\KILL");
+	if KillAttr <> -1 then KillOn = true else KillErr = GetLastError;   { read right after the call: 2/3 = not found }
+end;
+{ read check (Codex follow-up 2026-11-02 #3): -1 on the KILL file means "no file" only if the folder itself is readable.
+  Folder unreadable = state UNKNOWN: no new entries (open positions keep their normal exits; only a real KILL forces exits). }
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
+{ tri-state (2026-11-05): -1 with any error other than 2 (file not found) / 3 (path not found) = state UNKNOWN -> no new entries }
+if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
+
 { ---------- Entry: short at the 8:30 open ---------- }
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(IffString(FinishAccount <> "", FinishAccount, GetAccountID));
+		if FinRead > 0 then begin
+			FinEq = FinRead; FinKey = FinKeyNow; GrpFin = -1;   { copier group state (VPS files), read once a day }
+			if CopierGroup then begin
+				if GetFileAttributesA("C:\TradingLogs\group\EVAL_FINISH") <> -1 then GrpFin = 1
+				else if GetFileAttributesA("C:\TradingLogs\group\EVAL_FULL") <> -1 then GrpFin = 0;
+			end;
+		end;
+	end;
+	FinAcct = IffString(FinishAccount <> "", FinishAccount, GetAccountID);
+	if FinishAt > 0 then FinAt = FinishAt else if FinEq > 100000 then FinAt = 156000 else FinAt = 0;
+	FinOn = (FinKey = FinKeyNow) and FinAt > 0 and (FinEq >= FinAt) and LeftStr(FinAcct, 5) = "APEX-";
+	if GrpFin = 1 then FinOn = (FinKey = FinKeyNow) and FinAt > 0 and LeftStr(FinAcct, 5) = "APEX-";   { group: half size while the group's mean profit >= $6,000 }
+	if GrpFin = 0 then FinOn = false;
+end;
+
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 if IsExpiration and Time = EntryBarTime and MarketPosition = 0 and TradedToday = false
 	and ATRv > 0 then begin
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
-	if Qty >= 1 then
+	{ cushion guard (2026-11-08): size by the cushion above Apex's threshold, and never risk more than the cushion at the
+	  stop. Real time only (backtests unchanged). Equity missing or PeakSeed 0 -> no entry. }
+	if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+		CE = GetRTAccountEquity(IffString(AccountName <> "", AccountName, GetAccountID));
+		Thr = MinList(xLB, MaxList(PeakEOD, xSB, PeakSeed, PeakAuto) - xDD);
+		Cush = CE - Thr;
+		if GrpCush >= 0 then Cush = MinList(Cush, GrpCush);   { copier group: never size above the weakest account }
+		if CE <= 0 or Cush <= 0 or (PeakSeed <= 0 and PeakAuto <= 0) then Qty = 0
+		else begin
+			CF = MinList(1, MaxList(CushionMin, Cush / xCR));
+			Qty = Floor(Qty * CF + 0.000001);
+			if StopPts > 0 then Qty = MinList(Qty, Floor(Cush / (StopPts * BigPointValue)));
+		end;
+	end;
+	if FinOn and Qty >= 1 then Qty = MaxList(1, Floor(Qty * FinishMult + 0.5));
+	if Qty >= 1 and NoEntry = false then
 		SellShort ("Exp Open S") Qty contracts next bar at market;
 end;
 
@@ -129,6 +210,10 @@ if MarketPosition < 0 and StopPts > 0 and High >= EntryPrice + StopPts then
 if MarketPosition < 0 and Time >= ExitTime then
 	BuyToCover ("Exp Open SX") this bar on close;
 
+{ kill switch: flatten while C:\TradingLogs\KILL exists (see the Kill switch block above) }
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") next bar at market;
+
 // ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
 // Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the
 // code fails to compile or the signal is removed, the heartbeat stops and the 08:21 pre-market check / watchdog alert.
@@ -140,5 +225,48 @@ if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then
 		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
 			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
 		HB_Last = HB_Key;
+	end;
+end;
+
+{ Peak from the VPS (2026-11-09, user: no retyping): each day after the close the VPS writes C:\TradingLogs\peak\<account>_<the
+  highest end-of-day balance so far, rounded UP to $100, capped at xLB + xDD> (live/vps/cushion_peak.ps1). Read once
+  per trading day here, so PeakSeed no longer needs retyping after a restart (PeakSeed > 0 still overrides upwards). No file
+  (and PeakSeed 0) = no entries, as before. Real time only. }
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+	if Time >= 1600 then PKey = Date + 1 else PKey = Date;
+	PAcct = IffString(AccountName <> "", AccountName, GetAccountID);
+	if PKey <> PKeyLast and PAcct <> "" then begin      { until found today: a new account's file can appear during the day }
+		PkFound = 0;
+		for PkI = Ceiling((xLB + xDD) / 100) downto Floor(xSB / 100) begin
+			if PkFound = 0 and GetFileAttributesA("C:\TradingLogs\peak\" + PAcct + "_" + NumToStr(PkI * 100, 0)) <> -1 then PkFound = PkI * 100;
+		end;
+		GrpCush = -1;                               { copier group: the weakest funded account's cushion (VPS file) }
+		if CopierGroup then begin
+			for PkI = 100 downto 0 begin
+				if GrpCush < 0 and GetFileAttributesA("C:\TradingLogs\group\FUNDED_C" + NumToStr(PkI * 100, 0)) <> -1 then GrpCush = PkI * 100;
+			end;
+		end;
+		if PkFound > 0 then begin PeakAuto = MaxList(PeakAuto, PkFound); PKeyLast = PKey; end;
+	end;
+end;
+
+// Cushion guard tracker (2026-11-08): the highest END-OF-DAY account equity (Apex trails the threshold on it). The day
+// rolls at 16:00 CT; the last equity read before the roll is that day's close. Real time only. Log only: no orders.
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+	CE = GetRTAccountEquity(IffString(AccountName <> "", AccountName, GetAccountID));
+	if Time >= 1600 then CK = Date + 1 else CK = Date;
+	if CE > 0 then begin
+		if CKLast <> 0 and CK <> CKLast and CEPrev > 0 then PeakEOD = MaxList(PeakEOD, CEPrev);
+		CKLast = CK; CEPrev = CE;
 	end;
 end;

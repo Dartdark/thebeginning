@@ -1,0 +1,21 @@
+[provenance] code fbcd6a65 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+US100 Donchian trend (Wong 2026, SSRN 6722841; author's MQL5 'US100_Turtle_Donchian_Trend_EA'), run on NQ by Claude because Codex's
+   15-min bars: 217320 (2017-05-01 .. 2026-11-04)
+
+SOURCE arm (holds across sessions): 1648 trades, $101 a trade, PF 1.26, win 37%, median hold 8 bars, worst $-7,302
+   2018-22 (design): n 931 net $68,770 ($74 a trade), daily t 2.43 -> PASS gate
+   by year $: {2018: 10599, 2019: 2448, 2020: 10926, 2021: 43712, 2022: 1085, 2023: 36447, 2024: 26352, 2025: 27409, 2026: 7194}
+   exits: {'stop': 1648}
+   2023+ (seen-history replication, not a holdout): n 717 net $97,402 ($136), daily t 2.07
+                 trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+SOURCE arm 2018+   1648 37% $101 $18,962   1.02    2.16          1.26 $24,522   0.77  5.54       6.85
+
+APEX arm (flat 15:45 / 11:45 early close): 1837 trades, $80 a trade, PF 1.22, win 38%, median hold 7 bars, worst $-3,075
+   2018-22 (design): n 1045 net $68,496 ($66 a trade), daily t 2.74 -> PASS gate
+   by year $: {2018: 5605, 2019: 4242, 2020: 17412, 2021: 36678, 2022: 4559, 2023: 36881, 2024: 16398, 2025: 18622, 2026: 5721}
+   exits: {'stop': 1518, 'flat': 319}
+   2023+ (seen-history replication, not a holdout): n 792 net $77,622 ($98), daily t 1.98
+                 trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+APEX arm ( 2018+   1837 38% $80 $18,312   1.05    2.08          1.22 $24,205   0.76  5.18       7.07
+
+   t needed for promotion (N = 415): 3.67

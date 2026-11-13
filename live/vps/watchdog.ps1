@@ -1,4 +1,5 @@
 # VPS watchdog (2026-10-21): checks every 5 minutes on weekdays 08:15-15:10 CT and pushes an alert to the user's phone
+# 2026-11-05: phone alerts muted while no account is "live" in live/expected_setup.json (section 4).
 # (ntfy app, topic below) the moment something can affect trading. Installed by push_trade_logs.ps1 as the task
 # 'VpsWatchdog'. Read-only: it never touches MultiCharts, Rithmic or orders.
 # Checks: MultiCharts running; MultiCharts has live network connections (broker / data); every chart's logger heartbeat
@@ -53,7 +54,10 @@ Get-ChildItem "$Logs\2*.csv" | Sort-Object Name -Descending | Select-Object -Fir
 # only the charts that should be live (live/expected_setup.json): a closed account's tags (VB, ONB, EOS, MON_BR = #1)
 # stay in the last days' files and gave false 'no heartbeat today' alarms on 2026-10-29
 $cfg = Get-Content "C:\TradingRepo\live\expected_setup.json" -Raw | ConvertFrom-Json
-if ($cfg) { $live = @($cfg.charts.PSObject.Properties.Name); foreach ($t in @($tags.Keys)) { if ($live -notcontains $t) { $tags.Remove($t) } } }
+if ($cfg) {
+    $live = @($cfg.charts.PSObject.Properties | Where-Object { $cfg.accounts.($_.Value.account).status -eq "live" } | ForEach-Object { $_.Name })
+    $tags = @{}; foreach ($t in $live) { $tags[$t] = $true }
+} else { $problems += "CONFIG|Cannot read expected_setup.json: chart coverage is UNKNOWN" }
 $last = @{}
 if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "POS,*" } | ForEach-Object { $c = $_.Split(","); $last[$c[1]] = $c } }
 if ($hhmm -ge 845 -and $hhmm -le 1500) {
@@ -70,9 +74,33 @@ $acct = @{}
 if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "ACCT,*" } | ForEach-Object { $c = $_.Split(","); $acct[$c[1]] = $c } }
 if ($hhmm -ge 830 -and $hhmm -le 1500) {
     foreach ($t in $acct.Keys) {
+        if ($cfg -and $live -notcontains $t) { continue }
         $c = $acct[$t]
         if ($c[4] -eq "0") { $problems += "AUTOOFF_$t|Chart ${t}: auto-trading is OFF (account $($c[3])). Turn it on if this chart should trade." }
         if ([double]$c[7] -gt 600) { $problems += "FEED_$t|Chart ${t}: last bar is $([int]([double]$c[7] / 60)) min old. Data feed / Rithmic quiet? Check the connection status." }
+    }
+}
+
+# Unknown tags on a live account are a configuration fault, not retired-chart noise.
+if ($cfg) {
+    $liveIds = @($cfg.accounts.PSObject.Properties | Where-Object { $_.Value.status -eq "live" } | ForEach-Object { $_.Value.id })
+    foreach ($t in $acct.Keys) {
+        if ($t -ne "SCAN" -and $live -notcontains $t -and $liveIds -contains $acct[$t][3]) {
+            $problems += "UNEXPECTED_$t|Chart tag $t is on a live account but absent from expected_setup.json; reconcile Tag and HeartbeatTag."
+        }
+    }
+}
+
+# 2e. order routing (2026-11-01, after a false 'wrong account' call): the Chart Monitor's route_account (column 9,
+#     GetAccountID = where the chart's orders really go) and its typed AccountName (column 4, used for the balance) must
+#     both be the account expected_setup.json assigns to the tag. Any hour the watchdog runs: a wrong route is urgent.
+if ($cfg) {
+    foreach ($t in $acct.Keys) {
+        $ch = $cfg.charts.$t; if (-not $ch -or -not $ch.account) { continue }
+        $want = $cfg.accounts.($ch.account).id; $c = $acct[$t]
+        $route = ""; if ($c.Length -gt 8) { $route = $c[8].Trim() }
+        if ($route -ne "" -and $route -ne $want) { $problems += "ROUTE_$t|Chart ${t} SENDS ORDERS TO $route, should be $want ($($ch.account)). Fix the Auto Trading gear account now." }
+        if ($c[3] -ne $want) { $problems += "MONACCT_$t|Chart ${t}: Chart Monitor AccountName is '$($c[3])', should be $want (balance / floor alarm read the wrong account)." }
     }
 }
 
@@ -82,15 +110,22 @@ if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {
     foreach ($ap in $cfg.accounts.PSObject.Properties) {
         $v = $ap.Value; if ($v.status -ne "live" -or -not $v.start) { continue }
         $peak = [double]$v.start; $eqNow = $null
-        Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge $v.started } | Sort-Object Name | ForEach-Object {
+        Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge ($v.started -replace "-", "") } | Sort-Object Name | ForEach-Object {
             $last = $null
-            Get-Content $_.FullName | Where-Object { $_ -like ("ACCT,*," + $v.id + ",*") } | ForEach-Object { $e = [double]($_.Split(",")[6]); if ($e -gt 0) { $last = $e } }
+            Get-Content $_.FullName | Where-Object { $_ -like "ACCT,*" } | ForEach-Object { $c = $_.Split(","); if ($c.Length -gt 6 -and $c[3] -eq $v.id) { $e = 0.0; if ([double]::TryParse($c[6], [ref]$e) -and $e -gt 0) { $last = $e } } }   # column 4 only (Codex review 2026-11-01 #1: column 9 = route)
             if ($null -ne $last) { if ($_.BaseName -eq $day) { $eqNow = $last } else { $peak = [math]::Max($peak, $last) } }
         }
         if ($null -eq $eqNow) { continue }
-        $floor = [math]::Min($peak - [double]$v.trail, [double]$v.lock); $room = $eqNow - $floor; $n = $ap.Name
+        $floor = $peak - [double]$v.trail
+        $phase = $v.phase; if (-not $phase) { $phase = if ($v.id -like "PA-*") { "funded" } else { "evaluation" } }
+        if ($phase -eq "funded") {
+            $lock = if ($null -ne $v.lock) { [double]$v.lock } else { [double]$v.start + 100 }
+            $floor = [math]::Min($floor, $lock)
+        } elseif ($phase -ne "evaluation") { $problems += "CONFIG|Unknown account phase for $($ap.Name)"; continue }
+        if ($null -eq $v.max_stop) { $problems += "CONFIG|Missing max_stop for $($ap.Name); thin-cushion threshold is UNKNOWN" }
+        $room = $eqNow - $floor; $n = $ap.Name
         if ($room -le 0) { $problems += "ACCTFAIL_$($v.id)|Account $n ($($v.id)): equity $([math]::Round($eqNow)) is at or below its floor $([math]::Round($floor)). Apex has likely failed it: turn auto-trading OFF on its charts, check Apex." }
-        elseif ($room -lt 0.5 * [double]$v.max_stop) { $problems += "NEARFLOOR_$($v.id)|Account ${n}: only $([math]::Round($room)) above its floor (half a stop is $([math]::Round(0.5 * [double]$v.max_stop)))." }
+        elseif ($room -le [double]$v.max_stop) { $problems += "NEARFLOOR_$($v.id)|Account ${n}: only $([math]::Round($room)) above its floor (one planned stop before costs/slippage is $([math]::Round([double]$v.max_stop)))." }
     }
 }
 
@@ -99,6 +134,7 @@ if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {
 $sigTags = @{}
 Get-ChildItem "$Logs\2*.csv" | Sort-Object Name -Descending | Select-Object -First 6 | ForEach-Object {
     Get-Content $_.FullName | Where-Object { $_ -like "SIG,*" } | ForEach-Object { $sigTags[$_.Split(",")[1]] = $true } }
+if ($cfg) { $sigTags = @{}; foreach ($t in $live) { $sigTags[$t] = $true } }
 $sigLast = @{}
 if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "SIG,*" } | ForEach-Object { $c = $_.Split(","); $sigLast[$c[1]] = [int]$c[13] } }
 if ($hhmm -ge 900 -and $hhmm -le 1500) {
@@ -128,14 +164,33 @@ if ($rej -gt $prev) {
 }
 $state["rej_day"] = $day; $state["rej_count"] = $rej
 
-# 4. alert (once an hour per problem), log, save state
+# 4. alert (once an hour per problem; thin-cushion NEARFLOOR once a day, 2026-11-13), log, save state
+# mute (user 2026-11-05): no phone alerts while no account in expected_setup.json has status "live"; the problems are still
+# written to alerts.txt (marked MUTED). Alerts come back on their own when an account is set to "live" there.
+$anyLive = $true
+if ($cfg) { $anyLive = @($cfg.accounts.PSObject.Properties | Where-Object { $_.Value.status -eq "live" }).Count -gt 0 }
+if (-not $anyLive) {
+    foreach ($p in $problems) { "$($now.ToString('yyyy-MM-dd HH:mm')) MUTED (no live account) $($p.Split('|', 2)[1])" | Add-Content "$Logs\alerts.txt" }
+    $problems = @()
+}
+$sendFailed = $false
 foreach ($p in $problems) {
     $key, $text = $p.Split("|", 2); $k = "sent_" + ($key -replace '_\d+$', '')
     $lastSent = if ($state[$k]) { [datetime]$state[$k] } else { [datetime]::MinValue }
-    if (($now - $lastSent).TotalMinutes -ge 60 -or $key -like "REJECT_*") {
-        try { Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } | Out-Null } catch {}
-        "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
-        $state[$k] = $now.ToString("o")
+    # thin cushion is a standing condition (user 2026-11-13, alerts review): alert it once a trading day, not every hour.
+    # Floor touches (ACCTFAIL), mismatches, rejections and every other alert keep their timing.
+    $due = if ($key -like "NEARFLOOR_*") { $lastSent.Date -ne $now.Date } else { ($now - $lastSent).TotalMinutes -ge 60 }
+    if ($due -or $key -like "REJECT_*") {
+        try {
+            Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } -TimeoutSec 15 -ErrorAction Stop | Out-Null
+            "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
+            $state[$k] = $now.ToString("o")
+        } catch {
+            "$($now.ToString('yyyy-MM-dd HH:mm')) SEND_FAILED $text" | Add-Content "$Logs\alerts.txt"
+            $sendFailed = $true
+        }
     }
 }
 $state | ConvertTo-Json | Set-Content $StateFile
+
+if ($sendFailed) { exit 1 }

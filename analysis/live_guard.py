@@ -6,7 +6,7 @@ versions() Code-version stamps: the HB_Ver string in every strategy file that wr
 stale_versions() Repo files edited (git) after the date in their HB_Ver: the version wasn't bumped.
   python3 analysis/live_guard.py          (prints all three)
 """
-import glob, json, os, re, subprocess
+import datetime as dt, glob, json, os, re, subprocess
 import pandas as pd
 
 COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
@@ -22,15 +22,20 @@ def floors(day=None, cfg=None):
         eod = {}
         for f in sorted(glob.glob("live/trades/2*.csv")):
             d = os.path.basename(f)[:8]
-            if d < v["started"] or (day and d > day): continue
-            rows = [l.split(",") for l in open(f) if l.startswith("ACCT,") and f",{v['id']}," in l]
+            if d < str(v["started"]).replace("-", "") or (day and d > day): continue
+            rows = [r for r in (l.split(",") for l in open(f) if l.startswith("ACCT,")) if len(r) > 6 and r[3] == v["id"]]   # column 4 only (route_account added 2026-11-01)
             eq = [float(r[6]) for r in rows if r[6] and float(r[6]) > 0]
             if eq: eod[d] = eq[-1]
         if not eod: continue
         last = max(eod); peak = max([v["start"]] + [e for d, e in eod.items() if d < last])
-        floor = min(peak - v["trail"], v["lock"])
+        floor = peak - v["trail"]
+        phase = v.get("phase") or ("funded" if v["id"].startswith("PA-") else "evaluation")
+        if phase == "funded":
+            floor = min(floor, v.get("lock") or v["start"] + 100)
+        elif phase != "evaluation":
+            raise ValueError(f"Unknown account phase for {name}: {phase}")
         out[name] = dict(id=v["id"], date=last, equity=eod[last], peak=peak, floor=floor, room=round(eod[last] - floor, 2),
-                         max_stop=v["max_stop"])
+                         max_stop=v.get("max_stop"))
     return out
 
 
@@ -52,6 +57,12 @@ def chart_versions(df, charts):
         ver = str(s.iloc[-1].side) if pd.notna(s.iloc[-1].side) else ""
         if not ver: old.append(tag); continue
         stem = ver.split(" ")[0]
+        pend = json.load(open("live/expected_setup.json")).get("pending_install", {})
+        # muted on purpose until installed (Codex review 2026-11-01 #5): only the EXACT old version named for this strategy,
+        # only while the repo still has the version the mute was written for, and only until the expiry date
+        if (stem in repo and repo[stem] != ver and pend.get("allow_old", {}).get(stem) == ver
+                and pend.get("repo_version", {}).get(stem) == repo[stem] and str(dt.date.today()) <= pend.get("expires", "")):
+            continue
         if stem in repo and repo[stem] != ver:
             out.append(f"{tag}: runs {ver}, the repo has {repo[stem]}: paste the new code.")
     if old: out.append(f"Code version not stamped on {len(old)} chart(s) ({', '.join(old)}): repaste their strategies once (weekend).")

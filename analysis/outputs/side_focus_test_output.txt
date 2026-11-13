@@ -1,0 +1,24 @@
+[provenance] code ec80b801 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+One-sided versions where one side carries 2023+ (user 2026-11-09: 'key in on the sides that are working for each strategy and see
+
+   piece: day coverage (rebuild side known for the piece's trading days in the book)
+   ESMOCFollow_perMES   coverage 100% | $ a year both sides 471 / 172 | longs only 245 / 139 (2018-22 / 2023+)
+   S47                  coverage 100% | $ a year both sides 2,756 / 2,638 | shorts only 1,462 / 1,723 (2018-22 / 2023+)
+   FC2B                 coverage 94% | $ a year both sides 2,481 / 2,213 | longs only 1,022 / 1,336 (2018-22 / 2023+)
+   SwingTarget          coverage 100% | $ a year both sides 1,396 / 2,642 | shorts only 965 / 1,635 (2018-22 / 2023+)
+
+   FULL book: median year / DD p95 / return-DD
+      2018-26: book $40,543 / $7,222 / 5.61 | ESMOCFollow one-side 5.52 (-0.09; $-137 / DD $+99) | S47 one-side 5.59 (-0.02; $-1,104 / DD $-166) | FC2B one-side 5.46 (-0.15; $-1,313 / DD $-36) | SwingTarget one-side 5.65 (+0.04; $-662 / DD $-166)
+      2018-22: book $34,423 / $7,260 / 4.74 | ESMOCFollow one-side 4.64 (-0.11; $-184 / DD $+126) | S47 one-side 4.68 (-0.06; $-1,070 / DD $-137) | FC2B one-side 4.54 (-0.20; $-1,176 / DD $+63) | SwingTarget one-side 5.00 (+0.26; $-440 / DD $-460)
+      2023+: book $48,909 / $7,314 / 6.69 | ESMOCFollow one-side 6.69 (-0.00; $+20 / DD $+4) | S47 one-side 6.64 (-0.05; $-843 / DD $-77) | FC2B one-side 6.79 (+0.10; $-964 / DD $-251) | SwingTarget one-side 6.61 (-0.08; $-803 / DD $-32)
+
+   CORE book (no forward-log pieces): median year / DD p95 / return-DD
+      2018-26: book $26,330 / $4,857 / 5.42 | ESMOCFollow one-side 5.32 (-0.10; $-136 / DD $+65) | SwingTarget one-side 5.26 (-0.16; $-683 / DD $+21)
+      2018-22: book $19,897 / $3,652 / 5.45 | ESMOCFollow one-side 5.28 (-0.17; $-230 / DD $+76) | SwingTarget one-side 5.37 (-0.07; $-500 / DD $-42)
+      2023+: book $35,164 / $5,765 / 6.10 | ESMOCFollow one-side 6.08 (-0.02; $-83 / DD $+2) | SwingTarget one-side 6.09 (-0.01; $-942 / DD $-148)
+
+   Funded 150K, ES MOC 3 MES both sides vs longs only:
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      + MOC 3 MES both sides             2y $ 20,009 blown  2.5% all 6 97.2% diff $  -22 beats 50.1%
+      + MOC 3 MES longs only             2y $ 20,007 blown  2.5% all 6 97.2% diff $  -24 beats 50.1%

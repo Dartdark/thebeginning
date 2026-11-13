@@ -1,0 +1,44 @@
+[provenance] code 332e60a dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Diversified trend (time-series momentum) across NQ ES YM GC CL NG ZN 6E BTC, personal account only (pre-registered:
+   NQ: 2461 days, 29 rolls removed
+   ES: 2524 days, 29 rolls removed
+   YM: 2284 days, 27 rolls removed
+   GC: 2286 days, 32 rolls removed
+   CL: 2284 days, 80 rolls removed
+   NG: 2536 days, 110 rolls removed
+   ZN: 2289 days, 18 rolls removed
+   6E: 2290 days, 24 rolls removed
+   BTC: 2017 days, 75 rolls removed
+
+== TSMOM book (1/3/12-month sign blend, $1,000 daily risk per market, costs in), from 2019 (12-month lookback warm-up)
+   TSMOM, 9 markets                   $  31,652/yr Sharpe  0.62 Sortino  0.85 maxDD $ 75,913 Calmar  0.42 | 2019-22 Sharpe  0.83 2023-26  0.37
+        19:+28k 20:+91k 21:+38k 22:+31k 23:+7k 24:+5k 25:+20k 26:+36k
+   C1 long-only vol-scaled            $  67,564/yr Sharpe  0.90 Sortino  1.28 maxDD $175,850 Calmar  0.38 | 2019-22 Sharpe  0.71 2023-26  1.11
+        19:+143k 20:+96k 21:+93k 22:-111k 23:+103k 24:+103k 25:+84k 26:+34k
+   C2 lookback 21 days alone          $  25,769/yr Sharpe  0.38 Sortino  0.53 maxDD $ 91,427 Calmar  0.28 | 2019-22 Sharpe  0.58 2023-26  0.13
+        19:+50k 20:+107k 21:-25k 22:+44k 23:+50k 24:-45k 25:-32k 26:+58k
+   C2 lookback 63 days alone          $  24,912/yr Sharpe  0.37 Sortino  0.52 maxDD $156,756 Calmar  0.16 | 2019-22 Sharpe  0.64 2023-26  0.07
+        19:+48k 20:+62k 21:+58k 22:+14k 23:-21k 24:-31k 25:+77k 26:-7k
+   C2 lookback 252 days alone         $  53,522/yr Sharpe  0.85 Sortino  1.19 maxDD $118,905 Calmar  0.45 | 2019-22 Sharpe  0.99 2023-26  0.70
+        19:+48k 20:+102k 21:+80k 22:+36k 23:-7k 24:+100k 25:+16k 26:+56k
+   large-tick group (GC CL NG ZN)     $  12,441/yr Sharpe  0.44 Sortino  0.64 maxDD $ 52,699 Calmar  0.24 | 2019-22 Sharpe  0.76 2023-26  0.06
+        19:+17k 20:+39k 21:+6k 22:+32k 23:-11k 24:-11k 25:+6k 26:+21k
+   small-tick group (NQ ES YM 6E)     $   8,559/yr Sharpe  0.24 Sortino  0.31 maxDD $ 47,817 Calmar  0.18 | 2019-22 Sharpe  0.23 2023-26  0.24
+        19:+11k 20:+22k 21:+8k 22:-6k 23:+8k 24:+4k 25:+5k 26:+16k
+
+== per market (TSMOM): Sharpe 2019-26 / 2019-22 / 2023-26, annual $, avg contracts held, turnover cost $/yr
+   NQ    0.44 /  0.47 /  0.40   $  5,396/yr     0.22 contracts   $59/yr cost
+   ES    0.34 /  0.17 /  0.53   $  4,197/yr     0.38 contracts   $180/yr cost
+   YM   -0.19 / -0.11 / -0.28   $ -2,387/yr     0.48 contracts   $134/yr cost
+   GC    0.44 /  0.05 /  0.80   $  6,296/yr     0.37 contracts   $204/yr cost
+   CL    0.12 /  0.34 / -0.14   $  1,543/yr     0.43 contracts   $272/yr cost
+   NG    0.09 /  0.23 / -0.07   $  1,084/yr     0.55 contracts   $363/yr cost
+   ZN    0.28 /  1.04 / -0.72   $  3,518/yr     1.68 contracts   $1,476/yr cost
+   6E    0.11 /  0.16 /  0.07   $  1,353/yr     1.13 contracts   $492/yr cost
+   BTC   0.85 /  1.10 /  0.59   $ 10,652/yr     0.12 contracts   $138/yr cost
+
+== C3 placebo: random sign per market per month (100 runs), Sharpe 2019-26
+   placebo Sharpe mean 0.04, p95 0.56; TSMOM 0.62 -> p 0.040
+personal book not available: [Errno 2] No such file or directory: 'scratch_data/personal_P.pkl'
+
+== PASS RULE: Sharpe 2019-22 0.83 and 2023-26 0.37 >= 0.5; holdout beats long-only (0.37 vs 1.11); placebo p 0.040 -> FAIL

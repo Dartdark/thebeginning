@@ -1,0 +1,106 @@
+[provenance] code b6ee1b7 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+IBS Globex ES 'v6' = v5 with NO emergency stop and exit IBS > 0.7 (user 2026-11-12, after the ingredient breakdown; POST HOC: both
+
+== v5 (stop 2.5 ATR, exit 0.8)
+   all 2017-26                              n  306 win 66.7% $     507 total $   154,999 PF 1.46 t  2.44
+   his IS 2016-21                           n  141 win 66.0% $     276 total $    38,909 PF 1.31 t  1.17
+   his OOS 2022+                            n  165 win 67.3% $     704 total $   116,091 PF 1.55 t  2.15
+   design 2018-22                           n  169 win 63.3% $     194 total $    32,794 PF 1.16 t  0.72
+   holdout 2023+                            n  120 win 70.0% $     963 total $   115,562 PF 1.93 t  2.67
+   by year: 2017 $6,642 (17)  2018 $-22,592 (28)  2019 $17,542 (28)  2020 $26,542 (38)  2021 $10,775 (30)  2022 $528 (45)  2023 $17,418 (37)  2024 $20,739 (32)  2025 $39,051 (29)  2026 $38,355 (22)
+   exits: ibs: 240 $405,025 (worst $-4,885)  stop: 29 $-184,343 (worst $-13,810)  time: 37 $-65,682 (worst $-9,972) | worst trade $-13,810, avg hold 2.5
+   metrics all      Sharpe 0.71 Sortino 1.10 PF 1.44 Calmar 0.41 Ulcer 6.09 maxDD $41,408 (daily marked, incl. open trades) annual $17,143
+   metrics 2018-22  Sharpe 0.33 Sortino 0.48 PF 1.16 Calmar 0.17 Ulcer 7.83 maxDD $41,408 (daily marked, incl. open trades) annual $7,160
+   metrics 2023+    Sharpe 1.13 Sortino 1.86 PF 1.93 Calmar 1.63 Ulcer 2.65 maxDD $18,622 (daily marked, incl. open trades) annual $30,425
+
+== v6 (no stop, exit 0.7)
+   all 2017-26                              n  309 win 70.2% $     613 total $   189,472 PF 1.70 t  3.33
+   his IS 2016-21                           n  141 win 70.9% $     428 total $    60,402 PF 1.61 t  1.72
+   his OOS 2022+                            n  168 win 69.6% $     768 total $   129,070 PF 1.76 t  2.89
+   design 2018-22                           n  169 win 67.5% $     488 total $    82,535 PF 1.49 t  1.80
+   holdout 2023+                            n  122 win 72.1% $     816 total $    99,555 PF 1.99 t  2.99
+   by year: 2017 $7,382 (18)  2018 $-22,888 (25)  2019 $14,232 (28)  2020 $48,220 (38)  2021 $13,455 (32)  2022 $29,515 (46)  2023 $27,410 (39)  2024 $7,218 (32)  2025 $37,618 (27)  2026 $27,310 (24)
+   exits: ibs: 290 $305,312 (worst $-8,185)  time: 19 $-115,840 (worst $-19,998) | worst trade $-19,998, avg hold 2.2
+   metrics all      Sharpe 0.87 Sortino 1.38 PF 1.68 Calmar 0.78 Ulcer 5.02 maxDD $26,505 (daily marked, incl. open trades) annual $20,795
+   metrics 2018-22  Sharpe 0.77 Sortino 1.19 PF 1.49 Calmar 0.67 Ulcer 6.35 maxDD $24,832 (daily marked, incl. open trades) annual $16,527
+   metrics 2023+    Sharpe 1.00 Sortino 1.60 PF 1.99 Calmar 1.00 Ulcer 3.14 maxDD $26,505 (daily marked, incl. open trades) annual $26,474
+
+== v6 + time stop off
+   all 2017-26                              n  304 win 71.4% $     731 total $   222,310 PF 1.96 t  4.34
+   his IS 2016-21                           n  138 win 73.2% $     517 total $    71,395 PF 1.81 t  2.33
+   his OOS 2022+                            n  166 win 69.9% $     909 total $   150,915 PF 2.05 t  3.68
+   design 2018-22                           n  165 win 69.1% $     544 total $    89,712 PF 1.57 t  2.09
+   holdout 2023+                            n  121 win 71.9% $   1,033 total $   125,052 PF 2.72 t  4.51
+   by year: 2017 $7,545 (18)  2018 $-18,592 (23)  2019 $14,232 (28)  2020 $55,670 (38)  2021 $12,540 (31)  2022 $25,862 (45)  2023 $31,785 (39)  2024 $23,718 (32)  2025 $45,730 (27)  2026 $23,820 (23)
+   exits: ibs: 304 $222,310 (worst $-15,698) | worst trade $-15,698, avg hold 2.3
+   metrics all      Sharpe 1.02 Sortino 1.62 PF 1.93 Calmar 1.02 Ulcer 3.57 maxDD $24,430 (daily marked, incl. open trades) annual $25,017
+   metrics 2018-22  Sharpe 0.85 Sortino 1.32 PF 1.57 Calmar 0.77 Ulcer 4.59 maxDD $24,430 (daily marked, incl. open trades) annual $18,774
+   metrics 2023+    Sharpe 1.22 Sortino 1.98 PF 2.72 Calmar 1.57 Ulcer 1.93 maxDD $21,250 (daily marked, incl. open trades) annual $33,324
+
+== v6 with his costs ($13)
+   all 2017-26                              n  309 win 70.6% $     635 total $   196,270 PF 1.73 t  3.45
+   his IS 2016-21                           n  141 win 71.6% $     450 total $    63,504 PF 1.65 t  1.80
+   his OOS 2022+                            n  168 win 69.6% $     790 total $   132,766 PF 1.78 t  2.98
+   design 2018-22                           n  169 win 68.0% $     510 total $    86,253 PF 1.52 t  1.88
+   holdout 2023+                            n  122 win 72.1% $     838 total $   102,239 PF 2.02 t  3.07
+   by year: 2017 $7,778 (18)  2018 $-22,338 (25)  2019 $14,848 (28)  2020 $49,056 (38)  2021 $14,159 (32)  2022 $30,527 (46)  2023 $28,268 (39)  2024 $7,922 (32)  2025 $38,212 (27)  2026 $27,838 (24)
+   exits: ibs: 290 $311,692 (worst $-8,163)  time: 19 $-115,422 (worst $-19,976) | worst trade $-19,976, avg hold 2.2
+
+== v6 worst open drawdown inside a trade (no stop: how deep a held loser gets, per ES)
+   median $-1,725, 5% worst $-9,381, worst $-30,262 (date 2025-04-03 15:00:00)
+
+== Beta control (v6): random entry days with v6's hold lengths, 300 runs
+   random mean $35,077, p95 $97,809; rule $182,090; p 0.000
+
+== Same v6 on NQ (fresh market for this change)
+   NQ 2018-22                               n  179 win 72.1% $     996 total $   178,344 PF 1.76 t  2.70
+   NQ 2023+                                 n  121 win 71.9% $   1,419 total $   171,670 PF 1.73 t  2.36
+   NQ v5 2018-22                            n  178 win 71.3% $     695 total $   123,652 PF 1.42 t  1.68
+   NQ v5 2023+                              n  119 win 67.2% $     836 total $    99,522 PF 1.28 t  0.95
+
+== Bootstrap + drawdown permutation, 2023+ (1 ES daily)
+                     actual        p5       p50       p95
+name metric                                              
+v5   sharpe            1.13      0.46      1.09      1.74
+     sortino           1.86      0.69      1.78      3.07
+     pf_day            1.42      1.15      1.40      1.72
+     calmar            1.63      0.36      1.25      2.69
+     ulcer             2.65      1.62      3.18      7.32
+     max_dd       18,622.50 14,449.72 23,086.88 38,680.34
+     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+v6   sharpe            1.00      0.34      0.97      1.64
+     sortino           1.60      0.49      1.53      2.90
+     pf_day            1.40      1.11      1.38      1.74
+     calmar            1.00      0.24      1.01      2.35
+     ulcer             3.14      1.70      3.48      8.54
+     max_dd       26,505.00 14,707.12 24,792.50 42,532.62
+     P(Sharpe<=0)       NaN       NaN      0.01       NaN
+   actual_dd pct_rank    dd50    dd95    dd99 P(dd>=10000) P(dd>=20000) P(dd>=40000)
+v5   $18,622       4% $27,961 $43,272 $52,916         100%          92%           9%
+v6   $26,505      34% $29,330 $47,042 $56,828         100%          96%          14%
+
+== Monte Carlo v6 (1 ES, 1 MES)
+   Monte Carlo IBS v6 (x1): trades 291 | total p5 $87,802 / p50 $182,821 / p95 $273,628, P(total <= 0) 0.1%
+      max DD actual $24,695 (rank 26%), shuffled p50 $30,372 / p95 $55,159 / p99 $71,568; losing streak actual 4, p95 7
+      252-day block bootstrap: P&L p5 $-12,559 / p50 $20,299 / p95 $54,468, P(loss) 15.5%, max DD p50 $15,769 / p95 $33,405, return/DD 1.29, P(hit $1,000,000,000,000 trailing, EOD check only) 0.0%
+   Monte Carlo IBS v6 (x0.1): trades 291 | total p5 $8,780 / p50 $18,282 / p95 $27,363, P(total <= 0) 0.1%
+      max DD actual $2,470 (rank 26%), shuffled p50 $3,037 / p95 $5,516 / p99 $7,157; losing streak actual 4, p95 7
+      252-day block bootstrap: P&L p5 $-1,256 / p50 $2,030 / p95 $5,447, P(loss) 15.5%, max DD p50 $1,577 / p95 $3,341, return/DD 1.29, P(hit $1,000,000,000,000 trailing, EOD check only) 0.0%
+
+== Data sweep v6 (regime at the entry session)
+   ibs_v6_at_entry: 291 trade days, $626 a day, t 3.21 (2018-22 $488, 2023+ $816); 63 regimes, gap bar |t| >= 3.16
+      VIX9D/VIX                 z_high        keep on  gap t  3.45 AT BAR | subset n 48 $2164 t 4.40 (2366 / 1880)
+      copper/gold               z_high        keep on  gap t  2.31 | subset n 76 $1237 t 4.77 (845 / 1721)
+      VXN-VIX                   z_high        keep off gap t -2.07 | subset n 234 $861 t 4.29 (757 / 1005)
+      SPX                       above_median  keep off gap t -2.04 | subset n 59 $1589 t 2.85 (1386 / 3094)
+      TIP/IEF breakevens        z_high        keep off gap t -2.04 | subset n 192 $886 t 3.42 (596 / 1318)
+      SPX                       z_high        keep off gap t -2.03 | subset n 134 $1057 t 3.45 (804 / 1610)
+      TIP/IEF breakevens        above_median  keep off gap t -2.02 | subset n 120 $1106 t 3.37 (953 / 1449)
+      VVIX                      z_high        keep on  gap t  2.02 | subset n 36 $1768 t 2.88 (2009 / 1285)
+   BEST VERSION: copper/gold z_high keep on: t 3.21 -> 4.77; fair placebo (best of 63 random splits): median 4.65, 95th 5.31 -> p 0.380 (luck explains it)
+
+== Personal book (every piece 1 micro, OT 2 MNQ): return / DD of the 1-year block MC
+   v6 most correlated piece: OvernightTick +0.29
+   2018-26: book $28,194/$4,892=5.76 | + v5 1 MES $29,705/$4,841=6.14 (+0.37) | + v6 1 MES $30,083/$4,946=6.08 (+0.32) | + v6 2 MES $31,987/$6,100=5.24 (-0.52) | - OvernightTick + v6 1 MES $28,054/$4,905=5.72 (-0.04) | - OvernightTick (control) $26,136/$4,843=5.40 (-0.37)
+   2018-22: book $21,371/$3,745=5.71 | + v5 1 MES $22,094/$4,547=4.86 (-0.85) | + v6 1 MES $22,959/$4,433=5.18 (-0.53) | + v6 2 MES $24,685/$6,241=3.96 (-1.75) | - OvernightTick + v6 1 MES $21,317/$4,439=4.80 (-0.90) | - OvernightTick (control) $19,752/$3,679=5.37 (-0.34)
+   2023+: book $37,903/$5,795=6.54 | + v5 1 MES $40,481/$5,174=7.82 (+1.28) | + v6 1 MES $40,142/$5,483=7.32 (+0.78) | + v6 2 MES $42,398/$5,933=7.15 (+0.61) | - OvernightTick + v6 1 MES $37,373/$5,455=6.85 (+0.31) | - OvernightTick (control) $35,156/$5,765=6.10 (-0.44)

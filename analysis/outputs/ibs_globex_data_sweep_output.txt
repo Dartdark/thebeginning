@@ -1,0 +1,12 @@
+[provenance] code 7cc2a49 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Standing rule (user 2026-11-10): EVERY new strategy the user sends, good or bad on its own, goes against ALL the data to look for a
+   ibs_globex_v5_at_entry: 289 trade days, $513 a day, t 2.34 (2018-22 $194, 2023+ $963); 63 regimes, gap bar |t| >= 3.16
+      DIX                       rising        keep on  gap t  2.13 | subset n 143 $983 t 2.97 (916 / 1078)
+      FINRA short ratio         z_high        keep off gap t -2.12 | subset n 213 $892 t 3.59 (356 / 1557)
+      TIP/IEF breakevens        z_high        keep off gap t -1.99 | subset n 195 $801 t 2.89 (296 / 1574)
+      VXN-VIX                   z_high        keep off gap t -1.98 | subset n 232 $731 t 3.03 (459 / 1110)
+      TNX 10y yield             rising        keep off gap t -1.86 | subset n 118 $1009 t 2.82 (635 / 1660)
+      TIP/IEF breakevens        above_median  keep off gap t -1.78 | subset n 118 $964 t 3.21 (779 / 1421)
+      copper/gold               z_high        keep on  gap t  1.78 | subset n 73 $1078 t 3.29 (679 / 1617)
+      SPX                       above_median  keep off gap t -1.75 | subset n 58 $1428 t 2.32 (842 / 5095)
+   BEST VERSION: FINRA short ratio z_high keep off: t 2.34 -> 3.59; fair placebo (best of 63 random splits): median 3.61, 95th 4.50 -> p 0.525 (luck explains it)

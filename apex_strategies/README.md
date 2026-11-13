@@ -6,7 +6,26 @@ pass rate and speed to a funded account, **not for making money**. Do not judge 
 profit, and do not treat them as the funded-phase strategies; those live in
 `../funded_strategies/`.
 
-## The challenge plan
+## The evaluation plan NOW (150K No-Activation, account #5; updated 2026-11-12)
+
+Source of truth: `../live/expected_setup.json` (the 16:40 job checks every chart against it) and `analysis/bench150.py`
+`LIVE_EVAL` (the base every new candidate is benched against). Change all three in the same commit.
+
+| Chart tag | Strategy (file) | Chart | Size |
+|---|---|---|---|
+| ONB150-5 | Overnight Bias ADX30 (`NQ_Overnight_Bias_ADX30.txt`) | 15 min MNQ | `RiskPerTrade` 3500 (max 25; was 2750 until 11/12) |
+| ~~EOS150-5~~ | Expiration Open Short | | DROPPED 2026-11-12 (user: no proven help, mon_eos_contrib) |
+| MON_BR150-5 | Bridge Monday Long | 5 min MNQ | 5 |
+| TW150-5 | Twin Continuation (`Twin_Continuation_150K.txt`) | MNQ | 2 |
+| DT150-5 | Dual Thrust v4 (`../funded_strategies/NQ_Dual_Thrust.txt`) | 1 min MNQ | 2 |
+| JF150-5 | NQ Jump Fade v4 (`NQ_Jump_Fade.txt`, `MinVolRatio` 0) | 1 min MNQ, 24h | 1 (added 11/12 at 2; 1 from 11/12 evening while #5's cushion < ~$4,000) |
+| NBL150-5 | NQ Noise Longs (`NQ_Noise_Longs.txt`, longs only) | 15 min MNQ, 24h | `ContractsPerTrade` 3 (added 11/12) |
+| LDF150-5 | Late-Day Flow (`../funded_strategies/NQ_Late_Day_Flow.txt`) | 5 min MNQ, 24h, Bar Magnifier 1 min | `RiskPerTrade` 1000, `NumContracts` 1 (added 11/12) |
+| (each chart) | Apex Chart Guard (`Apex_Chart_Guard.txt`) | | helper |
+
+Vault Break: OUT of the evaluation since 2026-11-11 (DLL hit twice). Older 50K material below is history.
+
+## The old 50K challenge plan (history)
 
 One Apex 50K account at a time. Both strategies on MNQ, each in its own chart window
 (CME 24-hour session, Exchange time zone):
@@ -15,10 +34,6 @@ One Apex 50K account at a time. Both strategies on MNQ, each in its own chart wi
 |---|---|---|---|
 | Vault Break | `NQ_Vault_Break.txt` | 30 min | `NumContracts` 8 |
 | Overnight Bias | `NQ_Overnight_Bias.txt` | 15 min | `RiskPerTrade` 1100, `NumContracts` 1, `ExitTime` 1430, `EarlyExitTime` 1130 |
-
-Pass rate 44% (43–45% across periods), typically 12 trading days and about $117 per
-funded account. With 1 tick of slippage on every fill: 42.8%. Full rules, backtests and
-reasoning: `TWO_STRATEGY_PLAN.md`.
 
 ## Files
 

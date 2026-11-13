@@ -27,6 +27,25 @@ schtasks /Query /TN "VpsWatchdog" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsWatchdog" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /RI 5 /DU 07:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\watchdog.ps1" /F | Out-Null
 }
+# user 2026-11-09: no weekly VPS restart any more -> remove the 'WeeklyRestart' task if it exists (created by hand from
+# VPS_MAINTENANCE.md section 3). If Windows refuses (the task runs as SYSTEM), the failure goes to push_errors.txt.
+schtasks /Query /TN "WeeklyRestart" 2>$null | Out-Null
+if ($LASTEXITCODE -eq 0) {
+    schtasks /Delete /TN "WeeklyRestart" /F 2>&1 | Out-Null
+    if ($LASTEXITCODE -ne 0) { "$(Get-Date) could not delete task WeeklyRestart (needs admin): run as admin: schtasks /Delete /TN WeeklyRestart /F" | Out-File -Append "$Logs\push_errors.txt" }
+}
+# one-time (2026-11-09): FINRA short-volume signal, weekdays 18:00-21:00 CT hourly (live/vps/finra_daily.ps1; idempotent)
+schtasks /Query /TN "FinraDaily" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "FinraDaily" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 18:00 /RI 60 /DU 03:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\finra_daily.ps1" /F | Out-Null
+}
+# cushion peak files for the funded cushion guard (2026-11-09; every push, so a new account's file appears within 30 min)
+& powershell -ExecutionPolicy Bypass -File "$Repo\live\vps\cushion_peak.ps1"
+# one-time (2026-11-10): OVX flag for the personal CL fade (live/vps/ovx_daily.ps1; idempotent)
+schtasks /Query /TN "OvxDaily" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "OvxDaily" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 18:00 /RI 60 /DU 03:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\ovx_daily.ps1" /F | Out-Null
+}
 # alerts the watchdog sent today go to the repo too (live/health/YYYYMMDD_alerts.txt)
 if (Test-Path "$Logs\alerts.txt") { Get-Content "$Logs\alerts.txt" | Where-Object { $_ -like "$((Get-Date).ToString('yyyy-MM-dd'))*" } | Set-Content "live\health\$(Get-Date -Format yyyyMMdd)_alerts.txt" }
 
@@ -41,7 +60,7 @@ $rows = 0; if (Test-Path $today) { $rows = @(Get-Content $today).Count }
 $errs = 0; if (Test-Path "$Logs\push_errors.txt") { $errs = @(Get-Content "$Logs\push_errors.txt").Count }
 # rejected orders today: scan MultiCharts' own log files (TS Support folders) for 'Rejected' lines written today
 # (catches Symbol Mapping errors like 'Invalid Market order parameters ... @MNQ.CME', Apex locks, wrong accounts).
-$rej = 0; $rejmsg = ""
+$rej = 0; $rejmsg = ""; $warn = 0; $warnmsg = ""; $rejts = ""; $warnts = ""   # 2026-11-13: real rejections and other warnings counted apart
 $roots = @("$env:LOCALAPPDATA\TS Support", "$env:APPDATA\TS Support", "C:\ProgramData\TS Support") | Where-Object { Test-Path $_ }
 foreach ($r in $roots) {
     Get-ChildItem $r -Recurse -File -Include *.log, *.txt -ErrorAction SilentlyContinue |
@@ -50,11 +69,20 @@ foreach ($r in $roots) {
             # count only lines stamped today (MultiCharts writes dd.MM.yyyy/HH:mm:ss): a log file touched today still
             # holds older days' lines (10/28 counted 3,228, the last from 10/26) (2026-10-29)
             $hits = @($hits | Where-Object { $_.Line -like ("*" + (Get-Date).ToString("dd.MM.yyyy") + "/*") })
-            if ($hits) { $rej += @($hits).Count; $rejmsg = ($hits[-1].Line -replace ',', ';' -replace '\s+', ' ').Substring(0, [math]::Min(160, $hits[-1].Line.Length)) }
+            # 2026-11-13 (alerts review): 'Session not found' and other 'not found' lines are warnings, not order rejections.
+            # Rejections = Rejected / Invalid order / done for day; one order writes several lines, so count the lines that
+            # name an order (OrderName=) when there are any (as watchdog.ps1). The line shown is the latest by its time stamp.
+            $rj = @($hits | Where-Object { $_.Line -match "Rejected|Invalid .* order|done for day" })
+            $wn = @($hits | Where-Object { $_.Line -notmatch "Rejected|Invalid .* order|done for day" })
+            $ro = @($rj | Where-Object { $_.Line -match "OrderName=" }); if ($ro.Count -eq 0) { $ro = $rj }
+            # latest = the line with the latest HH:mm:ss after today's date stamp, across all log files ($rejts / $warnts)
+            foreach ($h in $rj) { if ($h.Line -match '\d{2}\.\d{2}\.\d{4}/(\d{2}:\d{2}:\d{2})') { if ($Matches[1] -ge $rejts) { $rejts = $Matches[1]; $l = $h.Line -replace ',', ';' -replace '\s+', ' '; $rejmsg = $l.Substring(0, [math]::Min(160, $l.Length)) } } }
+            foreach ($h in $wn) { if ($h.Line -match '\d{2}\.\d{2}\.\d{4}/(\d{2}:\d{2}:\d{2})') { if ($Matches[1] -ge $warnts) { $warnts = $Matches[1]; $l = $h.Line -replace ',', ';' -replace '\s+', ' '; $warnmsg = $l.Substring(0, [math]::Min(160, $l.Length)) } } }
+            $rej += $ro.Count; $warn += $wn.Count
         }
 }
 New-Item -ItemType Directory -Force "live\health" | Out-Null
-$line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs,rejected_today=$rej,last_reject=$rejmsg"
+$line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs,rejected_today=$rej,warnings_today=$warn,last_warning=$warnmsg,last_reject=$rejmsg"
 if ($Mode -ne "intraday") { Add-Content "live\health\$day.csv" $line }
 
 New-Item -ItemType Directory -Force "live\trades" | Out-Null
@@ -63,7 +91,13 @@ Copy-Item "$Logs\*.csv" "live\trades\" -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force "$Logs\bars" | Out-Null
 New-Item -ItemType Directory -Force "data\live_bars" | Out-Null
 Copy-Item "$Logs\bars\*.csv" "data\live_bars\" -Force -ErrorAction SilentlyContinue
-git add live/trades live/health data/live_bars
+# FINRA signal log (2026-11-09) -> live/finra/ (Claude follows WATCHLIST #32's forward log from it)
+New-Item -ItemType Directory -Force "live\finra" | Out-Null
+if (Test-Path "$Logs\finra\signals.csv") { Copy-Item "$Logs\finra\signals.csv" "live\finra\signals.csv" -Force }
+# copier group state log (2026-11-09) -> live/health/group_log.csv
+if (Test-Path "$Logs\group\group_log.csv") { Copy-Item "$Logs\group\group_log.csv" "live\health\group_log.csv" -Force }
+if (Test-Path "$Logs\ovx\ovx_log.csv") { Copy-Item "$Logs\ovx\ovx_log.csv" "live\health\ovx_log.csv" -Force }
+git add live/trades live/health data/live_bars live/finra
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     git commit -m "live trades + health $(Get-Date -Format yyyy-MM-dd) ($Mode)"

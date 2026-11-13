@@ -1,0 +1,21 @@
+Confirmation of the inverse-vol personal book (analysis/personal_invvol_test.py, 2026-11-01): (1) a yearly walk-forward
+
+15 cleared pieces (walk-forward weights, re-estimated each year)
+   size    book             2020-26 ret/DD  Sharpe  2023+ $ p50   DD p95  ret/DD  Sharpe   capital
+   ~2      equal                      6.54    3.58$      70,329$  11,529    6.10    3.58$   57,647
+   ~2      inv-vol                    7.82    3.88$      46,345$   6,319    7.33    3.90$   31,593
+   ~2      inv-vol cap 2x             8.12    3.99$      48,243$   6,272    7.69    3.97$   31,360
+   ~4      equal                      6.54    3.58$     140,658$  23,059    6.10    3.58$  115,294
+   ~4      inv-vol                    8.26    4.00$      94,345$  12,787    7.38    4.00$   63,935
+   ~4      inv-vol cap 2x             8.50    4.05$      94,398$  12,597    7.49    4.00$   62,984
+   2026 weights, capped (x equal): RelativeStrength 0.33, TwinContinuation 0.48, MondayLong 0.55, DualThrust 0.55, PaperTrend 0.57, OvernightBiasML 0.68, SwingTarget 0.74, VaultBreak 0.74, OvernightTick 0.76, BridgeMondayLong 1.01, LateDayFlow 1.23, ExpirationOpenShort 1.51, CLSundayFade_perMCL 1.90, NFPFade 1.94, ESMOCFollow_perMES 2.00
+
+full 19 (walk-forward weights, re-estimated each year)
+   size    book             2020-26 ret/DD  Sharpe  2023+ $ p50   DD p95  ret/DD  Sharpe   capital
+   ~2      equal                      6.71    3.48$      97,817$  14,628    6.69    3.17$   73,141
+   ~2      inv-vol                    8.27    3.98$      64,180$   8,303    7.73    3.86$   41,517
+   ~2      inv-vol cap 2x             8.60    4.02$      65,304$   8,578    7.61    3.83$   42,888
+   ~4      equal                      6.71    3.48$     195,634$  29,256    6.69    3.17$  146,282
+   ~4      inv-vol                    8.69    4.08$     127,302$  14,166    8.99    3.83$   70,828
+   ~4      inv-vol cap 2x             8.26    3.97$     140,302$  16,601    8.45    3.73$   83,005
+   2026 weights, capped (x equal): S30 0.18, RelativeStrength 0.40, Kusho 0.54, TwinContinuation 0.57, S47 0.58, MondayLong 0.66, DualThrust 0.66, FC2B 0.66, PaperTrend 0.69, OvernightBiasML 0.82, SwingTarget 0.89, VaultBreak 0.89, OvernightTick 0.92, BridgeMondayLong 1.22, LateDayFlow 1.48, ExpirationOpenShort 1.81, ESMOCFollow_perMES 2.00, CLSundayFade_perMCL 2.00, NFPFade 2.00

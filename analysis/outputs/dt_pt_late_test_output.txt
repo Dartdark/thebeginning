@@ -1,0 +1,44 @@
+[provenance] code efedbfee dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Dual Thrust without its target / Dual Thrust and PAPERTREND from 10:00 (user 2026-11-08, leads from ingredient_ablation2.py).
+
+1. Dual Thrust v4 (per NQ):
+   as is                              n  1623 $  139 t  4.37 PF 1.27 total $  226k maxDD $19.6k | 2018-22 $ 125 (t  3.1) 2023+ $ 156 (t  3.0) | worst $-1,042
+      longs                           n   826 $  130 t  3.02 PF 1.27 total $  108k maxDD $16.0k | 2018-22 $ 153 (t  2.8) 2023+ $ 104 (t  1.5) | worst $-1,042
+      shorts                          n   797 $  149 t  3.16 PF 1.28 total $  118k maxDD $24.1k | 2018-22 $  97 (t  1.6) 2023+ $ 212 (t  2.8) | worst $-1,042
+      by year $: {2018: 26902, 2019: 16425, 2020: 9843, 2021: 19862, 2022: 38085, 2023: 6760, 2024: 59523, 2025: 29414, 2026: 19254}
+   A no target                        n  1623 $  201 t  4.37 PF 1.36 total $  327k maxDD $27.4k | 2018-22 $ 181 (t  3.5) 2023+ $ 226 (t  2.8) | worst $-1,042
+      longs                           n   826 $  178 t  3.15 PF 1.34 total $  147k maxDD $21.7k | 2018-22 $ 196 (t  2.9) 2023+ $ 157 (t  1.7) | worst $-1,042
+      shorts                          n   797 $  226 t  3.08 PF 1.39 total $  180k maxDD $23.2k | 2018-22 $ 167 (t  2.1) 2023+ $ 299 (t  2.3) | worst $-1,042
+      by year $: {2018: 39028, 2019: 17080, 2020: 19023, 2021: 22582, 2022: 63290, 2023: 23820, 2024: 86758, 2025: 33709, 2026: 21554}
+   B signals from 10:00               n  1578 $   97 t  3.20 PF 1.20 total $  153k maxDD $27.7k | 2018-22 $  95 (t  2.5) 2023+ $ 100 (t  2.0) | worst $-1,017
+      longs                           n   826 $  133 t  3.28 PF 1.30 total $  109k maxDD $18.8k | 2018-22 $ 103 (t  2.2) 2023+ $ 169 (t  2.5) | worst $-1,017
+      shorts                          n   752 $   58 t  1.28 PF 1.11 total $   44k maxDD $30.1k | 2018-22 $  86 (t  1.5) 2023+ $  26 (t  0.4) | worst $-1,017
+      by year $: {2018: 24672, 2019: -9109, 2020: 18246, 2021: 30860, 2022: 17772, 2023: 27096, 2024: 21357, 2025: 12049, 2026: 10500}
+   dt_notarget: random side at the same signal bars $50, 95th $109; real $201; p 0.00
+   dt_late: random side at the same signal bars $-15, 95th $27; real $97; p 0.00
+
+2. PAPERTREND v2 (per NQ):
+   as is (marks from 08:45)           n   568 $  373 t  4.00 PF 1.65 total $  212k maxDD $27.8k | 2018-22 $ 369 (t  3.7) 2023+ $ 377 (t  2.2) | worst $-11,087
+      longs                           n   319 $  301 t  2.67 PF 1.59 total $   96k maxDD $24.2k | 2018-22 $ 310 (t  2.9) 2023+ $ 289 (t  1.3) | worst $-7,822
+      shorts                          n   249 $  464 t  2.98 PF 1.71 total $  116k maxDD $19.0k | 2018-22 $ 447 (t  2.4) 2023+ $ 485 (t  1.9) | worst $-11,087
+      by year $: {2018: 14868, 2019: -5001, 2020: 21066, 2021: 39292, 2022: 49002, 2023: 6400, 2024: 35931, 2025: 1028, 2026: 49018}
+   C marks from 10:00                 n   537 $  310 t  3.64 PF 1.60 total $  167k maxDD $19.9k | 2018-22 $ 311 (t  3.2) 2023+ $ 309 (t  2.0) | worst $-11,087
+      longs                           n   305 $  368 t  3.77 PF 1.95 total $  112k maxDD $16.0k | 2018-22 $ 303 (t  3.1) 2023+ $ 462 (t  2.4) | worst $-7,688
+      shorts                          n   232 $  234 t  1.56 PF 1.34 total $   54k maxDD $26.5k | 2018-22 $ 324 (t  1.7) 2023+ $ 126 (t  0.5) | worst $-11,087
+      by year $: {2018: 11653, 2019: -8335, 2020: 17163, 2021: 32572, 2022: 42506, 2023: 8636, 2024: 29290, 2025: 5334, 2026: 27733}
+   pt_late: random side $-3, 95th $153; real $310; p 0.00
+
+3. Personal book 1-year MC return / DD p95 (piece replaced by the Python rebuild as is vs the variant, 1 MNQ):
+   Dual Thrust:
+      2018-26: book 5.42 | DT rebuild as is 5.42 (+0.00) | A no target 5.29 (-0.13) | B from 10:00 4.87 (-0.55)
+      2018-22: book 5.45 | DT rebuild as is 5.45 (+0.00) | A no target 5.19 (-0.26) | B from 10:00 4.61 (-0.84)
+      2023+: book 6.10 | DT rebuild as is 6.10 (+0.00) | A no target 5.77 (-0.33) | B from 10:00 5.28 (-0.82)
+   PAPERTREND:
+      2018-26: book 5.42 | PT rebuild as is 5.33 (-0.09) | C from 10:00 5.30 (-0.12)
+      2018-22: book 5.45 | PT rebuild as is 5.40 (-0.05) | C from 10:00 5.40 (-0.05)
+      2023+: book 6.10 | PT rebuild as is 6.04 (-0.06) | C from 10:00 5.91 (-0.19)
+
+   Funded 150K x 1.5 + Twin 2 + Dual Thrust 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 19,932 blown  2.7% all 6 96.8% diff $   +0 beats 50.0%
+      DT 2 -> A no target 2              2y $ 19,516 blown  4.8% all 6 94.5% diff $ -417 beats 48.9%
+      DT 2 -> B from 10:00 2             2y $ 19,777 blown  3.3% all 6 96.0% diff $ -156 beats 49.7%

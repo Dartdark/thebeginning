@@ -1,0 +1,24 @@
+[provenance] code 29c76c68 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Twin Continuation: the author's 'Build Something Of Your Own' ideas (user 2026-11-08). PRE-REGISTERED (header committed with the
+   regime filters off on 64% (autocorrelation) / 81% (variance ratio) of trading days
+
+   base Twin cap1               n  1109 $  247 t  5.59 PF 1.62 | 18-19 $   30 20-22 $  377 23+ $  268 | BO n 749 $112 / MO n 360 $527
+      150K eval + 2 MNQ: pass 38.0% (18-22 37.7%, 23+ 38.3%) | vs base +0.0%
+
+   1 levels: prior day          n  2149 $  127 t  5.04 PF 1.37 | 18-19 $   24 20-22 $  179 23+ $  141 | BO n 1799 $50 / MO n 350 $520
+      150K eval + 2 MNQ: pass 36.9% (18-22 36.2%, 23+ 37.9%) | vs base -1.0%
+
+   2 levels: prior week         n   842 $  254 t  4.55 PF 1.57 | 18-19 $   16 20-22 $  427 23+ $  261 | BO n 480 $57 / MO n 362 $514
+      150K eval + 2 MNQ: pass 36.7% (18-22 35.8%, 23+ 38.0%) | vs base -1.2%
+
+   3 levels: round 100s         n   624 $  325 t  4.60 PF 1.70 | 18-19 $   44 20-22 $  493 23+ $  324 | BO n 251 $68 / MO n 373 $498
+      150K eval + 2 MNQ: pass 36.5% (18-22 35.8%, 23+ 37.4%) | vs base -1.5%
+
+   4 MO window 13:30-14:30      n   886 $  109 t  3.44 PF 1.34 | 18-19 $   14 20-22 $  226 23+ $   70 | BO n 825 $115 / MO n 61 $21
+      150K eval + 2 MNQ: pass 36.2% (18-22 35.8%, 23+ 36.7%) | vs base -1.8%
+
+   5 regime: autocorrelation    n   416 $  193 t  2.73 PF 1.46 | 18-19 $   55 20-22 $  385 23+ $  150 | BO n 275 $95 / MO n 141 $383
+      150K eval + 2 MNQ: pass 36.4% (18-22 36.2%, 23+ 36.8%) | vs base -1.5%
+
+   6 regime: variance ratio     n   181 $  188 t  1.78 PF 1.44 | 18-19 $  200 20-22 $  132 23+ $  195 | BO n 128 $81 / MO n 53 $447
+      150K eval + 2 MNQ: pass 35.8% (18-22 35.0%, 23+ 36.9%) | vs base -2.2%

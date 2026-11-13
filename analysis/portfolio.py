@@ -37,6 +37,12 @@ def load_mc(g, path):
     raw = pd.read_excel(path, sheet_name="List of Trades", header=2)
     ent = raw[raw["Type"].astype(str).str.startswith("Entry")].reset_index(drop=True)
     ex = raw[raw["Type"].astype(str).str.startswith("Exit")].reset_index(drop=True)
+    assert len(ent) == len(ex), f"{path}: {len(ent)} entries vs {len(ex)} exits"
+    # a position still open at the report's end is exported with an 'open' exit (marked, not closed): drop it
+    closed = (ex["Signal"].astype(str).str.strip().str.lower() != "open").to_numpy()
+    if not closed.all():
+        print(f"load_mc: dropped {(~closed).sum()} unfinished trade(s) in {path}")
+        ent, ex = ent[closed].reset_index(drop=True), ex[closed].reset_index(drop=True)
     et, xt = pd.to_datetime(ent["Date"]), pd.to_datetime(ex["Date"])
     dates = et.dt.strftime("%Y%m%d").astype(int).to_numpy()
     day = np.searchsorted(g.dates, dates)
@@ -153,7 +159,7 @@ def challenge(w, r, day_index, rules=RULES):
             return "pass", n
         if st == "fail":
             return "fail_mll", n
-        floor = max(floor, min(bal - rules["mll"], rules["start"] + rules["lock_above_start"]))
+        floor = max(floor, bal - rules["mll"])   # evaluation: keeps trailing (Codex 2026-11-06 #1; was capped at start + lock_above_start)
     if len(day_index) < rules["max_days"]:
         return None
     return "fail_time", rules["max_days"]

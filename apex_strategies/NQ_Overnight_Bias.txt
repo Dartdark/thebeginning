@@ -38,6 +38,10 @@
   costs): 997 trades, 49% winners, average $280, profit factor 1.40,
   positive every year; 1.23-1.47 across nearby settings. Confirm with a
   MultiCharts backtest. }
+// kill-switch file check through Windows (2026-11-01: EL Collections is not installed on the VPS; this line compiled there)
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";   { kill-switch tri-state (Codex REVIEW_kill_reply_20261102) }
+
 
 Inputs:
 	EntryBufTicks(2),       { live: enter at market if price is within this many ticks of / through the stop level }
@@ -58,7 +62,7 @@ Inputs:
 	EarlyExitTime(1130),
 	NumContracts(1),
 	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias 2026-10-30");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias 2026-11-05");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	EntryBuf(0),
@@ -178,6 +182,23 @@ else begin
 	DayExit = ExitTime;
 end;
 
+{ ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
+  While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
+KillOn = false;
+KillAttr = -1;
+KillErr = 0;
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	KillAttr = GetFileAttributesA("C:\TradingLogs\KILL");
+	if KillAttr <> -1 then KillOn = true else KillErr = GetLastError;   { read right after the call: 2/3 = not found }
+end;
+{ read check (Codex follow-up 2026-11-02 #3): -1 on the KILL file means "no file" only if the folder itself is readable.
+  Folder unreadable = state UNKNOWN: no new entries (open positions keep their normal exits; only a real KILL forces exits). }
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
+{ tri-state (2026-11-05): -1 with any error other than 2 (file not found) / 3 (path not found) = state UNKNOWN -> no new entries }
+if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
+
 { ---------- Entries: stop orders at the opening-range high / low ---------- }
 { a trade that opened and closed inside one bar still counts }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
@@ -187,7 +208,7 @@ if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition 
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
-	if Qty >= 1 then begin
+	if Qty >= 1 and NoEntry = false then begin
 		{ live fix (2026-10-14): a stop order on the wrong side of the market is rejected by the broker
 		  ("Invalid StopMarket order parameters"), so when price is already at / through the level
 		  (within EntryBufTicks) enter at market instead, which is how the backtest fills a gapped stop }
@@ -226,6 +247,10 @@ if MarketPosition <> 0 and Time >= DayExit then begin
 	Sell ("ON Bias LX") this bar on close;
 	BuyToCover ("ON Bias SX") this bar on close;
 end;
+
+{ kill switch: flatten while C:\TradingLogs\KILL exists (see the Kill switch block above) }
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") next bar at market;
 
 // ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
 // Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the

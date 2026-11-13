@@ -1,0 +1,29 @@
+[provenance] code 61073e8 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+NQ Noise Longs MultiCharts report (mc_reports/NQ_Noise_Longs.xlsx, user 2026-11-12: 1 NQ, ShortTrade false, no costs) vs the Python
+MC 2018-02-05..2026-11-11: n 2581 (qty [1.]), win 63.7%, gross $76.9, PF 1.34
+   exits: Profit Target 1512, LongEMAExit 488, Stop Loss 406, FlatLong1430 171, FlatLongEarly 4
+PY same span: n 2557, win 63.3%, gross $70.3, PF 1.31, net (our costs) $63.1
+same date + entry bar: 2509 of MC 2581 / PY 2557; same entry price 14.4%; same exit price 26.5%; median |gross diff| $0; P&L corr 0.977
+MC only 72 (gross $13,075), PY only 48 (gross $7,005)
+   MC by year gross $k: 18:+2.9 19:+7.1 20:+9.2 21:+29.3 22:+22.2 23:+46.6 24:+24.6 25:+29.5 26:+27.1
+   PY by year gross $k: 18:+5.0 19:+5.2 20:+8.4 21:+28.3 22:+24.7 23:+41.9 24:+19.1 25:+27.3 26:+20.0
+   first MC-only:
+                 ts   entry    exit           why  gross
+2018-02-14 12:30:00 6655.00 6680.00 Profit Target  500.0
+2018-02-20 13:00:00 6833.00 6816.00   LongEMAExit -340.0
+2018-12-26 13:00:00 6124.75 6149.75 Profit Target  500.0
+2019-05-16 13:45:00 7614.00 7596.75   LongEMAExit -345.0
+2019-06-07 10:15:00 7445.25 7431.75  FlatLong1430 -270.0
+2019-07-05 13:00:00 7865.50 7860.75   LongEMAExit  -95.0
+2019-07-05 14:00:00 7871.00 7867.50   LongEMAExit  -70.0
+2020-02-03 13:45:00 9122.00 9143.75  FlatLong1430  435.0
+   first PY-only:
+      date   t0   entry    exit          kind  gross
+2018-02-14 1300 6660.25 6685.25        target  500.0
+2018-02-20 1215 6840.00 6824.25 band/EMA exit -315.0
+2018-02-20 1315 6839.00 6815.75 band/EMA exit -465.0
+2018-11-23  915 6587.25 6562.00 band/EMA exit -505.0
+2018-12-26 1045 6012.75 6037.75        target  500.0
+2018-12-26 1100 6037.75 6062.75        target  500.0
+2018-12-26 1115 6068.50 6093.50        target  500.0
+2018-12-26 1130 6112.00 6137.00        target  500.0

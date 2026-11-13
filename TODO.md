@@ -4,8 +4,13 @@ Started 2026-10-17. Claude ticks items off when you say they're done and reminds
 bottom). Times are Central (CT).
 
 ## This week and next
+- [ ] **You, NOW (2026-11-12): JF150-5 inputs on the VPS:** set `HeartbeatTag` = `JF150-5` (blank, so the alarm said "not
+  running" while it traded +$145) and check the contract size (entered 1 MNQ, plan 2). The 08:21 check now names both.
+- [ ] **Settings report, recompile later (2026-11-12, user yes):** Claude adds the size + account inputs to each live strategy's
+  heartbeat line (2 lines each: ONB, EOS, Bridge Monday, Twin, DT, JF), checker reviews, then you recompile all 6 after a close
+  on a quiet evening. Then the 08:21 check sees a wrong size BEFORE the first trade (today it only sees it after an entry).
 
-- [ ] **Claude: re-run the backtests on the extended NQ data (daily feed, data now to 10/28; 2026-10-29).** Rebuild
+- [x] (2026-11-04, VB + ONB live replay 10/20-11/04: `analysis/outputs/live_replay_1020_1104_output.txt`; VB 15/15 trades identical, ONB: 10/27 missed (known compile miss), 11/04 entered one bar later (ADX 30.12 at 09:15 = knife-edge), same loss) **Claude: re-run the backtests on the extended NQ data (daily feed, data now to 10/28; 2026-10-29).** Rebuild
   scratch_data (`analysis/build_lab.py`), refresh `analysis/live_panels.py` (bt_cache.json) and the plan benches, and compare
   each live strategy's trades on 10/12-10/28 with what its backtest would have done (first real missed-trade check).
 
@@ -13,6 +18,7 @@ bottom). Times are Central (CT).
   typing each evening, and it guards the whole account's target. [Apex_Target_Guard_v2](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard_v2.txt)
   ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard_v2.txt)).
   Claude first checks from the logs whether Rithmic's Equity moves with open P&L (next live trade), then tells you to install it.
+  **2026-11-08: checked from the 10/30-11/04 ACCT logs: Equity moves with open P&L -> EquityHasOpenPL true; install with the next account.**
 
 - [x] (2026-10-29, user: feed on the chart) **NQ Daily Bar Feed (2026-10-29; VPS, outside market hours, ~5 min):** create `C:\TradingLogs\bars\`; new 1-minute @NQ
   chart (or @MNQ), Exchange time, CME 24h, loaded from 10/05, no strategy; add the indicator
@@ -55,6 +61,34 @@ bottom). Times are Central (CT).
   150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
+## Kill switch install (2026-11-01) - DONE 11/01 evening (remote KILL 18:07 -> phone + VPS flag ON 18:10; RESUME -> flag OFF 18:15)
+- [x] File check: EL Collections not installed; switched to Windows GetFileAttributesA, compiled on the VPS (2026-11-01).
+- [x] Latch test kill_test.ps1: ALL PASS (2026-11-01; 16 checks incl. Codex follow-up cases, 18:3x CT).
+- [x] Repasted the 2026-11-01 versions of VB, ONB ADX30, EOS, Bridge: all 8 charts report them (VPS feed 18:05, 2026-11-01).
+- [ ] You: Sunday test: `kill.ps1` -> ntfy KILL ACTIVE -> `kill.ps1 -Resume`; then a remote KILL / RESUME via Claude.
+      Steps: `live/vps/KILL_SWITCH.md`.
+- [x] Claude: `pending_install` removed (2026-11-01).
+
+## Firm view panel (2026-11-01, user yes) - after #4 is set up
+- [ ] Claude: once #4's account number is in and 2+ accounts are live, add a 'Firm view' panel to the Apex Live Desk:
+      total open risk and combined day P&L across all accounts, worst-case if every open position hits its stop, and a
+      flag when several accounts sit near their floors at once (the 'one bet' risk from `analysis/firm_risk_test.py`).
+      Also test correlated funded-account blow-ups before running many funded accounts.
+
+## Failover (2026-11-01)
+- [ ] You: fill in the table in `live/vps/FAILOVER.md` (VPS dashboard + support, Apex support, a second way into Rithmic)
+      and test logging in to R Trader Pro from your own PC once, on a quiet weekend.
+
+## Career (2026-11-01)
+- [ ] You: compare `career/resume_section.md` (v1) with `career/resume_section_v2_my_voice.md` (v2), pick what sounds like
+      you, then retype the final version **in your own words** (both drafts are Claude-written and carry the text
+      watermark; your own rewrite removes it). Then apply to Mercor's Generalist role and Finance Expert pool.
+- [ ] You: optional, finish practice 4 (paused at line 4) when you want more code-reading practice.
+- [ ] You (LOW PRIORITY, start when you say go): 4-week 'build it yourself' backtester (Karpathy loop, 2026-11-01).
+      Wk 1 pick the concept (an honest backtest) · Wk 2 type a ~30-line backtester yourself on one simple rule, Claude
+      explains each line first · Wk 3 plant the practice-round bugs (look-ahead, no costs, same-bar) and fix them ·
+      Wk 4 record yourself explaining it; add it to `portfolio/` as the piece you wrote. ~1-2 h a week.
+
 ## Live guard additions (2026-10-30) - this weekend
 - [x] VPS: follow `live/vps/VPS_MAINTENANCE.md` (updates only on Saturdays, weekly Saturday restart, Sunday pre-open routine).
 - [x] Repaste the live strategies once (VB, Overnight Bias, EOS, Bridge) from the repo: their heartbeat now stamps a code
@@ -62,20 +96,59 @@ bottom). Times are Central (CT).
 - [ ] On the VPS: `cd C:\TradingRepo; git pull` (watchdog: account-floor alarm and Apex-lock hint).
 - [ ] On the VPS after `git pull` (2026-10-30 fix): PowerShell `powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\watchdog.ps1`
       once, then `Get-Content C:\TradingLogs\alerts.txt -Tail 5`: no errors = the floor alarm can read the logs.
-- [ ] Claude: replay the Swing Target account benches with the corrected exit kinds (expected: ST adoption only stronger).
+- [x] Claude: 150K funded whole-number inputs (Codex audit): round the 1.5s down to 1, results unchanged (`FUNDED_PLAN.md`).
+- [x] Claude: opposing-position overlap measured (Codex audit step 2): benches overstate risk slightly on 4-17% of days; conservative, no decision changes (`FUNDED_PLAN.md`).
+- [x] Claude: personal ladder rebuilt on the 19-piece book (`PORTFOLIO.md`, `analysis/personal_ladder.py`): ~$10.9k = 4 pieces, ~$14.9k = 12 (best ratio), ~$24.3k = all 15 cleared, ~$36k = full 19.
+- [x] Claude: replay the Swing Target account benches with the corrected exit kinds -> ties; user reverted both funded swaps 2026-10-31.
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
 - [ ] Claude, once ~20 evaluations have finished: Brier-score the dashboard's pass odds (account_tools.pass_odds at each start)
       against actual pass / fail, to check they aren't too optimistic (idea from the 'Simulate like a quant desk' X article, 10/30).
-- [ ] Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
-      them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Swing Target, T_ONESIDE, Monday Long); funded floor rules in
+- [x] (2026-11-05, repo only: heartbeat + HB_Ver in the 9 files, `funded_rules` in expected_setup.json; NOT compiled on the VPS yet, rejected-orders limit is set on each chart when it is made) Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
+      them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Dual Thrust, T_ONESIDE, Monday Long); funded floor rules in
       expected_setup.json (150K: trail 4,000, lock 150,100); rejected-orders limit 10 on every funded chart.
+- [x] (2026-11-05, code in all 6 files, HB_Ver 2026-11-05; compile on the VPS = the next repaste, not yet done) Claude, with the NEXT planned repaste of the live charts (user, 2026-11-02: "fold it", not a repaste of its own):
+      kill-switch file-error tri-state (Codex REVIEW_kill_reply_20261102, medium). KILL file query = -1 with a readable
+      parent folder is now read as 'no KILL'; check GetLastError: 2/3 (not found) = no KILL, anything else = UNKNOWN ->
+      NoEntry. All 6 kill-switch strategy files; VPS compile + check inputs survive the paste.
+
+## When an account is FUNDED (passes its evaluation) - do before its first funded trade (added 2026-11-08)
+- [ ] **You:** paste and compile the funded strategy files (VB_SP, ONB ML, Monday Long, Late-Day Flow, NFP, EOS, CL fade;
+      version 2026-11-08); read the Output tab for 'compiled successfully' on each (first compile of `GetRTAccountEquity`
+      inside a strategy: if it fails, send Claude the error).
+- [ ] **You:** on every funded chart set the cushion guard inputs (`funded_strategies/FUNDED_PLAN.md`, 'Cushion cap'):
+      NOTHING to set (2026-11-09: auto account rules; cushion on only for PA- accounts, 50K / 150K from the balance). All 13 funded files now
+      (Bridge Monday, ES MOC, RS, Dual Thrust, Overnight Tick added; code version 2026-11-09).
+- [x] ~~Retype PeakSeed after restarts~~ automated 2026-11-09 (VPS peak files, `live/vps/cushion_peak.ps1`).
+- [ ] **Claude:** first funded day: check from the logs that each entry's size matches the cushion (balance - threshold)
+      and the stop cap; add the account to `FUNDED` in analysis/account_tools.py and to expected_setup.json.
 
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
+- Note (user 2026-11-08): the job starts Nov 10 and the FIRST payday is likely Mon Nov 17, not Fri Nov 13; dates below shift once the pay schedule is known.
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
       after tax ~3 (5 days/wk) / ~4 (6 days/wk); without tax 4 (5 days) / 4-5 (6 days). Dec 26 pay (3 days): ~2, January starts.
+- [ ] **Rithmic copier (user 2026-11-09)** - R|Trader Pro > Copier (Apex must have copy trading enabled for your login; $10 a month;
+      no other copier at the same time): leader 1 = one evaluation account, followers = the other evaluations; leader 2 = one
+      funded account, followers = the other funded accounts; **every follower multiplier 1, rounding default**. MultiCharts charts
+      run on the two LEADERS only (gear account = the leader). When the evaluation leader passes or fails: make another evaluation
+      the leader in R|Trader Pro and set it as the gear account on its 6 charts (nothing else changes). Cancel orders from the leader
+      only. First live week: Claude checks the group log (live/health/group_log.csv) and that followers' fills match the leader's.
+- [x] (done 2026-11-12: recompiled with TgtNearPct, set on every #5 chart incl. JF150-5) **Every live chart from the next purchase: ONE helper, `Apex Chart Guard` (user 2026-11-09: streamline)** - compile `apex_strategies/Apex_Chart_Guard.txt` as a Signal named "Apex Chart Guard"; on each chart remove Apex Trade Logger / Apex Chart Monitor / Apex Target Guard / Apex Stop Guard and add the guard: `Tag` (as before), `AccountName` typed exactly, `TargetBalance` left at -1 (auto: evaluation accounts get their target, others none), `StopPoints` only on Bridge Monday. Nothing to type in the evenings any more (it reads the balance from Rithmic). Claude checks the first day's rows (OPEN / CLOSE / POS / ACCT) arrive as before.
+- [ ] **150K evaluations from the next purchase: FINISH MODE on all six evaluation charts (user 2026-11-09)** - paste the new code of VB (`apex_strategies/NQ_Vault_Break.txt`), ONB ADX30, Bridge Monday, EOS (`funded_strategies/NQ_Expiration_Open_Short.txt`), Twin 150K and Dual Thrust (all HB_Ver 2026-11-09), compile each ('compiled successfully'), nothing to set (2026-11-09: finish mode is on by default and acts only on 150K evaluation accounts). Half size from a $156,000 session-start balance, automatic (reads Rithmic once a day). First check: the first time an account closes at $156,000+, Claude confirms in the logs that the next day's orders were half size.
+- [ ] **150K evaluations from the next purchase (user 2026-11-09): Vault Break `NumContracts` 20 -> 15 (other VB inputs unchanged) and a
+      6th chart, Dual Thrust 2 MNQ** (`funded_strategies/NQ_Dual_Thrust.txt`, the same file as the 150K funded chart: 1-minute MNQ, Exchange
+      time = CT, CME 24h session, IOG off, `NumContracts` 2, `HeartbeatTag` DT150 or DT150-<n>). Compile, check 'compiled successfully';
+      Claude adds DT150 to expected_setup.json. Quarterly check in the Friday review: back to VB 20 / no DT if VB 20 wins the last 12 months
+      (FUNDED_PLAN '150K' section, `analysis/vb_vs_dt_eval.py`).
+- [ ] **150K accounts from the next purchase (user 2026-11-08): a 5th chart, Twin Continuation 150K** (`apex_strategies/Twin_Continuation_150K.txt`):
+      MNQ 1-minute chart, 24h CME session, Data1 only, Intrabar Order Generation OFF; inputs Qty 2, BO_MaxStopMult 1 (defaults),
+      HeartbeatTag TW150 (or TW150-<n> per account); funded accounts also UseCushion true + the cushion inputs (FUNDED_PLAN 'Cushion cap').
+      Compile and read the Output tab ('compiled successfully'; first compile of this file). Claude adds TW150 to expected_setup.json.
+      Then (outside market hours) run a MultiCharts backtest of this file on NQ 1-minute 2018+ with Qty 1, BO_MaxStopMult 1, and send
+      Claude the List of Trades: Claude checks it trade by trade against the Python port (analysis/twin_continuation_test.py, v21=True)
+      so the added kill / heartbeat / cushion blocks change no trades.
 - [ ] Each new account: 4 charts, account number typed in every strategy's Auto Trading gear, rejected-orders limit 10,
-      initial position Flat; send Claude the number (watchdog / dashboard / expected_setup.json).
+      initial position Flat; send Claude the number (watchdog / dashboard / expected_setup.json) Claude sets its status to "live" in expected_setup.json: that also un-mutes the watchdog's phone alerts (muted 2026-11-05 while no account is live).
 - [ ] Stop buying if the drift alarm fires (live clearly below backtest). No more new 50Ks; #2 runs to the end.
 - Expected funded 150Ks: after tax ~6 (5 d) / ~8 (6 d) by Dec 31; no tax ~8 (5 d) / ~10 (6 d); +~4-5 more by late January.
 - From January: refill slots up to ~20 from payouts.
@@ -84,7 +157,8 @@ bottom). Times are Central (CT).
   ~$100k at 75% / ~$60-70k bad year, nearly all March-December. Plan Jan-Feb with no trading income.
   If the job continues through 2027 (~$850/wk after tax): reach 20 slots by ~February from pay, then switch pay to the
   personal account from ~March: ~$320k backtest / ~$175k at 75% from Apex (median), + personal account ~$30k by autumn.
-  Budget simulation (analysis/ramp_budget_test.py, 10/30): job to Dec 24 -> 2027 median ~$252k backtest / ~$89k at 75% (whole contracts, rerun 10/30);
+  Budget simulation (analysis/ramp_budget_test.py; rerun 11/08 with the corrected evaluation floor, 150K pass 33% / 24% at 75% edge):
+  job to Dec 24 -> 2027 median ~$237k backtest / ~$72k at 75% (was $252k / $89k);
   13-31% of histories have NO funded account by Dec 31 (then $0 in 2027 without the job). Buy ONE evaluation a day,
   not all on payday (same-day accounts pass or fail together).
 
@@ -194,13 +268,45 @@ after 15:59 CT, never with a position open.
 
 ## Swing Target NQ v2 (your file + Codex's test, 2026-10-25: B, personal candidate; not Apex-legal as written)
 
+- [x] **MultiCharts backtests to run (research, home PC; send each Strategy Performance Report):** ALL THREE DONE 2026-11-09 (`analysis/outputs/mc_confirm_3_output.txt`: S30 169/169, ZT 604/604, Ricochet 99.2%)
+      (a) **Ricochet 1144 target 80** (WATCHLIST #35): `checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt`
+      ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/ricochet_1144/NQ_Ricochet_1144_T80.txt)),
+      @NQ 5 min, Exchange time, CME 24h, Bar Magnifier 1 min, IOG off, NumContracts 1, 2018 -> now; Claude matches it to python_trades_t80.csv.
+      (b) **S30 IBS with `IbsEntry` 0.10** (WATCHLIST #34): `checks/candidates/s30_ibs/S30_IBS.txt` on @NQ **15 min** (the file counts 26 cash bars; 1 min gives 0 trades), back-adjusted continuous, Exchange time, 24h,
+      IOG off, `IbsExit` 0.80, ContractQty 1, 2018 -> now (expect ~172 trades).
+      (c) **ZT continuation EntryZ 1.25** (WATCHLIST #36): `checks/candidates/zt_continuation/NQ_ZT_Continuation.txt`
+      ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/relaxed-bell-dr4os0/checks/candidates/zt_continuation/NQ_ZT_Continuation.txt)),
+      @NQ 15 min, Exchange time, CME 24h, IOG off, 1 contract, 2017-06 -> now (warm-up; expect ~600 trades from 2018); Claude matches it to python_trades_z125.csv.
+- [ ] **BENCHED (user 2026-11-10): older-data validation on hold until the user decides to buy data.** MC feed only reaches 11/13/2016 (too little to add). When resumed: buy 2009-2016 1-min from a vendor (Databento / FirstRate Data / Kibot), Claude converts and runs the leads below.
+- [ ] **You (MultiCharts, any evening): export OLDER 1-minute bars, 2009-01 -> 2017-12, for NQ, ES, YM, GC and CL** (user 2026-11-10:
+      'put all of them on the todo for older data'). Same way as the existing `data/<SYMBOL>_1min_<year>.csv` files
+      (date,time,open,high,low,close,volume; Exchange time = CT; 24h session; continuous contract as now; one file per year).
+      Upload them; Claude then runs out-of-sample tests on data no screen has seen:
+        NQ: Overnight Tick x fear / oil volatility / stretched S&P (WATCHLIST #37, #38), Swing Target and PaperTrend regime leads (#38),
+            Twin RTH breakout + skip VXN-rising, Ricochet 1144 + skip Nasdaq-fear spikes, Donchian morning + skip VXN-rising,
+            Turn of the month + skip copper/gold-rising (rescue leads, `analysis/rejects_sweep.py`);
+        ES + YM: Fade YM vs ES + high FINRA short ratio (FINRA starts 2018-08: only the fade itself can be retested; the filter
+            needs new data);
+        GC: GC combo + fear-day filter (its taker-flow vote needs order-flow data, from 2018 only: partial retest);
+        CL: CL Sunday fade x OVX (WATCHLIST #37; OVX starts 2009-09).
+      Not testable on older data: FINRA short + DIX (FINRA from 2018-08) -> forward data only.
+- [ ] **You (MultiCharts, low priority): 6J 1-minute bars 2017-12 -> now**, same format as `data/6E_1min_<year>.csv` (24h, Exchange time, one file per year). Lets Claude rerun the 6J Pivot Continuation note on its own market (`analysis/pivot_continuation_test.py`; the port to 8 other markets failed, TIER_LIST F).
+- [ ] **You (MultiCharts or any data source, low priority): DAILY closes of the 1st-, 2nd- AND 3rd-nearby contracts** (not continuous; 3rd added 2026-11-10 for relative basis, SSRN 3404561) for CL, NG, GC, SI, HG, ZC, ZS, ZW, ZN, ZB, 6E, ES, as far back as available (paper 2026-11-10: basis-momentum, `papers/ssrn-2587784.pdf`). In MultiCharts: symbols like @CL and @CL2 (2nd continuation, unadjusted), Daily, CSV date,close. Unlocks the basis-momentum test (personal account / capital bench; monthly holds).
+- [ ] **Personal account (when it starts): CL Sunday fade with oil-volatility sizing** (user 2026-11-10; watched, WATCHLIST #37): `funded_strategies/CL_Sunday_Gap_Fade.txt` (version 2026-11-10) on the personal CL chart, `NumContracts` 1, **`UseOVX` true, `OVXQty` 2** (2 MCL on weekends after a high-OVX Friday). Automatic: the VPS task OvxDaily (installs itself) writes the flag; log `live/health/ovx_log.csv`. Funded charts keep `UseOVX` false.
+- [ ] **Personal account (when it starts): FINRA short-volume longs at 1 MNQ** (user 2026-11-09; watched, WATCHLIST #32): `checks/candidates/finra_longs/NQ_FINRA_Short_Volume_Longs.txt` on 1-min MNQ (file header), input **`UseFlagFiles` true**: fully automatic from the VPS task `FinraDaily` (`live/vps/finra_daily.ps1`, installs itself), nothing daily. Plus one Apex Chart Guard (`TargetBalance` 0).
+- [ ] **Personal account (when it starts): ZT continuation at 1 MNQ** (user 2026-11-09; watched, WATCHLIST #36): `NQ_ZT_Continuation.txt` on 15-min MNQ, Exchange time, 24h, IOG off, defaults as in the file (EntryZ 1.25, 08:35-14:45). No more than 1 MNQ (corr 0.41 with the book).
+- [ ] **Personal account (when it starts): Overnight Tick / VIX at 2 MNQ** (contracts input 1 -> 2; user 2026-11-08). Same chart and code as now.
 - [ ] **Personal account (when it starts): PAPERTREND v2 at `Qty` 1** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/papertrend/PAPERTREND_v2_claude.txt)), 5-min MNQ, Exchange time, IOG off, `StopATRMult` 2, logger tag `PT`.
 - [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).
-- [ ] **When a 50K account is funded:** Vault Break `NumContracts` 1 (was 2), `FlaggedContracts` 1, + Swing Target v3 `Qty` 1. **150K funded:** Swing Target `Qty` 2 instead of Dual Thrust (`FUNDED_PLAN.md`).
+- [ ] **When a 50K account is funded:** Vault Break `NumContracts` 2, `FlaggedContracts` 1, no Swing Target. **150K funded:** Dual Thrust `NumContracts` 2, no Swing Target (reverted 2026-10-31, `FUNDED_PLAN.md`).
 
 
 ## Later
 
+- [ ] **Export order-flow + gamma from 2026-07-07 to now** (home PC; `OFB_OrderFlow_Exporter`, `OFB_Gamma_Exporter`,
+  `OFB_GexOI_Exporter` in `tools/exporters/`, same charts and settings as before, a few days of overlap). All three files
+  in `data/` stop on 07-07. This unblocks Overnight Tick / VIX's backtest (24 live-period MC trades averaged -$280 per NQ)
+  and watchlist #1 / #5 / #15. List: `agents/claude_evidence/DATA_NEEDED_CLAUDE.md` (C01) (Claude, 2026-10-31).
 - [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
   (Exchange time, 24-hour session), into `data/` (or `C:\TradingVault`, then sync). Claude then tests the NG storage report
   (Thursdays 9:30 CT) and the USDA WASDE report (monthly, 11:00 CT) on ZC / ZS (2026-10-20,
@@ -226,640 +332,10 @@ Claude reminds you every **Sunday and Wednesday at 10:52 CT** (Central). Since 2
 separate session 'Scheduled jobs (journal, Friday review, reminders)', together with the 16:40 CT journal trades and the
 Friday review. Say "stop the reminders" to turn them off, or ask for a different schedule.
 
-## Promising strategies awaiting verification (user, 2026-10-27)
+## VPS status for Claude (2026-11-01)
+- [ ] Install the 5-minute status snapshot: steps in [live/vps/VPS_STATUS.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/live/vps/VPS_STATUS.md) (git pull, test with -Diag, one schtasks line), then tell Claude "status installed".
 
-- [ ] **dot arXiv evaluation complement — source-reviewed, untested; NEEDS DATA/RULES.**
-  Prioritize calendar-spread feedback (2501.03171) for frequent counter-moves and drift-burst reversal (2601.08974)
-  for direct CME relevance; queue imbalance (1512.03492) is the transparent native-book baseline. No proven CME
-  high-win sleeve or pass-rate benefit. First check paired/native quote availability, causal event timing and complete
-  exits, then distinctness from closed flow-fade families. No paused program or automatic backtest resumed.
-  [dot's ranked reviews and book-fit criteria](agents/codex/results/dot_arxiv_eval_shortlist_20261111.md)
-  · [Shared input admission](agents/codex/DATA_NEEDED.md#dot-arxiv-evaluation-complement--native-quotes-and-causal-rules-2026-11-11).
-
-- [ ] **Three-paper candle-pressure/jump model — NEEDS RULES; third-party screenshot, not independently verified.**
-  Papers 0803.1769v1 / 2106.07040v1 / cond-mat0307332v2 motivate jump normalization and pressure/liquidity response.
-  Screenshot claims 855 trades, 82.22% wins, PF 1.41; arithmetic fits roughly 0.3R winners/1R losers. Need one annotated
-  entry or the exact pressure, comparison window, fade/follow, stop/target, timing, session, size and fill/cost rules.
-  Owned NQ bars/aggressor aggregates support a labeled adaptation; exact event-time quote/book/news inputs remain partial.
-  User then authorized actual derived-strategy work: all19explicit adaptations across6batches fail frozen2018–22 gates,
-  including two-hourpre-eventmemory. Positive linearbook variant is weak/cost-fragile, not selected.
-  Original screenshot rules remain missing; owned nativeprice/aggressor and archiveddepth inputs have been audited.
-  Exactnative ladder/event/receipt/buildvintage prerequisites remain missing; prior failedfamilies stay closed.
-  [Actual build/test report](agents/codex/results/pressure_strategy_build_20261110.md). No150Kbenefit established.
-  [Full reconstruction and five-question reviews](agents/codex/results/pressure_papers_reconstruction_20261110.md)
-  · [Shared data/rule gaps](agents/codex/DATA_NEEDED.md#three-paper-candle-pressure-model--source-rule-gap-2026-11-10).
-
-- [ ] **API information before EIA — NEEDS DATA, uploaded SSRN 3747330.**
-  Source API actual minus Bloomberg EIA consensus; normal EIA−60/−1 minute hold. Source Sharpe 0.67 overall,
-  2.10 on 77 extreme events, no demonstrated native-cost/rolling-decile/net-holdout validation. New source-only
-  audit recovered API 2021/22 schedules and confirms all 90 matched CL endpoint/planned paths exist. Do not request
-  duplicate CL exports. Need original API/EIA/consensus clocks, pre-entry median and native contract/execution
-  reconciliation. Prior API price-follow/fade work remains weak; no automatic price-proxy/timing rescue.
-  Smallest next check: one genuine sequential-release/consensus-to-fill ledger using owned or lawful free inputs.
-  [Full uploaded-version review](agents/codex/results/ssrn_five_20261110.md)
-  · [D58](agents/codex/DATA_NEEDED.md). Zero new return tests; no allocation or paid acquisition.
-
-- [ ] **Low-turnover curve-aware commodity momentum — conditional PERSONAL / NEEDS DATA, SSRN 2485314.**
-  Uploaded 2014 Table 2 conservative-cost source 8.42% annual excess/Sharpe 0.60 versus generic 3.98%/0.25.
-  Merit: maturity selection and lower turnover, not a new independent directional engine or Apex daily-flat rule.
-  Missing 24-name native maturity/expiry/liquidity panel, exact front-slope extrapolation/expiry convention and
-  integer cash/roll costs. Reuse shared curve data needs; do not substitute one continuous contract. Next: one
-  source-consistent formation/selected maturity/hold/roll/cash reconciliation, then coverage/cost/power gate.
-  [Review](agents/codex/results/ssrn_five_20261110.md)
-  · [D59](agents/codex/DATA_NEEDED.md). No return test, fresh holdout or strategy promotion claimed.
-
-- [ ] **Diversified trend/value/carry foundations — conditional PERSONAL research baselines.**
-  Uploaded SSRN 2089463/2174501/2298565 verified against actual versions. Useful broad/monthly architecture,
-  not three independent verified additions. Need native excess-return/value/carry/roll/cost panels and long
-  warmup; the 2012 value/momentum draft also conflicts on bond-value definition and headline/table Sharpe.
-  Smallest check is a source-matched formation/roll/cash example and version reconciliation before returns.
-  BTC versions would be new adaptations; no source BTC result or automatic intraday/NQ/failed-family port.
-  [Five-question reviews](agents/codex/results/ssrn_five_20261110.md) · [Shared data needs](agents/codex/DATA_NEEDED.md).
-
-- [ ] **MNQ two-bar compression — NEEDS RULE/PARITY CHECK (dot, 2026-11-10).**
-  October 18 Whop commenter claims 110 trades, PF 1.59 versus baseline 1.11, halves 1.76/1.45; unverified.
-  Merit: a specific MNQ comparison. Need exact compression/lookback, session, trigger, side, exit, dates and costs;
-  first compare with existing ES two-bar code and prior repository coverage. ES Core3 remains weak; failed NQ NR7
-  is a different rule and is not reopened. Novelty is unestablished. No backtest or automatic schedule authorized by
-  this retention; no promotion or allocation. [dot review](agents/codex/results/dot_whop_review_20261110.md).
-
-- [x] **Gold crowded-long liquidation — REJECT EVALUATION FEASIBILITY (2026-11-10 UTC).**
-  User authorized implementation/testing. Acquired free Disaggregated Managed Money fields; official sample and
-  all313overlapping OI rows match. Frozen no-return census:38entries in2018–22,23report clusters; only20.4% of30-day
-  windows contain an entry. Fails >=40events/>=25%window gates. No P&L or2023+/account test; profitability untested.
-  Current mirror is not original vintage; native contract/quote/cost gaps remain. No threshold/window rescue or
-  automatic further test. [Completed screen](agents/codex/results/gold_crowding_feasibility_20261110.md)
-  · [Original hypothesis](agents/codex/results/gold_market_hypothesis_20261110.md) · [D56](agents/codex/DATA_NEEDED.md).
-
-- [ ] **Late-day relative-strength continuation — frozen design lead, advancement gate FAILED (2026-11-08).**
-  NQ/ES residual at14:00CT, absZ>=1.25, stop0.25ATR, exit14:30, no ownmovehurdle.
-  Owned2018–22:244trades, net$40163perNQ, t3.72, PF2.19, dailyDD$4157 versusLDF$15036;
-  one-minute delay remainspositive. Merits are standalone design evidence, not verified portfolio benefit.
-  Registered incrementalprofitconfidence gate versusLDFfailed (paired annual5/95%−$4890/+ $5393);
-  **no2023+,accounttests orpromotion**. The proposedLDF+RScombinedfilter separately rejected.
-  Smallest nextcheck: independent code/clock/cost/parity review of frozen engine and source receipts.
-  Further economic work needs a separate committed protocol preserving failure/selectionhistory; no
-  automatic retuning, reopening gate, freshholdout claim or live change. No missing paid dataset requested.
-  [Completed screen](agents/codex/results/ldf_rs_20261108.md) · [Frozen plan](agents/codex/plans/ldf_rs_20261108.md).
-
-- [ ] **KSE Sentinel / PSX trend continuation — NEEDS RULES AND VALIDATION (uploaded SSRN7102818).**
-  Low-priority personal-market lead only. Author claims 1,009 trades, PF 2.51, Sharpe 2.08,
-  PKR CAGR 7.47% but USD CAGR −2.96%; unverified. Exact EMA/regime/exit/sizing rules withheld;
-  DSR left as a placeholder, archive/forward outcomes not supplied. Public strategy shortlink
-  returned HTTP 403; bounded title/link search found no reproducible specification. Next only
-  with free new inputs: frozen rules/code plus a small dated trade/blocked-signal and cost/FX
-  ledger before acquiring full PSX point-in-time history or admitting a return experiment.
-  Do not invent settings, use an opaque API as verification, or adapt to NQ/ES automatically.
-  [Review](agents/codex/results/kse_sentinel_7102818_review.md) ·
-  [Data register](agents/codex/DATA_NEEDED.md#kse-sentinel--psx-source-rule-gate-uploaded-ssrn7102818).
-  **User-requested custom MNQ follow-up (2026-11-08): REJECT.** Explicitly selected our own
-  intraday version, not PSX replication. Frozen EMA9/21 two-candle rule, design2018–22:
-  1,238trades at1MNQ, gross−$240.50, net−$3,013.62, PF0.90, t−1.23; baseline net−$1,999.62.
-  Failed standalone gate; no2023+/account/PowerLanguage stages or rescue. Original PSX source
-  remains gated; this result does not test its withheld rules. [Build/test](agents/codex/results/sentinel_mnq_20261108.md).
-
-- [ ] **International Buffett-indicator allocation — NEEDS DATA AND SPECIFICATION (SSRN4071039).**
-  Conditional low-priority personal long-term lead: country-wise matured ten-year-return regressions on
-  log(market-cap/GDP), equal-weight top7 of14, reset everyten years. Source composite10.5% versus9.5%,
-  Sharpe0.57 versus0.49, DD−52.1%; not independently reproduced. Source waits for label maturity but
-  quarter-end GDP publication/vintages are unverified. Need1973–2019 quarterly total-market cap, GDP/RI/
-  rates and native base-currency/FX/composite-cost ledger. OECD/World Bank free probes proxy403; annual
-  proxy is nonmatching. Next: one country/formation identity, released-GDP/mature-label/cash reconciliation,
-  then coverage/power and committed protocol. No intraday/NQ/crash-timing substitute or new return trial.
-  [Review](agents/codex/results/buffett_international_4071039_review.md) ·
-  [Evidence](agents/codex/evidence/buffett_international_4071039.md) · [Data register](agents/codex/DATA_NEEDED.md).
-
-- [ ] **Diversified delta-straddle trend — NEEDS DATA AND SPECIFICATION (SSRN4677166).**
-  User-requested offline signal/whole-lot planner now built:34synthetic mechanical checks pass; no return backtest
-  or personal allocation established. Native replay/cash adapter still requires the matching data below.
-  Conditional low-priority personal lead: explicit smooth t-stat signal,32/64/126/252/504-day blend and41-market
-  risk-scaled portfolio. Author reports9.27%annual/Sharpe1.03/13.60%DD, not independently reproduced; fast4/8/16-day
-  version loses after modeled costs. Need full identified futures/FX total-return/carry panel,504-session warm-up,
-  native rolls/cash/collateral/margins, causal liquidity weights and exact execution/no-trade-band conventions.
-  Owned/free replication searches did not admit a matching panel. Printed AR(1)t adjustment and fast DD below−100%
-  require reconciliation. Next only on new inputs: one rebalance/roll/cash interval, then coverage/cost/power gate
-  before committed returns. No NQ subset, intraday port, failed-family rescue or allocation; multiday holds fail Apex.
-  [Review](agents/codex/results/delta_straddle_4677166_review.md) · [Code/test report](agents/codex/results/delta_straddle_4677166_build.md) ·
-  [Data gate](agents/codex/inputs/delta_straddle_4677166/free_data_gate.md).
-
-- [ ] **SPY “Beat the Market” replication audit — conditional low-priority NEEDS DATA (SSRN7323419).**
-  **User-authorized ES adaptation now TESTED / REJECT DESIGN:**2018–22complete-day selected net$25,517.50
-  versus BASE$107,475; return Sharpe.663versus1.281. Three definitions including shadow, no rescue/2023+
-  or account stage. [Actual ES test](agents/codex/results/delgado_es_20261108.md). Exact SPY gate remains separate.
-  User subsequently nominated the unchanged baseline for a separate2023+test: recent net+$49,755but return
-  Sharpe.550,2025nearly flat/2026−$32,910andDD$56,842.50. Baseline's own recent t/bootstrap fail; no allocation.
-  [Baseline validation](agents/codex/results/delgado_es_baseline_20261108.md). No modified-candidate rerun/tuning.
-  Author closely replicates the historical SPY noise-band/VWAP result, but reports−8.1%September2025–August2026;
-  final overlays selected after80adaptive SPY alternatives, no clean holdout, and fail to improve QQQ Sharpe.
-  Native SPY minute/dividend/calendar/cash/borrow data and authenticated replication engine/trial package missing
-  after bounded free checks. ES historical code/results now exist; existing NQ/ES failures remain retained.
-  Next only on genuinely new inputs: one causal formation/dividend/early-close/fill cash reconciliation, then
-  coverage/cost gate before economic protocol. No personal or Apex allocation.
-  [Review](agents/codex/results/delgado_7323419_review.md) · [D55 data needs](agents/codex/DATA_NEEDED.md).
-
-- [ ] **ETF-flow stock selection — NEEDS DATA AND SPECIFICATION (SSRN7517178).**
-  Conditional personal-stock lead: monthly top/bottom50 using z12−z3 of thematic/sector ETF-induced pressure.
-  Authors report17.57%annualized/Sharpe0.98 design; later Jan–Aug2026 earns8.54% versus16.82% benchmark,
-  Sharpe0.54 versus2.01. Source-only, not net verified. Need as-of NAV/shares/splits, historical holdings/category,
-  stock market caps/membership and borrow/financing/cost clocks. Public Trackinsight/SEC checks proxy403;
-  current ETF prices/holdings are not matching historical inputs. Next: one formation month and availability/
-  stock-pressure/cash ledger without returns, then coverage/power and committed protocol. Zero new return trials,
-  NQ/ES substitute or current allocation. [Review](agents/codex/results/etf_flows_7517178.md) ·
-  [Evidence](agents/codex/evidence/etf_flows_7517178.md) · [Data register](agents/codex/DATA_NEEDED.md).
-
-- [ ] **Lagged-volume intraday risk sizing — conditional SOURCE/EXECUTION WATCH (2026-11-06), SSRN5795584.**
-  Specific merit and unreplicated author results: [record](agents/codex/research/scout/records/5795584.json).
-  Owned price/volume fields overlap; this does not reopen prior generic volatility-targeting failures.
-  Prerequisites: causal preprocessing, observed paths and native costs/integer exposure. Smallest next check,
-  only with genuinely new matching evidence: reconcile one available-at forecast-to-position transition without
-  imputing prices or assuming fractional fills. Park and continue discovery; no allocation or TEST admission.
-  [D53](agents/codex/DATA_NEEDED.md#2026-11-06-volume-conditioned-risk-watch),
-  [checkpoint](agents/codex/results/scout_owned_source_20261106.md).
-
-- [ ] **Signed Treasury jump-risk premium — conditional personal WATCH / NEEDS DATA (2026-11-05), SSRN1716759.**
-  Merit: a specific countercyclical jump-risk predictor; the author abstract reports OOS Sharpe0.52 and the related
-  Tilburg thesis Table18 reports IR0.52 for2003–2009. Neither is our native ZN result. Monthly duration-normalized
-  JP Morgan index bets/CRSP excess-return targets do not establish an Apex intraday strategy. Need authenticated
-  published rules/version parity, causal jump detection/initialization and12/24-month formation, five-year
-  normalization/staggered-bet warm-up, source target/roll/duration reconciliation and actual integer sizing/costs.
-  Own named ZN exports start2017; no complete pre2018warm-up/native ledger is established. A bounded free check
-  found a public project advertising older ZN data, but its README explicitly excludes proprietary raw inputs.
-  Smallest later check only with genuinely new matching source/data: reconcile one fully past-only formation,
-  target and dated-contract position before assessing complete2018–22power or preregistering returns. Do not
-  shorten holds, omit overnights, impute jumps or recycle news-fade definitions. Park and continue discovery.
-  [D52](agents/codex/DATA_NEEDED.md#2026-11-05-treasury-jump-risk-watch),
-  [record](agents/codex/research/scout/records/1716759.json),
-  [source checkpoint](agents/codex/results/scout_owned_source_20261105.md).
-
-- [ ] **BTC asset-manager option positioning — SOURCE/DATA CHECK (Shen/Li/Luo2026).**
-  Merit: published CME-specific second-week-ahead predictive association beyond futures positioning, attributed to
-  non-momentum risk-transfer/inventory response; net strategy profit unverified. Need full residual/target rules,
-  matching option/futures positions, actual Friday/backlog availability and native costs. OwnTFFarchives are
-  futures-only. Bounded free combined-data request and manuscript reader were403; park, no unchanged retries,
-  paid access or user request. Smallest next check is an authenticated full source plus one matching released row.
-  [Metadata/acquisition record](agents/codex/results/scout_expanded_data_intake_20261101.md), data registerD46.
-
-- [ ] **COT top-four concentration -> gold — SOURCE/CAUSAL-CLOCK CHECK (Liu et al.2023).**
-  Merit: author Table5links CL top-four net concentration to GC(coefficient0.0457,SE0.0154); specific cross-market
-  information distinct from previously rejected dealer/nonreportable ranks. Owned COTheaders contain the fields;
-  net strategy profit is unverified. Smallest check: resolve`r[t+4]`target alignment and actual Friday/backlog
-  availability, then certify GC/CLhistory/rolls/costs before any bounded preregistration. No Tuesday look-ahead,
-  assumed four-week hold or shifted-horizon rescue. No return reservation. Move on while source specifics are absent.
-  [Selected-source assessment](agents/codex/results/scout_owned_data_discovery_20261031.md).
-
-- [ ] **Cross-calendar overlap and overnight continuation — SOURCE SETTINGS CHECK, not TEST (SSRN6818821).**
-  Merit: specific interaction among scheduled flows, rather than another single-family timing rule; author reports
-  −5.03bp/SD in sign-adjusted reversal,t−2.61,2016–24. Not verified net profit;2006–22source result is weak.
-  Prerequisites: complete source/exact footprint intensities, accurate calendars, causal entry clock and native costs.
-  Smallest next check: reconcile source calendar identities and obtain fixed constants before considering one
-  registered ES/NQ adaptation. Final cash-close direction cannot earn a guaranteed same-close fill. No quarter-end
-  reversal rescue, no return reservation, no repeated404or paid-data loop; continue other owned-data leads meanwhile.
-  [Selected-section assessment](agents/codex/results/scout_owned_data_discovery_20261031.md).
-
-**Data shopping/export register:** [Research leads awaiting data](agents/codex/DATA_NEEDED.md) consolidates previous
-data-blocked leads, exact missing inputs, partial acquisitions, next checks and superseded requests. Maintain it for future
-worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a listing does not authorize a return test.
-
-- [x] **NG storage announcement short — CLOSED: DON'T TEST at source gate (SSRN3575861).**
-  Full paper received/read. Table8's After2011 panel reports −0.90% after bid/ask costs (Sharpe−0.16),
-  −0.97% including funding (−0.17), versus the full-sample headline +12.01%/1.76. Author results, not reproduced.
-  This replaces the earlier summary-only promising/data-blocked status. No calendar/side/filter rescue or new
-  return trial; no portfolio place earned. The corrected2,959,522-bar NG exports remain archived for distinct
-  justified research; no further export/PDF/metadata request for this rule. Generic market inventory remains D12.
-  [Full-source review](agents/codex/results/ng_3575861_full_review_20261030.md) ·
-  [Evidence gate](agents/codex/evidence/ng_3575861_20261030.md) ·
-  [Corrected data intake](agents/codex/results/ng_corrected_intake_20261031.md).
-
-- [ ] **Bitcoin spot/inverse-futures utility allocation — CODE BUILT / NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
-  Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
-  versus spot4.40 on111days in2019, not independently reproduced net returns. Main formula/payoff audit passes;
-  AppendixB.2 has a confirmed sign discrepancy. Both calibrated legs are long BTC, not a neutral hedge.
-  Need exact source BitMEX contract IDs and spot/index clocks, executable spot, rebalancing, native lots,
-  collateral/mark liquidation and costs. Four public API probes hit network proxy403; owned CME/spot bars
-  are not matching inverse inputs. Next step only with new matching inputs: reconcile one native BTC/USD
-  contract/spot interval and availability clock, then committed coverage/cost/power gates before returns.
-  No new economic trial, Apex placement, modern perpetual substitution or allocation.
-  [Offline strategy/review packet](agents/codex/results/bitcoin_inverse_3441913_build.md) built at user request;20 synthetic tests
-  pass for native lots, reciprocal BTC accounting, costs and timing guards. Pooled-wallet execution assumptions remain;
-  independent Claude review and empirical verification pending.
-  [Review](agents/codex/results/bitcoin_inverse_3441913_review.md) ·
-  [Evidence](agents/codex/evidence/bitcoin_inverse_3441913.md).
-
-- [ ] **FOMC short nearby VX — NEEDS DATA AND SPECIFICATION (SSRN2544445).**
-  Conditional personal-research lead: scheduled uncertainty-release mechanism; author claims34selected2010–14trades,
-  +28.68%total/Sharpe1.085/0.7%DD, not independently reproduced. Need individual-contract intradayVXprices/quotes,
-  event-clock eras, source11:00timezone and the chart-only`min-Maturity=5`units/contract-selection rule. Printed Eq3
-  negative leverage reverses the sign; screenshotpositive3.5matches the short17example. Cboe/FirstRate/Portara products
-  found, but public sample attempts yielded no admitted panel. Follow-up2026-10-31: direct sample download proxy-blocked;
-  advertised FinzData$49/market and Portara$220 special verified on pricing pages, delivered quality unverified/no purchase.
-  User chose **free sources only**; no matching free panel acquired, paid paths excluded.
-  [Acquisition receipt](agents/codex/results/fomc_vx_data_acquisition.md). Smallest next check
-  when matching inputs/clarification arrive: reconcile one dated event/contract/clock/stop, then committed design/cost/power
-  screen. No daily/spotVIXorESproxy, parameter rescue, plan placement or return trial. This is separate from the failed
-  naked Calvados component. [Review](agents/codex/results/fomc_vx_2544445_review.md) ·
-  [Evidence](agents/codex/evidence/fomc_vx_2544445.md) · [Data gate](agents/codex/inputs/fomc_vx_2544445/data_gate.md).
-
-- [ ] **Extreme positive firm-news sentiment — low-priority personal-stock lead / NEEDS DATA AND RULES (SSRN2631135).**
-  Merit: nonprice company-information feature with reported2007–14long trend mean16.90%,Sharpe0.64;
-  source DD49.09%, unspecified costs and test-period cutoff scanning limit that claim. No independent net edge.
-  Need lawful TRNA probabilities/relevance with entity/receipt/model vintages, historical equity universe/sectors,
-  corporate-action cash ledgers, exact weights and position lifecycle. Actual owned/exact-title/GitHub/official
-  LSEG checks found documentation and manuscript records, not a full free admitted news panel.
-  Smallest next check when matching inputs arrive: audit an entitled historical sample and clocks, freeze a
-  training-only protocol, then cheap design screen. No NQ substitute, Apex placement or new return trial.
-  Python research code is feasible with those inputs; code feasibility is not profitability.
-  [Review](agents/codex/results/news_sentiment_2631135_20261031.md) · [Evidence](agents/codex/evidence/news_sentiment_2631135_20261031.md).
-
-
-- [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
-  Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
-  at London 18:00 and New York 17:00. Author reports net 3.5/5 bp per dollar traded in 2003–2013; unverified.
-  Literal pseudocode reverses its verbal rate-momentum direction; percentile, zero-divisor and gross-sizing
-  rules need clarification. A declared synthetic interpretation exceeds the stated 20% concentration bound.
-  Need synchronized original-vintage swap/FX snapshots, availability/fill clocks, financing and native costs.
-  Owned data and bounded BOE/ICE/CME checks did not provide the exact panel. Resume only with genuinely new
-  matching inputs/source clarification: reconcile one two-clock day and cashflows before a committed data/cost
-  gate. Continuous 6E, daily policy rates or OIS proxies are not an exact replication. No paid data or returns
-  attempted; no Apex adaptation, allocation or tier promotion.
-  [Review](agents/codex/results/ananta_2419243_review.md) · [Evidence](agents/codex/evidence/ananta_2419243.md).
-
-
-- [ ] **Monthly low-frequency FX momentum — NEEDS DATA / SOURCE CONVENTIONS (SSRN 1259661; 2026-10-30).**
-  Lower-priority personal lead: recursively fitted HP trend (monthly penalty 14,400), then MA(1,2) on the trend.
-  Author's 1993–2008 basket Sharpe 0.76 versus raw MA 0.41; carry included, costs ignored, not independently
-  reproduced. Public Fed-mirror daily FX panel and metadata acquired; euro starts 1999, source carry/pre-euro
-  history and exact basket/quote/endpoint conventions missing. Kernel bandwidth units also unresolved.
-  Resume only on genuinely new matching inputs or author clarification: reconcile one dated month and signal
-  vintage, then coverage/power/cost gate before a committed bounded HP/raw-MA design test. Monthly holds fail
-  all four Apex homes. No spot-only/subset/intraday proxy, return trial or allocation admitted.
-  [Review](agents/codex/results/fx_low_frequency_1259661_review.md) · [Evidence](agents/codex/evidence/fx_low_frequency_1259661.md).
-
-- [x] **Corrected stock + intraday MNQ RL selectors — TESTED / REJECT DESIGN (SSRN 3690996; 2026-10-30).**
-  User requested both corrected adaptations after the original-source audit. Frozen quarterly PPO/A2C/DDPG selector:
-  stocks2018–2019 lost$120 on$10,000 versus equal-weight+$1,790; fixed1MNQ2018–2022 made$2,090 versus
-  long-control+$5,404, and lost$5,188 at doubled costs. Both fail their prespecified advancement gates; no earned
-  personal,50K/150K evaluation or funded allocation. Later periods/seeds/portfolio tests were not earned.
-  Integer positions, later-bar fills, causal features and reconciled ledgers are implemented in a new bounded protocol;
-  the original paper's13%/Sharpe1.30 remain unreplicated. Static28-stock/no-dividend panel ends2020; futures condition
-  on complete observed NQ sessions as MNQ proxies. No rescue tuning or live changes.
-  [Build/results](agents/codex/results/rl3690996_build_20261030.md) · [Code guide](agents/codex/code/rl3690996/README.md) ·
-  [Original-source review](agents/codex/results/rl_ensemble_3690996_20261030.md).
-  Related [SSRN 7013523 upload review](agents/codex/results/ssrn_7013523_review_20261030.md):30/30 table cells
-  match the original; that source review adds no independent return test. The corrected builds above are new protocols.
-
-
-- [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
-  Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume
-  associations with subsequent 5–20-day agricultural futures returns (1995–2018); no net strategy independently
-  reproduced. Need dated agricultural futures/options volumes, option-underlying/expiry mapping, paired basis
-  inputs, vintaged forecasts, publication clocks and exact pre-event aggregation. Day-zero return inclusion,
-  retrospective normalization and forecast-revision versus consensus-surprise distinctions need resolution.
-  Owned filename census found no matching panel; public USDA/CME checks returned proxy tunnel 403.
-  Resume only with genuinely new matching inputs/specification: reconcile one report/contract without returns,
-  then a committed coverage/cost/power gate. Source multiday holdings fail all four Apex homes; no NQ proxy,
-  intraday adaptation, return trial, paid acquisition or allocation is earned.
-  [Review](agents/codex/results/wasde_volume_4841490_review.md) · [Evidence](agents/codex/evidence/wasde_volume_4841490.md).
-
-- [ ] **Commodity-index roll calendar spreads — conditional personal research / NEEDS SPECIFICATION AND DATA (SSRN2942340).**
-  Till/Eagleeye2017 identifies predictable sell-front/buy-deferred index demand and anticipatory spreads, but supplies
-  no net backtest or exact dated protocol. Distinct from weekly basis reversal; do not recycle failed outright CL
-  timing proxies (prior t1.4 and GSCI/BCOM t0.5/0.7). Need historical/current index rules and weights, actual paired
-  commodity maturities, synchronized prices, native both-leg costs and delivery/margin handling. Smallest next check
-  when matching evidence arrives: reconcile one specified index roll and its two-leg cashflows, then complete the
-  evidence/preregistration gate before returns. Source brings no new dataset; existing acquisition blockers remain.
-  Multiday description earns no Apex placement; personal contribution is unverified. Zero new trials.
-  [Review](agents/codex/results/till_2942340_20261031.md) · [Evidence](agents/codex/evidence/till_2942340_20261031.md).
-  [Actual acquisition follow-up](agents/codex/results/commodity_roll_data_20261031.md): downloaded pinned public
-  WHEAT/WHEAT_mini multi-maturity files and read2018/current roll documentation. Standard WHEAT holds annual
-  December contracts, not the required nearby pair. Mini prices have delivery-cycle identities but missingness,
-  clock and native identity remain unverified. Complete free2018–22paired ZW panel is not admitted; zero returns.
-
-
-- [ ] **Monthly commodity skewness — OFFLINE CODE BUILT / NEEDS FULL PANEL (SSRN 3507947; 2026-10-30).**
-  Personal-account lead: monthly long four lowest-skew / short four highest-skew across 22 commodities.
-  Authors report 6.67% annual return after modeled costs and -0.32 equity correlation; neither is independently
-  reproduced or established for our portfolio. Offline planner, schema and synthetic checks built at the user's request.
-  Need identified full-universe daily contracts/settlements, return/roll conventions and native cost/cash accounting.
-  Smallest next check: map those inputs to the packet and reconcile one formation/roll month before a separately
-  committed return test; do not substitute CL/GC or an NQ daily-flat rule. No economic trials or plan allocation.
-  [Source review](agents/codex/results/ssrn_3507947_review_20261030.md) ·
-  [Code/checkpoint](agents/codex/results/commodity_skew_build_20261030.md).
-
-  **Free-data follow-up2026-11-01:** downloaded a pinned84-series daily reference panel plus separate OATIES/OJ
-  multiple-price histories. Twenty of the22economic names occur in the reference panel; the two extra files do
-  not make a homogeneous/native22-market input. Multiple timestamps, missing cells, different rolls, receipt clocks,
-  costs and source settings remain unadmitted. No splicing, reduced-universe sort or return test. Reconcile one
-  complete formation/roll month before returns; do not redownload unchanged sources each cycle.
-  [Intake/source mapping](agents/codex/results/scout_expanded_data_intake_20261101.md).
-
-- [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
-  Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single
-  signal across eight FX futures; not independently reproduced or established after executable costs.
-  Source prose misidentifies the winning allocator; performance-pruning dates, exact signal/solver definitions,
-  execution clocks and roll/collateral accounting are unresolved. Only 6E of the source futures is owned.
-  Smallest next check when matching evidence arrives: author rules/code and one dated futures/yield/rebalance/roll
-  month reconciled before any design test. No invented NQ or daily-flat variant, return trial, Apex placement or allocation.
-  [Review](agents/codex/results/fx_multistrategy_3322717.md) · [Evidence](agents/codex/evidence/fx_multistrategy_3322717.md).
-
-**Standing rule:** when a reviewed strategy has documented merits but its results or implementation are not yet verified,
-add it here for later review. Record the merit, what is missing, the smallest next check and the source review; merge
-duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
-A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
-
-- [ ] **Calvados 2.0 preferred VX + ES hedge — conditional personal research / unverified (2026-10-30).**
-  Merit: specific dated-volatility basis normalization and an equity hedge; author claims +273.7% gross with 11.3% DD
-  in selected 2010–14 leveraged simulations. These are not verified current returns. The separately registered naked
-  component FAILED 2018–22: one VX, 58 trades, gross −$2,980 / net −$9,360, marked DD $18,385; no later/account stages.
-  Do not revive that component or claim its failure falsifies the untested hedge. Preferred-source work needs a verified
-  dated ES chain/roll cashflows, additive hedge-equation correction, explicit adjustment clock and actual integer sizes;
-  one VX often maps to less than one ES, and prelaunch MES/VXM histories must not be invented. Smallest next check:
-  authenticate vendor/price type and clock in the newly found public quarterly ES archive, audit complete paired prices,
-  then freeze the hedge protocol before a separately committed test. Three full samples were inspected; this is an
-  actual data lead, not a claim that no free ES chain exists. [ES gate](agents/codex/inputs/calvados_2379985_20261030/es_hedge_gate/es_hedge_feasibility.md).
-  Multiday VX is ineligible
-  for all four Apex homes as written; any personal addition/replacement must earn historical validation and native
-  account/margin comparison. [Review/results](agents/codex/results/calvados_2379985_20261030.md) ·
-  [Evidence](agents/codex/evidence/calvados_2379985_20261030.md) ·
-  [Acquisition](agents/codex/inputs/calvados_2379985_20261030/acquisition.md).
-
-- [ ] **Nocturne — verify archived assumed replay only; NOT ADMITTED (2026-10-30).**
-  Merit: user-authorized R²/target/reentry assumptions produce1085design trades,+$8.75/MNQ,PF1.38,
-  all5years positive, compared with+$4.32withoutR². These are conditional2018–22screen results, not independent
-  reproduction or portfolio contribution. Advancement FAILS: skipped nights t−0.95and matched random-keep joint
-  win89.9%miss preregistered−2/95%requirements. No2023+or accounts opened; no stop/threshold rescue project.
-  Source PDF also reports millions of configurations, weak finalOOSand fragile nearby settings; full author rules
-  remain withheld. Smallest next check: Claude independently verifies the archived assumed implementation,
-  cost/night accounting and failed gates. No place in personal,50K/150Kevaluation or50K/150Kfunded plans is earned.
-  [Results](agents/codex/results/nocturne_20261030.md) · [Frozen assumptions](agents/codex/plans/nocturne_20261030.md).
-
-- [ ] **Monthly commodity momentum/carry double-sort — PARKED / NEEDS PAIRED DATA AND NAV AUDIT (2026-10-31), SSRN 2614241.**
-  Specific merit: prior-month momentum selects eight winners/eight losers; curve signal `ln(front/second)` narrows
-  to four longs/four shorts held one month. Proposed trend plus inventory/hedging premia may diversify a personal
-  futures book; that benefit is unmeasured. The December 2012 thesis claims 20.22% annual excess return/24.91%vol
-  over February 1979–October 2011 at 2x gross, before costs. Its $7.63 endpoint matches additive return accumulation,
-  not demonstrated compounded NAV; no author result independently reproduced. This specifies the broad commodity
-  storage/momentum family already noted in TIER_LIST; it does not reopen the failed CL/GC hedging-pressure trial.
-  Need a point-in-time broad commodity first/second-contract panel, executable clocks, roll/cash/short-weight rules,
-  native costs and integer sizing. Owned CL/GC OHLCV and the bounded free check do not supply these inputs.
-  Smallest next check **when genuinely new matching inputs arrive**: reconcile one formation/roll month with
-  identified maturities and self-financing quantities/cash, then a no-return 2018–22 coverage/power census.
-  Low-priority personal research only; monthly holds fail all four Apex homes as written. No proxy, stop-overlay
-  rescue, recurring unchanged acquisition loop, return trial or allocation. Separate rule from weekly basis reversal
-  below, sharing its paired-data prerequisite. Risk-method findings retained in execution reference E38.
-  [Full-source review](agents/codex/results/rad_double_sort_review_20261031.md) ·
-  [Evidence](agents/codex/evidence/rad_double_sort_20261031.md).
-  [Code-building checkpoint](agents/codex/results/rad_double_sort_build_20261031.md): offline monthly selector,
-  integer reference allocation and strict input checks built;23 synthetic mechanics cases pass. No real-data
-  return/account result; source/data/accounting prerequisites remain unchanged.
-
-- [ ] **Weekly commodity basis reversal — NEEDS FULL TEXT / PAIRED DATA (2026-10-29), SSRN5250499.**
-  Merit: specific adjacent-maturity relative-return reversal claimed in the primary abstract, distinct from an
-  outright price reversal; public secondary code defines a delayed weekly two-leg implementation. No net return
-  or account benefit independently verified. Source mechanism is differential information sensitivity/limited arbitrage,
-  not a verified forced order. Primary full rules and version remain unread; secondary curves are gross and depend on
-  a private engine/data service. Smallest next check: obtain lawful primary text and one identified front/deferred
-  contract sample, verify expiry/settlement availability and integer versus equal-dollar exposure before2018–22 census.
-  Need complete paired history, native both-leg costs, rolls and executable prices; no imputed second month.
-  Weekly holding is ineligible for Apex as described; personal research only pending evidence, preregistration and tests.
-  [Source/strategy audit](agents/codex/results/scout_spread_strategy_feasibility_20261029.md) ·
-  [Evidence](agents/codex/evidence/scout_basis_reversal_20261029.md). No return trial started.
-  [Build checkpoint](agents/codex/results/weekly_basis_reversal_build_20261029.md): Python signal prototype created;
-  14 synthetic engineering checks pass. Real-data rules/sizing/costs remain unresolved; no profitability or portfolio
-  test. Source/data blockers stay visible; the draft is not an admitted preregistration.
-
-- [ ] **Clock-aware Treasury index-duration demand — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN7601879.**
-  Specific merit: Bloomberg independently documents the U.S. index snapshot moving14:00→15:00CT effective2021-01-14;
-  the earlier failed ZN month-end A/B/C protocols exit13:59CT. Authors claim snapshot-centered price pressure,
-  stronger with forecast duration extensions; their1.19bp versus0.07bp abstract figures are not verified net returns.
-  Preserve the old negative A result (−$31/ZN net, t−1.4;2023+−$79.7); do not repeat unconditional month-end longs or tune its exit.
-  Smallest next check: obtain/pin lawful full text, extract exact source clocks and perform a no-return event/data census.
-  Need dated holiday/early-close regimes, contracts/rolls, pre-entry duration-forecast vintages and reconciled native costs.
-  Complete source/clock/data/power gates before TEST and any new bounded preregistration. No return trial started.
-  [Review](agents/codex/results/scout_buying_duration_20261029.md) · [Evidence](agents/codex/evidence/scout_buying_duration_20261029.md).
-  [Testability follow-up](agents/codex/results/scout_7601879_testability_20261029.md): source still unavailable after
-  author/institution/replication searches. Three isolated forecast examples do not form a point-in-time panel.
-  Timestamp-only census confirms60 observed monthly endpoints, not60 authoritative events; November2020 demonstrates
-  that selecting the last available data date can select the wrong day. No returns or rescue protocol opened.
-  [Acquisition](agents/codex/results/scout_duration_acquisition_20261029.md) saved4 provider rows (only3/60 design months)
-  and3 separate institutional references; original availability remains unknown. Missing months were retained, not filled.
-
-- [ ] **Treasury auctions × next-day macro-announcement FX — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN5207418.**
-  Merit: a specific scheduled interaction with direct FX transmission; authors claim roughly8bp foreign-currency
-  appreciation on release days following auctions, versus near zero on other release days. Not independently
-  verified, euro-specific or established net of costs. Different from the already weak same-day6E auction short;
-  retain that negative/weak cost evidence and audit overlap with the existing personal6E package.
-  Smallest next check: obtain/pin the full April2025 or March2026 version and extract exact currencies, clocks,
-  auction/release definitions and costs before selecting rules. Owned6E minutes/auction records and free Fed/BEA
-  calendar sources establish partial feasibility; complete as-of releases and contract/roll provenance remain missing.
-  No realized price-spike event proxy, silently truncated overnight window or return trial is authorized by this entry.
-  Apex15:59CT fit is unknown; personal overnight research is conditional on the verified source window.
-  [Review](agents/codex/results/scout_fx_auctions_20261029.md) · [Evidence](agents/codex/evidence/scout_fx_auctions_20261029.md).
-  [Testability follow-up](agents/codex/results/scout_5207418_testability_20261029.md): new author/BoC/conference and
-  replication searches did not recover the source rule. Exact-window, flat-time and overnight constraints remain unresolved.
-  [Calendar acquisition](agents/codex/results/scout_fx_calendar_acquisition_20261029.md) now saves943 primary BLS/BEA/Fed
-  calendar facts for2018–22, with secondary inventory separate, shutdown revisions and unusual clocks explicit.
-  Full paper/event universe and original schedule/receipt evidence still precede TEST; this is data progress, not validation.
-  [Claims acquisition](agents/codex/results/scout_claims_calendar_acquisition_20261029.md) adds261 officially corroborated
-  release dates and249 printed clocks, retaining12 unknown times. Two omitted2019dates were restored from actual
-  official evidence; failed download URLs were not treated as absent releases.
-
-- [ ] **Signed SPX dealer delta at PM expiry — WATCH / NEEDS DATA (2026-10-29), SSRN7330098.**
-  Full source now read: a direct ES hedge-unwinding channel with reported extreme-group gross differences of17bp
-  over30minutes and12.5bp over15minutes, July2020–June2023. These are author evidence, not our net strategy results.
-  Need signed C1 SPXW dealer positions reconstructed from series inception plus matching option deltas, prior inventory,
-  session coverage, corrections and actual receipt clocks. Owned NDX GEX/OI and NQ tape delta cannot supply the signal.
-  Minute-start labels with end-minute quotes must be lagged correctly; retrospective T+1 records cannot become same-day signals.
-  Smallest next check: retain/hash the public paper and obtain a lawful sample; reconcile one expiring series from
-  inception and available-at data before any design returns. Public ZIP samples were unreadable via connector and
-  a network-enabled proxy download returned403. No complete historical book obtained and no return trial started.
-  Merge input acquisition with existing flow evidence-sheetD; retain the distinction between terminal book-level
-  hedge removal and time-decay position-change hedging. Existing failed gamma/OI/max-pain results remain in force.
-  [Full-source review and testability](agents/codex/results/scout_7330098_testability_20261029.md).
-  [Acquisition/intake packet](agents/codex/results/scout_spx_positions_acquisition_20261029.md): no raw signed book obtained.
-  Current Cboe terms identify a fixed2022H2 free sample for eligible first-time users; enrollment/licensing is unactivated.
-  The one-minute product was introduced in2025 and arrives2–5minutes after interval end; historical timestamps alone
-  do not certify a tradable2018–22 signal. Do not buy/activate access or substitute OI under this queue entry.
-
-- [ ] **U.S. factor-beta stock baskets — PARTIAL SCREEN FAIL; exact replication unverified (2026-10-29).**
-  Authorized restricted S&P500/SPY-beta screen is completed under a committed plan:2018–22 covered-day overnight +3.93bp gross/−0.66bp net, intraday +0.89/−3.52bp under4bp RT plus borrow.
-  120/114 of1,259 selected days are unresolved after acquisitions; quoted returns are conditional diagnostics, not a complete native cash ledger. Rounded shares do not rescue it. No2023+ or funded bench opened.
-  Stop this protocol; no timing/filter/sizing rescue search. Full CRSP/FF5 study still needs exact factor data, historical raw share basis, acquisition/settlement treatment and borrow/auction evidence before a separately justified preregistration.
-  Source's gross conditional coefficients remain author evidence, not validated portfolio returns. Outside current futures allocations.
-  [Screen/code/manifest](agents/codex/results/factor_beta_sessions_test_20261029.md) · [Original review](agents/codex/results/factor_beta_sessions_review_20261029.md).
-
-- [ ] **ORB30 + M30 EMA20, long-only NQ — WATCH; proxy tested, native implementation unverified.**
-  Verified proxy merit: 994 trades, PF 1.25 after NQ costs; full-session EMA outperformed cash-only EMA in the frozen
-  2018–22 design comparison. Later PF weakens to 1.21; 4R/no-target improvements remain statistically unproven.
-  Current personal19 additions lower profit/DD95; no allocation recommendation, and full Apex comparisons remain limited.
-  Smallest next check: compile the research PowerLanguage prototype on a home-PC research chart, confirm full-session
-  M30 EMA / 15:55 CT proxy settings, export exact fills/settings and reconcile with saved Python trades. Original author
-  EA/flatten settings, native ticks, roll handling and 18 unclassified held minutes still need verification.
-  No new parameter search or live/VPS changes. [Report](agents/codex/results/orb30_ema.md) ·
-  [Research code](agents/codex/code/ORB30_EMA_Research.txt).
-
-- [ ] **PrimeSync ES/NQ, 15m/30m — WATCH; research prototype, not MC-verified (2026-10-27).** Merit: in the frozen
-  reconstruction, full exit at4.5R beat thirds in all four2018-22 contexts and the selected style stayed net positive
-  in all four2023+ checks. Recent significance is weak; parameters are assumed, not the author's verified settings.
-  Compile [PrimeSync_v1](agents/codex/code/PrimeSync_v1.txt) on a separate research chart using the
-  [setup notes](agents/codex/code/PrimeSync_SETUP.md); export Settings, List of Trades and matching minute/total-volume data.
-  Verify signals, ADX/VWAP/ATR, integer risk sizing, entry-bar protection and IOG stop/partial behavior; reconcile native
-  micro versus mini-volume/cost assumptions. Matched controls, independent review and portfolio/account contribution
-  remain unverified; do not add it to a plan from this screen. [Results](agents/codex/results/primesync.md).
-  Account tests completed: none of the five plans clears the preregistered placement gates at1micro; closest personal
-  ES30 improves mean-profit/p95-DD only1.8%. Do not add or start a sizing rescue search. Keep MC parity pending for later review.
-  [Placement results](agents/codex/results/primesync_accounts.md) · [v2 code](agents/codex/code/PrimeSync_v2.txt).
-
-- [ ] **6E cross-asset package v4 — WATCH / NEEDS DATA; personal-account research.** Merit: a different market and multi-day
-  horizon, with reported cross-asset and walk-forward evidence; potential diversification from the NQ-heavy book.
-  Obtain the original Python implementation, frozen settings, contract/roll map, trade/order ledger and daily marked P&L.
-  First verify as-of 16:00 ET inputs, later executable fills, integer M6E vol-target quantities, native fees/spread/slippage
-  and trade-to-daily/roll reconciliation. The 08:29–09:30 euro-reaction branch needs intraday data; daily bars alone cannot reproduce it.
-  Review **Macro Momentum, Macro-Shock and Gold-Shock first**, retaining the complete six-leg package as the reference
-  (RSI pullback, weekly breakout and Stock-Shock included); no unregistered hindsight deletion or optimization.
-  Then preregister a bounded replication and, if it passes, measure addition/replacement in the current personal portfolio.
-  [Review](agents/codex/results/six_e_cross_asset_review_20261027.md) · [Evidence](agents/codex/evidence/six_e_cross_asset_20261027.md).
-
-- [ ] **IFT_NQ5_Flow_Signal — WATCH / NEEDS DATA; account placement unverified.** Merit: a fully supplied rule with disclosed
-  walk-forward, sensitivity and transfer claims that justify a careful replication. Obtain native **full-Globex 5-minute
-  OHLC + Volume + UpTicks + DownTicks**, 500 prior ratio observations plus their indicator warm-up, and the matching detailed MultiCharts report/settings;
-  also request the author's Python/WF selection records. Existing cash-session-only directional-volume files cannot reproduce it.
-  Home-PC research export only: [Claude's NQ Up/Down exporter](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_UpDown_Exporter.txt).
-  First reconcile volume classification, completed-bar/next-fill timing, staged scale-outs and position counting. Freeze source-parity
-  versus protected-entry protocols and the live/historical position-gate assumptions before returns. Then run the preregistered
-  cheap screen; account/personal comparisons follow only if it passes. Minimum two-contract scale-out and current risk limits need testing.
-  [Review](agents/codex/results/ift_nq5_flow_review.md) · [Evidence](agents/codex/evidence/ift_nq5_flow.md).
-
-- [ ] **Monthly S&P 500 VRP-conditioned equity exposure — exact-source verification pending; bounded proxy REJECT (2026-10-29).**
-  Merit: Zhou's SSRN 1783624 reports positive three-month equity-return predictability, adjusted R² 9.61% and
-  overlap-robust t 7.22 over 1990–2016; these are in-sample source claims, not verified net strategy returns.
-  This is monthly equity allocation, not an options-selling rule or a new intraday Apex filter.
-  Obtain/pin original monthly IV/RV series and construction code, historical availability, SPX five-minute/overnight
-  conventions and return units. Audit against related VIX/VRP work; daily SPY/futures substitutions are proxy adaptations.
-  Completed pre-return-registered adaptation: 2018–22, positive-VRP exposure one MES-equivalent,31 selected months
-  net$8,322.81 versus$9,614.12 for37 same-universe constant-exposure months; t1.79, removed months+$215.22 average.
-  Reject this filter; no2023+test or account placement. Rolling-median/IV-only/RV-only outcomes were not run:
-  history availability failed. A missing2020-11-30 daily mark also blocks daily-risk certification; no price repair.
-  Author data is advertised throughDec2024 but its Drive download is network-policy denied; older official Fed data
-  endsDec2008. Exact source replication remains distinct and unverified. Smallest later check, if source data becomes
-  accessible: pin/audit it before a separately registered source replication. No threshold rescue or automatic rerun.
-  [Actual proxy test](agents/codex/results/vrp_monthly_proxy_20261029.md).
-  [Review](agents/codex/results/variance_risk_premium_review_20261029.md) ·
-  [Evidence](agents/codex/evidence/variance_risk_premium_20261029.md).
-
-
-- [ ] **Actual closing-auction imbalances — shared SPY/ES and QQQ/NQ family; NEEDS DATA (2026-10-29).**
-  Academic merit: source auction-state reversion and temporary stock/ETF pressure support checking real signed
-  updates. No net futures edge or portfolio placement verified. Consolidates existing SPY/QQQ evidence rather
-  than counting another clock/ticker as a new family. This cycle moved past blocked leads: two Arca sample
-  sessions, one Nasdaq sample day and advertised2010–2018 author aggregates do not supply the design panel.
-  Smallest later check: permitted original source bytes plus venue-specific signed updates, reference/indicative
-  definitions, synchronized quotes and publication/receipt clocks; audit before a bounded preregistered screen.
-  Keep pre-auction pressure and post-auction reversal distinct. Personal stock/ETF implementation is a separate
-  possibility; do not transfer stock alpha to NQ/ES or reuse a final auction print as a hindsight fill.
-  [Cycle/source reviews](agents/codex/results/scout_closing_auctions_cycle_20261029.md) ·
-  [Evidence/data gates](agents/codex/evidence/scout_closing_auction_imbalances_20261029.md).
-
-
-- [ ] **Cross-asset futures OFI residual reversal — METADATA WATCH, not TEST (2026-11-02), SSRN7245981.**
-  Specific merit: lagged idiosyncratic flow pressure may unwind while PCA-rotation refits address changing common
-  institutional flows; author claims net/low-exposure results, but these are unverified and expressly not formal OOS.
-  This uses order-flow residuals, not a revival of the rejected price-spread/PCA pairs family. Needs full rules,
-  matching20-market L1tick OFI, native clocks/fills/costs and admissible2018–22history; own NQminute aggregates and
-  other-market OHLCV do not provide it. Smallest next check only on genuinely new source/data: authenticate the
-  exact universe and one complete matching observation. Bounded owned/free check completed; parked, no repeat crawl,
-  return reservation or user-action request. [Data D47](agents/codex/DATA_NEEDED.md#2026-11-02-owned-field-screen),
-  [record](agents/codex/research/scout/records/7245981.json), [report](agents/codex/results/scout_owned_source_20261102.md).
-
-- [ ] **Crude-oil distribution asymmetry OIS — METADATA WATCH / NEEDS FULL SOURCE (2026-11-02), SSRN5392801.**
-  Specific merit: authors claim OOS forecasting/allocation improvement beyond historical mean and realized skewness;
-  these are unverified primary-abstract claims. Owned CL prices may supply raw distribution inputs, conditional on
-  exact formation/forecast/roll rules. No formula, threshold or strategy inferred from a secondary summary.
-  Smallest next check only when genuinely new primary text arrives: authenticate OIS/target construction and map
-  one dated formation to actual owned fields/clocks before any trial. Primary403 and no-file author listing recorded;
-  parked, no repeated crawl or user-action request. [Data/source D48](agents/codex/DATA_NEEDED.md#2026-11-02-source-watches),
-  [record](agents/codex/research/scout/records/5392801.json), [report](agents/codex/results/scout_owned_source_followon_20261102.md).
-
-- [ ] **CTA subscription/redemption month-turn pressure — METADATA WATCH / NEEDS FULL SOURCE (2026-11-02), SSRN2515900.**
-  Specific merit: a timed fund-flow mechanism and author claim of concentrated CTA-index returns on three month-turn
-  days. This is not a verified net futures strategy or a forecast-accuracy statistic. Exact replication signal,
-  universe/weights, calendars, flow sign and costs remain unknown; existing CTA flip/fade and generic month-end
-  selections remain prior history. Smallest next check on new primary availability: identify a causal source rule
-  and its exact owned-field map; no invented CTA positions or trend window. Primary403, bounded author/institution
-  search found no authenticated full copy; parked and move on. [Data/source D49](agents/codex/DATA_NEEDED.md#2026-11-02-source-watches),
-  [record](agents/codex/research/scout/records/2515900.json), [report](agents/codex/results/scout_owned_source_followon_20261102.md).
-
-- [ ] **Post-publication commercial-position liquidity spread — conditional WATCH / NEEDS DATA (2026-11-03), SSRN2449315.**
-  Merit: the2018primary manuscript's Table4 reports29bp top-minus-bottom on days5–10after Tuesday formation
-  (t3.73), after its public-information boundary. This is an unreplicated26-market spread, not verified CL alpha.
-  Merge the related3881922robustness paper and2023HPM source watch (DOI10.1016/j.econmod.2023.106214) here;
-  do not count new titles as separate trials. Prior2311859/4534852clock cautions and failed Williams COT-index
-  tests remain history. Owned legacy archives contain783CL/GC/NG position-date rows, not the native26-market
-  portfolio, original released vintages or source roll legs. Smallest next check only with genuinely new matching
-  evidence: reconcile one source-specific public-release/formation/dated-contract roll week, retaining holidays,
-  shutdown catch-up and initial-versus-revised data; then assess the full design panel and native costs before
-  any bounded preregistration. No three-market substitute, Tuesday look-ahead or Apex intraday port. Park and
-  continue other discovery. [D50](agents/codex/DATA_NEEDED.md#2026-11-03-conditional-positioning-and-lei-watches),
-  [record](agents/codex/research/scout/records/2449315.json), [source checkpoint](agents/codex/results/scout_owned_source_20261103.md).
-
-- [ ] **LEI stale-information post-release reversal — conditional personal WATCH / NEEDS DATA (2026-11-03), SSRN1108050.**
-  Merit: authors report a transient ES response to publicly reconstructable information and65bp gross over the
-  complete three-day trade, not independently verified profit. The source's10:05ETpost-release reversal lasts
-  through next-day close; no Apex-compatible adaptation is supplied. Need original LEI releases, exact Bloomberg
-  consensus/receipt vintages, overlap calendar and native ES paths/rolls/costs. A bounded free check found public
-  forecasts but no faithful consensus panel: February22,2018MetaTrader0.5%versus contemporary ActionEconomics0.6%.
-  Smallest later check with new matching inputs: authenticate one surprise's available-at sign and source-leg
-  timing, then inspect complete2018–22coverage/power before reserving a test. No hindsight pre-release sign,
-  price-sign substitute, shortened hold or repeated vendor crawl. Park and move on.
-  [D51](agents/codex/DATA_NEEDED.md#2026-11-03-conditional-positioning-and-lei-watches),
-  [record](agents/codex/research/scout/records/1108050.json), [source checkpoint](agents/codex/results/scout_owned_source_20261103.md).
-
-- [ ] **One-minute post-release macro-surprise sign — conditional low-priority WATCH / NEEDS DATA (2026-11-08), SSRN1920401.**
-  Earlier author-attributed draft SectionVI enters with the surprise sign at the first transaction one minute
-  after release and exits a minute later; simultaneous releases must agree, zero skips. Authors report2001–10
-  cumulative net19.42%Nasdaq/29.27%S&P after one tick each way, not our returns or modern all-in costs.
-  Need full published2014version/parity, initial actual/median-consensus/receipt vintages and native contract/
-  fill/cost reconciliation. Owned price proxies/release calendars are insufficient; bounded free search acquired
-  no matching panel. Smallest later check only with new matching inputs: one source release's sign and first
-  executable transaction/cost ledger, then complete2018–22coverage/power before preregistration.
-  Share D51's forecast-vintage acquisition boundary, while keeping this continuation distinct from LEI's
-  multi-day reversal. No price-sign substitute, ex-post holding-window selection, new return trial or allocation.
-  Park and continue discovery. [Record](agents/codex/research/scout/records/1920401.json),
-  [source checkpoint](agents/codex/results/scout_owned_source_20261108.md).
-
-  **2026-11-09 intake recheck:** the new15-series macro snapshot contains none of this draft's seven10:00ET
-  release families (consumer confidence, ISM/NAPM, LEI, factory orders, new home sales, construction spending,
-  business inventories). Its08:30actual/forecast rows and JOLTS are not substitutes. Historical forecast/first-actual
-  vintages remain unadmitted. No return test; park and continue. [Exact mapping](agents/codex/inputs/scout_20261109/owned_input_inventory.json).
-
-- [ ] **Annual GSCI net reweighting pressure — conditional personal WATCH, SSRN3360787 (2026-11-09).**
-  Merit: a specific announced-demand mechanism, distinct from monthly front/deferred roll; authors'24-market
-  2004–17event study reports59bp peak abnormal impact that later fades. This is neither net cash profit nor our test.
-  Need full source review, original announced old/new production weights, complete day-zero price denominator,
-  source-designated contracts, publication/trade clocks, delivery/roll costs and a credible power gate. Owned
-  GC/CL/NG continuous bars do not supply those inputs; five design years are only five annual event clusters.
-  Smallest next check only when matching inputs arrive: reconcile one announced reweight to its signed contract
-  demand without returns. No generic January/calendar proxy, rescue of failed roll definitions or Apex hold change.
-  [Record](agents/codex/research/scout/records/3360787.json) · [Checkpoint](agents/codex/results/scout_owned_source_20261109.md).
-
-- [ ] **Intraday factor-zoo market forecast — conditional low-priority WATCH, SSRN4388560 (2026-11-09).**
-  Merit: published implementable ETF market-timing claims after modeled costs, with a cross-sectional slow-price-
-  adjustment mechanism. Authors'net SPY Sharpe1.37/annual six-factor alpha20.83% are unreplicated, not futures profits.
-  Need the exact218-factor intraday panel, full methods/appendix and original market target, causal jump/forecast
-  initialization, matched history, costs and native adaptation/account eligibility. The public supplement was
-  checked, but no dataset payload was acquired; futures bars are not the missing factors. Smallest next check on
-  genuinely new availability: authenticate one factor/date and forecast information clock, then source coverage
-  before any reservation. No ES-only fit or source-free predictor substitute. Park; continue owned-compatible work.
-  [Record](agents/codex/research/scout/records/4388560.json) · [Checkpoint](agents/codex/results/scout_owned_source_20261109.md).
-
-- [ ] **Ranked-analyst NG storage forecast disagreement — conditional WATCH / NEEDS DATA, SSRN2826684 (2026-11-10).**
-  Full43-page upload upgrades the existing November1metadata lead. Merit: a specific nonprice predictor and85-minute
-  intraday NG rule; authors report Sharpe0.84/1.26 on271/153trades in2008–16, not independently verified net returns.
-  Compute prior-week topthree analysts' current forecast median minus overall consensus; buy negative/sell positive,
-  enter90minutes before the storage release and exit five minutes before. Skip zero and same-day petroleum reports.
-  Need analyst submissions/revisions and historical ranks/consensus available by entry, event/roll clocks and costs;
-  the stronger sample-quartile subset has no specified causal cutoff protocol. Owned NG bars and current alternative
-  rankings cannot supply the missing forecasts. Bounded free checks acquired no matching panel. Smallest next check
-  only on new matching availability: reconcile one dated prior-rank/forecast/consensus/entry transition without returns,
-  then coverage/power/cost gates before preregistration. No price-only/Thursday-short rescue;3575861stays closed.
-  [Full review](agents/codex/results/ng_informed_2826684_review_20261110.md) ·
-  [D57 data requirements](agents/codex/DATA_NEEDED.md#d57--ranked-analyst-ng-storage-disagreement-ssrn2826684).
+## Routing check (2026-11-01)
+- [ ] Repaste **Apex Chart Monitor** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt)) in the PowerLanguage Editor, compile (F7); on each of the 8 charts auto-trading off/on (Flat). Then tell Claude: it confirms every chart's real order account from the VPS feed.
+- [x] Codex follow-up #3: INSTALLED 2026-11-01 18:45 CT, all 8 charts on 2026-11-02 (VPS feed). Was:: strategies treat any read failure of the KILL file as "no kill". Proposal: also
+      check C:\TradingLogs; if the folder can't be read -> no new entries. Next weekend repaste, with a distinct version tag.

@@ -27,7 +27,7 @@ R50 = dict(st=50_000.0, dd=2_000.0, dll=1_000.0, lock=50_100.0, tgt=3_000.0, saf
            caps=[1500.0, 1500.0, 2000.0, 2500.0, 2500.0, 3000.0])
 
 
-def evaluation(W, R, s, D, r):
+def evaluation(W, R, s, D, r, pa_lock=False):
     bal = r["st"]; floor = r["st"] - r["dd"]
     for n, d in enumerate(range(s, min(s + 21, D)), 1):
         w, rr = W[d], R[d]; lim = max(floor, bal - r["dll"])
@@ -38,7 +38,8 @@ def evaluation(W, R, s, D, r):
             if lim == floor: return "fail", n
             bal = lim
         else: bal += rr[-1]
-        floor = max(floor, min(bal - r["dd"], r["lock"]))
+        # evaluation floor keeps trailing (Codex weekly review 2026-11-06 #1); pa_lock=True = the old engine (lock at r["lock"])
+        floor = max(floor, min(bal - r["dd"], r["lock"])) if pa_lock else max(floor, bal - r["dd"])
     return ("time", 21) if s + 21 <= D else None
 
 

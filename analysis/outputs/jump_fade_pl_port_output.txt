@@ -1,0 +1,9 @@
+[provenance] code b6ee1b7 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Line-by-line Python port of apex_strategies/NQ_Jump_Fade.txt (2026-11-12): proves the PowerLanguage logic (streaming ring buffers,
+5-min bars: research 642,027, port 642,027, matched 642,027; closed late in the port: 356
+J on matched bars with both defined (631,597): max |diff| 1.85e-13, corr 1.000000; defined in one only: 0
+signal bars 2018+: research 800, port 800, both 800, research only 0, port only 0
+research trades                              n   694 win 77.5% tgt 77.1% net $  117.5 PF 1.35 t  2.68 avgR +0.036 R$  2013 mins   43 L/S 409/285
+port trades                                  n   694 win 77.5% tgt 77.1% net $  117.5 PF 1.35 t  2.68 avgR +0.036 R$  2013 mins   43 L/S 409/285
+identical entry minutes 694 of 694 / 694; same net on those: 100.0%
+signal bars closed late (entry one minute later in MultiCharts): 0 of 800

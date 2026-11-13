@@ -1,0 +1,17 @@
+[provenance] code ed9973c dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+4368 rule versions with >= 400 trades (>= 150 in each half). Breakeven win rate at 0.3R = 76.9%, PF 1.00. Screenshot: 855 trades, 82.2%, PF 1.41.
+whole window: median PF 1.01, best PF 1.67; versions with PF >= 1.41: 8, PF >= 1.25: 88, win >= 82%: 1
+
+Top 8 by whole-window PF (what a tuner would show):
+   dir   k  thr  h0  len   n   win    pf     avg   pf1   pf2
+  fade 1.5  3.5   7    3 419 0.800 1.670 224.403 1.347 2.072
+  fade 2.0  3.5   7    3 419 0.749 1.497 227.792 1.391 1.604
+  fade 1.5  3.0   7    2 552 0.788 1.494 148.207 1.042 2.245
+follow 0.5  5.0  15    6 437 0.794 1.487  51.808 1.293 1.614
+  fade 1.5  3.5   6    3 485 0.786 1.444 141.660 1.088 1.995
+  fade 1.5  3.5   7    4 512 0.787 1.435 163.779 1.258 1.628
+  fade 1.5  3.5   6    4 573 0.780 1.420 145.803 1.176 1.708
+  fade 1.5  3.0   7    3 724 0.782 1.414 139.903 1.093 1.805
+
+Pick the 20 best on 2019-22 only: first-half PF 1.58 (win 76.3%) -> same rules on 2023-26: PF 1.08 (win 69.5%); 17 of 20 still above 1.00
+rank correlation of first-half PF with second-half PF across all versions: 0.35

@@ -1,0 +1,34 @@
+[provenance] code f2edb7f1 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Filters on WATCHLIST #28 (long NQ after a green RTH day; user ask 2026-11-08 'add a volatility filter or something').
+
+Design 2018-22 only (2023+ hidden):
+   no filter                        n= 1127 | design 18-22 n= 627 $   87 t  1.1
+   F1 volatile (ATR > 1y median) IN n=  644 | design 18-22 n= 377 $   37 t  0.3
+         ... OUT                    n=  483 | design 18-22 n= 250 $  163 t  1.4
+   F2 above SMA200 IN               n=  929 | design 18-22 n= 467 $  166 t  2.0
+         ... OUT                    n=  198 | design 18-22 n= 160 $ -144 t -0.7
+   F3 strong body >= 0.5 ATR IN     n=  507 | design 18-22 n= 287 $   65 t  0.5
+         ... OUT                    n=  620 | design 18-22 n= 340 $  105 t  1.0
+   F4 close in top 25% of range IN  n=  739 | design 18-22 n= 428 $   48 t  0.5
+         ... OUT                    n=  388 | design 18-22 n= 199 $  170 t  1.2
+   F5 skip Friday IN                n=  918 | design 18-22 n= 514 $  127 t  1.4
+         ... OUT                    n=  209 | design 18-22 n= 113 $  -95 t -0.5
+   F6 calm (ATR < 1y median) IN     n=  483 | design 18-22 n= 250 $  163 t  1.4
+         ... OUT                    n=  644 | design 18-22 n= 377 $   37 t  0.3
+
+Chosen on design t (>= 40% of trades kept): F2 above SMA200
+
+One look at 2023+ (chosen, its complement, no filter):
+   F2 above SMA200 IN               n=  929 | design 18-22 n= 467 $  166 t  2.0 | 23+ $  360 t  2.2 | all $  263 t 2.84
+         ... OUT                    n=  198 | design 18-22 n= 160 $ -144 t -0.7 | 23+ $  444 t  0.7 | all $  -31 t -0.16
+   no filter                        n= 1127 | design 18-22 n= 627 $   87 t  1.1 | 23+ $  366 t  2.3 | all $  211 t 2.52
+
+All filters, full sample (information only, AFTER the pick):
+   F1 volatile (ATR > 1y median) IN n=  644 | design 18-22 n= 377 $   37 t  0.3 | 23+ $  367 t  1.5 | all $  174 t 1.45
+   F2 above SMA200 IN               n=  929 | design 18-22 n= 467 $  166 t  2.0 | 23+ $  360 t  2.2 | all $  263 t 2.84
+   F3 strong body >= 0.5 ATR IN     n=  507 | design 18-22 n= 287 $   65 t  0.5 | 23+ $  318 t  1.4 | all $  175 t 1.46
+   F4 close in top 25% of range IN  n=  739 | design 18-22 n= 428 $   48 t  0.5 | 23+ $  322 t  1.5 | all $  164 t 1.56
+   F5 skip Friday IN                n=  918 | design 18-22 n= 514 $  127 t  1.4 | 23+ $  206 t  1.2 | all $  162 t 1.82
+   F6 calm (ATR < 1y median) IN     n=  483 | design 18-22 n= 250 $  163 t  1.4 | 23+ $  365 t  1.8 | all $  260 t 2.30
+
+   t needed (N = 412): 3.67

@@ -19,17 +19,41 @@ def has_sig(tag):
     return any(f",{tag}," in l and l.startswith("SIG,") for f in glob.glob("live/trades/*.csv") for l in open(f))
 
 
+def size_check(day, cfg):
+    """2026-11-12 (no recompile): entry sizes in today's and the previous log vs expected_setup.json qty / max_qty.
+    Catches a wrong size input after its first trade (JF150-5 entered 1 MNQ on 11/12, plan 2). The size SETTING itself is
+    only visible once the strategies report it in the heartbeat (recompile, TODO)."""
+    import glob
+    out, d = [], day.strftime("%Y%m%d")
+    files = sorted(f for f in glob.glob("live/trades/2*.csv") if os.path.basename(f)[:8] <= d)[-2:]
+    for f in files:
+        x = pd.read_csv(f, header=None, names=COLS, dtype=str)
+        for r in x[x.event == "OPEN"].drop_duplicates(subset=["tag", "entry_date", "entry_time", "contracts"]).itertuples():
+            c = cfg["charts"].get(r.tag)
+            if c is None: continue
+            try: q = int(float(r.contracts))
+            except (TypeError, ValueError): continue
+            when = f"{r.entry_date} {int(float(r.entry_time)):04d}"
+            if c.get("qty") is not None and q != c["qty"]:
+                out.append(f"{r.tag}: entered {q} contracts on {when}, plan is {c['qty']}: check the strategy's size input.")
+            elif c.get("qty") is None and q > c.get("max_qty", 1e9):
+                out.append(f"{r.tag}: entered {q} contracts on {when}, above the {c['max_qty']} ceiling: check the risk input.")
+    return out
+
+
 CT = ZoneInfo("America/Chicago")                              # Codex 2026-10-30: fixed UTC-5 was wrong after the DST change
 
 
-def age_min(r, asof):
-    """Minutes from a row's capture (bar_date + bar_time, CT) to asof (aware datetime); None if unparseable or in the future."""
+def age_min(r, asof, ahead=2):
+    """Minutes from a row's capture (bar_date + bar_time, CT) to asof (aware datetime); None if unparseable or more than
+    `ahead` minutes in the future. MultiCharts stamps a bar at its CLOSE, so a row written inside a 30-min bar carries a
+    time up to 30 min ahead (2026-11-03 VB false alarm): callers pass the chart's bar length + 2; such rows count as age 0."""
     try:
         t = dt.datetime.strptime(f"{int(float(r.bar_date))}{int(float(r.bar_time)):04d}", "%Y%m%d%H%M").replace(tzinfo=CT)
     except (TypeError, ValueError):
         return None
     m = (asof - t).total_seconds() / 60
-    return m if m >= -2 else None
+    return max(m, 0.0) if m >= -ahead else None
 
 
 def check(day, asof=None):
@@ -45,8 +69,16 @@ def check(day, asof=None):
             for t in cfg["charts"]}
     for tag in cfg["charts"]:
         sig = df[(df.event == "SIG") & (df.tag == tag)]
-        if sig.empty and has_sig(tag):
-            out.append(f"{tag}: the STRATEGY wrote no heartbeat today: not compiled, removed or stopped (chart may look normal).")
+        if sig.empty:
+            # 2026-11-12: JF150-5 traded +$145 while this said 'not running': its HeartbeatTag input was blank (never wrote SIG)
+            traded = not df[(df.event.isin(["OPEN", "CLOSE"])) & (df.tag == tag)].empty
+            if traded:
+                out.append(f"{tag}: strategy TRADED today but writes no heartbeat: its HeartbeatTag input is blank or wrong; set it to {tag}.")
+            elif not has_sig(tag):
+                out.append(f"{tag}: strategy has never written a heartbeat: HeartbeatTag input blank? Set it to {tag}. "
+                           "Not proof it is stopped (no trade yet today to confirm either way).")
+            else:
+                out.append(f"{tag}: the STRATEGY wrote no heartbeat today (it did before): not compiled, removed or stopped (chart may look normal).")
         a = df[(df.event == "ACCT") & (df.tag == tag)]
         if a.empty:
             out.append(f"{tag}: no monitor line today (chart closed or monitor missing)."); continue
@@ -61,20 +93,26 @@ def check(day, asof=None):
             for ev in ("ACCT", "POS", "SIG"):
                 q = df[(df.event == ev) & (df.tag == tag)]
                 if q.empty: continue
-                m, L = age_min(q.iloc[-1], asof), lim(q)
+                L = lim(q)
+                m = age_min(q.iloc[-1], asof, ahead=L - 15 + 2)   # L - 15 = this chart's write interval (bar length)
                 if m is None: out.append(f"{tag}: last {ev} line has a bad or future time: VPS clock? Check it.")
                 elif m > L: out.append(f"{tag}: last {ev} line {int(float(q.iloc[-1].bar_time)):04d} CT is {m:.0f} min old (limit {L:.0f}): chart frozen or closed? Check it.")
-            m, bar_age = age_min(r, asof), float(r.entry_price or 0) / 60
+            m, bar_age = age_min(r, asof, ahead=lim(a) - 15 + 2), float(r.entry_price or 0) / 60
             if m is not None and bar_age + m > lim(a):        # feed age = bar age at capture + time since capture
                 out.append(f"{tag}: chart's last bar is {bar_age + m:.0f} min old at check time (limit {lim(a):.0f}; feed?).")
         elif float(r.entry_price or 0) > 900: out.append(f"{tag}: chart's last bar {float(r.entry_price) / 60:.0f} min old (feed?).")
         if str(r.contracts) != "1": out.append(f"{tag}: auto-trading OFF (last line {int(r.bar_time):04d}).")
         if want[tag] and r.side != want[tag][0]: out.append(f"{tag}: monitor account {r.side}, expected {want[tag][0]}.")
+        expected = cfg["accounts"].get(cfg["charts"][tag].get("account", ""), {}).get("id")
+        route = "" if pd.isna(r.exit_date) else str(r.exit_date).strip()
+        if expected and route != expected:
+            out.append(f"{tag}: routed account {route or 'UNKNOWN'}, expected {expected} (Auto Trading gear).")
         p = df[(df.event == "POS") & (df.tag == tag)]
         if len(p) and p.iloc[-1].contracts != p.iloc[-1].profit_usd:
             out.append(f"{tag}: strategy position {p.iloc[-1].contracts} vs broker {p.iloc[-1].profit_usd}.")
-    for t in sorted(set(df[df.event.isin(["POS", "ACCT", "SIG"])].tag) - set(cfg["charts"])):
+    for t in sorted(set(df[df.event.isin(["POS", "ACCT", "SIG"])].tag) - set(cfg["charts"]) - {"SCAN"}):   # SCAN = the guard's daily account scan, not a chart
         out.append(f"{t}: unexpected chart running (retired account or wrong tag).")
+    out += size_check(day, cfg)
     import live_guard as L                                    # 2026-10-30: failed accounts and code versions
     for n, a in L.floors(d, cfg).items():
         if a["room"] <= 0:

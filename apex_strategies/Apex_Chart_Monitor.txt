@@ -1,3 +1,4 @@
+// SUPERSEDED 2026-11-09 by Apex_Chart_Guard.txt (one helper per chart does this file's job and the other helpers'). Kept for reference.
 // Apex Chart Monitor (2026-10-29) - SIGNAL, places NO orders. Live guard step 1 (live/vps/LIVE_GUARD_PLAN.md).
 // Writes one ACCT row every MonitorMins to the same daily file as the Apex Trade Logger (C:\TradingLogs\YYYYMMDD.csv):
 // the account's balance as Rithmic reports it, whether auto-trading is on for this chart's strategy, and how old the
@@ -7,15 +8,18 @@
 // How to use (outside market hours, once per live chart):
 //   1. PowerLanguage Editor > New > Signal, name "Apex Chart Monitor", paste this file, compile (F7).
 //   2. On each live chart: Format Signals > Add > Apex Chart Monitor. Inputs: Tag = the chart's logger tag (VB-2, ONB150, ...),
-//      AccountName = the account typed exactly (APEX-681524-02 or APEX-681524-03). Leave the others.
+//      AccountName = the account typed exactly (the one live/expected_setup.json gives the tag, e.g. APEX-681524-02 or -04). Leave the others.
 //   3. Auto-trading off / on for that chart (starting Flat outside a trade window), as after any signal change.
 // Columns (same 14 as the logger, so one reader handles both):
-//   ACCT,tag,symbol,account,auto_trading(1/0),net_worth,equity,bar_age_sec,,,,,bar_date,bar_time
+//   ACCT,tag,symbol,account,auto_trading(1/0),net_worth,equity,bar_age_sec,route_account,,,,bar_date,bar_time
+// route_account (2026-11-01): GetAccountID = the account this chart's strategies actually send orders to (the Auto Trading
+// gear), empty while auto-trading is off. 'account' is only the typed AccountName input (used for the balance). The
+// watchdog alarms when route_account is not the account live/expected_setup.json assigns to the tag.
 // NetWorth 0 for an account = MultiCharts doesn't get the balance from Rithmic: tell Claude (the dashboard then keeps the
 // balance the user reports).
 
 inputs: Folder("C:\TradingLogs\"), Tag("VB-2"), AccountName(""), MonitorMins(5);
-variables: Acct(""), NW(0), EQ(0), AutoOn(0), AgeSec(0), FileName(""), BarDay(""), Row(""), Slot(0), LastSlot(-1),
+variables: Acct(""), Route(""), NW(0), EQ(0), AutoOn(0), AgeSec(0), FileName(""), BarDay(""), Row(""), Slot(0), LastSlot(-1),
 	MinOfDay(0);
 
 // keep calculating when no tick arrives, so a dead feed still produces rows with a growing bar age
@@ -26,6 +30,7 @@ if GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
 	Slot = CurrentDate * 10000 + IntPortion(MinOfDay / MaxList(MonitorMins, 1));
 	if Slot <> LastSlot then begin
 		LastSlot = Slot;
+		Route = GetAccountID;
 		Acct = AccountName;
 		if Acct = "" then begin
 			NW = 0; EQ = 0;
@@ -39,7 +44,7 @@ if GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
 		BarDay = NumToStr(CurrentDate + 19000000, 0);
 		FileName = Folder + BarDay + ".csv";
 		Row = "ACCT," + Tag + "," + GetSymbolName + "," + Acct + "," + NumToStr(AutoOn, 0) + "," + NumToStr(NW, 2) + ","
-			+ NumToStr(EQ, 2) + "," + NumToStr(AgeSec, 0) + ",,,,," + BarDay + "," + NumToStr(CurrentTime, 0);
+			+ NumToStr(EQ, 2) + "," + NumToStr(AgeSec, 0) + "," + Route + ",,,," + BarDay + "," + NumToStr(CurrentTime, 0);
 		FileAppend(FileName, Row + NewLine);
 	end;
 end;

@@ -36,7 +36,7 @@ def challenge(P, days, a, rule):
         else:
             if lim == floor: return "fail", n
             bal = lim
-        floor = max(floor, min(bal - a["dd"], a["lock"]))
+        floor = max(floor, bal - a["dd"])   # evaluation: keeps trailing (Codex 2026-11-06 #1; was capped at a["lock"])
     return ("time", a["maxd"]) if len(days) >= a["maxd"] else None
 
 

@@ -26,7 +26,7 @@ Sizes per account type (the combine set):
 
 | Strategy | Chart | 50K evaluation | 150K evaluation (x 2.5) |
 |---|---|---|---|
-| Vault Break | 30-min | `NumContracts` 8 | `NumContracts` 20 |
+| ~~Vault Break~~ (removed from 150K evaluations 2026-11-11) | 30-min | `NumContracts` 8 | none |
 | ONB ADX30 | 15-min | risk $1,100 | risk $2,750 |
 | Expiration Open Short | 5-min | risk $500 | risk $1,250 |
 | Bridge Monday Long | 5-min | 2 | 5 |
@@ -46,8 +46,12 @@ Sizes per account type (the combine set):
    - Mode **AA** (automated, asynchronous). **Initial position: Flat.** **No automatic position synchronisation.**
    - Intra-bar order generation **off** (unless the strategy file says otherwise).
    - 'Stop auto-trading after N rejected orders' = **10**.
-4. **Inputs (Format Signals > Inputs):** sizes from the table in section 1; Target Guard `StartBalance` = the Apex balance
-   today, `TargetBalance` 53050 (50K) / 159050 (150K); Trade Logger `Tag` = strategy name + the account suffix.
+4. **Inputs (Format Signals > Inputs):** sizes from the table in section 1. **Helper (since 2026-11-09): ONE signal per chart,
+   `Apex Chart Guard`** (`apex_strategies/Apex_Chart_Guard.txt`; replaces Trade Logger, Chart Monitor, Target Guard and Stop
+   Guard): `Tag` = strategy name + the account suffix, `AccountName` = the account typed exactly, everything else default
+   (2026-11-09: AUTO from the account in the chart's Auto Trading gear: evaluation or funded, 50K or 150K, from the account
+   name and balance; target guard, finish mode and cushion guard switch themselves on for the right account type). The only
+   per-chart inputs left: the strategy's size inputs, its HeartbeatTag and the guard's `Tag`.
 5. **Symbol Mapping:** `@MNQ -> MNQZ6` (rolls to MNQH7 on 12/10; see TODO).
 6. **Rename each chart window** with the account number (e.g. "#3 VB 30m"), so the four sets can't be confused on screen.
 7. Fill in section 1's register.
@@ -76,7 +80,7 @@ Then click **AA** (it turns green). If MultiCharts asks about the current positi
 
 - [ ] Accounts tab: every live account connected, Last Update current; balances as expected.
 - [ ] Open Positions: only positions the plan explains (e.g. Bridge long on Monday morning, ONB overnight).
-- [ ] Each chart's AA green, logger and Target Guard on it; Target Guard `StartBalance` = today's Apex balance.
+- [ ] Each chart's AA green, with its strategy and one Apex Chart Guard on it (nothing to type daily).
 - [ ] A failed or paused account: AA **off** on all of its charts.
 
 ---

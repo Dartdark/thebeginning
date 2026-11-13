@@ -1,0 +1,17 @@
+[provenance] code 0481cc0a dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Twin Continuation, breakout stop capped at 1 ATR ('cap1'), on the 150K EVALUATION (user 2026-11-08), as an ADDITION to the
+   Twin cap1: 1107 trades, $248 a trade per NQ
+   daily corr of Twin with the set: {'VB': 0.18, 'ONB30': 0.38, 'MON_BR': 0.05, 'EOS': 0.05}
+
+150K evaluation (corrected engine), every start day 2018+:
+   plan                                 pass 35.9% (18-22 35.0%, 23+ 37.2%) fail 63.3% time  0.8% median days 7 fee/funded $693 | vs plan +0.0% (+0.0% / +0.0%)
+   plan + Twin cap1 2 MNQ               pass 37.9% (18-22 37.6%, 23+ 38.3%) fail 61.1% time  1.0% median days 7 fee/funded $657 | vs plan +2.0% (+1.1% / +3.1%)
+   plan + Twin cap1 4 MNQ               pass 36.5% (18-22 36.6%, 23+ 36.4%) fail 62.7% time  0.8% median days 6 fee/funded $682 | vs plan +0.6% (-1.5% / +2.5%)
+   plan + Twin cap1 6 MNQ               pass 36.5% (18-22 36.1%, 23+ 37.1%) fail 63.0% time  0.5% median days 6 fee/funded $682 | vs plan +0.6% (-1.9% / +2.9%)
+   plan + Twin cap1 8 MNQ               pass 36.5% (18-22 36.8%, 23+ 36.1%) fail 62.9% time  0.6% median days 6 fee/funded $682 | vs plan +0.6% (-2.1% / +3.1%)
+   Twin cap1 4 instead of Bridge Mon    pass 34.1% (18-22 33.7%, 23+ 34.6%) fail 65.1% time  0.8% median days 6 fee/funded $730 | vs plan -1.8% (-4.5% / +0.8%)
+   Twin cap1 8 instead of Bridge Mon    pass 33.1% (18-22 34.4%, 23+ 31.3%) fail 66.2% time  0.8% median days 6 fee/funded $753 | vs plan -2.9% (-6.4% / +0.5%)
+   Twin cap1 8 instead of VB            pass 32.3% (18-22 32.7%, 23+ 31.8%) fail 59.9% time  7.8% median days 9 fee/funded $771 | vs plan -3.6% (-7.4% / +0.0%)
+   Twin cap1 12 instead of VB           pass 32.1% (18-22 34.6%, 23+ 28.8%) fail 63.1% time  4.8% median days 8 fee/funded $776 | vs plan -3.8% (-7.3% / -0.2%)
+   Twin cap1 8 instead of ONB ADX30     pass 28.3% (18-22 23.1%, 23+ 35.2%) fail 57.0% time 14.7% median days 10 fee/funded $879 | vs plan -7.6% (-13.7% / -1.2%)
+   Twin cap1 12 instead of ONB ADX30    pass 30.7% (18-22 26.4%, 23+ 36.4%) fail 57.5% time 11.8% median days 9 fee/funded $811 | vs plan -5.2% (-11.9% / +1.6%)

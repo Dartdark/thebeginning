@@ -4,6 +4,9 @@ For the user and for Claude. One line each, newest at the bottom of each section
 Claude adds to this during the Friday review (and whenever a mistake is caught); the user can add or strike lines anytime.
 
 ## Trading and evidence
+- Evaluations bought days apart are nearly one bet (outcome corr 0.73; half the time a batch of 4 all fails): expect
+  whole-batch failures, and space purchases when smoother results matter more than speed (2026-11-01, firm_risk_test.py).
+- Saving money is making money: the same return on less capital (or with less drawdown) counts as a real gain (user, 2026-11-01).
 - One winning trade is not a strategy; being on the right side at the right time looks like skill. Judge rules over
   hundreds of trades, never by the last trade (user, 2026-10-18).
 - Price patterns fail out of sample here again and again; edges that hold have a reason someone is forced to trade at a
@@ -31,6 +34,12 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - In an ablation, a setting of 0 must mean 'off': check the code's guard (FC 2B 'no break-even' run armed break-even
   at once and made the exits look essential; the checker caught it) (2026-10-23).
 - Book a Sunday-evening exit on the Monday trading date, or daily metrics silently drop it (Kusho, 2026-10-23).
+- A path helper must take the instrument's own $ a point: matching trade nets do not prove the intraday worst paths are right
+  (twin_continuation_bench.grids marked ES at NQ's $20; Codex 2026-11-08, fixed, MO-on-ES benches rerun).
+- Quote a multi-day strategy's drawdown from DAILY MARKS, never from trades booked at exit: S30 IBS < 0.10 showed $24.8k booked vs $45.3k
+  marked (2026-11-08, caught via Codex's S30 study). The book tests used marks; the standalone line did not.
+- An engine proven on NQ does not transfer to other markets by moving its clock (MO and noise band failed on CL / GC / ZN,
+  2026-11-08); the one that transferred (OT on ES) was the same trade. Test a new market's own mechanism instead.
 - A daily P&L series must add up to the trade nets (costs, fills, roll jumps): check the totals match before using it for
   sizing or Monte Carlo (S30's first daily series overstated it by ~$3k; Codex caught it, 2026-10-23).
 
@@ -77,3 +86,42 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - Never write PowerShell or Windows paths through a Python string: "\2" became an invisible control character and silenced
   the new floor alarm (2026-10-30, Codex cross-review). Use raw strings or write the file directly.
 - The weekly review must check Claude's own week of code, not only Codex's: five defects this week were all in new Claude code (2026-10-30).
+
+## Corrections from the user (one line per correction, added in the same reply; user rule 2026-11-01)
+- 2026-11-12, user: 'it did run today. it executed a trade for +145' (I relayed the pre-market 'JF150-5 wrote no heartbeat' as a real problem). Rule: before calling a strategy dead, check the trade log / account P&L for its fills that day; a missing heartbeat alone may be a heartbeat-logging gap, so say 'no heartbeat line (check trades)', not 'not running'.
+- 2026-11-11 (VPS log push down all day): my one-line fix to push_trade_logs.ps1 put a '#' comment before the line's closing '}', so PowerShell refused to parse the whole script and no logs uploaded. Rule: never append a comment to a code line that ends in a brace; after any .ps1 edit, parse-check it (pwsh Parser.ParseFile) or at least count braces, and say if it was not parse-checked.
+- 2026-11-11, user: 'cmon u are losing me money' (Chart Guard target limit rejected 10x -> Twin auto-trading off, position unprotected). Rule: before any live helper / order code goes on a chart, list every order it can send and check each against broker limits (price bands, size, rejects -> AA-off at 10) for EVERY chart size it runs on, not only the biggest one; say plainly what was not tested live.
+- 2026-11-11, user's Orders log ('wait was it a dual thrust trade?'): I said a 2-lot BUY STP on the VB chart came from no strategy. It was Twin's breakout entry: MultiCharts draws every working order of the same account + symbol on EVERY chart. Rule: before calling an order 'not from a strategy', check the Orders / Logs tab's Strategy column and every chart on that symbol, not only the chart it is drawn on.
+- 2026-11-06: "lettering is too bold" (re-rendering the edited resume nested bold inside bold rows: Inter-Black). Rule: after re-rendering a document, compare its fonts (pdffonts) and look with the previous approved version before sending.
+- 2026-11-09: "80 is a legit improvement. Yea it's still negative in 18-22 but it's less negative so it still is an improvement" (I judged a
+  variant only against the book and missed that it beats the current version in every period). Rule: judge a variant on TWO bars - vs
+  the current version of the piece (is it better in both periods?) and vs the book (does adding it help?) - and report both.
+- 2026-11-08: "the job doesnt start till the 10th and first payday likely wont be till the 17th" (I called Friday 11/13 'Friday's purchase' from an old alert). Rule: dates of the user's money / job come from the user's latest words, not from an old alert or to-do; say 'per the to-do' and ask when unsure.
+- 2026-11-06: "university of san francisco" (I expanded "USF" to South Florida). Rule: never expand an abbreviation or fill a fact about the user (school, employer, dates) by guessing; ask, or keep it exactly as they wrote it.
+- (2026-10-30, "you sent me the v2 version") Before sending a deliverable, open the exact file being sent and check its
+- 2026-11-01: "cmon this is money on the line i need u to be tight especially on checking multicharts". Rule: every MultiCharts claim says its source (screenshot / code line / log field + what writes it) and VERIFIED or GUESS; never send the user to change a live setting on a guess.
+- 2026-11-01: "i alr did?" (I said the x150 charts routed to closed #3 from the ACCT log rows; those rows show the Chart Monitor's typed AccountName input, not the order routing). Rule: know what a log field measures before calling it a defect; ACCT.account = monitor input only.
+- 2026-11-01: "dont drop it i want to do it" (I removed the VPS screenshot after Defender blocked it, without asking). Rule: when something the user asked for hits a blocker, keep it and offer the safe way through; ask before dropping a feature.
+  title, version and date match what was asked; regenerate rather than resend an older copy.
+- (2026-10-30, "the agreed plan is not what we just discussed") When a document restates numbers or a plan, re-derive
+  them from the latest decision in this conversation / TODO, not from the document's earlier version.
+- (2026-11-01, "why are your replies double?") Write the reply text once, after the PushNotification call, never before
+  and after it.
+- 2026-11-02: "2pm pst" (I read "Wed 2 at 2pm" as Central). Rule: a time the user gives without a zone is ambiguous; ask or state the zone assumed in the reply before scheduling.
+- 2026-11-04: "maybe make it a soft guide not a strict rule" (I wrote the Sharpe > 3.15 x corr pre-screen as a rule). Rule: heuristics go in the docs as guides; only the bench decides.
+- (2026-11-01, "where's the code?") Don't assume the user can open a file link on the phone: when they need to read
+  something now (a task, code to review), put it in the reply as well as the link.
+- (2026-11-06, Friday review; Codex eval audit) A fixed dollar-risk stop can exceed the account's remaining cushion:
+  three of four failures had the planned ONB stop above room-to-floor. Cap each entry's risk by the live cushion.
+- 2026-11-09: cutting a strategy's 'weak' side because the other side carried 2023+ never helped the books (4 of 4 pieces, `analysis/side_focus_test.py`): the weaker side still earns and smooths the other. Side splits are information; change a side only when it loses money in both periods.
+- 2026-11-12: "remember that vb is no longer part of the book are these the results with that in mind?" (the 150K evaluation bench still had VB 20 in its base: bench150.py predates the 11/11 removal). Rule: before any book bench, check the base against the live plan (NEW_CHAT_BRIEF 'Now', expected_setup.json) and print the base's pieces in the output.
+- 2026-11-12 (own defect, IBS Globex): `strategy_data_sweep.py` keyed multi-day trades on their EXIT date, so the regime was read after entry: GEX above median looked like t 3.4 (placebo p 0.000) and was t -0.4 at entry. Rule: any regime split of held trades uses the entry session; the tool now takes an entry_date column and warns without one.
+- 2026-11-12 (own defect, caught before any result was read): `ts.astype('int64') // 60e9` assumed nanoseconds; these frames are microseconds, so every bar looked 0 minutes apart (the drift-burst kernel never decayed). Rule: convert time with `.to_numpy().astype('datetime64[m]')`, never by dividing int64.
+- 2026-11-12 (own defect, caught at the first read, ML futures paper): difference (Panama) roll adjustment over ~100 CL / NG rolls pushed old prices toward zero, so RATIO returns exploded (+7,734 bp a day). Rule: any return / ratio series across many rolls uses backward ratio adjustment, and the script prints a sanity count of returns beyond +-25%.
+- 2026-11-12 (drift bursts): a reversal measured from a statistic's PEAK is not tradeable: 62-64% reversal at the peak fell to 53-55% at the first crossing and 49-51% once the turn was confirmed. Rule: any 'X% of events reverse' claim is re-measured at the first moment the event is knowable.
+- 2026-11-12: "jump looks hot garbage to me how was this supposed to help again?" (my MultiCharts code set the stop / target only on the signal bar, so they lived one minute; the Python port check could not see it because it ported the signal, not MultiCharts' order rules). Rule: a 'port matches' claim covers only what the port models; say which order mechanics were NOT checked, and ask for a report before calling MC code verified.
+- 2026-11-12: "make sure u update all docs so u dont test upcoming shit on past shit" (my Jump Fade eval benches used a base without DT 2, which is live on #5; the 150K bench base was VB-era code patched per script). Rule: the live evaluation set lives in ONE place in code (`bench150.LIVE_EVAL`, printed every run) and is changed in the same commit as `live/expected_setup.json` and `apex_strategies/README.md`; old scripts that edit the base by hand use `setup(base="legacy")`.
+- 2026-11-12 (own defect): `prepush_check.py ... | tail -1 && git push` pushes even when the check refuses (the pipe returns tail's exit code); the designated branch got a push before pulling 8 commits. Rule: `set -o pipefail` or no pipe on the check.
+- 2026-11-09: borrowing a proven filter from one strategy for another strategy's engine failed 4 of 4 (`analysis/ingredient_combos_test.py`): a filter is proven only on its own engine. Combine ingredients only when the mechanism says the filter fixes that engine's failure mode, and expect the placebo to decide.
+- 2026-11-10: when a filter / regime is the BEST of many tried on a piece, judge it against random splits picked the SAME way (best of N random), never against plain random skips: the Apex-book sweep's funded skips (+$280, blown 2.2% -> 0.2%) were matched by best-of-63 random splits (`analysis/apex_sweep_placebo.py`), while the Overnight Tick version beat them (`analysis/ot_version_placebo.py`).
+- 2026-11-13: "Before u were saying the best thing for the book was diversified markets. It seems now u switched ur tune" (I called concentration the real risk and said a different market is worth adding 'when one passes the bench', then after three failed ports recommended staying on NQ; the condition was buried, so it read as a reversal). Rule: when a recommendation depends on a test, lead with the condition ('only if X passes'), and when the test fails, say plainly which earlier statement it updates.

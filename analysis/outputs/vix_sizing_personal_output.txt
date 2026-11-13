@@ -1,0 +1,30 @@
+[provenance] code 98263732 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+VIX-regime sizing on the PERSONAL book (user 2026-11-08). No Apex floor, so the measure is the personal ladder's: 1-year
+   pieces: ['VaultBreak', 'OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend']; volatile share of days 51%
+
+2018-26:  variant                    $ a year p50  bad yr p5    DD p95  ret/DD   capital
+         book as is                $      26,330 $   14,304 $   4,857    5.42 $  24,285
+         VB + LDF calm x0.5        $      26,091 $   14,088 $   4,714    5.53 $  23,572
+         VB + LDF volatile x1.5    $      27,282 $   14,860 $   4,949    5.51 $  24,743
+         VB + LDF volatile x2      $      28,328 $   15,241 $   5,067    5.59 $  25,333
+         VB + LDF x1.5 / x0.5      $      27,135 $   14,772 $   4,824    5.62 $  24,120
+         ALL calm x0.5             $      21,672 $   11,362 $   3,529    6.14 $  17,645
+         ALL volatile x1.5         $      34,881 $   18,540 $   5,847    5.97 $  29,233
+
+2018-22:  variant                    $ a year p50  bad yr p5    DD p95  ret/DD   capital
+         book as is                $      19,897 $    9,359 $   3,652    5.45 $  18,259
+         VB + LDF calm x0.5        $      19,913 $    9,396 $   3,664    5.43 $  18,320
+         VB + LDF volatile x1.5    $      20,894 $    9,674 $   3,876    5.39 $  19,381
+         VB + LDF volatile x2      $      21,949 $    9,931 $   4,151    5.29 $  20,755
+         VB + LDF x1.5 / x0.5      $      20,894 $    9,714 $   3,862    5.41 $  19,310
+         ALL calm x0.5             $      17,877 $    7,775 $   3,597    4.97 $  17,983
+         ALL volatile x1.5         $      27,814 $   12,420 $   5,421    5.13 $  27,105
+
+2023+:  variant                    $ a year p50  bad yr p5    DD p95  ret/DD   capital
+         book as is                $      35,164 $   19,687 $   5,765    6.10 $  28,823
+         VB + LDF calm x0.5        $      34,513 $   19,329 $   5,605    6.16 $  28,024
+         VB + LDF volatile x1.5    $      36,108 $   20,358 $   5,804    6.22 $  29,018
+         VB + LDF volatile x2      $      37,125 $   20,968 $   5,830    6.37 $  29,152
+         VB + LDF x1.5 / x0.5      $      35,551 $   20,394 $   5,649    6.29 $  28,244
+         ALL calm x0.5             $      26,498 $   14,708 $   3,587    7.39 $  17,936
+         ALL volatile x1.5         $      43,857 $   24,778 $   6,265    7.00 $  31,327

@@ -388,3 +388,214 @@ ONB $1,100), no cushion sizing. Bootstrap 90% intervals for Sharpe; permutation 
   blow-ups.
 - ONB ML longs' full-period drawdown ($3,916) ranks above every shuffle: it is all 2018
   (−$2,491 that year), the first year of the frozen model; 2019–2026 were all positive.
+
+## Pre-screen: will a new strategy help the book? (2026-11-04, user asked to keep this)
+
+**Soft guide (not a rule; the bench decides): a new piece usually improves the personal book if its Sharpe > (book Sharpe) x (its daily correlation with the book).**
+Book Sharpe = 3.15 (20 pieces at 1 micro, 2018-26, after costs). Hurdle by correlation: 0.0 -> any edge; 0.2 -> 0.63; 0.3 -> 0.95;
+0.4 -> 1.26; 0.5 -> 1.58. The margin above the hurdle sets the size of the gain (noise-area longs: 1.54 vs 3.15 x 0.42 = 1.32 ->
+return/DD only 9.0 -> 9.3). A screen, not a substitute for the bench; valid for a small piece next to a large book.
+
+- t says how SURE we are the edge exists (grows with sqrt(trades)); t / sqrt(trades) and $/trade say how BIG it is.
+- Another NQ morning breakout (08:30-11:00) correlates ~0.4 with the book: needs Sharpe 1.3+ to help, 1.8+ to help a lot.
+  Other markets, overnight, weekend or event trades correlate ~0: almost any real edge (Sharpe 0.6-1.0) helps.
+- Apex is stricter: drawdown per MNQ well under $1,000 and profits on days Vault Break / ONB lose.
+
+Book piece stats (personal, per micro, 2018-26; corr = daily corr with the other pieces), medians: $2,153 a year, t 4.0,
+Sharpe 1.33, max DD $1,574, return/max DD 1.28 a year, 73 active days a year, 56% winning days, corr 0.23. Leaders:
+Twin (ret/DD 2.25, Sharpe 1.77, corr 0.30), Kusho (2.03, 1.68, 0.31), Overnight Tick (1.72, 1.68, 0.20): high Sharpe AND a time
+of day / week the rest of the book doesn't trade. Low-corr small pieces (CL Sunday fade, EOS, ES MOC: corr ~0) earn little but
+cut book risk. Recompute: `analysis/personal_portfolio.py` P (daily per piece).
+
+- **Checker G13 invariance (2026-11-08, Boutgajouft SSRN 7525240 Gate 2):** trade outcomes in risk units compared across
+  years and past-only VIX regimes (normalised Wasserstein-1 vs a Gaussian 95% reference). Soft gate: CONCERN, not FAIL, because
+  regime-dependent edges are allowed; a CONCERN means 'name the regime the edge lives in and size for the other one'.
+
+## Ingredients, not papers (user 2026-11-08)
+
+Working strategies combine several ideas; a paper usually supplies one. Every upload / paper is reviewed as a list of ingredients:
+1. **Mechanism** (why the money is there), 2. **place and time** where it is strongest, 3. **volatility normalisation**,
+4. **exits that fit the edge** (trend: let it run; short flows: tight), 5. **a filter backed by a second mechanism**.
+
+**For each upload:** list its ingredients, then run a drop-one ablation (remove one at a time, per NQ, both periods) before the
+whole-strategy tests: it shows which part carries the edge and which parts are decoration (knobs that only add fitting room).
+**For new combinations:** build only from ingredients in the register below, at most 2-3 per strategy, rules and settings fixed
+before any result, then the full checker (incl. the parameter-perturbation check). Every combination tried counts as a trial.
+
+### Every new strategy: ingredients + full data sweep (user 2026-11-10, standing rule)
+
+Every strategy the user sends, whether or not it passes on its own, goes through three steps in the same reply chain:
+1. **Standard test** (testing standard in CLAUDE.md: costs, both periods, placebo, metrics, books add / replace).
+2. **Ingredient breakdown:** rebuild it, change ONE part at a time (entry trigger, filters, timing, stop, target, sides), find the
+   engine vs supporting vs decoration; record a row in the Ingredient register below.
+3. **Full data sweep:** `python3 analysis/strategy_data_sweep.py <trades.csv> <name>` splits its trades by every daily data series
+   x regime and judges the best version against the FAIR placebo (best of N random splits picked the same way). A version that beats
+   it is a LEAD: book bench (vs the same size spread evenly) and out-of-sample evidence before any plan change.
+A weak strategy with a strong version is still worth the user's time: that is how the CL fade OVX sizing and the Overnight Tick lead
+were found.
+
+### New data: screen every piece (user 2026-11-10, standing rule)
+
+Whenever a new data source arrives (or an existing one is used in a new way), do not stop at the idea it was fetched for. Also
+**screen every plan piece against it**: `python3 analysis/new_data_screen.py <csv> <date col> <value col> <regime> <name>` splits
+each personal-book piece's daily P&L by the regime the data defines and flags pieces whose gap clears the multiple-testing bar
+with the same sign in both periods. Origin: the OVX data fetched for the CL fade also showed Overnight Tick earning ~3x more on
+high-OVX nights (`analysis/ovx_screen.py`, WATCHLIST #37), the biggest book lead of the week. Rules for a screen result:
+- it is a LEAD (found by screening): bench it in the books (post hoc, information) and compare with the same average size spread
+  evenly, so a sizing gain is not just 'more of the piece';
+- adoption needs out-of-sample evidence: older data, another independent market, or the forward log;
+- report the screen with its bar (19-20 pieces -> |t| >= ~2.8), not the best line alone.
+
+### Ingredient register (`analysis/ingredient_ablation.py`, 2026-11-08; per NQ, 2018-26) - historical component evidence (exploratory)
+
+Status words (Proven / Decoration / harmless) label already-seen ablations, not causal estimates: removing a part can change later
+trades, so a new combination still needs its own pre-registered design gate (Codex review 2026-11-08).
+
+| Ingredient | Where it lives | Evidence (removed / alone) | Status |
+|---|---|---|---|
+| Morning momentum: vol-normalised extension from a 21-EMA, 08:40-09:30 CT, held to 14:50, **no target** | Twin MO | alone $518, t 4.6 (both periods); with a 1.5x target $184 (t 5.2 -> lower total) | **Proven** (the engine of Twin) |
+| Noise band: breakout only beyond open / prior close +- the slot's average move | Bridge noise-area | without the band (vm 0) $62 -> $17, t 5.5 -> 2.2 | **Proven** |
+| Closing order flow x VIX regime for the overnight direction | Overnight Tick | alone (any day) $225, t 4.8 (both periods) | **Proven** (stronger than the down-day rule) |
+| Overnight drift window 17:05 -> 03:00 CT long | Overnight Tick | every night $108, t 3.1 (2018-22 t 1.6) | Supporting (base rate) |
+| Down-day condition for overnight longs | Overnight Tick | down days only $175 vs every night $108 | Supporting |
+| Swing-level stop entries (6h fractals, Osler) | Twin BO | alone $113, t 3.5 (2023+ t 1.5); RTH-only entries $309 a trade with the MO | Weak alone; better in RTH |
+| Stop / stop cap | all | noise-area without stop AND target (coupled, Codex 2026-11-08): worst trade -$1k -> -$11.8k; Twin uncapped: worst -$2.9k -> -$11.7k | Required for Apex (risk shape, not edge) |
+| Target on short-horizon trades | noise-area | without its 25-pt target $62 t 5.5 -> $123 t 3.7 (fewer, choppier) | Helps consistency |
+| Daily trade / stop limits | noise-area | no effect (t 5.47 vs 5.50) | Decoration |
+| Volatility cap filter (skip after a 2x range day) | Twin | no effect ($248 vs $243) | Decoration (keeps tail days out; harmless) |
+| Shorts on NQ trend / momentum rules | noise-area, Donchian | noise-area with shorts $62 -> $40 a trade | Weak (NQ shorts) |
+| Jump score: 5-min move / (bipower volatility x time-of-day factor), Marcaccioli 2021 | pino1 jump study (`analysis/jump_lib.py`, 2026-11-11) | Trigger \|J\| > 3 follow, 08:30-15:00: 30-min hold $115 (t 3.1) in 2018-22, -$70 in 2023+; swapping the exit to a 0.3R target lifts wins 52% -> 78% and cuts the net to $13; fade instead: PF 0.90; overnight instead of day: $0; precursor (endogenous / exogenous) filter: no gap | **Decoration** as a direction signal (the 0.3R target only buys win rate); usable as volatility normalisation |
+| ATR emergency stop on daily IBS reversion (2.5 x ATR10) | IBS Globex ES v5 (`analysis/ibs_globex_test.py`, 2026-11-12) | Without it PF 1.46 -> 1.58, total $155k -> $168k; 2018-22 $33k -> $57k; 2023+ $116k -> $105k; 2.0 ATR worse (PF 1.36) | **Drag** on mean reversion (stops sell the low the rule buys); size down instead |
+
+Post hoc leads from the ablation (not adopted, need their own pre-registered test): Overnight Tick's order-flow x VIX cell on any day
+(t 4.8 vs the full rule's 5.2, twice the nights); Twin's breakout entries in RTH only ($309 vs $248 a trade, total $246k vs $274k).
+
+**Round 2 (`analysis/ingredient_ablation2.py`, 2026-11-08; Vault Break v1, Dual Thrust v4, PAPERTREND v2; per NQ 2018-26, removed -> $ a trade / t):**
+
+| Ingredient | Where | Evidence | Status |
+|---|---|---|---|
+| Volatility-scaled distance from the open (VB open + 0.3 ATR, DT open +- 0.5 prior range, PT open +- 0.5 ATR; = the noise band) | VB, DT, PT, noise-area | removed: VB $87 t 4.1 -> $55 t 3.2 (DD $13.9k -> $23.6k); DT $139 t 4.4 -> $74 t 2.4; PT $373 t 4.0 -> $126 t 1.7 | **Proven, shared** by four plan pieces (daily corr between them only 0.16-0.29: different days / times) |
+| Direction of the break | PT | random side on the same days / times $-12 vs $373 | Proven (the side carries it) |
+| Late start (VB entries from 10:00, not 08:30) | VB | from 08:30: $40, t 1.9, 2023+ t 0.7, DD $30.1k | Supporting (strong: the first 90 minutes are noise for VB) |
+| Range-regime filter (DT skip RR > 1.2 ADR; PT skip after the widest of 7 ranges) | DT, PT | DT t 4.4 -> 3.6; PT t 4.0 -> 3.5 | Supporting |
+| Gap-side filter | PT | t 4.0 -> 3.4, but total $212k -> $301k (more trades) | Supporting per trade; costs total |
+| VWAP confirmation | VB | t 4.05 -> 3.81 | Weak supporting |
+| Up to 3 entries a day | VB | 1 a day: t 4.1 -> 2.9, total $154k -> $80k | Supporting |
+| Stop (target kept) | VB, DT | VB no stop: worst -$1.5k -> -$8.5k, t 2.4; DT both stops off: worst -$19k, 2023+ t 0.8 | Required (risk shape) |
+| Target | VB, DT | VB no target $152 t 2.7 (less steady); DT no target $201, **same t 4.37, total $226k -> $327k, DD $19.6k -> $27.4k** | VB: helps; DT: post hoc lead (needs its own pre-registered test) |
+| Entry-bar stop, holiday list (DT); 2 x ATR disaster stop (PT) | DT, PT | no change (PT's stop is never the exit that matters in the backtest) | Decoration (PT stop kept for tail risk) |
+
+**Round 3 (`analysis/ingredient_ablation3.py`, 2026-11-08; Relative Strength, Late-Day Flow; LDF rebuild 905 trades $91 vs MultiCharts 895 $95):**
+
+| Ingredient | Where | Evidence (removed -> $ a trade / t) | Status |
+|---|---|---|---|
+| NQ's move beyond what ES explains (cross-index residual) | Relative Strength | own momentum only $306 t 4.0 -> $189 t 2.1; market part alone $48 t 0.5; random side $-8 | **Proven** (a different engine from the open-breakout family) |
+| Early fixed decision time (9:00) | Relative Strength | decide 9:15: $220 t 2.8, DD $28.5k -> $42.9k | Supporting (strong) |
+| Big-day condition (move >= 0.4 ATR by 14:00) | Late-Day Flow | follow every day: $91 t 3.4 -> $42 t 2.7 | **Proven** (with the window) |
+| Forced-flow window 14:00 -> 14:30 | Late-Day Flow | signal 14:10: $20 t 0.7; exit 15:00: $72, 2023+ t 0.5 | **Proven** (timing is the edge) |
+| Volatility scaling of the threshold (Z / ATR vs a raw bp / % threshold, trade count matched) | RS, LDF | RS t 4.0 -> 3.9; LDF t 3.4 -> 3.3 | Decoration here (the threshold matters, its scaling does not; count-matched on the full sample) |
+| Target | RS | no target $310 t 3.8 | Decoration |
+| Stop | RS, LDF | RS no stop: worst -$6.8k -> -$20.2k, DD $35.3k; LDF no stop: $94 t 3.5, DD $15.0k -> $11.9k, worst -$2.7k -> -$3.1k | RS: required (tail); LDF: little effect (post hoc lead, not a change) |
+| Shorts | RS, LDF | RS shorts 2023+ t 1.1 (longs 2.8); LDF shorts $107 vs longs $78 | RS shorts weak recently (50K trades longs only); LDF both sides |
+
+**Round 4 (`analysis/ingredient_ablation4.py`, 2026-11-08; Expiration Open Short, NFP Fade, CL Sunday Gap Fade; rebuilds match: EOS 106 trades
+$501 vs 105 / $474, NFP 78 / $343 vs 76 / $319, CL 96 / $653 = the MultiCharts spec exactly):**
+
+| Ingredient | Where | Evidence (changed -> $ a trade / t) | Status |
+|---|---|---|---|
+| Monthly options expiry (AM settlement) | EOS | other Fridays $-58; long instead $-519; quarterly-only $260 (t 0.8) vs monthly-only $620 (t 2.8) | **Proven** (monthly expiries carry it) |
+| Enter at the 08:30 open | EOS | enter 09:00: $77 (t 0.5) | **Proven** (the edge is the first 30 minutes) |
+| Exit 10:00 | EOS | 09:00 $369 (t 2.85); 11:00 $551; 14:55 $789 (t 2.73; 2018-22 t 2.8, 2023+ t 1.4) | Lead: a later exit adds money at the same t (post hoc) |
+| Fade the payroll reaction | NFP | follow instead $-427 (t -2.6) | **Proven** (direction) |
+| Payroll spike condition (07:31-07:35 range > 3x median) | NFP | any first-10-day Friday: $234 (t 1.8) | Supporting |
+| Reaction window 07:30 -> 07:45 | NFP | 07:35: $236; 08:00: $325 | Supporting (07:45 best) |
+| Stop | EOS, NFP, CL | no stop: EOS $529 (worst -$8.1k), NFP $408 (t 2.2), CL $725 (t 3.5; but a -$16.6k open loss on 2026-03-08) | Risk shape: keep (Apex) |
+| Weekend gap threshold (Sunday 17:01 open >= 0.1 ATR above Friday) | CL | every up-gap $243 (t 2.3); >= 0.3 ATR $708 (n 34) | **Proven**; measured on the FIRST print: the gap at the 17:05 close instead gives $259 |
+| Fade up-gaps only | CL | follow $-664 (t -4.0); long down-gaps $-60; both sides $370 | **Proven** (up-gaps only) |
+| Weekend-specific | CL | the same fade on Mon-Thu reopens $-362 | **Proven** (weekend news gap) |
+| Hold to Monday 09:00 CT | CL | out Sunday 23:59 $146; Monday 07:00 $415; 13:30 $593 | Supporting (09:00 best) |
+
+**Round 5 (`analysis/ingredient_ablation5.py`, 2026-11-08; Monday Long, Swing Target v3; ONB ML from Codex's frozen ablation the same day,
+`agents/codex/results/ingredients_fc_onb_t_20261108.md`; rebuilds: Monday 414 trades $436 vs research 452 / $413; Swing Target 602 / $316 vs
+MultiCharts 598 / $316, same side 100%, P&L corr 0.96):**
+
+| Ingredient | Where | Evidence (changed -> $ a trade / t) | Status |
+|---|---|---|---|
+| Monday (weekend inflows / Monday 0DTE hedging) | Monday Long | Tue $73, Wed $56, Thu $15, Fri $69 (t <= 0.6); short $-371 | **Proven** |
+| Buy the 08:30 open, hold to 15:00 | Monday Long | enter 10:00 $163; out 10:00 $216, out 12:00 $282 | **Proven** (the whole session) |
+| After a down Friday | Monday Long | $510 vs $369 after an up Friday | Post hoc lead (both positive) |
+| Overnight location sets the side | ONB (Codex) | no overnight-bias direction: $156 / $173 a trade, DD x3-4 | **Proven** |
+| ML score (calendar terms most) | ONB ML (Codex) | no score $233 / $312 vs $631 / $711; no calendar terms $463 / $556 | Supporting (in-sample attribution) |
+| ADX trend filter | ONB ADX30 (Codex) | no ADX $182 / $316 vs $340 / $409 | Supporting |
+| Break of the prior 2 days' RTH range, in the break's direction | Swing Target | fade instead $-284 (t -3.7); 1-day levels $227, 5-day $170 | **Proven** (2-day levels best) |
+| Skip days that broke a level 08:31-08:45 | Swing Target | no skip: $208 (t 3.5), DD $15.6k -> $25.4k | **Proven** (supporting, strong) |
+| Target 0.35 x range | Swing Target | no target $294 (t 3.4); target 0.7 $315 (t 4.0) | Helps consistency |
+| Break-even at 0.30 x range | Swing Target | none: $321 (t 4.5) vs $316 (t 4.6) | Decoration here (Codex's earlier test: lower DD) |
+| Shorts | Swing Target | shorts $486 (t 4.7), longs $168 (t 1.9) | Post hoc lead: the shorts carry it |
+
+**Round 6: the capital-expansion bench (`analysis/ingredient_ablation6.py`, 2026-11-08; per contract, removed / changed -> $ a trade / t):**
+
+| Piece | Engine (removing it kills the edge) | Supporting / decoration | Post hoc lead |
+|---|---|---|---|
+| FVB | regime skip (off: $98 t 2.5) and strong-day short block (off: $92 t 2.4) | 1 trade a day ~same; window 120 best | **shorts $316 (t 3.7, DD $21k) vs longs $67 (t 1.5)** |
+| Ricochet 1144 | re-entries at S1 (none: $15 t 0.4); after a red day (green: $25; every day $54) | stop 50 / target 100 as is best | - |
+| DriftPullBack v3 | (no single part: drift off is BETTER, $47 t 3.4, DD $46k vs $58k) | target = stop: more $ but DD $75k | 1 trade a day: $60, DD $20.8k (vs $57.5k); shorts dead since 2023 ($5) |
+| RollZone 24h | the noise zone (off: $26 t 0.8) | night entries add (off: t 2.0); target irrelevant; stop 0.4 worse | - |
+| S30 IBS (NQ) | IBS reversal; hold until IBS > 0.8 (1-day hold $632) | after a down close: worse 2023+ | **entry IBS < 0.10: $2,331 (t 4.9; 2018-22 t 4.0, 2023+ t 3.1), DD $24.8k vs $37.7k, worst -$15k vs -$28k** |
+| Prior VWAP Trap | intraday momentum + 0.5 ADR trailing stop (its review: other levels $107-115, random levels $88-169) | the prior-VWAP level itself (~$30) | - |
+
+**Round 7: the three Codex bench pieces (`analysis/ingredient_ablation7.py`, from Codex's frozen ledgers; alternative models + side splits):**
+
+| Piece | Engine | Supporting / decoration | Post hoc lead |
+|---|---|---|---|
+| Anson momentum | its intended settings (threshold 4.5, hold 20 bars; the uploaded 3 / 6 earn $1) | Apex early flat: no effect | longs $140 (t 2.4) vs shorts $60 (t 1.0) |
+| R2Vault (longs only by design) | the CT 09:30-15:30 window (ET window $15, t 0.8; daily reset $25) | Apex flat halves it ($33) | - |
+| S03 Noise Area v2 | the noise-area breakout (v1 $144 t 3.3) | v2's 0.4 stop factor: t 3.3 -> 3.8, DD $41k -> $22k (supporting) | longs $158 (t 3.5) vs shorts $84 (2023+ $39) |
+(Exit-type splits are shown in the output but are not ablations: stops lose and targets win by construction.)
+
+**Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
+(t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
+carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight
+flow does not predict Twin's morning side; the noise-area longs do better on calm VIX days (post hoc lead), not volatile ones. Next ingredient
+work should look for new mechanisms (other places / times), not move the three engines to other markets.
+
+**Combos (`analysis/ingredient_combos_test.py`, 2026-11-09, pre-registered):** an engine from one piece + a proven filter from another
+(flow z on VB, heavy night on S47, DI on Monday Long, LDF agreement on ES MOC) - none beat random skips (p 0.13-0.90). A filter is
+proven only on its own engine: it encodes that engine's mechanism (Bridge's DI picks Bridge's Sunday-night trend, T's heavy night
+picks an overreaction to fade). Next ingredient work: new engines (new data / places / times), not borrowed filters.
+
+**Round 10: Kusho v9, S47 v2, FC 2B (`analysis/ingredient_ablation10.py`, 2026-11-09, pre-registered; personal-book pieces on forward logs):**
+
+| Piece | Engine | Supporting | Decoration | Notes |
+|---|---|---|---|---|
+| Kusho v9 ($109, t 5.32, 3,175 trades) | the strong 15-min up-bar entry (random entries at the same rate $4) | EMA50 filter (none: $57, 2023+ $37); small-wick filter (none: $91, DD $18k -> $27k); overnight / weekend hold (flat by 15:45: $91); DOWN-day shorts ($160 a trade) | - | robust in both periods ($108 / $109) |
+| S47 v2 ($347, t 4.10) | the London-open impulse (New York only: $114; fade: -$252) | the 09:30 confirmation (v1: $228, DD $16k -> $37k); stop 0.5 x overnight ATR (0.25: $220; none: worst -$20.9k) | - | shorts carry 2023+ ($494 vs longs $183) |
+| FC 2B ($255, t 3.74; v1 rebuild) | the flow z filter on the opening drive (no filter: $116; opposite: -$220) | the 150-point trail (none: 2023+ $144 vs $209) | break-even (none: $267, t 3.68) | shorts faded since 2023 ($100); z >= 0.5: t 4.20, total $300k vs $196k but $ a trade lower in both periods |
+
+Every version held up; no variant beats its current version on t AND both periods, so nothing changes. Leads: S47 shorts,
+FC 2B longs (both 'one side carries 2023+'), FC 2B z >= 0.5 as a capital-bench idea (more trades, higher t, lower $ a trade).
+
+**Round 9: Bridge Monday, ES MOC, T fade (`analysis/ingredient_ablation9.py`, 2026-11-09, pre-registered; rebuilds 218 / 202 / 376 vs MC 217 / 199 / 348):**
+
+| Piece | Engine | Supporting | Decoration | Notes |
+|---|---|---|---|---|
+| Bridge Monday Long ($560, t 4.44) | Monday (Tue -$137, Wed $157, Thu $169, Fri -$155) | DI+ > DI- (no filter: 2018-22 $121, 2023+ $742); the Sunday 19:00 entry (Monday 08:30: $419); target 100 (no target $779 but t 3.72, DD $18k) | the ADX 10-50 range (DI only $537, t 4.40) | 2023+ every Monday works (regime) |
+| ES MOC Follow ($158, t 3.47) | following a >= 0.3 ATR 14:00-14:50 move into the 15:00 cash close (fade -$150 t -3.5; every day -$13) | stop 0.25 (no stop $142); exit exactly 15:00 (14:55 $36, 15:15 $90) | - | 2023+ $99 (t 1.2): longs hold ($212, t 1.9), shorts faded ($34); same rule on NQ $255 but 2023+ $38 |
+| T fade ($221, t 3.39) | fading a HEAVY night (every night $20; quiet nights -$20; follow -$222) | stop 0.40 (none $187, worst -$7k); entry 08:29:00 before the bell (at the bell $171); exit ~08:44 (09:00 $189, 09:30 $145) | - | out 08:40 $234 t 3.81 but 2023+ lower ($243 vs $281): fails the two-bar rule |
+
+Every live version held up; no variant beats its current version on t AND both periods (two-bar rule), so nothing changes.
+Leads: ES MOC longs only (shorts flat since 2023; watch #20).
+
+**Round 8: ZT continuation (`analysis/zt_ablation.py` + `analysis/zt_plateau.py`, 2026-11-09; base 15-min, EntryZ 1, Apex window, $148 t 3.03):**
+engine = the vol-normalised distance from the 32-EMA (points from the EMA instead: $10, t 0.2; ATR denominator ~same, t 2.6), and it is
+Twin's engine (base trades on Twin-active days $343 t 5.6, on Twin-flat days −$194 t −2.5). Supporting: the |ZT| ≤ 0.25 exit (without
+$116 t 2.2), the EMA (SMA $96), mean 32 / vol 16-32. Decoration: the ±4 stop (never fires). Holding longer earns more per trade (16 bars
+$223 t 3.6) but hurts the evaluation (−2.9%) and the funded bench. Threshold plateau 15-min EntryZ 1.05-1.30 (t 3.4-3.8; ≥ 1.45 dies).
+Post hoc lead: EntryZ 1.25 ($246 t 3.5, DD $17.3k vs $32.8k) - the only variant that helps a book (personal +0.06 / +0.11 / +0.12).
+
+
+## Resize after every plan change (user rule 2026-11-12)
+Any change to a plan (piece added / removed / resized / swapped) is followed, in the same reply, by `analysis/resize_book.py` on the
+updated `bench150.LIVE_EVAL`: one-at-a-time sizes (0 / 0.5x / 1.5x / 2x), a greedy search ranked on 2018-22 starts, then one holdout
+look (2023-26) and the account-now check. Change sizes only when both bands exclude 0. First run 2026-11-12 (book with NBL 3 + LDF $1,000):
+search moved JF 1 -> 0 and LDF -> $1,500, holdout -0.1 pt, account -0.3 pt: keep the live sizes.

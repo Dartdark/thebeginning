@@ -24,8 +24,7 @@ OUT = "analysis/outputs/dashboard"
 NAMES = {"VB": "Vault Break", "ONB30": "Overnight Bias ADX30", "MON_BR": "Bridge Monday Long", "EOS": "EOS"}
 LOGTAG = {"VB": "VB", "ONB30": "ONB", "MON_BR": "MON_BR", "EOS": "EOS"}
 # live accounts: start date and balance; the current balance comes from accounts.json (analysis/dashboard_data.py, run first)
-ACCTS = [dict(account="#2", size="50K", mult=1.0, start="2026-10-20", start_bal=50000.0),
-         dict(account="#3", size="150K", mult=2.5, start="2026-10-26", start_bal=150000.0)]
+ACCTS = [dict(account="#5", size="150K", mult=2.5, start="2026-11-11", start_bal=150000.0)]   # #2-#4 removed 2026-11-10
 COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
         "exit_time", "exit_price", "profit_usd", "bar_date", "bar_time"]
 
@@ -66,6 +65,8 @@ def main():
         c = cur[a["account"]]
         asof = max(c["last_date"], max((t["date"] for t in json.load(open(f"{OUT}/trades.json")) if t["account"] == a["account"]), default=c["last_date"]))
         n = bdays(a["start"], asof); live = c["est_balance"] - a["start_bal"]
+        if n < 1:   # not started yet (2026-11-01: #4 read as 'below its range' before its first day and tripped the buy gate)
+            mc.append(dict(account=a["account"], size=a["size"], days=0, live_pnl=0.0, percentile=None, status="NOT STARTED")); continue
         win = ser.rolling(n).sum().dropna() * a["mult"]; m21 = ser.rolling(21).sum().dropna() * a["mult"]
         pct = float((win < live).mean() * 100)
         mc.append(dict(account=a["account"], size=a["size"], days=n, live_pnl=round(live, 2), percentile=round(pct, 1),

@@ -1,0 +1,20 @@
+[provenance] code 772e7096 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+NY Fed reverse repo (RRP) liquidity -> NQ next day (user 2026-11-08: 'grab it and test'). PRE-REGISTERED (header committed before the
+   signal days by year: {2017: 24, 2018: 5, 2020: 7, 2021: 69, 2022: 57, 2023: 70, 2024: 49, 2025: 20}
+   rule: RRP draining -> long, filling -> short n   273 $   -2 t -0.01 PF 1.00 total $   -0k maxDD $81.7k | 2018-22 $-567 (t -2.4) 2023+ $ 576 (t  1.4) | worst $-9,434
+      longs (cash leaving RRP)                n   143 $  446 t  1.14 PF 1.41 total $   64k maxDD $36.0k | 2018-22 $-699 (t -1.5) 2023+ $ 860 (t  1.7) | worst $-9,434
+      shorts (cash entering)                  n   130 $ -494 t -1.95 PF 0.64 total $  -64k maxDD $63.3k | 2018-22 $-517 (t -1.8) 2023+ $-418 (t -0.7) | worst $-9,087
+      by year $: {2018: 701, 2020: -6162, 2021: -33819, 2022: -39014, 2023: 30526, 2024: 17703, 2025: 29590}
+   random side (200 runs): $170, 95th $524; real $-2; p 0.775
+   longs 2021-24 $212 vs random-day longs same years $183 (95th $553); p 0.454
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   + RRP liquidity 2 MNQ              pass 36.2% (-2.1%; band -3.6% / -0.8%)
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      + RRP liquidity 2 MNQ              2y $ 19,376 blown  4.3% all 6 92.2% diff $ -655 beats 47.3%
+
+   Personal book 1-year MC return / DD p95 (+ 1 MNQ):
+      2018-26: book 5.42 | + RRP 1 MNQ 5.21 (-0.21)
+      2018-22: book 5.45 | + RRP 1 MNQ 4.48 (-0.97)
+      2023+: book 6.10 | + RRP 1 MNQ 6.36 (+0.26)

@@ -1,0 +1,32 @@
+[provenance] code aef88e9b dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Overnight Strategy v2 (user's MultiCharts paste 2026-11-09): trend filter + volatility-targeted sizing. PRE-REGISTERED (header
+
+ NQ (per contract; sized rows = contracts x per-contract net; paste sizing at NQ $ per point):
+   paste size at NQ: median 1, share > 1: 17%
+   every night, 1 contract (context)        n 2030 $  66.3/night t  1.1 | Sharpe 0.39 Sortino 0.54 PF 1.08 Calmar 0.19 Ulcer 21.0 DD $88,382 | 18-22 Sh 0.37 | 23+ Sh 0.44 (band -0.37 / 1.31)
+   every night + vol sizing (context)       n 2030 $  69.8/night t  1.1 | Sharpe 0.40 Sortino 0.54 PF 1.08 Calmar 0.20 Ulcer 20.2 DD $88,382 | 18-22 Sh 0.42 | 23+ Sh 0.41 (band -0.39 / 1.26)
+   ITEM trend, 1 contract                   n 1347 $  54.3/night t  0.9 | Sharpe 0.32 Sortino 0.43 PF 1.08 Calmar 0.12 Ulcer 24.7 DD $73,639 | 18-22 Sh 0.44 | 23+ Sh 0.26 (band -0.56 / 1.10)
+   ITEM trend + vol sizing (the paste)      n 1347 $  57.4/night t  0.9 | Sharpe 0.31 Sortino 0.42 PF 1.07 Calmar 0.13 Ulcer 25.1 DD $73,639 | 18-22 Sh 0.47 | 23+ Sh 0.21 (band -0.61 / 1.06)
+      by year $: {2018: -3489, 2019: 31784, 2020: 46759, 2021: 25588, 2022: -51454, 2023: -9614, 2024: 22198, 2025: 43909, 2026: -28322}
+   paste at MNQ ($2 / point): median 8 MNQ, mean 9.7
+   context: trend + vol sizing at MNQ       n 1346 $  51.2/night t  1.2 | Sharpe 0.42 Sortino 0.57 PF 1.10 Calmar 0.20 Ulcer 17.1 DD $43,838 | 18-22 Sh 0.55 | 23+ Sh 0.26 (band -0.52 / 1.06)
+      personal version: MNQ sizing x 0.19 (avg ~2 MNQ on trade nights)
+
+ ES (per contract; sized rows = contracts x per-contract net; paste sizing at ES $ per point):
+   paste size at ES: median 1, share > 1: 42%
+   every night, 1 contract (context)        n 1825 $  37.2/night t  1.1 | Sharpe 0.41 Sortino 0.56 PF 1.08 Calmar 0.19 Ulcer 18.8 DD $50,555 | 18-22 Sh 0.40 | 23+ Sh 0.42 (band -0.60 / 1.48)
+   every night + vol sizing (context)       n 1825 $  33.3/night t  0.8 | Sharpe 0.28 Sortino 0.38 PF 1.05 Calmar 0.15 Ulcer 23.0 DD $54,685 | 18-22 Sh 0.24 | 23+ Sh 0.33 (band -0.62 / 1.32)
+   ITEM trend, 1 contract                   n 1229 $  45.3/night t  1.3 | Sharpe 0.49 Sortino 0.70 PF 1.12 Calmar 0.16 Ulcer 18.8 DD $48,550 | 18-22 Sh 0.66 | 23+ Sh 0.35 (band -0.54 / 1.26)
+   ITEM trend + vol sizing (the paste)      n 1229 $  30.1/night t  0.6 | Sharpe 0.24 Sortino 0.31 PF 1.05 Calmar 0.07 Ulcer 29.8 DD $70,535 | 18-22 Sh 0.33 | 23+ Sh 0.12 (band -0.70 / 1.02)
+      by year $: {2018: -16100, 2019: 26595, 2020: 52455, 2021: -7005, 2022: -27302, 2023: -13972, 2024: 12988, 2025: 3932, 2026: 5428}
+
+   daily corr with Overnight Tick (2 MNQ in the book): 0.17; with the book: 0.06
+
+   Personal book 1-year MC return / DD p95:
+      2018-26: book 5.42 | + v2 sized ~2 MNQ 5.07 (-0.35) | + trend fixed 2 MNQ 3.93 (-1.49)
+      2018-22: book 5.45 | + v2 sized ~2 MNQ 4.54 (-0.91) | + trend fixed 2 MNQ 3.53 (-1.92)
+      2023+: book 6.10 | + v2 sized ~2 MNQ 5.78 (-0.31) | + trend fixed 2 MNQ 4.47 (-1.63)
+   replacing Overnight Tick:
+      2018-26: book 5.42 | v2 sized for OT 4.55 (-0.87) | trend fixed 2 for OT 3.42 (-2.00)
+      2018-22: book 5.45 | v2 sized for OT 3.93 (-1.52) | trend fixed 2 for OT 3.12 (-2.33)
+      2023+: book 6.10 | v2 sized for OT 5.27 (-0.83) | trend fixed 2 for OT 4.02 (-2.08)

@@ -139,3 +139,34 @@ for the next. Suggested to the user: cap the program or redirect it (e.g. data t
   the guard reads it itself, no typing, and with open P&L included it guards the account's target, not one chart's.
   Not installed until the next live trade shows whether Equity includes open P&L. Codex's 14 checks remain a useful
   reference (tick rounding, already-met target).
+
+## Update 2026-11-10 (Claude read codex/work b44f159b; summaries read, no Codex script rerun)
+- **VB split stop** (7 of 15 MNQ out at -37.5 pts): REJECT, 150K design pass 38.3 -> 35.7% (adverse DLL fills 35.0 -> 33.8%);
+  VB removed entirely 31.9%: VB earns its place. Agrees with Claude's earlier VB loss-trim results.
+- **VB / ONB tail review + dot loss map:** the 4 lost accounts had an ONB stop larger than the cushion left (e.g. $1,940 room vs
+  $2,478 risk). No costless fix found; finish mode (adopted) is the best lead. Claude's 11/08 cushion-cap bench already covered the
+  'cap the stop at the room' idea for evaluations (fewer fails, fewer passes: not adopted); funded charts have the cushion guard.
+- **New-data strategies (NY Fed funding, VIX9D):** 3 arms, all fail design; best pre-open fear rebound t 1.47 at 1 MNQ (gate 2.5).
+- **Gold crowded-long liquidation:** feasibility census fails (38 events 2018-22); no returns run. Claude's papers_1110 COT test
+  had GC alone t 2.5 for fading weekly non-commercial changes (1 of 8 markets, not an item): a different signal; note only.
+- **Papers:** NG informed-forecast (SSRN 2826684) WATCH / needs analyst forecast data; five commodity-curve papers (2485314 etc.)
+  need a contract panel; dot's validation audit adds that basis-momentum weakened in later samples (Baba-Yara & Bondatti, SSRN
+  4345427) and that 'A Tale of Two Premiums Revisited' (2023) supports the weekly position-change premium (no executable timing).
+  Same verdicts as Claude's batches today (TIER_LIST basis-momentum / relative basis / KRT / FX sessions rows).
+- **Whop / Unbiased Trading reviews:** one lead, MNQ two-bar compression (community claim PF 1.59 on 110 trades): unverified.
+- Nothing changes in any plan.
+
+## Next message for Codex (Claude, 2026-11-10): oil intraday lead data
+Claude ran the price-only version of Alturki & Kurov (SSRN 3747330) on CL 2018-26 (`analysis/api_pre_eia_test.py`): F (corr -0.11, follow
+-$25 / extreme -$102 a trade). Remaining test needs DATA ONLY: from the same Investing.com calendar source as
+`data/codex_20261109/investing_us_macro_consensus.json`, 2018-01 -> now: (1) 'API Weekly Crude Oil Stock' actual (+ its release
+timestamp), (2) EIA 'Crude Oil Inventories' actual + forecast (the consensus available before the release). Save as
+`data/codex_<date>/api_eia_crude.csv` (release_time_utc, series, actual, forecast, previous). No returns; Claude pre-registers and runs
+the signal (API actual - EIA forecast, follow into EIA-60 -> EIA-1). Note in the file that Investing's forecast is not Bloomberg's.
+
+## 2026-11-10 evening: Codex alert review (8a14dad3) ADOPTED
+Claude applied `agents/codex/code/alert_review_20261110/reliability.patch` unchanged (F1 evaluation floor no longer needs a
+funded lock: #5 floor 146,000 confirmed with live_guard.floors(); F2 failed alerts retried, not marked sent; F3 missing charts
+built from expected_setup; F5 routed-account check; F8 America/Chicago timestamps) + `max_stop` 2750 for #5. F4 (VB/ONB tags)
+fixed by the user the same evening (VB150-5 / ONB150-5). Open: F6 watchdog stops ~15:15 (Bridge Sunday window), F7 dashboard
+odds still the old 4-piece book x 2.5. Codex's PowerShell harness not rerun here (no pwsh); Windows acceptance = tomorrow's run.

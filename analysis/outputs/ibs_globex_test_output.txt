@@ -1,0 +1,65 @@
+[provenance] code 7cc2a49 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+IBS Mean Reversion ES v5 (user upload 2026-11-12: forum post + MultiCharts file IBS_MeanReversion_ES.txt, Kakushadze & Serur 2018 sec.
+ES 1-min 2017-01-02 17:02:00 .. 2026-10-11 18:22:00, 2526 sessions, 39 contract switches removed
+
+== Reproduction (his report: Dec 2016 - Nov 2026, 301 trades, $174,987, PF 1.53, 67.77% wins; IS 161 / $50,170 / PF 1.41; OOS 168 / $128,516 / PF 1.59)
+   his costs ($13 a round trip), all        n  306 win 66.7% $     529 total $   161,731 PF 1.48 t  2.55
+   his costs, his IS 2016-21                n  141 win 66.0% $     298 total $    42,011 PF 1.34 t  1.26
+   his costs, his OOS 2022+                 n  165 win 67.3% $     726 total $   119,721 PF 1.57 t  2.22
+   OUR costs ($30), all                     n  306 win 66.7% $     507 total $   154,999 PF 1.46 t  2.44
+   our costs, his IS 2016-21                n  141 win 66.0% $     276 total $    38,909 PF 1.31 t  1.17
+   our costs, his OOS 2022+                 n  165 win 67.3% $     704 total $   116,091 PF 1.55 t  2.15
+   our costs, design 2018-22                n  169 win 63.3% $     194 total $    32,794 PF 1.16 t  0.72
+   our costs, holdout 2023+                 n  120 win 70.0% $     963 total $   115,562 PF 1.93 t  2.67
+   by year: 2017 $6,642 (17, PF 2.65)  2018 $-22,592 (28, PF 0.45)  2019 $17,542 (28, PF 3.33)  2020 $26,542 (38, PF 1.59)  2021 $10,775 (30, PF 1.38)  2022 $528 (45, PF 1.01)  2023 $17,418 (37, PF 1.54)  2024 $20,739 (32, PF 1.60)  2025 $39,051 (29, PF 1.85)  2026 $38,355 (22, PF 4.25)
+   exits: ibs: 240 trades $405,025 (avg $1,688, worst $-4,885)  stop: 29 trades $-184,343 (avg $-6,357, worst $-13,810)  time: 37 trades $-65,682 (avg $-1,775, worst $-9,972)
+   avg win $2,420, avg loss $-3,320, worst $-13,810, avg hold 2.5 sessions
+
+== Standard metrics (2018-26, daily marked to the session close, 1 ES, capital 150K)
+   all      Sharpe 0.71 Sortino 1.10 PF 1.44 Calmar 0.41 Ulcer 6.09 maxDD $41,408 annual $17,143
+   2018-22  Sharpe 0.33 Sortino 0.48 PF 1.16 Calmar 0.17 Ulcer 7.83 maxDD $41,408 annual $7,160
+   2023+    Sharpe 1.13 Sortino 1.86 PF 1.93 Calmar 1.63 Ulcer 2.65 maxDD $18,622 annual $30,425
+   longs only (the rule is long only); shorts = the mirror, in the breakdown below
+
+== Beta controls (2018-26, our costs)
+   ES held every session: $224,300; x its time in market (43% of sessions with P&L) = $97,477; IBS rule $148,357
+   random entry days with the same hold lengths, 300 runs: mean $47,334, p95 $116,364; p(random >= rule) 0.007
+
+== Ingredient breakdown (one part changed at a time; our costs; whole 2016-26 / design 2018-22 / 2023+)
+   v5 as posted                             n  306 win 66.7% $     507 total $   154,999 PF 1.46 t  2.44 | 18-22 $   32,794 | 23+ $  115,562
+   no emergency stop                        n  290 win 67.6% $     579 total $   168,025 PF 1.58 t  2.84 | 18-22 $   56,760 | 23+ $  104,675
+   stop 2.0 ATR                             n  317 win 66.2% $     445 total $   141,133 PF 1.36 t  2.04 | 18-22 $   20,495 | 23+ $  115,340
+   stop 3.5 ATR                             n  300 win 67.3% $     570 total $   171,078 PF 1.53 t  2.54 | 18-22 $   56,320 | 23+ $  108,168
+   no time stop                             n  297 win 69.7% $     528 total $   156,918 PF 1.46 t  2.38 | 18-22 $   48,372 | 23+ $  100,921
+   time stop 3                              n  325 win 66.5% $     534 total $   173,403 PF 1.50 t  2.76 | 18-22 $   32,739 | 23+ $  133,756
+   time stop 10                             n  299 win 69.6% $     568 total $   169,960 PF 1.50 t  2.62 | 18-22 $   48,372 | 23+ $  114,813
+   entry IBS < 0.10                         n  187 win 70.6% $     708 total $   132,318 PF 1.64 t  2.44 | 18-22 $   65,457 | 23+ $   61,196
+   entry IBS < 0.30                         n  404 win 66.8% $     242 total $    97,926 PF 1.21 t  1.38 | 18-22 $   -7,076 | 23+ $   98,289
+   exit IBS > 0.7                           n  324 win 70.1% $     566 total $   183,538 PF 1.58 t  2.99 | 18-22 $   61,854 | 23+ $  114,249
+   exit IBS > 0.9                           n  281 win 66.2% $     637 total $   178,871 PF 1.52 t  2.67 | 18-22 $   50,534 | 23+ $  119,488
+   exit close > prev high                   n  291 win 67.0% $     605 total $   176,090 PF 1.48 t  2.59 | 18-22 $   54,198 | 23+ $  115,475
+   short mirror                             n  387 win 54.0% $     -15 total $    -5,961 PF 0.99 t -0.08 | 18-22 $   36,419 | 23+ $  -35,074
+   RTH range 08:30-14:59 (S30-like)         n  293 win 63.8% $     597 total $   174,986 PF 1.56 t  2.80 | 18-22 $   94,318 | 23+ $   76,975
+   decision 15:14 (near the close)          n  299 win 68.2% $     506 total $   151,401 PF 1.44 t  2.28 | 18-22 $   50,105 | 23+ $   89,391
+   same rule on NQ (per NQ)                 n  311 win 70.1% $     756 total $   235,159 PF 1.36 t  1.84 | 18-22 $  123,652 | 23+ $   99,522
+
+== Bootstrap + drawdown permutation, 2023+ holdout (1 ES daily, capital 150K)
+                          actual        p5       p50       p95
+name      metric                                              
+IBS v5 ES sharpe            1.13      0.46      1.09      1.74
+          sortino           1.86      0.69      1.78      3.07
+          pf_day            1.42      1.15      1.40      1.72
+          calmar            1.63      0.36      1.25      2.69
+          ulcer             2.65      1.62      3.18      7.32
+          max_dd       18,622.50 14,449.72 23,086.88 38,680.34
+          P(Sharpe<=0)       NaN       NaN      0.00       NaN
+          actual_dd pct_rank    dd50    dd95    dd99 P(dd>=10000) P(dd>=20000) P(dd>=40000)
+IBS v5 ES   $18,622       4% $27,961 $43,272 $52,916         100%          92%           9%
+
+== Monte Carlo at trading size (1 ES and 1 MES = x0.1; no trailing limit: personal account)
+   Monte Carlo IBS v5 (x1): trades 289 | total p5 $44,922 / p50 $147,365 / p95 $249,635, P(total <= 0) 1.0%
+      max DD actual $41,792 (rank 64%), shuffled p50 $36,605 / p95 $66,651 / p99 $86,776; losing streak actual 6, p95 7
+      252-day block bootstrap: P&L p5 $-18,023 / p50 $16,596 / p95 $51,157, P(loss) 20.6%, max DD p50 $17,808 / p95 $35,743, return/DD 0.93, P(hit $1,000,000,000,000 trailing, EOD check only) 0.0%
+   Monte Carlo IBS v5 (x0.1): trades 289 | total p5 $4,492 / p50 $14,736 / p95 $24,964, P(total <= 0) 1.0%
+      max DD actual $4,179 (rank 64%), shuffled p50 $3,661 / p95 $6,665 / p99 $8,678; losing streak actual 6, p95 7
+      252-day block bootstrap: P&L p5 $-1,802 / p50 $1,660 / p95 $5,116, P(loss) 20.6%, max DD p50 $1,781 / p95 $3,574, return/DD 0.93, P(hit $1,000,000,000,000 trailing, EOD check only) 0.0%

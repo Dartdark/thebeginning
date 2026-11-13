@@ -1,0 +1,41 @@
+[provenance] code 8d0a381b dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Capital-expansion bench retested against the CURRENT personal book (user 2026-11-08). Base = personal_P (the plan's pieces, 1 micro each;
+
+2018-26: current book median $28,467  p5 $15,637  DD p95 $4,903  ret/DD 5.81  capital $24.5k
+   Ricochet 1144 (commission only)      median  +2,017  p5    +762  DD   +236  ret/DD 5.93 (+0.13)  capital  +1,179  corr +0.12
+   Swing Target 2nd MNQ (both sides)    median  +2,031  p5    +560  DD   +475  ret/DD 5.67 (-0.14)  capital  +2,375  corr +0.37
+   FVB First Valid Breakout             median  +4,221  p5  +1,786  DD   +872  ret/DD 5.66 (-0.15)  capital  +4,362  corr +0.44
+   Swing Target 2nd MNQ (shorts only)   median  +1,308  p5    +502  DD   +362  ret/DD 5.66 (-0.15)  capital  +1,809  corr +0.27
+   R2Vault (Codex ledger)               median  +1,792  p5    +959  DD   +484  ret/DD 5.62 (-0.19)  capital  +2,418  corr +0.18
+   S03 Noise Area v2 (Codex ledger)     median  +2,937  p5    +960  DD   +848  ret/DD 5.46 (-0.35)  capital  +4,242  corr +0.43
+   S30 IBS (NQ + ES)                    median  +5,524  p5  +3,126  DD +1,407  ret/DD 5.39 (-0.42)  capital  +7,034  corr +0.12
+   RollZone 24h (plain stop)            median  +4,632  p5  +1,524  DD +1,333  ret/DD 5.31 (-0.50)  capital  +6,665  corr +0.27
+   Prior VWAP Trap                      median  +2,956  p5    +219  DD +1,040  ret/DD 5.29 (-0.52)  capital  +5,201  corr +0.33
+   Anson momentum (Codex ledger)        median  +2,085  p5    +180  DD +1,009  ret/DD 5.17 (-0.64)  capital  +5,045  corr +0.33
+   DriftPullBack v3                     median  +3,077  p5    +692  DD +1,321  ret/DD 5.07 (-0.74)  capital  +6,603  corr +0.36
+
+2018-22: current book median $21,572  p5 $10,576  DD p95 $3,730  ret/DD 5.78  capital $18.6k
+   Swing Target 2nd MNQ (shorts only)   median  +1,097  p5    +695  DD    +73  ret/DD 5.96 (+0.18)  capital    +366  corr +0.28
+   Swing Target 2nd MNQ (both sides)    median  +1,538  p5    +624  DD   +171  ret/DD 5.92 (+0.14)  capital    +856  corr +0.38
+   S03 Noise Area v2 (Codex ledger)     median  +2,700  p5  +1,461  DD   +430  ret/DD 5.84 (+0.05)  capital  +2,150  corr +0.50
+   R2Vault (Codex ledger)               median  +1,151  p5    +574  DD   +234  ret/DD 5.73 (-0.05)  capital  +1,170  corr +0.11
+   FVB First Valid Breakout             median  +2,805  p5  +1,545  DD   +678  ret/DD 5.53 (-0.25)  capital  +3,388  corr +0.42
+   Ricochet 1144 (commission only)      median  +1,789  p5    +436  DD   +501  ret/DD 5.52 (-0.26)  capital  +2,503  corr +0.16
+   DriftPullBack v3                     median  +3,067  p5  +1,023  DD   +826  ret/DD 5.41 (-0.38)  capital  +4,132  corr +0.40
+   Prior VWAP Trap                      median  +2,725  p5    +547  DD +1,071  ret/DD 5.06 (-0.72)  capital  +5,353  corr +0.38
+   Anson momentum (Codex ledger)        median  +1,037  p5    -517  DD +1,096  ret/DD 4.68 (-1.10)  capital  +5,481  corr +0.33
+   RollZone 24h (plain stop)            median  +2,571  p5    +119  DD +1,685  ret/DD 4.46 (-1.33)  capital  +8,426  corr +0.19
+   S30 IBS (NQ + ES)                    median  +6,041  p5  +2,998  DD +2,477  ret/DD 4.45 (-1.34)  capital +12,387  corr +0.11
+
+2023+: current book median $37,887  p5 $21,857  DD p95 $5,795  ret/DD 6.54  capital $29.0k
+   Ricochet 1144 (commission only)      median  +2,098  p5  +1,533  DD    +38  ret/DD 6.86 (+0.32)  capital    +188  corr +0.09
+   S30 IBS (NQ + ES)                    median  +5,378  p5  +2,849  DD   +729  ret/DD 6.63 (+0.09)  capital  +3,647  corr +0.13
+   RollZone 24h (plain stop)            median  +7,489  p5  +4,581  DD +1,166  ret/DD 6.52 (-0.02)  capital  +5,830  corr +0.32
+   R2Vault (Codex ledger)               median  +2,908  p5  +1,721  DD   +508  ret/DD 6.47 (-0.07)  capital  +2,541  corr +0.23
+   Swing Target 2nd MNQ (shorts only)   median  +1,748  p5    +619  DD   +369  ret/DD 6.43 (-0.11)  capital  +1,847  corr +0.26
+   FVB First Valid Breakout             median  +5,491  p5  +2,219  DD +1,224  ret/DD 6.18 (-0.36)  capital  +6,119  corr +0.45
+   S03 Noise Area v2 (Codex ledger)     median  +3,100  p5  +1,005  DD +1,045  ret/DD 5.99 (-0.55)  capital  +5,227  corr +0.40
+   Swing Target 2nd MNQ (both sides)    median  +2,472  p5    +616  DD   +964  ret/DD 5.97 (-0.57)  capital  +4,822  corr +0.37
+   Anson momentum (Codex ledger)        median  +3,135  p5    +751  DD +1,155  ret/DD 5.90 (-0.64)  capital  +5,776  corr +0.33
+   Prior VWAP Trap                      median  +2,806  p5     +12  DD +1,270  ret/DD 5.76 (-0.78)  capital  +6,349  corr +0.30
+   DriftPullBack v3                     median  +2,568  p5    +569  DD +1,869  ret/DD 5.28 (-1.26)  capital  +9,344  corr +0.34

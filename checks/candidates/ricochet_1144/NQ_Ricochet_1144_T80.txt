@@ -1,0 +1,286 @@
+{ RICOCHET 1144, target-80 version (Claude, 2026-11-09; WATCHLIST #35, capital-bench piece, personal account only: holds overnight).
+  Changes from the author's file (S1144_signal_multicharts.txt): (1) TargetPunti default 100 -> 80 (plateau check
+  analysis/ricochet_plateau_test.py: better than 100 in every period, max DD per NQ $16.9k vs $26.8k); (2) stop and target are explicit
+  stop / limit orders instead of SetStopLoss / SetProfitTarget (those dollar Set* exits did not fire in this MultiCharts install).
+  Everything else is the author's code. Chart: @NQ 5 minutes, Exchange time (CT), CME 24h session, Bar Magnifier 1 minute, IOG off.
+  Backtest NumContracts 1, commission $7.25 per round trip + 1 tick slippage per side; send the report for a trade-by-trade match
+  (Python: ricochet_1144_test.run(target=80): 2,242 trades 2018-26, $81 a trade per NQ before slippage). }
+
+{ ============================================================================
+  NOME DELLO STUDY:  S1144         (nome libero)
+  TIPO:              Signal (strategia) - un solo file, nessuna funzione da creare
+
+  RICOCHET - NQ LUNGO DOPO UN GIORNO IN CALO - 1144 NQ 5 minuti, "grezzo OP800"
+  (paper: Hu, Jin, Wang 2025, "Autocorrelation in Daily Stock Market Returns:
+  Time-variation and Asymmetry", SSRN 5314371: dopo i giorni negativi i
+  rimbalzi sono piu' probabili.)
+
+  LA REGOLA (barre da 5 minuti, ora di Chicago):
+  1. Segnale: la seduta REGOLARE di ieri (apertura = chiusura della barra
+     delle 08:30; chiusura = chiusura della barra delle 15:00, o delle 12:00
+     nelle mezze giornate) ha chiuso SOTTO l'apertura (soglia 0 %). "Ieri" e'
+     l'ultima seduta regolare valida: le feste della lista si saltano.
+  2. Entrata: LUNGO alla CHIUSURA della barra delle 17:05 (la prima della
+     seduta CME), se la seduta che comincia non e' una festa della lista.
+  3. Stop 50 punti (1.000 $ sul mini) e target 100 punti (2.000 $), per
+     contratto, con SetStopLoss e SetProfitTarget; se la barra apre gia'
+     oltre un livello, si esce all'apertura.
+  4. Rientri (al massimo 4 operazioni per seduta): dopo un'uscita allo stop
+     o al target, passata 1 barra dalla barra d'uscita, si rientra LUNGO alla
+     chiusura della prima barra, prima dell'uscita a orario, in cui:
+       - il minimo tocca il pivot S1 di ieri piu' un margine di 0,15 ATR 14
+         giornaliero di ieri: Low <= S1 + Margine;
+       - la chiusura e' sopra S1: Close > S1.
+     S1 = 2 x P - massimo di ieri, P = (massimo + minimo + chiusura) / 3 della
+     seduta regolare di ieri (barre 08:35-15:00). Stesso stop, stesso target.
+  5. Uscita a orario: alla chiusura della prima barra che chiude alle 15:00 o
+     dopo. Da li' niente piu' rientri nella seduta.
+  ATR 14 giornaliero: sedute regolari 08:35-15:00 (massimo, minimo; chiusura
+  delle 15:00, o delle 12:00 nelle mezze giornate), non festive, sempre di
+  IERI, alla Wilder come pandas (finche' non ci sono 14 sedute regolari il
+  margine e' 0).
+
+  ATTENZIONE - NON ANCORA VERIFICATO: scritto il 04/11/2026 sulla struttura di
+  S1000 (verificato 2021/2021 con l'emulatore), ma questo codice NON e' ancora
+  stato confrontato operazione per operazione con le 2.238 operazioni di
+  riferimento, ne' compilato in MultiCharts. Prima di usarlo: emulatore e
+  confronto, come per S1000. Limite noto: nelle mezze giornate (chiusura CME
+  alle 12:15) non c'e' una barra alle 15:00; la posizione resta aperta e la
+  chiude la sicurezza alla prima barra della seduta dopo (in Valeris esce
+  sull'ultima barra della seduta).
+
+  IMPOSTAZIONI DEL GRAFICO
+  Data1 = @NQ (o @MNQ), 5 MINUTI. Time zone = Exchange (ora di Chicago).
+  Sessione COMPLETA CME Globex 17:00-16:00, barre marcate alla chiusura.
+  Continuo NON aggiustato. Storia: almeno 30 sedute prima del primo giorno
+  che interessa (ATR di Wilder). Maximum number of bars study will reference
+  = 5. Intrabar Order Generation = NO. Bar Magnifier spento.
+  Nomi d'ordine: 1144 L (base), 1144 RL (rientro), 1144 fine LX (uscita a
+  orario), 1144 sic LX (sicurezza), piu' Stop Loss e Profit Target.
+  Feste (sedute senza seduta regolare valida, le stesse di Valeris) fino al
+  2027; per il 2028 aggiungere le date in coda e alzare NFeste.
+  L'esecuzione automatica resta SPENTA finche' non la accendi tu.
+  ============================================================================ }
+
+[IntrabarOrderGeneration = false]
+
+inputs:
+    NumContracts( 1 ),        { contratti per operazione }
+    OraEntrata( 1705 ),       { si entra alla chiusura di questa barra (la prima della seduta) }
+    OraUscita( 1500 ),        { uscita alla chiusura della prima barra che chiude a quest'ora o dopo }
+    SogliaPct( 0 ),           { ieri: (apertura - chiusura) / apertura x 100 >= SogliaPct e chiusura < apertura }
+    StopPunti( 50 ),          { 1.000 $ sul mini NQ }
+    TargetPunti( 80 ),        { 2026-11-09: 80 (WATCHLIST #35; author's 100) }
+    NMax( 4 ),                { operazioni nella seduta: la base + i rientri }
+    Pausa( 1 ),               { barre dopo quella d'uscita prima di poter rientrare }
+    MargAtr( 0.15 ),          { margine del tocco: 0,15 ATR 14 giornaliero di ieri }
+    AtrGiorni( 14 ),
+    SaltaSenza830( 1 );       { 1: niente operazioni nelle 6 sedute 2020 senza la barra delle 08:30 nei dati di Valeris }
+
+variables:
+    Primo( true ), NuovaSeduta( false ), NFeste( 0 ), NSenza( 0 ), jj( 0 ), Tmp( 0 ), ComW( 0 ), AG( 0 ), FG( 0 ),
+    ColEntrata( 0 ), ColUscita( 0 ), Minuti( 0 ), Col( 0 ),
+    SessData( 0 ), Festa( false ), Esclusa( false ), Ha830( false ), Ha1200( false ), Ha1500( false ), PrimaReg( true ),
+    Ap830( 0 ), MaxReg( 0 ), MinReg( 0 ), Chi1200( 0 ), Chi1500( 0 ), ChiOggi( 0 ), RangeOggi( 0 ), TrG( 0 ),
+    NReg( 0 ), ChiIeri( 0 ), ApIeri( 0 ), MaxIeri( 0 ), MinIeri( 0 ), WAtr( 0 ), AtrIeri( 0 ), AtrOk( false ), Marg( 0 ),
+    Piv( 0 ), S1( 0 ), IeriOk( false ), Rossa( false ),
+    HaFi( false ), Fase( 0 ), NTrade( 0 ), InPos( false ), BarIn( -1 ), UscitaBar( -1 ), Entra( false );
+
+arrays:
+    Feste[150]( 0 ),
+    Senza830[10]( 0 );
+
+if Primo then begin
+    Feste[0] = 1170102;  Feste[1] = 1170116;  Feste[2] = 1170220;  Feste[3] = 1170414;
+    Feste[4] = 1170529;  Feste[5] = 1170704;  Feste[6] = 1170904;  Feste[7] = 1171123;
+    Feste[8] = 1171225;  Feste[9] = 1180101;  Feste[10] = 1180115;  Feste[11] = 1180219;
+    Feste[12] = 1180330;  Feste[13] = 1180528;  Feste[14] = 1180704;  Feste[15] = 1180903;
+    Feste[16] = 1181122;  Feste[17] = 1181205;  Feste[18] = 1181225;  Feste[19] = 1190101;
+    Feste[20] = 1190121;  Feste[21] = 1190218;  Feste[22] = 1190419;  Feste[23] = 1190527;
+    Feste[24] = 1190704;  Feste[25] = 1190902;  Feste[26] = 1191128;  Feste[27] = 1191225;
+    Feste[28] = 1200101;  Feste[29] = 1200120;  Feste[30] = 1200217;  Feste[31] = 1200410;
+    Feste[32] = 1200525;  Feste[33] = 1200703;  Feste[34] = 1200907;  Feste[35] = 1201126;
+    Feste[36] = 1201225;  Feste[37] = 1210101;  Feste[38] = 1210118;  Feste[39] = 1210215;
+    Feste[40] = 1210402;  Feste[41] = 1210531;  Feste[42] = 1210705;  Feste[43] = 1210906;
+    Feste[44] = 1211125;  Feste[45] = 1211224;  Feste[46] = 1220117;  Feste[47] = 1220221;
+    Feste[48] = 1220415;  Feste[49] = 1220530;  Feste[50] = 1220620;  Feste[51] = 1220704;
+    Feste[52] = 1220905;  Feste[53] = 1221124;  Feste[54] = 1221226;  Feste[55] = 1230102;
+    Feste[56] = 1230116;  Feste[57] = 1230220;  Feste[58] = 1230407;  Feste[59] = 1230529;
+    Feste[60] = 1230619;  Feste[61] = 1230704;  Feste[62] = 1230904;  Feste[63] = 1231123;
+    Feste[64] = 1231225;  Feste[65] = 1240101;  Feste[66] = 1240115;  Feste[67] = 1240219;
+    Feste[68] = 1240329;  Feste[69] = 1240527;  Feste[70] = 1240619;  Feste[71] = 1240704;
+    Feste[72] = 1240902;  Feste[73] = 1241128;  Feste[74] = 1241225;  Feste[75] = 1250101;
+    Feste[76] = 1250109;  Feste[77] = 1250120;  Feste[78] = 1250217;  Feste[79] = 1250418;
+    Feste[80] = 1250526;  Feste[81] = 1250619;  Feste[82] = 1250704;  Feste[83] = 1250901;
+    Feste[84] = 1251127;  Feste[85] = 1251225;  Feste[86] = 1260101;  Feste[87] = 1260119;
+    Feste[88] = 1260216;  Feste[89] = 1260403;  Feste[90] = 1260525;  Feste[91] = 1260619;
+    Feste[92] = 1260703;  Feste[93] = 1260907;  Feste[94] = 1261126;  Feste[95] = 1261225;
+    Feste[96] = 1270101;  Feste[97] = 1270118;  Feste[98] = 1270215;  Feste[99] = 1270326;    { 2027 (NYSE) }
+    Feste[100] = 1270531;  Feste[101] = 1270618;  Feste[102] = 1270705;  Feste[103] = 1270906;
+    Feste[104] = 1271125;  Feste[105] = 1271224;
+    NFeste = 106;
+    { le sedute non festive senza la barra delle 08:30 nei dati di Valeris (NQ dxFeed, 2017 - 23/09/2026): Valeris non
+      le conta come sedute regolari e non ci fa operazioni (q4.tutte: 'ok' vuole la barra delle 08:30), ma alle 17:05
+      della sera prima non si puo' saperlo. Cinque sono i blocchi al limite di marzo 2020, una e' un buco del feed. }
+    Senza830[0] = 1200309;  Senza830[1] = 1200312;  Senza830[2] = 1200313;  Senza830[3] = 1200316;
+    Senza830[4] = 1200318;  Senza830[5] = 1201130;
+    NSenza = 6;
+    { ATR giornaliero come pandas in Valeris: alfa = 1 / (1 + com), com = (1 - 1/n) / (1/n) }
+    Tmp = 1 / AtrGiorni;
+    ComW = ( 1 - Tmp ) / Tmp;
+    AG = 1 / ( 1 + ComW );
+    FG = 1 - AG;
+    Minuti = IntPortion( OraEntrata / 100 ) * 60 + Mod( OraEntrata, 100 );
+    ColEntrata = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+    Minuti = IntPortion( OraUscita / 100 ) * 60 + Mod( OraUscita, 100 );
+    ColUscita = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+    Primo = false;
+end;
+
+{ ==========================================================================
+  1. SEDUTA: una barra dopo le 16:30 appartiene alla seduta del giorno dopo.
+  All'inizio di ogni seduta la seduta regolare appena finita (con la barra
+  delle 08:30 e quella delle 12:00 o delle 15:00, non festiva) diventa "ieri":
+  apertura, massimo, minimo, chiusura (pivot e segnale) e ATR 14.
+  ========================================================================== }
+if Time > 1630 then
+    NuovaSeduta = CurrentBar > 1 and ( Time[1] <= 1630 or Date[1] <> Date )
+else
+    NuovaSeduta = CurrentBar > 1 and Time[1] <= 1630 and Date[1] <> Date;
+
+if NuovaSeduta then begin
+    if Ha830 and ( Ha1200 or Ha1500 ) and Festa = false and PrimaReg = false then begin
+        if Ha1500 then ChiOggi = Chi1500 else ChiOggi = Chi1200;
+        NReg = NReg + 1;
+        RangeOggi = MaxReg - MinReg;
+        if NReg = 1 then TrG = RangeOggi
+        else TrG = MaxList( RangeOggi, AbsValue( MaxReg - ChiIeri ), AbsValue( MinReg - ChiIeri ) );
+        if NReg = 1 then WAtr = TrG
+        else if WAtr <> TrG then WAtr = ( FG * WAtr + AG * TrG ) / ( FG + AG );
+        AtrOk = NReg >= AtrGiorni;
+        AtrIeri = WAtr;
+        ChiIeri = ChiOggi;
+        ApIeri = Ap830;
+        MaxIeri = MaxReg;
+        MinIeri = MinReg;
+        IeriOk = true;
+    end;
+    if MarketPosition > 0 then Sell ( "1144 sic LX" ) this bar on close;
+    if MarketPosition <> 0 then Print( "S1144 AVVISO ", Date, " ", Time, " posizione aperta a inizio seduta: chiusa" );
+end;
+
+if NuovaSeduta or CurrentBar = 1 then begin
+    if Time > 1630 then SessData = JulianToDate( DateToJulian( Date ) + 1 ) else SessData = Date;
+    Festa = false;
+    for jj = 0 to NFeste - 1 begin
+        if Feste[jj] = SessData then Festa = true;
+    end;
+    Esclusa = false;
+    if SaltaSenza830 = 1 then begin
+        for jj = 0 to NSenza - 1 begin
+            if Senza830[jj] = SessData then Esclusa = true;
+        end;
+    end;
+    Ha830 = false;
+    Ha1200 = false;
+    Ha1500 = false;
+    PrimaReg = true;
+    HaFi = false;
+    Fase = 0;
+    NTrade = 0;
+    InPos = false;
+    BarIn = -1;
+    UscitaBar = -1;
+    if AtrOk then Marg = MargAtr * AtrIeri else Marg = 0;
+    { il segnale e il pivot S1 di ieri }
+    Rossa = false;
+    if IeriOk and ApIeri > 0 then
+        Rossa = ChiIeri < ApIeri and ( ApIeri - ChiIeri ) / ApIeri * 100 >= SogliaPct;
+    Piv = ( MaxIeri + MinIeri + ChiIeri ) / 3;
+    S1 = 2 * Piv - MaxIeri;
+    if CurrentBar = 1 then Fase = 9;
+end;
+
+{ --- la seduta regolare di oggi: apertura = chiusura delle 08:30, barre 08:35-15:00 --- }
+if Time = 830 then begin
+    Ha830 = true;
+    Ap830 = Close;
+end;
+if Time > 830 and Time <= 1500 then begin
+    if PrimaReg then begin
+        MaxReg = High;
+        MinReg = Low;
+        PrimaReg = false;
+    end
+    else begin
+        if High > MaxReg then MaxReg = High;
+        if Low < MinReg then MinReg = Low;
+    end;
+end;
+if Time = 1200 then begin
+    Ha1200 = true;
+    Chi1200 = Close;
+end;
+if Time = 1500 then begin
+    Ha1500 = true;
+    Chi1500 = Close;
+end;
+
+Minuti = IntPortion( Time / 100 ) * 60 + Mod( Time, 100 );
+Col = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+if HaFi = false and Col >= ColUscita and Col <= 282 then HaFi = true;
+
+{ --- 2. un'operazione chiusa da stop o target dentro una barra: la pausa dei rientri parte da qui --- }
+if InPos and CurrentBar > BarIn and MarketPosition = 0 then begin
+    InPos = false;
+    UscitaBar = CurrentBar;
+    if NTrade >= NMax then Fase = 9 else Fase = 3;
+end;
+
+{ --- 3. uscita a orario: alla chiusura della barra delle 15:00 (o della prima dopo) --- }
+if HaFi then begin
+    if InPos and MarketPosition > 0 then begin
+        Sell ( "1144 fine LX" ) this bar on close;
+        InPos = false;
+        UscitaBar = CurrentBar;
+    end;
+    Fase = 9;
+end;
+
+{ --- 4. la base alla barra delle 17:05 --- }
+if Col = ColEntrata and Fase = 0 then begin
+    if Festa = false and Esclusa = false and Rossa then begin
+        Buy ( "1144 L" ) NumContracts contracts this bar on close;
+        Fase = 2;
+        InPos = true;
+        BarIn = CurrentBar;
+        NTrade = 1;
+    end
+    else Fase = 9;
+end;
+
+{ --- 5. il rientro: tocco del pivot S1 (piu' il margine) e chiusura sopra, dopo la pausa --- }
+if Fase = 3 and MarketPosition = 0 and InPos = false then begin
+    if CurrentBar >= UscitaBar + 1 + Pausa and Col > ColEntrata then begin
+        Entra = Low <= S1 + Marg and Close > S1;
+        if Entra then begin
+            Buy ( "1144 RL" ) NumContracts contracts this bar on close;
+            Fase = 4;
+            InPos = true;
+            BarIn = CurrentBar;
+            NTrade = NTrade + 1;
+        end;
+    end;
+end;
+
+{ --- STOP and TARGET as explicit orders (Claude 2026-11-09): replaces SetStopLoss / SetProfitTarget, which did not fire in our
+  MultiCharts install (Dual Thrust notes). An entry 'this bar on close' fills at this bar's Close, so on the entry bar the brackets are
+  referenced to Close; from the next bar on, to EntryPrice. Run with Bar Magnifier on at 1 minute (the Python port walks 1-minute bars). --- }
+if InPos and BarIn = CurrentBar then begin
+    if StopPunti > 0 then Sell ( "1144 SL0" ) next bar at Close - StopPunti stop;
+    if TargetPunti > 0 then Sell ( "1144 TP0" ) next bar at Close + TargetPunti limit;
+end
+else if MarketPosition > 0 then begin
+    if StopPunti > 0 then Sell ( "1144 SL" ) next bar at EntryPrice - StopPunti stop;
+    if TargetPunti > 0 then Sell ( "1144 TP" ) next bar at EntryPrice + TargetPunti limit;
+end;

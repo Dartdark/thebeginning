@@ -1,0 +1,79 @@
+Good Friday fix: on; roll bars: 55; per 1 NQ after $7.25 + 1 tick per stop/market fill
+
+==== NQCAP (session budget 75 pts = the note: $1,500 on 1 NQ / $150 per MNQ): 2834 trades, exits {'night': 1272, 'stop': 895, 'eod': 650, 'target': 10, 'half': 7}
+        n      gross        net     avg    pf
+date                                         
+2018  399  -10241.50  -17119.25  -42.91  0.88
+2019  341   47342.06   41474.81  121.63  1.51
+2020  323   31977.93   26426.18   81.81  1.14
+2021  325   26711.79   21105.54   64.94  1.12
+2022  298  -36332.29  -41467.79 -139.15  0.84
+2023  326   40502.03   34878.53  106.99  1.19
+2024  319  116670.54  111172.79  348.50  1.60
+2025  282   71344.83   66480.33  235.75  1.31
+2026  221  -15515.59  -19327.84  -87.46  0.91
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+whole 2018-26    2834 48%  $79 $24,818   0.82    1.62          1.13 $58,912   0.42 16.99       2.92
+design 2018-22   1686 49%  $18  $5,772   0.22    0.40          1.04 $58,912   0.10 18.34       0.63
+holdout 2023+    1148 47% $168 $49,666   1.43    3.05          1.24 $36,304   1.37  7.63      13.01
+night entries    1964 46%  $49 $10,816   0.43    0.79          1.08 $68,674   0.16 33.71       0.64
+day entries       870 52% $145 $14,002   0.84    1.36          1.26 $25,430   0.55  8.34       3.36
+   daily t whole: 2.46   daily t design: 0.50   daily t holdout: 2.82
+                                                  actual        p5       p50       p95
+name                              metric                                              
+holdout 2023+ (long only = whole) sharpe            1.43      0.64      1.47      2.27
+                                  sortino           3.05      1.29      3.16      5.16
+                                  pf_day            1.28      1.11      1.29      1.48
+                                  calmar            1.37      0.39      1.35      3.09
+                                  ulcer             7.63      4.44      9.42     25.86
+                                  max_dd       36,303.98 23,612.36 37,214.97 64,023.04
+                                  P(Sharpe<=0)       NaN       NaN      0.00       NaN
+                                  actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+holdout 2023+ (long only = whole)   $36,304      60% $34,087 $53,244 $65,644        100%        100%        100%
+   Monte Carlo NQCAP 1 MNQ (x0.1): trades 2834 | total p5 $7,501 / p50 $22,455 / p95 $37,338, P(total <= 0) 0.7%
+      max DD actual $5,967 (rank 66%), shuffled p50 $5,226 / p95 $9,137 / p99 $11,821; losing streak actual 11, p95 15
+      252-day block bootstrap: P&L p5 $-2,267 / p50 $2,474 / p95 $7,565, P(loss) 20.3%, max DD p50 $2,358 / p95 $4,617, return/DD 1.05, P(hit $2,000 trailing, EOD check only) 48.2%
+   Monte Carlo NQCAP 4 MNQ (x0.4): trades 2834 | total p5 $30,004 / p50 $89,820 / p95 $149,351, P(total <= 0) 0.7%
+      max DD actual $23,870 (rank 66%), shuffled p50 $20,902 / p95 $36,548 / p99 $47,282; losing streak actual 11, p95 15
+      252-day block bootstrap: P&L p5 $-9,069 / p50 $9,895 / p95 $30,261, P(loss) 20.3%, max DD p50 $9,434 / p95 $18,467, return/DD 1.05, P(hit $2,000 trailing, EOD check only) 81.4%
+
+==== ATR (plain 0.8 x DailyATR stop): 3319 trades, exits {'night': 1877, 'eod': 1171, 'stop': 236, 'target': 27, 'half': 8}
+        n      gross        net     avg    pf
+date                                         
+2018  427    2241.62   -5104.13  -11.95  0.97
+2019  351   50575.73   44535.98  126.88  1.51
+2020  401   78715.57   71858.32  179.20  1.26
+2021  382   39317.38   32732.88   85.69  1.13
+2022  366    7112.75     809.25    2.21  1.00
+2023  368   58605.28   52262.28  142.02  1.23
+2024  369  145731.24  139370.99  377.70  1.60
+2025  360   39445.52   33245.52   92.35  1.08
+2026  295   44209.58   39125.83  132.63  1.09
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+whole 2018-26    3319 55% $123 $45,206   0.97    1.43          1.17 $62,630   0.72  8.94      10.12
+design 2018-22   1927 54%  $75 $28,140   0.77    1.10          1.13 $52,313   0.54  9.48       5.94
+holdout 2023+    1392 56% $190 $67,473   1.18    1.77          1.20 $62,630   1.08  9.51      14.19
+night entries    2004 54% $106 $23,540   0.69    1.01          1.15 $62,787   0.37 16.78       2.80
+day entries      1315 56% $149 $21,667   0.73    1.08          1.19 $55,201   0.39  7.77       5.58
+   daily t whole: 2.92   daily t design: 1.75   daily t holdout: 2.34
+                                                  actual        p5       p50        p95
+name                              metric                                               
+holdout 2023+ (long only = whole) sharpe            1.18      0.50      1.27       2.02
+                                  sortino           1.77      0.72      1.91       3.21
+                                  pf_day            1.26      1.10      1.28       1.48
+                                  calmar            1.08      0.31      1.20       2.78
+                                  ulcer             9.51      4.98     11.55      35.55
+                                  max_dd       62,630.34 37,234.24 58,878.64 103,729.65
+                                  P(Sharpe<=0)       NaN       NaN      0.00        NaN
+                                  actual_dd pct_rank    dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+holdout 2023+ (long only = whole)   $62,630      43% $65,346 $102,755 $121,772        100%        100%        100%
+   Monte Carlo ATR 1 MNQ (x0.1): trades 3319 | total p5 $18,017 / p50 $40,781 / p95 $63,135, P(total <= 0) 0.1%
+      max DD actual $6,384 (rank 31%), shuffled p50 $7,382 / p95 $12,727 / p99 $16,320; losing streak actual 11, p95 13
+      252-day block bootstrap: P&L p5 $-2,035 / p50 $4,795 / p95 $11,468, P(loss) 12.3%, max DD p50 $3,212 / p95 $6,343, return/DD 1.49, P(hit $2,000 trailing, EOD check only) 55.2%
+   Monte Carlo ATR 4 MNQ (x0.4): trades 3319 | total p5 $72,069 / p50 $163,126 / p95 $252,542, P(total <= 0) 0.1%
+      max DD actual $25,537 (rank 31%), shuffled p50 $29,529 / p95 $50,908 / p99 $65,279; losing streak actual 11, p95 13
+      252-day block bootstrap: P&L p5 $-8,139 / p50 $19,179 / p95 $45,873, P(loss) 12.3%, max DD p50 $12,846 / p95 $25,373, return/DD 1.49, P(hit $2,000 trailing, EOD check only) 80.6%
+
+==== placebo: random-bar market entries, same windows / budget / exits (20 seeds each)
+  NQCAP: real 2834 trades avg $79 (2018-22 $18, 2023+ $168); placebo n 3300, avg $44 [-1, 93], 2018-22 $37, 2023+ $55; real beats 95% of placebo runs
+  ATR: real 3319 trades avg $123 (2018-22 $75, 2023+ $190); placebo n 3871, avg $41 [14, 76], 2018-22 $18, 2023+ $70; real beats 100% of placebo runs

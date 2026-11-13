@@ -1,0 +1,44 @@
+[provenance] code 7cc2a49 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+IBS Globex ES v5 (analysis/ibs_globex_test.py): (1) the data-sweep leads re-checked with the regime known AT ENTRY (the sweep keys
+
+== Data-sweep leads, regime at ENTRY (last close before the entry session) vs at exit (as the sweep keyed them)
+   GEX (SqueezeMetrics)       above_median  at entry: on n 177 $   439 | off n 112 $   631 | gap t -0.39 | 2018-22 on $   273 off $   118 | 2023+ on $   586 off $ 2,327
+   GEX (SqueezeMetrics)       above_median  at exit : on n  92 $ 1,383 | off n 197 $   107 | gap t  3.44 | 2018-22 on $ 1,248 off $  -112 | 2023+ on $ 1,477 off $   542
+   GEX (SqueezeMetrics)       z_high        at entry: on n  63 $   547 | off n 226 $   504 | gap t  0.10 | 2018-22 on $   196 off $   193 | 2023+ on $   958 off $   965
+   GEX (SqueezeMetrics)       z_high        at exit : on n  21 $ 2,056 | off n 268 $   392 | gap t  4.38 | 2018-22 on $ 2,019 off $    29 | 2023+ on $ 2,131 off $   891
+   VVIX                       above_median  at entry: on n 145 $   328 | off n 144 $   700 | gap t -0.85 | 2018-22 on $   117 off $   277 | 2023+ on $   654 off $ 1,243
+   VVIX                       above_median  at exit : on n 177 $   -16 | off n 112 $ 1,349 | gap t -3.35 | 2018-22 on $  -383 off $ 1,165 | 2023+ on $   533 off $ 1,587
+   VVIX                       z_high        at entry: on n  43 $   743 | off n 246 $   473 | gap t  0.30 | 2018-22 on $   570 off $   113 | 2023+ on $ 1,141 off $   941
+   VVIX                       z_high        at exit : on n  79 $  -196 | off n 210 $   780 | gap t -1.63 | 2018-22 on $  -237 off $   370 | 2023+ on $  -129 off $ 1,327
+   VIX                        above_median  at entry: on n 142 $   457 | off n 147 $   568 | gap t -0.25 | 2018-22 on $   130 off $   286 | 2023+ on $ 1,235 off $   816
+   VIX                        above_median  at exit : on n 176 $   173 | off n 113 $ 1,043 | gap t -2.20 | 2018-22 on $    26 off $   593 | 2023+ on $   481 off $ 1,400
+   VIX                        z_high        at entry: on n  49 $   982 | off n 240 $   418 | gap t  0.74 | 2018-22 on $   579 off $   111 | 2023+ on $ 1,619 off $   840
+   VIX                        z_high        at exit : on n  96 $  -419 | off n 193 $   977 | gap t -2.56 | 2018-22 on $  -637 off $   617 | 2023+ on $  -101 off $ 1,475
+   VIX/VIX3M (term structure) above_median  at entry: on n 133 $   482 | off n 156 $   540 | gap t -0.13 | 2018-22 on $   143 off $   255 | 2023+ on $ 1,242 off $   818
+   VIX/VIX3M (term structure) above_median  at exit : on n 180 $   209 | off n 109 $ 1,016 | gap t -2.04 | 2018-22 on $    -2 off $   648 | 2023+ on $   612 off $ 1,339
+   VIX/VIX3M (term structure) z_high        at entry: on n  55 $   896 | off n 234 $   423 | gap t  0.66 | 2018-22 on $   415 off $   142 | 2023+ on $ 1,566 off $   820
+   VIX/VIX3M (term structure) z_high        at exit : on n  96 $  -400 | off n 193 $   968 | gap t -2.52 | 2018-22 on $  -736 off $   631 | 2023+ on $    32 off $ 1,465
+
+== Personal book (every piece 1 micro, OT 2 MNQ; data to 2026-10-09)
+   correlation with pieces: OvernightTick +0.25, VaultBreak +0.20, MondayLong +0.10, LateDayFlow +0.10, ESMOCFollow_perMES +0.06; most overlapped: OvernightTick
+   2018-26:
+      book                               median year $  28,194  DD p95 $  4,892  return/DD  5.76
+      + IBS 1 MES                        median year $  29,705  DD p95 $  4,841  return/DD  6.14 (+0.37)
+      + IBS 2 MES                        median year $  31,214  DD p95 $  5,950  return/DD  5.25 (-0.52)
+      - OvernightTick + IBS 1 MES        median year $  27,759  DD p95 $  4,883  return/DD  5.69 (-0.08)
+      - OvernightTick (control)          median year $  26,136  DD p95 $  4,843  return/DD  5.40 (-0.37)
+      + IBS VVIX-low 2 MES (post hoc)    median year $  30,621  DD p95 $  4,794  return/DD  6.39 (+0.62)
+   2018-22:
+      book                               median year $  21,371  DD p95 $  3,745  return/DD  5.71
+      + IBS 1 MES                        median year $  22,094  DD p95 $  4,547  return/DD  4.86 (-0.85)
+      + IBS 2 MES                        median year $  22,904  DD p95 $  6,413  return/DD  3.57 (-2.14)
+      - OvernightTick + IBS 1 MES        median year $  20,406  DD p95 $  4,625  return/DD  4.41 (-1.30)
+      - OvernightTick (control)          median year $  19,752  DD p95 $  3,679  return/DD  5.37 (-0.34)
+      + IBS VVIX-low 2 MES (post hoc)    median year $  22,653  DD p95 $  4,484  return/DD  5.05 (-0.66)
+   2023+:
+      book                               median year $  37,903  DD p95 $  5,795  return/DD  6.54
+      + IBS 1 MES                        median year $  40,481  DD p95 $  5,174  return/DD  7.82 (+1.28)
+      + IBS 2 MES                        median year $  43,189  DD p95 $  5,316  return/DD  8.12 (+1.58)
+      - OvernightTick + IBS 1 MES        median year $  37,756  DD p95 $  5,121  return/DD  7.37 (+0.83)
+      - OvernightTick (control)          median year $  35,156  DD p95 $  5,765  return/DD  6.10 (-0.44)
+      + IBS VVIX-low 2 MES (post hoc)    median year $  41,334  DD p95 $  5,039  return/DD  8.20 (+1.66)

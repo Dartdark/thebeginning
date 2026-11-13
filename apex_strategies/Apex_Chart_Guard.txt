@@ -1,0 +1,178 @@
+// Apex Chart Guard (2026-11-11: target limit only near the price) - ONE helper signal per live chart, next to the strategy. Replaces FOUR separate signals:
+//   Apex Trade Logger (OPEN / CLOSE / POS rows), Apex Chart Monitor (ACCT rows), Apex Target Guard v1 / v2 (evaluation
+//   finish line) and Apex Stop Guard (Bridge Monday only). It writes the SAME rows to the SAME daily file as before
+//   (C:\TradingLogs\YYYYMMDD.csv), so the watchdog, the 16:40 health check and the journal read it unchanged.
+// It never enters a trade. Its only orders are exits: the target guard (TargetBalance > 0) and the stop guard (StopPoints > 0).
+//
+// Setup (outside market hours): PowerLanguage Editor > New > Signal, name "Apex Chart Guard", paste, compile (F7). On each live
+// chart: Format Signals > remove Apex Trade Logger / Apex Chart Monitor / Apex Target Guard / Apex Stop Guard > Add > Apex Chart
+// Guard. Then auto-trading off / on (starting Flat, outside a trade window), as after any signal change. Inputs:
+//   Tag            the chart's logger tag (VB150-5, ONB150-5, ...: live/expected_setup.json)
+//   AccountName    leave EMPTY: the guard uses the account in this chart's Auto Trading gear (GetAccountID); type it only to override
+//   TargetBalance  leave -1 = AUTO: Apex evaluation account (APEX-...) -> 159050 (150K) / 53050 (50K) from its balance;
+//                  funded (PA-...) and personal accounts -> off. Type a number only to override (0 = off)
+//   StopPoints     Bridge Monday chart only: a few ticks wider than its stop (as the old Stop Guard). Every other chart: 0
+//   leave the rest at the defaults.
+//
+// Rows (14 columns, no header):
+//   OPEN / CLOSE: event,tag,symbol,side,contracts,entry_date,entry_time,entry_price,exit_date,exit_time,exit_price,profit_usd,bar_date,bar_time
+//   POS:  strategy position vs the broker's position for this strategy, on every change and every HeartbeatMins
+//   ACCT rows with tag SCAN: once a day between 15:55 and 16:00 CT, the balance of EVERY account of this Apex user that
+//         Rithmic reports (APEX-<id>-01..99 and PA-APEX-<id>-01..99): the VPS builds the copier GROUP state from them
+//   ACCT: account, auto-trading on (1/0), net worth, equity, bar age (s), routed account, every MonitorMins
+
+inputs: Tag("VB-2"), AccountName(""), TargetBalance(-1), StopPoints(0), Folder("C:\TradingLogs\"), HeartbeatMins(30),
+	MonitorMins(5), EquityHasOpenPL(true), LogHistory(false), ScanAccounts(true),
+	TgtNearPct(1.0);   { 2026-11-11: work the target limit only within this % of the price (Rithmic rejects far limits: "price crossed high limit") }
+variables: LastTT(0), LastEntryKey(0), K(0), N(0), EK(0), Live(false), SideTxt(""), Row(""), FileName(""), BarDay(""),
+	StratPos(0), BrokerPos(0), LastStrat(-999), LastBroker(-999), LastHB(-1), MinOfDay(0), HBKey(0),
+	MRoute(""), MNW(0), MEq(0), MAuto(0), MAge(0), MFile(""), MDay(""), MRow(""), MSlot(0), MLastSlot(-1), MMin(0),
+	Tk(0), GEq(0), GBase(0), GNeed(0), GPx(0), AcctUse(""), TgtX(0), ScanDay(0), ScanBase(""), ScanRest(""), ScanPos(0), ScanN(0), ScanNN(""), ScanName(""), ScanEq(0), ScanK(0);
+
+// keep calculating when no tick arrives, so a dead feed still produces ACCT rows with a growing bar age (as the Chart Monitor)
+RecalcLastBarAfter(60);
+
+Live = LogHistory or GetAppInfo(aiRealTimeCalc) = 1;
+AcctUse = IffString(AccountName <> "", AccountName, GetAccountID);   { the gear's account unless typed }
+BarDay = NumToStr(Date + 19000000, 0);
+FileName = Folder + BarDay + ".csv";
+
+// ---------- 1. trade log (was Apex Trade Logger): closed positions since the last bar, oldest first ----------
+if TotalTrades > LastTT then begin
+	N = TotalTrades - LastTT;
+	if Live then begin
+		for K = N downto 1 begin
+			if MarketPosition(K) > 0 then SideTxt = "long" else SideTxt = "short";
+			Row = "CLOSE," + Tag + "," + GetSymbolName + "," + SideTxt + "," + NumToStr(MaxContracts(K), 0) + ","
+				+ NumToStr(EntryDate(K) + 19000000, 0) + "," + NumToStr(EntryTime(K), 0) + "," + NumToStr(EntryPrice(K), 2) + ","
+				+ NumToStr(ExitDate(K) + 19000000, 0) + "," + NumToStr(ExitTime(K), 0) + "," + NumToStr(ExitPrice(K), 2) + ","
+				+ NumToStr(PositionProfit(K), 2) + "," + BarDay + "," + NumToStr(Time, 0);
+			FileAppend(FileName, Row + NewLine);
+		end;
+	end;
+	LastTT = TotalTrades;
+end;
+// a new open position (first bar it is seen)
+if MarketPosition <> 0 then begin
+	EK = EntryDate(0) * 10000 + EntryTime(0);
+	if EK <> LastEntryKey then begin
+		if Live then begin
+			if MarketPosition > 0 then SideTxt = "long" else SideTxt = "short";
+			Row = "OPEN," + Tag + "," + GetSymbolName + "," + SideTxt + "," + NumToStr(CurrentContracts, 0) + ","
+				+ NumToStr(EntryDate(0) + 19000000, 0) + "," + NumToStr(EntryTime(0), 0) + "," + NumToStr(EntryPrice(0), 2)
+				+ ",,,,," + BarDay + "," + NumToStr(Time, 0);
+			FileAppend(FileName, Row + NewLine);
+		end;
+		LastEntryKey = EK;
+	end;
+end;
+
+// ---------- 2. POS heartbeat (was Apex Trade Logger): strategy vs broker position ----------
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	StratPos = MarketPosition * CurrentContracts;
+	BrokerPos = MarketPosition_at_Broker_for_The_Strategy;
+	MinOfDay = IntPortion(Time * 0.01) * 60 + Mod(Time, 100);
+	HBKey = Date * 10000 + IntPortion(MinOfDay / MaxList(HeartbeatMins, 1));
+	if StratPos <> LastStrat or BrokerPos <> LastBroker or HBKey <> LastHB then begin
+		Row = "POS," + Tag + "," + GetSymbolName + ",," + NumToStr(StratPos, 0) + ",,,,,,," + NumToStr(BrokerPos, 0) + ","
+			+ BarDay + "," + NumToStr(Time, 0);
+		FileAppend(FileName, Row + NewLine);
+		LastStrat = StratPos; LastBroker = BrokerPos; LastHB = HBKey;
+	end;
+end;
+
+// ---------- 3. ACCT rows (was Apex Chart Monitor): balance, auto-trading, feed age, routed account ----------
+if GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	MMin = IntPortion(CurrentTime * 0.01) * 60 + Mod(CurrentTime, 100);
+	MSlot = CurrentDate * 10000 + IntPortion(MMin / MaxList(MonitorMins, 1));
+	if MSlot <> MLastSlot then begin
+		MLastSlot = MSlot;
+		MRoute = GetAccountID;
+		if AcctUse = "" then begin
+			MNW = 0; MEq = 0;
+		end
+		else begin
+			MNW = GetRTAccountNetWorth(AcctUse);
+			MEq = GetRTAccountEquity(AcctUse);
+		end;
+		MAuto = GetAppInfo(aiStrategyAuto);
+		MAge = (ComputerDateTime - DateTime) * 86400;
+		MDay = NumToStr(CurrentDate + 19000000, 0);
+		MFile = Folder + MDay + ".csv";
+		MRow = "ACCT," + Tag + "," + GetSymbolName + "," + AcctUse + "," + NumToStr(MAuto, 0) + "," + NumToStr(MNW, 2) + ","
+			+ NumToStr(MEq, 2) + "," + NumToStr(MAge, 0) + "," + MRoute + ",,,," + MDay + "," + NumToStr(CurrentTime, 0);
+		FileAppend(MFile, MRow + NewLine);
+	end;
+end;
+
+// ---------- 4. target guard (was Apex Target Guard v2; EVALUATION charts only, TargetBalance 0 = off) ----------
+// Closes this chart's position the moment the ACCOUNT would reach TargetBalance (balance from Rithmic Equity; other charts'
+// open profit counts while EquityHasOpenPL is true). No equity reading -> no target exit (it never guesses a balance).
+if TargetBalance <> 0 and MarketPosition <> 0 and CurrentContracts > 0 and AcctUse <> "" and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	Tk = MinMove / PriceScale;
+	GEq = GetRTAccountEquity(AcctUse);
+	TgtX = TargetBalance;
+	if TargetBalance < 0 then begin   { auto (2026-11-09): only Apex evaluation accounts have a target }
+		if LeftStr(AcctUse, 5) <> "APEX-" then TgtX = 0
+		else if GEq > 100000 then TgtX = 159050 else TgtX = 53050;
+	end;
+	if GEq > 0 and TgtX > 0 then begin
+		if EquityHasOpenPL then GBase = GEq - OpenPositionProfit else GBase = GEq;
+		if TgtX > GBase then begin
+			GNeed = (TgtX - GBase) / (BigPointValue * CurrentContracts);
+			// 2026-11-11 fix: on a small chart (Twin / DT 2 MNQ) the target price is thousands of points away; Rithmic rejected
+			// that limit every bar, and after 10 rejections MultiCharts switched the chart's auto-trading OFF, cancelling the
+			// strategy's own stop and target. Now the limit is sent only when it is within TgtNearPct % of the price.
+			if MarketPosition > 0 then begin
+				GPx = IntPortion((AvgEntryPrice + GNeed) / Tk + 0.999999) * Tk;
+				if GPx - Close <= Close * TgtNearPct / 100 then Sell ("Target Guard LX") next bar at GPx limit;
+			end
+			else begin
+				GPx = IntPortion((AvgEntryPrice - GNeed) / Tk + 0.000001) * Tk;
+				if Close - GPx <= Close * TgtNearPct / 100 then BuyToCover ("Target Guard SX") next bar at GPx limit;
+			end;
+		end
+		else if GBase < TgtX * 1.05 then begin   // > 5% above = wrong account / bad data: do nothing
+			if MarketPosition > 0 then Sell ("Target Guard LM") next bar at market
+			else BuyToCover ("Target Guard SM") next bar at market;
+		end;
+	end;
+end;
+
+// ---------- 5. stop guard (was Apex Stop Guard; Bridge Monday only, StopPoints 0 = off) ----------
+// Rithmic rejects a protective stop already through the market; if the bar traded at / through the stop level and the
+// position is still open, exit at market on the next bar. Set a few ticks WIDER than the strategy's own stop.
+if StopPoints > 0 then begin
+	if MarketPosition > 0 and Low <= EntryPrice - StopPoints then Sell ("Stop Guard LX") next bar at market;
+	if MarketPosition < 0 and High >= EntryPrice + StopPoints then BuyToCover ("Stop Guard SX") next bar at market;
+end;
+
+// ---------- 6. account scan for the Rithmic copier groups (2026-11-09; ScanAccounts false = off) ----------
+// Once a day at 15:55-16:00 CT (computer clock), reads Rithmic's balance of every account of this Apex user (the user id is
+// taken from this chart's own account: APEX-<id>-NN / PA-APEX-<id>-NN) and writes one ACCT row per account found, tag SCAN.
+// The VPS (live/vps/cushion_peak.ps1) turns them into the group files the strategies read: the weakest funded account's
+// cushion and the evaluation group's finish mode. Log only: no orders.
+if ScanAccounts and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart and CurrentTime >= 1555 and CurrentTime <= 1600
+	and ScanDay <> CurrentDate and AcctUse <> "" then begin
+	ScanDay = CurrentDate;
+	ScanPos = InStr(AcctUse, "APEX-");
+	if ScanPos > 0 then begin
+		ScanRest = MidStr(AcctUse, ScanPos + 5, 30);
+		ScanPos = InStr(ScanRest, "-");
+		if ScanPos > 1 then begin
+			ScanBase = LeftStr(ScanRest, ScanPos - 1);
+			MDay = NumToStr(CurrentDate + 19000000, 0);
+			MFile = Folder + MDay + ".csv";
+			for ScanN = 1 to 99 begin
+				if ScanN < 10 then ScanNN = "0" + NumToStr(ScanN, 0) else ScanNN = NumToStr(ScanN, 0);
+				for ScanK = 0 to 1 begin
+					if ScanK = 0 then ScanName = "APEX-" + ScanBase + "-" + ScanNN else ScanName = "PA-APEX-" + ScanBase + "-" + ScanNN;
+					ScanEq = GetRTAccountEquity(ScanName);
+					if ScanEq > 0 then
+						FileAppend(MFile, "ACCT,SCAN," + GetSymbolName + "," + ScanName + ",,0," + NumToStr(ScanEq, 2) + ",,,,,," + MDay + ","
+							+ NumToStr(CurrentTime, 0) + NewLine);
+				end;
+			end;
+		end;
+	end;
+end;

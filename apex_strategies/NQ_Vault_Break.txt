@@ -29,6 +29,10 @@
   Holiday half-days (market halts around 12:00 CT): no entries from
   EarlyLastEntry, flat at EarlyFlattenTime, so no position is carried
   overnight in the backtest. }
+// kill-switch file check through Windows (2026-11-01: EL Collections is not installed on the VPS; this line compiled there)
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";   { kill-switch tri-state (Codex REVIEW_kill_reply_20261102) }
+
 
 Inputs:
 	NoiseMult(0.30),        { 30% of the ATR }
@@ -43,8 +47,14 @@ Inputs:
 	EarlyLastEntry(1100),
 	EarlyFlattenTime(1130),
 	NumContracts(1),        { 1 for NQ backtests; 10 MNQ = 1 NQ }
-	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break 2026-10-30");   { code version (live guard 2026-10-30): bump the date on every change }
+	HeartbeatTag(""),      { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat }
+	UseFinish(true),        { 150K EVALUATION finish mode: acts ONLY on Apex evaluation accounts (name APEX-...) of 150K; funded / personal: no effect }
+	CopierGroup(true),      { Rithmic copier (2026-11-09): follow the GROUP state the VPS writes (funded: the weakest account's cushion; evaluations: finish mode when the group's MEAN profit >= $6,000). false = this account only }
+	FinishAccount(""),      { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
+	FinishAt(0),            { 0 = auto: 156000 on a 150K evaluation (start + $6,000); 50K: off (not tested there) }
+	FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break 2026-11-09");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0), FinAcct(""), FinAt(0), GrpFin(-1);   { finish mode }
 
 Variables:
 	BarVol(0), CumPV(0), CumVol(0), DayVwap(0),
@@ -131,14 +141,57 @@ else begin
 	DayFlatten = FlattenTime;
 end;
 
+{ ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
+  While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
+KillOn = false;
+KillAttr = -1;
+KillErr = 0;
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	KillAttr = GetFileAttributesA("C:\TradingLogs\KILL");
+	if KillAttr <> -1 then KillOn = true else KillErr = GetLastError;   { read right after the call: 2/3 = not found }
+end;
+{ read check (Codex follow-up 2026-11-02 #3): -1 on the KILL file means "no file" only if the folder itself is readable.
+  Folder unreadable = state UNKNOWN: no new entries (open positions keep their normal exits; only a real KILL forces exits). }
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
+{ tri-state (2026-11-05): -1 with any error other than 2 (file not found) / 3 (path not found) = state UNKNOWN -> no new entries }
+if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
+
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(IffString(FinishAccount <> "", FinishAccount, GetAccountID));
+		if FinRead > 0 then begin
+			FinEq = FinRead; FinKey = FinKeyNow; GrpFin = -1;   { copier group state (VPS files), read once a day }
+			if CopierGroup then begin
+				if GetFileAttributesA("C:\TradingLogs\group\EVAL_FINISH") <> -1 then GrpFin = 1
+				else if GetFileAttributesA("C:\TradingLogs\group\EVAL_FULL") <> -1 then GrpFin = 0;
+			end;
+		end;
+	end;
+	FinAcct = IffString(FinishAccount <> "", FinishAccount, GetAccountID);
+	if FinishAt > 0 then FinAt = FinishAt else if FinEq > 100000 then FinAt = 156000 else FinAt = 0;
+	FinOn = (FinKey = FinKeyNow) and FinAt > 0 and (FinEq >= FinAt) and LeftStr(FinAcct, 5) = "APEX-";
+	if GrpFin = 1 then FinOn = (FinKey = FinKeyNow) and FinAt > 0 and LeftStr(FinAcct, 5) = "APEX-";   { group: half size while the group's mean profit >= $6,000 }
+	if GrpFin = 0 then FinOn = false;
+end;
+FinQty = NumContracts;
+if FinOn then FinQty = MaxList(1, Floor(NumContracts * FinishMult + 0.5));
+
 { ---------- Entries ---------- }
 TradesToday = TotalTrades - DayStartTrades;
 if MarketPosition <> 0 then TradesToday = TradesToday + 1;
 
 if ATRv > 0 and Time >= FirstDecision and Time < DayLastEntry
 	and MarketPosition = 0 and TradesToday < MaxTradesPerDay
-	and Close > Noise and Close > DayVwap then
-	Buy ("VaultBreak") NumContracts contracts next bar at market;
+	and Close > Noise and Close > DayVwap and NoEntry = false then
+	Buy ("VaultBreak") FinQty contracts next bar at market;
 
 { ---------- Exits ---------- }
 SetStopContract;
@@ -153,6 +206,10 @@ if MarketPosition > 0 and Low <= EntryPrice - StopPts then
 
 if MarketPosition > 0 and Time >= DayFlatten then
 	Sell ("VB EOD") this bar on close;
+
+{ kill switch: flatten while C:\TradingLogs\KILL exists (see the Kill switch block above) }
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") next bar at market;
 
 // ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
 // Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the

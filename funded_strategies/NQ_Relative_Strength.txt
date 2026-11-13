@@ -72,6 +72,8 @@
   ORDERS       RS.L / RS.S entries, RS.LS / RS.SS stops, RS.LT / RS.ST
                targets, RS.LF / RS.SF flat at the close
   ========================================================================== }
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;   { peak file check (2026-11-09) }
+
 Inputs:
 	DecideHHMM(900),      { CT, check time }
 	ZMin(1.25),           { entry threshold }
@@ -84,7 +86,16 @@ Inputs:
 	RthStartHHMM(830),    { CT }
 	RthEndHHMM(1500),     { CT }
 	FlatHHMM(1500),       { CT, flat this bar on close }
-	SkipHolidays(true);   { skip NYSE holidays and early-close sessions }
+	SkipHolidays(true),   { skip NYSE holidays and early-close sessions }
+	UseCushion(true),       { cushion guard: acts ONLY on Apex funded accounts (name PA-...); evaluations / personal: no effect }
+	CopierGroup(true),      { Rithmic copier (2026-11-09): follow the GROUP state the VPS writes (funded: the weakest account's cushion; evaluations: finish mode when the group's MEAN profit >= $6,000). false = this account only }
+	AccountName(""),        { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
+	StartBalance(0),        { 0 = auto: 150000 when the account balance is above 100,000, else 50000 }
+	TrailDD(0),             { 0 = auto: 4000 (150K) / 2000 (50K) }
+	LockBalance(0),         { 0 = auto: start + 100 }
+	PeakSeed(0),            { highest END-OF-DAY balance so far (new account: xSB); RETYPE after any restart / recompile; 0 = no entries }
+	CushionRef(0),          { 0 = auto: 3000 (150K) / 1500 (50K) }
+	CushionMin(0.5);        { size floor of the cushion sizing }
 
 Vars:
 	CalInit(false), DayOK(true), jj(0), NHolF(0), NHolE(0), TickSz(0),
@@ -95,6 +106,9 @@ Vars:
 	C2(0), RetA(0), RetB(0), AlphaE(0), CovE(0), VarE1(0), VarE2(0), BetaE(0), ResE(0),
 	NEst(0), BarsDay(78), Anc1(0), Anc2(0), NBA(0), Decided(true), RelX(0), ZRel(0),
 	SigDir(0), StopPx(0), TgtPx(0);
+
+Variables: CE(0), CEPrev(0), CK(0), CKLast(0), PeakEOD(0), Thr(0), Cush(0), CF(0), CQty(0);   { cushion guard }
+Variables: PeakAuto(0), PKey(0), PKeyLast(0), PAcct(""), PkI(0), PkFound(0), AcctX(""), EqX(0), xSB(0), xDD(0), xLB(0), xCR(0), GrpCush(-1);   { peak file + auto account rules (2026-11-09) }
 
 Arrays:
 	HolFull[200](0), HolEarly[60](0),
@@ -253,8 +267,28 @@ if RthOn and Decided = false and Time >= DecideHHMM then begin
 end;
 
 if SigDir <> 0 and MP = 0 and EntToday = 0 and Time < FlatHHMM then begin
-	if SigDir = 1 and TradeDir >= 0 then Buy ("RS.L") NumContracts contracts next bar at market;
-	if SigDir = -1 and TradeDir <= 0 then SellShort ("RS.S") NumContracts contracts next bar at market;
+	CQty = NumContracts;
+	{ cushion guard (2026-11-09, as the plan's other funded files): size by the cushion above Apex's threshold and never
+	  risk more than the cushion at the stop. Real time only (backtests unchanged). Equity missing or PeakSeed 0 -> no entry. }
+	if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+		CE = GetRTAccountEquity(IffString(AccountName <> "", AccountName, GetAccountID));
+		Thr = MinList(xLB, MaxList(PeakEOD, xSB, PeakSeed, PeakAuto) - xDD);
+		Cush = CE - Thr;
+		if GrpCush >= 0 then Cush = MinList(Cush, GrpCush);   { copier group: never size above the weakest account }
+		if CE <= 0 or Cush <= 0 or (PeakSeed <= 0 and PeakAuto <= 0) then CQty = 0
+		else begin
+			CF = MinList(1, MaxList(CushionMin, Cush / xCR));
+			CQty = Floor(CQty * CF + 0.000001);
+			if IFF(StopFrac > 0, StopFrac * AvgDRng, 0) > 0 then CQty = MinList(CQty, Floor(Cush / ((IFF(StopFrac > 0, StopFrac * AvgDRng, 0)) * BigPointValue)));
+		end;
+	end;
+	if SigDir = 1 and TradeDir >= 0 and CQty >= 1 then Buy ("RS.L") CQty contracts next bar at market;
+	if SigDir = -1 and TradeDir <= 0 and CQty >= 1 then SellShort ("RS.S") CQty contracts next bar at market;
 end;
 
 { exits: stop and target }
@@ -277,4 +311,47 @@ if MP = -1 and MP[1] = -1 and StopFrac > 0 and AvgDRng > 0 and High >= StopPx th
 if MP <> 0 and (Time >= FlatHHMM or Time <= RthStartHHMM) then begin
 	if MP = 1 then Sell ("RS.LF") this bar on close;
 	if MP = -1 then BuyToCover ("RS.SF") this bar on close;
+end;
+
+{ Peak from the VPS (2026-11-09, user: no retyping): each day after the close the VPS writes C:\TradingLogs\peak\<account>_<the
+  highest end-of-day balance so far, rounded UP to $100, capped at xLB + xDD> (live/vps/cushion_peak.ps1). Read once
+  per trading day here, so PeakSeed no longer needs retyping after a restart (PeakSeed > 0 still overrides upwards). No file
+  (and PeakSeed 0) = no entries, as before. Real time only. }
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+	if Time >= 1600 then PKey = Date + 1 else PKey = Date;
+	PAcct = IffString(AccountName <> "", AccountName, GetAccountID);
+	if PKey <> PKeyLast and PAcct <> "" then begin      { until found today: a new account's file can appear during the day }
+		PkFound = 0;
+		for PkI = Ceiling((xLB + xDD) / 100) downto Floor(xSB / 100) begin
+			if PkFound = 0 and GetFileAttributesA("C:\TradingLogs\peak\" + PAcct + "_" + NumToStr(PkI * 100, 0)) <> -1 then PkFound = PkI * 100;
+		end;
+		GrpCush = -1;                               { copier group: the weakest funded account's cushion (VPS file) }
+		if CopierGroup then begin
+			for PkI = 100 downto 0 begin
+				if GrpCush < 0 and GetFileAttributesA("C:\TradingLogs\group\FUNDED_C" + NumToStr(PkI * 100, 0)) <> -1 then GrpCush = PkI * 100;
+			end;
+		end;
+		if PkFound > 0 then begin PeakAuto = MaxList(PeakAuto, PkFound); PKeyLast = PKey; end;
+	end;
+end;
+
+// Cushion guard tracker (2026-11-09, as the plan's other funded files): the highest END-OF-DAY account equity (Apex trails the
+// threshold on it). The day rolls at 16:00 CT; the last equity read before the roll is that day's close. Real time only.
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+	CE = GetRTAccountEquity(IffString(AccountName <> "", AccountName, GetAccountID));
+	if Time >= 1600 then CK = Date + 1 else CK = Date;
+	if CE > 0 then begin
+		if CKLast <> 0 and CK <> CKLast and CEPrev > 0 then PeakEOD = MaxList(PeakEOD, CEPrev);
+		CKLast = CK; CEPrev = CE;
+	end;
 end;

@@ -17,22 +17,21 @@ NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridg
 # tag suffix -> account. "" = #1 (50K, -01), "-2" = #2 (50K, -02), "150" = #3 (150K No-Activation, -03)
 ACCOUNTS = [
     # update last_balance / last_date whenever the user reports an Apex end-of-day balance
-    dict(account="#1", id="APEX-681524-01", size="50K evaluation", status="Blown", start=50000, floor=None,
-         last_balance=None, last_date="2026-10-26", note="Blown 2026-10-26; trades after that are not counted."),
-    dict(account="#2", id="APEX-681524-02", size="50K evaluation", status="Trading", start=50000, floor=48764.42,
-         last_balance=50764.42, last_date="2026-10-28",
-         note="Balance from the Order and Position Tracker 10/28 evening. Floor assumes 10/28 is its highest end-of-day balance (peak - $2,000). 10/26 #3's 150K-size orders hit this account: logged P&L that day may not match fills."),
-    dict(account="#3", id="APEX-681524-03", size="150K No-Activation", status="Blown", start=150000, floor=None,
-         last_balance=147822.60, last_date="2026-10-28",
-         note="Blown 2026-10-30: Apex liquidated the Overnight Bias short at 28,780 (09:38 CT) when equity touched the $146,000 floor intraday. $4,000 EOD trailing; target +$9,000. Started 10/26. Balance from the Order and Position Tracker 10/28 evening (user screenshot)."),
+    # 2026-11-10: #1-#4 (all blown) removed from the dashboard at the user's request; history in git
+    dict(account="#5", id="APEX-681524-05", size="150K No-Activation", status="Live", start=150000, floor=146000.0,
+         last_balance=150000.0, last_date="2026-11-10",
+         note="Bought 2026-11-10. VB removed 2026-11-11 (user). 5 charts: ONB ADX30 $2,750, Bridge 5, EOS $1,250, Twin 2, Dual Thrust 2; finish mode; Apex Chart Guard. Tags *150-5."),
 ]
-CLOSED_AFTER = {"#1": "20261026", "#3": "20261030"}
+
+CLOSED_AFTER = {"#1": "20261026", "#3": "20261030", "#2": "20261104", "#4": "20261104"}   # #2, #4 blown 2026-11-04 (user)
 OUT = "analysis/outputs/dashboard"
 
 
-def split(tag):
+def split(tag, day=""):
+    """Tag -> (strategy, account). The 150 tags belonged to #3 until it closed (2026-10-30) and to #4 from its first
+    session 2026-11-02 (Codex review 2026-11-01 #2: date-effective, old #3 trades keep #3)."""
     tag = str(tag)
-    if tag.endswith("150"): return tag[:-3], "#3"
+    if tag.endswith("150"): return tag[:-3], ("#4" if str(day) >= "20261102" else "#3")
     base, _, acct = tag.partition("-")
     return base, {"": "#1", "2": "#2"}.get(acct, "#" + acct)
 
@@ -42,7 +41,7 @@ def main():
     df = df[df.event == "CLOSE"].drop_duplicates()
     rows = []
     for r in df.itertuples():
-        strat, acct = split(r.tag)
+        strat, acct = split(r.tag, r.exit_date)
         if acct in CLOSED_AFTER and r.exit_date > CLOSED_AFTER[acct]: continue
         d = f"{r.exit_date[:4]}-{r.exit_date[4:6]}-{r.exit_date[6:]}"
         rows.append(dict(trade_id=f"{acct}-{r.tag}-{r.entry_date}-{r.entry_time}", date=d, account=acct,
@@ -71,17 +70,17 @@ def main():
                           trades=sum(t["account"] == a["account"] for t in trades),
                           net_logged=round(sum(t["pnl"] for t in trades if t["account"] == a["account"]), 2)))
     health = []
-    for f in sorted(glob.glob("live/health/*.csv")):
+    for f in sorted(glob.glob("live/health/2*.csv")):   # dated files only (group_log.csv etc. skipped)
         for line in open(f):
             p = line.strip().split(",")
-            kv = dict(x.split("=", 1) for x in p[2:] if "=" in x and not x.startswith("last_reject"))
+            kv = dict(x.split("=", 1) for x in p[2:] if "=" in x and not x.startswith("last_"))
             health.append(dict(check=f"{p[1]} {p[0]}", time=p[1], mode=p[0], mc_processes=int(kv.get("mc_processes", 0)),
                                disk_free_gb=float(kv.get("disk_free_gb", 0)), log_rows=int(kv.get("log_rows_today", 0)),
                                push_errors=int(kv.get("push_errors", 0)),
                                rejected=int(kv["rejected_today"]) if "rejected_today" in kv else None))
     import re, vps_health
     checks = []
-    for day in sorted({os.path.basename(f)[:8] for f in glob.glob("live/trades/*.csv") + glob.glob("live/health/*.csv")})[-10:]:
+    for day in sorted({os.path.basename(f)[:8] for f in glob.glob("live/trades/2*.csv") + glob.glob("live/health/2*.csv")})[-10:]:
         d = dt.date(int(day[:4]), int(day[4:6]), int(day[6:]))
         for i, line in enumerate(vps_health.check(d)):
             text = line.lstrip("- ").strip()
@@ -102,4 +101,5 @@ if __name__ == "__main__":
     import runpy
     runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "live_panels.py"), run_name="__main__")
     runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "account_tools.py"), run_name="__main__")
+    runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "lab_tools.py"), run_name="__main__")   # lab_stats / lab_studies
     runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "daily_bars_merge.py"), run_name="__main__")

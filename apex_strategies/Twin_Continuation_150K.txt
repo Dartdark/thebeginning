@@ -1,0 +1,543 @@
+{ TWIN CONTINUATION - 150K APEX VERSION (2026-11-08, from personal_strategies/Twin_Continuation.txt v2.1)
+  For the Apex 150K evaluation AND funded accounts, MNQ chart, Qty 2 (= 2 MNQ), BO_MaxStopMult 1 (swing stop <= 1 ATR).
+  Bench: 150K evaluation + 2 MNQ 37.9% vs 35.9% (analysis/twin_cap1_150k_eval.py); funded x1.5 + 2 MNQ (twin_cap1_150k_funded.py).
+  Added to v2.1 (same blocks as the other live strategies):
+    - kill switch (C:\TradingLogs\KILL, tri-state with GetLastError): no new entries; an open position exits at market
+    - heartbeat (HeartbeatTag, HB_Ver) for the Chart Monitor / watchdog
+    - cushion guard (UseCushion; FUNDED charts only): size x clip(cushion / xCR, CushionMin, 1), then capped so one stop
+      fits the cushion. Breakout stop counted at BO_MaxStopMult x ATR (its worst case), Momentum at MO_StopPoints.
+  Holiday rules are v2.1's (early-close days: no MO, no BO entries 11:00-17:00, flat after the 11:30 bar; checked 2026-11-08:
+  0 trades cross a session break in the matching Python port). }
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";
+{ =====================================================================
+  TWIN CONTINUATION  -  Swing Breakout + Morning Momentum, one system
+  ---------------------------------------------------------------------
+  INSTRUMENT   NQ or MNQ futures (continuous contract)
+  CHART        Data1 only, 1-MINUTE bars. No Data2.
+               (Other requiered bars are built inside the code from the 1-minute bars.)
+  SESSION      24h CME Globex session template (17:00-16:00 CT)
+  TIME ZONE    Central Time (CT). Bars stamped with their CLOSE time
+               (MultiCharts default). Open-stamped chart: ClockShift = 1
+  PROPERTIES   Intrabar Order Generation OFF, Bar Magnifier not needed,
+               Max Bars Back 5 (manual), do not allow multiple entries
+  HISTORY      Load at least 6 months before the test period
+  COSTS        Research run: $5 commission + $1 slippage per trade (NQ)
+  SIZE         Qty = 1 (1 NQ = 10 MNQ)
+  SETUPS       UseBreakout - Swing Breakout on 6h swing highs/lows
+               UseMomentum - Morning Momentum, 08:40-09:30 CT entries
+  RULE         One position at a time. A setup only enters while flat;
+               each exit only closes its own setup's entry.
+  v2 (2026-10-15): HOLIDAY FIX. On CME early-close days (12:00 CT halt) the original
+  could never reach its 15:45 / 14:50 exits and carried the position through the
+  halt (SetExitOnClose only works in backtests). Now, on those days (same list as
+  NQ_Vault_Break.txt): no new entries from EarlyLastEntry (11:00 CT), everything
+  flat at the close of the EarlyFlatten bar (11:30 CT), Morning Momentum skipped.
+  For Apex / prop use also set BO_MaxStopMult 1 (the swing stop risks ~$6,000/NQ).
+  v2.1 (2026-10-15): SetExitOnClose removed. On the user's chart it fired at MIDNIGHT and closed
+  47 evening breakout trades at 00:00 in backtests (-$20.8k vs holding them) while doing nothing
+  live, so backtest and live differed. Normal days end at the 15:45 / 14:50 exits, early-close
+  days at 11:30 (holiday fix), so it is not needed.
+===================================================================== }
+
+Inputs:
+    { --- general --- }
+    UseBreakout( true ),
+    UseMomentum( true ),
+    Qty( 2 ),                 { MNQ contracts (150K plan: 2 MNQ) }
+
+    { --- Swing Breakout --- }
+    BO_TargetMult( 2.0 ),
+    BO_MaxStopMult( 1 ),      { Apex: swing stop capped at 1 x ATR }
+    BO_ATRPeriod( 14 ),
+    BO_VolCap( 2.0 ),
+    BO_VolLookback( 50 ),
+    BO_SessionOpen( 1700 ),
+    BO_SessionClose( 1600 ),
+    BO_LastFill( 1530 ),
+    BO_ExitTime( 1545 ),
+    BO_PivotTF( 360 ),
+
+    { --- Morning Momentum --- }
+    MO_BasisLen( 21 ),
+    MO_RangeLen( 14 ),
+    MO_SignalLen( 3 ),
+    MO_Trigger( 100 ),
+    MO_WindowStart( 840 ),
+    MO_WindowEnd( 930 ),
+    MO_ExitTime( 1450 ),
+    MO_StopPoints( 75 ),
+    MO_Warmup( 60 ),
+    MO_FullBarsOnly( true ),
+    MO_AllowLong( true ),
+    MO_AllowShort( true ),
+    ClockShift( 0 ),
+    UseHolidayTimes( true ),
+    EarlyLastEntry( 1100 ),   { CT: no new entries from here on early-close days }
+    EarlyFlatten( 1130 ),     { CT: flat at the close of this bar on early-close days }
+    DebugLog( false ),
+    HeartbeatTag( "" ),       { live guard: the chart's logger tag, e.g. TW150; empty = no heartbeat }
+    UseCushion(true),       { cushion guard: acts ONLY on Apex funded accounts (name PA-...); evaluations / personal: no effect }
+    CopierGroup(true),      { Rithmic copier (2026-11-09): follow the GROUP state the VPS writes (funded: the weakest account's cushion; evaluations: finish mode when the group's MEAN profit >= $6,000). false = this account only }
+    AccountName( "" ),        { the Apex account, typed exactly (Rithmic Equity is read for it) }
+    StartBalance(0),        { 0 = auto: 150000 when the account balance is above 100,000, else 50000 }
+    TrailDD(0),             { 0 = auto: 4000 (150K) / 2000 (50K) }
+    LockBalance(0),         { 0 = auto: start + 100 }
+    PeakSeed( 0 ),            { highest END-OF-DAY balance so far (new account: xSB); RETYPE after any restart; 0 = no entries }
+    CushionRef(0),          { 0 = auto: 3000 (150K) / 1500 (50K) }
+    CushionMin( 0.5 ),
+    UseFinish(true),        { 150K EVALUATION finish mode: acts ONLY on Apex evaluation accounts (name APEX-...) of 150K; funded / personal: no effect }
+    FinishAccount(""),      { empty = the account in this chart's Auto Trading gear (GetAccountID); or type it to override }
+    FinishAt(0),            { 0 = auto: 156000 on a 150K evaluation (start + $6,000); 50K: off (not tested there) }
+    FinishMult(0.5);        { ... trade this share of the size (nearest whole contract, at least 1) }
+
+Arrays:
+    CanH[6]( 0 ), CanL[6]( 0 ), SessRng[100]( 0 );
+
+Vars:
+
+    TimeC( 0 ), SmNow( 0 ), PrevSm( -1 ), Bkt( 0 ), PrevBkt( -1 ), HIdx( 0 ), PrevHIdx( -1 ),
+    NewSess( false ), NewBkt( false ), NewCan( false ), SessStartM( 0 ),
+    SessEndSm( 0 ), FillEndSm( 0 ), FlatSm( 0 ),
+
+    SHi( 0 ), SLo( 0 ), NSess( 0 ), VolRatio( 0 ), RngSum( 0 ), VL( 0 ),
+
+    BarOpen( false ), B15H( 0 ), B15L( 0 ), B15C( 0 ), B15LastH( 0 ), B15LastL( 0 ), B15LastSm( 0 ),
+    CanOpen( false ), CurH( 0 ), CurL( 0 ), NC( 0 ),
+    LateCan( false ), LateBar( false ), DoCan( false ), DoBar( false ), K( 0 ), J( 0 ),
+
+    PrevC15( 0 ), TrN( 0 ), TrSum( 0 ), AtrV( 0 ), TRv( 0 ),
+
+    GotSwH( false ), GotSwL( false ), NewSwH( 0 ), NewSwL( 0 ),
+    SwH( 0 ), SwL( 0 ), LastSwH( 0 ), LastSwL( 0 ), HaveSwH( false ), HaveSwL( false ),
+    SwHOpen( false ), SwLOpen( false ),
+
+    Armed( false ), OkL( false ), OkS( false ), LvlL( 0 ), LvlS( 0 ), StpL( 0 ), StpS( 0 ),
+    AtrU( 0 ), ArmTrades( 0 ),
+
+    AlphaPivot( 0 ), AlphaOsc( 0 ), SStartMin( 0 ), SBk( 0 ), SPrevBk( -1 ), SBkDate( 0 ),
+    SOpen( false ), SH( 0 ), SL_( 0 ), SC( 0 ), SN( 0 ), SEndT( 0 ),
+    SNewBk( false ), SLate( false ), SDo( false ),
+    FH( 0 ), FL( 0 ), FC( 0 ), FN( 0 ), FEndT( 0 ),
+    SNB( 0 ), SPrevC( 0 ), Strv( 0 ), SatrW( 0 ), SPivot( 0 ), SRaw( 0 ),
+    SOscV( 0 ), SOscPrev( 0 ), SHaveOsc( false ), SHavePrev( false ),
+    SSide( 0 ), SFire( 0 ), STradedToday( false ), SLastDate( 0 ), SHalfDay( false ),
+    CalMonth( 0 ), CalDay( 0 ), CalDow( 0 ), CalYear( 0 ), IsWeekday( false ), IsEarlyClose( false ),
+    HolNoEntry( false ), HolFlat( false ),
+    KillOn( false ), NoEntry( false ), KillAttr( -1 ), KillErr( 0 ), HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ),
+    HB_Ver( "Twin_Continuation_150K 2026-11-09" ),
+    QtyMO( 0 ), QtyBO( 0 ), StopBO( 0 ), CE( 0 ), CEPrev( 0 ), CK( 0 ), CKLast( 0 ), PeakEOD( 0 ), Thr( 0 ), Cush( 0 ), CF( 0 );
+Vars: FinEq(0), FinKey(0), FinKeyNow(0), FinRead(0), FinOn(false), FinQty(0), FinAcct(""), FinAt(0), GrpFin(-1);   { finish mode }
+Vars: PeakAuto(0), PKey(0), PKeyLast(0), PAcct(""), PkI(0), PkFound(0), AcctX(""), EqX(0), xSB(0), xDD(0), xLB(0), xCR(0), GrpCush(-1);   { peak file + auto account rules (2026-11-09) }
+
+Once Begin
+    If BarInterval <> 1 or BarType <> 1 Then
+        RaiseRunTimeError( "Twin Continuation must run on a 1-minute chart." );
+    AlphaPivot = 2 / ( MO_BasisLen + 1 );
+    AlphaOsc   = 2 / ( MO_SignalLen + 1 );
+End;
+
+If ClockShift <> 0 Then TimeC = MinutesToTime( TimeToMinutes( Time ) + ClockShift )
+Else TimeC = Time;
+
+{ ===== CME early-close days (12:00 CT halt), same list as NQ_Vault_Break.txt ===== }
+CalMonth = Month( Date ); CalDay = DayOfMonth( Date ); CalDow = DayOfWeek( Date ); CalYear = Year( Date ) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = UseHolidayTimes and (
+    ( CalMonth = 1 and ( ( CalDay = 1 and IsWeekday ) or ( CalDay = 2 and CalDow = 1 ) ) )
+    or ( CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21 )
+    or ( CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21 )
+    or ( CalMonth = 5 and CalDow = 1 and CalDay >= 25 )
+    or ( CalMonth = 6 and CalYear >= 2022 and ( ( CalDay = 19 and IsWeekday )
+        or ( CalDay = 18 and CalDow = 5 ) or ( CalDay = 20 and CalDow = 1 ) ) )
+    or ( CalMonth = 7 and ( ( ( CalDay = 3 or CalDay = 4 ) and IsWeekday ) or ( CalDay = 5 and CalDow = 1 ) ) )
+    or ( CalMonth = 9 and CalDow = 1 and CalDay <= 7 )
+    or ( CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28 )
+    or ( CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29 )
+    or ( CalMonth = 12 and ( ( ( CalDay = 24 or CalDay = 25 ) and IsWeekday ) or ( CalDay = 26 and CalDow = 1 ) ) ) );
+{ the early-close day's morning only (its date); the evening session before it carries the previous date }
+HolNoEntry = IsEarlyClose and TimeC >= EarlyLastEntry and TimeC < 1700;
+HolFlat    = IsEarlyClose and TimeC >= EarlyFlatten and TimeC < 1700;
+
+{ ===== SWING BREAKOUT: clock, session range, volatility filter ===== }
+SessStartM = TimeToMinutes( BO_SessionOpen );
+SmNow      = Mod( TimeToMinutes( TimeC ) - 1 - SessStartM + 2880, 1440 );
+SessEndSm  = Mod( TimeToMinutes( BO_SessionClose ) - SessStartM + 1440, 1440 );
+FillEndSm  = Mod( TimeToMinutes( BO_LastFill ) - SessStartM + 1440, 1440 );
+FlatSm     = Mod( TimeToMinutes( BO_ExitTime )    - SessStartM + 1440, 1440 );
+
+NewSess = PrevSm < 0 or SmNow < PrevSm;
+Bkt     = IntPortion( SmNow / 15 );
+HIdx    = IntPortion( SmNow / BO_PivotTF );
+NewBkt  = NewSess or Bkt <> PrevBkt;
+NewCan  = NewSess or HIdx <> PrevHIdx;
+
+If NewSess Then Begin
+    If PrevSm >= 0 and SHi > SLo Then Begin
+        For J = 99 downto 1 Begin SessRng[J] = SessRng[J-1]; End;
+        SessRng[0] = SHi - SLo;
+        NSess = NSess + 1;
+        VL = MinList( MaxList( BO_VolLookback, 1 ), 99 );
+        VolRatio = 0;
+        If NSess > VL Then Begin
+            RngSum = 0;
+            For J = 1 to VL Begin RngSum = RngSum + SessRng[J]; End;
+            If RngSum > 0 Then VolRatio = SessRng[0] / ( RngSum / VL );
+        End;
+    End;
+    SHi = High; SLo = Low;
+End
+Else Begin
+    SHi = MaxList( SHi, High ); SLo = MinList( SLo, Low );
+End;
+
+{ ===== SWING BREAKOUT: 15m bars, 6h candles, swing levels, arming ===== }
+LateCan = NewCan and CanOpen;
+LateBar = NewBkt and BarOpen;
+
+For K = 1 to 2 Begin
+    If K = 1 Then Begin
+        DoCan = LateCan; DoBar = LateBar;
+    End
+    Else Begin
+
+        If NewCan Then Begin CurH = High; CurL = Low; CanOpen = true; End
+        Else Begin CurH = MaxList( CurH, High ); CurL = MinList( CurL, Low ); End;
+        If NewBkt Then Begin B15H = High; B15L = Low; BarOpen = true; End
+        Else Begin B15H = MaxList( B15H, High ); B15L = MinList( B15L, Low ); End;
+        B15C = Close; B15LastH = High; B15LastL = Low; B15LastSm = SmNow;
+
+        If SwHOpen and High >= SwH Then SwHOpen = false;
+        If SwLOpen and Low  <= SwL Then SwLOpen = false;
+        DoCan = CanOpen and ( Mod( SmNow + 1, BO_PivotTF ) = 0 or SmNow + 1 >= SessEndSm );
+        DoBar = BarOpen and Mod( SmNow + 1, 15 ) = 0;
+    End;
+
+    If DoCan Then Begin
+        CanOpen = false;
+        For J = 6 downto 1 Begin CanH[J] = CanH[J-1]; CanL[J] = CanL[J-1]; End;
+        CanH[0] = CurH; CanL[0] = CurL;
+        NC = NC + 1;
+        If NC >= 7 Then Begin
+            If CanH[3] >= MaxList( CanH[4], CanH[5], CanH[6] ) and CanH[3] >= MaxList( CanH[0], CanH[1], CanH[2] ) Then Begin
+                GotSwH = true; NewSwH = CanH[3];
+            End;
+            If CanL[3] <= MinList( CanL[4], CanL[5], CanL[6] ) and CanL[3] <= MinList( CanL[0], CanL[1], CanL[2] ) Then Begin
+                GotSwL = true; NewSwL = CanL[3];
+            End;
+        End;
+    End;
+
+    If DoBar Then Begin
+        BarOpen = false;
+        If TrN = 0 Then TRv = B15H - B15L
+        Else TRv = MaxList( B15H, PrevC15 ) - MinList( B15L, PrevC15 );
+        TrN = TrN + 1;
+        If TrN <= BO_ATRPeriod Then Begin
+            TrSum = TrSum + TRv;
+            If TrN = BO_ATRPeriod Then AtrV = TrSum / BO_ATRPeriod;
+        End
+        Else AtrV = ( AtrV * ( BO_ATRPeriod - 1 ) + TRv ) / BO_ATRPeriod;
+        PrevC15 = B15C;
+
+        If GotSwH Then Begin
+            SwH = NewSwH; LastSwH = NewSwH; HaveSwH = true;
+            SwHOpen = B15C < SwH and B15LastH < SwH;
+            GotSwH = false;
+        End;
+        If GotSwL Then Begin
+            SwL = NewSwL; LastSwL = NewSwL; HaveSwL = true;
+            SwLOpen = B15C > SwL and B15LastL > SwL;
+            GotSwL = false;
+        End;
+
+        Armed = false;
+        If MarketPosition = 0 and TrN >= BO_ATRPeriod Then Begin
+            AtrU = AtrV;
+            LvlL = SwH; StpL = LastSwL;
+            LvlS = SwL; StpS = LastSwH;
+            OkL  = SwHOpen and HaveSwL and StpL < LvlL;
+            OkS  = SwLOpen and HaveSwH and StpS > LvlS;
+            Armed = UseBreakout and ( OkL or OkS ) and B15LastSm < FillEndSm - 1;
+            If BO_VolCap > 0 and VolRatio > BO_VolCap Then Armed = false;
+            ArmTrades = TotalTrades;
+            If DebugLog and Armed Then
+                Print( ELDateToString( Date ), " ", NumToStr( TimeC, 0 ), " BO arm",
+                       "  L=", IffString( OkL, NumToStr( LvlL, 2 ), "-" ), " stp ", NumToStr( StpL, 2 ),
+                       "  S=", IffString( OkS, NumToStr( LvlS, 2 ), "-" ), " stp ", NumToStr( StpS, 2 ),
+                       "  ATR=", NumToStr( AtrU, 2 ), "  vol=", NumToStr( VolRatio, 2 ) );
+        End;
+    End;
+End;
+PrevSm = SmNow; PrevBkt = Bkt; PrevHIdx = HIdx;
+
+{ ===== MORNING MOMENTUM: 10m buckets, oscillator, signal ===== }
+If Date <> SLastDate Then Begin
+    STradedToday = false;
+
+    If SLastDate <> 0 Then Begin
+        Sell       ( "MO-LX2" ) from entry ( "MO-L" ) this bar on close;
+        BuyToCover ( "MO-SX2" ) from entry ( "MO-S" ) this bar on close;
+    End;
+    SLastDate = Date;
+End;
+SHalfDay = IsEarlyClose or ( Month( Date ) = 7 and DayOfMonth( Date ) = 3 ) or ( Month( Date ) = 12 and DayOfMonth( Date ) = 24 )
+        or ( Month( Date ) = 11 and DayOfWeek( Date ) = 5 and DayOfMonth( Date ) >= 23 and DayOfMonth( Date ) <= 29 );
+
+SStartMin = Mod( TimeToMinutes( TimeC ) - 1 + 1440, 1440 );
+SBk       = IntPortion( SStartMin / 10 );
+SNewBk    = SBk <> SPrevBk or Date <> SBkDate;
+SLate     = SNewBk and SOpen;
+SFire     = 0;
+
+For K = 1 to 2 Begin
+    If K = 1 Then Begin
+        SDo = SLate;
+        FH = SH; FL = SL_; FC = SC; FN = SN; FEndT = SEndT;
+    End
+    Else Begin
+        If SNewBk Then Begin
+            SH = High; SL_ = Low; SN = 1; SOpen = true; SBkDate = Date;
+        End
+        Else Begin
+            SH = MaxList( SH, High ); SL_ = MinList( SL_, Low ); SN = SN + 1;
+        End;
+        SC = Close;
+        SEndT = MinutesToTime( ( SBk + 1 ) * 10 );
+        If SBk = 143 Then SEndT = 0;
+        SDo = SOpen and Mod( SStartMin + 1, 10 ) = 0;
+        FH = SH; FL = SL_; FC = SC; FN = SN; FEndT = SEndT;
+    End;
+
+    If SDo Then Begin
+        SOpen = false;
+        SNB = SNB + 1;
+
+        If SNB = 1 Then Begin
+            Strv = FH - FL; SatrW = Strv; SPivot = FC;
+        End
+        Else Begin
+            Strv   = MaxList( FH - FL, MaxList( AbsValue( FH - SPrevC ), AbsValue( FL - SPrevC ) ) );
+            SatrW  = SatrW + ( Strv - SatrW ) / MO_RangeLen;
+            SPivot = SPivot + ( FC - SPivot ) * AlphaPivot;
+        End;
+        SPrevC = FC;
+
+        SSide = 0;
+        If SatrW > 0 Then Begin
+            SRaw = ( FC - SPivot ) / ( 3 * SatrW ) * 100;
+            If SHaveOsc = false Then Begin
+                SOscV = SRaw; SHaveOsc = true;
+            End
+            Else Begin
+                SOscPrev = SOscV; SHavePrev = true;
+                SOscV = SOscV + ( SRaw - SOscV ) * AlphaOsc;
+            End;
+            If SHavePrev Then Begin
+                If SOscV > MO_Trigger and SOscPrev <= MO_Trigger Then SSide = 1
+                Else If SOscV < -MO_Trigger and SOscPrev >= -MO_Trigger Then SSide = -1;
+            End;
+        End;
+
+        If SSide <> 0 and FEndT >= MO_WindowStart and FEndT <= MO_WindowEnd
+           and ( MO_FullBarsOnly = false or FN = 10 )
+           and STradedToday = false and SHalfDay = false
+           and MarketPosition = 0 and SNB >= MO_Warmup Then Begin
+            STradedToday = true;
+            If UseMomentum Then Begin
+                If SSide = 1 and MO_AllowLong Then SFire = 1;
+                If SSide = -1 and MO_AllowShort Then SFire = -1;
+            End;
+            If DebugLog Then
+                Print( ELDateToString( Date ), " ", NumToStr( FEndT, 0 ), " MO side=", NumToStr( SSide, 0 ),
+                       " osc=", NumToStr( SOscV, 1 ), " fire=", NumToStr( SFire, 0 ) );
+        End;
+    End;
+End;
+SPrevBk = SBk;
+
+{ ===== live guards (2026-11-08): kill switch, cushion guard. Real time only: backtests unchanged ===== }
+KillOn = false; KillAttr = -1; KillErr = 0;
+If GetAppInfo( aiRealTimeCalc ) = 1 Then Begin
+    KillAttr = GetFileAttributesA( "C:\TradingLogs\KILL" );
+    If KillAttr <> -1 Then KillOn = true Else KillErr = GetLastError;
+End;
+NoEntry = KillOn;
+If GetAppInfo( aiRealTimeCalc ) = 1 and GetFileAttributesA( "C:\TradingLogs" ) = -1 Then NoEntry = true;
+If GetAppInfo( aiRealTimeCalc ) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 Then NoEntry = true;
+
+{ Finish mode (150K evaluation, 2026-11-09; analysis/eval_levers150.py: pass 38.9% -> 40.6%): once the account's balance at the
+  session start is at or above FinishAt, trade FinishMult of the size (nearest whole contract, at least 1). The balance is read
+  once per trading day (the CT day rolls at 16:00) at the first real-time bar; no reading = full size. Real time only
+  (backtests unchanged). }
+FinOn = false;
+if UseFinish and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	if Time >= 1600 then FinKeyNow = Date + 1 else FinKeyNow = Date;
+	if FinKeyNow <> FinKey then begin
+		FinRead = GetRTAccountEquity(IffString(FinishAccount <> "", FinishAccount, GetAccountID));
+		if FinRead > 0 then begin
+			FinEq = FinRead; FinKey = FinKeyNow; GrpFin = -1;   { copier group state (VPS files), read once a day }
+			if CopierGroup then begin
+				if GetFileAttributesA("C:\TradingLogs\group\EVAL_FINISH") <> -1 then GrpFin = 1
+				else if GetFileAttributesA("C:\TradingLogs\group\EVAL_FULL") <> -1 then GrpFin = 0;
+			end;
+		end;
+	end;
+	FinAcct = IffString(FinishAccount <> "", FinishAccount, GetAccountID);
+	if FinishAt > 0 then FinAt = FinishAt else if FinEq > 100000 then FinAt = 156000 else FinAt = 0;
+	FinOn = (FinKey = FinKeyNow) and FinAt > 0 and (FinEq >= FinAt) and LeftStr(FinAcct, 5) = "APEX-";
+	if GrpFin = 1 then FinOn = (FinKey = FinKeyNow) and FinAt > 0 and LeftStr(FinAcct, 5) = "APEX-";   { group: half size while the group's mean profit >= $6,000 }
+	if GrpFin = 0 then FinOn = false;
+end;
+
+QtyMO = Qty; QtyBO = Qty;
+If BO_MaxStopMult > 0 Then StopBO = BO_MaxStopMult * AtrU Else StopBO = MaxList( LvlL - StpL, StpS - LvlS );
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+    CE = GetRTAccountEquity( IffString(AccountName <> "", AccountName, GetAccountID) );
+    Thr = MinList( xLB, MaxList( PeakEOD, xSB, PeakSeed, PeakAuto ) - xDD );
+    Cush = CE - Thr;
+    if GrpCush >= 0 then Cush = MinList(Cush, GrpCush);   { copier group: never size above the weakest account }
+    If CE <= 0 or Cush <= 0 or (PeakSeed <= 0 and PeakAuto <= 0) Then Begin QtyMO = 0; QtyBO = 0; End
+    Else Begin
+        CF = MinList( 1, MaxList( CushionMin, Cush / xCR ) );
+        QtyMO = Floor( Qty * CF + 0.000001 ); QtyBO = QtyMO;
+        If MO_StopPoints > 0 Then QtyMO = MinList( QtyMO, Floor( Cush / ( MO_StopPoints * BigPointValue ) ) );
+        If StopBO > 0 Then QtyBO = MinList( QtyBO, Floor( Cush / ( StopBO * BigPointValue ) ) );
+    End;
+End;
+If FinOn Then Begin
+    If QtyMO >= 1 Then QtyMO = MaxList( 1, Floor( QtyMO * FinishMult + 0.5 ) );
+    If QtyBO >= 1 Then QtyBO = MaxList( 1, Floor( QtyBO * FinishMult + 0.5 ) );
+End;
+If NoEntry Then Begin SFire = 0; Armed = false; End;
+
+{ ===== MORNING MOMENTUM: entry (only while flat) ===== }
+If SFire = 1 and QtyMO > 0 Then Begin
+    Armed = false;
+    Buy ( "MO-L" ) QtyMO contracts next bar at market;
+End;
+If SFire = -1 and QtyMO > 0 Then Begin
+    Armed = false;
+    SellShort ( "MO-S" ) QtyMO contracts next bar at market;
+End;
+
+{ ===== MORNING MOMENTUM: stop loss and timed exit ===== }
+If MarketPosition = 1 Then
+    Sell ( "MO-LS" ) from entry ( "MO-L" ) next bar at EntryPrice - MO_StopPoints stop;
+If MarketPosition = -1 Then
+    BuyToCover ( "MO-SS" ) from entry ( "MO-S" ) next bar at EntryPrice + MO_StopPoints stop;
+If TimeC >= MO_ExitTime and TimeC <= 1600 Then Begin
+    Sell       ( "MO-LX" ) from entry ( "MO-L" ) next bar at market;
+    BuyToCover ( "MO-SX" ) from entry ( "MO-S" ) next bar at market;
+End;
+
+{ ===== SWING BREAKOUT: entry orders (only while flat) ===== }
+If Armed and ( MarketPosition <> 0 or TotalTrades > ArmTrades ) Then Armed = false;
+
+If HolNoEntry Then Armed = false;
+If Armed and QtyBO > 0 and MarketPosition = 0 and SmNow + 1 < FillEndSm Then Begin
+    If OkL Then Buy       ( "BO-L" ) QtyBO contracts next bar at LvlL stop;
+    If OkS Then SellShort ( "BO-S" ) QtyBO contracts next bar at LvlS stop;
+End;
+
+{ ===== SWING BREAKOUT: stop loss and take profit ===== }
+If MarketPosition = 1 Then Begin
+    If StpL >= EntryPrice Then
+        Sell ( "BO-L0" ) from entry ( "BO-L" ) next bar at market
+    Else Begin
+        If BO_MaxStopMult > 0 Then
+            Sell ( "BO-LS" ) from entry ( "BO-L" ) next bar at MaxList( StpL, EntryPrice - BO_MaxStopMult * AtrU ) stop
+        Else
+            Sell ( "BO-LS" ) from entry ( "BO-L" ) next bar at StpL stop;
+        If BO_TargetMult > 0 Then
+            Sell ( "BO-LT" ) from entry ( "BO-L" ) next bar at EntryPrice + BO_TargetMult * AtrU limit;
+    End;
+End;
+If MarketPosition = -1 Then Begin
+    If StpS <= EntryPrice Then
+        BuyToCover ( "BO-S0" ) from entry ( "BO-S" ) next bar at market
+    Else Begin
+        If BO_MaxStopMult > 0 Then
+            BuyToCover ( "BO-SS" ) from entry ( "BO-S" ) next bar at MinList( StpS, EntryPrice + BO_MaxStopMult * AtrU ) stop
+        Else
+            BuyToCover ( "BO-SS" ) from entry ( "BO-S" ) next bar at StpS stop;
+        If BO_TargetMult > 0 Then
+            BuyToCover ( "BO-ST" ) from entry ( "BO-S" ) next bar at EntryPrice - BO_TargetMult * AtrU limit;
+    End;
+End;
+
+{ ===== SWING BREAKOUT: timed exit 15:45 CT ===== }
+If SmNow + 1 >= FlatSm and SmNow < SessEndSm Then Begin
+    Sell       ( "BO-LX" ) from entry ( "BO-L" ) this bar on close;
+    BuyToCover ( "BO-SX" ) from entry ( "BO-S" ) this bar on close;
+End;
+
+{ ===== early-close days: flat before the 12:00 CT halt ===== }
+If HolFlat Then Begin
+    Sell       ( "HOL-LX" ) this bar on close;
+    BuyToCover ( "HOL-SX" ) this bar on close;
+End;
+
+{ SetExitOnClose removed in v2.1: backtest-only, fired at midnight on a 24h chart }
+
+{ ===== kill switch: flatten while C:\TradingLogs\KILL exists ===== }
+If KillOn and MarketPosition > 0 Then Sell ( "KILL LX" ) next bar at market;
+If KillOn and MarketPosition < 0 Then BuyToCover ( "KILL SX" ) next bar at market;
+
+{ ===== heartbeat (log only, no orders) ===== }
+If HeartbeatTag <> "" and GetAppInfo( aiRealTimeCalc ) = 1 and LastBarOnChart Then Begin
+    HB_Key = CurrentDate * 10000 + CurrentTime;
+    If HB_Key <> HB_Last Then Begin
+        HB_Day = NumToStr( CurrentDate + 19000000, 0 );
+        FileAppend( "C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+            + NumToStr( MarketPosition * CurrentContracts, 0 ) + ",,,,,,,," + HB_Day + "," + NumToStr( CurrentTime, 0 ) + NewLine );
+        HB_Last = HB_Key;
+    End;
+End;
+
+{ Peak from the VPS (2026-11-09, user: no retyping): each day after the close the VPS writes C:\TradingLogs\peak\<account>_<the
+  highest end-of-day balance so far, rounded UP to $100, capped at xLB + xDD> (live/vps/cushion_peak.ps1). Read once
+  per trading day here, so PeakSeed no longer needs retyping after a restart (PeakSeed > 0 still overrides upwards). No file
+  (and PeakSeed 0) = no entries, as before. Real time only. }
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+	if Time >= 1600 then PKey = Date + 1 else PKey = Date;
+	PAcct = IffString(AccountName <> "", AccountName, GetAccountID);
+	if PKey <> PKeyLast and PAcct <> "" then begin      { until found today: a new account's file can appear during the day }
+		PkFound = 0;
+		for PkI = Ceiling((xLB + xDD) / 100) downto Floor(xSB / 100) begin
+			if PkFound = 0 and GetFileAttributesA("C:\TradingLogs\peak\" + PAcct + "_" + NumToStr(PkI * 100, 0)) <> -1 then PkFound = PkI * 100;
+		end;
+		GrpCush = -1;                               { copier group: the weakest funded account's cushion (VPS file) }
+		if CopierGroup then begin
+			for PkI = 100 downto 0 begin
+				if GrpCush < 0 and GetFileAttributesA("C:\TradingLogs\group\FUNDED_C" + NumToStr(PkI * 100, 0)) <> -1 then GrpCush = PkI * 100;
+			end;
+		end;
+		if PkFound > 0 then begin PeakAuto = MaxList(PeakAuto, PkFound); PKeyLast = PKey; end;
+	end;
+end;
+
+{ ===== cushion guard tracker: highest end-of-day equity (day rolls at 16:00 CT). Log only ===== }
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 and LeftStr(IffString(AccountName <> "", AccountName, GetAccountID), 3) = "PA-" then begin
+	{ auto account rules (2026-11-09): from the account itself, nothing typed per account (a 0 input = auto) }
+	AcctX = IffString(AccountName <> "", AccountName, GetAccountID); EqX = GetRTAccountEquity(AcctX);
+	if EqX > 100000 then begin xSB = 150000; xDD = 4000; xCR = 3000; end else begin xSB = 50000; xDD = 2000; xCR = 1500; end;
+	if StartBalance > 0 then xSB = StartBalance; if TrailDD > 0 then xDD = TrailDD; if CushionRef > 0 then xCR = CushionRef;
+	if LockBalance > 0 then xLB = LockBalance else xLB = xSB + 100;
+    CE = GetRTAccountEquity( IffString(AccountName <> "", AccountName, GetAccountID) );
+    If Time >= 1600 Then CK = Date + 1 Else CK = Date;
+    If CE > 0 Then Begin
+        If CKLast <> 0 and CK <> CKLast and CEPrev > 0 Then PeakEOD = MaxList( PeakEOD, CEPrev );
+        CKLast = CK; CEPrev = CE;
+    End;
+End;

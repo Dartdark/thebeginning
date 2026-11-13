@@ -40,3 +40,28 @@ READ (-> TIER_LIST grade) / NEED PDF (user downloads from SSRN and drops it in t
 | 2026-10-30 | arXiv 2604.26063 | A Volume-Price-Adjusted MACD Trading Strategy for U.S. Equity Indices | SKIP: indicator paper (user's skip list) |
 | 2026-10-30 | arXiv 2606.08586 | Cross-sectional topological anomaly scores and intraday return predictability in the S&P 500 | SKIP: stock cross-section, ML |
 | 2026-10-30 | arXiv 2608.05373 | Detection of Intraday Options Market Manipulation | SKIP: surveillance, options |
+| 2026-11-01 | ECB WP 1901 (JFQA 2019) https://ecb.europa.eu/pub/pdf/scpwps/ecbwp1901.lv.pdf | Price Drift before U.S. Macroeconomic News (Kurov, Sancetta, Strasser & Wolfe) | READ (method + release list) -> lab idea Q016 (ES / ZN pre-release drift at 09:00 CT releases) |
+| 2026-11-01 | Van Hemert 2014 (SSRN; summaries Quantpedia / CXO) | MOM-TOM: Momentum and the Turn of the Month | LAB IDEA Q017 (CTA flow on TOM days in CL / NG / GC / ZN / 6E); NEED PDF optional for the lab |
+| 2026-11-01 | Blose, Gondhalekar & Kort 2018 (J. Futures Markets?) | Gold overnight vs day returns, COMEX 1985-2012 | LAB IDEA Q018 (GC overnight long / day short); NEED PDF optional |
+| 2026-11-01 | AEA 2023 slides (Ge, Kang, Tang & Yang) | WTI negative price: settlement-window closing pressure | SKIP: CL settlement window already F (cl_forced_flows_test.py) |
+| 2026-11-01 | IAEE proceedings 2025 | Intraday seasonality in Brent futures | SKIP: ICE Brent (no data / not Apex); CL seasonality covered by CL forced-flow rows |
+| 2026-11-01 | OPEC meeting-window hedging study (MPRA) | OPEC meeting cycles and commercial hedging | SKIP: ~2-4 meetings a year, fails the lab's power check (Q012 lesson) |
+| 2026-11-01 | Kellard, Jiang & Liu 2020 JFM; Zhou (AUT); GFJ 2025 | Chinese gold / silver futures night session | SKIP: SHFE effects; Shanghai open / SGE items already F |
+| 2026-11-01 | LSEG 2024 research paper | How markets react to CPI surprises | SKIP: reaction to surprise needs consensus data; ZN after 07:30 releases already F |
+| 2026-11-01 | Baltas & Kosowski; GSCI rebalancing study (AgEcon) | CTA capacity / index-roll flows | SKIP: GSCI / BCOM roll windows already F |
+| 2026-11-01 17:43 UTC | scheduled run | (no search) | STOP: 6 ideas already queued in lab/IDEAS.md (Q013-Q018 >= 5); nothing added |
+| 2026-11-01 22:43 UTC | scheduled run (re-run after a worker restart) | (no search) | STOP: 5 ideas already queued in lab/IDEAS.md (Q014, Q015, Q017, Q018, Q019); nothing added |
+| 2026-11-02 02:44 UTC | scheduled run | (no search) | STOP: 5 ideas already queued in lab/IDEAS.md (Q014, Q015, Q017, Q018, Q019); nothing added |
+| 2026-11-02 06:44 UTC | Todorov 2019 'Passive Funds Actively Affect Prices' (SSRN; CXO summary https://www.cxoadvisory.com/?p=33572) | ETF leverage-rebalancing price impact in VIX / commodity futures | LAB IDEA Q020 (NG settlement-window LETF flow); queue had 4 queued before |
+| 2026-11-02 06:44 UTC | IEEE 10772770; arXiv 2010.13036 (agent-based Nikkei LETF) | LETF rebalancing simulations | SKIP: simulation, no futures data test |
+| 2026-11-04 22:43 UTC | internal port (no paper) | NG Sunday up-gap fade (CL Sunday fade rule, rank A, unchanged) | LAB IDEA Q021 (priority 1); queue had 4 queued (Q015, Q018, Q019, Q020) |
+| 2026-11-11 | arXiv 2511.06177 https://arxiv.org/abs/2511.06177 | Consecutive intraday price pushes in SPY (Vlasiuk & Smirnov 2025) | READ -> TIER_LIST F (gate 1 failed, NQ t -0.5) (ENGINE): large negative pushes over long lags are followed by stronger positive responses than equal positive pushes; port to NQ 1-min as 'buy the big intraday down push' |
+| 2026-11-11 | arXiv 2512.15720 https://arxiv.org/abs/2512.15720 | Hidden Order in Trades Predicts the Size of Price Moves (Singha 2025) | READ -> TIER_LIST F after DT + pooled tests (INGREDIENT): low order-flow entropy -> 2.9x larger next 5-min moves, no direction; 36-day SPY sample; needs a 1-min-bar entropy proxy; fits breakout / push engines as a size-or-skip gate |
+| 2026-11-11 | arXiv 2611.09286 https://arxiv.org/abs/2611.09286 | End-of-Day Reversal After 2019, pre-registered (S&P 500 stocks) | SKIP: cross-sectional stocks; at index level it falls to 0.74 bp (t ~ -1.8 change) |
+| 2026-11-11 | arXiv 2608.03703 https://arxiv.org/abs/2608.03703 | Preying on Leveraged ETFs (Zhao 2026, Korea) | SKIP test: supports the next-day reversal behind our NQ LETF fade (TIER C, WATCHLIST #31); Korean stocks, no futures |
+| 2026-11-11 | arXiv 2611.04533 https://arxiv.org/abs/2611.04533 | Volatility response to a preceding price trend, lag-resolved | SKIP: crypto/SPY; effect half-life ~1.5 h, a possible stop-width note only |
+| 2026-11-11 | SSRN 6752518 https://papers.ssrn.com/abstract=6752518 | Front end of the VIX term structure and forward realised volatility (Lim 2026) | SKIP: VIX9D/VIX inversion already tested as plan filter (TIER C) |
+| 2026-11-11 | SSRN 6847024 https://papers.ssrn.com/abstract=6847024 | Intraday microstructure of E-mini S&P 500 futures (Brown 2026) | SKIP: descriptive (regimes, liquidity decay), no trading claim |
+| 2026-11-11 | arXiv 2611.12141 https://arxiv.org/abs/2611.12141 | Do time-series foundation models forecast index-futures returns? (pre-registered, NQ/ES) | SKIP as strategy: 0 of 160 cells beat no-change; warning against TSFM signals |
+| 2026-11-11 | arXiv 2608.24786 https://arxiv.org/abs/2608.24786 | Learning-to-rank 0DTE short puts | SKIP: options (not Apex) |
+| 2026-11-11 | SSRN 5641974; 2607.01550; Mazzoleni-Melone; Baltussen et al. | 0DTE gamma, Is Trend Still Your Friend, 60/40 rebalancing, hedging-demand intraday momentum | SKIP: already in TIER_LIST |

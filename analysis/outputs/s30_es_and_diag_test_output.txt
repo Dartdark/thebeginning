@@ -1,0 +1,18 @@
+[provenance] code 48665d89 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+S30 ES leg + why the other three bench leads failed (user 2026-11-08). PRE-REGISTERED for the ES part (header committed before the run;
+
+A. S30 ES leg (per ES):
+   ES IBS < 0.10: n 158 $1169 t 3.79 | 2018-22 $1023 (t 2.4) 2023+ $1397 (t 3.2) | worst $-13,660
+   ES IBS < 0.20: n 240 $773 t 3.32 | 2018-22 $692 (t 2.2) 2023+ $896 (t 2.5) | worst $-18,623
+   daily corr ES lead vs NQ lead: 0.80
+   book return / DD p95 (OT 2):
+      book                       2018-26 5.81 | 2018-22 5.78 | 2023+ 6.54 | median $28,467 DD $4,903
+      + NQ lead (IBS<0.10)       2018-26 6.61 | 2018-22 5.94 | 2023+ 7.84 | median $32,769 DD $4,961
+      + NQ lead + ES IBS<0.10    2018-26 6.17 | 2018-22 4.88 | 2023+ 7.78 | median $34,769 DD $5,636
+      + NQ lead + ES IBS<0.20    2018-26 5.89 | 2018-22 4.58 | 2023+ 7.61 | median $34,659 DD $5,885
+
+B. Why the other leads fail (per micro, 1 MNQ):
+   S30 NQ IBS<0.10 (passed): | 2018-22 $3,881/yr Sharpe 1.40 corr +0.08 | 2023+ $4,787/yr Sharpe 1.00 corr +0.15 | on the book's worst 10% days $+7 a day (book there $-668); most like {'OvernightTick': 0.3, 'VaultBreak': 0.19}
+   FVB shorts: | 2018-22 $1,810/yr Sharpe 1.07 corr +0.24 | 2023+ $4,123/yr Sharpe 1.40 corr +0.24 | on the book's worst 10% days $-9 a day (book there $-668); most like {'DualThrust': 0.23, 'RelativeStrength': 0.22}
+   S03 v2 longs: | 2018-22 $1,311/yr Sharpe 1.24 corr +0.37 | 2023+ $2,832/yr Sharpe 1.27 corr +0.35 | on the book's worst 10% days $-14 a day (book there $-668); most like {'VaultBreak': 0.37, 'LateDayFlow': 0.32}
+   Anson longs: | 2018-22 $921/yr Sharpe 0.65 corr +0.20 | 2023+ $2,133/yr Sharpe 0.92 corr +0.28 | on the book's worst 10% days $-8 a day (book there $-668); most like {'VaultBreak': 0.23, 'PaperTrend': 0.15}

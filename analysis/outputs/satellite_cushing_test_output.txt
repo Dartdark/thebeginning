@@ -1,0 +1,36 @@
+[provenance] code 62559be4 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Satellite Trader (user upload 2026-11-10: The Bridge's SatelliteTrader code + M. Conti's video). PRE-REGISTERED (header
+   release days 456 (2018-01-04 .. 2026-10-07); Cushing weekly change median |888| kbbl
+   check: corr(9:29->9:35 CL move, Cushing change) -0.066; draws -> CL mean move $13, builds $6
+
+C. CEILING: side from the TRUE Cushing change (known only after the release):
+   W1 9:29->9:35 gross                                            n= 456 avg $    4 PF 1.03 t  0.3 win 51% yrs+ 4/9 | 18-22 $   15 23-26 $  -11
+   W1 9:29->9:35 net                                              n= 456 avg $  -23 PF 0.81 t -1.7 win 48% yrs+ 1/9 | 18-22 $  -12 23-26 $  -38
+   W2 9:29->10:30 gross                                           n= 456 avg $  -62 PF 0.78 t -2.0 win 44% yrs+ 2/9 | 18-22 $  -45 23-26 $  -84
+   W2 9:29->10:30 net                                             n= 456 avg $  -89 PF 0.69 t -2.9 win 43% yrs+ 0/9 | 18-22 $  -72 23-26 $ -112
+   W3 9:29->13:29 gross                                           n= 456 avg $ -100 PF 0.79 t -1.8 win 47% yrs+ 4/9 | 18-22 $ -134 23-26 $  -54
+   W3 9:29->13:29 net                                             n= 456 avg $ -127 PF 0.74 t -2.2 win 47% yrs+ 3/9 | 18-22 $ -162 23-26 $  -81
+   W4 overnight 13:29->13:29 gross                                n= 456 avg $  -15 PF 0.98 t -0.2 win 50% yrs+ 4/9 | 18-22 $ -160 23-26 $  178
+   W4 overnight 13:29->13:29 net                                  n= 456 avg $  -42 PF 0.94 t -0.4 win 50% yrs+ 4/9 | 18-22 $ -187 23-26 $  150
+   W1 9:29->9:35 net, |change| >= 1,000 kbbl                      n= 208 avg $    7 PF 1.06 t  0.3 win 52% yrs+ 6/9 | 18-22 $   34 23-26 $  -39
+   W2 9:29->10:30 net, |change| >= 1,000 kbbl                     n= 208 avg $  -81 PF 0.72 t -1.7 win 42% yrs+ 2/9 | 18-22 $  -49 23-26 $ -138
+   W3 9:29->13:29 net, |change| >= 1,000 kbbl                     n= 208 avg $ -103 PF 0.77 t -1.3 win 49% yrs+ 4/9 | 18-22 $  -46 23-26 $ -205
+   W4 overnight 13:29->13:29 net, |change| >= 1,000 kbbl          n= 208 avg $  -10 PF 0.98 t -0.1 win 51% yrs+ 5/9 | 18-22 $   60 23-26 $ -134
+
+B. ITEMS: side from LAST week's change (bar t >= 2.24, both periods > 0):
+   hit rate vs the true sign: all 65%; by year 2018:82% 2019:67% 2020:60% 2021:69% 2022:67% 2023:78% 2024:48% 2025:57% 2026:60% | 2018-23 71%, 2024+ 54%
+   ITEM W1 9:29->9:35                                             n= 455 avg $  -39 PF 0.71 t -2.7 win 47% yrs+ 1/9 | 18-22 $  -53 23-26 $  -20
+   ITEM W2 9:29->10:30                                            n= 455 avg $  -74 PF 0.74 t -2.4 win 46% yrs+ 4/9 | 18-22 $ -123 23-26 $  -10
+   ITEM W3 9:29->13:29                                            n= 455 avg $ -169 PF 0.66 t -3.0 win 47% yrs+ 1/9 | 18-22 $ -255 23-26 $  -57
+   ITEM W4 overnight 13:29->13:29                                 n= 455 avg $ -249 PF 0.69 t -2.6 win 46% yrs+ 1/9 | 18-22 $ -370 23-26 $  -90
+
+S. What a satellite call would be worth per CL trade (net of $27.25):
+   W1 9:29->9:35                mean |move| $  225: h 0.58 $     9, h 0.72 $    72, h 0.76 $    90; break-even h 56%
+   W2 9:29->10:30               mean |move| $  488: h 0.58 $    51, h 0.72 $   187, h 0.76 $   227; break-even h 53%
+   W3 9:29->13:29               mean |move| $  836: h 0.58 $   107, h 0.72 $   341, h 0.76 $   408; break-even h 52%
+   W4 overnight 13:29->13:29    mean |move| $ 1342: h 0.58 $   187, h 0.72 $   563, h 0.76 $   670; break-even h 51%
+   (the TRUE sign itself only reaches an effective h of W1 51%, W2 44%, W3 44%, W4 49%: the price does not follow Cushing one-for-one, so a 72% call is worth (2 x 0.72 - 1) x that)
+   W1: 72% satellite x the true-sign edge ~ $   -26 net a trade
+   W2: 72% satellite x the true-sign edge ~ $   -54 net a trade
+   W3: 72% satellite x the true-sign edge ~ $   -71 net a trade
+   W4: 72% satellite x the true-sign edge ~ $   -34 net a trade

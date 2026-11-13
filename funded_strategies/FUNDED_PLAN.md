@@ -1,5 +1,9 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
+> **RETIRED 2026-11-12 (user, all plans, until further notice; WATCHLIST #41 `analysis/vb_watch.py`)**: Vault Break (all sizes, both 50K and 150K tables below) is out of the funded plan. Its last-250-trade average
+> R fell below its 2018-24 minimum (data to 11/06); the edge after its breakout entries is gone in 2026 (`analysis/outputs/vb_drawdown_diag_output.txt`).
+> Benches: `analysis/bench150.py` BASE_FUNDED no longer contains VB. Tables below are history until re-run.
+
 ## Account and growth plan (agreed 2026-10-16)
 
 Priority order (details in the sections below and in `../reports/Trading_Business_Plan.pdf`):
@@ -23,7 +27,7 @@ current plans (`../analysis/t_oneside_bench2.py`, two independent runs of 1,000 
 
 | Plan | Change | Effect (run 1 / run 2) | Decision |
 |---|---|---|---|
-| **50K funded** | **Relative Strength longs 1 MNQ -> T fade 1 MNQ** | y2 +$194 / +$182, blown 5.9 -> 4.3% / 5.6 -> 4.2%, all 6 payouts in 2y 93 -> 95%, y2 p5 $2,925 -> $10,000 / $1,500 -> $13,000; y1 −$55 / −$70, 6th payout +5 / +8 days | **in the plan** |
+| **50K funded** | **Relative Strength longs 1 MNQ -> T fade 1 MNQ** | y2 +$194 / +$182, blown 5.9 -> 4.3% / 5.6 -> 4.2%, all 6 payouts in 2y 93 -> 95%, y2 p5 $2,925 -> $10,000 / $1,500 -> $13,000; y1 −$55 / −$70, 6th payout +5 / +8 days | **in the plan since 2026-10-28** (T fade 1 MNQ in place of RS longs on the 50K funded; the 10/31 revert concerned the Swing Target swap below - cell corrected 2026-11-09 after Dot's roster review) |
 | 50K funded | + T 1 / 2 MNQ, OT -> T, ONB ML -> T | noise or worse | not used |
 | 150K funded | + T 1-3 MNQ, OT 2 -> T 2 | within $80 of the plan (cap-bound) | not used (RS stays both sides) |
 
@@ -76,8 +80,8 @@ report: 595 trades 2018-26, $305 per NQ, PF 1.63, t 4.55, 9/9 years, 0 overnight
 
 | Plan | Change | Effect | Decision |
 |---|---|---|---|
-| **50K funded** | **Vault Break 2/1 -> 1/1 + Swing Target 1 MNQ** | y1 $10,159 vs $9,940, y2 $12,347 vs $12,163, blown 5.0% vs 6.8%, y2 p5 $7,500 vs $1,500 | **in the plan** |
-| **150K funded** | **Dual Thrust 2 MNQ -> Swing Target 2 MNQ** | y1 $18,083 vs $17,870, y2 $20,296 vs $20,137, blown 1.0% vs 1.8%, 6th payout day 204 vs 209 | **in the plan** (DT stays personal) |
+| **50K funded** | **Vault Break 2/1 -> 1/1 + Swing Target 1 MNQ** | y1 $10,159 vs $9,940, y2 $12,347 vs $12,163, blown 5.0% vs 6.8%, y2 p5 $7,500 vs $1,500 | **REVERTED (user 2026-10-31)**: replay with corrected exit kinds = a TIE (y1 $9,822 vs $9,818, y2 −$7, blown 6.2% vs 6.4%) -> back to VB 2/1, no Swing Target (moved here from the T-fade row 2026-11-09) |
+| **150K funded** | **Dual Thrust 2 MNQ -> Swing Target 2 MNQ** | y1 $18,083 vs $17,870, y2 $20,296 vs $20,137, blown 1.0% vs 1.8%, 6th payout day 204 vs 209 | **REVERTED (user 2026-10-31)**: replay = a TIE (y1 +$25, y2 −$7, blown 1.8% vs 1.8%) -> back to Dual Thrust 2 MNQ |
 | Evaluations (50K / 150K) | add, or replace VB | add: 50.0% vs 50.1%; VB -> ST 42.6-44.8% | not used |
 
 Chart: 1-minute MNQ, Exchange time (CT), CME 24h session, IOG off, `ClockShiftMin` 0, `Qty` 1 (50K) / 2 (150K), defaults
@@ -105,6 +109,45 @@ make it faster; its ~$5,000-a-year at 2 MNQ fits the 150K's $4,000 drawdown but 
 the user's MultiCharts report of v4 for the trade-by-trade check (`../TODO.md`); live, the drift alarm decides.
 Code `../analysis/dual_thrust_150k_test.py`, output `../analysis/outputs/dual_thrust_150k_output.txt`.
 
+## Twin Continuation 150K, 2 MNQ (added 2026-11-08, user)
+
+On 150K accounts (evaluation and funded): `../apex_strategies/Twin_Continuation_150K.txt` (v2.1 rules, BO stop <= 1 ATR, Qty 2 MNQ,
+kill switch, heartbeat, cushion guard). Evaluation set + Twin 2 MNQ 37.9% vs 35.9% pass (paired +2.0 pts, 90% band +1.1 / +3.1;
+`../analysis/twin_cap1_150k_eval.py`); funded plan x 1.5 + Twin 2 MNQ: bootstrap 2y +$260, all 6 payouts 97% vs 94%, 1y +$774
+single history (`../analysis/twin_cap1_150k_funded.py`). Best of 4 sizes (post hoc): expect less live. Not on 50K accounts.
+
+## Cushion cap (bench 2026-11-08, `../analysis/cushion_cap_funded.py`; adopt before the first funded account, code not written yet)
+
+Each strategy trades at most floor((balance - threshold) / its stop per MNQ) MNQ that day, on top of the cushion sizing (Bridge
+Monday Long has no stop: exempt). 1,000 paired bootstrap histories, 2 years, current plan (VB 2, without CL fade): blown
+**8.1% -> 2.3%** per strategy (payouts -$32, $11,778 -> $11,747), 1.5% if the day's stops together must fit (+$52, needs the
+strategies to share one cushion). Every start day 2018+: blown 1.5% either way (2 years). A $200 buffer cuts blown to ~0% but
+costs ~$450-725 in payouts. Evaluations: no gain (`../analysis/outputs/cushion_cap_bench_output.txt`, fails -> time-outs).
+**Code 2026-11-08 (not compiled yet):** `UseCushion` block in VB_SP, ONB ML, Monday Long, LDF, NFP, EOS, CL fade. It reads
+Rithmic Equity (`GetRTAccountEquity(AccountName)`; includes open P&L, verified from the 11/04 logs), tracks the highest
+end-of-day equity itself (day rolls 16:00 CT), threshold = min(LockBalance, peak - TrailDD), then size x clip(cushion / CushionRef,
+CushionMin, 1) and cap at floor(cushion / stop $ per contract). Funded chart inputs: UseCushion true, AccountName exact,
+StartBalance / TrailDD / LockBalance / CushionRef (50K 50000 / 2000 / 50100 / 1500; 150K 150000 / 4000 / 150100 / 3000),
+**PeakSeed = the highest end-of-day balance so far (new account: StartBalance; retype after any restart or recompile, else
+the threshold is understated; 0 = no entries)**. Default UseCushion false: evaluations and backtests unchanged.
+Live sizing differs from the bench in one way: it reads equity at the signal (other charts' open P&L included), the bench
+at the day's start.
+**2026-11-09 (user: everything automated): all 13 funded charts carry the guard** (added: Bridge Monday, ES MOC, Relative
+Strength, Dual Thrust, Overnight Tick). **No typing:** `AccountName` empty = the account in the chart's Auto Trading gear
+(GetAccountID); **PeakSeed no longer retyped:** the VPS writes `C:\TradingLogs\peak\<account>_<peak>` after every push from the
+Apex Chart Guard's balance rows (`live/vps/cushion_peak.ps1`), and each strategy reads it once a day. Funded chart inputs now: **none** (2026-11-09, auto account rules): `UseCushion` defaults to true and acts only on
+Apex funded accounts (name PA-...); 50K / 150K rules come from the account's balance (above 100,000 = 150K); any 0 input = auto.
+The same files on an evaluation or personal account: cushion off. Finish mode (`UseFinish` true by default) acts only on 150K
+evaluation accounts (APEX-...); the Apex Chart Guard's `TargetBalance` -1 = auto (evaluations 159050 / 53050, others off).
+**Rithmic copier (user 2026-11-09): two leaders, one for the evaluations, one for the funded accounts; followers 1x.** The
+MultiCharts charts run on the two leaders only. Every account then trades the leader's size, so the size follows the GROUP:
+funded = the weakest funded account's cushion; evaluations = finish mode when the group's MEAN profit is >= $6,000
+(`../analysis/copier_finish_bench.py`: 40.0% vs 39.1% with no finish mode, band +0.2 / +1.5; per-account finish would be 40.9%,
+so the copier costs ~0.9 points of pass rate for no per-account setup). Built: the Apex Chart Guard scans every account's balance
+at 15:55 (ACCT rows tag SCAN), the VPS writes `C:\TradingLogs\group\EVAL_FINISH` / `EVAL_FULL` / `FUNDED_C<min cushion>`
+(`live/vps/cushion_peak.ps1`), the strategies read them once a day (`CopierGroup` true, default). Followers do NOT get their own
+target exit (only the leader's chart guard sees a target); a follower that touches $159,050 inside a trade is not closed there.
+
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 
 Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,
@@ -118,8 +161,8 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
-| Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **`NumContracts` 1**, `FlaggedContracts` 1 (2 / 1 until 2026-10-25, Swing Target took one contract; 3 / 1 until 2026-10-17) | ~107 a year |
-| **Swing Target v3 (2026-10-25)** | `NQ_Swing_Target_v3.txt` | 1 min MNQ | `Qty` 1 (150K: 2, in place of Dual Thrust) | ~70 a year |
+| ~~Vault Break~~ **RETIRED 2026-11-12 (user, all plans, until further notice; WATCHLIST #41 `analysis/vb_watch.py`)** | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **0 (retired)**; was `NumContracts` 2, `FlaggedContracts` 1 (back to 2 / 1 2026-10-31, Swing Target reverted; 1 / 1 2026-10-25 to 10-31; 3 / 1 until 2026-10-17) | ~107 a year |
+| **Swing Target v3 (2026-10-25)** | `NQ_Swing_Target_v3.txt` | 1 min MNQ | **not in the funded plans since 2026-10-31** (tie after the exit-kind fix; personal only) | ~70 a year |
 | Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
 | ~~Monday Long~~ **50K: replaced 2026-10-24** by Overnight Tick / VIX (150K keeps it at 1) | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
 | **Overnight Tick / VIX (2026-10-24)** | `NQ_Overnight_Tick_VIX.txt` | 5 min MNQ + VIX daily (Data2, Map ASCII) | `NumContracts` 1 | ~60 a year (17:05 → 03:00 CT after down days) |
@@ -141,11 +184,11 @@ kept between 0.5 and 1; multiply each full-size input by f and round down:
 
 | Cushion | f | VB normal / flagged | Swing Target | ONB ML risk | OT / VIX | EOS risk | LDF | NFP risk | Bridge Monday | CL Sunday | ES MOC | T fade (was RS longs) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| $1,500 or more | 1.0 | 1 / 1 | 1 | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
-| $1,125 | 0.75 | 0 / 0 (off) | 0 (off) | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
-| $750 or less | 0.5 | 0 / 0 (off) | 0 (off) | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+| $1,500 or more | 1.0 | 2 / 1 | 0 (reverted) | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
+| $1,125 | 0.75 | 1 / 0 | 0 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+| $750 or less | 0.5 | 1 / 0 | 0 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
 
-(Table updated 2026-10-28: VB 1/1 + Swing Target 1 since 2026-10-25, T fade in place of RS longs since 2026-10-28; 1-lot pieces round down to 0 below full size, as benched.) Any cushion in between:
+(Table updated 2026-10-31: Swing Target reverted, VB back to 2/1 (user, tie after the exit-kind fix); earlier: VB 1/1 + ST 1 2026-10-25, T fade in place of RS longs since 2026-10-28; 1-lot pieces round down to 0 below full size, as benched.) Any cushion in between:
 f = cushion / 1,500, multiply, round DOWN to whole contracts (risk inputs: multiply, no rounding). Evaluations (combines)
 are NOT cushion-sized: they run the combine set at fixed size.
 
@@ -815,6 +858,16 @@ $154,600: Apex's pages, user's screenshots in reports/screenshots/, 2026-10-15).
 - **Evaluation:** the combine set x 2.5 passes 41.6% (2018–22 38.9%, 2023–26 45.4%; x 2 38.7%, x 3 40.7%), vs 50.1% on the
   50K: the 150K target is 2.25x its drawdown (50K 1.5x). Adding Twin cap1 does not help (39–42%).
   Inputs x 2.5: VB 20 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250.
+  **From the next 150K evaluation (user 2026-11-09): VB 20 -> 15 MNQ + Dual Thrust 2 MNQ** (with Twin cap1 2 MNQ, added 11/08):
+  `analysis/vb_vs_dt_eval.py`: all starts 38.3 -> 38.9%, 2025-26 starts +4.0% (band +0.5 / +7.5; the window picked from the user's
+  view that VB is weak lately: VB $49 a trade in 2026 vs DT $117), 2022 -4%, 2024 -3%. Full replacement (VB 0 + DT 8) 33.3%: VB stays
+  the main source of speed. Review each quarter (Friday review): switch back if VB 20 beats it on the latest 12 months.
+  150K evaluation inputs now (user 2026-11-11: **Vault Break REMOVED** from the evaluation, 'blew out the DLL again today, performance underwhelming'; backtest cost per Codex 11/10: design pass 38.3% -> 31.9%): ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250, Twin cap1 2 MNQ, Dual Thrust 2 MNQ.
+  **Finish mode (user 2026-11-09, automated):** once the evaluation's balance at the session start is >= $156,000, every chart trades
+  half size (nearest whole contract, at least 1) until it passes: pass 38.9 -> 40.6% (+1.7, band +0.8 / +2.8; plateau $4,500-$7,500
+  at x0.5; `../analysis/eval_levers150.py`, `../analysis/eval_finish150_plateau.py`). Inputs on all six evaluation charts: `UseFinish`
+  true, `FinishAccount` = the evaluation account exactly, `FinishAt` 156000, `FinishMult` 0.5. Off on funded charts. Daily stops
+  (-$1,000 / -$1,500) and start-timing rules were tested: they hurt or did nothing.
 - **Funded:** the funded plan x 1.5 with full size from a **$3,000** cushion: $15,731 / $19,743 (1 / 2 years), **blown 0% /
   0%**, all 6 payouts within 2 years 91% (real ladder; the assumed one gave $15,866 / $19,725). Bigger (x 2–3) or a faster cushion blows 9–37%; Twin adds nothing.
   Inputs x 1.5 (whole MNQ, rounded down): VB 4 (`FlaggedContracts` 1), ONB ML $600, Monday 1, EOS $1,050, LDF 3, NFP $750,
@@ -953,3 +1006,39 @@ in place of each plan slot (whole, and in part for VB / LDF / ES MOC / CL), each
 - Removing Monday Long, Bridge Monday or the CL fade changes the 2-year payout by under $30: at bench level the plan is
   saturated; its drawdown budget, not missing edges, is the limit. Swaps only trade speed against blow-up risk.
 Decision: keep the plan. Live data (drift alarm, mid-December gate) decides the next change.
+
+## 150K funded: exact chart inputs (2026-10-31, Codex portfolio audit)
+
+The 150K benches used 'plan x 1.5', leaving three 1-lot pieces at 1.5 MNQ. Whole-number choices benched
+(`../analysis/plan150_integer_test.py`, 500 paired 2-year histories, `../analysis/outputs/plan150_integer_test_output.txt`):
+rounding them DOWN to 1 matches the old numbers (y2 $20,182 vs $20,137, blown 1.6% vs 1.8%), so the earlier 150K decisions
+stand; rounding UP to 2 is worse (blown 6.0%, y2 −$800). VB flagged 2 scored y2 +$122 / blown 1.2%: best of 4, within noise, not used.
+
+**Full-size 150K funded inputs (f = 1, cushion >= $3,000):** Vault Break `NumContracts` 3 / `FlaggedContracts` 1, ONB ML risk
+$600, Monday Long 1, EOS risk $1,050, Late-Day Flow 3, NFP risk $750, Bridge Monday 1, CL Sunday fade 3 MCL, ES MOC 3 MES,
+Relative Strength 1, Dual Thrust 2, Overnight Tick / VIX 2. Below full size each chart trades floor(input x f), f = cushion /
+3,000 (min 0.5); the bench now trades exactly these inputs.
+
+## Bench limits: opposing positions and overnight minutes (2026-10-31, Codex portfolio audit step 2)
+
+`../analysis/opposing_overlap_check.py` (v2 after Codex's follow-up: CURRENT rosters, 50K with T fade 1 in place of RS longs and
+VB 2/1, 150K whole-number inputs; VB flagged contracts only on flagged days): the benches mark every trade at its own worst price
+each minute, so when NQ longs and shorts are open together the smaller side's range is counted twice. 50K: 76 of 2,436 days,
+avg $17 a minute, worst $166; 150K: 416 days (17%), avg $20, worst $406. **Corrected replay** (the double-count added back as a
+credit piece, 500 bootstrapped 2-year histories): identical to the bench as run (50K blown 6.4%, y2 $12,196; 150K blown 2.0%,
+y2 $20,095): no failure in any history falls in an overlap minute. Wiring proven: the same piece as a 10x debit raised 50K
+blown 3% -> 16%. So no allocation result depends on it. Overnight Tick is stored as one
+whole-night worst value on its exit day (also conservative). Missing overnight minutes in the data can't be rebuilt: limit noted.
+
+## Firm-level risk: accounts bought close together fail together (2026-11-01, `../analysis/firm_risk_test.py`)
+Batches of four 150K evaluations, combine set, every start day 2018-01 .. 2023-08 (output stamped with code + data version):
+| Batch of 4 | passes avg | P(0 pass) | P(all 4 fail) | outcome corr |
+|---|---|---|---|---|
+| one a day, same mix (the plan) | 1.58 | 48% | 45% | 0.73 |
+| one a WEEK, same mix | 1.58 | 29% | 26% | 0.29 |
+| one a day, 2 of 4 at VB 10 | 1.51 | 48% | 42% | 0.67 |
+| ~1 year apart (independent) | 1.71 | 14% | 12% | 0.09 |
+Accounts started within days of each other are close to ONE bet (corr 0.73): same expected passes, but half the time a whole
+batch fails together. Spacing purchases a week apart halves that (29%) at the same expected passes; a different mix doesn't
+help (fewer passes, still corr 0.67). Expected value is unchanged either way: spacing buys smoother results, not more passes.
+The budget ramp (`../analysis/ramp_budget_test.py`) already models same-week starts as correlated.

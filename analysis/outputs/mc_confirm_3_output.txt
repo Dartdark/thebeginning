@@ -1,0 +1,32 @@
+[provenance] code 7ec034b6 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+MultiCharts confirmation of three watched pieces (user's reports 2026-11-09, in mc_reports/): S30 IBS < 0.10 (WATCHLIST #34; 15-min,
+   MC-only trades: [('2020-03-12 15:15:00', 670.5), ('2020-03-16 15:15:00', 503.75)]
+   Python-only trades: []
+   differing matched trades by MC exit: {} | MC - Python points on them: 0.0
+
+ S30 IBS < 0.10 (raw prices on both sides: roll gaps inside a hold are in both): MultiCharts 171 trades from 2018, Python 169; matched (same day, side, order) 169 = 98.8% of MC / 100.0% of Python
+   matched P&L points: corr 1.000; identical (|diff| <= 0.25) 100.0%; sum MC 19,804 vs Python 19,804 points
+   MC trades after our costs: $2436 a trade (t 5.11), total $416,625 | 2018-22 $2089 (t 4.1) | 2023+ $3003 (t 3.2)
+   MC by year $: {2018: 6264, 2019: 23247, 2020: 93934, 2021: 38685, 2022: 59292, 2023: 61046, 2024: 40707, 2025: 72476, 2026: 20975}
+   Python after costs: $2326 a trade, total $393,175
+   same exit day on matched: 100.0%
+   MC-only trades: [('2026-11-05 09:15:00', 430.0)]
+   Python-only trades: []
+   differing matched trades by MC exit: {} | MC - Python points on them: 0.0
+
+ ZT continuation EntryZ 1.25: MultiCharts 605 trades from 2018, Python 604; matched (same day, side, order) 604 = 99.8% of MC / 100.0% of Python
+   matched P&L points: corr 1.000; identical (|diff| <= 0.25) 100.0%; sum MC 7,960 vs Python 7,960 points
+   MC trades after our costs: $260 a trade (t 3.63), total $157,359 | 2018-22 $177 (t 2.2) | 2023+ $352 (t 2.9)
+   MC by year $: {2018: 12142, 2019: 2312, 2020: 3218, 2021: 12984, 2022: 25628, 2023: -388, 2024: 53998, 2025: 9622, 2026: 37842}
+   Python after costs: $246 a trade, total $148,776
+
+   Ricochet: Python session stamp check: first rows [[20180102, Timestamp('2018-01-02 00:00:00'), 6411.75], [20180105, Timestamp('2018-01-05 00:00:00'), 6606.75]]
+   MC-only trades: [('2018-04-24 10:45:00', -50.0), ('2021-07-13 13:05:00', 24.75), ('2025-07-31 14:50:00', -50.0), ('2026-11-05 17:05:00', -50.0), ('2026-11-08 17:05:00', 80.0), ('2026-11-08 17:45:00', -50.0), ('2026-11-08 18:05:00', 80.0), ('2026-11-08 18:30:00', -50.0)]
+   differing matched trades by MC exit: {'1144 fine LX': 188, '1144 TP': 26, '1144 SL': 21, '1144 sic LX': 4, '1144 SL0': 4, '1144 TP0': 3} | MC - Python points on them: 731.2
+
+ Ricochet target 80 (session = next day for 17:00+ entries): MultiCharts 2233 trades from 2018, Python 2242; matched (same day, side, order) 2225 = 99.6% of MC / 99.2% of Python
+   matched P&L points: corr 0.948; identical (|diff| <= 0.25) 88.9%; sum MC 10,844 vs Python 9,820 points
+   MC trades after our costs: $81 a trade (t 3.09), total $181,246 | 2018-22 $97 (t 2.7) | 2023+ $63 (t 1.6)
+   MC by year $: {2018: -3367, 2019: 7316, 2020: 39063, 2021: 36122, 2022: 34476, 2023: 10948, 2024: 33801, 2025: 25888, 2026: -3000}
+   Python after costs: $81 a trade, total $181,020
+   Ricochet exit signals in MC: {'1144 SL': 1126, '1144 TP': 806, '1144 fine LX': 189, '1144 SL0': 75, '1144 TP0': 33, '1144 sic LX': 4}

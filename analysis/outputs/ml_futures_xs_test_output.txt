@@ -1,0 +1,57 @@
+[provenance] code 66dd050 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Waldow, Schnaubelt, Krauss & Fischer (2021) 'Machine Learning in Futures Markets' (JRFM 14:119; papers/jrfm-14-00119.pdf),
+   sanity: 5 trade returns beyond +-25% (data errors if any)
+
+   days 2017-12-01 .. 2026-10-13 (2285); median round-trip cost bp: 6E 1.2, BTC 2.6, CL 3.7, ES 1.3, GC 1.2, NG 8.4, NQ 0.6, YM 0.8, ZN 3.0
+   period train 2018-11-07..2021-10-05 (6163 rows) -> trade 2021-10-07..2022-09-23
+   period train 2019-10-29..2022-09-22 (6398 rows) -> trade 2022-09-26..2023-09-13
+   period train 2020-10-16..2023-09-12 (6562 rows) -> trade 2023-09-14..2024-09-02
+   period train 2021-10-07..2024-08-30 (6540 rows) -> trade 2024-09-03..2025-08-21
+   period train 2022-09-26..2025-08-20 (6221 rows) -> trade 2025-08-22..2026-08-11
+   period train 2023-09-14..2026-08-10 (5817 rows) -> trade 2026-08-12..2026-10-13
+
+== k = 1, h = 1, out-of-sample days 2021-10-07 .. 2026-10-13 (bp a day of the long-short book)
+   LR                         n 1286 | gross  +2.9 bp t  0.5 | net  -1.0 bp t -0.2 Sharpe -0.08 | long  +8.6 short  -2.9 | 18-22  +6.2 (t  0.4) 23+  -3.4 (t -0.6)
+      by year (net bp): 21:-13.1 22:+10.8 23:-11.3 24: +6.2 25: +3.4 26:-13.8
+   RF                         n 1286 | gross +13.4 bp t  3.1 | net +10.2 bp t  2.3 Sharpe  1.04 | long +17.5 short  +9.3 | 18-22 +23.9 (t  2.3) 23+  +5.7 (t  1.2)
+      by year (net bp): 21: -2.3 22:+30.1 23: +1.4 24: +3.2 25: +4.6 26:+15.9
+   GBC                        n 1286 | gross +14.7 bp t  3.1 | net +11.5 bp t  2.4 Sharpe  1.05 | long +22.4 short  +7.1 | 18-22  -0.3 (t -0.0) 23+ +15.3 (t  2.9)
+      by year (net bp): 21:-38.6 22: +8.8 23: +1.7 24:+22.1 25: +9.9 26:+30.8
+   A1 reversal raw (same days) n 1294 | gross  +1.8 bp t  0.3 | net  -2.7 bp t -0.4 Sharpe -0.20 | long  +2.7 short  +1.0 | 18-22  +7.1 (t  0.5) 23+  -5.9 (t -0.9)
+      by year (net bp): 21: +2.8 22: +8.1 23:-15.0 24:-12.1 25: +4.5 26: +0.7
+   A2 reversal / sd20 (same days) n 1294 | gross  -0.5 bp t -0.1 | net  -3.6 bp t -0.8 Sharpe -0.36 | long  -1.2 short  +0.2 | 18-22  +7.4 (t  0.7) 23+  -7.2 (t -1.5)
+      by year (net bp): 21:+10.1 22: +6.7 23:-15.5 24:-13.2 25: +0.7 26: +0.9
+   MKT (long all, net)        n 1295 | net  +1.5 bp t  0.7
+
+== Model-free rules, whole sample 2018-2026 (thresholds none, nothing fitted)
+   A1 reversal raw            n 2264 | gross  -3.4 bp t -0.8 | net  -8.2 bp t -1.9 Sharpe -0.63 | long  +1.0 short  -7.9 | 18-22 -10.0 (t -1.7) 23+  -5.9 (t -0.9)
+      by year (net bp): 18: +9.2 19:-24.5 20:-32.6 21:-10.3 22: +8.1 23:-15.0 24:-12.1 25: +4.5 26: +0.7
+   A2 reversal / sd20         n 2264 | gross  -1.3 bp t -0.4 | net  -4.6 bp t -1.4 Sharpe -0.48 | long  -0.1 short  -2.5 | 18-22  -2.6 (t -0.6) 23+  -7.2 (t -1.5)
+      by year (net bp): 18: -4.0 19: -1.2 20:-21.8 21: +7.2 22: +6.7 23:-15.5 24:-13.2 25: +0.7 26: +0.9
+
+== Placebo: random top / flop picks on the same days (1000 draws), net bp a day
+   LR                         net  -1.0 bp vs random p50  -2.4, p95  +3.5: rank 65.4%
+   RF                         net +10.2 bp vs random p50  -2.4, p95  +3.5: rank 100.0%
+   GBC                        net +11.5 bp vs random p50  -2.4, p95  +3.5: rank 100.0%
+   A1 reversal raw            net  -2.7 bp vs random p50  -2.4, p95  +3.5: rank 47.9%
+   A2 reversal / sd20         net  -3.6 bp vs random p50  -2.4, p95  +3.5: rank 37.9%
+
+== Which markets the best model picks (share of days)
+   RF: long CL 24%, NG 24%, BTC 17%, NQ 13%, GC 12%, ES 4%, YM 4%, ZN 1%, 6E 1% | short ZN 36%, 6E 32%, GC 9%, ES 8%, YM 7%, NQ 4%, CL 2%, BTC 1%, NG 1%
+   A2 reversal / sd20: long ZN 17%, NG 16%, CL 15%, 6E 13%, BTC 12%, GC 9%, YM 8%, NQ 6%, ES 2% | short CL 16%, NG 15%, GC 13%, ZN 12%, BTC 11%, 6E 11%, NQ 10%, YM 8%, ES 4%
+
+== Control added after the first look (disclosed): is the ML edge a volatility tilt? (long the highest 20-day sd, short the lowest)
+   V long hi-vol / short lo-vol (same days) n 1294 | gross  +3.6 bp t  0.7 | net  -1.6 bp t -0.3 Sharpe -0.13 | long  +6.0 short  +1.2 | 18-22  -3.4 (t -0.3) 23+  -1.1 (t -0.2)
+      by year (net bp): 21:-19.0 22: +0.4 23: -7.1 24: +5.2 25: -6.8 26: +6.1
+   V long hi-vol / short lo-vol 2018-26 n 2264 | gross +10.8 bp t  2.6 | net  +5.8 bp t  1.4 Sharpe  0.47 | long +21.0 short  +0.5 | 18-22 +10.9 (t  1.9) 23+  -1.1 (t -0.2)
+      by year (net bp): 18: +4.3 19: +5.3 20:+33.0 21:+11.6 22: +0.4 23: -7.1 24: +5.2 25: -6.8 26: +6.1
+   V reverse (long lo-vol) (same days) n 1294 | gross  -3.6 bp t -0.7 | net  -8.8 bp t -1.6 Sharpe -0.71 | long  -1.2 short  -6.0 | 18-22  -3.8 (t -0.3) 23+ -10.4 (t -1.7)
+      by year (net bp): 21:+11.8 22: -7.5 23: -6.1 24:-18.1 25: -5.0 26:-12.9
+   V reverse (long lo-vol) 2018-26 n 2264 | gross -10.8 bp t -2.6 | net -15.8 bp t -3.8 Sharpe -1.28 | long  -0.5 short -21.0 | 18-22 -19.8 (t -3.5) 23+ -10.4 (t -1.7)
+      by year (net bp): 18:-13.2 19:-15.2 20:-45.7 21:-17.4 22: -7.5 23: -6.1 24:-18.1 25: -5.0 26:-12.9
+
+== Risk-scaled version of the models (each leg divided by its market's 20-day sd, x the median sd): vol tilt removed
+   RF risk-scaled             n 1286 | gross  +5.7 bp t  2.9 | net  +2.4 bp t  1.2 Sharpe  0.55 | long  +4.5 short  +0.3 | 18-22  +8.0 (t  2.2) 23+  +0.6 (t  0.2)
+      by year (net bp): 21: +1.7 22: +9.5 23: -4.0 24: +2.2 25: -0.6 26: +5.6
+   GBC risk-scaled            n 1286 | gross  +6.1 bp t  3.1 | net  +3.6 bp t  1.8 Sharpe  0.81 | long  +6.1 short  +1.1 | 18-22  +2.2 (t  0.5) 23+  +4.0 (t  1.8)
+      by year (net bp): 21:-14.8 22: +6.2 23: -3.1 24: +7.2 25: +4.0 26: +9.2

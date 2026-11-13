@@ -41,7 +41,9 @@ B,"The Bridge's Overnight Bias ORB (close beyond the 8:30–8:45 range, ADX(16) 
 B,Combine add-ons: Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ on top of VB 8 + ONB ADX30,20,
 B,"ES MOC auction follow: after a ≥ 0.3 ATR 14:00 → 14:50 CT move, follow 14:51 → 15:00, stop 0.25 ATR (round 1, analysis/s_rank_es_round1_test",1,3.5
 B,"Twin Continuation on an Apex 150K account ($9,000 target, $4,000 EOD drawdown, $2,000 DLL; 6 payouts ≈ $20,500, ladder assumed; analysis/twi",1,
+B,"Bridge noise-area NQ 15-min (user's paste 2026-11-03, the Bridge's code; Zarattini / Aziz / Barbon; port analysis/bridge_noise_15m_test.py, ",1,4.9
 C,"NQ Overnight Rebound (user's file via Codex, 2026-10-25; agents/codex/results/overnight_rebound.md on codex/work): long 17:02 → 03:01 CT aft",1,2.59
+C,"RollZone 24h NQ Long v1 (user upload 2026-10-31, PowerLanguage + research note; Zarattini-Aziz-Barbon 'noise area' on the 24h Globex session",2,2.46
 C,"Nocturne, NQ overnight long with an R^2 filter (L. Franceschetti research note, user upload 2026-10-30; Blose-Gondhalekar-Kort 2018 gold ove",1,2.56
 C,"VIX term-structure sleeve (Predicting Alpha 'North Star' VIX rules) (user's PDF 'VIX_Strategy_Replication_1', 2026-10-25; checks/candidates/",1,
 C,"VWAP Drift Continuation, MNQ (user's PowerLanguage file + write-up, 2026-10-25; checks/candidates/vwap_drift/, rebuild analysis/vwap_drift_t",1,3.8
@@ -81,6 +83,9 @@ C,"YM MOC auction follow (≥ 0.3 ATR, stop 0.25)",1,3.4
 C,"YM post-settlement fade (fade a ≥ 0.2 ATR 14:00 → 15:00 move, 15:01 → 15:15)",77,2.6
 C,BTC CME weekend-gap continuation (follow the Sunday gap ≥ 0.5 ATR),1,4.6
 C,"Overnight Bias ML (funded v2) at $1,100 in the combine instead of ONB ADX30 (analysis/combine_swap_test.py)",1,
+C,"Ricochet 1144 (user upload 2026-11-04, author L. Franceschetti; Hu, Jin, Wang 2025 SSRN 5314371; code + note checks/candidates/ricochet_1144",1,3.08
+C,"Bitcoin weekend beta -> ES / NQ Sunday open (user's clip 2026-11-05: 'alpha 0, beta 0.4'; analysis/btc_weekend_beta_test.py; on-chain S&P pe",1,-2.9
+D,"GC USA -> Asia night continuation (user upload 2026-11-01, Gold_USA_Asia_Continuation v4 + MC report; paper Wei 2026 'Who Moves the Price?',",1,1.28
 D,"Hourly 2-bar CHoCH 1:2 'foundation' (Codex's frozen engine, user request 2026-10-29 to make it plan-ready; pre-registered round checks/candi",5,1.19
 D,"Heterogeneity in Overnight-versus-Intraday Stock-Return Behavior with Asymmetric Information and 52-week Price Anchoring (Chen, Stivers & Su",1,0.2
 D,"Abnormal volume on gold (Bajo, SSRN 675587): user's AbnormalVolumeStrategy + v1 / v2 + slides (2026-10-24; analysis/abnormal_volume_gc_test.",1,-0.9
@@ -164,6 +169,9 @@ F,"'T5 NQ' v2: EMA-5 trend signal gated by a rolling 60-bar t-stat (user's ib_in
 F,"'Trend-5' (T5) EMA-5 + ADX-14 bot (user's ib_insync script for ES on IB, 2026-10-30; test analysis/t5_ema_adx_test.py; 3 variants)",3,-0.3
 F,"'Setup Generator' stock setups (user screenshot 2026-10-30: the two best setups by profit on one day, 10/23, 13 and 6 stock trades), moved t",1,-0.36
 F,"'How Quant Desks Build Market Regime-Adaptive Strategies With AI' (X article by @RitOnchain, 2026-10-27; user link 2026-10-30; no test)",1,
+F,'Claude Code/Codex + Seedance AI video: idea to finished film' (Chinese article by Eian; user paste 2026-11-05; no test),1,
+F,'How to Turn Your AI Into a Hedge-Fund Trading System' (QuantGPT promo article + 5 screenshots; user paste 2026-11-05; site not checked),1,
+F,"Daily Mean Reversion in Global Equity Indices (Bertola 2026, SSRN 7663278; user upload 2026-11-08; papers/ssrn-7663278.pdf; analysis/daily_r",1,0.3
 F,"The Overnight Drift (Boyarchenko, Larsen & Whelan, NY Fed SR 917 / RFS 2023) + their 2026 Liberty Street post 'The Disappearing Overnight Dr",6,1.6
 F,"Does Overnight News Explain Overnight Returns? (Glasserman, Krstovski, Laliberte & Mamaysky 2025, arXiv 2507.04481; scout 2026-10-30; papers",1,
 F,"Natenberg, Option Volatility & Pricing Workbook (McGraw Hill 2018; user upload 2026-10-30, book not committed)",1,
@@ -194,6 +202,14 @@ F,"Codex: Late-Day Flow sized by leveraged-ETF dollar flow (2026-10-22, codex/wo
 F,"Codex: FOMC minutes reaction continuation (2026-10-22, codex/work 2c4f5f8, pre-registered agents/codex/plans/fomc_minutes_screen.md, design ",1,0.14
 F,"Codex: Shanghai gold delivery-deadline continuation (2026-10-22, codex/work 5ca37fb, pre-registered agents/codex/plans/sge_delivery_screen.m",1,-6.4
 F,"Codex: London FX-fix reversal on 6E (2026-10-22, codex/work 15369ae, pre-registered agents/codex/plans/fx_fix_reversal.md; analysis/codex_fx",2,-6.3
+F,"Lab Q003: 6E into / out of the 4 pm London fix (10:00 CT, 11:00 in DST-mismatch weeks): follow the fix−30 → fix−5 move to the fix (month-end",1,0.85
+F,"Lab Q010: 6E month-end hedge rebalancing (Melvin & Prins 2015), side = sign of ES month-to-date at 08:30 CT: 08:30 → fix, fix−30 → fix, or t",1,0.17
+F,"Lab Q012: 6E after the ECB decision / press conference (decision 13:45 Berlin before 2022-07, 14:15 after; days from the 6E volume spike): f",1,0.4
+F,"Lab Q016: pre-release drift (Kurov, Sancetta, Strasser & Wolfe, JFQA 2019): follow the 08:35 → 08:58 move from 08:59 to 09:10 / 09:30 on ISM",1,0.76
+F,"Lab Q013: 6E after US payrolls: follow / fade the 07:30 → 07:45 move from 07:46 to 09:55 CT (all / ≥ 0.3 ATR), stop 0.3 ATR; NFP days from t",1,-0.2
+F,"Lab Q014: GC while the Shanghai Gold Exchange is closed (Spring Festival, National Day; data/sge_holidays.csv): short 07:20 → 12:25 CT on cl",1,-0.85
+F,"Lab Q017: MOM-TOM (Van Hemert 2014): trade each market's 63- / 252-day trend direction on the 3 turn-of-month sessions, open → 13:25 CT, sto",1,-1.1
+F,"Lab Q021: NG Sunday up-gap fade = the plan's CL rule unchanged (short the 17:05 open when the reopen gap ≥ +0.1 ATR(15), stop 0.75 ATR, out ",1,-1.3
 F,"Antigravity's NQRelWeaknessShort (2026-10-20, antigravity/jesse strategies/NQRelWeaknessShort, its report 'A+': 367 trades, $398 per NQ, 70%",1,5.41
 F,"Antigravity's NQIntradayMR (2026-10-20, antigravity/jesse strategies/NQIntradayMR, its own report): 15-min fade of an 8-bar low / high on be",1,1.34
 F,"Antigravity's NQBreakoutATR (built from the catalog's blocks, 2026-10-20, antigravity/jesse strategies/NQBreakoutATR; rebuild analysis/anti_",1,1.5
@@ -279,6 +295,8 @@ F,"Cross-asset lead-lag and morning decoupling (NQ vs ES, YM, gold, oil, bitcoin
 F,"Cross-asset overnight signals (gold, oil, bitcoin overnight z-scores; risk-off = gold − oil) as filters on NQ's day and the plan",25,2.0
 F,"The plan's strategies on CL and GC (Python versions, prices rescaled to the code's tick, point targets by range ratio)",1,1.1
 F,"CL forced flows: EIA report (pre-release drift, follow / fade the first 5 minutes), settlement 13:30 CT (follow / fade into and after it), e",1,0.9
+F,"Lab Q007: NG EIA storage report (Thu 09:30 CT; release day found from the 09:31 volume spike, 15.6× normal), fade / follow a ≥ 0.15 ATR 09:3",1,-1.5
+F,Lab Q009: NG drift 08:00 → 09:29 CT before the EIA storage report (release day from the 09:31 volume spike; long / short / follow the overni,1,0.36
 F,"Gold Asian-range breakout ported to NQ / ES (user's file): range 20:00–00:00 CT, OCO stops at the edges, stop 1× range, no target, out 10:00",1,-1.9
 F,"Volatility targeting (Harvey, Hoyle et al. 2018, SSRN 3175538): size the plan's fixed-MNQ strategies (or all) by 1 / recent NQ vol",1,
 F,"Abnormal trading volume (Bajo 2010, SSRN 675587): follow the move the day after a volume spike",1,-1.7

@@ -1,0 +1,22 @@
+[provenance] code 0aff683c dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Book test of the four capital-bench leads (user 2026-11-08). PRE-REGISTERED (header committed before the run; 4 variants, all POST HOC
+   S30 NQ trades (all years): IBS < 0.2 259, IBS < 0.1 172
+   base 2018-26: median $28,467  DD p95 $4,903  ret/DD 5.81
+   base 2018-22: median $21,572  DD p95 $3,730  ret/DD 5.78
+   base 2023+: median $37,887  DD p95 $5,795  ret/DD 6.54
+
+S30 IBS (NQ):
+   bench IBS < 0.20     2018-26 ret/DD 5.80 (-0.00) | 2018-22 ret/DD 5.27 (-0.51) | 2023+ ret/DD 6.89 (+0.36) | 2018-26 median +3,559, DD +616, capital +3,081
+   lead IBS < 0.10      2018-26 ret/DD 6.61 (+0.80) | 2018-22 ret/DD 5.94 (+0.16) | 2023+ ret/DD 7.84 (+1.30) | 2018-26 median +4,302, DD +58, capital +289 -> PLAN CANDIDATE
+
+FVB:
+   bench both sides     2018-26 ret/DD 5.66 (-0.15) | 2018-22 ret/DD 5.53 (-0.25) | 2023+ ret/DD 6.18 (-0.36) | 2018-26 median +4,221, DD +872, capital +4,362
+   lead shorts only     2018-26 ret/DD 6.12 (+0.31) | 2018-22 ret/DD 5.55 (-0.23) | 2023+ ret/DD 6.93 (+0.40) | 2018-26 median +2,949, DD +231, capital +1,154
+
+S03 Noise Area v2:
+   bench both sides     2018-26 ret/DD 5.46 (-0.35) | 2018-22 ret/DD 5.84 (+0.05) | 2023+ ret/DD 5.99 (-0.55) | 2018-26 median +2,937, DD +848, capital +4,242
+   lead longs only      2018-26 ret/DD 5.77 (-0.03) | 2018-22 ret/DD 5.69 (-0.09) | 2023+ ret/DD 6.56 (+0.02) | 2018-26 median +1,805, DD +342, capital +1,710
+
+Anson momentum:
+   bench both sides     2018-26 ret/DD 5.17 (-0.64) | 2018-22 ret/DD 4.68 (-1.10) | 2023+ ret/DD 5.90 (-0.64) | 2018-26 median +2,085, DD +1,009, capital +5,045
+   lead longs only      2018-26 ret/DD 5.49 (-0.31) | 2018-22 ret/DD 5.82 (+0.04) | 2023+ ret/DD 6.16 (-0.37) | 2018-26 median +1,214, DD +501, capital +2,507

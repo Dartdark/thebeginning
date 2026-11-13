@@ -39,3 +39,19 @@ broker's, or a NEW rejected order appears in MultiCharts' logs (Symbol Mapping h
 problem (every new rejection alerts). One-time: install **ntfy** on the phone and subscribe to topic
 `apex-alarm-6e531eb6db8e` (keep the name private: anyone with it can read the alerts). Alerts also land in
 `C:\TradingLogs\alerts.txt`, in `live/health/` and in the journal's Health section.
+
+## One helper per chart: Apex Chart Guard (2026-11-09)
+
+`apex_strategies/Apex_Chart_Guard.txt` replaces the four helper signals (Apex Trade Logger, Apex Chart Monitor, Apex Target
+Guard v1 / v2, Apex Stop Guard). Each live chart carries two signals: the strategy and the guard. It writes the same OPEN /
+CLOSE / POS / ACCT rows to the same daily file, so this folder's scripts and the 16:40 check read it unchanged. Setup in
+`live/AUTO_TRADING_SETUP.md` section 2 step 4.
+
+## FINRA short-volume signal (automatic, 2026-11-09)
+
+`finra_daily.ps1`, task `FinraDaily` (weekdays 18:00-21:00 CT hourly; installed by `push_trade_logs.ps1` on its next run,
+nothing to set up): downloads FINRA's daily short-volume file, computes the signal (same math as `analysis/finra_longs_test.py`:
+checked to give the same 388 signal dates on the repo data) and writes `C:\TradingLogs\finra\SIG_<date>` when it fires. The
+personal-account FINRA chart (`checks/candidates/finra_longs/NQ_FINRA_Short_Volume_Longs.txt`, input `UseFlagFiles` true)
+reads the flag at the 08:30 bar. Log: `C:\TradingLogs\finra\signals.csv`, copied to `live/finra/` by the 16:10 push. No
+phone alerts; a missing day shows as MISSING in the log (Friday review).
