@@ -1,0 +1,15 @@
+[provenance] code cbdedf6 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Size COMBINATION search on the live #5 evaluation book (user 2026-11-12 'search combinations').
+[bench150] eval base (live): ONB30 $3500 risk, MON_BR 5, TWIN 2, DT 2, JF 1, NBL 3, LDF $1000 risk
+engine check (every 7th start): numba 0.3563 vs plan_150k_test 0.3563
+LIVE {'ONB30': 3500, 'MON_BR': 5, 'TWIN': 2, 'DT': 2, 'JF': 1, 'NBL': 3, 'LDF': 1000}: fresh 2018-22 33.9%, 2023+ 43.0%, all 37.7% | from #5 now 22.5%
+Our live #5 book (bench150.LIVE_EVAL) under FTMO 2-Step rules vs the Apex 150K evaluation (user upload 2026-11-13: the Bridge's
+book {'ONB30': 3500, 'MON_BR': 5, 'TWIN': 2, 'DT': 2, 'JF': 1, 'NBL': 3, 'LDF': 1000}
+Apex 150K evaluation (21 days, EOD trail $4,000): pass 38.2%  (2018-22 33.9%, 2023+ 45.1%)
+FTMO 100K, live sizes    pass 54.2% fail 45.8% still going  0.0% | median trading days to pass 25 | 2018-22 56.3% 2023+ 50.5%
+FTMO 100K, sizes x0.67   pass 76.9% fail 21.7% still going  1.4% | median trading days to pass 48 | 2018-22 77.2% 2023+ 76.5%
+FTMO 100K, sizes x1.33   pass 23.9% fail 76.1% still going  0.0% | median trading days to pass 15 | 2018-22 22.5% 2023+ 26.3%
+FTMO 200K, live sizes    pass 85.1% fail  9.9% still going  5.0% | median trading days to pass 68 | 2018-22 79.1% 2023+ 95.5%
+FTMO 200K, sizes x1.5    pass 73.0% fail 26.5% still going  0.5% | median trading days to pass 40 | 2018-22 74.5% 2023+ 70.5%
+FTMO 100K live sizes, phase 1 failures by cause: daily 5% loss 6.2% of starts, 10% floor 18.5%
+worst single day of the book (intraday low): $-8,211; days with an intraday low below -$5,000: 9 of 2282
