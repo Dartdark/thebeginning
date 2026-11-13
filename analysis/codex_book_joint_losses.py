@@ -337,9 +337,9 @@ def market_audit(g,daily):
         d=tab.loc[mask];tail=d.nsmallest(int(np.ceil(len(d)*.05)),'BOOK')
         for label,sub in [('all',d),('tail5',tail)]:
             summaries.append(dict(period=per,sample=label,days=len(sub),
-                                  rth_down_fraction=float((sub.rth_points<0).mean()),
-                                  first_hour_down_fraction=float((sub.first_hour_points<0).mean()),
-                                  gap_down_fraction=float((sub.gap_points<0).mean()),
+                                  rth_down_fraction=float((sub.rth_points.dropna()<0).mean()),
+                                  first_hour_down_fraction=float((sub.first_hour_points.dropna()<0).mean()),
+                                  gap_down_fraction=float((sub.gap_points.dropna()<0).mean()),
                                   median_range_atr=float(sub.range_over_atr.median()),
                                   median_abs_rth=float(sub.rth_points.abs().median())))
     pd.DataFrame(summaries).to_csv(OUT/'market_context.csv',index=False)
