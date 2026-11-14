@@ -1,0 +1,12 @@
+[provenance] code f2c685a2 dirty | data 
+Standing rule (user 2026-11-10): EVERY new strategy the user sends, good or bad on its own, goes against ALL the data to look for a
+   cl_meanrev_V1: 74 trade days, $226 a day, t 1.60 (2018-22 $347, 2023+ $58); 44 regimes, gap bar |t| >= 3.05
+      VVIX                      above_median  keep off gap t -2.48 | subset n 35 $583 t 2.97 (488 / 820)
+      VIX9D/VIX                 above_median  keep on  gap t  2.22 | subset n 32 $550 t 4.22 (676 / 311)
+      FINRA short ratio         above_median  keep on  gap t  2.06 | subset n 31 $612 t 3.33 (732 / 500)
+      TNX 10y yield             z_high        keep on  gap t  1.96 | subset n 23 $637 t 2.49 (512 / 733)
+      SKEW                      above_median  keep off gap t -1.60 | subset n 34 $473 t 2.05 (622 / 198)
+      TNX-IRX curve             above_median  keep on  gap t  1.56 | subset n 38 $438 t 2.11 (523 / 362)
+      HYG/LQD credit            z_high        keep on  gap t  1.56 | subset n 22 $579 t 2.08 (396 / 706)
+      RRP                       rising        keep on  gap t  1.56 | subset n 35 $456 t 2.22 (519 / 274)
+   BEST VERSION: VXN-VIX rising keep off: t 1.60 -> 2.68; fair placebo (best of 44 random splits): median 3.17, 95th 4.07 -> p 0.880 (luck explains it)
