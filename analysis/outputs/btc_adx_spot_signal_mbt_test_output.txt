@@ -1,0 +1,38 @@
+[provenance] code 935ee4c6 dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+BTC ADX ensemble: SPOT signals, MBT execution (user 2026-11-13 'let's test this'). The books run exactly as in
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+spot book trades in the futures window (2018-12-17 -> 2026-10-13): 733, spot mean +0.256R
+
+MIRROR: spot signals, every fill on MBT at the same or next available 15m close
+  675 book trades, win 41.0%, $18.1 per MBT a trade, PF 1.52, t 3.55 (daily t 2.95), $1,568 a year, max DD $-1,815, worst trade $-393 (-3.3R), worst day $-520; stop $ per MBT median 80 (2025+ 159)
+  R: mean +0.173 (t 3.67) vs the same trades on spot +0.301 | 2019-22 +0.166 (t 2.40) | 2023+ +0.180 (t 2.80)
+  longs: n 328 $22.1 R +0.299 t 4.24 | 2023+ R +0.339 t 3.38
+  shorts: n 347 $14.4 R +0.054 t 0.87 | 2023+ R +0.018 t 0.23
+  book ADX>40: n 461 R +0.139 t 2.44 | 2023+ +0.133 t 1.71
+  book ADX>50: n 214 R +0.248 t 2.93 | 2023+ +0.278 t 2.46
+  by year $: 2018 -23 (2)  2019 +364 (99)  2020 +520 (102)  2021 +3,270 (51)  2022 +1,103 (80)  2023 +876 (103)  2024 +1,640 (96)  2025 +1,757 (82)  2026 +2,729 (60)
+  entered late (CME closed at the signal): 15% of trades, R +0.177 vs on time +0.172; exited late: 15%, R +0.519 vs on time +0.114
+  losses worse than -1.5R: 19 (worst five R: [-3.32, -3.11, -2.95, -2.65, -2.13])
+
+  only books whose entry signal came while CME was open
+  573 book trades, win 39.8%, $16.6 per MBT a trade, PF 1.48, t 3.01 (daily t 2.57), $1,221 a year, max DD $-1,899, worst trade $-393 (-3.3R), worst day $-520; stop $ per MBT median 79 (2025+ 157)
+  R: mean +0.172 (t 3.33) vs the same trades on spot +0.257 | 2019-22 +0.147 (t 1.90) | 2023+ +0.197 (t 2.84)
+  longs: n 275 $22.2 R +0.292 t 3.71 | 2023+ R +0.372 t 3.40
+  shorts: n 298 $11.5 R +0.062 t 0.92 | 2023+ R +0.019 t 0.24
+  book ADX>40: n 395 R +0.139 t 2.25 | 2023+ +0.145 t 1.75
+  book ADX>50: n 178 R +0.247 t 2.60 | 2023+ +0.310 t 2.48
+  by year $: 2018 -21 (1)  2019 +125 (79)  2020 +489 (88)  2021 +2,769 (38)  2022 +769 (73)  2023 +837 (90)  2024 +1,243 (83)  2025 +773 (69)  2026 +2,541 (52)
+  entered late (CME closed at the signal): 0% of trades, R +nan vs on time +0.172; exited late: 15%, R +0.507 vs on time +0.112
+  losses worse than -1.5R: 16 (worst five R: [-3.32, -2.65, -2.13, -2.12, -1.98])
+
+  every fill one 15m candle late (execution lag)
+  675 book trades, win 41.8%, $16.9 per MBT a trade, PF 1.47, t 3.28 (daily t 2.69), $1,466 a year, max DD $-1,771, worst trade $-429 (-3.4R), worst day $-671; stop $ per MBT median 80 (2025+ 159)
+  R: mean +0.165 (t 3.42) vs the same trades on spot +0.301 | 2019-22 +0.175 (t 2.41) | 2023+ +0.155 (t 2.43)
+  longs: n 328 $23.1 R +0.320 t 4.37 | 2023+ R +0.317 t 3.17
+  shorts: n 347 $11.2 R +0.017 t 0.28 | 2023+ R -0.010 t -0.13
+  book ADX>40: n 461 R +0.134 t 2.33 | 2023+ +0.123 t 1.58
+  book ADX>50: n 214 R +0.229 t 2.65 | 2023+ +0.223 t 2.01
+  by year $: 2018 -30 (2)  2019 +310 (99)  2020 +675 (102)  2021 +3,361 (51)  2022 +864 (80)  2023 +540 (103)  2024 +1,054 (96)  2025 +2,271 (82)  2026 +2,391 (60)
+  entered late (CME closed at the signal): 100% of trades, R +0.165 vs on time +nan; exited late: 100%, R +0.165 vs on time +nan
+  losses worse than -1.5R: 31 (worst five R: [-3.45, -3.28, -3.06, -2.91, -2.41])

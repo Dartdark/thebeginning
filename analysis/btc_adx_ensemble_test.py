@@ -111,7 +111,7 @@ def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=No
         k = b[i]; s = k["s"]; r = s * (px - k["e"]) / k["e"]
         cs = COST if cost_pts is None else cost_pts / k["e"]
         pnl = k["q"] * r + (0.5 * k["pr"] if k["half"] else 0.0) - cs * (1 + k["q"]) - (cs * 0.5 if k["half"] else 0.0)
-        out.append((k["t"], t, s, books[i], pnl, k["R"], why, k["e"])); b[i] = None
+        out.append((k["t"], t, s, books[i], pnl, k["R"], why, k["e"], k.get("th", np.datetime64("NaT")))); b[i] = None
     for j in range(len(T)):
         t, h, l, c = T[j], Hh[j], Ll[j], Cc[j]
         he = (pd.Timestamp(t).minute == 45)
@@ -132,7 +132,7 @@ def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=No
             if (s == 1 and l <= k["stop"]) or (s == -1 and h >= k["stop"]): close_book(i, c, t, "stop"); continue
             if (s == 1 and h >= k["tp"]) or (s == -1 and l <= k["tp"]): close_book(i, c, t, "tp"); continue
             if not k["half"] and ((s == 1 and h >= k["pt"]) or (s == -1 and l <= k["pt"])):
-                k["half"] = True; k["pr"] = s * (c - k["e"]) / k["e"]; k["q"] = 0.5
+                k["half"] = True; k["pr"] = s * (c - k["e"]) / k["e"]; k["q"] = 0.5; k["th"] = t
             if (t - k["t"]) >= 240 * hour or (he and lt == -s): close_book(i, c, t, "time" if lt != -s else "ema"); continue
             if flat is not None and flat[j]: close_book(i, c, t, "flat")
         if not he or (noent is not None and noent[j]): continue
@@ -156,7 +156,7 @@ def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=No
                 R = 2.5 * atr / c
                 b[i] = {"s": side, "e": c, "stop": c - side * 2.5 * atr, "pt": c + side * 1.5 * atr, "tp": c + side * 8 * atr,
                         "half": False, "q": 1.0, "pr": 0.0, "t": t, "R": R}
-    d = pd.DataFrame(out, columns=["t", "tx", "side", "book", "ret", "R", "why", "e"])
+    d = pd.DataFrame(out, columns=["t", "tx", "side", "book", "ret", "R", "why", "e", "th"])
     d["r"] = d.ret / d.R; d["yr"] = pd.DatetimeIndex(d.t).year
     return d
 
