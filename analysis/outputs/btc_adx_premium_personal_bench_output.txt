@@ -1,0 +1,29 @@
+[provenance] code edf04a08 dirty | data 
+CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+BTC ADX PREMIUM (6 ADX books 40-50) vs the plan's FREE version (2 books 40 / 50, 1 MBT a book) in the PERSONAL book
+FREE: 328 long book trades on MBT, $6,414 per MBT a book in total, $821 a year per MBT a book
+PREMIUM: 960 long book trades on MBT, $22,834 per MBT a book in total, $2,923 a year per MBT a book
+
+2019-26: variant                                  $ a year p50   DD p95  ret/DD  vs plan  seeds better  backtest $/yr / max DD
+        base (no BTC)                           $     36,230 $  5,152    7.03    -0.14 0/5                 6.69
+        PLAN: + FREE 1 MBT a book (max 2)       $     37,016 $  5,160    7.17    +0.00 0/5                 6.82
+        + PREMIUM 1/3 MBT a book (max 2, ref)   $     37,178 $  5,134    7.24    +0.07 5/5                 7.00
+        + PREMIUM 1/2 MBT a book (max 3, ref)   $     37,653 $  5,269    7.15    -0.03 1/5                 7.16
+        + PREMIUM 1 MBT a book (max 6)          $     39,124 $  6,074    6.44    -0.73 0/5                 6.60
+
+2019-22: variant                                  $ a year p50   DD p95  ret/DD  vs plan  seeds better  backtest $/yr / max DD
+        base (no BTC)                           $     27,666 $  4,126    6.71    -0.13 0/5                 8.60
+        PLAN: + FREE 1 MBT a book (max 2)       $     27,925 $  4,084    6.84    +0.00 0/5                 8.68
+        + PREMIUM 1/3 MBT a book (max 2, ref)   $     28,039 $  4,079    6.88    +0.04 5/5                 8.72
+        + PREMIUM 1/2 MBT a book (max 3, ref)   $     28,228 $  4,071    6.93    +0.09 5/5                 8.78
+        + PREMIUM 1 MBT a book (max 6)          $     28,819 $  4,154    6.94    +0.10 4/5                 8.95
+
+2023+: variant                                  $ a year p50   DD p95  ret/DD  vs plan  seeds better  backtest $/yr / max DD
+        base (no BTC)                           $     45,694 $  5,881    7.77    -0.32 0/5                 8.36
+        PLAN: + FREE 1 MBT a book (max 2)       $     47,073 $  5,816    8.10    +0.00 0/5                 8.59
+        + PREMIUM 1/3 MBT a book (max 2, ref)   $     47,197 $  5,774    8.18    +0.08 5/5                 8.81
+        + PREMIUM 1/2 MBT a book (max 3, ref)   $     47,947 $  5,922    8.10    +0.00 2/5                 9.04
+        + PREMIUM 1 MBT a book (max 6)          $     50,368 $  6,791    7.42    -0.68 0/5                 8.43
