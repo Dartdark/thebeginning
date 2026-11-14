@@ -1,0 +1,37 @@
+[provenance] code e316482d dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+BTC ADX ensemble FREE vs PREMIUM (user 2026-11-13: the author's site shows 'BTCAdxEnsemblePremium', no code, described as the free
+
+FREE 2 books 40/50: 773 book trades, mean +0.252R per book trade
+  2018-26               +70.5% a year (not compounded), daily t  4.42, Sharpe 1.54, max DD  -46.2%  (773 book trades)
+  2018-22               +85.8% a year (not compounded), daily t  3.95, Sharpe 1.87, max DD  -46.2%  (413 book trades)
+  2023+                 +52.8% a year (not compounded), daily t  2.24, Sharpe 1.15, max DD  -33.4%  (360 book trades)
+  2024 (site window)    +45.7% a year (not compounded), daily t  0.99, Sharpe 0.99, max DD  -20.2%  (105 book trades)
+  by year %: 2018 +20.9  2019 +170.0  2020 +116.6  2021 +55.2  2022 +21.0  2023 +87.0  2024 +45.4  2025 +38.5  2026 +29.6
+  2024 position trades (merged books): 64; longs 52% of book trades
+  longs: +46.6% a year; 2023+ +45.5% a year
+  shorts: +23.9% a year; 2023+ +7.3% a year
+
+PREMIUM 6 books 40-50: 2272 book trades, mean +0.293R per book trade
+  2018-26               +80.4% a year (not compounded), daily t  5.12, Sharpe 1.78, max DD  -36.3%  (2272 book trades)
+  2018-22               +91.7% a year (not compounded), daily t  4.43, Sharpe 2.09, max DD  -36.3%  (1211 book trades)
+  2023+                 +67.3% a year (not compounded), daily t  2.80, Sharpe 1.44, max DD  -26.0%  (1061 book trades)
+  2024 (site window)    +64.0% a year (not compounded), daily t  1.44, Sharpe 1.45, max DD  -19.7%  (294 book trades)
+  by year %: 2018 +23.3  2019 +159.6  2020 +129.3  2021 +67.8  2022 +30.7  2023 +112.8  2024 +63.6  2025 +23.0  2026 +56.4
+  2024 position trades (merged books): 62; longs 52% of book trades
+  longs: +51.8% a year; 2023+ +53.3% a year
+  shorts: +28.6% a year; 2023+ +14.0% a year
+
+paired, yearly account % premium - free: 2018 +2.4  2019 -10.4  2020 +12.7  2021 +12.6  2022 +9.7  2023 +25.8  2024 +18.2  2025 -15.5  2026 +26.8
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+
+B. LONGS on MBT (spot signals, resting stop), $ per year / max DD / daily t:
+  FREE, 1 MBT a book (max 2 MBT)                   2019-26  $    828 a year, max DD $ -1,406, $/yr / DD 0.59, daily t 2.37
+  FREE, 1 MBT a book (max 2 MBT)                   2019-22  $    270 a year, max DD $   -839, $/yr / DD 0.32, daily t 0.93
+  FREE, 1 MBT a book (max 2 MBT)                   2023+    $  1,425 a year, max DD $ -1,406, $/yr / DD 1.01, daily t 2.18
+  PREMIUM, 1/3 MBT a book (max 2 MBT, equal risk)  2019-26  $    983 a year, max DD $ -1,225, $/yr / DD 0.80, daily t 2.95
+  PREMIUM, 1/3 MBT a book (max 2 MBT, equal risk)  2019-22  $    401 a year, max DD $   -807, $/yr / DD 0.50, daily t 1.22
+  PREMIUM, 1/3 MBT a book (max 2 MBT, equal risk)  2023+    $  1,607 a year, max DD $ -1,225, $/yr / DD 1.31, daily t 2.70
+  PREMIUM, 1 MBT a book (max 6 MBT)                2019-26  $  2,948 a year, max DD $ -3,676, $/yr / DD 0.80, daily t 2.95
+  PREMIUM, 1 MBT a book (max 6 MBT)                2019-22  $  1,203 a year, max DD $ -2,422, $/yr / DD 0.50, daily t 1.22
+  PREMIUM, 1 MBT a book (max 6 MBT)                2023+    $  4,821 a year, max DD $ -3,676, $/yr / DD 1.31, daily t 2.70
