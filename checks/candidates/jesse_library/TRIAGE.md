@@ -76,3 +76,14 @@ The one genuinely different idea for our book is #1 (CL mean reversion).
 Not worth it: Turtle V2 / V3 (parent F), SuperScalper (SuperTrend family F, one bear-market window), MtfKelt2xA (SOL tuned),
 TFAtrExitBreakout (loses on its own site), Slow Trend Following (no stats, no rule), BTCAdxEnsemblePremium (already rebuilt
 from its exact description; at tradeable size it does not beat the plan's free version).
+
+## Premium pages sent by the user (2026-11-13, screenshots; code still locked)
+| Premium | Window shown (calendar) | Stats | Free parent in the same year (our test, sum of trade %) |
+|---|---|---|---|
+| TrendSwingTrader V2 (BTC 4h) | 2022 | +70.8%, 30 trades (7 long / 23 short), win 57%, Sharpe 1.95, DD -10.7% | V1 2022 +21%; V1 shorts lose overall |
+| | 2024 window ('2023 - 2024' filter, read in the page) | +72.4%, 28 trades (24 long), win 61%, Sharpe 2.22, DD -9.2% | V1 2024 +53% |
+| TrendWaveRiderV2 (BTC 15m) | 2024 | +108%, 67 trades (23 long / 44 short), win 75%, Sharpe 2.18, DD -19.6% | free TWR 2024 -4% (V2 is materially different) |
+| AlligatorV2 (BTC 30m) | 2022 | +90%, 37 trades (13 long / 24 short), win 73%, Sharpe 1.77, DD -13.9% | AlligatorAi 2022 +13% |
+| CLMeanReversionPremium (CL perp 30m) | June 2026 | +1.3%, 3 trades | nothing to judge |
+Two of the four shown windows are 2022 (the BTC bear year, carried by shorts). The pages' period filter has every month / quarter /
+year 2021-2026; per-year stats for each premium would show whether the edge holds outside the window the author picked.
