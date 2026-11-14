@@ -1,0 +1,20 @@
+[provenance] code 4c9f5821 dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+BTC ADX ensemble, LONGS ONLY, spot signals -> MBT, with a RESTING STOP on the futures (user 2026-11-13 'yes, test it').
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+books (50,), longs-only signal engine: True
+spot LONG book trades in the futures window: 113, spot mean +0.414R
+
+LONGS, no resting stop (exits follow spot only)
+  per MBT: 98 book trades, win 54.1%, $33.8 a trade, PF 2.27, R +0.390 (t 2.94); 2019-22 +0.227R (t 1.23), 2023+ +0.546R (t 2.88)
+  worst trade -2.12R, losses past -1.2R: 10; exits {'spot': 98}
+  book ADX>50: n 98 R +0.390 t 2.94 | 2023+ t 2.88
+  $25,000 at 1% per R: 98 trades (0 skipped, 1 MBT > 2%), MBT per book median 3, $1,126 a year (4.5%), max DD $-1,222 (-4.9%), longest under water 314 days | 2019 +1,753 2020 +1,354 2021 -195 2022 -183 2023 +2,399 2024 +2,428 2025 +348 2026 +667
+  $50,000 at 1% per R: 98 trades (0 skipped, 1 MBT > 2%), MBT per book median 7, $2,282 a year (4.6%), max DD $-2,439 (-4.9%), longest under water 318 days | 2019 +3,571 2020 +2,921 2021 -371 2022 -632 2023 +4,896 2024 +4,373 2025 +972 2026 +1,644
+
+LONGS, resting stop on MBT at the spot stop distance
+  per MBT: 98 book trades, win 54.1%, $36.5 a trade, PF 2.52, R +0.437 (t 3.46); 2019-22 +0.249R (t 1.40), 2023+ +0.616R (t 3.49)
+  worst trade -1.23R, losses past -1.2R: 1; exits {'spot': 61, 'stop': 37}
+  book ADX>50: n 98 R +0.437 t 3.46 | 2023+ t 3.49
+  $25,000 at 1% per R: 98 trades (0 skipped, 1 MBT > 2%), MBT per book median 3, $1,255 a year (5.0%), max DD $-699 (-2.8%), longest under water 314 days | 2019 +1,754 2020 +1,751 2021 -273 2022 -208 2023 +2,691 2024 +2,678 2025 +439 2026 +726
+  $50,000 at 1% per R: 98 trades (0 skipped, 1 MBT > 2%), MBT per book median 7, $2,569 a year (5.1%), max DD $-1,451 (-2.9%), longest under water 318 days | 2019 +3,566 2020 +3,732 2021 -568 2022 -690 2023 +5,511 2024 +5,033 2025 +1,155 2026 +1,822

@@ -7,6 +7,7 @@ Sizing: 1% of the account per R per book, whole MBT contracts (at least 1; a boo
 on a $25,000 and a $50,000 account, not compounded (fixed $ risk). Costs $2.50 round trip + 1 tick a fill per MBT.
 Personal account only (multi-day holds).
   tools/run_stamped.sh analysis/btc_adx_mbt_longs_stop_test.py > analysis/outputs/btc_adx_mbt_longs_stop_test_output.txt
+  tools/run_stamped.sh analysis/btc_adx_mbt_longs_stop_test.py book50 > analysis/outputs/btc_adx_mbt_longs_stop_book50_output.txt
 """
 import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
@@ -17,7 +18,9 @@ src = open("analysis/btc_adx_futures_test.py", encoding="utf-8").read().split("\
 ns = {"np": np, "pd": pd, "glob": __import__("glob")}; exec(src, ns)
 f = ns["load_fut"](); f15 = P.rs(f, "15min"); fac = f.f.resample("15min", label="left", closed="left").last().reindex(f15.index).to_numpy()
 FT = f15.index.to_numpy(); FO, FL, FC = (f15[k].to_numpy() for k in ("open", "low", "close"))
-S = P.run(P.setup()); S = S[(S.t >= FT[0]) & (S.tx <= FT[-1]) & (S.side == 1)].reset_index(drop=True)
+BOOKS = (50,) if "book50" in sys.argv else (40, 50)          # book50: a standalone single book ADX > 50, longs only (user 11/13)
+S = P.run(P.setup(), books=BOOKS, longs_only="book50" in sys.argv); S = S[(S.t >= FT[0]) & (S.tx <= FT[-1]) & (S.side == 1)].reset_index(drop=True)
+print(f"books {BOOKS}, longs-only signal engine: {'book50' in sys.argv}")
 print(f"spot LONG book trades in the futures window: {len(S)}, spot mean {S.r.mean():+.3f}R")
 
 
@@ -50,7 +53,7 @@ def show(d, nm):
     print(f"\n{nm}\n  per MBT: {len(d)} book trades, win {np.mean(x > 0):.1%}, ${x.mean():.1f} a trade, PF {pf:.2f}, R {d.r.mean():+.3f} (t {tt(d):.2f}); "
           f"2019-22 {d.r[d.yr <= 2022].mean():+.3f}R (t {tt(d[d.yr <= 2022]):.2f}), 2023+ {d.r[d.yr >= 2023].mean():+.3f}R (t {tt(d[d.yr >= 2023]):.2f})")
     print(f"  worst trade {d.r.min():.2f}R, losses past -1.2R: {np.sum(d.r < -1.2)}; exits {d.why.value_counts().to_dict()}")
-    for b in (40, 50): g = d[d.book == b]; print(f"  book ADX>{b}: n {len(g)} R {g.r.mean():+.3f} t {tt(g):.2f} | 2023+ t {tt(g[g.yr >= 2023]):.2f}")
+    for b in BOOKS: g = d[d.book == b]; print(f"  book ADX>{b}: n {len(g)} R {g.r.mean():+.3f} t {tt(g):.2f} | 2023+ t {tt(g[g.yr >= 2023]):.2f}")
     for acct in (25000, 50000):
         n = np.floor(0.01 * acct / d.risk).clip(lower=1); ok = n * d.risk <= 0.02 * acct; g = d[ok].assign(pnl=(n * d.usd)[ok])
         dd = g.groupby("day").pnl.sum(); eq = dd.cumsum(); mdd = (eq - eq.cummax()).min(); yrs = (d.t.max() - d.t.min()).days / 365.25
