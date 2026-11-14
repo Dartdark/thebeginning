@@ -1,0 +1,36 @@
+{
+  "source_head": "7b0caeff98ead324ecc492375659b0b89db13d9f",
+  "syntax_only_python_files": 197,
+  "syntax_errors": [],
+  "finish_mode_omission": {
+    "actual_from_now_helper_result": "PASS",
+    "actual_numba_port_result": 1.0,
+    "documented_integer_finish_result": "TIME",
+    "full_contracts": 2,
+    "intended_finish_contracts": 1,
+    "initial_equity": 158750.0,
+    "full_end_equity": 159147.55,
+    "finish_end_equity": 158948.775,
+    "cost_convention": "NQ/10 benchmark proxy, not authenticated nativeMNQ cost",
+    "limitation": "Invented valid near-target state with one DT100point target; no actual frequency, pass-rate delta or installed input state claim"
+  },
+  "previous_week_closures": {
+    "continuing_eval_floor": "PASS",
+    "simultaneous_target_risk_touch": "FAIL_AS_REQUIRED",
+    "single_round_trip_commission": {
+      "NQ": {
+        "green": -17.25,
+        "bertola": -17.25,
+        "expected": -17.25
+      },
+      "ES": {
+        "green": -30.0,
+        "bertola": -30.0,
+        "expected": -30.0
+      }
+    },
+    "still_open": "General UNKNOWN held-path state is not supplied by the two daily helpers; 21-session expiry and DLL snapping remain inherited evaluation limits"
+  },
+  "no_real_market_or_account_simulation": true,
+  "no_live_or_notification_action": true
+}

@@ -1,0 +1,875 @@
+{
+  "source_head": "7b0caeff98ead324ecc492375659b0b89db13d9f",
+  "source_sha256": "a206f8fbfbcd50caf32b9f316b05f1272cba0d018d295b8ff26a66375e2b9767",
+  "proposal": "/workspace/thebeginning_papers_20261110/agents/codex/proposals/weekly_20261113_watchdog_retry.patch",
+  "proposal_sha256": "3c1e9051c76a1e0198b392d8a773eb019e28dbd63e0597245bf9634417e3f5dc",
+  "patched_sha256": "50622b0c081eecff6e5dfd63855fdecf96fc564127b798642ca58a448e01d6ef",
+  "exact_patch_applied_to_temporary_copy": true,
+  "full_patched_powershell_parse": {
+    "errors": []
+  },
+  "all_assertions_passed": true,
+  "original_replays": [
+    {
+      "name": "same_count_retry_then_no_duplicate",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "pending_survives_day_roll_with_zero_new",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-16T08:15:00.0000000",
+          "observed_count": 0,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 0
+        },
+        {
+          "at": "2026-11-16T08:20:00.0000000",
+          "observed_count": 0,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 0
+        }
+      ],
+      "bodies": [
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "new_rejection_coalesces_while_pending",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        },
+        {
+          "at": "2026-11-13T09:20:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        }
+      ],
+      "bodies": [
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:10:00 Rejected OrderName=toy_2."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:10 SEND_FAILED 1 new rejected order(s). Last: 13.11.2026/09:10:00 Rejected OrderName=toy_2."
+      ]
+    },
+    {
+      "name": "new_next_day_rejection_coalesces_with_old_pending",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-16T08:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-16T08:20:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: 1 new rejected order(s). Last: 16.11.2026/08:15:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-16 08:15 ALERT 1 new rejected order(s). Last: 16.11.2026/08:15:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "muted_observation_acknowledged_before_account_returns",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": false,
+          "generated_problems": 1,
+          "total_delivery_attempts": 0,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 0,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        }
+      ],
+      "bodies": [
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:15:00 Rejected OrderName=toy_2."
+      ],
+      "logs": [
+        "2026-11-13 09:05 MUTED (no live account) 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:15 ALERT 1 new rejected order(s). Last: 13.11.2026/09:15:00 Rejected OrderName=toy_2."
+      ]
+    },
+    {
+      "name": "active_failure_then_muted_acknowledgement",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": false,
+          "generated_problems": 0,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "other_failure_does_not_resurrect_acknowledged_rejection",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 2,
+          "total_delivery_attempts": 2,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: synthetic standing alert",
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: synthetic standing alert"
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED synthetic standing alert",
+        "2026-11-13 09:05 ALERT 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:10 ALERT synthetic standing alert"
+      ]
+    },
+    {
+      "name": "other_success_does_not_acknowledge_failed_rejection",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 2,
+          "total_delivery_attempts": 2,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: synthetic standing alert",
+        "VPS: 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 ALERT synthetic standing alert",
+        "2026-11-13 09:05 SEND_FAILED 1 new rejected order(s). Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    }
+  ],
+  "patched_replays": [
+    {
+      "name": "same_count_retry_then_no_duplicate",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 1,
+          "pending_first": "2026-11-13 09:05",
+          "pending_last": "2026-11-13 09:05",
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:10 ALERT 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "pending_survives_day_roll_with_zero_new",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 1,
+          "pending_first": "2026-11-13 09:05",
+          "pending_last": "2026-11-13 09:05",
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-16T08:15:00.0000000",
+          "observed_count": 0,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 0
+        },
+        {
+          "at": "2026-11-16T08:20:00.0000000",
+          "observed_count": 0,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 0
+        }
+      ],
+      "bodies": [
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-16 08:15 ALERT 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "new_rejection_coalesces_while_pending",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 1,
+          "pending_first": "2026-11-13 09:05",
+          "pending_last": "2026-11-13 09:05",
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": true,
+          "pending_count": 2,
+          "pending_first": "2026-11-13 09:05",
+          "pending_last": "2026-11-13 09:10",
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        },
+        {
+          "at": "2026-11-13T09:20:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        }
+      ],
+      "bodies": [
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: 2 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:10. Last: 13.11.2026/09:10:00 Rejected OrderName=toy_2.",
+        "VPS: 2 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:10. Last: 13.11.2026/09:10:00 Rejected OrderName=toy_2."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:10 SEND_FAILED 2 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:10. Last: 13.11.2026/09:10:00 Rejected OrderName=toy_2.",
+        "2026-11-13 09:15 ALERT 2 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:10. Last: 13.11.2026/09:10:00 Rejected OrderName=toy_2."
+      ]
+    },
+    {
+      "name": "new_next_day_rejection_coalesces_with_old_pending",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 1,
+          "pending_first": "2026-11-13 09:05",
+          "pending_last": "2026-11-13 09:05",
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-16T08:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-16T08:20:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 2,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261116",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: 2 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-16 08:15. Last: 16.11.2026/08:15:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-16 08:15 ALERT 2 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-16 08:15. Last: 16.11.2026/08:15:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "muted_observation_acknowledged_before_account_returns",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": false,
+          "generated_problems": 1,
+          "total_delivery_attempts": 0,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 0,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 2,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 2
+        }
+      ],
+      "bodies": [
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:15, latest 2026-11-13 09:15. Last: 13.11.2026/09:15:00 Rejected OrderName=toy_2."
+      ],
+      "logs": [
+        "2026-11-13 09:05 MUTED (no live account) 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:15 ALERT 1 unacknowledged rejected order(s), first observed 2026-11-13 09:15, latest 2026-11-13 09:15. Last: 13.11.2026/09:15:00 Rejected OrderName=toy_2."
+      ]
+    },
+    {
+      "name": "active_failure_then_muted_acknowledgement",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": true,
+          "pending_count": 1,
+          "pending_first": "2026-11-13 09:05",
+          "pending_last": "2026-11-13 09:05",
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": false,
+          "generated_problems": 1,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 0,
+          "total_delivery_attempts": 1,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:10 MUTED (no live account) 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    },
+    {
+      "name": "other_failure_does_not_resurrect_acknowledged_rejection",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 2,
+          "total_delivery_attempts": 2,
+          "send_failed": true,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: synthetic standing alert",
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: synthetic standing alert"
+      ],
+      "logs": [
+        "2026-11-13 09:05 SEND_FAILED synthetic standing alert",
+        "2026-11-13 09:05 ALERT 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:10 ALERT synthetic standing alert"
+      ]
+    },
+    {
+      "name": "other_success_does_not_acknowledge_failed_rejection",
+      "passes": [
+        {
+          "at": "2026-11-13T09:05:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 2,
+          "total_delivery_attempts": 2,
+          "send_failed": true,
+          "pending_count": 1,
+          "pending_first": "2026-11-13 09:05",
+          "pending_last": "2026-11-13 09:05",
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:10:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 2,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        },
+        {
+          "at": "2026-11-13T09:15:00.0000000",
+          "observed_count": 1,
+          "live": true,
+          "generated_problems": 1,
+          "total_delivery_attempts": 3,
+          "send_failed": false,
+          "pending_count": 0,
+          "pending_first": null,
+          "pending_last": null,
+          "cursor_day": "20261113",
+          "cursor_count": 1
+        }
+      ],
+      "bodies": [
+        "VPS: synthetic standing alert",
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "VPS: 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ],
+      "logs": [
+        "2026-11-13 09:05 ALERT synthetic standing alert",
+        "2026-11-13 09:05 SEND_FAILED 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1.",
+        "2026-11-13 09:10 ALERT 1 unacknowledged rejected order(s), first observed 2026-11-13 09:05, latest 2026-11-13 09:05. Last: 13.11.2026/09:05:00 Rejected OrderName=toy_1."
+      ]
+    }
+  ],
+  "boundaries": "Offline proposal only. Extracted actual blocks, synthetic state, stubbed HTTP; no real network, source, live/VPS/account/notification change.",
+  "limitations": "PowerShell 7.6.9 parser/runtime; Windows PowerShell 5.1 and live task installation not exercised. Existing state-file write failure and underlying rejection scan/count semantics are unchanged."
+}

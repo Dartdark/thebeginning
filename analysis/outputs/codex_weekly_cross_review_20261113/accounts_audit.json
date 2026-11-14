@@ -1,0 +1,504 @@
+{
+  "assessment": "independent; frozen before same-week Claude cross-review/Friday conclusions",
+  "source_head": "7b0caeff98ead324ecc492375659b0b89db13d9f",
+  "baseline": "fe35af99aa90d7f31b91f8693859251bb44dd9ab",
+  "source_status_before": "",
+  "method": "Static source and saved text accounting; AST-extracted synthetic fixtures. No strategy module imports, market backtests, parameter search, live operations, or external messages.",
+  "funded_horizon_fixture": [
+    {
+      "requested_days": 250,
+      "actual_days": [
+        240
+      ],
+      "calls": 600,
+      "row_label": "2y (original constant)"
+    },
+    {
+      "requested_days": 500,
+      "actual_days": [
+        500
+      ],
+      "calls": 600,
+      "row_label": "2y (original constant)"
+    }
+  ],
+  "funded_integer_fixture": {
+    "base_values": {
+      "MON_MC": 1.5,
+      "MON_BR_MC": 1.5
+    },
+    "rows": [
+      {
+        "cushion": 1500,
+        "f": 0.5,
+        "bench_monday": 0,
+        "bench_bridge": 0,
+        "documented_each": 0
+      },
+      {
+        "cushion": 2000,
+        "f": 0.6666666666666666,
+        "bench_monday": 1,
+        "bench_bridge": 1,
+        "documented_each": 0
+      },
+      {
+        "cushion": 2250,
+        "f": 0.75,
+        "bench_monday": 1,
+        "bench_bridge": 1,
+        "documented_each": 0
+      },
+      {
+        "cushion": 2999,
+        "f": 0.9996666666666667,
+        "bench_monday": 1,
+        "bench_bridge": 1,
+        "documented_each": 0
+      },
+      {
+        "cushion": 3000,
+        "f": 1,
+        "bench_monday": 1,
+        "bench_bridge": 1,
+        "documented_each": 1
+      }
+    ],
+    "quantity_expression_line": 165
+  },
+  "live_funded_nominal_base": {
+    "ONB_ML2_MC": [
+      "risk",
+      600.0
+    ],
+    "MON_MC": 1.5,
+    "EOS": [
+      "risk",
+      1050.0
+    ],
+    "LDF_MC": 4.0,
+    "NFP_MC": [
+      "risk",
+      750.0
+    ],
+    "MON_BR_MC": 1.5,
+    "CLS": 3.0,
+    "MOC_MES": 3.0,
+    "RS": 1,
+    "DT": 2,
+    "OT": 2,
+    "TWIN": 2
+  },
+  "eval_roster_fixture": {
+    "composition_and_nominal_sizes_match": {
+      "ONB30": true,
+      "MON_BR": true,
+      "TWIN": true,
+      "DT": true,
+      "JF": true,
+      "NBL": true,
+      "LDF": true
+    },
+    "scope": "Nominal roster only; this does not assert finish/entry-level behavior parity.",
+    "account_target": 159050,
+    "bench_target": 159000
+  },
+  "evaluation_floor_fix_control": {
+    "current": [
+      "fail",
+      3
+    ],
+    "old_pa_lock_control": [
+      "pass",
+      4
+    ],
+    "meaning": "Previously reported evaluation floor bug is corrected in this source; synthetic fixture only."
+  },
+  "offline_proposal_verification": {
+    "status": "offline proposal; not deployed or applied to either worktree",
+    "patch": "/workspace/thebeginning_papers_20261110/agents/codex/proposals/weekly_20261113_funded_bench.patch",
+    "patch_sha256": "b83d7b2f958204df359a1281372528f49e7a836b39ef8de2db6150bb4858a73a",
+    "git_apply_check": "PASS",
+    "git_apply_check_output": "",
+    "pinned_bench_sha256": "698afc88f4e53c5fcd0d10e3d088d234b33559287d2728c2931dc4ae4d358665",
+    "temporary_patched_bench_sha256": "9ca16e0f09e1e5822cfe5dc8dad19d019972f6787e9c5a256229fef58e3ce1b8",
+    "safe_write_worktree_bench_sha256_unchanged": "98ddbd2bc2ccc03bce9c6e332752c8faa98f93b456357449d4f87a1dda5e93d2",
+    "funded_horizon_fixture": [
+      {
+        "requested_days": 250,
+        "actual_days": [
+          250
+        ],
+        "calls": 600,
+        "row_label": "250d"
+      },
+      {
+        "requested_days": 500,
+        "actual_days": [
+          500
+        ],
+        "calls": 600,
+        "row_label": "500d"
+      }
+    ],
+    "funded_integer_fixture": {
+      "base_values": {
+        "MON_MC": 1,
+        "MON_BR_MC": 1
+      },
+      "rows": [
+        {
+          "cushion": 1500,
+          "f": 0.5,
+          "bench_monday": 0,
+          "bench_bridge": 0,
+          "documented_each": 0
+        },
+        {
+          "cushion": 2000,
+          "f": 0.6666666666666666,
+          "bench_monday": 0,
+          "bench_bridge": 0,
+          "documented_each": 0
+        },
+        {
+          "cushion": 2250,
+          "f": 0.75,
+          "bench_monday": 0,
+          "bench_bridge": 0,
+          "documented_each": 0
+        },
+        {
+          "cushion": 2999,
+          "f": 0.9996666666666667,
+          "bench_monday": 0,
+          "bench_bridge": 0,
+          "documented_each": 0
+        },
+        {
+          "cushion": 3000,
+          "f": 1,
+          "bench_monday": 1,
+          "bench_bridge": 1,
+          "documented_each": 1
+        }
+      ],
+      "quantity_expression_line": 165
+    },
+    "all_other_funded_plan_values_preserved": true,
+    "LDF_MC_preserved": 4.0,
+    "temporary_copy_removed": true,
+    "actual_strategy_or_payout_returns_computed": false
+  },
+  "limits": [
+    "No market-data performance rerun: actual direction and size of corrected funded differences remain unmeasured.",
+    "Existing DLL exact-limit liquidation and 21-trading-day proxy for the actual calendar clock remain inherited assumptions.",
+    "Existing scaled micro commission, missing-minute marks, whole-night worst proxies, and intraminute adverse-extreme aggregation remain qualifications, not newly quantified regressions.",
+    "The new nominal LIVE_EVAL roster matches expected_setup; eval_size_combo/resize_book still use fixed full-size paths while ONB/Twin/DT have default real-time finish sizing. No live-policy parity or changed ranking claimed.",
+    "Funded live cushion guards sample entry equity and cap each stop; this shared simulator uses day-start fractional cushion sizing. No funded account is currently live."
+  ],
+  "source_provenance": [
+    {
+      "path": "analysis/bench150.py",
+      "bytes": 11696,
+      "lines": 143,
+      "sha256": "698afc88f4e53c5fcd0d10e3d088d234b33559287d2728c2931dc4ae4d358665"
+    },
+    {
+      "path": "analysis/funded_sim150.py",
+      "bytes": 9698,
+      "lines": 230,
+      "sha256": "15dbc97f349a0e29ec9cbfb8068f15d5fe50246dc904ea453c7bd891aada0302"
+    },
+    {
+      "path": "analysis/funded_lab.py",
+      "bytes": 5101,
+      "lines": 115,
+      "sha256": "b0ce67e6ab26c72b278d6a2a6a6369d5d0cba9aae770313ebbfe750ec6ef0f15"
+    },
+    {
+      "path": "analysis/funded_bootstrap.py",
+      "bytes": 8549,
+      "lines": 131,
+      "sha256": "e45fdc76b0014957836d6ecf9b2f46824d151ec4b151719612383577605969ec"
+    },
+    {
+      "path": "analysis/funded_resize150.py",
+      "bytes": 1208,
+      "lines": 17,
+      "sha256": "603bfb73a7b52486fdff485ed9919bae601d7a37c19ae2e8c447bcdfbcdc954d"
+    },
+    {
+      "path": "analysis/funded_speed150.py",
+      "bytes": 1699,
+      "lines": 20,
+      "sha256": "e9ecfbb10f2dd0e06ddb458ed9326a98a4cb17e521c32918a0abd13d3012e84a"
+    },
+    {
+      "path": "analysis/funded_ldf_int150.py",
+      "bytes": 708,
+      "lines": 10,
+      "sha256": "8f47b35a2ed4ac989d64dc05866e52c25aaac5a5e0e1b50a47e7a63712499dd3"
+    },
+    {
+      "path": "analysis/plan150_integer_test.py",
+      "bytes": 2732,
+      "lines": 43,
+      "sha256": "e80dfa8211de7defd681c599320daae8588a0397c93d64487c412e7019d8807b"
+    },
+    {
+      "path": "analysis/plan_150k_test.py",
+      "bytes": 8970,
+      "lines": 130,
+      "sha256": "65617f0c3bf8addfcb3d78ed534d81871fd05ed29d511d8ad18533f808f0bd13"
+    },
+    {
+      "path": "analysis/portfolio.py",
+      "bytes": 8485,
+      "lines": 190,
+      "sha256": "2490ec4e234777284bdda0f63fbabb78360a7f523fd293ddf80f7197f7d0bf97"
+    },
+    {
+      "path": "analysis/twin_continuation_bench.py",
+      "bytes": 3913,
+      "lines": 52,
+      "sha256": "4cd0feb478bb9179cb4cd2b69911ac7103f7200cc1b9af73e3a6f70580b9c2e0"
+    },
+    {
+      "path": "analysis/dual_thrust_bench.py",
+      "bytes": 5616,
+      "lines": 82,
+      "sha256": "8ba1bca6e9b9df538a6817289179e054432787f633258200991fbbf77344f9d9"
+    },
+    {
+      "path": "analysis/overnight_tick_bench.py",
+      "bytes": 7779,
+      "lines": 113,
+      "sha256": "ced9d73dae8ba340f85428a36b6835fd3ee2e4c1daa3d4c58af0daadaf964e76"
+    },
+    {
+      "path": "analysis/jump_fade_paths.py",
+      "bytes": 1755,
+      "lines": 29,
+      "sha256": "875c4260b20159108e987ac2a92165e38c230103a737a77704baaf1286bb1663"
+    },
+    {
+      "path": "analysis/eval_size_live.py",
+      "bytes": 4268,
+      "lines": 64,
+      "sha256": "eacfd39cfaee8b04699a3be2d3954fff791e73f181ee38dfde23abb0571f6158"
+    },
+    {
+      "path": "analysis/eval_size_combo.py",
+      "bytes": 6500,
+      "lines": 103,
+      "sha256": "e0071b49712bb1ce8982f5526ce76185b52a842c99b62747d773ca8476b92977"
+    },
+    {
+      "path": "analysis/resize_book.py",
+      "bytes": 4042,
+      "lines": 52,
+      "sha256": "9a57b1e769373e0145a7570495eaaad0ef04703c83e4892933a8dfab09555cf8"
+    },
+    {
+      "path": "analysis/eval_levers150.py",
+      "bytes": 7205,
+      "lines": 96,
+      "sha256": "4480717cc930b469664170cad4269aca9b6d0e86f9dbee81edda5251292db32e"
+    },
+    {
+      "path": "analysis/eval_finish150_plateau.py",
+      "bytes": 1853,
+      "lines": 26,
+      "sha256": "cf892ac6367f54af73058fdc451cab2c55c110cc74dcafcf3a21d5073053803d"
+    },
+    {
+      "path": "analysis/copier_finish_bench.py",
+      "bytes": 5069,
+      "lines": 77,
+      "sha256": "0c216592d6a42f5ba4a5f6b8bd5f67cd8b13846745b1eb34b422064ae95d8451"
+    },
+    {
+      "path": "analysis/active_scan_eval.py",
+      "bytes": 6564,
+      "lines": 79,
+      "sha256": "38a895e6dc5c462cf4c61f4b60a7f1c067fce9789adb77a8c4419d04c3bcc9f2"
+    },
+    {
+      "path": "analysis/cl_sunday_fade_bench.py",
+      "bytes": 4796,
+      "lines": 66,
+      "sha256": "a41843b03d99acb4026ed015c88d40245ab8afd4140eb005d5a1d60e52e69cbc"
+    },
+    {
+      "path": "analysis/fc_2b_bench.py",
+      "bytes": 7293,
+      "lines": 104,
+      "sha256": "2bad7f63e2d23c96239ab9caf6b547b0690065842b1561192231ed7983baaef4"
+    },
+    {
+      "path": "analysis/real_fee_bench.py",
+      "bytes": 7480,
+      "lines": 109,
+      "sha256": "496479bf773455d969c1417d6abccd4ad3fd73306549b58673f86d80793a6ce0"
+    },
+    {
+      "path": "analysis/build_lab.py",
+      "bytes": 4181,
+      "lines": 62,
+      "sha256": "7c19e7bfd74ab21b31ab016d677bd651f8badcfde6866142b1f6237f6be2e16c"
+    },
+    {
+      "path": "analysis/grid24.py",
+      "bytes": 5665,
+      "lines": 116,
+      "sha256": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c"
+    },
+    {
+      "path": "analysis/bridge_noise_15m_test.py",
+      "bytes": 13346,
+      "lines": 230,
+      "sha256": "28ea1b2b0604e7e0b703071fea64984a36cbbdd84e8e341352dbf632d713a526"
+    },
+    {
+      "path": "funded_strategies/FUNDED_PLAN.md",
+      "bytes": 79712,
+      "lines": 1048,
+      "sha256": "1d07b4cbe07e15faebe10bd311c44ed522fe38f864d92529b790b1b2fe0c6f9f"
+    },
+    {
+      "path": "funded_strategies/README.md",
+      "bytes": 160812,
+      "lines": 2149,
+      "sha256": "89254e85c9619b8cd156a7280563b484d687e95b447ce7cfd040789b3e8fac1b"
+    },
+    {
+      "path": "apex_strategies/README.md",
+      "bytes": 3707,
+      "lines": 62,
+      "sha256": "ff1a770c8a5723c43923d2209151fb0c8ebc4b033f405e927276edd08a765f79"
+    },
+    {
+      "path": "apex_strategies/NQ_Overnight_Bias_ADX30.txt",
+      "bytes": 14341,
+      "lines": 288,
+      "sha256": "f474014c86b2e53c4ee7e1365c1d74e2ea3c437423ca0fa917289966cb22dc9c"
+    },
+    {
+      "path": "apex_strategies/Twin_Continuation_150K.txt",
+      "bytes": 28128,
+      "lines": 543,
+      "sha256": "b5ea7f55ba0a3a78c1bf8b49f2d23e2c1c36c659c538eaf5020b3bca1b0574bc"
+    },
+    {
+      "path": "funded_strategies/NQ_Dual_Thrust.txt",
+      "bytes": 21414,
+      "lines": 363,
+      "sha256": "555db60fd0da11d8434d284963a8c82817be272199f31e1ff299679a962c1e85"
+    },
+    {
+      "path": "funded_strategies/NQ_Late_Day_Flow.txt",
+      "bytes": 14776,
+      "lines": 257,
+      "sha256": "91f4ba6d8e17be0ac33329b76aae22bd19f7331a7e46b148aa47f6d1f5b8c120"
+    },
+    {
+      "path": "funded_strategies/NQ_Monday_Long.txt",
+      "bytes": 13732,
+      "lines": 234,
+      "sha256": "c98968a4061430959b8aebb50ff64b807528c39632dab0581d720ccf144e1fc7"
+    },
+    {
+      "path": "live/expected_setup.json",
+      "bytes": 2955,
+      "lines": 107,
+      "sha256": "599d95e29da8284cf16553b6fd78a83402ee810d92e614997c47241fa3d10ed4"
+    },
+    {
+      "path": "analysis/outputs/funded_resize150_output.txt",
+      "bytes": 4652,
+      "lines": 42,
+      "sha256": "0e81b64a227b3bdb2deec054b15e7baf67d77b8b89c8b3b22a7f3d4505cc67b5"
+    },
+    {
+      "path": "analysis/outputs/funded_speed150_output.txt",
+      "bytes": 1934,
+      "lines": 16,
+      "sha256": "de0a615f30ab900dfc178cea1229b05eda23ca9d9cec2fa4a1c009f73c187904"
+    },
+    {
+      "path": "analysis/outputs/funded_ldf_int150_output.txt",
+      "bytes": 1393,
+      "lines": 11,
+      "sha256": "046c5590949d94f75e830bbd6948c24959e49fe774c1bf1d4d8582c869d47901"
+    },
+    {
+      "path": "analysis/outputs/resize_book_output.txt",
+      "bytes": 3318,
+      "lines": 44,
+      "sha256": "7e04bc359721f2aece3ed8c6a1a19e5a7a44cc4997d02192a34ae84145019c32"
+    },
+    {
+      "path": "analysis/outputs/eval_size_live_output.txt",
+      "bytes": 2683,
+      "lines": 37,
+      "sha256": "288ecf9321120901f007a8a93eac0701015601371950f3c0075dbe4efd1edda9"
+    },
+    {
+      "path": "analysis/outputs/eval_levers150_output.txt",
+      "bytes": 2251,
+      "lines": 21,
+      "sha256": "901552e2c53a546a088bbdbff9326e9ef4767822d0d2b47ee6eb0701745ae23d"
+    },
+    {
+      "path": "analysis/outputs/copier_finish_bench_output.txt",
+      "bytes": 1410,
+      "lines": 16,
+      "sha256": "fba09d81c50c81f98733dad54f4031f11171fcdabff8e47d5595194413eb5a80"
+    }
+  ],
+  "review_metrics": {
+    "explicit_scope_files_hashed": 43,
+    "scope_text_lines": 7727,
+    "same_week_review_conclusion_files_read": 0,
+    "synthetic_checks": 6,
+    "market_backtests_or_searches": 0,
+    "mutated_source_files": 0,
+    "diff_numstat_for_hashed_files": [
+      "79\t0\tanalysis/active_scan_eval.py",
+      "143\t0\tanalysis/bench150.py",
+      "4\t2\tanalysis/bridge_noise_15m_test.py",
+      "77\t0\tanalysis/copier_finish_bench.py",
+      "26\t0\tanalysis/eval_finish150_plateau.py",
+      "96\t0\tanalysis/eval_levers150.py",
+      "103\t0\tanalysis/eval_size_combo.py",
+      "64\t0\tanalysis/eval_size_live.py",
+      "2\t1\tanalysis/funded_bootstrap.py",
+      "10\t0\tanalysis/funded_ldf_int150.py",
+      "17\t0\tanalysis/funded_resize150.py",
+      "20\t0\tanalysis/funded_speed150.py",
+      "29\t0\tanalysis/jump_fade_paths.py",
+      "16\t0\tanalysis/outputs/copier_finish_bench_output.txt",
+      "21\t0\tanalysis/outputs/eval_levers150_output.txt",
+      "37\t0\tanalysis/outputs/eval_size_live_output.txt",
+      "11\t0\tanalysis/outputs/funded_ldf_int150_output.txt",
+      "42\t0\tanalysis/outputs/funded_resize150_output.txt",
+      "16\t0\tanalysis/outputs/funded_speed150_output.txt",
+      "44\t0\tanalysis/outputs/resize_book_output.txt",
+      "3\t2\tanalysis/plan_150k_test.py",
+      "1\t1\tanalysis/portfolio.py",
+      "52\t0\tanalysis/resize_book.py",
+      "6\t4\tanalysis/twin_continuation_bench.py",
+      "33\t2\tapex_strategies/NQ_Overnight_Bias_ADX30.txt",
+      "20\t5\tapex_strategies/README.md",
+      "543\t0\tapex_strategies/Twin_Continuation_150K.txt",
+      "60\t3\tfunded_strategies/FUNDED_PLAN.md",
+      "112\t5\tfunded_strategies/NQ_Dual_Thrust.txt",
+      "95\t4\tfunded_strategies/NQ_Late_Day_Flow.txt",
+      "77\t2\tfunded_strategies/NQ_Monday_Long.txt",
+      "3\t3\tfunded_strategies/README.md",
+      "56\t37\tlive/expected_setup.json"
+    ]
+  },
+  "source_status_after": ""
+}

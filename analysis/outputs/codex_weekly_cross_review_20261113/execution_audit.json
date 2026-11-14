@@ -1,0 +1,107 @@
+{
+  "source_head": "7b0caeff98ead324ecc492375659b0b89db13d9f",
+  "base": "fe35af99",
+  "source_sha256": {
+    "live/vps/watchdog.ps1": "a206f8fbfbcd50caf32b9f316b05f1272cba0d018d295b8ff26a66375e2b9767",
+    "live/vps/push_trade_logs.ps1": "83042c888cbb138a565d7f7899462ddbd4445735a21dca6c3dc2327ab2334640",
+    "live/vps/cushion_peak.ps1": "7089278ebe08100b5444a2fe558a8fc136dfce90219717ccb96e8e29565e45e5",
+    "apex_strategies/NQ_Overnight_Bias_ADX30.txt": "f474014c86b2e53c4ee7e1365c1d74e2ea3c437423ca0fa917289966cb22dc9c",
+    "apex_strategies/Twin_Continuation_150K.txt": "b5ea7f55ba0a3a78c1bf8b49f2d23e2c1c36c659c538eaf5020b3bca1b0574bc",
+    "funded_strategies/NQ_Late_Day_Flow.txt": "91f4ba6d8e17be0ac33329b76aae22bd19f7331a7e46b148aa47f6d1f5b8c120",
+    "analysis/vps_health.py": "d2ff0bed4bb21cd453d3f2eb0dd0de33d5e64019e213d19623b419ae1b1ef3e2",
+    "live/expected_setup.json": "599d95e29da8284cf16553b6fd78a83402ee810d92e614997c47241fa3d10ed4"
+  },
+  "powershell_parse_checks": [
+    {
+      "path": "/workspace/thebeginning_weekly_source_20261113/live/vps/claude_alert_relay.ps1",
+      "errors": []
+    },
+    {
+      "path": "/workspace/thebeginning_weekly_source_20261113/live/vps/cushion_peak.ps1",
+      "errors": []
+    },
+    {
+      "path": "/workspace/thebeginning_weekly_source_20261113/live/vps/finra_daily.ps1",
+      "errors": []
+    },
+    {
+      "path": "/workspace/thebeginning_weekly_source_20261113/live/vps/ovx_daily.ps1",
+      "errors": []
+    },
+    {
+      "path": "/workspace/thebeginning_weekly_source_20261113/live/vps/push_trade_logs.ps1",
+      "errors": []
+    },
+    {
+      "path": "/workspace/thebeginning_weekly_source_20261113/live/vps/watchdog.ps1",
+      "errors": []
+    }
+  ],
+  "rejection_retry": {
+    "method": "actual extracted source blocks, stubbed network, synthetic counters",
+    "passes": [
+      {
+        "pass": 1,
+        "generated_problems": 1,
+        "total_delivery_attempts": 1,
+        "send_failed": true,
+        "persisted_rejection_count": 1,
+        "persisted_sent_timestamp": null
+      },
+      {
+        "pass": 2,
+        "generated_problems": 0,
+        "total_delivery_attempts": 1,
+        "send_failed": false,
+        "persisted_rejection_count": 1,
+        "persisted_sent_timestamp": null
+      }
+    ],
+    "confirmed": "failed rejection alert is not retried when the rejection count stays unchanged"
+  },
+  "finish_cache": {
+    "method": "minimal transcription of ONB finish-key/cache/override conditions",
+    "writer_event": "16:10 final close push changes EVAL_FULL to EVAL_FINISH",
+    "trace": [
+      {
+        "date": 20261111,
+        "time": 1600,
+        "disk_group": 0,
+        "read": true,
+        "cached_group": 0,
+        "finish": false,
+        "contracts": 10
+      },
+      {
+        "date": 20261111,
+        "time": 1700,
+        "disk_group": 1,
+        "read": false,
+        "cached_group": 0,
+        "finish": false,
+        "contracts": 10
+      },
+      {
+        "date": 20261112,
+        "time": 900,
+        "disk_group": 1,
+        "read": false,
+        "cached_group": 0,
+        "finish": false,
+        "contracts": 10
+      }
+    ],
+    "expected_after_final_group_update": 5,
+    "actual_cached_contracts": 10,
+    "caveat": "Conditional on a change after the prior 15:15 push and a 16:00 strategy calculation; no actual excess-size trade claimed."
+  },
+  "gap_controls": {
+    "method": "actual extracted new_today reader against temporary logs",
+    "new_today": {
+      "OLD": false,
+      "CHANGED": true,
+      "NEW": true
+    }
+  },
+  "boundaries": "No live/VPS/account/API/notification action; no real monitoring script run; no strategy backtest."
+}

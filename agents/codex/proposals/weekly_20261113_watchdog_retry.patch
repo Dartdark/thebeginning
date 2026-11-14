@@ -1,0 +1,41 @@
+--- a/live/vps/watchdog.ps1
++++ b/live/vps/watchdog.ps1
+@@ -160,9 +160,18 @@
+ if ($rej -gt $prev) {
+     $hint = ""; if ($msg -match "@MNQ|@MES|Invalid") { $hint = " Likely Symbol Mapping: File > Broker Profiles > Symbol Mapping." }
+     if ($msg -match "done for day|liquidat|[Ff]ailed|disabled") { $hint = " Apex locked or failed the account: after the close turn auto-trading off/on (Flat) on its charts." }
+-    $problems += "REJECT_$rej|$($rej - $prev) new rejected order(s). Last: $($msg.Substring(0, [math]::Min(140, $msg.Length))).$hint"
++    # The scan cursor records observations; pending delivery has a separate acknowledgement.
++    # Coalesce new observations with any failed delivery, preserving their first/latest timestamps.
++    if (-not $state["rej_pending_count"]) { $state["rej_pending_first"] = $now.ToString("yyyy-MM-dd HH:mm") }
++    $state["rej_pending_count"] = [int]$state["rej_pending_count"] + ($rej - $prev)
++    $state["rej_pending_last"] = $now.ToString("yyyy-MM-dd HH:mm")
++    $state["rej_pending_detail"] = "Last: $($msg.Substring(0, [math]::Min(140, $msg.Length))).$hint"
+ }
+ $state["rej_day"] = $day; $state["rej_count"] = $rej
++# Retry pending observations even if today's count is unchanged or the day has rolled.
++if ([int]$state["rej_pending_count"] -gt 0) {
++    $problems += "REJECT_PENDING|$($state['rej_pending_count']) unacknowledged rejected order(s), first observed $($state['rej_pending_first']), latest $($state['rej_pending_last']). $($state['rej_pending_detail'])"
++}
+ 
+ # 4. alert (once an hour per problem; thin-cushion NEARFLOOR once a day, 2026-11-13), log, save state
+ # mute (user 2026-11-05): no phone alerts while no account in expected_setup.json has status "live"; the problems are still
+@@ -171,6 +180,8 @@
+ if ($cfg) { $anyLive = @($cfg.accounts.PSObject.Properties | Where-Object { $_.Value.status -eq "live" }).Count -gt 0 }
+ if (-not $anyLive) {
+     foreach ($p in $problems) { "$($now.ToString('yyyy-MM-dd HH:mm')) MUTED (no live account) $($p.Split('|', 2)[1])" | Add-Content "$Logs\alerts.txt" }
++    # Preserve the no-live-account policy: MUTED observations are logged and acknowledged.
++    foreach ($pendingKey in @("rej_pending_count", "rej_pending_first", "rej_pending_last", "rej_pending_detail")) { $state.Remove($pendingKey) }
+     $problems = @()
+ }
+ $sendFailed = $false
+@@ -185,6 +196,9 @@
+             Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "VPS: $text" -Headers @{ Title = "Trading alarm"; Priority = "high" } -TimeoutSec 15 -ErrorAction Stop | Out-Null
+             "$($now.ToString('yyyy-MM-dd HH:mm')) ALERT $text" | Add-Content "$Logs\alerts.txt"
+             $state[$k] = $now.ToString("o")
++            if ($key -eq "REJECT_PENDING") {
++                foreach ($pendingKey in @("rej_pending_count", "rej_pending_first", "rej_pending_last", "rej_pending_detail")) { $state.Remove($pendingKey) }
++            }
+         } catch {
+             "$($now.ToString('yyyy-MM-dd HH:mm')) SEND_FAILED $text" | Add-Content "$Logs\alerts.txt"
+             $sendFailed = $true
