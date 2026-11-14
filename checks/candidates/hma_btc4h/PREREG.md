@@ -12,3 +12,15 @@ does the timing beat simply being long ~half the time? Ingredients: without the 
 Trade match vs the author's CoinQuant log (backtest-trades-sma.csv). Costs: his 2 bp a side AND ours 6 bp a side (0.05% fee + 0.01% slip).
 NQ port (multi-day holds: personal account only): the same rule on NQ 4H bars (24h, Central), per NQ, $7.25 + 1 tick a side; data sweep on it.
 Pass (BTC, our costs): beats the random-timing placebo at p < 0.05 AND positive in both halves. Not Apex-legal in any form (multi-day).
+
+## Result (2026-11-14, `analysis/outputs/hma_btc4h_test_output.txt`, `analysis/outputs/hma_btc4h_sweep_output.txt`)
+Reproduction: SMA version (his saved run) 142 trades, +1,037% at his 2 bp (his +964% on Binance, 131 trades); 116 of his 132 entries
+within one 4H bar of ours (exchange / time-stamp differences). Buy-and-hold over the span +1,983%.
+SMA, our 6 bp: +915%, CAGR 35%, max DD -56%, Sharpe 0.93 vs buy-and-hold 0.95; random-timing placebo p 0.142 -> NO timing edge (it is
+half of buy-and-hold at buy-and-hold's risk-adjusted return). FAIL.
+HMA (the repo's name), our 6 bp: 246 trades, +647%, CAGR 30%, max DD -32%, Sharpe 1.06 vs 0.95, in the market 24% of the time; 2019-22
+Sharpe 1.07 (B&H 0.88), 2023+ 1.09 (B&H 1.13); random-timing placebo p 0.004 -> PASSES the pre-registered gate (beats random timing,
+positive in both halves). Its value is risk control (drawdown -32% vs ~-77% for holding), not more return. The RSI filter matters (without
+it max DD -76%); the LinReg filter does nothing.
+NQ port (personal, multi-day): SMA $2,113 a trade t 1.63, HMA $581 t 1.39; both below NQ long-only; data sweep p 0.68 (luck). FAIL.
+Use: BTC only, multi-day, long only -> personal account (CME micro bitcoin futures would need its own test: rolls, CME hours). C+.

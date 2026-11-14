@@ -1,0 +1,32 @@
+[provenance] code db655412 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+HMA / SMA crossover + RSI + LinReg on BTC 4H (pre-registered checks/candidates/hma_btc4h/PREREG.md; user 2026-11-14, ZiadFrancis repo).
+BTC 4H bars 2018-06-01 00:00:00 .. 2026-10-23 20:00:00 (18398)
+
+== SMA 16/65 + RSI > 52 + LinReg(50), costs 2 bp (his)
+   whole 2019-02 -> 2026-10               n 142 win 35% avg +2.42% | total    +1037% CAGR +37.3% maxDD -55.5% Sharpe 0.97 expo 50% | buy&hold   +1983% Sharpe 0.95
+   2019-22                                n  71 win 32% avg +3.01% | total     +301% CAGR +43.3% maxDD -55.4% Sharpe 0.97 expo 50% | buy&hold    +325% Sharpe 0.88
+   2023+                                  n  71 win 38% avg +1.83% | total     +184% CAGR +31.5% maxDD -33.4% Sharpe 1.02 expo 50% | buy&hold    +391% Sharpe 1.13
+
+== SMA 16/65 + RSI > 52 + LinReg(50), costs 6 bp (ours)
+   whole 2019-02 -> 2026-10               n 142 win 34% avg +2.34% | total     +915% CAGR +35.3% maxDD -56.4% Sharpe 0.93 expo 50% | buy&hold   +1983% Sharpe 0.95
+   2019-22                                n  71 win 30% avg +2.93% | total     +279% CAGR +41.2% maxDD -56.2% Sharpe 0.94 expo 50% | buy&hold    +325% Sharpe 0.88
+   2023+                                  n  71 win 38% avg +1.75% | total     +168% CAGR +29.6% maxDD -34.6% Sharpe 0.97 expo 50% | buy&hold    +391% Sharpe 1.13
+   random-timing placebo (same 142 holding lengths, random starts, 500 runs): median total +282%, p95 +1377% vs real +915% -> p 0.142
+   ingredients (6 bp): no RSI: total     +905% CAGR +35.1% maxDD -54.9% Sharpe 0.93 expo 51% | no LinReg: total     +901% CAGR +35.0% maxDD -57.2% Sharpe 0.92 expo 51% | cross only: total     +854% CAGR +34.2% maxDD -55.7% Sharpe 0.90 expo 53%
+   trade match vs his CoinQuant log (SMA): his 132, ours 142, same 4H bar 2 (+-1 bar 116)
+
+== HMA 16/65 + RSI > 52 + LinReg(50), costs 2 bp (his)
+   whole 2019-02 -> 2026-10               n 246 win 44% avg +1.05% | total     +810% CAGR +33.4% maxDD -31.4% Sharpe 1.15 expo 24% | buy&hold   +1983% Sharpe 0.95
+   2019-22                                n 127 win 45% avg +1.20% | total     +264% CAGR +39.8% maxDD -31.4% Sharpe 1.15 expo 25% | buy&hold    +325% Sharpe 0.88
+   2023+                                  n 119 win 43% avg +0.89% | total     +150% CAGR +27.2% maxDD -24.2% Sharpe 1.21 expo 22% | buy&hold    +391% Sharpe 1.13
+
+== HMA 16/65 + RSI > 52 + LinReg(50), costs 6 bp (ours)
+   whole 2019-02 -> 2026-10               n 246 win 43% avg +0.97% | total     +647% CAGR +30.0% maxDD -31.8% Sharpe 1.06 expo 24% | buy&hold   +1983% Sharpe 0.95
+   2019-22                                n 127 win 44% avg +1.12% | total     +229% CAGR +36.2% maxDD -31.8% Sharpe 1.07 expo 25% | buy&hold    +325% Sharpe 0.88
+   2023+                                  n 119 win 42% avg +0.80% | total     +127% CAGR +24.0% maxDD -25.1% Sharpe 1.09 expo 22% | buy&hold    +391% Sharpe 1.13
+   random-timing placebo (same 246 holding lengths, random starts, 500 runs): median total +43%, p95 +328% vs real +647% -> p 0.004
+   ingredients (6 bp): no RSI: total     +426% CAGR +24.1% maxDD -76.3% Sharpe 0.74 expo 46% | no LinReg: total     +635% CAGR +29.7% maxDD -31.8% Sharpe 1.04 expo 24% | cross only: total     +467% CAGR +25.4% maxDD -73.7% Sharpe 0.75 expo 50%
+
+== NQ port (24h Globex, 4H bars in Central time; multi-day holds: personal only), per NQ, $7.25 + 1 tick a side
+   SMA: n 114 avg $2,113 t 1.63 win 46% PF 1.64 | 2018-22 $941 2023+ $3,371 | total $240,934 vs NQ long-only over the span $413,455 (unadjusted, rolls included)
+   HMA: n 241 avg $581 t 1.39 win 50% PF 1.33 | 2018-22 $428 2023+ $799 | total $139,988 vs NQ long-only over the span $413,455 (unadjusted, rolls included)
