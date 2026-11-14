@@ -81,9 +81,28 @@ from its exact description; at tradeable size it does not beat the plan's free v
 | Premium | Window shown (calendar) | Stats | Free parent in the same year (our test, sum of trade %) |
 |---|---|---|---|
 | TrendSwingTrader V2 (BTC 4h) | 2022 | +70.8%, 30 trades (7 long / 23 short), win 57%, Sharpe 1.95, DD -10.7% | V1 2022 +21%; V1 shorts lose overall |
-| | 2024 window ('2023 - 2024' filter, read in the page) | +72.4%, 28 trades (24 long), win 61%, Sharpe 2.22, DD -9.2% | V1 2024 +53% |
+| | 2023 ('2023 - 2024' filter = calendar 2023; first logged as 2024 by mistake) | +72.4%, 28 trades (24 long), win 61%, Sharpe 2.22, DD -9.2% | V1 2023 +23% |
 | TrendWaveRiderV2 (BTC 15m) | 2024 | +108%, 67 trades (23 long / 44 short), win 75%, Sharpe 2.18, DD -19.6% | free TWR 2024 -4% (V2 is materially different) |
 | AlligatorV2 (BTC 30m) | 2022 | +90%, 37 trades (13 long / 24 short), win 73%, Sharpe 1.77, DD -13.9% | AlligatorAi 2022 +13% |
 | CLMeanReversionPremium (CL perp 30m) | June 2026 | +1.3%, 3 trades | nothing to judge |
 Two of the four shown windows are 2022 (the BTC bear year, carried by shorts). The pages' period filter has every month / quarter /
 year 2021-2026; per-year stats for each premium would show whether the edge holds outside the window the author picked.
+
+## Every year and quarter from the site's metrics endpoint (user 2026-11-13 'do the endpoint'; Binance BTC-USDT perp, the
+## author's sizing and fees; the filter label 'YYYY - YYYY+1' = calendar YYYY). Return % / max DD % / trades.
+| Strategy | 2022 | 2023 | 2024 | 2025 | 2026 Q1 / Q2 / Q3 |
+|---|---|---|---|---|---|
+| **TrendSwingTrader V2** | +70.8 / -10.7 / 30 | +72.4 / -9.2 / 28 | +74.6 / -36.1 / 35 (**identical to V1's 2024**) | -2.1 / -13.7 / 22 (Q1 +1.6, Q2 +5.7, Q3 +0.3) | +2.2 / +9.6 / +10.4 |
+| TrendSwingTrader V1 (free) | +68.0 / -41.4 / 30 | +103.3 / -28.5 / 31 | +74.6 / -36.1 / 35 | n/a (Q1 -35.1, Q2 +22.6, Q3 +1.5) | +4.5 / +24.2 / -19.7 |
+| TrendWaveRiderV2 | +19.6 / -40.1 / 92 | -3.4 / -24.9 / 103 | +108.3 / -19.6 / 67 | n/a (Q1 -1.4, Q2 +13.6, Q3 -4.1) | -7.4 / +16.7 / +7.6 |
+| TrendWaveRider (free) | +42.6 / -38.8 / 52 | +141.8 / -39.9 / 61 | +26.4 / -22.9 / 35 | -24.1 / -38.1 / 32 | +10.3 / +18.0 / +22.2 |
+| AlligatorV2 | +90.1 / -13.9 / 37 | +73.0 / -16.4 / 48 | +47.4 / -12.0 / 35 | n/a (Q1 +17.7, Q2 -14.0, Q3 -0.2, Q4 +0.6) | +7.8 / +11.4 / -5.1 |
+| AlligatorAi (free) | +67.7 / -14.0 / 41 | +28.0 / -18.7 / 57 | +32.3 / -27.4 / 60 | +9.4 / -21.8 / 50 | +6.8 / +3.5 / -8.1 |
+| CLMeanReversion / Premium | no yearly or quarterly results on the site (404): only single months | | | | |
+Reading: the premium versions were published about two years ago (late 2024), so 2025-26 is after publication.
+- **TrendSwingTrader V2** is the steadiest: positive every year 2022-24 with ~10% drawdowns (except 2024, whose numbers are
+  byte-identical to V1's, so that year looks like V1's backtest, not V2's), then roughly flat 2025 (-2.1%) and +22% over
+  2026 Q1-Q3 with small drawdowns. The free V1 swings far more (Q1 2025 -35%, Q3 2026 -20%). V2 is the one worth the code.
+- TrendWaveRiderV2: 2024 was its showcase (+108%); 2023 -3% and mixed since publication; the free version did better in 2026.
+- AlligatorV2: strong 2022-24 (DD 12-16%), about +16% over the 7 quarters since publication with one -14% quarter.
+These are the author's own backtests (perp, their fills and leverage): direction of the evidence, not a test.
