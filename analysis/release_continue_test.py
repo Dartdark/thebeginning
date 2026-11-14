@@ -22,7 +22,7 @@ G = {"ADPMNUSNERSA": "ADP", "PAYEMS": "Jobs report", "UNRATE": "Jobs report", "C
      "RSAFS": "Retail sales", "GDPC1": "GDP", "PCEPILFE": "Core PCE", "PCEPI": "Core PCE", "ICSA": "Jobless claims", "JTSJOL": "JOLTS", "DFEDTARU": "Fed decision"}
 M["grp"] = M.series.map(G); E = M.dropna(subset=["grp"]).drop_duplicates(["grp", "day"])[["grp", "day", "hm"]]
 busy = set(zip(E[E.grp != "Jobless claims"].day, E[E.grp != "Jobless claims"].hm))
-E = E[~((E.grp == "Jobless claims") & [((d, h) in busy) for d, h in zip(E.day, E.hm)])]          # claims-only days
+E = E[~((E.grp == "Jobless claims") & np.array([((d, h) in busy) for d, h in zip(E.day, E.hm)]))]          # claims-only days
 A = pd.read_csv("data/treasury_auctions.csv", parse_dates=["auction_date"]); A = A[(A.auction_date >= "2018-01-01") & (A.security_type.isin(["Note", "Bond"]))]
 for term, nm in (("10-Year", "10-year auction"), ("30-Year", "30-year auction")):
     x = A[A.security_term.str.contains(term.split("-")[0] + "-Year|" + str(int(term.split("-")[0]) - 1) + "-Year 1", regex=True) & (A.closing_time_comp == "01:00 PM")]
