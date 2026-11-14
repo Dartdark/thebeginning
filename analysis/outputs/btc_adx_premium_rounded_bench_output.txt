@@ -1,0 +1,28 @@
+[provenance] code a3096c06 dirty | data 
+CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+BTC ADX PREMIUM with a ROUNDED net position on MBT (user 2026-11-13 'test the rounded premium version').
+rounded premium: 722.0 MBT contract fills, $1,212 a year | plan free $821 | premium 1/3 $974 | engine check (free books, position = units, should match the plan): $832
+   FREE    alone 2019-26: max DD $-1,415, worst day $-457, by year 2019 +319 2020 +611 2021 +637 2022 -503 2023 +1,306 2024 +3,407 2025 -109 2026 +746
+   ROUND   alone 2019-26: max DD $-2,566, worst day $-639, by year 2019 +496 2020 +1,133 2021 +1,891 2022 -773 2023 +1,967 2024 +4,391 2025 -1,259 2026 +1,616
+   PREM/3  alone 2019-26: max DD $-1,259, worst day $-577, by year 2019 +217 2020 +789 2021 +1,220 2022 -646 2023 +1,462 2024 +3,484 2025 -334 2026 +1,419
+
+2019-26: variant                                        $ a year p50   DD p95  ret/DD  vs plan  seeds better  backtest $/yr / DD
+        base (no BTC)                                 $     36,230 $  5,152    7.03    -0.14 0/5               6.69
+        PLAN: + FREE 1 MBT a book (max 2)             $     37,016 $  5,160    7.17    +0.00 0/5               6.82
+        + PREMIUM ROUNDED (1 MBT <= 3 units, 2 above) $     37,415 $  5,377    6.96    -0.21 0/5               7.05
+        + PREMIUM 1/3 MBT a book (ref)                $     37,178 $  5,134    7.24    +0.07 5/5               7.00
+
+2019-22: variant                                        $ a year p50   DD p95  ret/DD  vs plan  seeds better  backtest $/yr / DD
+        base (no BTC)                                 $     27,666 $  4,126    6.71    -0.13 0/5               8.60
+        PLAN: + FREE 1 MBT a book (max 2)             $     27,925 $  4,084    6.84    +0.00 0/5               8.68
+        + PREMIUM ROUNDED (1 MBT <= 3 units, 2 above) $     28,358 $  4,101    6.92    +0.08 5/5               8.80
+        + PREMIUM 1/3 MBT a book (ref)                $     28,039 $  4,079    6.88    +0.04 5/5               8.72
+
+2023+: variant                                        $ a year p50   DD p95  ret/DD  vs plan  seeds better  backtest $/yr / DD
+        base (no BTC)                                 $     45,694 $  5,881    7.77    -0.32 0/5               8.36
+        PLAN: + FREE 1 MBT a book (max 2)             $     47,073 $  5,816    8.10    +0.00 0/5               8.59
+        + PREMIUM ROUNDED (1 MBT <= 3 units, 2 above) $     47,368 $  6,085    7.79    -0.31 0/5               8.85
+        + PREMIUM 1/3 MBT a book (ref)                $     47,197 $  5,774    8.18    +0.08 5/5               8.81
