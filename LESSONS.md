@@ -87,6 +87,8 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   the new floor alarm (2026-10-30, Codex cross-review). Use raw strings or write the file directly.
 - The weekly review must check Claude's own week of code, not only Codex's: five defects this week were all in new Claude code (2026-10-30).
 
+- 2026-11-13 (Friday review, scheduled-jobs chat): the VPS ran VpsHealthOpen at 08:15 (result 0) but no check-in reached the repo, so premarket_check.py saw 'check-in missing' while vps-status showed charts live at 08:30. Rule: before reporting 'VPS down', read `analysis/vps_status.py` (task results + latest trade lines) and report a push gap separately from a dead VPS.
+
 ## Corrections from the user (one line per correction, added in the same reply; user rule 2026-11-01)
 - 2026-11-12, user: 'it did run today. it executed a trade for +145' (I relayed the pre-market 'JF150-5 wrote no heartbeat' as a real problem). Rule: before calling a strategy dead, check the trade log / account P&L for its fills that day; a missing heartbeat alone may be a heartbeat-logging gap, so say 'no heartbeat line (check trades)', not 'not running'.
 - 2026-11-11 (VPS log push down all day): my one-line fix to push_trade_logs.ps1 put a '#' comment before the line's closing '}', so PowerShell refused to parse the whole script and no logs uploaded. Rule: never append a comment to a code line that ends in a brace; after any .ps1 edit, parse-check it (pwsh Parser.ParseFile) or at least count braces, and say if it was not parse-checked.

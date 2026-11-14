@@ -4,6 +4,7 @@ Started 2026-10-17. Claude ticks items off when you say they're done and reminds
 bottom). Times are Central (CT).
 
 ## This week and next
+- [ ] **You, decide (Friday review 2026-11-13): VB watch STATE = RETIRE** (`analysis/outputs/vb_watch_output.txt`, data to 11/06: trailing-250 avg R +0.006 below the 2018-24 minimum +0.014; trailing-60 -0.124). New territory: keep, pause or retire Vault Break? Also export this week's MultiCharts reports into `live/` (none arrived, so no live-vs-backtest comparison).
 - [ ] **You, NOW (2026-11-12): JF150-5 inputs on the VPS:** set `HeartbeatTag` = `JF150-5` (blank, so the alarm said "not
   running" while it traded +$145). (Size 1 MNQ is CORRECT: Qty 1 since 11/12 per expected_setup; the "plan 2" flag came from a stale local copy, 11/13.)
 - [ ] **Settings report, recompile later (2026-11-12, user yes):** Claude adds the size + account inputs to each live strategy's
