@@ -1,0 +1,58 @@
+== base replica
+replica longs                          n  168 mean +1.57% t +3.28 win 54% sum +263%
+maker trades.csv                       n  165 mean +1.62% t +3.38 win 55% sum +268%
+hold days mean 5.4 median 3.8; in-market share of time 29.8%; half-target hit 54%
+by year:
+  2018: n   8 mean -0.88% sum -7.0%  t -0.57
+  2019: n  25 mean +1.34% sum +33.6%  t +0.84
+  2020: n  28 mean +3.40% sum +95.2%  t +2.69
+  2021: n  16 mean +2.44% sum +39.0%  t +1.05
+  2022: n  13 mean +0.19% sum +2.5%  t +0.20
+  2023: n  21 mean +2.21% sum +46.4%  t +1.55
+  2024: n  26 mean +1.77% sum +46.1%  t +1.81
+  2025: n  16 mean +0.14% sum +2.2%  t +0.16
+  2026: n  15 mean +0.36% sum +5.3%  t +0.39
+2018-22                                n   90 mean +1.81% t +2.42 win 56% sum +163%
+2023+                                  n   78 mean +1.28% t +2.29 win 53% sum +100%
+concentration: top5 trades = 35% of total; without best 5% (8): mean +0.79% t +1.91; without best 10: +0.63%
+median trade +1.50%
+(b) B&H full window                    n  168 mean +2.04% t +3.13 win 42% sum +343%
+   excess strat-B&H: mean -0.48% t -1.89 p(one-sided) 0.970; strat beats in 52%
+(b2) B&H exposure-matched              n  168 mean +1.54% t +3.25 win 54% sum +258%
+   excess strat-B&H: mean +0.03% t +0.95 p(one-sided) 0.172; strat beats in 50%
+BTC mean 4h return 0.0214% -> drift over avg hold (33.2 bars) ~ 0.71%
+random p per flat bar 0.0134
+(a) random entries 200 runs: n 175 (sd 10); mean/trade +0.43% (5-95% -0.14..+1.11); sum +75%
+   strat mean +1.57%: excess +1.13%/trade; p = share of runs >= strat 0.000; z 2.94
+   strat sum +263%: p(sum) 0.000
+   from 2018-06-01: strat +1.57% vs random +0.38%; p 0.000
+   from 2023-01-01: strat +1.28% vs random +0.47%; p 0.040
+(c1) ADX>25 only, no EMA stack         n  484 mean +0.45% t +1.52 win 42% sum +216%
+   excess +1.12%/trade, Welch t +2.00 p(one-sided) 0.023; sum +216% vs +263%
+   days in market 2589 vs strat 915; return per in-market day 0.083% vs strat 0.288%
+(c2) EMA stack only, no ADX            n  233 mean +0.90% t +2.33 win 48% sum +211%
+   excess +0.66%/trade, Welch t +1.08 p(one-sided) 0.141; sum +211% vs +263%
+   days in market 1185 vs strat 915; return per in-market day 0.178% vs strat 0.288%
+(c3) no filter (always long)           n  572 mean +0.19% t +0.72 win 39% sum +109%
+   excess +1.38%/trade, Welch t +2.52 p(one-sided) 0.006; sum +109% vs +263%
+   days in market 2996 vs strat 915; return per in-market day 0.036% vs strat 0.288%
+== neighbours
+ADX 20                                 n  213 mean +0.92% t +2.27 win 49% sum +197%
+ADX 30                                 n  145 mean +1.42% t +2.73 win 53% sum +206%
+stop 1.5                               n  197 mean +1.00% t +2.50 win 44% sum +198%
+stop 2.5                               n  159 mean +1.45% t +2.71 win 58% sum +230%
+half 2.5                               n  176 mean +1.36% t +3.09 win 56% sum +239%
+half 3.5                               n  161 mean +1.70% t +3.27 win 50% sum +274%
+trail 1.5                              n  202 mean +1.36% t +3.35 win 53% sum +275%
+trail 2.5                              n  144 mean +1.69% t +2.91 win 54% sum +243%
+EMA (10, 30, 60)                       n  181 mean +1.13% t +2.51 win 49% sum +204%
+EMA (20, 50, 200)                      n  151 mean +1.52% t +2.90 win 52% sum +229%
+EMA (9, 21, 55)                        n  190 mean +1.11% t +2.61 win 49% sum +212%
+EMA (30, 60, 120)                      n  169 mean +1.41% t +2.96 win 53% sum +238%
+ratcheting trail                       n  206 mean +1.38% t +3.55 win 54% sum +283%
+no re-entry on the exit bar            n  167 mean +1.52% t +3.18 win 53% sum +255%
+== delays / leaks
+entry at next 1-min open               n  168 mean +1.57% t +3.28 win 54% sum +263%
+entry one 4h bar later                 n  171 mean +1.35% t +2.87 win 51% sum +231%
+costs x2                               n  168 mean +1.43% t +3.00 win 54% sum +241%
+entry minute = last minute of 4h bar: 100.0%; exits after entry bar: 100%

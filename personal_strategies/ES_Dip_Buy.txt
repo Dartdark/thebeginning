@@ -1,0 +1,201 @@
+{ ES Dip Buy (SPY dip-buy on ES, off rising-volatility sessions) - MultiCharts PowerLanguage signal
+  PERSONAL account (holds overnight). Written 2026-11-14, NOT YET COMPILED OR BACKTESTED.
+
+  jesse.trade free 'SPYTFDipLS' ported to ES (analysis/jesse_lib_rest_test.py, analysis/spy_dip_filter_settle.py), personal plan
+  at 1 MES (WATCHLIST #45). The rule runs UNFILTERED as a SHADOW position on paper; a real trade copies a shadow entry only when
+  the session it enters in is NOT a rising-volatility session. Never block the signal itself (that lets the rule re-enter on
+  later, worse signals: t 1.3-1.7 instead of 2.7; settled 2026-11-14).
+
+  SHADOW RULE (1h ES bars; the 4h values are from the last COMPLETED 4h candle, 4h candles on Central-time boundaries 00/04/08/12/16/20)
+  - Long when the 4h SuperTrend(22, 2) is bullish (close above it) and the 1h close < EMA(18) of 1h closes.
+    Stop = entry - 1.5 x ATR(14, 4h); no target. Trail at each later 1h close:
+    stop = max(stop, min(best close - 3 x ATR4h, close - 0.5 x ATR(14, 1h))).
+  - Short when bearish, 4h ADX(14) > 22 and the 1h close > EMA(40). Stop = entry + 0.75 x ATR4h, target entry - 2.5 x ATR4h;
+    trail stop = min(stop, max(best close + 3 x ATR4h, close + 0.5 x ATR1h)).
+  - Entry at the signal bar's close, only when the shadow is flat (it can re-enter on the bar it exited). Stop before target.
+  FILTER: a session (17:00 CT start; an entry at or after 17:00 belongs to the NEXT day's session) is RISING when VIX/VIX3M's last
+  close before that session date is higher than its close 20 trading days earlier (new_data_screen RULES 'rising').
+  - Backtest: data2 = the daily VIX/VIX3M ratio (data/VIX_VIX3M_ratio_mc.csv, one bar a day stamped 16:00 CT).
+  - Real time: the VPS file C:\TradingLogs\vix\VIXTS_<session yyyymmdd>_1 (rising) or _0 (not rising), written by
+    live/vps/vix_ts_daily.ps1. No file for the session = unknown = no new real entry (the shadow keeps running).
+  REAL ORDERS: copy a kept shadow entry next bar at market; resting stop (and the short's limit target) at the shadow's levels
+  every bar; if the shadow is out and the real position is not, exit next bar at market. Python (session dating, shadow):
+  about $1,562 a year per MES, t 2.83, max DD $1,671 (reference with the id(pos) trailing-stop bug fixed, checker 2026-11-14; a
+  data-sweep lead, POST HOC). Checker replica of THIS code: 381 real trades vs 386, per-trade P&L correlation 1.000.
+
+  CHART SETUP
+  - Data1: @MES (live) or @ES (backtest; divide by 10 for MES), 60 minutes, Exchange time zone (Central), CME 24-hour session
+    (17:00-16:00). Bar Magnifier ON at 1 minute. Intra-bar order generation OFF.
+  - Data2 (backtest; keep it on the live chart too): Map ASCII data/VIX_VIX3M_ratio_mc.csv as symbol VIXTS, Exchange CME,
+    Central time, 1-minute data; add it to the chart as data2 at 1 minute (one bar per day).
+  - MaxBarsBack 200. Load at least 3 months before the backtest start (ADX / SuperTrend on 4h warm up).
+  - Real-time: set HeartbeatTag; install the VPS task (live/vps/vix_ts_daily.ps1 header).
+
+  KNOWN DIFFERENCES FROM THE PYTHON TEST
+  - The shadow checks stops / targets on each 1h bar's high / low (Python: 1-minute bars). If a short's stop and target are both
+    inside one bar, the shadow takes the stop (the real orders fill in the order MultiCharts' Bar Magnifier finds).
+  - Real entries fill at the next bar's open (Python: the signal bar's close). On the bar a real entry fills its resting stop is
+    not live yet; if the shadow stops out on that bar, the real position exits next bar at market. }
+
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";
+
+Inputs:
+	Qty(1),
+	STPeriod(22), STFactor(2), ADXMin(22), EMALong(18), EMAShort(40),
+	LongStopAtr4(1.5), ShortStopAtr4(0.75), ShortTgtAtr4(2.5), TrailAtr4(3), TrailAtr1(0.5),
+	UseFilter(true),        { false = trade every shadow entry (the unfiltered control) }
+	RisingLookback(20),     { trading days: rising = last ratio close > the close RisingLookback closes earlier }
+	HeartbeatTag("");
+
+Variables:
+	CK(0), OK(0), TR1(0), N1(0), A1(0), SA1(0), E18(0), E40(0), PC1(0),
+	H4B(-1), Has4(false), H4H(0), H4L(0), H4C(0), N4(0), PC4(0), PH4(0), PL4(0), TR4(0), UpM(0), DnM(0),
+	A4(0), SA4(0), A22(0), SA22(0), P4(0), Q4(0), SP4(0), SQ4(0), DXv(0), SDX(0), NDX(0), ADX4(0), ADXok(false),
+	UB(0), LB(0), FU(0), FL(0), ST4(0), STok(false), TrUp(true), ps4(0), Do4(false), pdi(0), ndi(0), i4(0),
+	Sig(0), ShIn(false), ShS(0), ShE(0), ShStop(0), ShTgt(0), ShBest(0), ShKeep(false), ShNew(false), ShOut(false),
+	SesDate(0), Rising(-1), k(0), nr(0), R0(0), RN(0), FName(""),
+	KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("ES_Dip_Buy 2026-11-14");
+
+{ ---------- kill switch (live/vps/KILL_SWITCH.md; real time only) ---------- }
+KillOn = false; KillAttr = -1; KillErr = 0;
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	KillAttr = GetFileAttributesA("C:\TradingLogs\KILL");
+	if KillAttr <> -1 then KillOn = true else KillErr = GetLastError;
+end;
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
+if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
+
+{ ---------- 1h indicators (Wilder ATR seeded with the mean of the first 14, pandas-style EMAs) ---------- }
+CK = DateToJulian(Date) * 24 + IntPortion(Time / 100);       { bar CLOSE, hours (Central) }
+OK = CK - 1;                                                  { bar OPEN hour }
+if N1 = 0 then TR1 = High - Low else TR1 = MaxList(High - Low, AbsValue(High - PC1), AbsValue(Low - PC1));
+N1 = N1 + 1;
+if N1 <= 14 then begin SA1 = SA1 + TR1; if N1 = 14 then A1 = SA1 / 14; end else A1 = A1 + (TR1 - A1) / 14;
+if N1 = 1 then begin E18 = Close; E40 = Close; end
+else begin E18 = E18 + 2 / (EMALong + 1) * (Close - E18); E40 = E40 + 2 / (EMAShort + 1) * (Close - E40); end;
+PC1 = Close;
+
+{ ---------- 4h candles on Central boundaries: pass 1 = finalize an unfinished earlier 4h, pass 2 = add this bar, pass 3 = 4h end ---------- }
+for ps4 = 1 to 3 begin
+	Do4 = false;
+	if ps4 = 1 then Do4 = Has4 and IntPortion(OK / 4) <> H4B;
+	if ps4 = 2 then begin
+		if Has4 = false then begin H4B = IntPortion(OK / 4); H4H = High; H4L = Low; Has4 = true; end
+		else begin if High > H4H then H4H = High; if Low < H4L then H4L = Low; end;
+		H4C = Close;
+	end;
+	if ps4 = 3 then Do4 = Has4 and Mod(OK, 4) = 3;
+	if Do4 then begin
+		i4 = N4; N4 = N4 + 1;                              { 0-based index of this 4h candle }
+		if i4 = 0 then begin TR4 = H4H - H4L; UpM = 0; DnM = 0; end
+		else begin
+			TR4 = MaxList(H4H - H4L, AbsValue(H4H - PC4), AbsValue(H4L - PC4));
+			UpM = H4H - PH4; DnM = PL4 - H4L;
+			if UpM > DnM and UpM > 0 then value2 = UpM else value2 = 0;
+			if DnM > UpM and DnM > 0 then value3 = DnM else value3 = 0;
+			UpM = value2; DnM = value3;
+		end;
+		{ ATR(14) and ATR(STPeriod): wilder() seeded with the mean of the first n true ranges (index 0 included) }
+		if i4 < 14 then begin SA4 = SA4 + TR4; if i4 = 13 then A4 = SA4 / 14; end else A4 = A4 + (TR4 - A4) / 14;
+		if i4 < STPeriod then begin SA22 = SA22 + TR4; if i4 = STPeriod - 1 then A22 = SA22 / STPeriod; end else A22 = A22 + (TR4 - A22) / STPeriod;
+		{ DMI: +DM / -DM from index 1 (index 0 is NaN in Python), so their Wilder seed is the mean of indices 1-14 }
+		if i4 >= 1 and i4 <= 14 then begin SP4 = SP4 + UpM; SQ4 = SQ4 + DnM; if i4 = 14 then begin P4 = SP4 / 14; Q4 = SQ4 / 14; end; end;
+		if i4 > 14 then begin P4 = P4 + (UpM - P4) / 14; Q4 = Q4 + (DnM - Q4) / 14; end;
+		if i4 >= 14 and A4 > 0 then begin
+			pdi = 100 * P4 / A4; ndi = 100 * Q4 / A4;
+			if pdi + ndi > 0 then DXv = 100 * AbsValue(pdi - ndi) / (pdi + ndi) else DXv = 0;
+			NDX = NDX + 1;
+			if NDX <= 14 then begin SDX = SDX + DXv; if NDX = 14 then begin ADX4 = SDX / 14; ADXok = true; end; end
+			else ADX4 = ADX4 + (DXv - ADX4) / 14;
+		end;
+		{ SuperTrend(STPeriod, STFactor) }
+		if i4 >= STPeriod - 1 then begin
+			UB = (H4H + H4L) / 2 + STFactor * A22; LB = (H4H + H4L) / 2 - STFactor * A22;
+			if STok = false then begin FU = UB; FL = LB; STok = true; end
+			else begin
+				if UB < FU or PC4 > FU then FU = UB;
+				if LB > FL or PC4 < FL then FL = LB;
+			end;
+			if TrUp and H4C < FL then TrUp = false
+			else if TrUp = false and H4C > FU then TrUp = true;
+			if TrUp then ST4 = FL else ST4 = FU;
+		end;
+		PC4 = H4C; PH4 = H4H; PL4 = H4L;
+		Has4 = false;
+	end;
+end;
+
+{ ---------- shadow position (unfiltered rule) ---------- }
+ShNew = false; ShOut = false;
+if ShIn then begin
+	if (ShS = 1 and Low <= ShStop) or (ShS = -1 and High >= ShStop) then ShOut = true
+	else if ShS = -1 and Low <= ShTgt then ShOut = true;
+	if ShOut then ShIn = false
+	else begin                                              { trail at this close }
+		if ShS = 1 then begin
+			ShBest = MaxList(ShBest, Close);
+			ShStop = MaxList(ShStop, MinList(ShBest - TrailAtr4 * A4, Close - TrailAtr1 * A1));
+		end else begin
+			ShBest = MinList(ShBest, Close);
+			ShStop = MinList(ShStop, MaxList(ShBest + TrailAtr4 * A4, Close + TrailAtr1 * A1));
+		end;
+	end;
+end;
+Sig = 0;
+if STok and N4 > 14 and A4 > 0 and N1 >= 14 then begin
+	if Close > ST4 and Close < E18 then Sig = 1
+	else if Close < ST4 and ADXok and ADX4 > ADXMin and Close > E40 then Sig = -1;
+end;
+if ShIn = false and Sig <> 0 then begin
+	ShIn = true; ShS = Sig; ShE = Close; ShBest = Close; ShNew = true;
+	if Sig = 1 then begin ShStop = Close - LongStopAtr4 * A4; ShTgt = 0; end
+	else begin ShStop = Close + ShortStopAtr4 * A4; ShTgt = Close - ShortTgtAtr4 * A4; end;
+	{ filter: the session this entry belongs to (an entry at or after 17:00 CT -> the next day's session) }
+	if Time >= 1700 then SesDate = JulianToDate(DateToJulian(Date) + 1) else SesDate = Date;
+	Rising = -1;
+	if GetAppInfo(aiRealTimeCalc) = 1 then begin
+		FName = "C:\TradingLogs\vix\VIXTS_" + NumToStr(SesDate + 19000000, 0);
+		if GetFileAttributesA(FName + "_1") <> -1 then Rising = 1
+		else if GetFileAttributesA(FName + "_0") <> -1 then Rising = 0;
+	end else begin
+		nr = 0; R0 = 0; RN = 0;
+		for k = 0 to 60 begin                               { ratio closes dated BEFORE the session date, newest first }
+			if nr <= RisingLookback and Date[k] of data2 < SesDate and Close[k] of data2 > 0 then begin
+				if nr = 0 then R0 = Close[k] of data2;
+				if nr = RisingLookback then RN = Close[k] of data2;
+				nr = nr + 1;
+			end;
+		end;
+		if nr > RisingLookback then begin if R0 > RN then Rising = 1 else Rising = 0; end;
+	end;
+	ShKeep = (UseFilter = false) or Rising = 0;
+end;
+
+{ ---------- real position: copy kept shadow entries ---------- }
+if MarketPosition <> 0 and (ShIn = false or ShKeep = false or KillOn or (MarketPosition = 1 and ShS = -1) or (MarketPosition = -1 and ShS = 1)) then begin
+	if MarketPosition = 1 then Sell ("Dip LX") next bar at market else BuyToCover ("Dip SX") next bar at market;
+end;
+if ShNew and ShKeep and NoEntry = false and Qty >= 1 then begin
+	if ShS = 1 then Buy ("Dip L") Qty contracts next bar at market else SellShort ("Dip S") Qty contracts next bar at market;
+end;
+if MarketPosition = 1 and ShIn and ShKeep and ShS = 1 and KillOn = false then Sell ("Dip L Stop") next bar at ShStop stop;
+if MarketPosition = -1 and ShIn and ShKeep and ShS = -1 and KillOn = false then begin
+	BuyToCover ("Dip S Stop") next bar at ShStop stop;
+	BuyToCover ("Dip S Tgt") next bar at ShTgt limit;
+end;
+
+{ ---------- heartbeat (live guard; log only) ---------- }
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
+	{ log each shadow entry with its filter state (the watch rule compares kept vs skipped) }
+	if ShNew then FileAppend("C:\TradingLogs\vix\es_dip_shadow.csv", HB_Day + "," + NumToStr(CurrentTime, 0) + "," + NumToStr(ShS, 0) + ","
+		+ NumToStr(ShE, 2) + "," + NumToStr(SesDate + 19000000, 0) + "," + NumToStr(Rising, 0) + "," + NumToStr(IFF(ShKeep, 1, 0), 0) + NewLine);
+end;

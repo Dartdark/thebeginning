@@ -1,0 +1,1 @@
+Checker replica of personal_strategies/BTC_ADX_Longs.txt (MC logic bar by bar, replica.py): long books of the spot BTC ADX ensemble copied to 1 MBT a book; $2.50 RT + 1 tick ($0.50) a fill; roll-adjusted CME BTC 15m. trades.csv = replica trades 2019+ (not the maker's). No fills.csv: leak_checks has no BTC tick table.

@@ -1,0 +1,28 @@
+[provenance] code 6f43adb1 dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+jesse.trade library, BTC strategies with free code (user 2026-11-13; code read logged in; triage checks/candidates/jesse_library/TRIAGE.md).
+FIX 2026-11-14 (checker): the trailing best/peak close was keyed by id(pos), which Python reuses after a trade ends (1,072 of 1,116 ES trades started from an old best); now stored on the position.
+
+[ES] filter: VIX/VIX3M (term structure) rising -> skip; unfiltered 891 trades, $6.49 per micro, t 0.74
+   calendar  drop trades      389 trades, $ 40.68 per micro, PF 1.62, t  3.01 | 2018-22 t  2.19 | 2023+ t  2.09 | $1,695 a year, max DD $-1,813
+   calendar  block signals    462 trades, $ 26.12 per micro, PF 1.36, t  2.12 | 2018-22 t  1.49 | 2023+ t  1.52 | $1,293 a year, max DD $-3,122
+   session   drop trades      386 trades, $ 37.76 per micro, PF 1.58, t  2.83 | 2018-22 t  2.13 | 2023+ t  1.90 | $1,562 a year, max DD $-1,671
+   session   block signals    462 trades, $ 27.94 per micro, PF 1.39, t  2.28 | 2018-22 t  1.58 | 2023+ t  1.66 | $1,383 a year, max DD $-2,012
+
+[NQ] filter: VXN rising -> skip; unfiltered 878 trades, $18.07 per micro, t 1.01
+   calendar  drop trades      383 trades, $ 93.99 per micro, PF 1.80, t  3.35 | 2018-22 t  1.98 | 2023+ t  2.71 | $3,901 a year, max DD $-2,728
+   calendar  block signals    456 trades, $ 89.48 per micro, PF 1.71, t  3.27 | 2018-22 t  1.96 | 2023+ t  2.64 | $4,376 a year, max DD $-3,464
+   session   drop trades      386 trades, $ 89.77 per micro, PF 1.74, t  3.21 | 2018-22 t  1.85 | 2023+ t  2.63 | $3,754 a year, max DD $-3,400
+   session   block signals    458 trades, $ 87.73 per micro, PF 1.69, t  3.19 | 2018-22 t  1.96 | 2023+ t  2.55 | $4,309 a year, max DD $-3,400
+
+sweep on SESSION dating, ES:
+   spy_ES_session: 706 trade days, $9 a day, t 0.83 (2018-22 $7, 2023+ $13); 66 regimes, gap bar |t| >= 3.17
+   VIX/VIX3M (term structure)rising        keep off gap t -3.01 | subset n 319 $45 t 2.85 (39 / 55)
+   VXN                       z_high        keep off gap t -2.61 | subset n 510 $28 t 2.25 (16 / 44)
+   BEST VERSION: VIX/VIX3M (term structure) rising keep off: t 0.83 -> 2.85; fair placebo (best of 66 random splits): median 2.27, 95th 2.75 -> p 0.035 LEAD
+
+sweep on SESSION dating, NQ:
+   spy_NQ_session: 710 trade days, $23 a day, t 1.04 (2018-22 $3, 2023+ $49); 66 regimes, gap bar |t| >= 3.17
+   VXN                       rising        keep off gap t -3.54 AT BAR | subset n 317 $108 t 3.25 (61 / 171)
+   VXN                       z_high        keep off gap t -2.88 | subset n 510 $60 t 2.25 (24 / 107)
+   BEST VERSION: VXN rising keep off: t 1.04 -> 3.25; fair placebo (best of 66 random splits): median 2.29, 95th 2.66 -> p 0.000 LEAD

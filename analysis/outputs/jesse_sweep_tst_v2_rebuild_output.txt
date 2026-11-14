@@ -1,0 +1,12 @@
+[provenance] code 8985ffa1 dirty | data 
+Standing rule (user 2026-11-10): EVERY new strategy the user sends, good or bad on its own, goes against ALL the data to look for a
+   tst_v2_rebuild: 178 trade days, $0 a day, t 2.30 (2018-22 $0, 2023+ $0); 63 regimes, gap bar |t| >= 3.16
+      VIX9D/VIX                 z_high        keep off gap t -2.09 | subset n 133 $0 t 3.22 (0 / 0)
+      OVX                       z_high        keep on  gap t  1.94 | subset n 41 $0 t 2.57 (0 / 0)
+      FINRA short ratio         rising        keep off gap t -1.68 | subset n 100 $0 t 2.79 (0 / 0)
+      GEX (SqueezeMetrics)      rising        keep off gap t -1.26 | subset n 98 $0 t 2.42 (0 / 0)
+      VXN                       above_median  keep off gap t -1.26 | subset n 78 $0 t 2.34 (0 / 0)
+      TIP/IEF breakevens        rising        keep on  gap t  1.25 | subset n 104 $0 t 2.54 (0 / 0)
+      FINRA short ratio         z_high        keep off gap t -1.25 | subset n 146 $0 t 2.84 (0 / 0)
+      RRP                       z_high        keep on  gap t  1.14 | subset n 29 $0 t 1.63 (0 / 0)
+   BEST VERSION: VIX9D/VIX z_high keep off: t 2.30 -> 3.22; fair placebo (best of 63 random splits): median 3.18, 95th 3.72 -> p 0.415 (luck explains it)

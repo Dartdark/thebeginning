@@ -1,0 +1,32 @@
+[provenance] code 3f6efdfb dirty | data 
+CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+AlligatorV2 rebuild and TrendSwingTrader V1 longs against the PERSONAL book (user 2026-11-13 'run them both').
+jesse.trade library, BTC strategies with free code (user 2026-11-13; code read logged in; triage checks/candidates/jesse_library/TRIAGE.md).
+ALLI both: 258 trades on MBT, $-87 a year per MBT; max DD $-1,297; by year 2019 -98 2020 +28 2021 -84 2022 +331 2023 -109 2024 -63 2025 -882 2026 +209
+ALLI longs: 144 trades on MBT, $-95 a year per MBT; max DD $-915; by year 2019 -40 2020 +65 2021 +17 2022 +113 2023 -74 2024 -194 2025 -215 2026 -406
+TST longs: 157 trades on MBT, $2,590 a year per MBT; max DD $-819; by year 2019 +222 2020 +906 2021 +3,381 2022 +300 2023 +1,972 2024 +6,768 2025 +3,886 2026 +2,783
+daily corr: ALLI vs BTC ADX +0.11, TST vs BTC ADX +0.46, ALLI vs TST -0.02, ALLI vs rest of book -0.03
+
+2019-26: variant                                      $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX)                       $     37,016 $  5,160    7.17    +0.00 0/5
+        + AlligatorV2 rebuild 1 MBT (both sides)    $     36,929 $  5,246    7.04    -0.13 0/5
+        + AlligatorV2 rebuild longs 1 MBT           $     36,952 $  5,212    7.09    -0.08 1/5
+        + TST V1 longs 1 MBT                        $     39,582 $  4,887    8.10    +0.93 5/5
+        + both (ALLI both sides + TST longs)        $     39,530 $  4,960    7.97    +0.80 5/5
+
+2019-22: variant                                      $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX)                       $     27,925 $  4,084    6.84    +0.00 0/5
+        + AlligatorV2 rebuild 1 MBT (both sides)    $     27,962 $  4,083    6.85    +0.01 3/5
+        + AlligatorV2 rebuild longs 1 MBT           $     27,968 $  4,102    6.82    -0.02 1/5
+        + TST V1 longs 1 MBT                        $     29,147 $  4,036    7.22    +0.38 5/5
+        + both (ALLI both sides + TST longs)        $     29,208 $  4,027    7.25    +0.41 5/5
+
+2023+: variant                                      $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX)                       $     47,073 $  5,816    8.10    +0.00 0/5
+        + AlligatorV2 rebuild 1 MBT (both sides)    $     46,905 $  5,961    7.87    -0.23 0/5
+        + AlligatorV2 rebuild longs 1 MBT           $     46,874 $  5,873    7.98    -0.11 0/5
+        + TST V1 longs 1 MBT                        $     51,005 $  5,454    9.35    +1.26 5/5
+        + both (ALLI both sides + TST longs)        $     50,826 $  5,596    9.08    +0.99 5/5

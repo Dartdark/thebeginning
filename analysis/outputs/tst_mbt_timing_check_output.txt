@@ -1,0 +1,18 @@
+[provenance] code 0a371fa2 dirty | data 
+BTC ADX longs on MBT (best version: both books ADX 40 / 50, spot signals, resting MBT stop; analysis/btc_adx_mbt_longs_stop_test.py)
+CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+jesse.trade library, BTC strategies with free code (user 2026-11-13; code read logged in; triage checks/candidates/jesse_library/TRIAGE.md).
+ALLI both: 258 trades on MBT, $-87 a year per MBT; max DD $-1,297; by year 2019 -98 2020 +28 2021 -84 2022 +331 2023 -109 2024 -63 2025 -882 2026 +209
+ALLI longs: 144 trades on MBT, $-95 a year per MBT; max DD $-915; by year 2019 -40 2020 +65 2021 +17 2022 +113 2023 -74 2024 -194 2025 -215 2026 -406
+TST longs: 157 trades on MBT, $2,590 a year per MBT; max DD $-819; by year 2019 +222 2020 +906 2021 +3,381 2022 +300 2023 +1,972 2024 +6,768 2025 +3,886 2026 +2,783
+daily corr: ALLI vs BTC ADX +0.11, TST vs BTC ADX +0.46, ALLI vs TST -0.02, ALLI vs rest of book -0.03
+same trades as the bench: True | lag check (exit minute - tx, hours) median 5.875
+bench timing (4h OPEN)   157 trades, $2,590 a year per MBT, max DD $-819; by year 2019 +222 2020 +906 2021 +3,381 2022 +300 2023 +1,972 2024 +6,768 2025 +3,886 2026 +2,783
+correct timing           160 trades, $1,092 a year per MBT, max DD $-1,612; by year 2019 -47 2020 +621 2021 +2,180 2022 -27 2023 +856 2024 +4,149 2025 +358 2026 +441
+2019-26 + TST bench timing     p50 $39,582 DD p95 $4,887 ret/DD 8.10 vs plan +0.93
+2019-26 + TST correct timing   p50 $38,057 DD p95 $5,405 ret/DD 7.04 vs plan -0.13
+2023+ + TST bench timing     p50 $51,005 DD p95 $5,454 ret/DD 9.35 vs plan +1.26
+2023+ + TST correct timing   p50 $48,480 DD p95 $6,116 ret/DD 7.93 vs plan -0.17

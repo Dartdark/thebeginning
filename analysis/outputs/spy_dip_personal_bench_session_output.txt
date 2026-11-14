@@ -1,0 +1,47 @@
+[provenance] code 6f43adb1 dirty | data 
+BTC ADX longs on MBT (best version: both books ADX 40 / 50, spot signals, resting MBT stop; analysis/btc_adx_mbt_longs_stop_test.py)
+CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+jesse.trade library, BTC strategies with free code (user 2026-11-13; code read logged in; triage checks/candidates/jesse_library/TRIAGE.md).
+ALLI both: 258 trades on MBT, $-87 a year per MBT; max DD $-1,297; by year 2019 -98 2020 +28 2021 -84 2022 +331 2023 -109 2024 -63 2025 -882 2026 +209
+ALLI longs: 144 trades on MBT, $-95 a year per MBT; max DD $-915; by year 2019 -40 2020 +65 2021 +17 2022 +113 2023 -74 2024 -194 2025 -215 2026 -406
+TST longs: 157 trades on MBT, $2,590 a year per MBT; max DD $-819; by year 2019 +222 2020 +906 2021 +3,381 2022 +300 2023 +1,972 2024 +6,768 2025 +3,886 2026 +2,783
+daily corr: ALLI vs BTC ADX +0.11, TST vs BTC ADX +0.46, ALLI vs TST -0.02, ALLI vs rest of book -0.03
+SPYTFDipLS lead (data sweep 2026-11-13: skip trades entered on days when volatility is rising) against the PERSONAL book
+entry-day dating: CME session
+NQ filter VXN not rising: 386 of 878 trades kept, $3,681 a year per micro, max DD $-3,400; by year 2018 +31 2019 +34 2020 +5,066 2021 +3,252 2022 +2,802 2023 +205 2024 +7,142 2025 +6,371 2026 +8,135
+NQ unfiltered: 878 of 878 trades kept, $2,259 a year per micro, max DD $-8,464; by year 2018 -90 2019 +1,869 2020 +1,200 2021 +1,831 2022 -3,646 2023 +741 2024 +3,580 2025 +7,049 2026 +7,743
+ES filter VIX/VIX3M (term structure) not rising: 386 of 891 trades kept, $1,624 a year per micro, max DD $-1,671; by year 2018 +296 2019 +1,300 2020 +1,936 2021 +2,624 2022 +1,151 2023 +2,522 2024 +2,133 2025 +1,931 2026 +683
+daily corr of filtered NQ with each piece: DualThrust +0.07, ZTContinuation +0.02, ESMOCFollow_perMES +0.01, OvernightTick +0.01, NFPFade +0.00, ExpirationOpenShort -0.00 | with the whole plan -0.01; most-overlapping: DualThrust
+
+2018-26: variant                                        $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX + TST V1 longs)          $     36,320 $  4,764    7.63    +0.00 0/5
+        + SPY dip NQ filtered 1 MNQ                   $     39,952 $  5,702    7.01    -0.62 0/5
+        + SPY dip NQ filtered 2 MNQ                   $     43,500 $  8,822    4.93    -2.70 0/5
+        + SPY dip NQ UNFILTERED 1 MNQ (control)       $     38,432 $  6,880    5.59    -2.04 0/5
+        + SPY dip ES filtered 1 MES                   $     37,971 $  4,731    8.03    +0.40 5/5
+        + SPY dip ES filtered 2 MES                   $     39,695 $  4,992    7.95    +0.33 5/5
+        + both filtered (1 MNQ + 1 MES)               $     41,680 $  6,556    6.36    -1.27 0/5
+        DualThrust -> SPY dip NQ filtered 1 MNQ       $     37,526 $  5,243    7.16    -0.47 0/5
+
+2018-22: variant                                        $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX + TST V1 longs)          $     25,187 $  3,856    6.53    +0.00 0/5
+        + SPY dip NQ filtered 1 MNQ                   $     27,167 $  4,237    6.41    -0.12 1/5
+        + SPY dip NQ filtered 2 MNQ                   $     29,020 $  5,319    5.46    -1.07 0/5
+        + SPY dip NQ UNFILTERED 1 MNQ (control)       $     25,510 $  5,541    4.60    -1.93 0/5
+        + SPY dip ES filtered 1 MES                   $     26,722 $  3,833    6.97    +0.44 5/5
+        + SPY dip ES filtered 2 MES                   $     28,304 $  4,013    7.05    +0.52 5/5
+        + both filtered (1 MNQ + 1 MES)               $     28,697 $  4,350    6.60    +0.07 3/5
+        DualThrust -> SPY dip NQ filtered 1 MNQ       $     25,070 $  4,150    6.04    -0.49 0/5
+
+2023+: variant                                        $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX + TST V1 longs)          $     51,005 $  5,454    9.35    +0.00 0/5
+        + SPY dip NQ filtered 1 MNQ                   $     56,490 $  6,607    8.55    -0.80 0/5
+        + SPY dip NQ filtered 2 MNQ                   $     62,036 $  9,500    6.53    -2.82 0/5
+        + SPY dip NQ UNFILTERED 1 MNQ (control)       $     55,548 $  7,387    7.52    -1.83 0/5
+        + SPY dip ES filtered 1 MES                   $     52,939 $  5,362    9.88    +0.52 5/5
+        + SPY dip ES filtered 2 MES                   $     54,941 $  5,679    9.67    +0.32 5/5
+        + both filtered (1 MNQ + 1 MES)               $     58,474 $  7,267    8.05    -1.31 0/5
+        DualThrust -> SPY dip NQ filtered 1 MNQ       $     53,549 $  6,060    8.84    -0.52 0/5

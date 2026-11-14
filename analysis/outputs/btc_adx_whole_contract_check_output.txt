@@ -1,0 +1,22 @@
+[provenance] code 6f43adb1 dirty | data 
+BTC ADX longs on MBT (best version: both books ADX 40 / 50, spot signals, resting MBT stop; analysis/btc_adx_mbt_longs_stop_test.py)
+CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+BTC ADX longs on MBT: the plan's bench sold HALF a contract at the half-off (1 MBT a book, untradeable). Tradeable versions
+plan (half a contract at half-off)   $821 a year, max DD $-1,415; by year 2019 +319 2020 +611 2021 +637 2022 -503 2023 +1,306 2024 +3,407 2025 -109 2026 +746
+(a) 1 MBT a book, no half-off        $1,518 a year, max DD $-2,051; by year 2019 +662 2020 +1,268 2021 +1,300 2022 -998 2023 +1,901 2024 +5,992 2025 +267 2026 +1,467
+(b) 2 MBT a book, 1 off at half      $1,642 a year, max DD $-2,830; by year 2019 +639 2020 +1,222 2021 +1,274 2022 -1,006 2023 +2,611 2024 +6,815 2025 -218 2026 +1,492
+2019-26 base (no BTC ADX)                    p50 $36,230 DD p95 $5,152 ret/DD 7.03 vs plan -0.14
+2019-26 plan (half a contract at half-off)   p50 $37,016 DD p95 $5,160 ret/DD 7.17 vs plan +0.00
+2019-26 (a) 1 MBT a book, no half-off        p50 $37,739 DD p95 $5,167 ret/DD 7.30 vs plan +0.13
+2019-26 (b) 2 MBT a book, 1 off at half      p50 $37,872 DD p95 $5,467 ret/DD 6.93 vs plan -0.25
+2019-22 base (no BTC ADX)                    p50 $27,666 DD p95 $4,126 ret/DD 6.71 vs plan -0.13
+2019-22 plan (half a contract at half-off)   p50 $27,925 DD p95 $4,084 ret/DD 6.84 vs plan +0.00
+2019-22 (a) 1 MBT a book, no half-off        p50 $28,209 DD p95 $4,080 ret/DD 6.92 vs plan +0.08
+2019-22 (b) 2 MBT a book, 1 off at half      p50 $28,165 DD p95 $4,077 ret/DD 6.91 vs plan +0.07
+2023+ base (no BTC ADX)                    p50 $45,694 DD p95 $5,881 ret/DD 7.77 vs plan -0.32
+2023+ plan (half a contract at half-off)   p50 $47,073 DD p95 $5,816 ret/DD 8.10 vs plan +0.00
+2023+ (a) 1 MBT a book, no half-off        p50 $48,168 DD p95 $5,818 ret/DD 8.28 vs plan +0.19
+2023+ (b) 2 MBT a book, 1 off at half      p50 $48,484 DD p95 $6,168 ret/DD 7.86 vs plan -0.23
