@@ -8,6 +8,7 @@ BTC ADX longs 1 MBT a book, TrendSwingTrader V1 longs 1 MBT. Variants: add filte
 filtered ES 1 / 2 MES, both filtered; and REPLACE the piece the filtered NQ series correlates with most.
 1-year block MC median year / p95 DD, mean of 5 seeds, paired vs the plan; 2018-26 / 2018-22 / 2023+.
   tools/run_stamped.sh analysis/spy_dip_personal_bench.py > analysis/outputs/spy_dip_personal_bench_output.txt
+  tools/run_stamped.sh analysis/spy_dip_personal_bench.py session > analysis/outputs/spy_dip_personal_bench_session_output.txt
 """
 import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 src = open("analysis/jesse_rebuilds_personal_bench.py", encoding="utf-8").read().split("plan = P.sum(axis=1) + btc")[0]
@@ -17,11 +18,14 @@ np, pd, P, MC, days, ns, btc, tst = g["np"], g["pd"], g["P"], g["MC"], g["days"]
 from new_data_screen import RULES, prior
 from data_sweep import series
 SR = series()
+SESSION = "session" in sys.argv          # 2026-11-14 settle: date trades by CME session (freshest close known at entry); default = calendar (the first bench)
+print("entry-day dating:", "CME session" if SESSION else "calendar")
 
 
 def daily(sym, filt):
     t = pd.read_csv(f"scratch_data/jesse_lib_SPY_{sym}.csv", parse_dates=["t", "tx"])
-    ent = pd.DatetimeIndex(t.t.dt.normalize()); v = prior(SR[filt], ent, RULES["rising"]) if filt else np.zeros(len(t))
+    ent = pd.DatetimeIndex((t.t + pd.Timedelta(hours=8)).dt.normalize()) if SESSION else pd.DatetimeIndex(t.t.dt.normalize())   # session (17:00 CT start; 1h bar open + 1h entry + 7h) or calendar
+    v = prior(SR[filt], ent, RULES["rising"]) if filt else np.zeros(len(t))
     keep = ~(v == 1) if filt else np.ones(len(t), bool)
     k = t[keep]; net = k.usd / 10 - 0.55
     ex = pd.DatetimeIndex(k.tx.dt.normalize()); ex = ex[ex <= days[-1]]; net = net[:len(ex)] if len(ex) < len(net) else net
