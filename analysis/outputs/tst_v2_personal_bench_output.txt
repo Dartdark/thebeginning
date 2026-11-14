@@ -1,0 +1,29 @@
+[provenance] code 7a026317 dirty | data 
+CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+TrendSwingTrader V2 REBUILD (checks/candidates/tst_v2_rebuild/) against the PERSONAL book (user 2026-11-13 'yes' to the bench).
+jesse.trade library, BTC strategies with free code (user 2026-11-13; code read logged in; triage checks/candidates/jesse_library/TRIAGE.md).
+REBUILD: 97 long trades on MBT, $855 a year per MBT
+V1: 154 long trades on MBT, $2,611 a year per MBT
+BTCADX: 328 long trades on MBT, $821 a year per MBT
+daily corr: rebuild vs BTC ADX +0.53, vs the rest of the book +0.05
+
+2019-26: variant                                    $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX 1 MBT a book)        $     37,016 $  5,160    7.17    +0.00 0/5
+        + TST V2 rebuild longs 1 MBT              $     37,902 $  5,151    7.36    +0.19 5/5
+        + TST V2 rebuild longs 2 MBT              $     38,709 $  5,223    7.41    +0.24 5/5
+        + free TST V1 longs 1 MBT (comparison)    $     39,605 $  4,887    8.11    +0.93 5/5
+
+2019-22: variant                                    $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX 1 MBT a book)        $     27,925 $  4,084    6.84    +0.00 0/5
+        + TST V2 rebuild longs 1 MBT              $     28,322 $  4,072    6.96    +0.12 5/5
+        + TST V2 rebuild longs 2 MBT              $     28,711 $  4,133    6.95    +0.11 5/5
+        + free TST V1 longs 1 MBT (comparison)    $     29,164 $  4,036    7.23    +0.39 5/5
+
+2023+: variant                                    $ a year p50   DD p95  ret/DD  vs plan  seeds better
+        PLAN (book + BTC ADX 1 MBT a book)        $     47,073 $  5,816    8.10    +0.00 0/5
+        + TST V2 rebuild longs 1 MBT              $     48,352 $  5,758    8.40    +0.30 5/5
+        + TST V2 rebuild longs 2 MBT              $     49,574 $  5,815    8.53    +0.43 5/5
+        + free TST V1 longs 1 MBT (comparison)    $     51,008 $  5,454    9.35    +1.26 5/5

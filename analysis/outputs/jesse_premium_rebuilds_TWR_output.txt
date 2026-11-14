@@ -1,0 +1,19 @@
+[provenance] code 7a026317 dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+jesse.trade library, BTC strategies with free code (user 2026-11-13; code read logged in; triage checks/candidates/jesse_library/TRIAGE.md).
+Premium rebuilds by matching, round 2 (pre-registered checks/candidates/jesse_premium_rebuilds/PREREG.md): AlligatorV2, | TWR
+parent code vs parent site curve: fit F1 0.794, check F1 0.815 (ceiling)
+parent code vs PREMIUM curve: fit F1 0.600, check F1 0.606; premium active days fit 218, check 188
+grid 900: fit F1 median 0.593, 95th 0.727, best 0.753
+   rank 1: {'adx': 40, 'sma': (10, 30), 'cci': 100, 'stop': 2.5, 'target': 2} fit F1 0.753 n 267 -> check F1 0.738
+   rank 2: {'adx': 40, 'sma': (25, 50), 'cci': 100, 'stop': 2.5, 'target': 2} fit F1 0.753 n 268 -> check F1 0.738
+   rank 3: {'adx': 40, 'sma': (20, 100), 'cci': 100, 'stop': 2.5, 'target': 2} fit F1 0.753 n 268 -> check F1 0.740
+   rank 4: {'adx': 40, 'sma': (20, 100), 'cci': 100, 'stop': 3, 'target': 2} fit F1 0.752 n 268 -> check F1 0.745
+   rank 5: {'adx': 40, 'sma': (25, 50), 'cci': 100, 'stop': 3, 'target': 2} fit F1 0.752 n 268 -> check F1 0.743
+ACCEPT rank 1: True (check 0.738 >= 0.6, within 0.10 of fit 0.753, above parent's check 0.606)
+
+REBUILD on our data (1-min fills): 1052 trades, win 63%, +0.071% a trade, PF 1.15, t 1.90
+   2018-21 (unseen): +0.180% t 2.96 n 494 | 2022-23 (fit): -0.008% t -0.12 n 259 | 2024-26 (check): -0.041% t -0.70 n 299
+   longs +0.018% (t 0.34) | shorts +0.105% (t 2.06)
+   by year %: 2018 +11  2019 +10  2020 +8  2021 +60  2022 +9  2023 -11  2024 -11  2025 -2  2026 +1
+   placebo (random side, 40 runs): mean -0.129%, p95 -0.067%, p = 0.00

@@ -170,7 +170,7 @@ def simulate(b, sig, plan, manage=None, limit=None, seed=None, cooldown_close=Fa
                     px = (min(pos["stop"], MO[k]) if s == 1 else max(pos["stop"], MO[k])); why = "stop"; cst = FEE + SLIP; break
                 if pos["tgt"] is not None and ((s == 1 and MH[k] >= pos["tgt"]) or (s == -1 and ML[k] <= pos["tgt"])):
                     if pos.get("half_at") and not pos["half"]:
-                        parts.append((0.5, pos["tgt"], FEE)); pos["half"] = True; pos["tgt"] = None
+                        parts.append((0.5, pos["tgt"], FEE)); pos["half"] = True; pos["tgt"] = None; pos["th"] = MT[k]
                         if manage: manage(j, pos, event="half")
                         continue
                     px = pos["tgt"]; why = "target"; cst = FEE; break
@@ -182,9 +182,9 @@ def simulate(b, sig, plan, manage=None, limit=None, seed=None, cooldown_close=Fa
         if px is None: break
         q = 1.0 - sum(p[0] for p in parts)
         ret = sum(w * s * (p_ - e) / e - w * c_ for w, p_, c_ in parts) + q * (s * (px - e) / e - cst) - cost_in
-        out.append((b.index[i], b.index[j], s, ret, ret / R, why, e, len(parts) > 0))
+        out.append((b.index[i], b.index[j], s, ret, ret / R, why, e, len(parts) > 0, R, pos.get("th", np.datetime64("NaT"))))
         i = j + 1 if cooldown_close else j + 1
-    t = pd.DataFrame(out, columns=["t", "tx", "side", "ret", "r", "why", "e", "halfed"]); t["yr"] = t.t.dt.year
+    t = pd.DataFrame(out, columns=["t", "tx", "side", "ret", "r", "why", "e", "halfed", "R", "th"]); t["yr"] = t.t.dt.year
     return t
 
 
