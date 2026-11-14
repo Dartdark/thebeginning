@@ -65,4 +65,5 @@ def show(d, nm):
 
 show(trades(S, resting=False), "LONGS, no resting stop (exits follow spot only)")
 D = trades(S); show(D, "LONGS, resting stop on MBT at the spot stop distance")
-D.assign(date=pd.DatetimeIndex(D.tx).normalize().date, net=D.usd).to_csv("scratch_data/btc_adx_mbt_longs_stop_trades.csv", index=False)
+D.assign(date=pd.DatetimeIndex(D.tx).normalize().date, entry_date=pd.DatetimeIndex(D.t).normalize().date, net=D.usd).to_csv(
+    "scratch_data/btc_adx_mbt_longs_stop_trades%s.csv" % ("_book50" if "book50" in sys.argv else ""), index=False)

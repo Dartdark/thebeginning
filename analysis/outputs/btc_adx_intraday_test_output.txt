@@ -1,0 +1,21 @@
+[provenance] code 959476e1 dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+BTC ADX ensemble, APEX-LEGAL INTRADAY version on MBT (user 2026-11-13: 'is there an intraday apex legal version? break it into
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+
+APEX-LEGAL INTRADAY (flat 15:45 CT), spot signals -> MBT, per MBT per book:
+V0 as coded                    n  861 win 46% $   1.5/MBT PF 1.05 R +0.017 t  0.55 daily t  0.37 | 2019-22 t -1.04 2023+ t  1.84 | 4/9 yrs | $170/yr per MBT, DD $-2,320 | longs +0.031R (t 0.71) shorts +0.004R (t 0.09)
+  (V0 exits: {'flat': 470, 'mbt stop': 227, 'ema': 79, 'tp': 59, 'stop': 26}; spot book trades 866, mirrored 861; hold hours median 11.8)
+V1 longs only                  n  412 win 47% $   2.1/MBT PF 1.08 R +0.031 t  0.71 daily t  0.43 | 2019-22 t -1.15 2023+ t  1.88 | 3/8 yrs | $111/yr per MBT, DD $-1,405 | longs +0.031R (t 0.71) shorts +nanR (t nan)
+V2 no ADX gate                 n 4552 win 43% $  -1.1/MBT PF 0.96 R -0.050 t -3.91 daily t -0.60 | 2019-22 t -4.85 2023+ t -0.64 | 2/9 yrs | $-636/yr per MBT, DD $-9,040 | longs -0.036R (t -2.04) shorts -0.065R (t -3.59)
+V3 no Bollinger width          n  882 win 46% $   2.8/MBT PF 1.09 R +0.021 t  0.71 daily t  0.70 | 2019-22 t -0.93 2023+ t  1.96 | 5/9 yrs | $316/yr per MBT, DD $-2,264 | longs +0.032R (t 0.75) shorts +0.011R (t 0.27)
+V4 no vol ratio                n  884 win 45% $   0.6/MBT PF 1.02 R +0.008 t  0.27 daily t  0.14 | 2019-22 t -1.39 2023+ t  1.81 | 4/9 yrs | $64/yr per MBT, DD $-2,484 | longs +0.027R (t 0.63) shorts -0.009R (t -0.21)
+V5 no SuperTrend               n 1197 win 43% $  -1.7/MBT PF 0.94 R -0.046 t -1.85 daily t -0.49 | 2019-22 t -3.34 2023+ t  0.83 | 4/9 yrs | $-263/yr per MBT, DD $-3,547 | longs -0.048R (t -1.44) shorts -0.044R (t -1.18)
+V6 single book ADX>40          n  605 win 43% $  -0.8/MBT PF 0.97 R -0.018 t -0.50 daily t -0.22 | 2019-22 t -1.24 2023+ t  0.56 | 3/9 yrs | $-65/yr per MBT, DD $-2,201 | longs -0.001R (t -0.02) shorts -0.034R (t -0.66)
+V7 single book ADX>50          n  256 win 50% $   7.2/MBT PF 1.24 R +0.099 t  1.73 daily t  1.14 | 2019-22 t -0.01 2023+ t  2.44 | 6/8 yrs | $237/yr per MBT, DD $-734 | longs +0.111R (t 1.31) shorts +0.088R (t 1.14)
+V8 no resting stop             n  861 win 47% $   2.0/MBT PF 1.06 R +0.017 t  0.54 daily t  0.47 | 2019-22 t -1.03 2023+ t  1.78 | 5/9 yrs | $219/yr per MBT, DD $-2,548 | longs +0.044R (t 0.97) shorts -0.008R (t -0.17)
+V9 V0 shorts (slice)           n  449 win 44% $   1.0/MBT PF 1.03 R +0.004 t  0.09 daily t  0.16 | 2019-22 t -0.43 2023+ t  0.66 | 4/9 yrs | $60/yr per MBT, DD $-2,126 | longs +nanR (t nan) shorts +0.004R (t 0.09)
+
+BEST by the fixed rule (highest daily t of V0-V8): V7 single book ADX>50
+  by year $ per MBT: 2019 +70 (44)  2020 +58 (37)  2021 -159 (19)  2022 -23 (24)  2023 +450 (39)  2024 +113 (37)  2025 +641 (33)  2026 +682 (23)
+  worst trade -1.75R ($-437), worst Apex day $-437; stop $ per MBT median 89 (2025+ 173)
