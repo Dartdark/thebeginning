@@ -25,6 +25,7 @@ def series():
     S["RRP"] = rd("data/nyfed/rrp_daily.csv", "operationDate", "rrp_bn"); S["SPX"] = rd("data/SPX_daily.csv", "date", "close")
     F = pd.read_csv("data/finra/short_volume.csv", sep="|", parse_dates=["Date"])
     F = F[F.Symbol.isin(["QQQ", "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "AVGO", "TSLA", "COST", "NFLX"]) & (F.TotalVolume > 0)]
+    S["GPR (geopolitical)"] = rd("data/GPR_daily.csv", "date", "GPRD")      # Caldara-Iacoviello daily GPR (matteoiacoviello.com), added 2026-11-14 (EdgeFinder triage)
     S["FINRA short ratio"] = (F.ShortVolume / F.TotalVolume).groupby(F.Date).mean().sort_index()
     return S
 
