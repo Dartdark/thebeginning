@@ -1,0 +1,65 @@
+== replica vs maker
+replica (simple CMO, re-entry in exit candle) n  352 win 70% mean +0.3888% PF 1.56 t +3.32 | match 352/352 (100%)
+net corr 1.000000, max |net diff| 1.01e-05, same exit type 100.0%
+talib-style Wilder CMO, reentry=True     n  396 win 70% mean +0.4022% PF 1.61 t +4.03 | match 311/352 (88%)
+talib-style Wilder CMO, reentry=False    n  394 win 70% mean +0.4111% PF 1.63 t +4.11 | match 305/352 (87%)
+simple CMO, no re-entry in exit candle   n  350 win 70% mean +0.3989% PF 1.58 t +3.39
+
+== leak shifts
+4h Alligator one 4h candle later         n  332 win 70% mean +0.3999% PF 1.56 t +3.23 | match 314/352 (89%)
+4h Alligator two candles later           n  313 win 69% mean +0.3386% PF 1.46 t +2.64 | match 290/352 (82%)
+4h Alligator FORMING final (leak demo)   n  385 win 70% mean +0.3927% PF 1.57 t +3.56 | match 338/352 (96%)
+4h EMA completed only (no forming)       n  352 win 70% mean +0.3888% PF 1.56 t +3.32 | match 352/352 (100%)
+4h EMA one completed candle later        n  352 win 70% mean +0.3888% PF 1.56 t +3.32 | match 352/352 (100%)
+4h EMA forming FINAL close (leak demo)   n  352 win 70% mean +0.3888% PF 1.56 t +3.32 | match 352/352 (100%)
+both 4h pieces one candle later          n  332 win 70% mean +0.3999% PF 1.56 t +3.23 | match 314/352 (89%)
+entry 1 x 30m bar later (G11-style)      n  351 win 71% mean +0.4308% PF 1.64 t +3.82
+entry 2 x 30m bar later (G11-style)      n  341 win 69% mean +0.3856% PF 1.54 t +3.31
+
+== neighbours (one at a time)
+ADX 35                                   n  427 win 68% mean +0.3052% PF 1.42 t +2.92
+ADX 45                                   n  278 win 71% mean +0.4056% PF 1.57 t +2.95
+CMO 10                                   n  397 win 71% mean +0.3984% PF 1.57 t +3.59
+CMO 30                                   n  254 win 72% mean +0.4464% PF 1.68 t +3.48
+StochRSI 10/90                           n  165 win 72% mean +0.5104% PF 1.77 t +3.06
+StochRSI 30/70                           n  467 win 69% mean +0.2941% PF 1.38 t +2.43
+stop 2.5                                 n  354 win 66% mean +0.3341% PF 1.49 t +3.06
+stop 3.5                                 n  351 win 73% mean +0.4447% PF 1.64 t +3.79
+target 1.5                               n  374 win 75% mean +0.2700% PF 1.47 t +2.78
+target 2.5                               n  344 win 64% mean +0.4308% PF 1.51 t +3.20
+stop 2 target 2                          n  355 win 59% mean +0.2690% PF 1.41 t +2.67
+stop 2 target 3                          n  334 win 47% mean +0.2544% PF 1.29 t +1.93
+4h EMA 30                                n  352 win 70% mean +0.3888% PF 1.56 t +3.32
+4h EMA 100                               n  348 win 70% mean +0.3973% PF 1.57 t +3.36
+
+== by year / periods / sides
+2018                                     n   36 win 75% mean +0.8050% PF 2.55 t +2.33 sum +0.290
+2019                                     n   47 win 68% mean +0.5326% PF 1.90 t +1.91 sum +0.250
+2020                                     n   49 win 71% mean +0.6996% PF 2.10 t +2.12 sum +0.343
+2021                                     n   36 win 67% mean -0.0534% PF 0.96 t -0.08 sum -0.019
+2022                                     n   29 win 72% mean +0.4966% PF 1.56 t +1.04 sum +0.144
+2023                                     n   49 win 71% mean +0.3350% PF 1.66 t +1.60 sum +0.164
+2024                                     n   36 win 69% mean +0.2345% PF 1.34 t +0.77 sum +0.084
+2025                                     n   35 win 71% mean +0.1811% PF 1.33 t +0.73 sum +0.063
+2026                                     n   35 win 63% mean +0.1396% PF 1.24 t +0.58 sum +0.049
+2018-21 (never used)                     n  168 win 70% mean +0.5141% PF 1.66 t +2.55
+2022-23 (matching window)                n   78 win 72% mean +0.3951% PF 1.61 t +1.80
+2024-26                                  n  106 win 68% mean +0.1855% PF 1.31 t +1.21
+2023+                                    n  155 win 69% mean +0.2328% PF 1.41 t +1.88
+longs                                    n  191 win 69% mean +0.2865% PF 1.46 t +2.33
+shorts                                   n  161 win 71% mean +0.5101% PF 1.64 t +2.42
+exit types: {'target': 246, 'stop': 106} target fills where open gapped past target (fill could be better): 0
+
+== concentration
+without best 5% (18 trades): mean +0.1844%, t 1.64, sum +0.616 vs +1.369
+best year 2020 removed:                                          n  303 win 70% mean +0.3385% PF 1.48 t +2.70
+largest win +7.58%, largest loss -15.80%; top 10 trades = 35% of total
+
+== geometry baseline: random side at every signal time (path-dependent, flat only), and random times
+random side: 300 runs, mean -0.0566% (sd 0.1168%), share >= real +0.3888%: 0.000
+random times + random side (same signal count): 100 runs, mean -0.1135%, share >= real: 0.000
+
+== fills (own L1 / data issues)
+entry price inside its last 1m bar 100.0%; exit price inside its 1m bar 100.0%
+trades with a data gap > 30 min while open: 2 (net of those -0.010)
+same-minute exits (entry minute = exit minute): 0; median hold 0 days 07:25:00
