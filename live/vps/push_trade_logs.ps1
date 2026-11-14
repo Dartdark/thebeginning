@@ -46,6 +46,12 @@ schtasks /Query /TN "OvxDaily" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "OvxDaily" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 18:00 /RI 60 /DU 03:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\ovx_daily.ps1" /F | Out-Null
 }
+# one-time (2026-11-14): VIX/VIX3M rising flag for the personal ES Dip Buy (live/vps/vix_ts_daily.ps1; idempotent). Installed before the
+# strategy goes live so its log shows when CBOE's close arrives (evening entries need the file by 17:00 CT).
+schtasks /Query /TN "VixTsDaily" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "VixTsDaily" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 15:30 /RI 15 /DU 08:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\vix_ts_daily.ps1" /F | Out-Null
+}
 # alerts the watchdog sent today go to the repo too (live/health/YYYYMMDD_alerts.txt)
 if (Test-Path "$Logs\alerts.txt") { Get-Content "$Logs\alerts.txt" | Where-Object { $_ -like "$((Get-Date).ToString('yyyy-MM-dd'))*" } | Set-Content "live\health\$(Get-Date -Format yyyyMMdd)_alerts.txt" }
 
@@ -97,6 +103,8 @@ if (Test-Path "$Logs\finra\signals.csv") { Copy-Item "$Logs\finra\signals.csv" "
 # copier group state log (2026-11-09) -> live/health/group_log.csv
 if (Test-Path "$Logs\group\group_log.csv") { Copy-Item "$Logs\group\group_log.csv" "live\health\group_log.csv" -Force }
 if (Test-Path "$Logs\ovx\ovx_log.csv") { Copy-Item "$Logs\ovx\ovx_log.csv" "live\health\ovx_log.csv" -Force }
+if (Test-Path "$Logs\vix\vix_ts_log.csv") { Copy-Item "$Logs\vix\vix_ts_log.csv" "live\health\vix_ts_log.csv" -Force }
+if (Test-Path "$Logs\vix\es_dip_shadow.csv") { Copy-Item "$Logs\vix\es_dip_shadow.csv" "live\health\es_dip_shadow.csv" -Force }
 git add live/trades live/health data/live_bars live/finra
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {

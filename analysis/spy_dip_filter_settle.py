@@ -1,4 +1,5 @@
-"""Settle the ES dip-buy volatility filter (user 2026-11-14 'yes, settle it'). Two choices changed the result:
+"""FIX 2026-11-14 (checker): the trailing best/peak close was keyed by id(pos), which Python reuses after a trade ends (1,072 of 1,116 ES trades started from an old best); now stored on the position.
+Settle the ES dip-buy volatility filter (user 2026-11-14 'yes, settle it'). Two choices changed the result:
  1. which DAY a trade belongs to: the calendar date of the entry (the bench) or the CME session (17:00 CT start; an evening entry
     belongs to the next session, so its 'last close' is today's close, the freshest value known at 17:00, no look-ahead)
  2. WHERE the filter acts: dropping finished trades from the unfiltered list (the bench and the sweep) or blocking the SIGNAL so the
@@ -47,7 +48,7 @@ def spy(sym):
     sig = np.where((C > L4) & (C < e18), 1, np.where((C < L4) & (X4 > 22) & (C > e40), -1, 0)); sig[np.isnan(L4) | np.isnan(A4)] = 0
     bs = {}
     def mg(j, pos, event=None):
-        s = pos["s"]; k = id(pos); bb_ = bs.get(k, pos["e"]); bb_ = max(bb_, C[j]) if s == 1 else min(bb_, C[j]); bs[k] = bb_
+        s = pos["s"]; bb_ = pos.get("_best", pos["e"]); bb_ = max(bb_, C[j]) if s == 1 else min(bb_, C[j]); pos["_best"] = bb_
         if s == 1: pos["stop"] = max(pos["stop"], min(bb_ - 3 * A4[j], C[j] - 0.5 * A1[j]))
         else: pos["stop"] = min(pos["stop"], max(bb_ + 3 * A4[j], C[j] + 0.5 * A1[j]))
     plan = lambda i, s, e: (e - 1.5 * A4[i], None) if s == 1 else (e + 0.75 * A4[i], e - 2.5 * A4[i])

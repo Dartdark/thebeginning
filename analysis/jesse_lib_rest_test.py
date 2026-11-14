@@ -1,4 +1,5 @@
-"""jesse.trade library, the rest of the shortlist (user 2026-11-13 'test the rest'), free code as coded, ported to our data.
+"""FIX 2026-11-14 (checker): the trailing best/peak close was keyed by id(pos), which Python reuses after a trade ends (1,072 of 1,116 ES trades started from an old best); now stored on the position.
+jesse.trade library, the rest of the shortlist (user 2026-11-13 'test the rest'), free code as coded, ported to our data.
 Engine and conventions: analysis/jesse_lib_btc_test.py (Jesse order semantics, stops / targets on 1-min bars, placebo = random side).
   BBSQ  BBSqueezeTrend (author: ETH-USDT 30m / 4h anchor; no ETH data -> BTC spot): 4h Bollinger(29, 1.82) inside Keltner(29,
         1.56, EMA mid, ATR) for >= 4 bars, then the FORMING 4h candle is out of the squeeze -> enter on that 30m close in the
@@ -89,7 +90,7 @@ for i in range(len(b)):
     sig[i] = 1 if slope > 0 else -1; fired_at[k] = i
 best = {}
 def mg_bbsq(j, pos, event=None):
-    s = pos["s"]; key = id(pos); bb_ = best.get(key, pos["e"]); bb_ = max(bb_, C30[j]) if s == 1 else min(bb_, C30[j]); best[key] = bb_
+    s = pos["s"]; bb_ = pos.get("_best", pos["e"]); bb_ = max(bb_, C30[j]) if s == 1 else min(bb_, C30[j]); pos["_best"] = bb_
     a = atr14[done[j]] if done[j] >= 0 else np.nan
     ns = bb_ - s * tm * a
     if (s == 1 and ns > pos["stop"]) or (s == -1 and ns < pos["stop"]): pos["stop"] = ns
@@ -114,7 +115,7 @@ peak = {}
 def mg_eth(j, pos, event=None):
     s = pos["s"]
     if reg[j] != s: return "exit"
-    key = id(pos); pk = peak.get(key, pos["e"]); pk = max(pk, C30[j]) if s == 1 else min(pk, C30[j]); peak[key] = pk
+    pk = pos.get("_peak", pos["e"]); pk = max(pk, C30[j]) if s == 1 else min(pk, C30[j]); pos["_peak"] = pk
     trail = min(pk - 9 * A30[j], C30[j] - 0.5 * A30[j]) if s == 1 else max(pk + 9 * A30[j], C30[j] + 0.5 * A30[j])
     pos["stop"] = max(pos["stop"], trail) if s == 1 else min(pos["stop"], trail)
 run = lambda seed=None: simulate(b, sig, lambda i, s, e: (e - s * 7 * A30[i], None), manage=mg_eth, seed=seed)
@@ -148,7 +149,7 @@ for sym in ("ES", "NQ"):
     sig = np.where(bull & (C1 < e18), 1, np.where(bear & (C1 > e40), -1, 0)); sig[np.isnan(L4) | np.isnan(A4)] = 0
     bestS = {}
     def mg_spy(j, pos, event=None):
-        s = pos["s"]; key = id(pos); bb_ = bestS.get(key, pos["e"]); bb_ = max(bb_, C1[j]) if s == 1 else min(bb_, C1[j]); bestS[key] = bb_
+        s = pos["s"]; bb_ = pos.get("_best", pos["e"]); bb_ = max(bb_, C1[j]) if s == 1 else min(bb_, C1[j]); pos["_best"] = bb_
         if s == 1:
             tr = min(bb_ - 3 * A4[j], C1[j] - 0.5 * A1[j]); pos["stop"] = max(pos["stop"], tr)
         else:

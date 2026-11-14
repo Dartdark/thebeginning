@@ -1,4 +1,5 @@
-"""jesse.trade strategies as APEX-LEGAL INTRADAY versions on NQ (user 2026-11-13: 'none of em can be intraday?'). Pre-registered here,
+"""FIX 2026-11-14 (checker): the trailing best/peak close was keyed by id(pos), which Python reuses after a trade ends (1,072 of 1,116 ES trades started from an old best); now stored on the position.
+jesse.trade strategies as APEX-LEGAL INTRADAY versions on NQ (user 2026-11-13: 'none of em can be intraday?'). Pre-registered here,
 before running: every library strategy whose bars are <= 1h, ported as coded to NQ futures (24h 1-min, rolls difference-adjusted,
 bars on the CT clock, indicators continuous across sessions as a 24h chart), in two forms: (1) as coded (holds overnight) and
 (2) Apex-legal: no new entries from 14:45 to 17:00 CT, every position out at the last bar closing at or before 15:45 CT
@@ -104,7 +105,7 @@ def mk_eth(C_, A_, rg):
     def mg(j, pos, event=None):
         s = pos["s"]
         if rg[j] != s: return "exit"
-        k = id(pos); p_ = pk.get(k, pos["e"]); p_ = max(p_, C_[j]) if s == 1 else min(p_, C_[j]); pk[k] = p_
+        p_ = pos.get("_peak", pos["e"]); p_ = max(p_, C_[j]) if s == 1 else min(p_, C_[j]); pos["_peak"] = p_
         tr = min(p_ - 9 * A_[j], C_[j] - 0.5 * A_[j]) if s == 1 else max(p_ + 9 * A_[j], C_[j] + 0.5 * A_[j])
         pos["stop"] = max(pos["stop"], tr) if s == 1 else min(pos["stop"], tr)
     return mg
@@ -123,7 +124,7 @@ sigS = np.where((C > L4s) & (C < e18), 1, np.where((C < L4s) & (X4 > 22) & (C > 
 def mk_spy(C_, A1, A4_):
     bs = {}
     def mg(j, pos, event=None):
-        s = pos["s"]; k = id(pos); bb_ = bs.get(k, pos["e"]); bb_ = max(bb_, C_[j]) if s == 1 else min(bb_, C_[j]); bs[k] = bb_
+        s = pos["s"]; bb_ = pos.get("_best", pos["e"]); bb_ = max(bb_, C_[j]) if s == 1 else min(bb_, C_[j]); pos["_best"] = bb_
         if s == 1: pos["stop"] = max(pos["stop"], min(bb_ - 3 * A4_[j], C_[j] - 0.5 * A1[j]))
         else: pos["stop"] = min(pos["stop"], max(bb_ + 3 * A4_[j], C_[j] + 0.5 * A1[j]))
     return mg

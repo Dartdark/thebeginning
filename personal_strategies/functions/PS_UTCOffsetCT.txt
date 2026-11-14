@@ -1,0 +1,18 @@
+{ PS_UTCOffsetCT - MultiCharts PowerLanguage FUNCTION (personal strategies, 2026-11-14). Compile this once BEFORE the signals
+  that call it (Personal_BTC_ADX_Longs). Return type: Numeric. Function storage: Simple.
+
+  Returns the hours to ADD to a US Central time to get UTC: 5 during daylight time (CDT), 6 otherwise (CST).
+  US rule since 2007: daylight time from the 2nd Sunday of March 02:00 to the 1st Sunday of November 02:00 local time.
+  DateVal is MultiCharts' date (YYYMMDD, year - 1900), TimeVal is HHMM. The ambiguous 01:00-02:00 hour in November is read
+  as daylight time (as pandas' ambiguous handling in our Python port drops it; one hour a year). }
+Inputs: DateVal(NumericSimple), TimeVal(NumericSimple);
+Variables: Yr(0), Mo(0), Dy(0), Mar1(0), Nov1(0), DstStart(0), DstEnd(0), Res(6);
+Yr = Year(DateVal); Mo = Month(DateVal); Dy = DayOfMonth(DateVal);
+Mar1 = Yr * 10000 + 301; Nov1 = Yr * 10000 + 1101;
+DstStart = 1 + Mod(7 - DayOfWeek(Mar1), 7) + 7;     { day of March: 2nd Sunday }
+DstEnd = 1 + Mod(7 - DayOfWeek(Nov1), 7);           { day of November: 1st Sunday }
+Res = 6;
+if Mo > 3 and Mo < 11 then Res = 5
+else if Mo = 3 and (Dy > DstStart or (Dy = DstStart and TimeVal > 200)) then Res = 5
+else if Mo = 11 and (Dy < DstEnd or (Dy = DstEnd and TimeVal < 200)) then Res = 5;
+PS_UTCOffsetCT = Res;

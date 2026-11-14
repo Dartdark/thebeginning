@@ -1,0 +1,78 @@
+
+=== MC: paper books (both sides), entries from 2019-07-01 ===
+ref 675, replica 674, matched entries (t, side, book) 664 = 98.4% of ref, 98.5% of replica
+  of matched: same exit time 99.5%, same exit reason 100.0%
+  unmatched ref by year: {2020: 2, 2021: 4, 2023: 2, 2024: 1, 2025: 1, 2026: 1} unmatched replica by year: {2020: 3, 2021: 2, 2023: 1, 2024: 1, 2025: 3}
+  2019: ref  60 matched  60 (100%) exit-same 100%
+  2020: ref 115 matched 113 (98%) exit-same 100%
+  2021: ref  58 matched  54 (93%) exit-same 98%
+  2022: ref  82 matched  82 (100%) exit-same 100%
+  2023: ref 104 matched 102 (98%) exit-same 99%
+  2024: ref 105 matched 104 (99%) exit-same 99%
+  2025: ref  85 matched  84 (99%) exit-same 100%
+  2026: ref  66 matched  65 (98%) exit-same 100%
+--- MC: real MBT longs from 2019-07-01: ref 299 trades $10,964, replica 282 trades $9,497
+  matched by paper entry (t, book) 278 = 93.0% of ref; entry fill same 15m moment 96.4%; exit within 15 min 89.2%; same exit kind 96.0%
+  P&L corr per matched trade 0.938; matched sum ref $8,728 vs replica $9,797; unmatched ref $2,237 (21), unmatched replica $-300 (4)
+  replica exit kinds: {'out': 146, 'stop': 136} ref: {'out': 163, 'stop': 136}
+  $/yr ref 1,505 replica 1,304; by year ref 2019:-234 2020:+1,268 2021:+1,300 2022:-998 2023:+1,901 2024:+5,992 2025:+267 2026:+1,467 | replica 2019:-228 2020:+1,278 2021:+873 2022:-1,092 2023:+1,874 2024:+5,195 2025:+190 2026:+1,408
+  largest per-trade differences (rep - ref):
+    2024-05-15 21:45:00 b50 ref out 2024-05-20 23:30:00 $621 | rep stop 2024-05-16 17:30:00 $-152
+    2026-08-20 15:45:00 b40 ref out 2026-08-21 09:00:00 $676 | rep stop 2026-08-21 11:30:00 $443
+    2022-02-04 21:45:00 b40 ref out 2022-02-08 06:00:00 $417 | rep stop 2022-02-08 09:00:00 $239
+    2020-11-29 11:45:00 b40 ref out 2020-12-01 00:15:00 $-21 | rep stop 2020-12-01 12:15:00 $-73
+    2024-02-08 01:45:00 b40 ref out 2024-02-09 11:00:00 $206 | rep out 2024-02-12 15:45:00 $501
+    2024-02-27 01:45:00 b50 ref out 2024-02-28 09:00:00 $345 | rep out 2024-02-28 17:15:00 $796
+    2025-07-10 08:45:00 b40 ref out 2025-07-10 22:15:00 $478 | rep out 2025-07-14 05:30:00 $1,093
+
+=== MCfix: paper books (both sides), entries from 2019-07-01 ===
+ref 675, replica 674, matched entries (t, side, book) 672 = 99.6% of ref, 99.7% of replica
+  of matched: same exit time 100.0%, same exit reason 100.0%
+  unmatched ref by year: {2021: 2, 2026: 1} unmatched replica by year: {2021: 2}
+  2019: ref  60 matched  60 (100%) exit-same 100%
+  2020: ref 115 matched 115 (100%) exit-same 100%
+  2021: ref  58 matched  56 (97%) exit-same 100%
+  2022: ref  82 matched  82 (100%) exit-same 100%
+  2023: ref 104 matched 104 (100%) exit-same 100%
+  2024: ref 105 matched 105 (100%) exit-same 100%
+  2025: ref  85 matched  85 (100%) exit-same 100%
+  2026: ref  66 matched  65 (98%) exit-same 100%
+--- MCfix: real MBT longs from 2019-07-01: ref 299 trades $10,964, replica 282 trades $9,513
+  matched by paper entry (t, book) 280 = 93.6% of ref; entry fill same 15m moment 96.4%; exit within 15 min 89.6%; same exit kind 96.1%
+  P&L corr per matched trade 0.938; matched sum ref $8,687 vs replica $9,758; unmatched ref $2,278 (19), unmatched replica $-245 (2)
+  replica exit kinds: {'out': 146, 'stop': 136} ref: {'out': 163, 'stop': 136}
+  $/yr ref 1,505 replica 1,306; by year ref 2019:-234 2020:+1,268 2021:+1,300 2022:-998 2023:+1,901 2024:+5,992 2025:+267 2026:+1,467 | replica 2019:-228 2020:+1,278 2021:+873 2022:-1,092 2023:+1,861 2024:+5,195 2025:+218 2026:+1,408
+  largest per-trade differences (rep - ref):
+    2024-05-15 21:45:00 b50 ref out 2024-05-20 23:30:00 $621 | rep stop 2024-05-16 17:30:00 $-152
+    2026-08-20 15:45:00 b40 ref out 2026-08-21 09:00:00 $676 | rep stop 2026-08-21 11:30:00 $443
+    2022-02-04 21:45:00 b40 ref out 2022-02-08 06:00:00 $417 | rep stop 2022-02-08 09:00:00 $239
+    2020-11-29 11:45:00 b40 ref out 2020-12-01 00:15:00 $-21 | rep stop 2020-12-01 12:15:00 $-73
+    2024-02-08 01:45:00 b40 ref out 2024-02-09 11:00:00 $206 | rep out 2024-02-12 15:45:00 $501
+    2024-02-27 01:45:00 b50 ref out 2024-02-28 09:00:00 $345 | rep out 2024-02-28 17:15:00 $796
+    2025-07-10 08:45:00 b40 ref out 2025-07-10 22:15:00 $478 | rep out 2025-07-14 05:30:00 $1,093
+
+=== WARM: paper books (both sides), entries from 2019-07-01 ===
+ref 675, replica 674, matched entries (t, side, book) 664 = 98.4% of ref, 98.5% of replica
+  of matched: same exit time 99.5%, same exit reason 100.0%
+  unmatched ref by year: {2020: 2, 2021: 4, 2023: 2, 2024: 1, 2025: 1, 2026: 1} unmatched replica by year: {2020: 3, 2021: 2, 2023: 1, 2024: 1, 2025: 3}
+  2019: ref  60 matched  60 (100%) exit-same 100%
+  2020: ref 115 matched 113 (98%) exit-same 100%
+  2021: ref  58 matched  54 (93%) exit-same 98%
+  2022: ref  82 matched  82 (100%) exit-same 100%
+  2023: ref 104 matched 102 (98%) exit-same 99%
+  2024: ref 105 matched 104 (99%) exit-same 99%
+  2025: ref  85 matched  84 (99%) exit-same 100%
+  2026: ref  66 matched  65 (98%) exit-same 100%
+--- WARM: real MBT longs from 2019-07-01: ref 299 trades $10,964, replica 282 trades $9,497
+  matched by paper entry (t, book) 278 = 93.0% of ref; entry fill same 15m moment 96.4%; exit within 15 min 89.2%; same exit kind 96.0%
+  P&L corr per matched trade 0.938; matched sum ref $8,728 vs replica $9,797; unmatched ref $2,237 (21), unmatched replica $-300 (4)
+  replica exit kinds: {'out': 146, 'stop': 136} ref: {'out': 163, 'stop': 136}
+  $/yr ref 1,505 replica 1,304; by year ref 2019:-234 2020:+1,268 2021:+1,300 2022:-998 2023:+1,901 2024:+5,992 2025:+267 2026:+1,467 | replica 2019:-228 2020:+1,278 2021:+873 2022:-1,092 2023:+1,874 2024:+5,195 2025:+190 2026:+1,408
+  largest per-trade differences (rep - ref):
+    2024-05-15 21:45:00 b50 ref out 2024-05-20 23:30:00 $621 | rep stop 2024-05-16 17:30:00 $-152
+    2026-08-20 15:45:00 b40 ref out 2026-08-21 09:00:00 $676 | rep stop 2026-08-21 11:30:00 $443
+    2022-02-04 21:45:00 b40 ref out 2022-02-08 06:00:00 $417 | rep stop 2022-02-08 09:00:00 $239
+    2020-11-29 11:45:00 b40 ref out 2020-12-01 00:15:00 $-21 | rep stop 2020-12-01 12:15:00 $-73
+    2024-02-08 01:45:00 b40 ref out 2024-02-09 11:00:00 $206 | rep out 2024-02-12 15:45:00 $501
+    2024-02-27 01:45:00 b50 ref out 2024-02-28 09:00:00 $345 | rep out 2024-02-28 17:15:00 $796
+    2025-07-10 08:45:00 b40 ref out 2025-07-10 22:15:00 $478 | rep out 2025-07-14 05:30:00 $1,093

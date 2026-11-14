@@ -1,0 +1,39 @@
+reference: unfiltered 1116 trades $5,260; session+drop 469 trades $14,031 ($1,503/yr, t 2.65); block-signals file 798 trades
+
+=== stops on 1h bars ===
+shadow vs reference unfiltered: ref 1116, replica 891, same entry bar+side 869 (77.9% of ref, 97.5% of replica); same exit bar 84.2%; same exit kind 99.4%; filter flag agrees 100.0%
+  shadow P&L corr per matched trade 0.9195; matched ref $10,267 vs replica shadow $6,923
+  unmatched ref: [['2017-08-10 03:00:00', '1'], ['2017-12-19 23:00:00', '-1'], ['2017-12-21 08:00:00', '-1'], ['2017-12-21 11:00:00', '-1'], ['2018-01-17 06:00:00', '-1'], ['2018-02-06 06:00:00', '1']]  unmatched replica: [['2017-12-21 10:00:00', '-1'], ['2018-10-24 11:00:00', '1'], ['2019-06-13 09:00:00', '-1'], ['2019-08-14 07:00:00', '1'], ['2020-01-06 10:00:00', '-1'], ['2020-01-07 08:00:00', '1']]
+real vs ref session+drop: ref 469 $14,031, replica real 381 $14,839 ($1,590/yr, t 2.89); matched by shadow entry 375 (80.0% of ref); P&L corr 0.953
+  matched: ref $14,562 vs replica $15,673; difference per trade mean $+2.96; unmatched ref 94 $-531, unmatched replica 6 $-834
+  entries filled after the 16:00-17:00 break / weekend (fill bar not the next hour): 11, P&L diff on them $+6; others $+1,105
+  exits: replica {'stop': 335, 'target': 35, 'mkt': 11}; ref {'stop': 434, 'target': 35}
+   2017: ref $    +135  replica $    +152
+   2018: ref $     +13  replica $    +157
+   2019: ref $    +885  replica $  +1,295
+   2020: ref $  +2,397  replica $  +1,937
+   2021: ref $  +3,335  replica $  +3,155
+   2022: ref $    +469  replica $    +541
+   2023: ref $  +1,687  replica $  +2,526
+   2024: ref $  +1,168  replica $  +2,395
+   2025: ref $  +3,191  replica $  +1,975
+   2026: ref $    +751  replica $    +705
+
+=== stops on 1min bars ===
+shadow vs reference unfiltered: ref 1116, replica 891, same entry bar+side 869 (77.9% of ref, 97.5% of replica); same exit bar 84.2%; same exit kind 99.4%; filter flag agrees 100.0%
+  shadow P&L corr per matched trade 0.9202; matched ref $10,267 vs replica shadow $6,835
+  unmatched ref: [['2017-08-10 03:00:00', '1'], ['2017-12-19 23:00:00', '-1'], ['2017-12-21 08:00:00', '-1'], ['2017-12-21 11:00:00', '-1'], ['2018-01-17 06:00:00', '-1'], ['2018-02-06 06:00:00', '1']]  unmatched replica: [['2017-12-21 10:00:00', '-1'], ['2018-10-24 11:00:00', '1'], ['2019-06-13 09:00:00', '-1'], ['2019-08-14 07:00:00', '1'], ['2020-01-06 10:00:00', '-1'], ['2020-01-07 08:00:00', '1']]
+real vs ref session+drop: ref 469 $14,031, replica real 381 $14,839 ($1,590/yr, t 2.89); matched by shadow entry 375 (80.0% of ref); P&L corr 0.953
+  matched: ref $14,562 vs replica $15,673; difference per trade mean $+2.96; unmatched ref 94 $-531, unmatched replica 6 $-834
+  entries filled after the 16:00-17:00 break / weekend (fill bar not the next hour): 11, P&L diff on them $+6; others $+1,105
+  exits: replica {'stop': 335, 'target': 35, 'mkt': 11}; ref {'stop': 434, 'target': 35}
+   2017: ref $    +135  replica $    +152
+   2018: ref $     +13  replica $    +157
+   2019: ref $    +885  replica $  +1,295
+   2020: ref $  +2,397  replica $  +1,937
+   2021: ref $  +3,335  replica $  +3,155
+   2022: ref $    +469  replica $    +541
+   2023: ref $  +1,687  replica $  +2,526
+   2024: ref $  +1,168  replica $  +2,395
+   2025: ref $  +3,191  replica $  +1,975
+   2026: ref $    +751  replica $    +705

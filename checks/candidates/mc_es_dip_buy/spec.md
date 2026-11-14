@@ -1,0 +1,1 @@
+Checker replica of personal_strategies/ES_Dip_Buy.txt (MC logic bar by bar, replica.py): shadow SPY dip rule on ES 60-min, real trades only off VIX/VIX3M-rising sessions; $ per MES = (pts x 50 - $5 - $12.50 a market/stop fill)/10 - $0.55. trades.csv / fills.csv = replica real trades (fills at unadjusted prices, fill-bar end stamps).
