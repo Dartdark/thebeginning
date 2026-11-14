@@ -33,3 +33,9 @@ spans costs one extra round trip. Costs per MBT ($0.10 a point, tick 5 points = 
 = $3.50, as a % of notional at entry. Report: as spot (return, CAGR, max DD, Sharpe, exposure, halves), futures buy-and-hold (ratio-adjusted:
 includes the roll / contango cost of holding), random-timing placebo (500 runs), and the same rule on spot over the same dates.
 Pass: placebo p < 0.05 and Sharpe above futures buy-and-hold in both halves. Then the personal-book bench (1 MBT).
+
+## Result of Amendment 1 (`analysis/outputs/hma_mbt_test_output.txt`): FAIL on CME micro bitcoin futures
+187 trades (246 on spot: CME weekends / daily breaks change the 4H bars), $27.7 per MBT a trade (t 1.39), 0.11 rolls a trade. 2019-26 +503%,
+CAGR 26.5%, max DD -44.8%, Sharpe 0.73 vs futures buy-and-hold 0.94; 2019-22 Sharpe 0.38 (B&H 0.87), 2023+ 1.25 (B&H 1.12). Random-timing
+placebo p 0.020 (timing still real) but it fails 'Sharpe above buy-and-hold in both halves'. Personal book: + 1 MBT return/DD -0.07 (2018-22
++0.09, 2023+ +0.10), + 2 MBT -0.33; corr -0.02. Spot's advantage (Sharpe 1.06, max DD -32%) does not survive the move to CME futures.
