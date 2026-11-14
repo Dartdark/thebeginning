@@ -1,0 +1,21 @@
+[provenance] code 6a83f43e dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+BTC ADX ensemble, LONGS ONLY, spot signals -> MBT, with a RESTING STOP on the futures (user 2026-11-13 'yes, test it').
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+spot LONG book trades in the futures window: 369, spot mean +0.341R
+
+LONGS, no resting stop (exits follow spot only)
+  per MBT: 328 book trades, win 47.0%, $22.5 a trade, PF 1.67, R +0.315 (t 4.44); 2019-22 +0.283R (t 2.83), 2023+ +0.343R (t 3.42)
+  worst trade -2.64R, losses past -1.2R: 26; exits {'spot': 328}
+  book ADX>40: n 230 R +0.283 t 3.37 | 2023+ t 2.20
+  book ADX>50: n 98 R +0.390 t 2.94 | 2023+ t 2.88
+  $25,000 at 1% per R: 328 trades (0 skipped, 1 MBT > 2%), MBT per book median 3, $3,042 a year (12.2%), max DD $-1,808 (-7.2%), longest under water 359 days | 2019 +4,215 2020 +5,440 2021 +1,658 2022 -1,012 2023 +5,513 2024 +5,823 2025 +230 2026 +1,681
+  $50,000 at 1% per R: 328 trades (0 skipped, 1 MBT > 2%), MBT per book median 6, $6,210 a year (12.4%), max DD $-4,171 (-8.3%), longest under water 359 days | 2019 +8,539 2020 +11,298 2021 +4,122 2022 -2,449 2023 +11,208 2024 +10,681 2025 +1,066 2026 +3,617
+
+LONGS, resting stop on MBT at the spot stop distance
+  per MBT: 328 book trades, win 43.3%, $19.6 a trade, PF 1.60, R +0.265 (t 4.01); 2019-22 +0.195R (t 2.09), 2023+ +0.328R (t 3.53)
+  worst trade -1.41R, losses past -1.2R: 10; exits {'spot': 186, 'stop': 142}
+  book ADX>40: n 230 R +0.192 t 2.49 | 2023+ t 1.95
+  book ADX>50: n 98 R +0.437 t 3.46 | 2023+ t 3.49
+  $25,000 at 1% per R: 328 trades (0 skipped, 1 MBT > 2%), MBT per book median 3, $2,595 a year (10.4%), max DD $-2,215 (-8.9%), longest under water 622 days | 2019 +3,188 2020 +4,434 2021 +1,023 2022 -1,264 2023 +5,094 2024 +6,348 2025 -19 2026 +1,291
+  $50,000 at 1% per R: 328 trades (0 skipped, 1 MBT > 2%), MBT per book median 6, $5,208 a year (10.4%), max DD $-4,722 (-9.4%), longest under water 440 days | 2019 +6,448 2020 +9,250 2021 +2,225 2022 -3,047 2023 +10,449 2024 +11,954 2025 +608 2026 +2,433
