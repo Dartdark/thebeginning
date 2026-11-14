@@ -1,0 +1,30 @@
+[provenance] code c63e72d4 dirty | data 
+BTC ADX longs on MBT (best version: both books ADX 40 / 50, spot signals, resting MBT stop; analysis/btc_adx_mbt_longs_stop_test.py)
+base pieces (15): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs']; days 2018-01-02 -> 2026-10-09
+BTC longs: 328 book trades to 2026-10-09, $828 a year per MBT per book
+daily corr with each piece (2019+): BridgeMondayLong +0.07, MondayLong +0.04, OvernightTick +0.02, TwinContinuation +0.02, OvernightBiasML +0.02, LateDayFlow +0.01, RelativeStrength +0.01, NoiseLongs +0.00, PaperTrend +0.00, NFPFade -0.00, ExpirationOpenShort -0.01, DualThrust -0.01, SwingTarget -0.02, ESMOCFollow_perMES -0.02, CLSundayFade_perMCL -0.02
+corr with the whole book +0.03; most-overlapping piece: BridgeMondayLong
+
+2019-26: variant                        $ a year p50    DD p95  ret/DD   diff  capital (DD/0.20)
+        book as is                    $     31,148 $   4,768    6.53  +0.00 $          23,838
+        + BTC longs 1 MBT a book      $     31,932 $   4,709    6.78  +0.25 $          23,547
+        + BTC longs 2 MBT a book      $     32,763 $   5,060    6.47  -0.06 $          25,300
+        + BTC longs 3 MBT a book      $     33,513 $   5,467    6.13  -0.40 $          27,333
+        BridgeMondayLong -> BTC 1 MBT $     30,388 $   4,843    6.27  -0.26 $          24,214
+        BridgeMondayLong -> BTC 2 MBT $     31,158 $   4,972    6.27  -0.27 $          24,862
+
+2019-22: variant                        $ a year p50    DD p95  ret/DD   diff  capital (DD/0.20)
+        book as is                    $     24,250 $   3,643    6.66  +0.00 $          18,217
+        + BTC longs 1 MBT a book      $     24,504 $   3,593    6.82  +0.16 $          17,965
+        + BTC longs 2 MBT a book      $     24,776 $   3,596    6.89  +0.23 $          17,980
+        + BTC longs 3 MBT a book      $     24,953 $   3,617    6.90  +0.24 $          18,087
+        BridgeMondayLong -> BTC 1 MBT $     22,874 $   3,721    6.15  -0.51 $          18,606
+        BridgeMondayLong -> BTC 2 MBT $     23,242 $   3,723    6.24  -0.41 $          18,617
+
+2023+: variant                        $ a year p50    DD p95  ret/DD   diff  capital (DD/0.20)
+        book as is                    $     37,953 $   5,530    6.86  +0.00 $          27,652
+        + BTC longs 1 MBT a book      $     39,303 $   5,465    7.19  +0.33 $          27,325
+        + BTC longs 2 MBT a book      $     40,850 $   5,755    7.10  +0.24 $          28,776
+        + BTC longs 3 MBT a book      $     42,520 $   6,348    6.70  -0.16 $          31,741
+        BridgeMondayLong -> BTC 1 MBT $     37,883 $   5,289    7.16  +0.30 $          26,445
+        BridgeMondayLong -> BTC 2 MBT $     39,450 $   5,624    7.02  +0.15 $          28,118
