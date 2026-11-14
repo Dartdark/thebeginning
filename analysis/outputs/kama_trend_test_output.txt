@@ -1,0 +1,51 @@
+[provenance] code 1c9dd334 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261106 #effc816a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+EMBIA_V3 (user's Jesse strategy, 2026-11-14; pre-registered checks/candidates/embia_v3/PREREG.md): rebuild on BTC spot and NQ, ingredient
+EMBIA_V3 (user's Jesse strategy, 2026-11-14; pre-registered checks/candidates/embia_v3/PREREG.md): rebuild on BTC spot and NQ, ingredient
+
+################ BTC spot
+   1h PRIMARY                               n   203 avg $  -31.2 t -0.41 PF 0.92 win 55% | 2018-22 $   59.6 (t  1.0) 2023+ $ -124.7 (t -0.9) | L $ 115.5 S $-160.2
+      18:-0.8k 19:+1.6k 20:+0.8k 21:-4.1k 22:+8.6k 23:-7.4k 24:-9.9k 25:-0.4k 26:+5.3k
+      exits tgt 112, stop 91; median hold 621 min; 23 trades a year
+   15min secondary                          n   927 avg $    1.6 t  0.08 PF 1.01 win 56% | 2018-22 $   42.0 (t  2.3) 2023+ $  -53.9 (t -1.3) | L $ -53.3 S $  48.9
+      18:+0.2k 19:-0.6k 20:+1.8k 21:+13.6k 22:+7.5k 23:+0.9k 24:-10.6k 25:-16.0k 26:+4.7k
+      exits tgt 522, stop 405; median hold 217 min; 105 trades a year
+   random side, same entries (40 runs): mean $-43.3, p95 $78.2 -> real $-31.2: p 0.375
+   ingredient breakdown (1h, one condition removed at a time):
+   without kama                             n   215 avg $  -23.8 t -0.32 PF 0.94 win 54% | 2018-22 $   27.9 (t  0.4) 2023+ $  -80.0 (t -0.6) | L $ 136.4 S $-165.7
+   without adx                              n  1966 avg $  -55.1 t -2.29 PF 0.88 win 50% | 2018-22 $  -32.9 (t -1.4) 2023+ $  -80.5 (t -1.8) | L $ -87.7 S $ -19.1
+   without ltkama                           n   215 avg $    3.4 t  0.05 PF 1.01 win 56% | 2018-22 $   65.0 (t  1.0) 2023+ $  -63.7 (t -0.5) | L $ 157.9 S $-146.9
+   without chop                             n   246 avg $   38.2 t  0.54 PF 1.10 win 57% | 2018-22 $  119.0 (t  2.0) 2023+ $  -56.9 (t -0.4) | L $ 158.8 S $ -62.6
+   without bbw                              n   303 avg $   45.7 t  0.62 PF 1.10 win 60% | 2018-22 $   79.6 (t  1.1) 2023+ $    0.7 (t  0.0) | L $ 161.3 S $ -54.8
+   without cooldown                         n   277 avg $   61.5 t  0.97 PF 1.17 win 58% | 2018-22 $   30.5 (t  0.6) 2023+ $   92.3 (t  0.8) | L $ 186.8 S $ -50.9
+
+################ NQ as coded (holds overnight)
+   1h PRIMARY                               n   192 avg $  -91.3 t -0.41 PF 0.93 win 50% | 2018-22 $ -380.8 (t -1.6) 2023+ $  210.4 (t  0.6) | L $-148.0 S $ -35.9
+      18:+0.2k 19:-5.0k 20:+10.7k 21:-14.0k 22:-29.2k 23:+7.6k 24:+0.9k 25:+24.2k 26:-12.9k
+      exits tgt 96, stop 96; median hold 632 min; 22 trades a year
+   15min secondary                          n   602 avg $   44.3 t  0.60 PF 1.06 win 52% | 2018-22 $   61.7 (t  0.8) 2023+ $   20.7 (t  0.1) | L $  58.5 S $  31.6
+      18:-7.0k 19:-6.9k 20:+7.5k 21:+12.9k 22:+14.9k 23:+4.9k 24:+6.9k 25:-16.8k 26:+10.3k
+      exits tgt 315, stop 287; median hold 217 min; 68 trades a year
+   random side, same entries (40 runs): mean $-21.6, p95 $257.5 -> real $-91.3: p 0.675
+   ingredient breakdown (1h, one condition removed at a time):
+   without kama                             n   199 avg $  -78.5 t -0.35 PF 0.94 win 51% | 2018-22 $ -246.1 (t -1.0) 2023+ $   90.8 (t  0.2) | L $ -97.2 S $ -60.7
+   without adx                              n  1855 avg $ -107.4 t -1.53 PF 0.92 win 50% | 2018-22 $  -90.1 (t -1.2) 2023+ $ -129.9 (t -1.0) | L $ -20.4 S $-223.0
+   without ltkama                           n   199 avg $ -201.6 t -0.91 PF 0.86 win 48% | 2018-22 $ -407.7 (t -1.7) 2023+ $    6.5 (t  0.0) | L $-213.3 S $-189.4
+   without chop                             n   202 avg $  -45.6 t -0.20 PF 0.97 win 50% | 2018-22 $ -461.2 (t -1.9) 2023+ $  395.3 (t  1.0) | L $ -64.7 S $ -28.3
+   without bbw                              n   195 avg $ -128.9 t -0.56 PF 0.91 win 50% | 2018-22 $ -279.6 (t -1.2) 2023+ $   26.5 (t  0.1) | L $ -70.9 S $-184.0
+   without cooldown                         n   262 avg $ -209.9 t -1.07 PF 0.86 win 49% | 2018-22 $ -337.1 (t -1.6) 2023+ $  -90.2 (t -0.3) | L $-169.9 S $-247.5
+
+################ NQ Apex (flat 15:55, no entries 15:00-17:00)
+   1h PRIMARY                               n   199 avg $ -314.4 t -1.65 PF 0.75 win 46% | 2018-22 $ -603.4 (t -3.0) 2023+ $  -22.5 (t -0.1) | L $-209.5 S $-418.2
+      18:-12.2k 19:-7.4k 20:+2.1k 21:-10.1k 22:-32.8k 23:+5.3k 24:-4.6k 25:+13.5k 26:-16.4k
+      exits stop 81, tgt 65, flat 53; median hold 414 min; 22 trades a year
+   15min secondary                          n   573 avg $  -34.4 t -0.52 PF 0.94 win 52% | 2018-22 $   -1.4 (t -0.0) 2023+ $  -79.3 (t -0.6) | L $   0.5 S $ -66.0
+      18:-10.9k 19:-3.1k 20:-2.6k 21:+10.6k 22:+5.5k 23:+1.9k 24:+1.4k 25:-17.9k 26:-4.7k
+      exits stop 227, tgt 225, flat 121; median hold 159 min; 65 trades a year
+   random side, same entries (40 runs): mean $-16.1, p95 $260.1 -> real $-314.4: p 0.975
+   ingredient breakdown (1h, one condition removed at a time):
+   without kama                             n   207 avg $ -200.4 t -1.07 PF 0.83 win 48% | 2018-22 $ -446.5 (t -2.3) 2023+ $   43.4 (t  0.1) | L $-131.7 S $-265.9
+   without adx                              n  2196 avg $  -98.6 t -1.79 PF 0.91 win 49% | 2018-22 $  -85.9 (t -1.5) 2023+ $ -114.9 (t -1.1) | L $ -85.2 S $-117.3
+   without ltkama                           n   207 avg $ -490.1 t -2.65 PF 0.63 win 44% | 2018-22 $ -570.1 (t -2.9) 2023+ $ -410.9 (t -1.3) | L $-412.8 S $-569.6
+   without chop                             n   213 avg $ -228.8 t -1.23 PF 0.81 win 48% | 2018-22 $ -588.6 (t -3.0) 2023+ $  141.3 (t  0.4) | L $-200.7 S $-253.7
+   without bbw                              n   203 avg $ -373.2 t -1.87 PF 0.71 win 46% | 2018-22 $ -521.7 (t -2.5) 2023+ $ -223.3 (t -0.7) | L $-144.5 S $-590.9
+   without cooldown                         n   290 avg $ -210.7 t -1.36 PF 0.82 win 49% | 2018-22 $ -325.4 (t -2.0) 2023+ $  -99.2 (t -0.4) | L $ -40.9 S $-371.4
