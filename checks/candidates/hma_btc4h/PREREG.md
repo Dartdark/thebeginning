@@ -24,3 +24,12 @@ positive in both halves). Its value is risk control (drawdown -32% vs ~-77% for 
 it max DD -76%); the LinReg filter does nothing.
 NQ port (personal, multi-day): SMA $2,113 a trade t 1.63, HMA $581 t 1.39; both below NQ long-only; data sweep p 0.68 (luck). FAIL.
 Use: BTC only, multi-day, long only -> personal account (CME micro bitcoin futures would need its own test: rolls, CME hours). C+.
+
+## Amendment 1 (user 2026-11-14 'yea test it'): CME micro bitcoin futures (MBT). Written before running it.
+The HMA version (the one that passed on spot), rules unchanged, on CME bitcoin futures 1-min (data/BTC_1min_*, Central, close-stamped,
+2018-12 ->; CME hours: closed weekends and 16:00-17:00 CT), 4H bars on the same UTC grid as spot (missing bars simply absent). Roll jumps
+removed by backward RATIO adjustment (analysis/roll_adjust.py roll_jumps, monthly windows) for signals and returns; every roll a trade
+spans costs one extra round trip. Costs per MBT ($0.10 a point, tick 5 points = $0.50): $2.50 commission + 1 tick a side per round trip
+= $3.50, as a % of notional at entry. Report: as spot (return, CAGR, max DD, Sharpe, exposure, halves), futures buy-and-hold (ratio-adjusted:
+includes the roll / contango cost of holding), random-timing placebo (500 runs), and the same rule on spot over the same dates.
+Pass: placebo p < 0.05 and Sharpe above futures buy-and-hold in both halves. Then the personal-book bench (1 MBT).
