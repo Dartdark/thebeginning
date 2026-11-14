@@ -98,7 +98,9 @@ def setup():
     return m15, H1, ema, t4, vr, td
 
 
-def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=None, seed=None):
+def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=None, seed=None, cost_pts=None, flat=None, noent=None, longs_only=False):
+    """cost_pts: cost per fill in price points (futures) instead of COST; flat / noent: per-15m-candle flags (force every book out at
+    this close / no new entries), for the flat-by-15:59 CT version"""
     m15, H1, ema, t4, vr, td = ctx
     rng = np.random.default_rng(seed) if seed is not None else None
     T = m15.index.to_numpy(); Hh, Ll, Cc = (m15[k].to_numpy() for k in ("high", "low", "close"))
@@ -107,8 +109,9 @@ def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=No
     b = [None] * len(books); out = []
     def close_book(i, px, t, why):
         k = b[i]; s = k["s"]; r = s * (px - k["e"]) / k["e"]
-        pnl = k["q"] * r + (0.5 * k["pr"] if k["half"] else 0.0) - COST * (1 + k["q"]) - (COST * 0.5 if k["half"] else 0.0)
-        out.append((k["t"], t, s, books[i], pnl, k["R"], why)); b[i] = None
+        cs = COST if cost_pts is None else cost_pts / k["e"]
+        pnl = k["q"] * r + (0.5 * k["pr"] if k["half"] else 0.0) - cs * (1 + k["q"]) - (cs * 0.5 if k["half"] else 0.0)
+        out.append((k["t"], t, s, books[i], pnl, k["R"], why, k["e"])); b[i] = None
     for j in range(len(T)):
         t, h, l, c = T[j], Hh[j], Ll[j], Cc[j]
         he = (pd.Timestamp(t).minute == 45)
@@ -130,8 +133,9 @@ def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=No
             if (s == 1 and h >= k["tp"]) or (s == -1 and l <= k["tp"]): close_book(i, c, t, "tp"); continue
             if not k["half"] and ((s == 1 and h >= k["pt"]) or (s == -1 and l <= k["pt"])):
                 k["half"] = True; k["pr"] = s * (c - k["e"]) / k["e"]; k["q"] = 0.5
-            if (t - k["t"]) >= 240 * hour or (he and lt == -s): close_book(i, c, t, "time" if lt != -s else "ema")
-        if not he: continue
+            if (t - k["t"]) >= 240 * hour or (he and lt == -s): close_book(i, c, t, "time" if lt != -s else "ema"); continue
+            if flat is not None and flat[j]: close_book(i, c, t, "flat")
+        if not he or (noent is not None and noent[j]): continue
         ih = h1i.get(t - np.timedelta64(45, "m"))
         if ih is None or ih < 60 or np.isnan(e4): continue
         adx, atr, st, bbw, cl = A[ih]
@@ -144,6 +148,7 @@ def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=No
             if iv >= 0 and not np.isnan(vr[iv]) and vr[iv] >= 1.5: side = 0
         if not side: continue
         if rng is not None: side = int(rng.choice([-1, 1]))
+        if longs_only and side < 0: continue
         net = sum(k["s"] for k in b if k)
         if net * side < 0: continue
         for i, lvl in enumerate(books):
@@ -151,7 +156,7 @@ def run(ctx, gates=("adx", "bbw", "vol", "st"), books=(40, 50), side_override=No
                 R = 2.5 * atr / c
                 b[i] = {"s": side, "e": c, "stop": c - side * 2.5 * atr, "pt": c + side * 1.5 * atr, "tp": c + side * 8 * atr,
                         "half": False, "q": 1.0, "pr": 0.0, "t": t, "R": R}
-    d = pd.DataFrame(out, columns=["t", "tx", "side", "book", "ret", "R", "why"])
+    d = pd.DataFrame(out, columns=["t", "tx", "side", "book", "ret", "R", "why", "e"])
     d["r"] = d.ret / d.R; d["yr"] = pd.DatetimeIndex(d.t).year
     return d
 

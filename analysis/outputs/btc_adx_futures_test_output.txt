@@ -1,0 +1,22 @@
+[provenance] code 1b9cfcad dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+BTC ADX ensemble on CME BITCOIN FUTURES (user 2026-11-13: 'cant it be traded on btc futures?'). Same rule as
+futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
+
+A  as coded on CME futures (multi-day holds; not Apex-legal)
+  547 book trades, win 37.7%, $9.3 per MBT a trade, PF 1.22, t 1.51 (daily t 1.34), $666 a year, max DD $-2,396, worst trade $-398, worst day $-788; stop $ per MBT median 82 (2025+ 167)
+  R: mean +0.138, 2019-22 +0.117, 2023+ +0.162 | longs $12.7 (n 279)  shorts $5.8 (n 268)
+  by year $: 2019 +199 (81)  2020 +277 (86)  2021 -810 (52)  2022 +1,217 (67)  2023 +1,443 (81)  2024 +1,414 (76)  2025 -1,650 (53)  2026 +3,015 (51)
+  exits: {'stop': 246, 'tp': 138, 'ema': 98, 'time': 35, 'guard': 30}
+
+B  Apex version: flat by 15:45 CT, no entries 14:45-17:00 CT
+  802 book trades, win 47.5%, $-0.2 per MBT a trade, PF 0.99, t -0.06 (daily t -0.05), $-24 a year, max DD $-2,320, worst trade $-398, worst day $-748; stop $ per MBT median 80 (2025+ 175)
+  R: mean -0.003, 2019-22 -0.063, 2023+ +0.068 | longs $-1.8 (n 417)  shorts $1.5 (n 385)
+  by year $: 2019 -234 (127)  2020 -152 (122)  2021 -1,897 (73)  2022 +1,239 (114)  2023 +815 (109)  2024 -32 (108)  2025 -693 (77)  2026 +773 (72)
+  exits: {'flat': 494, 'stop': 169, 'ema': 69, 'tp': 41, 'guard': 29}
+
+C  B, longs only
+  417 book trades, win 47.5%, $-1.8 per MBT a trade, PF 0.94, t -0.40 (daily t -0.34), $-98 a year, max DD $-2,175, worst trade $-398, worst day $-724; stop $ per MBT median 72 (2025+ 159)
+  R: mean -0.010, 2019-22 -0.095, 2023+ +0.083 | longs $-1.8 (n 417)  shorts $nan (n 0)
+  by year $: 2019 -315 (72)  2020 -18 (78)  2021 -876 (32)  2022 +212 (35)  2023 +661 (67)  2024 -39 (67)  2025 -540 (32)  2026 +163 (34)
+  exits: {'flat': 254, 'stop': 102, 'tp': 25, 'guard': 18, 'ema': 18}
