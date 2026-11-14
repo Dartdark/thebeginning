@@ -4,6 +4,7 @@ Started 2026-10-17. Claude ticks items off when you say they're done and reminds
 bottom). Times are Central (CT).
 
 ## This week and next
+- [ ] **Claude, then you (2026-11-13, user 'put trendswing in the personal'): TrendSwingTrader V1 longs into the personal plan at 1 MBT.** Claude writes the MultiCharts strategy alongside the BTC ADX one (MBT chart + spot BTC 4h signals, resting stop, half-off, trailing stop), checker review, then you run a MultiCharts backtest and send the report before it goes live.
 - [ ] **Claude, then you (2026-11-13, user 'yes, add it'): BTC ADX longs into the personal plan at 1 MBT a book.** Claude writes the MultiCharts strategy (MBT chart + a spot BTC feed as data2 for the signals, resting stop, half-off; or confirms the signals can come from MBT's own 24/7 bars since CME went 24/7 on 2026-05-29), checker review, then you run a MultiCharts backtest and send the report before it goes live. Check your broker's MBT margin (~$2.8k a contract per Schwab, March 2026).
 - [ ] **You, decide (Friday review 2026-11-13): VB watch STATE = RETIRE** (`analysis/outputs/vb_watch_output.txt`, data to 11/06: trailing-250 avg R +0.006 below the 2018-24 minimum +0.014; trailing-60 -0.124). New territory: keep, pause or retire Vault Break? Also export this week's MultiCharts reports into `live/` (none arrived, so no live-vs-backtest comparison).
 - [ ] **You, NOW (2026-11-12): JF150-5 inputs on the VPS:** set `HeartbeatTag` = `JF150-5` (blank, so the alarm said "not
