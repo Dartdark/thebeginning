@@ -1,0 +1,12 @@
+[provenance] code 7b0caeff dirty | data 
+Standing rule (user 2026-11-10): EVERY new strategy the user sends, good or bad on its own, goes against ALL the data to look for a
+   btc_adx_ensemble: 475 trade days, $0 a day, t 4.34 (2018-22 $1, 2023+ $0); 63 regimes, gap bar |t| >= 3.16
+      VIX9D/VIX                 rising        keep off gap t -2.24 | subset n 261 $1 t 5.00 (1 / 1)
+      HYG/LQD credit            z_high        keep off gap t -1.68 | subset n 319 $1 t 4.43 (1 / 0)
+      FINRA short ratio         above_median  keep off gap t -1.63 | subset n 239 $1 t 3.86 (1 / 1)
+      GVZ                       rising        keep on  gap t  1.57 | subset n 212 $1 t 3.85 (1 / 0)
+      copper/gold               z_high        keep off gap t -1.55 | subset n 353 $0 t 4.33 (1 / 0)
+      DIX                       rising        keep off gap t -1.54 | subset n 233 $1 t 3.67 (1 / 1)
+      GVZ                       z_high        keep on  gap t  1.38 | subset n 86 $1 t 2.81 (1 / 1)
+      copper/gold               above_median  keep on  gap t  1.24 | subset n 121 $1 t 3.46 (1 / 1)
+   BEST VERSION: VIX9D/VIX rising keep off: t 4.34 -> 5.00; fair placebo (best of 63 random splits): median 4.65, 95th 4.95 -> p 0.040 LEAD

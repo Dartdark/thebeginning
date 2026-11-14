@@ -1,0 +1,35 @@
+[provenance] code 7b0caeff dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+data 2018-06-01 00:00:00 -> 2026-10-23 23:45:00 UTC, 15m candles 294163
+AS CODED (2 books ADX 40/50)       n  773 win 38.8% mean +0.252R PF 1.67 t  5.61 | 2018-22 +0.310R t  4.90 | 2023+ +0.186R t  2.93 | acct %/yr +70.5
+by year (R per book trade, sum R):
+  2018: n  41 mean +0.170R sum  +6.96R win 34%
+  2019: n 117 mean +0.484R sum +56.66R win 47%
+  2020: n 115 mean +0.338R sum +38.86R win 44%
+  2021: n  58 mean +0.317R sum +18.40R win 43%
+  2022: n  82 mean +0.085R sum  +6.99R win 35%
+  2023: n 104 mean +0.279R sum +29.02R win 37%
+  2024: n 105 mean +0.144R sum +15.13R win 34%
+  2025: n  85 mean +0.151R sum +12.84R win 34%
+  2026: n  66 mean +0.150R sum  +9.88R win 35%
+  longs                            n  385 win 42.3% mean +0.334R PF 1.88 t  5.01 | 2018-22 +0.351R t  3.73 | 2023+ +0.315R t  3.34 | acct %/yr +46.6
+  shorts                           n  388 win 35.3% mean +0.170R PF 1.46 t  2.84 | 2018-22 +0.270R t  3.18 | 2023+ +0.052R t  0.62 | acct %/yr +24.1
+  book ADX>40                      n  525 win 37.1% mean +0.208R PF 1.53 t  3.85 | 2018-22 +0.271R t  3.57 | 2023+ +0.135R t  1.77 | acct %/yr +39.5
+  book ADX>50                      n  248 win 42.3% mean +0.345R PF 2.02 t  4.28 | 2018-22 +0.392R t  3.44 | 2023+ +0.292R t  2.56 | acct %/yr +31.2
+exits: {'stop': 349, 'tp': 225, 'ema': 126, 'time': 39, 'guard': 34}
+
+ingredient breakdown (one gate removed at a time; books 40/50 unless noted):
+no ADX gate (both books always)    n 2928 win 29.8% mean +0.016R PF 1.04 t  0.80 | 2018-22 +0.052R t  1.73 | 2023+ -0.022R t -0.78 | acct %/yr +17.2
+no Bollinger width                 n  794 win 38.4% mean +0.247R PF 1.67 t  5.60 | 2018-22 +0.300R t  4.90 | 2023+ +0.183R t  2.90 | acct %/yr +70.9
+no vol-ratio filter                n  799 win 37.9% mean +0.229R PF 1.60 t  5.22 | 2018-22 +0.272R t  4.45 | 2023+ +0.178R t  2.83 | acct %/yr +66.2
+no SuperTrend agreement            n 1079 win 35.9% mean +0.141R PF 1.36 t  3.93 | 2018-22 +0.169R t  3.35 | 2023+ +0.109R t  2.15 | acct %/yr +54.9
+EMA side only                      n 4030 win 28.4% mean -0.019R PF 0.95 t -1.21 | 2018-22 +0.005R t  0.21 | 2023+ -0.045R t -2.07 | acct %/yr -28.0
+single book ADX>25                 n 1091 win 31.3% mean +0.063R PF 1.15 t  1.83 | 2018-22 +0.091R t  1.84 | 2023+ +0.031R t  0.65 | acct %/yr +24.8
+single book ADX>30                 n  921 win 31.7% mean +0.079R PF 1.19 t  2.08 | 2018-22 +0.144R t  2.61 | 2023+ +0.008R t  0.16 | acct %/yr +26.4
+single book ADX>40                 n  525 win 37.1% mean +0.209R PF 1.54 t  3.88 | 2018-22 +0.273R t  3.61 | 2023+ +0.135R t  1.77 | acct %/yr +39.7
+single book ADX>50                 n  248 win 42.3% mean +0.342R PF 2.00 t  4.23 | 2018-22 +0.386R t  3.38 | 2023+ +0.292R t  2.56 | acct %/yr +30.9
+single book ADX>60                 n   88 win 52.3% mean +0.424R PF 2.40 t  3.32 | 2018-22 +0.254R t  1.36 | 2023+ +0.579R t  3.33 | acct %/yr +13.7
+
+placebo: same entry moments, random side, same exits (40 runs):
+  mean +0.111R, p95 +0.139R, real +0.252R, p = 0.000
+multiple-testing bar t_threshold(N=400) = 3.66
