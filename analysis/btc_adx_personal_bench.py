@@ -1,7 +1,7 @@
 """BTC ADX longs on MBT (best version: both books ADX 40 / 50, spot signals, resting MBT stop; analysis/btc_adx_mbt_longs_stop_test.py)
 against the PERSONAL book (user 2026-11-13 'how much does the best version help the personal book').
 Base built locally (scratch_data/personal_P.pkl is cloud-only): analysis/personal_portfolio.py's pieces at 1 micro, minus the
-forward-log / retired ones (FC2B, Kusho, S47, S30, VaultBreak), plus Noise-area longs 1 MNQ (checks/candidates/bridge_noise_15m/
+forward-log / retired ones (FC2B, Kusho, S47, S30, VaultBreak), plus FINRA short-volume longs and ZT continuation (1 MNQ each, user 2026-11-09), Noise-area longs 1 MNQ (checks/candidates/bridge_noise_15m/
 trades_longs.csv, per NQ / 10), Overnight Tick at 2 MNQ (user 2026-11-08) and CL Sunday fade at 2 MCL when the last OVX close
 before the trade day is above its 1-year median, else 1 (user 2026-11-10; data_sweep OVX, new_data_screen 'above_median').
 BTC (v2, user 2026-11-13 'test all this first'): rebuilt trade by trade and MARKED at every CME 16:00 CT close it is held through
@@ -25,6 +25,9 @@ P, days, from_trades = ns["P"], ns["days"], ns["from_trades"]
 P = P[[c for c in P.columns if c not in ("FC2B", "Kusho", "S47", "S30", "VaultBreak")]].copy()
 nbl, _ = from_trades("checks/candidates/bridge_noise_15m/trades_longs.csv", "NoiseLongs"); P["NoiseLongs"] = nbl
 P["OvernightTick"] *= 2
+fm = pd.read_csv("checks/candidates/finra_longs/mc_trades.csv", parse_dates=["date"])        # FINRA longs 1 MNQ (MC trades, repo costs), user 2026-11-09
+P["FINRALongs"], _ = from_trades(None, "FINRALongs", fm.assign(net=fm.net_rc)[["date", "net"]])
+P["ZTContinuation"], _ = from_trades("checks/candidates/zt_continuation/python_trades_z125.csv", "ZTContinuation")   # ZT EntryZ 1.25, 1 MNQ, user 2026-11-09
 from new_data_screen import RULES, prior
 from data_sweep import series
 ovx = prior(series()["OVX"], P.index, RULES["above_median"]) == 1

@@ -1,48 +1,48 @@
-[provenance] code 54f7f068 dirty | data 
+[provenance] code 2e53a280 dirty | data 
 BTC ADX longs on MBT (best version: both books ADX 40 / 50, spot signals, resting MBT stop; analysis/btc_adx_mbt_longs_stop_test.py)
 CL Sunday fade: 2 MCL on 62% of its trade days (high OVX)
-base pieces (15): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs']; days 2018-01-02 -> 2026-10-09
+base pieces (17): ['OvernightBiasML', 'MondayLong', 'ExpirationOpenShort', 'LateDayFlow', 'NFPFade', 'BridgeMondayLong', 'CLSundayFade_perMCL', 'ESMOCFollow_perMES', 'RelativeStrength', 'TwinContinuation', 'OvernightTick', 'DualThrust', 'SwingTarget', 'PaperTrend', 'NoiseLongs', 'FINRALongs', 'ZTContinuation']; days 2018-01-02 -> 2026-10-09
 BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
 futures bars 1772434, 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 CT, rolls removed 84 (median reopen gap 0.213%)
 BTC marked: 328 trades, sum $6,414 vs trade list $6,414 (diff $-0.00); booked to 2026-10-09: $6,414
 margin: at most 2 books open at once; peak margin at 1 MBT a book ~$7,898 (at BTC $81k today: $5,400 a size step)
-daily corr with each piece (2019+): BridgeMondayLong +0.07, NoiseLongs +0.04, OvernightTick +0.02, MondayLong +0.01, CLSundayFade_perMCL +0.00, TwinContinuation +0.00, DualThrust -0.00, ExpirationOpenShort -0.00, OvernightBiasML -0.00, NFPFade -0.00, SwingTarget -0.01, PaperTrend -0.01, LateDayFlow -0.01, RelativeStrength -0.02, ESMOCFollow_perMES -0.03
-corr with the whole book +0.01; most-overlapping piece: BridgeMondayLong
+daily corr with each piece (2019+): BridgeMondayLong +0.07, FINRALongs +0.05, NoiseLongs +0.04, ZTContinuation +0.02, OvernightTick +0.02, MondayLong +0.01, CLSundayFade_perMCL +0.00, TwinContinuation +0.00, DualThrust -0.00, ExpirationOpenShort -0.00, OvernightBiasML -0.00, NFPFade -0.00, SwingTarget -0.01, PaperTrend -0.01, LateDayFlow -0.01, RelativeStrength -0.02, ESMOCFollow_perMES -0.03
+corr with the whole book +0.02; most-overlapping piece: BridgeMondayLong
 
 2019-26: variant                        $ a year p50    DD p95  ret/DD   diff  capital (DD/0.20)
-        book as is                    $     31,692 $   4,695    6.75  +0.00 $          23,475
-        + BTC longs 1 MBT a book      $     32,564 $   4,691    6.94  +0.19 $          23,454
-        + BTC longs 2 MBT a book      $     33,413 $   5,012    6.67  -0.08 $          25,060
-        + BTC longs 3 MBT a book      $     34,255 $   5,411    6.33  -0.42 $          27,056
-        BridgeMondayLong -> BTC 1 MBT $     31,001 $   4,790    6.47  -0.28 $          23,951
-        BridgeMondayLong -> BTC 2 MBT $     31,785 $   4,942    6.43  -0.32 $          24,709
+        book as is                    $     36,237 $   5,125    7.07  +0.00 $          25,626
+        + BTC longs 1 MBT a book      $     37,139 $   5,171    7.18  +0.11 $          25,853
+        + BTC longs 2 MBT a book      $     38,056 $   5,443    6.99  -0.08 $          27,217
+        + BTC longs 3 MBT a book      $     38,663 $   5,857    6.60  -0.47 $          29,283
+        BridgeMondayLong -> BTC 1 MBT $     35,503 $   5,192    6.84  -0.23 $          25,958
+        BridgeMondayLong -> BTC 2 MBT $     36,569 $   5,363    6.82  -0.25 $          26,813
 
 2019-22: variant                        $ a year p50    DD p95  ret/DD   diff  capital (DD/0.20)
-        book as is                    $     24,700 $   3,640    6.79  +0.00 $          18,199
-        + BTC longs 1 MBT a book      $     24,895 $   3,597    6.92  +0.13 $          17,987
-        + BTC longs 2 MBT a book      $     25,175 $   3,615    6.96  +0.18 $          18,075
-        + BTC longs 3 MBT a book      $     25,407 $   3,655    6.95  +0.16 $          18,277
-        BridgeMondayLong -> BTC 1 MBT $     23,416 $   3,727    6.28  -0.50 $          18,635
-        BridgeMondayLong -> BTC 2 MBT $     23,561 $   3,765    6.26  -0.53 $          18,827
+        book as is                    $     27,447 $   4,157    6.60  +0.00 $          20,786
+        + BTC longs 1 MBT a book      $     27,788 $   4,148    6.70  +0.10 $          20,742
+        + BTC longs 2 MBT a book      $     27,878 $   4,127    6.75  +0.15 $          20,636
+        + BTC longs 3 MBT a book      $     28,040 $   4,212    6.66  +0.06 $          21,058
+        BridgeMondayLong -> BTC 1 MBT $     26,288 $   4,307    6.10  -0.50 $          21,536
+        BridgeMondayLong -> BTC 2 MBT $     26,467 $   4,317    6.13  -0.47 $          21,587
 
 2023+: variant                        $ a year p50    DD p95  ret/DD   diff  capital (DD/0.20)
-        book as is                    $     38,722 $   5,545    6.98  +0.00 $          27,723
-        + BTC longs 1 MBT a book      $     40,056 $   5,399    7.42  +0.44 $          26,995
-        + BTC longs 2 MBT a book      $     41,669 $   5,783    7.21  +0.22 $          28,916
-        + BTC longs 3 MBT a book      $     43,384 $   6,344    6.84  -0.14 $          31,719
-        BridgeMondayLong -> BTC 1 MBT $     38,695 $   5,349    7.23  +0.25 $          26,744
-        BridgeMondayLong -> BTC 2 MBT $     40,242 $   5,625    7.15  +0.17 $          28,127
+        book as is                    $     45,578 $   6,071    7.51  +0.00 $          30,356
+        + BTC longs 1 MBT a book      $     47,076 $   5,891    7.99  +0.48 $          29,455
+        + BTC longs 2 MBT a book      $     48,428 $   6,277    7.72  +0.21 $          31,383
+        + BTC longs 3 MBT a book      $     49,665 $   6,750    7.36  -0.15 $          33,751
+        BridgeMondayLong -> BTC 1 MBT $     45,390 $   5,842    7.77  +0.26 $          29,208
+        BridgeMondayLong -> BTC 2 MBT $     46,771 $   6,104    7.66  +0.16 $          30,519
 
 Monte Carlo check, return/DD (p50 / p95 DD) by seed (2,000 runs each) and with 20,000 runs; plus the plain backtest $ a year / max DD:
-   2019-26 book as is                 seeds 6.54-6.75 (mean 6.66) | 20k runs 6.65 | backtest $/yr / max DD 5.76
-   2019-26 + BTC longs 1 MBT a book   seeds 6.69-6.94 (mean 6.83) | 20k runs 6.88 | backtest $/yr / max DD 5.89
-   2019-26 + BTC longs 2 MBT a book   seeds 6.42-6.69 (mean 6.56) | 20k runs 6.64 | backtest $/yr / max DD 6.02
-   2019-26 + BTC longs 3 MBT a book   seeds 6.03-6.33 (mean 6.13) | 20k runs 6.19 | backtest $/yr / max DD 6.15
-   2019-22 book as is                 seeds 6.74-6.93 (mean 6.83) | 20k runs 6.82 | backtest $/yr / max DD 9.30
-   2019-22 + BTC longs 1 MBT a book   seeds 6.88-7.09 (mean 6.98) | 20k runs 7.00 | backtest $/yr / max DD 9.40
-   2019-22 + BTC longs 2 MBT a book   seeds 6.96-7.16 (mean 7.06) | 20k runs 7.07 | backtest $/yr / max DD 9.49
-   2019-22 + BTC longs 3 MBT a book   seeds 6.93-7.14 (mean 7.01) | 20k runs 6.97 | backtest $/yr / max DD 9.59
-   2023+ book as is                 seeds 6.98-7.31 (mean 7.11) | 20k runs 7.20 | backtest $/yr / max DD 7.05
-   2023+ + BTC longs 1 MBT a book   seeds 7.42-7.69 (mean 7.51) | 20k runs 7.56 | backtest $/yr / max DD 7.28
-   2023+ + BTC longs 2 MBT a book   seeds 7.21-7.48 (mean 7.32) | 20k runs 7.35 | backtest $/yr / max DD 7.51
-   2023+ + BTC longs 3 MBT a book   seeds 6.81-6.98 (mean 6.88) | 20k runs 6.88 | backtest $/yr / max DD 7.74
+   2019-26 book as is                 seeds 6.90-7.14 (mean 7.03) | 20k runs 6.98 | backtest $/yr / max DD 6.69
+   2019-26 + BTC longs 1 MBT a book   seeds 7.07-7.33 (mean 7.17) | 20k runs 7.17 | backtest $/yr / max DD 6.82
+   2019-26 + BTC longs 2 MBT a book   seeds 6.85-7.07 (mean 6.93) | 20k runs 6.99 | backtest $/yr / max DD 6.95
+   2019-26 + BTC longs 3 MBT a book   seeds 6.35-6.60 (mean 6.45) | 20k runs 6.54 | backtest $/yr / max DD 6.91
+   2019-22 book as is                 seeds 6.51-6.86 (mean 6.71) | 20k runs 6.73 | backtest $/yr / max DD 8.60
+   2019-22 + BTC longs 1 MBT a book   seeds 6.65-6.97 (mean 6.84) | 20k runs 6.88 | backtest $/yr / max DD 8.68
+   2019-22 + BTC longs 2 MBT a book   seeds 6.75-7.01 (mean 6.91) | 20k runs 6.93 | backtest $/yr / max DD 8.76
+   2019-22 + BTC longs 3 MBT a book   seeds 6.66-7.02 (mean 6.86) | 20k runs 6.88 | backtest $/yr / max DD 8.84
+   2023+ book as is                 seeds 7.51-8.01 (mean 7.77) | 20k runs 7.79 | backtest $/yr / max DD 8.36
+   2023+ + BTC longs 1 MBT a book   seeds 7.95-8.30 (mean 8.10) | 20k runs 8.11 | backtest $/yr / max DD 8.59
+   2023+ + BTC longs 2 MBT a book   seeds 7.71-8.03 (mean 7.86) | 20k runs 7.85 | backtest $/yr / max DD 8.82
+   2023+ + BTC longs 3 MBT a book   seeds 7.22-7.52 (mean 7.40) | 20k runs 7.37 | backtest $/yr / max DD 8.82
