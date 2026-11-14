@@ -23,11 +23,25 @@ so nothing below is tested yet except the rows marked done. The site's stats are
 | 5 | ETHSTPullback30m (free) | 4h SuperTrend + EMA200 regime, 30m SuperTrend pullback entries, ADX filter, chandelier exit; site 2024-25 +46%, 93 trades | ETH on the site: BTC / NQ port |
 | 6 | SPYTFDipLS (free) | researched on SPY: 4h SuperTrend + ADX regime, EMA-pullback entries, chandelier exit | ES / NQ (overnight holds: personal only) |
 
+## Premium strategies (no code anywhere; stats and descriptions only; each is the author's tuned version of a free parent)
+Site snapshot, author's window, BTC-USDT unless noted: return / win / Sharpe / max DD / trades.
+| Strategy | Snapshot | Rule we can rebuild from | Verdict |
+|---|---|---|---|
+| **CLMeanReversionPremium** | Oct 2026: +1.3%, 3 trades | Full rule in the description: 30m close beyond the Bollinger band, fade only WITH the 1h EMA trend (buy stretched dips in uptrends, sell pops in downtrends), CME crude hours only, ATR stop, target the middle band, exit on a mean cross | **Shortlist #1 together with the free version** (rebuildable; the trend-aligned filter is the premium difference) |
+| **AlligatorV2** | 2022-23: +90%, 73% win, Sharpe 1.77, DD -13.9%, 37 trades | Free parent AlligatorAI is described rule by rule (Alligator trend on 30m + 6h-style higher tf, ADX strong, EMA100 higher tf, CMO threshold, StochRSI pullback, ATR stop / target) | **Shortlist #7**: rebuild the parent from its description, then the premium snapshot is the target to compare |
+| **TrendWaveRiderV2** | 2024-25 (15m): +108%, 75% win, Sharpe 2.18, DD -19.6%, 67 trades | MAs for direction + ADX / DMI strength + CCI timing, ATR stop and target (free parent TrendWaveRider: same, DMI) | **Shortlist #8** (high-win trend entries on BTC; parameters must be guessed: pre-register defaults ADX 25, CCI(20) +-100, MA 50/200, stop 2 / target 3 ATR) |
+| **TrendSwingTrader V2** | 2022-23 (4h): +71%, 57% win, Sharpe 1.95, DD -10.7%, 30 trades | Free V1 rule: three EMAs for trend, ADX against ranges, ATR stop and first target, trailing stop on the second half | **Shortlist #9**, low priority: 4h, ~15 trades a year (too few to judge) |
+| **Turtle V2 / V3** | 2022-23 (1h): +118% / +96%, 44% / 43% win, Sharpe 1.79 / 1.69, DD -16.6% / -19.1%, 68 / 72 trades | 'Premium version of Turtle AI': Donchian breakout family (free TurtleAI by o1-preview: 2023-24 +74%, Sharpe 1.65) | Same family as our Donchian F rows; test only as part of #7-style rebuilds if the user wants: **deferred** |
+| **SuperScalper** | 2022-23 (15m): +59%, 52% win, Sharpe 1.93, DD -12.5%, 132 trades | SuperTrend in-and-out in trends; 'better in a downtrend' | SuperTrend family already F on NQ / GC; the one window shown is the 2022 bear: **deferred** |
+| **MtfKelt2xA** | 2025-26 SOL (1h): +44%, 51% win, Sharpe 2.22, DD -8.9%, 72 trades | Keltner(29, 2.77) breakout on 4h with a daily anchor, entries on 1h | SOL only on the site; a BTC / NQ port is possible: **shortlist #10, low priority** (tuned to SOL) |
+| Slow Trend Following | no snapshot on its page | 'a trend following indicator', no rule | not rebuildable: skip |
+| TFAtrExitBreakout | 2025-26 (1h): -1.3%, Sharpe -0.07, 125 trades | Bollinger breakout + EMA filter, ATR bracket | loses on its own site: skip |
+| BTCAdxEnsemblePremium | 2024-25: +78.5% | six ADX books | done (rounded and 1/3 versions benched) |
+
 ## Not pursued
 - **No data for the market:** SOL (SOLSqzDon30mYTD, MtfMomo2xA, MtfKelt2xA), ETH-only squeeze variants (ETHSqueezeV35, ETHSqzDonYTD,
   ETHTrendBB), ZEC (ZecStTrend6538-31), single stocks (NVDATrendBreakout1h, NVDASuperTrendBreakout, AAPLHourlyAnchorTrend).
-- **Premium, no code and no rule in the description:** Turtle V2 / V3, TrendWaveRiderV2, AlligatorV2, TrendSwingTrader V2,
-  SuperScalper, Slow Trend Following, TFAtrExitBreakout, CLMeanReversionPremium (description only; covered by #1).
+- (premium strategies: assessed in their own table below, user 2026-11-13 'even the premium ones show stats and descriptions')
 - **Losing or near zero on their own site, or a handful of trades:** TTMSqueezeWithAlma (-99% in its window), AAPLHourlyAnchorTrend,
   TFTrailBreakout (+1.5% in 2 years), TrendSwingTrader V1 (DD -41%), ABQ1 ("test"), RSI Trend, TrendWaveRider, AlligatorAI,
   Trend Following / TurtleAI by o1-preview, MeanReversionRSI (7 trades), CloudScalper (DD -31%), Golden Cross.
