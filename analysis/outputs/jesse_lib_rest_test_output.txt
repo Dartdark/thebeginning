@@ -1,0 +1,30 @@
+[provenance] code 8901dfcb dirty | data 
+BTC ADX ensemble (user's Jesse strategy 'BTCAdxEnsembleFree', pasted 2026-11-13): Python port on Coinbase spot BTC-USD 1-min
+jesse.trade library, BTC strategies with free code (user 2026-11-13; code read logged in; triage checks/candidates/jesse_library/TRIAGE.md).
+jesse.trade library, the rest of the shortlist (user 2026-11-13 'test the rest'), free code as coded, ported to our data.
+
+BBSQ  BBSqueezeTrend on BTC (30m / 4h): 121 trades (15 a year), win 36%, mean +0.716% (+0.205R), PF 1.69, t 1.06 | 2018-22 +1.121% (t 0.96) | 2023+ +0.262% (t 0.43)
+   longs +2.507% (t 1.65, n 51) | shorts -0.588% (t -1.77, n 70) | exits {'stop': 121}
+   by year: 2018 +1  2019 +41  2020 +5  2021 +24  2022 +2  2023 -9  2024 +28  2025 +6  2026 -10
+   placebo (random side, 40 runs): mean +0.00506, p95 +0.01179, real +0.00716, p = 0.23
+
+ETHST ETHSTPullback30m on BTC (30m / 4h): 891 trades (107 a year), win 21%, mean +0.078% (+0.052R), PF 1.09, t 0.60 | 2018-22 +0.367% (t 1.68) | 2023+ -0.217% (t -1.52)
+   longs +0.434% (t 1.83, n 405) | shorts -0.218% (t -1.61, n 486) | exits {'stop': 492, 'signal': 399}
+   by year: 2018 +10  2019 +62  2020 +49  2021 +39  2022 +6  2023 -14  2024 -28  2025 -23  2026 -30
+   placebo (random side, 40 runs): mean -0.00004, p95 +0.00066, real +0.00078, p = 0.03
+   BBSQ daily corr with the BTC ADX ensemble: +0.13
+   ETHST daily corr with the BTC ADX ensemble: +0.11
+
+[ES] 1-min 2017-06-01 00:00:00 -> 2026-10-11 18:21:00 CT, 3,288,270 bars, rolls adjusted 29
+
+SPY   SPYTFDipLS on ES (1h / 4h, per contract): 1116 trades (134 a year), win 32%, mean $+53 (+0.049R), PF 1.07, t 0.76 | 2018-22 $+54 (t 0.66) | 2023+ $+51 (t 0.42)
+   longs $+150 (t 1.47, n 649) | shorts $-83 (t -0.98, n 467) | exits {'stop': 1022, 'target': 94}
+   by year: 2017 -6,203  2018 +9,277  2019 +8,743  2020 +24,577  2021 +27,762  2022 -28,790  2023 +11,776  2024 +10,870  2025 +15,797  2026 -15,072
+   placebo (random side, 40 runs): mean -7.81991, p95 +61.10824, real +52.63371, p = 0.12
+
+[NQ] 1-min 2017-06-01 07:59:00 -> 2026-11-06 15:14:00 CT, 3,197,989 bars, rolls adjusted 29
+
+SPY   SPYTFDipLS on NQ (1h / 4h, per contract): 1064 trades (128 a year), win 32%, mean $+172 (+0.095R), PF 1.13, t 1.17 | 2018-22 $+82 (t 0.62) | 2023+ $+302 (t 0.99)
+   longs $+356 (t 1.54, n 605) | shorts $-71 (t -0.47, n 459) | exits {'stop': 971, 'target': 93}
+   by year: 2017 -2,560  2018 +4,048  2019 +20,130  2020 +24,094  2021 +32,206  2022 -26,165  2023 +28,909  2024 +49,812  2025 +15,312  2026 +37,046
+   placebo (random side, 40 runs): mean +161.21166, p95 +277.66979, real +171.83446, p = 0.42

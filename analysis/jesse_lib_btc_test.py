@@ -182,9 +182,9 @@ def simulate(b, sig, plan, manage=None, limit=None, seed=None, cooldown_close=Fa
         if px is None: break
         q = 1.0 - sum(p[0] for p in parts)
         ret = sum(w * s * (p_ - e) / e - w * c_ for w, p_, c_ in parts) + q * (s * (px - e) / e - cst) - cost_in
-        out.append((b.index[i], b.index[j], s, ret, ret / R, why))
+        out.append((b.index[i], b.index[j], s, ret, ret / R, why, e, len(parts) > 0))
         i = j + 1 if cooldown_close else j + 1
-    t = pd.DataFrame(out, columns=["t", "tx", "side", "ret", "r", "why"]); t["yr"] = t.t.dt.year
+    t = pd.DataFrame(out, columns=["t", "tx", "side", "ret", "r", "why", "e", "halfed"]); t["yr"] = t.t.dt.year
     return t
 
 

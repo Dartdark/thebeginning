@@ -51,3 +51,28 @@ The strongest BTC entries in the library (BTC ADX, KAMA, TEMA, ADX-Williams, Clo
 own test found ADX > 50 was the only filter that mattered, and BTC ADX's edge is the ADX level. So most of these are one edge
 (strong-trend continuation on BTC) with different decorations; expect high correlation with the BTC piece already in the plan.
 The one genuinely different idea for our book is #1 (CL mean reversion).
+
+## Results (2026-11-13, free code as coded on our data; tier-list rows)
+| Strategy | Result | Verdict |
+|---|---|---|
+| CLMeanReversion (CME CL) | t -0.8; premium-as-described t 1.66 at EMA 50 only, 2023+ t 0.2 | F (premium rebuild D) |
+| TemaTrendFollowing | t 1.18, placebo p 0.10 | F |
+| ADXWilliamsStrategy | t 3.28 but random side earns the same (p 0.30) | F |
+| TrendWaveRider (V2's parent) | t 2.19, placebo p 0.00, 2023+ t -0.1 | D |
+| AlligatorAi (V2's parent) | t 1.50, placebo p 0.00 | D |
+| **TrendSwingTrader V1 (V2's parent)** | **t 2.24, placebo p 0.03, both periods positive; longs t 3.38** | **C** |
+| TurtleAI (Turtle V2 / V3's parent) | t -0.13 | F |
+| BBSqueezeTrend (on BTC) | t 1.06, placebo p 0.23 | F |
+| ETHSTPullback30m (on BTC) | t 0.60; 2023+ t -1.5 | F |
+| SPYTFDipLS (ES / NQ) | t 0.76 / 1.17, placebo p 0.12 / 0.42 | F |
+
+## Premium code worth getting (user asked which to request)
+1. **TrendSwingTrader V2**: its free parent is the only library strategy that passed; V2 is the author's optimised version.
+2. **TrendWaveRiderV2**: parent has a real direction edge (placebo p 0.00) but nothing since 2023; the site's V2 snapshot is
+   2024-25 (+108%), so the code would show whether V2 fixed the post-2023 decay or just refit it.
+3. **CLMeanReversionPremium**: my rebuild from the description lives on one EMA length; the real code settles the trend filter.
+   CME crude, short holds: the only Apex-relevant idea in the library.
+4. AlligatorV2 (optional): parent t 1.5 with a clean placebo; worth a look only if cheap.
+Not worth it: Turtle V2 / V3 (parent F), SuperScalper (SuperTrend family F, one bear-market window), MtfKelt2xA (SOL tuned),
+TFAtrExitBreakout (loses on its own site), Slow Trend Following (no stats, no rule), BTCAdxEnsemblePremium (already rebuilt
+from its exact description; at tradeable size it does not beat the plan's free version).
