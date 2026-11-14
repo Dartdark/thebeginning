@@ -2759,3 +2759,21 @@ Source/review: [dot's synergistic paper packets](results/dot_synergistic_paper_p
 Additional methods check: Gould/Bonart samples a random point inside the interval between two successive price changes. An executable adaptation must sample on a causal clock instead of using the later change to select the observation time. Drift-burst local-extremum labels likewise cannot select an earlier entry. Preserve these distinctions before comparing classifier accuracy or reversal incidence with trading win rates.
 
 Missing prerequisites: ordered native quote/trade events with contract and receipt clocks, order lifecycle/queue handling, actual micro fees, stressed fills, integer inventory/risk constraints and a causal trade specification. Minute aggressor bars and summarized walls are not equivalents. Smallest justified step is the existing no-return input/rule admission, not a new backtest or live implementation. The review records three conditional research bundles, zero return trials and no paused-program restart. Keep prior pressure/OU/pairs failures in the selection history.
+
+### E20/E22 follow-up — Delivery acknowledgement and completed group-state clocks (week ending2026-11-13)
+
+Source: [weekly cross-review](../cross_review/2026-11-13_codex.md), pinned Claude7b0caeff.
+- Scanning a rejection and successfully delivering its alert need separate state. Advancing a scan count before a
+  failed send consumes the event unless a persistent pending record survives. Actual extracted PowerShell blocks
+  reproduce the failure; the offline pending-record proposal passes8synthetic retry/mute/rollover/coalescing checks.
+- A once-per-session sizing cache can capture provisional group state before the final close writer. The16:00
+  reader/16:10publisher ordering can retain the wrong next-session quantity. Require a completed state identity
+  and prove refresh before the next entry; a local equity fallback does not cure a stale group override.
+- Nominal roster and trade-list parity do not establish parity with account-state finish/cushion sizing. Integer
+  rounding, trigger time, actual history length and source availability are part of the account model contract.
+
+Evidence: source checks, synthetic counterexamples, saved-result arithmetic and parse checks only. No actual lost
+notification, wrong-size live trade, installed correction, native MultiCharts acceptance or measured financial benefit
+is established. Two review-only patches are retained under `proposals/weekly_20261113_*`; production remains unchanged.
+Smallest next check: reconcile the exact source corrections and session-state fixtures, then validate native reader
+timing before any deployment. Current-week Claude counterpart was absent at the reviewed revision; joint review pending.
