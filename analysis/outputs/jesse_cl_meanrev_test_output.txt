@@ -1,0 +1,53 @@
+[provenance] code 562a4690 dirty | data 
+Jesse CLMeanReversion (free + premium as described) on CME CL futures, pre-registered checks/candidates/jesse_cl_meanrev/PREREG.md
+CL 1-min 2017-11-30 23:01:00 -> 2026-10-13 21:19:00 CT, 3,106,933 bars, rolls removed 80 (median reopen gap 0.040)
+
+V0 as coded (free; both sides, 24h)
+  660 trades (75 a year), win 57.7%, $-42.4 per CL, PF 0.91, t -0.80 | 2018-22 $49.9 (t 0.87) | 2023+ $-182.6 (t -1.81) | without the author's fit window t -0.63
+  max DD $-54,318 per CL, worst trade $-7,876, median stop $1,271; per MCL $-4.79 a trade, $-360 a year
+  longs $-74.8 (t -1.03, n 375) | shorts $0.3 (t 0.00, n 285) | exits {'mean': 341, 'stop': 180, 'target': 139}
+  by year $: 2017 +644 (7)  2018 -3,176 (108)  2019 +710 (94)  2020 -7,022 (62)  2021 -5,202 (62)  2022 +33,903 (65)  2023 +189 (82)  2024 -9,272 (70)  2025 -3,324 (69)  2026 -35,432 (41)
+
+V1 premium as described: fade only with the 1h EMA(50) trend
+  76 trades (9 a year), win 69.7%, $228.8 per CL, PF 1.73, t 1.66 | 2018-22 $346.6 (t 3.34) | 2023+ $57.8 (t 0.19) | without the author's fit window t 1.62
+  max DD $-5,854 per CL, worst trade $-4,797, median stop $1,227; per MCL $22.33 a trade, $198 a year
+  longs $277.7 (t 2.34, n 48) | shorts $145.0 (t 0.46, n 28) | exits {'mean': 33, 'target': 28, 'stop': 15}
+  by year $: 2017 +684 (2)  2018 -1,602 (10)  2019 +3,525 (15)  2020 +1,243 (6)  2021 +4,018 (6)  2022 +7,730 (6)  2023 -450 (14)  2024 -632 (7)  2025 -755 (5)  2026 +3,629 (5)
+
+   sensitivity: 1h EMA(20)
+  27 trades (3 a year), win 48.1%, $-137.4 per CL, PF 0.69, t -0.66 | 2018-22 $36.5 (t 0.22) | 2023+ $-485.3 (t -0.91) | without the author's fit window t -0.31
+  max DD $-7,093 per CL, worst trade $-3,547, median stop $1,132; per MCL $-14.29 a trade, $-45 a year
+  longs $-12.3 (t -0.05, n 16) | shorts $-319.4 (t -0.87, n 11) | exits {'mean': 14, 'stop': 8, 'target': 5}
+  by year $: 2017 +53 (1)  2018 -329 (4)  2019 -126 (8)  2020 -998 (3)  2021 +925 (1)  2022 +1,133 (1)  2023 +1,735 (3)  2024 -1,290 (1)  2025 -2,401 (2)  2026 -2,412 (3)
+
+   sensitivity: 1h EMA(100)
+  143 trades (16 a year), win 62.9%, $-4.8 per CL, PF 0.99, t -0.04 | 2018-22 $274.5 (t 3.01) | 2023+ $-340.1 (t -1.66) | without the author's fit window t -0.06
+  max DD $-32,890 per CL, worst trade $-7,876, median stop $1,184; per MCL $-1.03 a trade, $-17 a year
+  longs $18.8 (t 0.13, n 89) | shorts $-43.7 (t -0.25, n 54) | exits {'mean': 63, 'target': 45, 'stop': 35}
+  by year $: 2017 +684 (2)  2018 +1,055 (16)  2019 +4,771 (24)  2020 +3,187 (10)  2021 +5,100 (14)  2022 +6,615 (12)  2023 +2,538 (20)  2024 -5,589 (20)  2025 -2,990 (13)  2026 -16,063 (12)
+
+V2 Apex-legal V0 (out 15:45 CT, no entries 15:00-17:00)
+  658 trades (75 a year), win 57.9%, $-40.8 per CL, PF 0.92, t -0.77 | 2018-22 $50.5 (t 0.88) | 2023+ $-179.8 (t -1.77) | without the author's fit window t -0.60
+  max DD $-53,401 per CL, worst trade $-7,876, median stop $1,270; per MCL $-4.63 a trade, $-347 a year
+  longs $-72.6 (t -0.99, n 374) | shorts $1.0 (t 0.01, n 284) | exits {'mean': 339, 'stop': 180, 'target': 139}
+  by year $: 2017 +644 (7)  2018 -3,176 (108)  2019 +918 (93)  2020 -7,022 (62)  2021 -5,202 (62)  2022 +33,903 (65)  2023 +189 (82)  2024 -8,355 (69)  2025 -3,324 (69)  2026 -35,432 (41)
+
+V3 Apex-legal V1
+  76 trades (9 a year), win 69.7%, $228.8 per CL, PF 1.73, t 1.66 | 2018-22 $346.6 (t 3.34) | 2023+ $57.8 (t 0.19) | without the author's fit window t 1.62
+  max DD $-5,854 per CL, worst trade $-4,797, median stop $1,227; per MCL $22.33 a trade, $198 a year
+  longs $277.7 (t 2.34, n 48) | shorts $145.0 (t 0.46, n 28) | exits {'mean': 33, 'target': 28, 'stop': 15}
+  by year $: 2017 +684 (2)  2018 -1,602 (10)  2019 +3,525 (15)  2020 +1,243 (6)  2021 +4,018 (6)  2022 +7,730 (6)  2023 -450 (14)  2024 -632 (7)  2025 -755 (5)  2026 +3,629 (5)
+
+V4 V0 longs (slice)
+  375 trades (43 a year), win 57.9%, $-74.8 per CL, PF 0.86, t -1.03 | 2018-22 $6.8 (t 0.09) | 2023+ $-207.3 (t -1.40) | without the author's fit window t -0.78
+  max DD $-34,938 per CL, worst trade $-7,876, median stop $1,278; per MCL $-8.03 a trade, $-346 a year
+  longs $-74.8 (t -1.03, n 375) | shorts $nan (t nan, n 0) | exits {'mean': 172, 'stop': 113, 'target': 90}
+  by year $: 2017 +727 (3)  2018 -1,467 (62)  2019 +3,866 (60)  2020 -12,574 (37)  2021 -276 (36)  2022 +11,303 (34)  2023 -1,073 (47)  2024 -5,087 (40)  2025 -7,894 (37)  2026 -15,588 (19)
+
+V5 V0 shorts (slice)
+  285 trades (32 a year), win 57.5%, $0.3 per CL, PF 1.00, t 0.00 | 2018-22 $110.1 (t 1.23) | 2023+ $-152.9 (t -1.15) | without the author's fit window t -0.03
+  max DD $-24,157 per CL, worst trade $-6,338, median stop $1,266; per MCL $-0.52 a trade, $-17 a year
+  longs $nan (t nan, n 0) | shorts $0.3 (t 0.00, n 285) | exits {'mean': 169, 'stop': 67, 'target': 49}
+  by year $: 2017 -83 (4)  2018 -1,709 (46)  2019 -3,156 (34)  2020 +5,552 (25)  2021 -4,926 (26)  2022 +22,600 (31)  2023 +1,262 (35)  2024 -4,185 (30)  2025 +4,569 (32)  2026 -19,844 (22)
+
+placebo, V0 entry moments with a random side (100 runs): mean $-20.8, p95 $40.1; real $-42.4, p = 0.72
